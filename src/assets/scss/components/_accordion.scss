@@ -1,0 +1,243 @@
+@import "../variables";
+
+.component-accordion {
+  text-align: left;
+  overflow: hidden;
+
+  &.component-accordion--type-minimal {
+    &.component-accordion--size-md {
+      & > .component-accordion__item {
+        & > .component-accordion__item__header {
+          line-height: 25px;
+          & > .component-accordion__item__header__arrow-icon {
+            font-size: $COMPONENT_FONT_SIZE_MD;
+            margin-right: $COMPONENT_ELEMENT_MARGIN_MD;
+          }
+          & > .component-accordion__item__header__content {
+            font-size: $COMPONENT_FONT_SIZE_MD;
+          }
+        }
+        & > .component-accordion__item__item-content {
+          padding-left: 28px;
+          font-size: $COMPONENT_FONT_SIZE_MD;
+        }
+      }
+    }
+
+    &.component-accordion--size-sm {
+      & > .component-accordion__item {
+        & > .component-accordion__item__header {
+          line-height: 25px;
+          & > .component-accordion__item__header__arrow-icon {
+            font-size: $COMPONENT_FONT_SIZE_SM;
+            margin-right: $COMPONENT_ELEMENT_MARGIN_SM;
+          }
+          & > .component-accordion__item__header__content {
+            font-size: $COMPONENT_FONT_SIZE_SM;
+          }
+        }
+        & > .component-accordion__item__item-content {
+          padding-left: 20px;
+          font-size: $COMPONENT_FONT_SIZE_SM;
+        }
+      }
+    }
+
+    &.component-accordion--size-lg {
+      & > .component-accordion__item {
+        & > .component-accordion__item__header {
+          line-height: 25px;
+          & > .component-accordion__item__header__arrow-icon {
+            font-size: $COMPONENT_FONT_SIZE_LG;
+            margin-right: $COMPONENT_ELEMENT_MARGIN_LG;
+          }
+          & > .component-accordion__item__header__content {
+            font-size: $COMPONENT_FONT_SIZE_LG;
+          }
+        }
+        & > .component-accordion__item__item-content {
+          padding-left: 37px;
+          font-size: $COMPONENT_FONT_SIZE_LG;
+        }
+      }
+    }
+
+    & > .component-accordion__item {
+      & > .component-accordion__item__header {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        cursor: pointer;
+        & > .component-accordion__item__header__arrow-icon {
+          float: left;
+          top: 6px;
+          position: relative;
+        }
+      }
+    }
+  }
+
+  &.component-accordion--type-boxed {
+    & > .component-accordion__item {
+      & > .component-accordion__item__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: $COMPONENT_BORDER;
+        cursor: pointer;
+        & > component-accordion__item__header__content {
+
+        }
+        & > .component-accordion__item__header__arrow-icon {
+          position: relative;
+          right: 0;
+          font-size: 20px;
+        }
+      }
+      & > .component-accordion__item__item-content {
+        border-bottom: $COMPONENT_BORDER;
+      }
+    }
+
+    &.component-accordion--color-default {
+      & > .component-accordion__item {
+        & > .component-accordion__item__header {
+          background: $default;
+          color: $default_text_color;
+        }
+        & > .component-accordion__item__item-content {
+          background: $default_LIGHTEN_X1;
+          color: $default_text_color;
+        }
+      }
+    }
+
+    &.component-accordion--color-primary {
+      & > .component-accordion__item {
+        & > .component-accordion__item__header {
+          background: $primary;
+          color: $primary_text_color;
+        }
+        & > .component-accordion__item__item-content {
+          background: $primary_LIGHTEN_X1;
+          color: $primary_text_color;
+        }
+      }
+    }
+
+    &.component-accordion--color-secondary {
+      & > .component-accordion__item {
+        & > .component-accordion__item__header {
+          background: $secondary;
+          color: $secondary_text_color;
+        }
+        & > .component-accordion__item__item-content {
+          background: $secondary_LIGHTEN_X1;
+          color: $secondary_text_color;
+        }
+      }
+    }
+
+    &.component-accordion--color-info {
+      & > .component-accordion__item {
+        & > .component-accordion__item__header {
+          background: $info;
+          color: $info_text_color;
+        }
+        & > .component-accordion__item__item-content {
+          background: $info_LIGHTEN_X1;
+          color: $info_text_color;
+        }
+      }
+    }
+
+    &.component-accordion--color-warning {
+      & > .component-accordion__item {
+        & > .component-accordion__item__header {
+          background: $warning;
+          color: $warning_text_color;
+        }
+        & > .component-accordion__item__item-content {
+          background: $warning_LIGHTEN_X1;
+          color: $warning_text_color;
+        }
+      }
+    }
+
+    &.component-accordion--color-success {
+      & > .component-accordion__item {
+        & > .component-accordion__item__header {
+          background: $success;
+          color: $success_text_color;
+        }
+        & > .component-accordion__item__item-content {
+          background: $success_LIGHTEN_X1;
+          color: $success_text_color;
+        }
+      }
+    }
+
+    &.component-accordion--color-danger {
+      & > .component-accordion__item {
+        & > .component-accordion__item__header {
+          background: $danger;
+          color: $danger_text_color;
+        }
+        & > .component-accordion__item__item-content {
+          background: $danger_LIGHTEN_X1;
+          color: $danger_text_color;
+        }
+      }
+    }
+
+    &.component-accordion--rounded {
+      border-radius: $COMPONENT_BORDER_RADIUS;
+    }
+
+    &.component-accordion--size-md {
+      & > .component-accordion__item {
+        & > .component-accordion__item__header {
+          padding: $COMPONENT_PADDING_MD;
+          font-size: $COMPONENT_FONT_SIZE_MD;
+        }
+        & > .component-accordion__item__item-content {
+          padding: $COMPONENT_PADDING_MD;
+          font-size: $COMPONENT_FONT_SIZE_MD;
+        }
+      }
+    }
+
+    &.component-accordion--size-sm {
+      & > .component-accordion__item {
+        & > .component-accordion__item__header {
+          padding: $COMPONENT_PADDING_SM;
+          font-size: $COMPONENT_FONT_SIZE_SM;
+        }
+        & > .component-accordion__item__item-content {
+          padding: $COMPONENT_PADDING_SM;
+          font-size: $COMPONENT_FONT_SIZE_SM;
+        }
+      }
+    }
+
+    &.component-accordion--size-lg {
+      & > .component-accordion__item {
+        & > .component-accordion__item__header {
+          padding: $COMPONENT_PADDING_LG;
+          font-size: $COMPONENT_FONT_SIZE_LG;
+        }
+        & > .component-accordion__item__item-content {
+          padding: $COMPONENT_PADDING_LG;
+          font-size: $COMPONENT_FONT_SIZE_LG;
+        }
+      }
+    }
+
+    &.component-accordion--separated {
+      & > .component-accordion__item {
+        &:not(:last-child) {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+@import '../variables';
+
+.component-wrapper {
+  position: relative;
+
+  &:hover {
+    & > :first-child {
+      position: absolute;
+      top: calc(100% - 30px);
+      right: 3px;
+      display: block !important;
+    }
+  }
+}
+
+.builder {
+  .component-row, .component-col {
+    border: 3px solid $primary;
+    cursor: pointer;
+    min-height: 30px;
+
+    &:hover {
+      border: 3px solid $secondary;
+    }
+  }
+}

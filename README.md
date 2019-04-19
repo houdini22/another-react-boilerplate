@@ -1,2 +1,2 @@
-# javascript-framework
-React.js Components Framework
+https://prettier.io/docs/en/webstorm.html
+

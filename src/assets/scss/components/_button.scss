@@ -1,0 +1,323 @@
+@import "../variables";
+
+.component-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.20em 0.75em;
+  font-size: 1em;
+  line-height: 1.5;
+  border-radius: 0.25em;
+  -webkit-transition: color 0.15s ease-in-out,
+  background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+  -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+  -webkit-box-shadow 0.15s ease-in-out;
+  outline: 0 none !important;
+  overflow: hidden;
+
+  svg {
+    position: relative;
+    font-size: 1.3em;
+  }
+
+  &.component-button--size-lg {
+    padding: $COMPONENT_ELEMENT_PADDING_LG;
+    font-size: $COMPONENT_FONT_SIZE_LG;
+    line-height: 1.5;
+    border-radius: 0.3em;
+  }
+
+  &.component-button--size-md {
+    padding: $COMPONENT_ELEMENT_PADDING_MD;
+    font-size: $COMPONENT_FONT_SIZE_MD;
+    line-height: 1.5;
+    border-radius: 0.2em;
+  }
+
+  &.component-button--size-sm {
+    padding: $COMPONENT_ELEMENT_PADDING_SM;
+    font-size: $COMPONENT_FONT_SIZE_SM;
+    line-height: 1.5;
+    border-radius: 0.2em;
+  }
+
+  &.component-button--block {
+    display: block;
+    width: 100%;
+  }
+
+  &.component-button--disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
+  &.component-button--is-loading {
+    svg,
+    span {
+      visibility: hidden;
+    }
+  }
+
+  &.component-button--rounded {
+    border-radius: 100px;
+  }
+
+  &.component-button--roundless {
+    border-radius: 0;
+  }
+
+  &.component-button--borderless {
+    border: 0 none;
+  }
+
+  &.component-button--outline {
+    border-width: 2px !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    &.component-button--color-default {
+      border-color: $default;
+      color: $default;
+    }
+    &.component-button--color-primary {
+      border-color: $primary;
+      color: $primary;
+    }
+    &.component-button--color-secondary {
+      border-color: $secondary;
+      color: $secondary;
+    }
+    &.component-button--color-success {
+      border-color: $success;
+      color: $success;
+    }
+    &.component-button--color-info {
+      border-color: $info;
+      color: $info;
+    }
+    &.component-button--color-warning {
+      border-color: $warning;
+      color: $warning;
+    }
+    &.component-button--color-danger {
+      border-color: $danger;
+      color: $danger;
+    }
+  }
+
+  &:not(.component-button--icon-only) {
+    svg:not(.component-button__arrow-icon) {
+      margin-right: 7px;
+    }
+  }
+
+  .component-button__arrow-icon {
+    margin: 0;
+    margin-left: 7px;
+  }
+
+  &:not(:disabled):not(.disabled) {
+    cursor: pointer;
+  }
+
+  &.component-button--color-link {
+    font-weight: 400;
+    color: #007bff;
+    background-color: transparent;
+    &:not(.component-button--disabled) {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &:not(.component-button--color-link) {
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.18),
+    0 2px 4px rgba(0, 0, 0, 0.21);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.18), 0 2px 4px rgba(0, 0, 0, 0.21);
+    &:hover {
+      -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15),
+      0 3px 6px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &:active,
+  &:focus {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+  }
+
+  &.component-button--color-default {
+    background-color: $default;
+    border-color: $default_DARKEN_X2;
+    color: $default_text_color;
+    &:not(.component-button--disabled):hover {
+      background-color: $default_DARKEN_X1;
+    }
+    .loading-overlay-container {
+      .spinner > * {
+        background: $default_DARKEN_X3;
+      }
+    }
+  }
+  &.component-button--color-primary {
+    background-color: $primary;
+    border-color: $primary_DARKEN_X2;
+    color: $primary_text_color;
+    &:not(.component-button--disabled):hover {
+      background-color: $primary_DARKEN_X1;
+    }
+    .loading-overlay-container {
+      .spinner > * {
+        background: $primary_DARKEN_X3;
+      }
+    }
+  }
+  &.component-button--color-secondary {
+    background-color: $secondary;
+    border-color: $secondary_DARKEN_X2;
+    color: $secondary_text_color;
+    &:not(.component-button--disabled):hover {
+      background-color: $secondary_DARKEN_X1;
+    }
+    .loading-overlay-container {
+      .spinner > * {
+        background: $secondary_DARKEN_X3;
+      }
+    }
+  }
+  &.component-button--color-success {
+    background-color: $success;
+    border-color: $success_DARKEN_X2;
+    color: $success_text_color;
+    &:not(.component-button--disabled):hover {
+      background-color: $success_DARKEN_X1;
+    }
+    .loading-overlay-container {
+      .spinner > * {
+        background: $success_DARKEN_X3;
+      }
+    }
+  }
+  &.component-button--color-info {
+    background-color: $info;
+    border-color: $info_DARKEN_X2;
+    color: $info_text_color;
+    &:not(.component-button--disabled):hover {
+      background-color: $info_DARKEN_X1;
+    }
+    .loading-overlay-container {
+      .spinner > * {
+        background: $info_DARKEN_X3;
+      }
+    }
+  }
+  &.component-button--color-warning {
+    background-color: $warning;
+    border-color: $warning_DARKEN_X2;
+    color: $warning_text_color;
+    &:not(.component-button--disabled):hover {
+      background-color: $warning_DARKEN_X1;
+    }
+    .loading-overlay-container {
+      .spinner > * {
+        background: $warning_DARKEN_X3;
+      }
+    }
+  }
+  &.component-button--color-danger {
+    background-color: $danger;
+    border-color: $danger_DARKEN_X2;
+    color: $danger_text_color;
+    &:not(.component-button--disabled):hover {
+      background-color: $danger_DARKEN_X1;
+    }
+    .loading-overlay-container {
+      .spinner > * {
+        background: $danger_DARKEN_X3;
+      }
+    }
+  }
+
+  &.component-button--has-navigation {
+    &.component-button--outline {
+      &.component-button--color-secondary {
+        .component-button__navigation {
+          border-left: 2px solid $secondary;
+          color: $secondary;
+        }
+      }
+    }
+
+    &.component-button--size-lg {
+      padding-right: calc(.7em + 45px);
+
+      .component-button__navigation {
+        width: 45px;
+      }
+    }
+
+    &.component-button--size-md {
+      padding-right: calc(.7em + 38px);
+
+      .component-button__navigation {
+        width: 38px;
+      }
+    }
+
+    &.component-button--size-sm {
+      padding-right: calc(.7em + 29px);
+
+      .component-button__navigation {
+        width: 29px;
+      }
+    }
+
+    .component-button__navigation {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      text-align: center;
+
+      svg {
+        margin: 0 auto;
+        position: relative;
+        left: -2px;
+        top: 0px;
+      }
+    }
+  }
+
+  &.component-button--transparent {
+    background: transparent !important;
+    color: #333;
+    padding: 0 7px;
+    border: 0 none;
+    box-shadow: none !important;
+  }
+
+  &.component-button--icon-only {
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+  }
+}

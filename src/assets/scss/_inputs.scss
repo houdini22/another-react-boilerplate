@@ -1,0 +1,115 @@
+@import "variables";
+
+.component-form-field {
+  &:not(.component-form-field--type-hidden) {
+    margin-bottom: $COMPONENT_MARGIN_SINGLE;
+  }
+
+  .component-form-field__label {
+    label {
+      color: $defaultTextColor;
+      position: relative;
+      margin-bottom: 0;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      font-size: 11px;
+
+      span {
+        width: 100%;
+        display: inline-block;
+      }
+
+      .loading-overlay-container {
+        width: 20px;
+        height: 20px;
+        right: 0;
+        position: relative;
+      }
+    }
+  }
+  .component-form-field__input-container {
+    input[type=text], input[type=number], input[type=password] {
+      display: inline-block;
+      height: 28px;
+      width: 100%;
+      border: none;
+      border-radius: 0;
+      font-size: 13px;
+      font-weight: 400;
+      padding: 0;
+      background-color: transparent;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      border-bottom: 2px solid $default;
+      outline: 0 none;
+      color: #000;
+
+      &::placeholder {
+        color: lighten(#000, 35%);
+      }
+    }
+    select {
+      height: 28px;
+      background: transparent;
+      border: 0 none;
+      border-radius: 0;
+      font-size: 13px;
+      border-bottom: 2px solid $default;
+      width: 100%;
+      outline: 0 none;
+      color: #000;
+
+      &::placeholder {
+        color: lighten(#000, 35%);
+      }
+    }
+    textarea {
+      min-height: 100px;
+      border: 0 none;
+      border-bottom: 2px solid $default;
+      padding: 0;
+      width: 100%;
+      font-size: 13px;
+      outline: 0 none;
+
+      &::placeholder {
+        color: lighten(#000, 35%);
+      }
+    }
+    .component-form-field__input-container__error {
+      font-size: $COMPONENT_FONT_SIZE_MD;
+      color: $danger;
+      margin-bottom: 0;
+    }
+  }
+
+  &.component-form-field--state-success {
+    .component-form-field__input-container {
+      input[type=text], input[type=number], input[type=password] {
+        border-bottom-color: $success;
+      }
+      select {
+        border-bottom-color: $success;
+      }
+      textarea {
+        border-bottom-color: $success;
+      }
+    }
+  }
+
+  &.component-form-field--state-error {
+    .component-form-field__input-container {
+      input[type=text], input[type=number] {
+        border-bottom-color: $danger;
+      }
+      select {
+        border-bottom-color: $danger;
+      }
+      textarea {
+        border-bottom-color: $danger;
+      }
+    }
+  }
+}

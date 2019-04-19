@@ -1,0 +1,64 @@
+@import "./variables";
+
+.page-buttons {
+  .component-button:not(.component-button--block) {
+    margin-right: 7px;
+  }
+  .component-button--block {
+    margin-bottom: 7px;
+  }
+  .row {
+    margin-bottom: 7px;
+  }
+}
+
+.page-badge {
+  .row {
+    margin-bottom: 7px;
+  }
+  .component-badge {
+    margin-right: 7px;
+  }
+  .component-button {
+    .component-badge {
+      margin: 0;
+    }
+  }
+}
+
+.presentation-tab {
+  pre {
+    margin-top: $COMPONENT_MARGIN_SINGLE;
+    text-align: left;
+  }
+  .component-tabs__content__outer__inner__tab {
+    text-align: center;
+  }
+}
+
+.presentation-tab-simple {
+  margin-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 2px solid $secondary;
+  border-bottom: 2px solid $secondary;
+
+  .presentation-tab-simple__presentation {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+    & > div {
+      padding: 0 50px;
+      text-align: center;
+    }
+  }
+}
+
+.contact-form {
+  .component-button {
+    float: right;
+    margin-left: auto;
+    margin-top: $COMPONENT_MARGIN_SINGLE;
+  }
+}

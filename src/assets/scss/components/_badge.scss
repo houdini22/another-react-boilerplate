@@ -1,0 +1,121 @@
+@import "../variables";
+
+.component-badge {
+  display: inline-block;
+  min-width: 10px;
+  font-weight: 500;
+  line-height: 1.5384616;
+  white-space: nowrap;
+  text-align: center;
+  letter-spacing: 0.1px;
+  vertical-align: middle;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 200px;
+  padding: 0 3px;
+  position: relative;
+  top: -7px;
+
+  &.component-badge--right {
+    top: 0;
+    right: 5px;
+  }
+
+  &.component-badge--size-sm {
+    font-size: $COMPONENT_ELEMENT_FONT_SIZE_SM;
+  }
+
+  &.component-badge--size-md {
+    font-size: $COMPONENT_ELEMENT_FONT_SIZE_MD;
+  }
+
+  &.component-badge--size-lg {
+    font-size: $COMPONENT_ELEMENT_FONT_SIZE_LG;
+  }
+
+  &.component-badge--color-default {
+    background-color: $default;
+    border-color: $default_DARKEN_X1;
+    color: $default_text_color;
+  }
+  &.component-badge--color-primary {
+    background-color: $primary;
+    border-color: $primary_DARKEN_X1;
+    color: $primary_text_color;
+  }
+  &.component-badge--color-secondary {
+    background-color: $secondary;
+    border-color: $secondary_DARKEN_X1;
+    color: $secondary_text_color;
+  }
+  &.component-badge--color-info {
+    background-color: $info;
+    border-color: $info_DARKEN_X1;
+    color: $info_text_color;
+  }
+  &.component-badge--color-warning {
+    background-color: $warning;
+    border-color: $warning_DARKEN_X1;
+    color: $warning_text_color;
+  }
+  &.component-badge--color-danger {
+    background-color: $danger;
+    border-color: $danger_DARKEN_X1;
+    color: $danger_text_color;
+  }
+  &.component-badge--color-success {
+    background-color: $success;
+    border-color: $success_DARKEN_X1;
+    color: $success_text_color;
+  }
+
+  &.component-badge--outline {
+    background-color: transparent;
+    border-width: 2px;
+    padding: 1px 5px 0 5px;
+
+    &.component-badge--color-default {
+      border-color: $default;
+      color: $default;
+    }
+    &.component-badge--color-primary {
+      border-color: $primary;
+      color: $primary;
+    }
+    &.component-badge--color-secondary {
+      border-color: $secondary;
+      color: $secondary;
+    }
+    &.component-badge--color-info {
+      border-color: $info;
+      color: $info;
+    }
+    &.component-badge--color-warning {
+      border-color: $warning;
+      color: $warning;
+    }
+    &.component-badge--color-danger {
+      border-color: $danger;
+      color: $danger;
+    }
+    &.component-badge--color-success {
+      border-color: $success;
+      color: $success;
+    }
+  }
+
+  &.component-badge--link {
+    &:hover {
+      text-decoration: none;
+    }
+    cursor: pointer;
+  }
+
+  &.component-badge--arrow {
+    cursor: pointer;
+
+    .component-badge__arrow-icon {
+      margin-left: 5px;
+    }
+  }
+}

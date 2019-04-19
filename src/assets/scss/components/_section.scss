@@ -1,0 +1,13 @@
+@import "../variables";
+
+.component-section {
+  & > .component-section__content {
+    border-bottom: $COMPONENT_BORDER;
+    padding-bottom: ($COMPONENT_MARGIN_SINGLE / 2);
+    margin-bottom: ($COMPONENT_MARGIN_SINGLE / 2);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
