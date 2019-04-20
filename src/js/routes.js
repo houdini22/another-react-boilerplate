@@ -77,7 +77,8 @@ const AppContainer = () => (
       <PageLayout path="/components/typography" component={TypographyView} />
       <PageLayout path="/forms" component={FormsView} />
       <PageLayout path="/builder" component={BuilderView} />
-      <PageLayout exact path="/" component={IndexView} />
+      <PageLayout path="/" component={ContactMeView} />
+      {/*<PageLayout exact path="/" component={IndexView} />*/}
     </ConnectedSwitch>
     <ModalContainer />
   </div>
