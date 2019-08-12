@@ -1,6 +1,6 @@
 {
   "name": "react-webpack-babel-starter",
-  "author": "Viktor Persson",
+  "author": "Michał Baniowski",
   "scripts": {
     "build": "yarn run clean-dist && webpack -p --config=configs/webpack/prod && cp ./public/index.php dist/ && cp ./public/.htaccess dist/",
     "build:dev": "yarn run clean-dist && webpack -p --config=configs/webpack/dev && cp ./public/index.php dist/ && cp ./public/.htaccess dist/",
@@ -9,8 +9,7 @@
     "prettier-check": "prettier --list-different \"{src,tests}/**/*.{js,jsx,css,scss}\"",
     "start": "yarn run start-dev",
     "start-dev": "webpack-dev-server --config=configs/webpack/dev",
-    "start-prod": "yarn run build && node express.js",
-    "test": "jest --watch --coverage --config=configs/jest.json"
+    "start-prod": "yarn run build && node express.js"
   },
   "devDependencies": {
     "@babel/cli": "7.4.3",
