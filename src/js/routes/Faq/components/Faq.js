@@ -44,10 +44,10 @@ export class FaqView extends React.Component {
                 </Col>
                 <Col xs={9} style={{ textAlign: 'right' }}>
                   <a
-                    href="https://github.com/houdini22/javascript-framework"
+                    href="https://github.com/houdini22/another-react-boilerplate"
                     target="_blank"
                   >
-                    https://github.com/houdini22/javascript-framework
+                    https://github.com/houdini22/another-react-boilerplate
                   </a>
                 </Col>
               </Row>

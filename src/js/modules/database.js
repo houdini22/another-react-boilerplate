@@ -8,12 +8,6 @@ if (LocalStorage.isNew()) {
       email: '',
     },
   ])
-  LocalStorage.createTable('todo', [
-    {
-      name: '',
-      text: '',
-    },
-  ])
   LocalStorage.commit()
 }
 
