@@ -15,6 +15,7 @@ class Row extends React.Component {
         {...props}
         className={cx('component-row', {
           [cx('builder')]: builder,
+          [cx('component-row--no-padding')]: props['noPadding'],
         })}
       >
         {children}
@@ -28,6 +29,7 @@ Row.propTypes = {
     PropTypes.element.isRequired,
     PropTypes.array.isRequired,
   ]),
+  noPadding: PropTypes.bool,
 }
 
 export { Row }

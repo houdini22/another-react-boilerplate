@@ -8,7 +8,7 @@ import { LoginView } from './routes/Login'
 import { FaqView } from './routes/Faq'
 import { RateView } from './routes/Rate'
 import { FormsView } from './routes/Forms'
-import { ContactMeView } from './routes/ContactMe'
+import { AboutView } from './routes/About'
 import { BuilderView } from './routes/Builder/components/Builder'
 
 import {
@@ -31,7 +31,6 @@ import {
   AccordionView,
   ListView,
 } from './routes/StyleGuide'
-import { IndexView } from './routes/Index'
 
 import { userIsAuthenticated } from './modules/auth'
 import { ModalContainer } from './containers/Modal'
@@ -47,8 +46,8 @@ const AppContainer = () => (
   <div>
     <ConnectedSwitch>
       <PageLayout path="/login" component={LoginView} />
-      <PageLayout path="/whats-new" component={FaqView} />
-      <PageLayout path="/contact-me" component={ContactMeView} />
+      <PageLayout path="/faq" component={FaqView} />
+      <PageLayout path="/contact-me" component={AboutView} />
       <PageLayout
         path="/restricted-area"
         component={userIsAuthenticated(RateView)}
@@ -77,8 +76,7 @@ const AppContainer = () => (
       <PageLayout path="/components/typography" component={TypographyView} />
       <PageLayout path="/forms" component={FormsView} />
       <PageLayout path="/builder" component={BuilderView} />
-      <PageLayout path="/" component={ContactMeView} />
-      {/*<PageLayout exact path="/" component={IndexView} />*/}
+      <PageLayout exact path="/" component={FaqView} />
     </ConnectedSwitch>
     <ModalContainer />
   </div>

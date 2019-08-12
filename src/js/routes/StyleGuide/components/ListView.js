@@ -1,7 +1,6 @@
 import React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components/index'
 import { Row, Col, Section, List } from '../../../components/index'
-import PropTypes from 'prop-types'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 import { createPresentationTab } from '../../../utils/tabs'
 import { ListFormContainer } from './ListFormContainer'
@@ -33,7 +32,7 @@ class ListView extends React.Component {
 
     return (
       <PageContent>
-        <ComponentsPageHeader title="Tabs" component="Tabs" />
+        <ComponentsPageHeader title="List" component="List" />
         <Section>
           <Row>
             <Col xs={6}>

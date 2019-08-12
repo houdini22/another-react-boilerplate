@@ -1,11 +1,11 @@
 import React from 'react'
 import {
-  FaQuestionCircle as FaqIcon,
   FaKey as KeyIcon,
   FaExclamationTriangle as AlertIcon,
   FaIdCard as CardIcon,
   FaObjectGroup as ButtonGroupIcon,
   FaWpforms as FormsIcon,
+  FaInfo as InfoIcon,
 } from 'react-icons/fa'
 import {
   IoIosMail as ContactIcon,
@@ -27,9 +27,9 @@ export const navigation = [
   },
   {
     type: 'link',
-    href: '/whats-new',
-    caption: "What's new?",
-    icon: <FaqIcon />,
+    href: '/faq',
+    caption: 'FAQ',
+    icon: <InfoIcon />,
   },
   {
     type: 'link',
@@ -155,13 +155,6 @@ export const navigation = [
   },
   {
     type: 'link',
-    href: '/components/row',
-    caption: 'Row',
-    icon: 'RO',
-    componentType: 'row',
-  },
-  {
-    type: 'link',
     href: '/components/tabs',
     caption: 'Tabs',
     icon: <TabIcon />,
@@ -191,7 +184,7 @@ export const navigation = [
     href: '/forms',
     icon: <FormsIcon />,
   },
-  {
+  /*{
     type: 'header',
     caption: 'Builder',
   },
@@ -200,5 +193,5 @@ export const navigation = [
     caption: 'Builder',
     href: '/builder',
     icon: 'BU',
-  },
+  },*/
 ]

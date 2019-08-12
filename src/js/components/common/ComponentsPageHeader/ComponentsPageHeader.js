@@ -28,6 +28,12 @@ export class ComponentsPageHeader extends React.Component {
                   </Dropdown.Trigger>
                   <Dropdown.Menu>
                     <Dropdown.Item
+                      href="/components/accordion"
+                      highlighted={path === '/components/accordion'}
+                    >
+                      Accordion
+                    </Dropdown.Item>
+                    <Dropdown.Item
                       href="/components/alert"
                       highlighted={path === '/components/alert'}
                     >

@@ -1,11 +1,11 @@
 import React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components/index'
-import { Row, Col, Section, PageHeader } from '../../../components/index'
+import { Row, Col, PageHeader } from '../../../components/index'
 import { PageHeaderFormContainer } from './PageHeaderFormContainer'
 import { createPresentationTab } from '../../../utils/tabs'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 import { FaHome as HomeIcon } from 'react-icons/fa'
-import { Button, Dropdown, Badge } from '../../../components/index'
+import { Button, Dropdown, Label } from '../../../components/index'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/_helpers.scss'
 
@@ -40,7 +40,7 @@ class PageHeaderView extends React.Component {
     return (
       <PageContent>
         <ComponentsPageHeader title="PageHeader" component="PageHeader" />
-        <Section style={{ marginBottom: 30 }}>
+        <div style={{ marginBottom: 30 }}>
           <Row>
             <Col xs={12}>
               <PageHeaderFormContainer
@@ -49,7 +49,7 @@ class PageHeaderView extends React.Component {
               />
             </Col>
           </Row>
-        </Section>
+        </div>
         <PageHeader.Container size={size}>
           <PageHeader.Title>Title</PageHeader.Title>
           {breadcrumbs && (
@@ -74,9 +74,9 @@ class PageHeaderView extends React.Component {
                   <Dropdown.Item>Action 1</Dropdown.Item>
                   <Dropdown.Item>
                     Action 2
-                    <Badge color="warning" className={cx('pull-right')}>
+                    <Label color="warning" className={cx('pull-right')}>
                       33
-                    </Badge>
+                    </Label>
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown.Container>

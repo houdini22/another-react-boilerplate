@@ -44,7 +44,7 @@ class AccordionView extends React.Component {
 
     return (
       <PageContent>
-        <ComponentsPageHeader title="Alert" component="Alert" />
+        <ComponentsPageHeader title="Accordion" component="Accordion" />
         <Section>
           <Row>
             <Col xs={6}>

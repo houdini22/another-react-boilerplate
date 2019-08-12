@@ -92,10 +92,9 @@ class IndexViewBase extends React.Component {
               {render && [
                 <span className={cx('animation--fade-in')}>
                   <strong>{config.texts.frameworkName}</strong> framework
-                  {disableHeader &&
-                    disableFooter && (
-                      <StartButton setLayoutOption={setLayoutOption} />
-                    )}
+                  {disableHeader && disableFooter && (
+                    <StartButton setLayoutOption={setLayoutOption} />
+                  )}
                 </span>,
                 <div className={cx('route--index__container__actions')}>
                   {renderAction1 && <WhatsNewButton push={push} />}

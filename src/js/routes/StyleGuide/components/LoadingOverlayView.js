@@ -33,39 +33,35 @@ class LoadingOverlayView extends React.Component {
         />
         <Section>
           <Row>
-            <Col xs={12}>
-              <Row>
-                <Col xs={6}>
-                  {createPresentationTab(
-                    <span>Basic</span>,
-                    <Row>
-                      <Col xs={12}>
-                        <div style={{ position: 'relative', height: '150px' }}>
-                          <p>Content...</p>
-                          <LoadingOverlay />
-                        </div>
-                      </Col>
-                    </Row>,
-                    code1,
-                  )}
-                </Col>
-                <Col xs={6}>
-                  {createPresentationTab(
-                    <span>
-                      Size <Label color="info">xs</Label>
-                    </span>,
-                    <Row>
-                      <Col xs={12}>
-                        <div style={{ position: 'relative', height: '150px' }}>
-                          <p>Content...</p>
-                          <LoadingOverlay size="xs" />
-                        </div>
-                      </Col>
-                    </Row>,
-                    code2,
-                  )}
-                </Col>
-              </Row>
+            <Col xs={6}>
+              {createPresentationTab(
+                <span>Basic</span>,
+                <Row>
+                  <Col xs={12}>
+                    <div style={{ position: 'relative', height: '150px' }}>
+                      <p>Content...</p>
+                      <LoadingOverlay />
+                    </div>
+                  </Col>
+                </Row>,
+                code1,
+              )}
+            </Col>
+            <Col xs={6}>
+              {createPresentationTab(
+                <span>
+                  Size <Label color="info">xs</Label>
+                </span>,
+                <Row>
+                  <Col xs={12}>
+                    <div style={{ position: 'relative', height: '150px' }}>
+                      <p>Content...</p>
+                      <LoadingOverlay size="xs" />
+                    </div>
+                  </Col>
+                </Row>,
+                code2,
+              )}
             </Col>
           </Row>
         </Section>

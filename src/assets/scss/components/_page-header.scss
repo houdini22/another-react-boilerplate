@@ -3,7 +3,7 @@
 .component-page-header {
   border-bottom: $COMPONENT_BORDER;
   background-color: #fff;
-  margin-bottom: 20px;
+  margin-bottom: #{$COMPONENT_MARGIN_SINGLE};
   margin-left: -15px;
   margin-right: -15px;
   margin-top: -15px;
@@ -88,30 +88,38 @@
   &.component-page-header--size-lg {
     & > .component-page-header__content {
       padding: 42px 46px 42px 20px;
+
       & > .component-page-header__content__title {
         & > h2 {
           font-size: 31px;
+
+          svg:first-child {
+            margin-left: -15px;
+          }
         }
       }
+
       & > .component-page-header__content__actions {
         & > * {
           margin-left: $COMPONENT_ELEMENT_MARGIN_LG;
         }
       }
     }
+
     & > .component-page-header__breadcrumbs--outer {
       position: relative;
       padding: 0 13px;
       border-top: $COMPONENT_BORDER;
-      background: $COMPONENT_BACKGROUND_DARKER;
 
       & > .component-page-header__breadcrumbs--inner {
         & > ul {
           height: 47px;
+
           & > li {
             & > a {
               font-size: $COMPONENT_ELEMENT_FONT_SIZE_LG;
             }
+
             & > .component-dropdown {
               & > .component-dropdown__trigger {
                 & > .component-button {
@@ -128,17 +136,24 @@
   &.component-page-header--size-md {
     & > .component-page-header__content {
       padding: 32px 36px 32px 20px;
+
       & > .component-page-header__content__title {
         & > h2 {
           font-size: 23px;
+
+          svg:first-child {
+            margin-left: -11px;
+          }
         }
       }
+
       & > .component-page-header__content__actions {
         & > * {
           margin-left: $COMPONENT_ELEMENT_MARGIN_MD;
         }
       }
     }
+
     & > .component-page-header__breadcrumbs--outer {
       position: relative;
       padding: 0 13px;
@@ -148,10 +163,12 @@
       & > .component-page-header__breadcrumbs--inner {
         & > ul {
           height: 41px;
+
           & > li {
             & > a {
               font-size: $COMPONENT_ELEMENT_FONT_SIZE_MD;
             }
+
             & > .component-dropdown {
               & > .component-dropdown__trigger {
                 & > .component-button {
@@ -168,17 +185,24 @@
   &.component-page-header--size-sm {
     & > .component-page-header__content {
       padding: 20px 22px 20px 24px;
+
       & > .component-page-header__content__title {
         & > h2 {
           font-size: 18px;
+
+          svg:first-child {
+            margin-left: -9px;
+          }
         }
       }
+
       & > .component-page-header__content__actions {
         & > * {
           margin-left: $COMPONENT_ELEMENT_MARGIN_SM;
         }
       }
     }
+
     & > .component-page-header__breadcrumbs--outer {
       position: relative;
       padding: 0 13px;
@@ -188,10 +212,12 @@
       & > .component-page-header__breadcrumbs--inner {
         & > ul {
           height: 30px;
+
           & > li {
             & > a {
               font-size: $COMPONENT_ELEMENT_FONT_SIZE_SM;
             }
+
             & > .component-dropdown {
               & > .component-dropdown__trigger {
                 & > .component-button {

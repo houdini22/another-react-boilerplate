@@ -122,44 +122,40 @@ class ItemHeader extends React.Component {
                   }
                 }}
               >
-                {type === 'minimal' &&
-                  isOpened(name) && (
-                    <ArrowIconUp
-                      className={cx(
-                        'component-accordion__item__header__arrow-icon',
-                      )}
-                    />
-                  )}
-                {type === 'minimal' &&
-                  !isOpened(name) && (
-                    <ArrowIconDown
-                      className={cx(
-                        'component-accordion__item__header__arrow-icon',
-                      )}
-                    />
-                  )}
+                {type === 'minimal' && isOpened(name) && (
+                  <ArrowIconUp
+                    className={cx(
+                      'component-accordion__item__header__arrow-icon',
+                    )}
+                  />
+                )}
+                {type === 'minimal' && !isOpened(name) && (
+                  <ArrowIconDown
+                    className={cx(
+                      'component-accordion__item__header__arrow-icon',
+                    )}
+                  />
+                )}
                 <div
                   className={cx('component-accordion__item__header__content')}
                 >
                   {children}
                 </div>
 
-                {type === 'boxed' &&
-                  isOpened(name) && (
-                    <ArrowIconUp
-                      className={cx(
-                        'component-accordion__item__header__arrow-icon',
-                      )}
-                    />
-                  )}
-                {type === 'boxed' &&
-                  !isOpened(name) && (
-                    <ArrowIconDown
-                      className={cx(
-                        'component-accordion__item__header__arrow-icon',
-                      )}
-                    />
-                  )}
+                {type === 'boxed' && isOpened(name) && (
+                  <ArrowIconUp
+                    className={cx(
+                      'component-accordion__item__header__arrow-icon',
+                    )}
+                  />
+                )}
+                {type === 'boxed' && !isOpened(name) && (
+                  <ArrowIconDown
+                    className={cx(
+                      'component-accordion__item__header__arrow-icon',
+                    )}
+                  />
+                )}
               </div>
             </AppContext.Provider>
           )

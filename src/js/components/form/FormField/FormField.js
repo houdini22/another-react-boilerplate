@@ -94,14 +94,11 @@ class FormField extends React.Component {
         >
           <div className={cx('component-form-field__input-container')}>
             {inputComponent}
-            {error &&
-              withError && (
-                <p
-                  className={cx('component-form-field__input-container__error')}
-                >
-                  {error}
-                </p>
-              )}
+            {error && withError && (
+              <p className={cx('component-form-field__input-container__error')}>
+                {error}
+              </p>
+            )}
           </div>
         </div>
       )

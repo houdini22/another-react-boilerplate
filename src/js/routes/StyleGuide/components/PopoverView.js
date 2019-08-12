@@ -25,7 +25,7 @@ class PopoverView extends React.Component {
         color: 'default',
         outline: false,
         pixelsWidth: 300,
-        placement: 'right-top',
+        placement: 'left-top',
         clean: false,
         disableOutsideClick: false,
         trigger: 'click',

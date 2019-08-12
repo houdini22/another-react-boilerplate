@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import _ from 'underscore'
-import { Input } from 'reactstrap'
+import _ from 'lodash'
 
 class Select extends React.Component {
   renderPlaceholder() {

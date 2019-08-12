@@ -10,15 +10,6 @@ body {
   min-height: 100vh;
 }
 
-#root {
-  height: 100vh;
-  position: relative;
-
-  & > div {
-    height: 100%;
-  }
-}
-
 pre {
   border: $COMPONENT_BORDER;
   border-radius: $COMPONENT_BORDER_RADIUS;

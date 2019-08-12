@@ -4,3 +4,4 @@ node_modules/
 tests/__coverage__/
 vendor/
 .env
+.package-lock.json

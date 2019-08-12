@@ -11,26 +11,27 @@
   vertical-align: middle;
   background-color: transparent;
   border: 1px solid transparent;
-  border-radius: 200px;
   padding: 0 3px;
   position: relative;
-  top: -7px;
+  border-radius: $COMPONENT_BORDER_RADIUS;
 
-  &.component-badge--right {
-    top: 0;
-    right: 5px;
+  &.component-badge--rounded {
+    border-radius: 200px;
   }
 
   &.component-badge--size-sm {
-    font-size: $COMPONENT_ELEMENT_FONT_SIZE_SM;
+    top: -0.4em;
+    font-size: #{$COMPONENT_ELEMENT_FONT_SIZE_SM - 0.05em};
   }
 
   &.component-badge--size-md {
-    font-size: $COMPONENT_ELEMENT_FONT_SIZE_MD;
+    top: -0.4em;
+    font-size: #{$COMPONENT_ELEMENT_FONT_SIZE_MD - 0.15em};
   }
 
   &.component-badge--size-lg {
-    font-size: $COMPONENT_ELEMENT_FONT_SIZE_LG;
+    font-size: #{$COMPONENT_ELEMENT_FONT_SIZE_LG - 0.2em};
+    top: -0.25em;
   }
 
   &.component-badge--color-default {
