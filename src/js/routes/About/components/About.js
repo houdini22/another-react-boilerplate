@@ -23,6 +23,8 @@ export class AboutView extends React.Component {
                   <a href="mailto:michal.baniowski@gmail.com">
                     michal.baniowski@gmail.com
                   </a>
+                  <br />
+                  <a href="mailto:baniczek@gmail.com">baniczek@gmail.com</a>
                 </Col>
               </Row>
               <Row>
