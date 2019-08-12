@@ -68,12 +68,12 @@ export class FaqView extends React.Component {
               <Row>
                 <Col xs={3}>
                   <h4>
-                    <b>2019-06-01</b>
+                    <b>2019-06-12</b>
                   </h4>
                 </Col>
                 <Col xs={6}>
                   <ul>
-                    <li>Initial release</li>
+                    <li>Initial release v0.1-alpha</li>
                   </ul>
                 </Col>
               </Row>
