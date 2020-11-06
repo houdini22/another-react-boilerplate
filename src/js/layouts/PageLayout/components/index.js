@@ -9,13 +9,13 @@ import { SidebarTabIcon } from './SidebarTabIcon'
 import { PageContent } from './PageContent'
 
 export {
-  Sidebar,
-  SidebarHeader,
-  Navigation,
-  NavigationLink,
-  Container,
-  Footer,
-  NavigationHeader,
-  SidebarTabIcon,
-  PageContent,
+    Sidebar,
+    SidebarHeader,
+    Navigation,
+    NavigationLink,
+    Container,
+    Footer,
+    NavigationHeader,
+    SidebarTabIcon,
+    PageContent,
 }

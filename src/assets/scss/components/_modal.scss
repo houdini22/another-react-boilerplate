@@ -1,214 +1,214 @@
 @import '../variables';
 
 .component-modal-container {
-  display: block;
-  overflow-x: hidden;
-  overflow-y: auto;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 5000;
-  -webkit-overflow-scrolling: touch;
-  outline: 0;
-  background: rgba(0, 0, 0, 0.4);
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5000;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    background: rgba(0, 0, 0, 0.4);
 
-  .component-modal-container__modal {
-    position: relative;
-    width: 600px;
-    margin: 30px auto;
-
-    &.component-modal-container__modal--color-primary {
-      .component-modal-container__modal__content {
-        .component-modal-container__modal__content__title {
-          background-color: $primary;
-          color: #fff;
-        }
-      }
-    }
-
-    &.component-modal-container__modal--color-info {
-      .component-modal-container__modal__content {
-        .component-modal-container__modal__content__title {
-          background-color: $info;
-          color: #fff;
-        }
-      }
-    }
-
-    &.component-modal-container__modal--color-danger {
-      .component-modal-container__modal__content {
-        .component-modal-container__modal__content__title {
-          background-color: $danger;
-          color: #fff;
-        }
-      }
-    }
-
-    &.component-modal-container__modal--color-warning {
-      .component-modal-container__modal__content {
-        .component-modal-container__modal__content__title {
-          background-color: $warning;
-          color: $defaultTextColor;
-        }
-      }
-    }
-
-    &.component-modal-container__modal--color-success {
-      .component-modal-container__modal__content {
-        .component-modal-container__modal__content__title {
-          background-color: $success;
-          color: #fff;
-        }
-      }
-    }
-
-    &.component-modal-container__modal--size-xs {
-      width: 300px;
-    }
-
-    &.component-modal-container__modal--size-lg {
-      width: 900px;
-    }
-
-    &.component-modal-container__modal--size-full {
-      width: 94%;
-      margin-left: 3%;
-      margin-right: 3%;
-    }
-
-    &.component-modal-container__modal--placement-center {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-flex-flow: column nowrap;
-      -ms-flex-flow: column nowrap;
-      flex-flow: column nowrap;
-      -webkit-box-pack: center;
-      -webkit-justify-content: center;
-      -ms-flex-pack: center;
-      justify-content: center;
-      height: 100%;
-      margin: 0 auto;
-      -webkit-align-content: center;
-      -ms-flex-line-pack: center;
-      align-content: center;
-    }
-
-    &.component-modal-container__modal--placement-bottom {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-flex-flow: column nowrap;
-      -ms-flex-flow: column nowrap;
-      flex-flow: column nowrap;
-      -webkit-box-pack: end;
-      -webkit-justify-content: flex-end;
-      -ms-flex-pack: end;
-      justify-content: flex-end;
-      height: 100%;
-      -webkit-align-content: center;
-      -ms-flex-line-pack: center;
-      align-content: center;
-      margin-top: -30px;
-      margin-bottom: 0;
-    }
-
-    &.component-modal-container__modal--placement-right {
-      position: absolute;
-      right: 0;
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-flex-flow: column nowrap;
-      -ms-flex-flow: column nowrap;
-      flex-flow: column nowrap;
-      -webkit-box-pack: center;
-      -webkit-justify-content: center;
-      -ms-flex-pack: center;
-      justify-content: center;
-      height: 100%;
-      margin: 0;
-      background-color: #fff;
-      -webkit-align-content: center;
-      -ms-flex-line-pack: center;
-      align-content: center;
-
-      .component-modal-container__modal__content {
-        box-shadow: none;
-        -webkit-box-shadow: none;
-        height: 100%;
-
-        .component-modal-container__modal__content__footer {
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0;
-        }
-      }
-    }
-
-    .component-modal-container__modal__content {
-      position: relative;
-      background-color: #fff;
-      -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-      background-clip: padding-box;
-      outline: 0;
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-orient: vertical;
-      -webkit-box-direction: normal;
-      -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-      flex-direction: column;
-      pointer-events: auto;
-      -webkit-background-clip: padding-box;
-      border: 1px solid transparent;
-
-      .component-modal-container__modal__content__title {
-        padding: $COMPONENT_PADDING;
+    .component-modal-container__modal {
         position: relative;
+        width: 600px;
+        margin: 30px auto;
 
-        .component-modal-container__modal__content__title__title {
-          margin: 0;
+        &.component-modal-container__modal--color-primary {
+            .component-modal-container__modal__content {
+                .component-modal-container__modal__content__title {
+                    background-color: $primary;
+                    color: #fff;
+                }
+            }
         }
 
-        .component-modal-container__modal__content__title__close-icon {
-          position: absolute;
-          top: 50%;
-          right: 17px;
-          width: 22px;
-          height: 22px;
-          margin-top: -11px;
-          text-align: center;
-          cursor: pointer;
-          line-height: 22px;
-
-          svg {
-            font-size: 18px;
-          }
+        &.component-modal-container__modal--color-info {
+            .component-modal-container__modal__content {
+                .component-modal-container__modal__content__title {
+                    background-color: $info;
+                    color: #fff;
+                }
+            }
         }
-      }
 
-      .component-modal-container__modal__content__body {
-        padding: $COMPONENT_PADDING;
-      }
-
-      .component-modal-container__modal__content__footer {
-        padding: $COMPONENT_PADDING;
-        text-align: right;
-
-        .component-button {
-          margin-left: $COMPONENT_MARGIN_SINGLE;
+        &.component-modal-container__modal--color-danger {
+            .component-modal-container__modal__content {
+                .component-modal-container__modal__content__title {
+                    background-color: $danger;
+                    color: #fff;
+                }
+            }
         }
-      }
+
+        &.component-modal-container__modal--color-warning {
+            .component-modal-container__modal__content {
+                .component-modal-container__modal__content__title {
+                    background-color: $warning;
+                    color: $defaultTextColor;
+                }
+            }
+        }
+
+        &.component-modal-container__modal--color-success {
+            .component-modal-container__modal__content {
+                .component-modal-container__modal__content__title {
+                    background-color: $success;
+                    color: #fff;
+                }
+            }
+        }
+
+        &.component-modal-container__modal--size-xs {
+            width: 300px;
+        }
+
+        &.component-modal-container__modal--size-lg {
+            width: 900px;
+        }
+
+        &.component-modal-container__modal--size-full {
+            width: 94%;
+            margin-left: 3%;
+            margin-right: 3%;
+        }
+
+        &.component-modal-container__modal--placement-center {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-flow: column nowrap;
+            -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            height: 100%;
+            margin: 0 auto;
+            -webkit-align-content: center;
+            -ms-flex-line-pack: center;
+            align-content: center;
+        }
+
+        &.component-modal-container__modal--placement-bottom {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-flow: column nowrap;
+            -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+            -webkit-box-pack: end;
+            -webkit-justify-content: flex-end;
+            -ms-flex-pack: end;
+            justify-content: flex-end;
+            height: 100%;
+            -webkit-align-content: center;
+            -ms-flex-line-pack: center;
+            align-content: center;
+            margin-top: -30px;
+            margin-bottom: 0;
+        }
+
+        &.component-modal-container__modal--placement-right {
+            position: absolute;
+            right: 0;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-flow: column nowrap;
+            -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            height: 100%;
+            margin: 0;
+            background-color: #fff;
+            -webkit-align-content: center;
+            -ms-flex-line-pack: center;
+            align-content: center;
+
+            .component-modal-container__modal__content {
+                box-shadow: none;
+                -webkit-box-shadow: none;
+                height: 100%;
+
+                .component-modal-container__modal__content__footer {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                }
+            }
+        }
+
+        .component-modal-container__modal__content {
+            position: relative;
+            background-color: #fff;
+            -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            background-clip: padding-box;
+            outline: 0;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            pointer-events: auto;
+            -webkit-background-clip: padding-box;
+            border: 1px solid transparent;
+
+            .component-modal-container__modal__content__title {
+                padding: $COMPONENT_PADDING;
+                position: relative;
+
+                .component-modal-container__modal__content__title__title {
+                    margin: 0;
+                }
+
+                .component-modal-container__modal__content__title__close-icon {
+                    position: absolute;
+                    top: 50%;
+                    right: 17px;
+                    width: 22px;
+                    height: 22px;
+                    margin-top: -11px;
+                    text-align: center;
+                    cursor: pointer;
+                    line-height: 22px;
+
+                    svg {
+                        font-size: 18px;
+                    }
+                }
+            }
+
+            .component-modal-container__modal__content__body {
+                padding: $COMPONENT_PADDING;
+            }
+
+            .component-modal-container__modal__content__footer {
+                padding: $COMPONENT_PADDING;
+                text-align: right;
+
+                .component-button {
+                    margin-left: $COMPONENT_MARGIN_SINGLE;
+                }
+            }
+        }
     }
-  }
 }

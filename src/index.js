@@ -6,7 +6,7 @@ import configureStore, { history } from './js/store/configure-store'
 import { Provider } from 'react-redux'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { Router } from "react-router"
+import { Router } from 'react-router'
 
 import 'react-custom-scroll/dist/customScroll.css'
 import 'typeface-spectral'
@@ -19,25 +19,25 @@ export const store = configureStore()
 export const AppContext = React.createContext()
 
 const renderComponent = (Component) => {
-  ReactDOM.render(
-    <DndProvider backend={HTML5Backend}>
-      <AppContainer>
-        <Provider store={store}>
-          <Router history={history}>
-            <Component />
-          </Router>
-        </Provider>
-      </AppContainer>
-    </DndProvider>,
-    rootEl,
-  )
+    ReactDOM.render(
+        <DndProvider backend={HTML5Backend}>
+            <AppContainer>
+                <Provider store={store}>
+                    <Router history={history}>
+                        <Component />
+                    </Router>
+                </Provider>
+            </AppContainer>
+        </DndProvider>,
+        rootEl,
+    )
 }
 
 renderComponent(App)
 
 // Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./js/routes', () => {
-    renderComponent(App)
-  })
+    module.hot.accept('./js/routes', () => {
+        renderComponent(App)
+    })
 }

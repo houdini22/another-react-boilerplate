@@ -9,49 +9,49 @@ import _ from 'lodash'
 export const FORM_NAME = 'ColPropsForm'
 
 export const submit = (values, dispatch, props) => {
-  return new Promise((resolve) => {
-    if (!values['xs']) {
-      throw new SubmissionError({
-        xs: 'Required.',
-      })
-    }
+    return new Promise((resolve) => {
+        if (!values['xs']) {
+            throw new SubmissionError({
+                xs: 'Required.',
+            })
+        }
 
-    const { addComponent, editComponent, myKey, close } = props
+        const { addComponent, editComponent, myKey, close } = props
 
-    if (_.isFunction(addComponent)) {
-      addComponent('col', myKey, values)
-    } else if (_.isFunction(editComponent)) {
-      editComponent(myKey, values)
-    }
+        if (_.isFunction(addComponent)) {
+            addComponent('col', myKey, values)
+        } else if (_.isFunction(editComponent)) {
+            editComponent(myKey, values)
+        }
 
-    close()
+        close()
 
-    resolve()
-  })
+        resolve()
+    })
 }
 
 const ColPropsFormContainer = compose(
-  connect((state, props) => {
-    const { component: { xs, sm, md, lg } = {} } = props
-    return {
-      initialValues: {
-        xs: xs,
-        sm: sm,
-        md: md,
-        lg: lg,
-      },
-    }
-  }),
-  reduxForm({
-    onSubmit: submit,
-    enableReinitialize: true,
-    destroyOnUnmount: true,
-    form: FORM_NAME,
-  }),
+    connect((state, props) => {
+        const { component: { xs, sm, md, lg } = {} } = props
+        return {
+            initialValues: {
+                xs: xs,
+                sm: sm,
+                md: md,
+                lg: lg,
+            },
+        }
+    }),
+    reduxForm({
+        onSubmit: submit,
+        enableReinitialize: true,
+        destroyOnUnmount: true,
+        form: FORM_NAME,
+    }),
 )(FormComponent)
 
 ColPropsFormContainer.propTypes = {
-  component: PropTypes.object,
+    component: PropTypes.object,
 }
 
 export { ColPropsFormContainer }

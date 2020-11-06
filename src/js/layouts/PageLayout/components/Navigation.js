@@ -6,26 +6,28 @@ import styles from '../../../../assets/scss/layout/_layout.scss'
 const cx = classNames.bind(styles)
 
 class Navigation extends React.Component {
-  render() {
-    const { children } = this.props
+    render() {
+        const { children } = this.props
 
-    return (
-      <div className={cx('layout__sidebar__content__navigation')}>
-        <ul
-          className={cx('layout__sidebar__content__navigation__links__links')}
-        >
-          {children}
-        </ul>
-      </div>
-    )
-  }
+        return (
+            <div className={cx('layout__sidebar__content__navigation')}>
+                <ul
+                    className={cx(
+                        'layout__sidebar__content__navigation__links__links',
+                    )}
+                >
+                    {children}
+                </ul>
+            </div>
+        )
+    }
 }
 
 Navigation.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.element.isRequired,
-    PropTypes.array.isRequired,
-  ]),
+    children: PropTypes.oneOfType([
+        PropTypes.element.isRequired,
+        PropTypes.array.isRequired,
+    ]),
 }
 
 export { Navigation }

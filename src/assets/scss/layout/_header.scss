@@ -1,22 +1,22 @@
 .page-header {
-  font-size: 20px;
-  border-bottom: $COMPONENT_BORDER;
-  position: relative;
-  margin: 0;
-  margin-bottom: 8px;
-  padding-bottom: 4px;
+    font-size: 20px;
+    border-bottom: $COMPONENT_BORDER;
+    position: relative;
+    margin: 0;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
 }
 
 .page-header-loading-container {
-  width: 28px;
-  height: 28px;
-  margin-left: 12px;
-  display: inline-block;
-  position: relative;
+    width: 28px;
+    height: 28px;
+    margin-left: 12px;
+    display: inline-block;
+    position: relative;
 }
 
 .page-header-caption {
-  display: inline-block;
-  vertical-align: top;
-  color: $SIDEBAR_BACKGROUND_COLOR;
+    display: inline-block;
+    vertical-align: top;
+    color: $SIDEBAR_BACKGROUND_COLOR;
 }

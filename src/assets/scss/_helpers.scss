@@ -1,33 +1,33 @@
 @import './variables';
 
 .no-margin {
-  margin: 0 !important;
+    margin: 0 !important;
 }
 
 .text-sm {
-  font-size: 85%;
+    font-size: 85%;
 }
 
 .text-center {
-  text-align: center;
+    text-align: center;
 }
 
 .text-right {
-  text-align: right;
+    text-align: right;
 }
 
 .shaded {
-  opacity: 0.4;
+    opacity: 0.4;
 }
 
 .pull-right {
-  float: right !important;
+    float: right !important;
 }
 
 .highlight-danger {
-  background-color: lighten($danger, 40) !important;
+    background-color: lighten($danger, 40) !important;
 }
 
 .highlight-success {
-  background-color: lighten($success, 40) !important;
+    background-color: lighten($success, 40) !important;
 }

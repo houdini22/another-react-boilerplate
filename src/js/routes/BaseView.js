@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 class BaseViewBase extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+    constructor(props) {
+        super(props)
+    }
 }
 
 BaseViewBase.propTypes = {
-  onEnter: PropTypes.func,
+    onEnter: PropTypes.func,
 }
 
 const BaseView = connect()(BaseViewBase)

@@ -1,375 +1,375 @@
 @import '../variables';
 
 .component-card {
-  background: $COMPONENT_BACKGROUND;
-  border: $COMPONENT_BORDER;
-  border-top: 3px solid $primary;
-  border-radius: $COMPONENT_BORDER_RADIUS;
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-clip: border-box;
-  text-align: left;
-  margin-bottom: $COMPONENT_MARGIN_SINGLE;
-  -webkit-box-shadow: 0 2px 10px -1px rgba(69, 90, 100, 0.3);
-  box-shadow: 0 2px 10px -1px rgba(69, 90, 100, 0.3);
-
-  &:not(:first-child) {
-    margin: $COMPONENT_MARGIN;
-  }
-
-  &.component-card--no-border-top {
-    border-top: $COMPONENT_BORDER !important;
-  }
-
-  &.component-card--size-lg {
-    .component-card__header {
-      font-size: 1.3em;
-      height: 55px;
-      line-height: 55px;
-
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        line-height: 1.4em;
-        font-size: 1.3em;
-        padding-left: $COMPONENT_PADDING_SINGLE;
-        padding-right: $COMPONENT_PADDING_SINGLE;
-      }
-
-      .component-card__header__actions {
-        .component-card__header__actions__action-button {
-          padding-left: 0.325em;
-          padding-right: 0.325em;
-        }
-      }
-    }
-
-    .component-card__content {
-      font-size: 14px;
-      padding: $COMPONENT_PADDING;
-    }
-
-    .component-card__footer > div {
-      padding: $COMPONENT_PADDING;
-    }
-  }
-
-  &.component-card--size-md {
-    .component-card__header {
-      font-size: 1.2em;
-      height: 45px;
-      line-height: 45px;
-
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        line-height: 1.4em;
-        font-size: 1.2em;
-        padding-left: #{$COMPONENT_PADDING_SINGLE / 2};
-        padding-right: #{$COMPONENT_PADDING_SINGLE / 2};
-      }
-
-      .component-card__header__actions {
-        .component-card__header__actions__action-button {
-          padding-left: 0.275em;
-          padding-right: 0.275em;
-        }
-      }
-    }
-
-    .component-card__content {
-      padding: #{$COMPONENT_PADDING / 2};
-    }
-    .component-card__footer > div {
-      padding: #{$COMPONENT_PADDING / 2};
-    }
-  }
-
-  &.component-card--size-sm {
-    .component-card__header {
-      font-size: 1.1em;
-      height: 35px;
-      line-height: 35px;
-
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        line-height: 1.1em;
-        font-size: 1.1em;
-        padding-left: #{$COMPONENT_PADDING_SINGLE / 3};
-        padding-right: #{$COMPONENT_PADDING_SINGLE / 3};
-      }
-
-      .component-card__header__actions {
-        .component-card__header__actions__action-button {
-          padding-left: 0.175em;
-          padding-right: 0.175em;
-        }
-      }
-    }
-
-    .component-card__content {
-      font-size: 12px;
-      padding: #{$COMPONENT_PADDING / 3};
-    }
-
-    .component-card__footer > div {
-      padding: #{$COMPONENT_PADDING / 3};
-    }
-  }
-
-  &.component-card--color-default {
-    border-top-color: $default_DARKEN_X1;
-    .component-card__header {
-      background: $default;
-      color: $default_text_color;
-      .component-card__header__actions {
-        .component-card__header__actions__action-button {
-          color: $default_text_color_DARKEN_X1;
-        }
-      }
-    }
-  }
-
-  &.component-card--color-primary {
-    border-top-color: $primary_DARKEN_X1;
-    .component-card__header {
-      background: $primary;
-      color: $primary_text_color;
-      .component-card__header__actions {
-        .component-card__header__actions__action-button {
-          color: $primary_text_color_DARKEN_X1;
-        }
-      }
-    }
-  }
-
-  &.component-card--color-secondary {
-    border-top-color: $secondary_DARKEN_X1;
-    .component-card__header {
-      background: $secondary;
-      color: $secondary_text_color;
-      .component-card__header__actions {
-        .component-card__header__actions__action-button {
-          color: $secondary_text_color_DARKEN_X1;
-        }
-      }
-    }
-  }
-
-  &.component-card--color-info {
-    border-top-color: $info_DARKEN_X1;
-    .component-card__header {
-      background: $info;
-      color: $info_text_color;
-      .component-card__header__actions {
-        .component-card__header__actions__action-button {
-          color: $info_text_color_DARKEN_X1;
-        }
-      }
-    }
-  }
-
-  &.component-card--color-warning {
-    border-top-color: $warning_DARKEN_X1;
-    .component-card__header {
-      background: $warning;
-      color: $warning_text_color;
-      .component-card__header__actions {
-        .component-card__header__actions__action-button {
-          color: $warning_text_color_DARKEN_X1;
-        }
-      }
-    }
-  }
-
-  &.component-card--color-success {
-    border-top-color: $success_DARKEN_X1;
-    .component-card__header {
-      background: $success;
-      color: $success_text_color;
-      .component-card__header__actions {
-        .component-card__header__actions__action-button {
-          color: $success_text_color_DARKEN_X1;
-        }
-      }
-    }
-  }
-
-  &.component-card--color-danger {
-    border-top-color: $danger_DARKEN_X1;
-    .component-card__header {
-      background: $danger;
-      color: $danger_text_color;
-      .component-card__header__actions {
-        .component-card__header__actions__action-button {
-          color: $danger_text_color_DARKEN_X1;
-        }
-      }
-    }
-  }
-
-  .component-card__header {
-    border-bottom: $COMPONENT_BORDER;
-    background: $COMPONENT_BACKGROUND_DARKER;
-    font-weight: 400;
+    background: $COMPONENT_BACKGROUND;
+    border: $COMPONENT_BORDER;
+    border-top: 3px solid $primary;
+    border-radius: $COMPONENT_BORDER_RADIUS;
     position: relative;
-    color: $defaultTextColor;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-clip: border-box;
+    text-align: left;
+    margin-bottom: $COMPONENT_MARGIN_SINGLE;
+    -webkit-box-shadow: 0 2px 10px -1px rgba(69, 90, 100, 0.3);
+    box-shadow: 0 2px 10px -1px rgba(69, 90, 100, 0.3);
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-weight: 400;
-      margin: 0;
-      margin-top: -4px;
-      display: inline-block;
-      vertical-align: middle;
-
-      svg {
-        margin-right: 5px;
-        display: inline-block;
-        vertical-align: middle;
-      }
+    &:not(:first-child) {
+        margin: $COMPONENT_MARGIN;
     }
 
-    .component-card__header__actions {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      right: 10px;
-      display: flex;
-      align-items: center;
+    &.component-card--no-border-top {
+        border-top: $COMPONENT_BORDER !important;
+    }
 
-      & > * {
-        margin-left: 5px;
-        margin-right: 5px;
-        flex: none;
+    &.component-card--size-lg {
+        .component-card__header {
+            font-size: 1.3em;
+            height: 55px;
+            line-height: 55px;
 
-        &.form-control:not(.checkbox) {
-          flex: 1;
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                line-height: 1.4em;
+                font-size: 1.3em;
+                padding-left: $COMPONENT_PADDING_SINGLE;
+                padding-right: $COMPONENT_PADDING_SINGLE;
+            }
+
+            .component-card__header__actions {
+                .component-card__header__actions__action-button {
+                    padding-left: 0.325em;
+                    padding-right: 0.325em;
+                }
+            }
         }
 
-        &:last-child {
-          margin-right: 0;
+        .component-card__content {
+            font-size: 14px;
+            padding: $COMPONENT_PADDING;
         }
-      }
 
-      .component-card__header__actions__action-button.component-card__header__actions__action-button--outline {
-        &.component-card__header__actions__action-button--color-primary.component-card__header__actions__action-button--outline {
-          color: $primary_LIGHTEN_X3;
+        .component-card__footer > div {
+            padding: $COMPONENT_PADDING;
         }
-        &.component-card__header__actions__action-button--color-secondary.component-card__header__actions__action-button--outline {
-          color: $secondary_LIGHTEN_X3;
-        }
-        &.component-card__header__actions__action-button--color-success.component-card__header__actions__action-button--outline {
-          color: $success_LIGHTEN_X3;
-        }
-        &.component-card__header__actions__action-button--color-info.component-card__header__actions__action-button--outline {
-          color: $info_LIGHTEN_X3;
-        }
-        &.component-card__header__actions__action-button--color-warning.component-card__header__actions__action-button--outline {
-          color: $warning_LIGHTEN_X3;
-        }
-        &.component-card__header__actions__action-button--color-danger.component-card__header__actions__action-button--outline {
-          color: $danger_LIGHTEN_X3;
-        }
-      }
-    }
-  }
-
-  .component-card__content {
-    & > *:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  .component-card__footer {
-    border-top: 1px solid transparent;
-
-    &.component-card__footer--type-bordered {
-      border-top: $COMPONENT_BORDER;
     }
 
-    &.component-card__footer--type-solid {
-      border-top: $COMPONENT_BORDER;
-      background: darken($COMPONENT_BACKGROUND, 5%);
-    }
-  }
+    &.component-card--size-md {
+        .component-card__header {
+            font-size: 1.2em;
+            height: 45px;
+            line-height: 45px;
 
-  &.component-card--color-default {
-    & > .component-card__footer {
-      &.component-card__footer--type-colored {
-        background: $default;
-        color: $default_text_color;
-      }
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                line-height: 1.4em;
+                font-size: 1.2em;
+                padding-left: #{$COMPONENT_PADDING_SINGLE / 2};
+                padding-right: #{$COMPONENT_PADDING_SINGLE / 2};
+            }
+
+            .component-card__header__actions {
+                .component-card__header__actions__action-button {
+                    padding-left: 0.275em;
+                    padding-right: 0.275em;
+                }
+            }
+        }
+
+        .component-card__content {
+            padding: #{$COMPONENT_PADDING / 2};
+        }
+        .component-card__footer > div {
+            padding: #{$COMPONENT_PADDING / 2};
+        }
     }
-  }
-  &.component-card--color-primary {
-    & > .component-card__footer {
-      &.component-card__footer--type-colored {
-        background: $primary;
-        color: $primary_text_color;
-      }
+
+    &.component-card--size-sm {
+        .component-card__header {
+            font-size: 1.1em;
+            height: 35px;
+            line-height: 35px;
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                line-height: 1.1em;
+                font-size: 1.1em;
+                padding-left: #{$COMPONENT_PADDING_SINGLE / 3};
+                padding-right: #{$COMPONENT_PADDING_SINGLE / 3};
+            }
+
+            .component-card__header__actions {
+                .component-card__header__actions__action-button {
+                    padding-left: 0.175em;
+                    padding-right: 0.175em;
+                }
+            }
+        }
+
+        .component-card__content {
+            font-size: 12px;
+            padding: #{$COMPONENT_PADDING / 3};
+        }
+
+        .component-card__footer > div {
+            padding: #{$COMPONENT_PADDING / 3};
+        }
     }
-  }
-  &.component-card--color-secondary {
-    & > .component-card__footer {
-      &.component-card__footer--type-colored {
-        background: $secondary;
-        color: $secondary_text_color;
-      }
+
+    &.component-card--color-default {
+        border-top-color: $default_DARKEN_X1;
+        .component-card__header {
+            background: $default;
+            color: $default_text_color;
+            .component-card__header__actions {
+                .component-card__header__actions__action-button {
+                    color: $default_text_color_DARKEN_X1;
+                }
+            }
+        }
     }
-  }
-  &.component-card--color-info {
-    & > .component-card__footer {
-      &.component-card__footer--type-colored {
-        background: $info;
-        color: $info_text_color;
-      }
+
+    &.component-card--color-primary {
+        border-top-color: $primary_DARKEN_X1;
+        .component-card__header {
+            background: $primary;
+            color: $primary_text_color;
+            .component-card__header__actions {
+                .component-card__header__actions__action-button {
+                    color: $primary_text_color_DARKEN_X1;
+                }
+            }
+        }
     }
-  }
-  &.component-card--color-danger {
-    & > .component-card__footer {
-      &.component-card__footer--type-colored {
-        background: $danger;
-        color: $danger_text_color;
-      }
+
+    &.component-card--color-secondary {
+        border-top-color: $secondary_DARKEN_X1;
+        .component-card__header {
+            background: $secondary;
+            color: $secondary_text_color;
+            .component-card__header__actions {
+                .component-card__header__actions__action-button {
+                    color: $secondary_text_color_DARKEN_X1;
+                }
+            }
+        }
     }
-  }
-  &.component-card--color-warning {
-    & > .component-card__footer {
-      &.component-card__footer--type-colored {
-        background: $warning;
-        color: $warning_text_color;
-      }
+
+    &.component-card--color-info {
+        border-top-color: $info_DARKEN_X1;
+        .component-card__header {
+            background: $info;
+            color: $info_text_color;
+            .component-card__header__actions {
+                .component-card__header__actions__action-button {
+                    color: $info_text_color_DARKEN_X1;
+                }
+            }
+        }
     }
-  }
-  &.component-card--color-success {
-    & > .component-card__footer {
-      &.component-card__footer--type-colored {
-        background: $success;
-        color: $success_text_color;
-      }
+
+    &.component-card--color-warning {
+        border-top-color: $warning_DARKEN_X1;
+        .component-card__header {
+            background: $warning;
+            color: $warning_text_color;
+            .component-card__header__actions {
+                .component-card__header__actions__action-button {
+                    color: $warning_text_color_DARKEN_X1;
+                }
+            }
+        }
     }
-  }
+
+    &.component-card--color-success {
+        border-top-color: $success_DARKEN_X1;
+        .component-card__header {
+            background: $success;
+            color: $success_text_color;
+            .component-card__header__actions {
+                .component-card__header__actions__action-button {
+                    color: $success_text_color_DARKEN_X1;
+                }
+            }
+        }
+    }
+
+    &.component-card--color-danger {
+        border-top-color: $danger_DARKEN_X1;
+        .component-card__header {
+            background: $danger;
+            color: $danger_text_color;
+            .component-card__header__actions {
+                .component-card__header__actions__action-button {
+                    color: $danger_text_color_DARKEN_X1;
+                }
+            }
+        }
+    }
+
+    .component-card__header {
+        border-bottom: $COMPONENT_BORDER;
+        background: $COMPONENT_BACKGROUND_DARKER;
+        font-weight: 400;
+        position: relative;
+        color: $defaultTextColor;
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 400;
+            margin: 0;
+            margin-top: -4px;
+            display: inline-block;
+            vertical-align: middle;
+
+            svg {
+                margin-right: 5px;
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+
+        .component-card__header__actions {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 10px;
+            display: flex;
+            align-items: center;
+
+            & > * {
+                margin-left: 5px;
+                margin-right: 5px;
+                flex: none;
+
+                &.form-control:not(.checkbox) {
+                    flex: 1;
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+
+            .component-card__header__actions__action-button.component-card__header__actions__action-button--outline {
+                &.component-card__header__actions__action-button--color-primary.component-card__header__actions__action-button--outline {
+                    color: $primary_LIGHTEN_X3;
+                }
+                &.component-card__header__actions__action-button--color-secondary.component-card__header__actions__action-button--outline {
+                    color: $secondary_LIGHTEN_X3;
+                }
+                &.component-card__header__actions__action-button--color-success.component-card__header__actions__action-button--outline {
+                    color: $success_LIGHTEN_X3;
+                }
+                &.component-card__header__actions__action-button--color-info.component-card__header__actions__action-button--outline {
+                    color: $info_LIGHTEN_X3;
+                }
+                &.component-card__header__actions__action-button--color-warning.component-card__header__actions__action-button--outline {
+                    color: $warning_LIGHTEN_X3;
+                }
+                &.component-card__header__actions__action-button--color-danger.component-card__header__actions__action-button--outline {
+                    color: $danger_LIGHTEN_X3;
+                }
+            }
+        }
+    }
+
+    .component-card__content {
+        & > *:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .component-card__footer {
+        border-top: 1px solid transparent;
+
+        &.component-card__footer--type-bordered {
+            border-top: $COMPONENT_BORDER;
+        }
+
+        &.component-card__footer--type-solid {
+            border-top: $COMPONENT_BORDER;
+            background: darken($COMPONENT_BACKGROUND, 5%);
+        }
+    }
+
+    &.component-card--color-default {
+        & > .component-card__footer {
+            &.component-card__footer--type-colored {
+                background: $default;
+                color: $default_text_color;
+            }
+        }
+    }
+    &.component-card--color-primary {
+        & > .component-card__footer {
+            &.component-card__footer--type-colored {
+                background: $primary;
+                color: $primary_text_color;
+            }
+        }
+    }
+    &.component-card--color-secondary {
+        & > .component-card__footer {
+            &.component-card__footer--type-colored {
+                background: $secondary;
+                color: $secondary_text_color;
+            }
+        }
+    }
+    &.component-card--color-info {
+        & > .component-card__footer {
+            &.component-card__footer--type-colored {
+                background: $info;
+                color: $info_text_color;
+            }
+        }
+    }
+    &.component-card--color-danger {
+        & > .component-card__footer {
+            &.component-card__footer--type-colored {
+                background: $danger;
+                color: $danger_text_color;
+            }
+        }
+    }
+    &.component-card--color-warning {
+        & > .component-card__footer {
+            &.component-card__footer--type-colored {
+                background: $warning;
+                color: $warning_text_color;
+            }
+        }
+    }
+    &.component-card--color-success {
+        & > .component-card__footer {
+            &.component-card__footer--type-colored {
+                background: $success;
+                color: $success_text_color;
+            }
+        }
+    }
 }

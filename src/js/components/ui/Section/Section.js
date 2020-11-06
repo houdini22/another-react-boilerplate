@@ -6,20 +6,22 @@ import styles from '../../../../assets/scss/components/_section.scss'
 const cx = classNames.bind(styles)
 
 class Section extends React.Component {
-  render() {
-    const { children, style } = this.props
+    render() {
+        const { children, style } = this.props
 
-    return (
-      <div className={cx('component-section')} style={style}>
-        <div className={cx('component-section__content')}>{children}</div>
-      </div>
-    )
-  }
+        return (
+            <div className={cx('component-section')} style={style}>
+                <div className={cx('component-section__content')}>
+                    {children}
+                </div>
+            </div>
+        )
+    }
 }
 
 Section.propTypes = {
-  children: PropTypes.element.isRequired,
-  style: PropTypes.object,
+    children: PropTypes.element.isRequired,
+    style: PropTypes.object,
 }
 
 export { Section }

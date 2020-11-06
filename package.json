@@ -7,6 +7,7 @@
     "bootstrap": "^4.5.3",
     "copy-to-clipboard": "^3.3.1",
     "localstoragedb": "^2.3.2",
+    "lodash": "^4.17.20",
     "md5": "^2.3.0",
     "moment": "^2.29.1",
     "react-custom-scroll": "^4.2.1",
@@ -50,10 +51,12 @@
     "jquery": "^3.5.1",
     "node-sass": "^4.0.0",
     "null-loader": "^4.0.1",
+    "pre-commit": "^1.2.2",
     "prettier": "^2.1.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-hot-loader": "^4.13.0",
     "react-redux": "^7.2.2",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
@@ -71,7 +74,6 @@
     "web-vitals": "^0.2.4",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
-    "webpack-merge": "^4.2.2",
-    "react-hot-loader": "^4.13.0"
+    "webpack-merge": "^4.2.2"
   }
 }

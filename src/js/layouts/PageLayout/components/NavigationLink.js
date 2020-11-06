@@ -8,77 +8,80 @@ import { DragSource } from 'react-dnd'
 const cx = classNames.bind(styles)
 
 const navigationLinkSource = {
-  beginDrag(props) {
-    // Return the data describing the dragged item
-    const item = { id: props.id }
-    return item
-  },
+    beginDrag(props) {
+        // Return the data describing the dragged item
+        const item = { id: props.id }
+        return item
+    },
 
-  endDrag(props, monitor, component) {
-    if (!monitor.didDrop()) {
-      return
-    }
+    endDrag(props, monitor, component) {
+        if (!monitor.didDrop()) {
+            return
+        }
 
-    // When dropped on a compatible target, do something
-    const item = monitor.getItem()
-    const dropResult = monitor.getDropResult()
+        // When dropped on a compatible target, do something
+        const item = monitor.getItem()
+        const dropResult = monitor.getDropResult()
 
-    console.log(item, dropResult, component)
-  },
+        console.log(item, dropResult, component)
+    },
 }
 
 function collect(connect, monitor) {
-  return {
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging(),
-  }
+    return {
+        connectDragSource: connect.dragSource(),
+        isDragging: monitor.isDragging(),
+    }
 }
 
 class BaseNavigationLink extends React.Component {
-  render() {
-    const { children, href, icon, active, connectDragSource } = this.props
+    render() {
+        const { children, href, icon, active, connectDragSource } = this.props
 
-    return connectDragSource(
-      <li
-        className={cx('layout__sidebar__content__navigation__links__link', {
-          'layout__sidebar__content__navigation__links__link--active': active,
-        })}
-      >
-        <Link to={href}>
-          <div>
-            <span
-              className={cx(
-                'layout__sidebar__content__navigation__links__link__icon',
-              )}
+        return connectDragSource(
+            <li
+                className={cx(
+                    'layout__sidebar__content__navigation__links__link',
+                    {
+                        'layout__sidebar__content__navigation__links__link--active': active,
+                    },
+                )}
             >
-              {icon}
-            </span>
-            <span
-              className={cx(
-                'layout__sidebar__content__navigation__links__link__caption',
-              )}
-            >
-              {children}
-            </span>
-          </div>
-        </Link>
-      </li>,
-    )
-  }
+                <Link to={href}>
+                    <div>
+                        <span
+                            className={cx(
+                                'layout__sidebar__content__navigation__links__link__icon',
+                            )}
+                        >
+                            {icon}
+                        </span>
+                        <span
+                            className={cx(
+                                'layout__sidebar__content__navigation__links__link__caption',
+                            )}
+                        >
+                            {children}
+                        </span>
+                    </div>
+                </Link>
+            </li>,
+        )
+    }
 }
 
 BaseNavigationLink.propTypes = {
-  children: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
-  icon: PropTypes.element,
-  active: PropTypes.bool.isRequired,
-  connectDragSource: PropTypes.func.isRequired,
+    children: PropTypes.string.isRequired,
+    href: PropTypes.string.isRequired,
+    icon: PropTypes.element,
+    active: PropTypes.bool.isRequired,
+    connectDragSource: PropTypes.func.isRequired,
 }
 
 const NavigationLink = DragSource(
-  'NAVIGATION_LINK',
-  navigationLinkSource,
-  collect,
+    'NAVIGATION_LINK',
+    navigationLinkSource,
+    collect,
 )(BaseNavigationLink)
 
 export { NavigationLink }

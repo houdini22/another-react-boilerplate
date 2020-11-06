@@ -7,29 +7,29 @@ import styles from '../../../../assets/scss/components/_row.scss'
 const cx = classNames.bind(styles)
 
 class Row extends React.Component {
-  render() {
-    const { children, builder, ...props } = this.props
+    render() {
+        const { children, builder, ...props } = this.props
 
-    return (
-      <div
-        {...props}
-        className={cx('component-row', {
-          [cx('builder')]: builder,
-          [cx('component-row--no-padding')]: props['noPadding'],
-        })}
-      >
-        {children}
-      </div>
-    )
-  }
+        return (
+            <div
+                {...props}
+                className={cx('component-row', {
+                    [cx('builder')]: builder,
+                    [cx('component-row--no-padding')]: props['noPadding'],
+                })}
+            >
+                {children}
+            </div>
+        )
+    }
 }
 
 Row.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.element.isRequired,
-    PropTypes.array.isRequired,
-  ]),
-  noPadding: PropTypes.bool,
+    children: PropTypes.oneOfType([
+        PropTypes.element.isRequired,
+        PropTypes.array.isRequired,
+    ]),
+    noPadding: PropTypes.bool,
 }
 
 export { Row }

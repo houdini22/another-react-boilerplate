@@ -4,20 +4,20 @@ import { FormContainer } from '../containers/FormContainer'
 import { Row, Col, PageHeader, Card } from '../../../components/index'
 
 class FormsView extends React.Component {
-  render() {
-    return (
-      <PageContent>
-        <PageHeader.Container>
-          <PageHeader.Title>Forms</PageHeader.Title>
-        </PageHeader.Container>
-        <Row>
-          <Col xs={12}>
-            <FormContainer />
-          </Col>
-        </Row>
-      </PageContent>
-    )
-  }
+    render() {
+        return (
+            <PageContent>
+                <PageHeader.Container>
+                    <PageHeader.Title>Forms</PageHeader.Title>
+                </PageHeader.Container>
+                <Row>
+                    <Col xs={12}>
+                        <FormContainer />
+                    </Col>
+                </Row>
+            </PageContent>
+        )
+    }
 }
 
 export { FormsView }

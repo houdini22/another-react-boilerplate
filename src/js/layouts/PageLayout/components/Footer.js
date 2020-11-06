@@ -6,13 +6,13 @@ import styles from '../../../../assets/scss/layout/_layout.scss'
 const cx = classNames.bind(styles)
 
 class Footer extends React.Component {
-  render() {
-    return (
-      <div className={cx('layout__container__footer')}>
-        <Copyright />
-      </div>
-    )
-  }
+    render() {
+        return (
+            <div className={cx('layout__container__footer')}>
+                <Copyright />
+            </div>
+        )
+    }
 }
 
 Footer.propTypes = {}

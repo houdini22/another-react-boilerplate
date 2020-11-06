@@ -1,218 +1,219 @@
 @import '../variables';
 
 .component-popover {
-  display: inline-block;
-  position: relative;
-  text-align: left;
+    display: inline-block;
+    position: relative;
+    text-align: left;
 
-  & > .component-popover__content {
-    & > .component-popover__content__outer {
-      border-radius: $COMPONENT_BORDER_RADIUS;
+    & > .component-popover__content {
+        & > .component-popover__content__outer {
+            border-radius: $COMPONENT_BORDER_RADIUS;
+        }
     }
-  }
 
-  &:not(.component-popover--outline) {
+    &:not(.component-popover--outline) {
+        &:not(.component-popover--transparent) {
+            & > .component-popover__content {
+                & > .component-popover__content__outer {
+                    border: $COMPONENT_BORDER;
+                }
+            }
+
+            &.component-popover--color-default {
+                & > .component-popover__content {
+                    & > .component-popover__content__outer {
+                        background: $COMPONENT_BACKGROUND;
+                    }
+                }
+            }
+
+            &.component-popover--color-primary {
+                & > .component-popover__content {
+                    & > .component-popover__content__outer {
+                        background: $primary;
+                        color: $primary_text_color;
+                    }
+                }
+            }
+
+            &.component-popover--color-secondary {
+                & > .component-popover__content {
+                    & > .component-popover__content__outer {
+                        background: $secondary;
+                        color: $secondary_text_color;
+                    }
+                }
+            }
+
+            &.component-popover--color-info {
+                & > .component-popover__content {
+                    & > .component-popover__content__outer {
+                        background: $info;
+                        color: $info_text_color;
+                    }
+                }
+            }
+
+            &.component-popover--color-warning {
+                & > .component-popover__content {
+                    & > .component-popover__content__outer {
+                        background: $warning;
+                        color: $warning_text_color;
+                    }
+                }
+            }
+
+            &.component-popover--color-danger {
+                & > .component-popover__content {
+                    & > .component-popover__content__outer {
+                        background: $danger;
+                        color: $danger_text_color;
+                    }
+                }
+            }
+
+            &.component-popover--color-success {
+                & > .component-popover__content {
+                    & > .component-popover__content__outer {
+                        background: $success;
+                        color: $success_text_color;
+                    }
+                }
+            }
+        }
+    }
+
     &:not(.component-popover--transparent) {
-      & > .component-popover__content {
+        &.component-popover--outline {
+            & > .component-popover__content {
+                & > .component-popover__content__outer {
+                    display: flex;
+                    background: $COMPONENT_BACKGROUND;
+                }
+            }
+
+            &.component-popover--color-default {
+                & > .component-popover__content {
+                    & > .component-popover__content__outer {
+                        border: 2px solid $default;
+                        color: $default;
+                    }
+                }
+            }
+
+            &.component-popover--color-primary {
+                & > .component-popover__content {
+                    & > .component-popover__content__outer {
+                        border: 2px solid $primary;
+                        color: $primary;
+                    }
+                }
+            }
+
+            &.component-popover--color-secondary {
+                & > .component-popover__content {
+                    & > .component-popover__content__outer {
+                        border: 2px solid $secondary;
+                        color: $secondary;
+                    }
+                }
+            }
+
+            &.component-popover--color-info {
+                & > .component-popover__content {
+                    & > .component-popover__content__outer {
+                        border: 2px solid $info;
+                        color: $info;
+                    }
+                }
+            }
+
+            &.component-popover--color-warning {
+                & > .component-popover__content {
+                    & > .component-popover__content__outer {
+                        border: 2px solid $warning;
+                        color: $warning;
+                    }
+                }
+            }
+
+            &.component-popover--color-danger {
+                & > .component-popover__content {
+                    & > .component-popover__content__outer {
+                        border: 2px solid $danger;
+                        color: $danger;
+                    }
+                }
+            }
+
+            &.component-popover--color-success {
+                & > .component-popover__content {
+                    & > .component-popover__content__outer {
+                        border: 2px solid $success;
+                        color: $success;
+                    }
+                }
+            }
+        }
+    }
+
+    &.component-popover--no-padding {
+        & > .component-popover__content {
+            & > .component-popover__content__outer {
+                padding: 0;
+
+                & > .component-popover__content__outer__inner {
+                }
+            }
+        }
+    }
+
+    &.component-popover--is-open {
+        & > .component-popover__content {
+            display: flex;
+        }
+    }
+
+    &.component-popover--placement-right-top,
+    &.component-popover--placement-right-center {
+        & > .component-popover__content {
+            left: 100%;
+            padding-left: $COMPONENT_MARGIN_SINGLE !important;
+            top: 0;
+        }
+    }
+
+    &.component-popover--placement-left-top,
+    &.component-popover--placement-left-center {
+        & > .component-popover__content {
+            right: 100%;
+            padding-right: $COMPONENT_MARGIN_SINGLE !important;
+            top: 0;
+        }
+    }
+
+    & > .component-popover__content {
+        position: absolute;
+        bottom: calc(100% + #{$COMPONENT_MARGIN_SINGLE});
+        min-height: 200px;
+        display: none;
+        z-index: 1;
+
         & > .component-popover__content__outer {
-          border: $COMPONENT_BORDER;
+            padding: $COMPONENT_PADDING;
+            border-radius: $COMPONENT_BORDER_RADIUS;
+            flex: 1;
+            display: block;
+            -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.18),
+                0 2px 4px rgba(0, 0, 0, 0.21);
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.18),
+                0 2px 4px rgba(0, 0, 0, 0.21);
+            & > .component-popover__content__outer__inner {
+                flex: 1;
+                & > * {
+                    height: 100%;
+                }
+            }
         }
-      }
-
-      &.component-popover--color-default {
-        & > .component-popover__content {
-          & > .component-popover__content__outer {
-            background: $COMPONENT_BACKGROUND;
-          }
-        }
-      }
-
-      &.component-popover--color-primary {
-        & > .component-popover__content {
-          & > .component-popover__content__outer {
-            background: $primary;
-            color: $primary_text_color;
-          }
-        }
-      }
-
-      &.component-popover--color-secondary {
-        & > .component-popover__content {
-          & > .component-popover__content__outer {
-            background: $secondary;
-            color: $secondary_text_color;
-          }
-        }
-      }
-
-      &.component-popover--color-info {
-        & > .component-popover__content {
-          & > .component-popover__content__outer {
-            background: $info;
-            color: $info_text_color;
-          }
-        }
-      }
-
-      &.component-popover--color-warning {
-        & > .component-popover__content {
-          & > .component-popover__content__outer {
-            background: $warning;
-            color: $warning_text_color;
-          }
-        }
-      }
-
-      &.component-popover--color-danger {
-        & > .component-popover__content {
-          & > .component-popover__content__outer {
-            background: $danger;
-            color: $danger_text_color;
-          }
-        }
-      }
-
-      &.component-popover--color-success {
-        & > .component-popover__content {
-          & > .component-popover__content__outer {
-            background: $success;
-            color: $success_text_color;
-          }
-        }
-      }
     }
-  }
-
-  &:not(.component-popover--transparent) {
-    &.component-popover--outline {
-      & > .component-popover__content {
-        & > .component-popover__content__outer {
-          display: flex;
-          background: $COMPONENT_BACKGROUND;
-        }
-      }
-
-      &.component-popover--color-default {
-        & > .component-popover__content {
-          & > .component-popover__content__outer {
-            border: 2px solid $default;
-            color: $default;
-          }
-        }
-      }
-
-      &.component-popover--color-primary {
-        & > .component-popover__content {
-          & > .component-popover__content__outer {
-            border: 2px solid $primary;
-            color: $primary;
-          }
-        }
-      }
-
-      &.component-popover--color-secondary {
-        & > .component-popover__content {
-          & > .component-popover__content__outer {
-            border: 2px solid $secondary;
-            color: $secondary;
-          }
-        }
-      }
-
-      &.component-popover--color-info {
-        & > .component-popover__content {
-          & > .component-popover__content__outer {
-            border: 2px solid $info;
-            color: $info;
-          }
-        }
-      }
-
-      &.component-popover--color-warning {
-        & > .component-popover__content {
-          & > .component-popover__content__outer {
-            border: 2px solid $warning;
-            color: $warning;
-          }
-        }
-      }
-
-      &.component-popover--color-danger {
-        & > .component-popover__content {
-          & > .component-popover__content__outer {
-            border: 2px solid $danger;
-            color: $danger;
-          }
-        }
-      }
-
-      &.component-popover--color-success {
-        & > .component-popover__content {
-          & > .component-popover__content__outer {
-            border: 2px solid $success;
-            color: $success;
-          }
-        }
-      }
-    }
-  }
-
-  &.component-popover--no-padding {
-    & > .component-popover__content {
-      & > .component-popover__content__outer {
-        padding: 0;
-
-        & > .component-popover__content__outer__inner {
-        }
-      }
-    }
-  }
-
-  &.component-popover--is-open {
-    & > .component-popover__content {
-      display: flex;
-    }
-  }
-
-  &.component-popover--placement-right-top,
-  &.component-popover--placement-right-center {
-    & > .component-popover__content {
-      left: 100%;
-      padding-left: $COMPONENT_MARGIN_SINGLE !important;
-      top: 0;
-    }
-  }
-
-  &.component-popover--placement-left-top,
-  &.component-popover--placement-left-center {
-    & > .component-popover__content {
-      right: 100%;
-      padding-right: $COMPONENT_MARGIN_SINGLE !important;
-      top: 0;
-    }
-  }
-
-  & > .component-popover__content {
-    position: absolute;
-    bottom: calc(100% + #{$COMPONENT_MARGIN_SINGLE});
-    min-height: 200px;
-    display: none;
-    z-index: 1;
-
-    & > .component-popover__content__outer {
-      padding: $COMPONENT_PADDING;
-      border-radius: $COMPONENT_BORDER_RADIUS;
-      flex: 1;
-      display: block;
-      -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.18),
-        0 2px 4px rgba(0, 0, 0, 0.21);
-      box-shadow: 0 0 2px rgba(0, 0, 0, 0.18), 0 2px 4px rgba(0, 0, 0, 0.21);
-      & > .component-popover__content__outer__inner {
-        flex: 1;
-        & > * {
-          height: 100%;
-        }
-      }
-    }
-  }
 }

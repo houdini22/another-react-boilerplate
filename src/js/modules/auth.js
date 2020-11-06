@@ -7,10 +7,10 @@ import { selectors } from '../reducers/auth'
 const { getIsLoggedIn } = selectors
 
 export const userIsAuthenticated = connectedRouterRedirect({
-  redirectPath: '/',
-  authenticatedSelector: (state) => getIsLoggedIn(state),
-  //redirectAction: routerActions.push,
-  wrapperDisplayName: 'UserIsAuthenticated',
+    redirectPath: '/',
+    authenticatedSelector: (state) => getIsLoggedIn(state),
+    //redirectAction: routerActions.push,
+    wrapperDisplayName: 'UserIsAuthenticated',
 })
 
 /*

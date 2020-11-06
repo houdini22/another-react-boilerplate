@@ -8,53 +8,53 @@ export const CLOSE_MODAL = 'modal::close-modal'
 // Actions
 // ------------------------------------
 const openModal = ({ id, component }) => (dispatch) => {
-  dispatch({
-    type: OPEN_MODAL,
-    payload: {
-      id,
-      component,
-    },
-  })
+    dispatch({
+        type: OPEN_MODAL,
+        payload: {
+            id,
+            component,
+        },
+    })
 }
 
 const closeModal = (id) => (dispatch) => {
-  dispatch({
-    type: CLOSE_MODAL,
-    payload: {
-      id,
-    },
-  })
+    dispatch({
+        type: CLOSE_MODAL,
+        payload: {
+            id,
+        },
+    })
 }
 
 export const actions = {
-  openModal,
-  closeModal,
+    openModal,
+    closeModal,
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [OPEN_MODAL]: (state, { payload: { id, component } }) => {
-    return {
-      ...state,
-      modals: [
-        ...state.modals,
-        {
-          id,
-          component,
-        },
-      ],
-    }
-  },
-  [CLOSE_MODAL]: (state, { payload }) => {
-    return {
-      ...state,
-      modals: state.modals.filter(({ id }) => {
-        return payload.id !== id
-      }),
-    }
-  },
+    [OPEN_MODAL]: (state, { payload: { id, component } }) => {
+        return {
+            ...state,
+            modals: [
+                ...state.modals,
+                {
+                    id,
+                    component,
+                },
+            ],
+        }
+    },
+    [CLOSE_MODAL]: (state, { payload }) => {
+        return {
+            ...state,
+            modals: state.modals.filter(({ id }) => {
+                return payload.id !== id
+            }),
+        }
+    },
 }
 
 // ------------------------------------
@@ -62,12 +62,12 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 
 const getInitialState = () => ({
-  modals: [],
+    modals: [],
 })
 
 export default function userReducer(state = getInitialState(), action) {
-  const handler = ACTION_HANDLERS[action.type]
-  return handler ? handler(state, action) : state
+    const handler = ACTION_HANDLERS[action.type]
+    return handler ? handler(state, action) : state
 }
 
 // selectors
@@ -75,5 +75,5 @@ export default function userReducer(state = getInitialState(), action) {
 const getState = (state) => state['modal']
 
 export const selectors = {
-  getState,
+    getState,
 }

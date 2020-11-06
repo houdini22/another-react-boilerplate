@@ -9,37 +9,39 @@ import styles from '../../../../assets/scss/layout/_layout.scss'
 const cx = classNames.bind(styles)
 
 class ContainerBase extends React.Component {
-  render() {
-    const {
-      children,
-      layout: { floatingSidebar, sidebarExpanded },
-    } = this.props
+    render() {
+        const {
+            children,
+            layout: { floatingSidebar, sidebarExpanded },
+        } = this.props
 
-    return (
-      <div
-        className={cx('layout__container', {
-          'layout__container--floating': floatingSidebar,
-          'layout__container--sidebar-expanded': sidebarExpanded,
-        })}
-      >
-        <div className={cx('layout__container__content')}>{children}</div>
-        <Footer />
-      </div>
-    )
-  }
+        return (
+            <div
+                className={cx('layout__container', {
+                    'layout__container--floating': floatingSidebar,
+                    'layout__container--sidebar-expanded': sidebarExpanded,
+                })}
+            >
+                <div className={cx('layout__container__content')}>
+                    {children}
+                </div>
+                <Footer />
+            </div>
+        )
+    }
 }
 
 ContainerBase.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.element.isRequired,
-    PropTypes.array.isRequired,
-  ]),
+    children: PropTypes.oneOfType([
+        PropTypes.element.isRequired,
+        PropTypes.array.isRequired,
+    ]),
 }
 
 const Container = connect((state) => {
-  return {
-    layout: commonSelectors.getLayout(state),
-  }
+    return {
+        layout: commonSelectors.getLayout(state),
+    }
 })(ContainerBase)
 
 export { Container }

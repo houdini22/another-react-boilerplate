@@ -1,637 +1,637 @@
 @import '../variables';
 
 .component-table {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-  & > .component-table__thead {
-    width: 100%;
-
-    & > .component-table__row {
-      width: 100%;
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-
-      & > .component-table__thead__th {
-        display: flex;
-        flex-direction: column;
-        -ms-flex-preferred-size: 0;
-        flex-basis: 0;
-        -ms-flex-positive: 1;
-        flex-grow: 1;
-        max-width: 100%;
-        position: relative;
-        min-height: 1px;
-        text-align: left;
-        font-weight: bold;
-
-        &.component-table__thead__th--align-center {
-          text-align: center;
-        }
-
-        &.component-table__thead__th--xs-1 {
-          -ms-flex: 0 0 8.333333%;
-          flex: 0 0 8.333333%;
-          max-width: 8.333333%;
-        }
-        &.component-table__thead__th--xs-2 {
-          -ms-flex: 0 0 16.666667%;
-          flex: 0 0 16.666667%;
-          max-width: 16.666667%;
-        }
-        &.component-table__thead__th--xs-3 {
-          -ms-flex: 0 0 25%;
-          flex: 0 0 25%;
-          max-width: 25%;
-        }
-        &.component-table__thead__th--xs-4 {
-          -ms-flex: 0 0 33.333333%;
-          flex: 0 0 33.333333%;
-          max-width: 33.333333%;
-        }
-        &.component-table__thead__th--xs-5 {
-          -ms-flex: 0 0 41.666667%;
-          flex: 0 0 41.666667%;
-          max-width: 41.666667%;
-        }
-        &.component-table__thead__th--xs-6 {
-          -ms-flex: 0 0 50%;
-          flex: 0 0 50%;
-          max-width: 50%;
-        }
-        &.component-table__thead__th--xs-7 {
-          -ms-flex: 0 0 58.333333%;
-          flex: 0 0 58.333333%;
-          max-width: 58.333333%;
-        }
-        &.component-table__thead__th--xs-8 {
-          -ms-flex: 0 0 66.666667%;
-          flex: 0 0 66.666667%;
-          max-width: 66.666667%;
-        }
-        &.component-table__thead__th--xs-9 {
-          -ms-flex: 0 0 75%;
-          flex: 0 0 75%;
-          max-width: 75%;
-        }
-        &.component-table__thead__th--xs-10 {
-          -ms-flex: 0 0 83.333333%;
-          flex: 0 0 83.333333%;
-          max-width: 83.333333%;
-        }
-        &.component-table__thead__th--xs-11 {
-          -ms-flex: 0 0 91.666667%;
-          flex: 0 0 91.666667%;
-          max-width: 91.666667%;
-        }
-        &.component-table__thead__th--xs-12 {
-          -ms-flex: 0 0 100%;
-          flex: 0 0 100%;
-          max-width: 100%;
-        }
-      }
-    }
-  }
-
-  & > .component-table__tbody {
-    width: 100%;
-
-    & > .component-table__row {
-      width: 100%;
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-
-      & > .component-table__tbody__td {
-        display: flex;
-        flex-direction: column;
-        -ms-flex-preferred-size: 0;
-        flex-basis: 0;
-        -ms-flex-positive: 1;
-        flex-grow: 1;
-        max-width: 100%;
-        position: relative;
+    & > .component-table__thead {
         width: 100%;
-        min-height: 1px;
-        text-align: left;
 
-        &.component-table__tbody__td--align-center {
-          text-align: center;
-        }
+        & > .component-table__row {
+            width: 100%;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
 
-        &.component-table__tbody__td--xs-1 {
-          -ms-flex: 0 0 8.333333%;
-          flex: 0 0 8.333333%;
-          max-width: 8.333333%;
+            & > .component-table__thead__th {
+                display: flex;
+                flex-direction: column;
+                -ms-flex-preferred-size: 0;
+                flex-basis: 0;
+                -ms-flex-positive: 1;
+                flex-grow: 1;
+                max-width: 100%;
+                position: relative;
+                min-height: 1px;
+                text-align: left;
+                font-weight: bold;
+
+                &.component-table__thead__th--align-center {
+                    text-align: center;
+                }
+
+                &.component-table__thead__th--xs-1 {
+                    -ms-flex: 0 0 8.333333%;
+                    flex: 0 0 8.333333%;
+                    max-width: 8.333333%;
+                }
+                &.component-table__thead__th--xs-2 {
+                    -ms-flex: 0 0 16.666667%;
+                    flex: 0 0 16.666667%;
+                    max-width: 16.666667%;
+                }
+                &.component-table__thead__th--xs-3 {
+                    -ms-flex: 0 0 25%;
+                    flex: 0 0 25%;
+                    max-width: 25%;
+                }
+                &.component-table__thead__th--xs-4 {
+                    -ms-flex: 0 0 33.333333%;
+                    flex: 0 0 33.333333%;
+                    max-width: 33.333333%;
+                }
+                &.component-table__thead__th--xs-5 {
+                    -ms-flex: 0 0 41.666667%;
+                    flex: 0 0 41.666667%;
+                    max-width: 41.666667%;
+                }
+                &.component-table__thead__th--xs-6 {
+                    -ms-flex: 0 0 50%;
+                    flex: 0 0 50%;
+                    max-width: 50%;
+                }
+                &.component-table__thead__th--xs-7 {
+                    -ms-flex: 0 0 58.333333%;
+                    flex: 0 0 58.333333%;
+                    max-width: 58.333333%;
+                }
+                &.component-table__thead__th--xs-8 {
+                    -ms-flex: 0 0 66.666667%;
+                    flex: 0 0 66.666667%;
+                    max-width: 66.666667%;
+                }
+                &.component-table__thead__th--xs-9 {
+                    -ms-flex: 0 0 75%;
+                    flex: 0 0 75%;
+                    max-width: 75%;
+                }
+                &.component-table__thead__th--xs-10 {
+                    -ms-flex: 0 0 83.333333%;
+                    flex: 0 0 83.333333%;
+                    max-width: 83.333333%;
+                }
+                &.component-table__thead__th--xs-11 {
+                    -ms-flex: 0 0 91.666667%;
+                    flex: 0 0 91.666667%;
+                    max-width: 91.666667%;
+                }
+                &.component-table__thead__th--xs-12 {
+                    -ms-flex: 0 0 100%;
+                    flex: 0 0 100%;
+                    max-width: 100%;
+                }
+            }
         }
-        &.component-table__tbody__td--xs-2 {
-          -ms-flex: 0 0 16.666667%;
-          flex: 0 0 16.666667%;
-          max-width: 16.666667%;
-        }
-        &.component-table__tbody__td--xs-3 {
-          -ms-flex: 0 0 25%;
-          flex: 0 0 25%;
-          max-width: 25%;
-        }
-        &.component-table__tbody__td--xs-4 {
-          -ms-flex: 0 0 33.333333%;
-          flex: 0 0 33.333333%;
-          max-width: 33.333333%;
-        }
-        &.component-table__tbody__td--xs-5 {
-          -ms-flex: 0 0 41.666667%;
-          flex: 0 0 41.666667%;
-          max-width: 41.666667%;
-        }
-        &.component-table__tbody__td--xs-6 {
-          -ms-flex: 0 0 50%;
-          flex: 0 0 50%;
-          max-width: 50%;
-        }
-        &.component-table__tbody__td--xs-7 {
-          -ms-flex: 0 0 58.333333%;
-          flex: 0 0 58.333333%;
-          max-width: 58.333333%;
-        }
-        &.component-table__tbody__td--xs-8 {
-          -ms-flex: 0 0 66.666667%;
-          flex: 0 0 66.666667%;
-          max-width: 66.666667%;
-        }
-        &.component-table__tbody__td--xs-9 {
-          -ms-flex: 0 0 75%;
-          flex: 0 0 75%;
-          max-width: 75%;
-        }
-        &.component-table__tbody__td--xs-10 {
-          -ms-flex: 0 0 83.333333%;
-          flex: 0 0 83.333333%;
-          max-width: 83.333333%;
-        }
-        &.component-table__tbody__td--xs-11 {
-          -ms-flex: 0 0 91.666667%;
-          flex: 0 0 91.666667%;
-          max-width: 91.666667%;
-        }
-        &.component-table__tbody__td--xs-12 {
-          -ms-flex: 0 0 100%;
-          flex: 0 0 100%;
-          max-width: 100%;
-        }
-      }
     }
-  }
 
-  &.component-table--bordered {
-    & > .component-table__thead {
-      & > .component-table__row {
-        &:first-child {
-          & > .component-table__thead__th {
-            border-top: 1px solid $default;
-          }
-        }
-        &:last-child {
-          & > .component-table__thead__th {
-            border-bottom: 0 none;
-          }
-        }
-        & > .component-table__thead__th {
-          //border-right: 1px solid $default;
-          border-bottom: 1px solid $default;
-          &:first-child {
-            //border-left: 1px solid $default;
-          }
-        }
-      }
-    }
     & > .component-table__tbody {
-      & > .component-table__row {
-        &:first-child {
-          & > .component-table__tbody__td {
-            border-top: 1px solid $default;
-          }
-        }
-        & > .component-table__tbody__td {
-          //border-right: 1px solid $default;
-          border-bottom: 1px solid $default;
-          &:first-child {
-            //border-left: 1px solid $default;
-          }
-        }
-      }
-    }
-  }
+        width: 100%;
 
-  &.component-table--striped {
-    & > .component-table__tbody {
-      & > .component-table__row:nth-child(2n + 1) {
-        & > .component-table__tbody__td {
-          background: $default_LIGHTEN_X1;
-        }
-      }
-    }
-  }
+        & > .component-table__row {
+            width: 100%;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
 
-  &.component-table--size-md {
-    & > .component-table__thead {
-      & > .component-table__row {
-        & > .component-table__thead__th {
-          padding: 8px 8px;
-          font-size: $COMPONENT_FONT_SIZE_MD;
-        }
-      }
-    }
-    & > .component-table__tbody {
-      & > .component-table__row {
-        & > .component-table__tbody__td {
-          padding: 8px 8px;
-          font-size: $COMPONENT_FONT_SIZE_MD;
-        }
-      }
-    }
-  }
+            & > .component-table__tbody__td {
+                display: flex;
+                flex-direction: column;
+                -ms-flex-preferred-size: 0;
+                flex-basis: 0;
+                -ms-flex-positive: 1;
+                flex-grow: 1;
+                max-width: 100%;
+                position: relative;
+                width: 100%;
+                min-height: 1px;
+                text-align: left;
 
-  &.component-table--size-sm {
-    & > .component-table__thead {
-      & > .component-table__row {
-        & > .component-table__thead__th {
-          padding: 5px 5px;
-          font-size: $COMPONENT_FONT_SIZE_SM;
-        }
-      }
-    }
-    & > .component-table__tbody {
-      & > .component-table__row {
-        & > .component-table__tbody__td {
-          padding: 5px 5px;
-          font-size: $COMPONENT_FONT_SIZE_SM;
-        }
-      }
-    }
-  }
+                &.component-table__tbody__td--align-center {
+                    text-align: center;
+                }
 
-  &.component-table--size-lg {
-    & > .component-table__thead {
-      & > .component-table__row {
-        & > .component-table__thead__th {
-          padding: 13px 13px;
-          font-size: $COMPONENT_FONT_SIZE_LG;
+                &.component-table__tbody__td--xs-1 {
+                    -ms-flex: 0 0 8.333333%;
+                    flex: 0 0 8.333333%;
+                    max-width: 8.333333%;
+                }
+                &.component-table__tbody__td--xs-2 {
+                    -ms-flex: 0 0 16.666667%;
+                    flex: 0 0 16.666667%;
+                    max-width: 16.666667%;
+                }
+                &.component-table__tbody__td--xs-3 {
+                    -ms-flex: 0 0 25%;
+                    flex: 0 0 25%;
+                    max-width: 25%;
+                }
+                &.component-table__tbody__td--xs-4 {
+                    -ms-flex: 0 0 33.333333%;
+                    flex: 0 0 33.333333%;
+                    max-width: 33.333333%;
+                }
+                &.component-table__tbody__td--xs-5 {
+                    -ms-flex: 0 0 41.666667%;
+                    flex: 0 0 41.666667%;
+                    max-width: 41.666667%;
+                }
+                &.component-table__tbody__td--xs-6 {
+                    -ms-flex: 0 0 50%;
+                    flex: 0 0 50%;
+                    max-width: 50%;
+                }
+                &.component-table__tbody__td--xs-7 {
+                    -ms-flex: 0 0 58.333333%;
+                    flex: 0 0 58.333333%;
+                    max-width: 58.333333%;
+                }
+                &.component-table__tbody__td--xs-8 {
+                    -ms-flex: 0 0 66.666667%;
+                    flex: 0 0 66.666667%;
+                    max-width: 66.666667%;
+                }
+                &.component-table__tbody__td--xs-9 {
+                    -ms-flex: 0 0 75%;
+                    flex: 0 0 75%;
+                    max-width: 75%;
+                }
+                &.component-table__tbody__td--xs-10 {
+                    -ms-flex: 0 0 83.333333%;
+                    flex: 0 0 83.333333%;
+                    max-width: 83.333333%;
+                }
+                &.component-table__tbody__td--xs-11 {
+                    -ms-flex: 0 0 91.666667%;
+                    flex: 0 0 91.666667%;
+                    max-width: 91.666667%;
+                }
+                &.component-table__tbody__td--xs-12 {
+                    -ms-flex: 0 0 100%;
+                    flex: 0 0 100%;
+                    max-width: 100%;
+                }
+            }
         }
-      }
     }
-    & > .component-table__tbody {
-      & > .component-table__row {
-        & > .component-table__tbody__td {
-          padding: 13px 13px;
-          font-size: $COMPONENT_FONT_SIZE_LG;
-        }
-      }
-    }
-  }
 
-  &.component-table--color-primary {
-    & > .component-table__thead {
-      & > .component-table__row {
-        & > .component-table__thead__th {
-          background: $primary;
-          color: $primary_text_color;
+    &.component-table--bordered {
+        & > .component-table__thead {
+            & > .component-table__row {
+                &:first-child {
+                    & > .component-table__thead__th {
+                        border-top: 1px solid $default;
+                    }
+                }
+                &:last-child {
+                    & > .component-table__thead__th {
+                        border-bottom: 0 none;
+                    }
+                }
+                & > .component-table__thead__th {
+                    //border-right: 1px solid $default;
+                    border-bottom: 1px solid $default;
+                    &:first-child {
+                        //border-left: 1px solid $default;
+                    }
+                }
+            }
         }
-      }
+        & > .component-table__tbody {
+            & > .component-table__row {
+                &:first-child {
+                    & > .component-table__tbody__td {
+                        border-top: 1px solid $default;
+                    }
+                }
+                & > .component-table__tbody__td {
+                    //border-right: 1px solid $default;
+                    border-bottom: 1px solid $default;
+                    &:first-child {
+                        //border-left: 1px solid $default;
+                    }
+                }
+            }
+        }
     }
-    & > .component-table__tbody {
-      & > .component-table__row {
-        & > .component-table__tbody__td {
-          background: $primary_LIGHTEN_X2;
-          color: $primary_text_color;
-        }
-      }
-    }
-    & > .component-table__thead {
-      & > .component-table__row {
-        &:first-child {
-          & > .component-table__thead__th {
-            border-top: 1px solid $primary;
-          }
-        }
-        &:last-child {
-          & > .component-table__thead__th {
-            border-bottom: 0 none;
-          }
-        }
-        & > .component-table__thead__th {
-          border-bottom: 1px solid $primary;
-        }
-      }
-    }
-    & > .component-table__tbody {
-      & > .component-table__row {
-        &:first-child {
-          & > .component-table__tbody__td {
-            border-top: 1px solid $primary;
-          }
-        }
-        & > .component-table__tbody__td {
-          border-bottom: 1px solid $primary;
-        }
-      }
-    }
+
     &.component-table--striped {
-      & > .component-table__tbody {
-        & > .component-table__row:nth-child(2n + 1) {
-          & > .component-table__tbody__td {
-            background: $primary_LIGHTEN_X1;
-          }
+        & > .component-table__tbody {
+            & > .component-table__row:nth-child(2n + 1) {
+                & > .component-table__tbody__td {
+                    background: $default_LIGHTEN_X1;
+                }
+            }
         }
-      }
     }
-  }
 
-  &.component-table--color-secondary {
-    & > .component-table__thead {
-      & > .component-table__row {
-        & > .component-table__thead__th {
-          background: $secondary;
-          color: $secondary_text_color;
+    &.component-table--size-md {
+        & > .component-table__thead {
+            & > .component-table__row {
+                & > .component-table__thead__th {
+                    padding: 8px 8px;
+                    font-size: $COMPONENT_FONT_SIZE_MD;
+                }
+            }
         }
-      }
+        & > .component-table__tbody {
+            & > .component-table__row {
+                & > .component-table__tbody__td {
+                    padding: 8px 8px;
+                    font-size: $COMPONENT_FONT_SIZE_MD;
+                }
+            }
+        }
     }
-    & > .component-table__tbody {
-      & > .component-table__row {
-        & > .component-table__tbody__td {
-          background: $secondary_LIGHTEN_X2;
-          color: $secondary_text_color;
-        }
-      }
-    }
-    & > .component-table__thead {
-      & > .component-table__row {
-        &:first-child {
-          & > .component-table__thead__th {
-            border-top: 1px solid $secondary;
-          }
-        }
-        &:last-child {
-          & > .component-table__thead__th {
-            border-bottom: 0 none;
-          }
-        }
-        & > .component-table__thead__th {
-          border-bottom: 1px solid $secondary;
-        }
-      }
-    }
-    & > .component-table__tbody {
-      & > .component-table__row {
-        &:first-child {
-          & > .component-table__tbody__td {
-            border-top: 1px solid $secondary;
-          }
-        }
-        & > .component-table__tbody__td {
-          border-bottom: 1px solid $secondary;
-        }
-      }
-    }
-    &.component-table--striped {
-      & > .component-table__tbody {
-        & > .component-table__row:nth-child(2n + 1) {
-          & > .component-table__tbody__td {
-            background: $secondary_LIGHTEN_X1;
-          }
-        }
-      }
-    }
-  }
 
-  &.component-table--color-danger {
-    & > .component-table__thead {
-      & > .component-table__row {
-        & > .component-table__thead__th {
-          background: $danger;
-          color: $danger_text_color;
+    &.component-table--size-sm {
+        & > .component-table__thead {
+            & > .component-table__row {
+                & > .component-table__thead__th {
+                    padding: 5px 5px;
+                    font-size: $COMPONENT_FONT_SIZE_SM;
+                }
+            }
         }
-      }
+        & > .component-table__tbody {
+            & > .component-table__row {
+                & > .component-table__tbody__td {
+                    padding: 5px 5px;
+                    font-size: $COMPONENT_FONT_SIZE_SM;
+                }
+            }
+        }
     }
-    & > .component-table__tbody {
-      & > .component-table__row {
-        & > .component-table__tbody__td {
-          background: $danger_LIGHTEN_X2;
-          color: $danger_text_color;
-        }
-      }
-    }
-    & > .component-table__thead {
-      & > .component-table__row {
-        &:first-child {
-          & > .component-table__thead__th {
-            border-top: 1px solid $danger;
-          }
-        }
-        &:last-child {
-          & > .component-table__thead__th {
-            border-bottom: 0 none;
-          }
-        }
-        & > .component-table__thead__th {
-          border-bottom: 1px solid $danger;
-        }
-      }
-    }
-    & > .component-table__tbody {
-      & > .component-table__row {
-        &:first-child {
-          & > .component-table__tbody__td {
-            border-top: 1px solid $danger;
-          }
-        }
-        & > .component-table__tbody__td {
-          border-bottom: 1px solid $danger;
-        }
-      }
-    }
-    &.component-table--striped {
-      & > .component-table__tbody {
-        & > .component-table__row:nth-child(2n + 1) {
-          & > .component-table__tbody__td {
-            background: $danger_LIGHTEN_X1;
-          }
-        }
-      }
-    }
-  }
 
-  &.component-table--color-warning {
-    & > .component-table__thead {
-      & > .component-table__row {
-        & > .component-table__thead__th {
-          background: $warning;
-          color: $warning_text_color;
+    &.component-table--size-lg {
+        & > .component-table__thead {
+            & > .component-table__row {
+                & > .component-table__thead__th {
+                    padding: 13px 13px;
+                    font-size: $COMPONENT_FONT_SIZE_LG;
+                }
+            }
         }
-      }
+        & > .component-table__tbody {
+            & > .component-table__row {
+                & > .component-table__tbody__td {
+                    padding: 13px 13px;
+                    font-size: $COMPONENT_FONT_SIZE_LG;
+                }
+            }
+        }
     }
-    & > .component-table__tbody {
-      & > .component-table__row {
-        & > .component-table__tbody__td {
-          background: $warning_LIGHTEN_X2;
-          color: $warning_text_color;
-        }
-      }
-    }
-    & > .component-table__thead {
-      & > .component-table__row {
-        &:first-child {
-          & > .component-table__thead__th {
-            border-top: 1px solid $warning;
-          }
-        }
-        &:last-child {
-          & > .component-table__thead__th {
-            border-bottom: 0 none;
-          }
-        }
-        & > .component-table__thead__th {
-          border-bottom: 1px solid $warning;
-        }
-      }
-    }
-    & > .component-table__tbody {
-      & > .component-table__row {
-        &:first-child {
-          & > .component-table__tbody__td {
-            border-top: 1px solid $warning;
-          }
-        }
-        & > .component-table__tbody__td {
-          border-bottom: 1px solid $warning;
-        }
-      }
-    }
-    &.component-table--striped {
-      & > .component-table__tbody {
-        & > .component-table__row:nth-child(2n + 1) {
-          & > .component-table__tbody__td {
-            background: $warning_LIGHTEN_X1;
-          }
-        }
-      }
-    }
-  }
 
-  &.component-table--color-success {
-    & > .component-table__thead {
-      & > .component-table__row {
-        & > .component-table__thead__th {
-          background: $success;
-          color: $success_text_color;
+    &.component-table--color-primary {
+        & > .component-table__thead {
+            & > .component-table__row {
+                & > .component-table__thead__th {
+                    background: $primary;
+                    color: $primary_text_color;
+                }
+            }
         }
-      }
+        & > .component-table__tbody {
+            & > .component-table__row {
+                & > .component-table__tbody__td {
+                    background: $primary_LIGHTEN_X2;
+                    color: $primary_text_color;
+                }
+            }
+        }
+        & > .component-table__thead {
+            & > .component-table__row {
+                &:first-child {
+                    & > .component-table__thead__th {
+                        border-top: 1px solid $primary;
+                    }
+                }
+                &:last-child {
+                    & > .component-table__thead__th {
+                        border-bottom: 0 none;
+                    }
+                }
+                & > .component-table__thead__th {
+                    border-bottom: 1px solid $primary;
+                }
+            }
+        }
+        & > .component-table__tbody {
+            & > .component-table__row {
+                &:first-child {
+                    & > .component-table__tbody__td {
+                        border-top: 1px solid $primary;
+                    }
+                }
+                & > .component-table__tbody__td {
+                    border-bottom: 1px solid $primary;
+                }
+            }
+        }
+        &.component-table--striped {
+            & > .component-table__tbody {
+                & > .component-table__row:nth-child(2n + 1) {
+                    & > .component-table__tbody__td {
+                        background: $primary_LIGHTEN_X1;
+                    }
+                }
+            }
+        }
     }
-    & > .component-table__tbody {
-      & > .component-table__row {
-        & > .component-table__tbody__td {
-          background: $success_LIGHTEN_X2;
-          color: $success_text_color;
-        }
-      }
-    }
-    & > .component-table__thead {
-      & > .component-table__row {
-        &:first-child {
-          & > .component-table__thead__th {
-            border-top: 1px solid $success;
-          }
-        }
-        &:last-child {
-          & > .component-table__thead__th {
-            border-bottom: 0 none;
-          }
-        }
-        & > .component-table__thead__th {
-          border-bottom: 1px solid $success;
-        }
-      }
-    }
-    & > .component-table__tbody {
-      & > .component-table__row {
-        &:first-child {
-          & > .component-table__tbody__td {
-            border-top: 1px solid $success;
-          }
-        }
-        & > .component-table__tbody__td {
-          border-bottom: 1px solid $success;
-        }
-      }
-    }
-    &.component-table--striped {
-      & > .component-table__tbody {
-        & > .component-table__row:nth-child(2n + 1) {
-          & > .component-table__tbody__td {
-            background: $success_LIGHTEN_X1;
-          }
-        }
-      }
-    }
-  }
 
-  &.component-table--color-info {
-    & > .component-table__thead {
-      & > .component-table__row {
-        & > .component-table__thead__th {
-          background: $info;
-          color: $info_text_color;
+    &.component-table--color-secondary {
+        & > .component-table__thead {
+            & > .component-table__row {
+                & > .component-table__thead__th {
+                    background: $secondary;
+                    color: $secondary_text_color;
+                }
+            }
         }
-      }
+        & > .component-table__tbody {
+            & > .component-table__row {
+                & > .component-table__tbody__td {
+                    background: $secondary_LIGHTEN_X2;
+                    color: $secondary_text_color;
+                }
+            }
+        }
+        & > .component-table__thead {
+            & > .component-table__row {
+                &:first-child {
+                    & > .component-table__thead__th {
+                        border-top: 1px solid $secondary;
+                    }
+                }
+                &:last-child {
+                    & > .component-table__thead__th {
+                        border-bottom: 0 none;
+                    }
+                }
+                & > .component-table__thead__th {
+                    border-bottom: 1px solid $secondary;
+                }
+            }
+        }
+        & > .component-table__tbody {
+            & > .component-table__row {
+                &:first-child {
+                    & > .component-table__tbody__td {
+                        border-top: 1px solid $secondary;
+                    }
+                }
+                & > .component-table__tbody__td {
+                    border-bottom: 1px solid $secondary;
+                }
+            }
+        }
+        &.component-table--striped {
+            & > .component-table__tbody {
+                & > .component-table__row:nth-child(2n + 1) {
+                    & > .component-table__tbody__td {
+                        background: $secondary_LIGHTEN_X1;
+                    }
+                }
+            }
+        }
     }
-    & > .component-table__tbody {
-      & > .component-table__row {
-        & > .component-table__tbody__td {
-          background: $info_LIGHTEN_X2;
-          color: $info_text_color;
+
+    &.component-table--color-danger {
+        & > .component-table__thead {
+            & > .component-table__row {
+                & > .component-table__thead__th {
+                    background: $danger;
+                    color: $danger_text_color;
+                }
+            }
         }
-      }
+        & > .component-table__tbody {
+            & > .component-table__row {
+                & > .component-table__tbody__td {
+                    background: $danger_LIGHTEN_X2;
+                    color: $danger_text_color;
+                }
+            }
+        }
+        & > .component-table__thead {
+            & > .component-table__row {
+                &:first-child {
+                    & > .component-table__thead__th {
+                        border-top: 1px solid $danger;
+                    }
+                }
+                &:last-child {
+                    & > .component-table__thead__th {
+                        border-bottom: 0 none;
+                    }
+                }
+                & > .component-table__thead__th {
+                    border-bottom: 1px solid $danger;
+                }
+            }
+        }
+        & > .component-table__tbody {
+            & > .component-table__row {
+                &:first-child {
+                    & > .component-table__tbody__td {
+                        border-top: 1px solid $danger;
+                    }
+                }
+                & > .component-table__tbody__td {
+                    border-bottom: 1px solid $danger;
+                }
+            }
+        }
+        &.component-table--striped {
+            & > .component-table__tbody {
+                & > .component-table__row:nth-child(2n + 1) {
+                    & > .component-table__tbody__td {
+                        background: $danger_LIGHTEN_X1;
+                    }
+                }
+            }
+        }
     }
-    & > .component-table__thead {
-      & > .component-table__row {
-        &:first-child {
-          & > .component-table__thead__th {
-            border-top: 1px solid $info;
-          }
+
+    &.component-table--color-warning {
+        & > .component-table__thead {
+            & > .component-table__row {
+                & > .component-table__thead__th {
+                    background: $warning;
+                    color: $warning_text_color;
+                }
+            }
         }
-        &:last-child {
-          & > .component-table__thead__th {
-            border-bottom: 0 none;
-          }
+        & > .component-table__tbody {
+            & > .component-table__row {
+                & > .component-table__tbody__td {
+                    background: $warning_LIGHTEN_X2;
+                    color: $warning_text_color;
+                }
+            }
         }
-        & > .component-table__thead__th {
-          border-bottom: 1px solid $info;
+        & > .component-table__thead {
+            & > .component-table__row {
+                &:first-child {
+                    & > .component-table__thead__th {
+                        border-top: 1px solid $warning;
+                    }
+                }
+                &:last-child {
+                    & > .component-table__thead__th {
+                        border-bottom: 0 none;
+                    }
+                }
+                & > .component-table__thead__th {
+                    border-bottom: 1px solid $warning;
+                }
+            }
         }
-      }
+        & > .component-table__tbody {
+            & > .component-table__row {
+                &:first-child {
+                    & > .component-table__tbody__td {
+                        border-top: 1px solid $warning;
+                    }
+                }
+                & > .component-table__tbody__td {
+                    border-bottom: 1px solid $warning;
+                }
+            }
+        }
+        &.component-table--striped {
+            & > .component-table__tbody {
+                & > .component-table__row:nth-child(2n + 1) {
+                    & > .component-table__tbody__td {
+                        background: $warning_LIGHTEN_X1;
+                    }
+                }
+            }
+        }
     }
-    & > .component-table__tbody {
-      & > .component-table__row {
-        &:first-child {
-          & > .component-table__tbody__td {
-            border-top: 1px solid $info;
-          }
+
+    &.component-table--color-success {
+        & > .component-table__thead {
+            & > .component-table__row {
+                & > .component-table__thead__th {
+                    background: $success;
+                    color: $success_text_color;
+                }
+            }
         }
-        & > .component-table__tbody__td {
-          border-bottom: 1px solid $info;
+        & > .component-table__tbody {
+            & > .component-table__row {
+                & > .component-table__tbody__td {
+                    background: $success_LIGHTEN_X2;
+                    color: $success_text_color;
+                }
+            }
         }
-      }
+        & > .component-table__thead {
+            & > .component-table__row {
+                &:first-child {
+                    & > .component-table__thead__th {
+                        border-top: 1px solid $success;
+                    }
+                }
+                &:last-child {
+                    & > .component-table__thead__th {
+                        border-bottom: 0 none;
+                    }
+                }
+                & > .component-table__thead__th {
+                    border-bottom: 1px solid $success;
+                }
+            }
+        }
+        & > .component-table__tbody {
+            & > .component-table__row {
+                &:first-child {
+                    & > .component-table__tbody__td {
+                        border-top: 1px solid $success;
+                    }
+                }
+                & > .component-table__tbody__td {
+                    border-bottom: 1px solid $success;
+                }
+            }
+        }
+        &.component-table--striped {
+            & > .component-table__tbody {
+                & > .component-table__row:nth-child(2n + 1) {
+                    & > .component-table__tbody__td {
+                        background: $success_LIGHTEN_X1;
+                    }
+                }
+            }
+        }
     }
-    &.component-table--striped {
-      & > .component-table__tbody {
-        & > .component-table__row:nth-child(2n + 1) {
-          & > .component-table__tbody__td {
-            background: $info_LIGHTEN_X1;
-          }
+
+    &.component-table--color-info {
+        & > .component-table__thead {
+            & > .component-table__row {
+                & > .component-table__thead__th {
+                    background: $info;
+                    color: $info_text_color;
+                }
+            }
         }
-      }
+        & > .component-table__tbody {
+            & > .component-table__row {
+                & > .component-table__tbody__td {
+                    background: $info_LIGHTEN_X2;
+                    color: $info_text_color;
+                }
+            }
+        }
+        & > .component-table__thead {
+            & > .component-table__row {
+                &:first-child {
+                    & > .component-table__thead__th {
+                        border-top: 1px solid $info;
+                    }
+                }
+                &:last-child {
+                    & > .component-table__thead__th {
+                        border-bottom: 0 none;
+                    }
+                }
+                & > .component-table__thead__th {
+                    border-bottom: 1px solid $info;
+                }
+            }
+        }
+        & > .component-table__tbody {
+            & > .component-table__row {
+                &:first-child {
+                    & > .component-table__tbody__td {
+                        border-top: 1px solid $info;
+                    }
+                }
+                & > .component-table__tbody__td {
+                    border-bottom: 1px solid $info;
+                }
+            }
+        }
+        &.component-table--striped {
+            & > .component-table__tbody {
+                & > .component-table__row:nth-child(2n + 1) {
+                    & > .component-table__tbody__td {
+                        background: $info_LIGHTEN_X1;
+                    }
+                }
+            }
+        }
     }
-  }
 }
