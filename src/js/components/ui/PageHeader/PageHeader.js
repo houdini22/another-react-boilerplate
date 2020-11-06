@@ -86,11 +86,11 @@ export class Container extends React.Component {
         >
           <div className={cx('component-page-header__content')}>
             <div className={cx('component-page-header__content__title')}>
-              <h2 ref={e => this.registerTitleElement(e)} />
+              <h2 ref={(e) => this.registerTitleElement(e)} />
             </div>
             <div
               className={cx('component-page-header__content__actions')}
-              ref={e => this.registerActionsElement(e)}
+              ref={(e) => this.registerActionsElement(e)}
             />
           </div>
           <div
@@ -98,7 +98,7 @@ export class Container extends React.Component {
             style={{ display: breadcrumbsExists ? 'block' : 'none' }}
           >
             <div className={cx('component-page-header__breadcrumbs--inner')}>
-              <ul ref={e => this.registerBreadcrumbsElement(e)} />
+              <ul ref={(e) => this.registerBreadcrumbsElement(e)} />
             </div>
           </div>
           {children}

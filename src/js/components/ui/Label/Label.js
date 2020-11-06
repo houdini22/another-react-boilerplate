@@ -35,10 +35,9 @@ class Label extends React.Component {
       [`component-label--striped`]: striped,
       [`component-label--outline`]: outline,
       [`component-label--arrow`]: arrow,
-      [`component-label--size-${dropdownSize ||
-        cardSize ||
-        accordionSize ||
-        size}`]: dropdownSize || cardSize || accordionSize || size,
+      [`component-label--size-${
+        dropdownSize || cardSize || accordionSize || size
+      }`]: dropdownSize || cardSize || accordionSize || size,
     })
   }
 

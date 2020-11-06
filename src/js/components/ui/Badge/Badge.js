@@ -27,10 +27,9 @@ class Badge extends React.Component {
       [`component-badge--link`]: href,
       [`component-badge--arrow`]: arrow,
       [`component-badge--rounded`]: rounded,
-      [`component-badge--size-${dropdownSize ||
-        cardSize ||
-        accordionSize ||
-        size}`]: dropdownSize || cardSize || accordionSize || size,
+      [`component-badge--size-${
+        dropdownSize || cardSize || accordionSize || size
+      }`]: dropdownSize || cardSize || accordionSize || size,
     })
   }
 

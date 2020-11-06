@@ -113,7 +113,7 @@ class ItemHeader extends React.Component {
             <AppContext.Provider value={{ accordionSize: size }}>
               <div
                 className={cx('component-accordion__item__header')}
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault()
                   if (!isOpened(name)) {
                     open(name)

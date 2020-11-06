@@ -6,7 +6,7 @@ import Transition from 'react-transition-group/Transition'
 import styles1 from '../../../../assets/scss/components/_radio.scss'
 import styles2 from '../../../../assets/scss/_animations.scss'
 
-const cx = classNames.bind({...styles1, ...styles2})
+const cx = classNames.bind({ ...styles1, ...styles2 })
 
 class Radio extends React.Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class Radio extends React.Component {
           'component-radio--is-checked': checked,
           'component-radio--is-disabled': disabled,
         })}
-        onClick={e => this.handleClick(e)}
+        onClick={(e) => this.handleClick(e)}
       >
         {checked && (
           <Transition timeout={0}>

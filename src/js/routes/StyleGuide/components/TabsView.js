@@ -88,7 +88,7 @@ class TabsView extends React.Component {
                       <p>
                         <a
                           href="#"
-                          onClick={e => {
+                          onClick={(e) => {
                             e.preventDefault()
                             changeTab('code')
                           }}

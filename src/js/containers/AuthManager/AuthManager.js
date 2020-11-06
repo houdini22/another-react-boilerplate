@@ -25,11 +25,11 @@ AuthManagerBase.propTypes = {
   logoff: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: authSelectors.getState(state),
 })
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       logoff: authActions.logoff,

@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .component-form-field {
   &:not(.component-form-field--type-hidden) {
@@ -30,7 +30,9 @@
     }
   }
   .component-form-field__input-container {
-    input[type=text], input[type=number], input[type=password] {
+    input[type='text'],
+    input[type='number'],
+    input[type='password'] {
       display: inline-block;
       height: 28px;
       width: 100%;
@@ -87,7 +89,9 @@
 
   &.component-form-field--state-success {
     .component-form-field__input-container {
-      input[type=text], input[type=number], input[type=password] {
+      input[type='text'],
+      input[type='number'],
+      input[type='password'] {
         border-bottom-color: $success;
       }
       select {
@@ -101,7 +105,8 @@
 
   &.component-form-field--state-error {
     .component-form-field__input-container {
-      input[type=text], input[type=number] {
+      input[type='text'],
+      input[type='number'] {
         border-bottom-color: $danger;
       }
       select {

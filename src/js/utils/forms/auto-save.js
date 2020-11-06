@@ -13,11 +13,11 @@ import { startSubmit, stopSubmit } from 'redux-form'
 
 const TIMEOUT = 1000
 
-export const isFullOfUndefined = obj => {
+export const isFullOfUndefined = (obj) => {
   const length1 = Object.keys(obj)
-    .map(key => obj[key])
-    .filter(value => value === undefined).length
-  const length2 = Object.keys(obj).map(key => obj[key]).length
+    .map((key) => obj[key])
+    .filter((value) => value === undefined).length
+  const length2 = Object.keys(obj).map((key) => obj[key]).length
 
   return length1 === length2 && length1 > 0
 }
@@ -55,8 +55,8 @@ export class AutoSaveForm extends React.Component {
     if (_.isFunction(componentDidMount)) {
       componentDidMount({
         subject: {
-          onUnlock: cb => (_self.handlers['onUnlock'] = cb),
-          onLock: cb => (_self.handlers['onLock'] = cb),
+          onUnlock: (cb) => (_self.handlers['onUnlock'] = cb),
+          onLock: (cb) => (_self.handlers['onLock'] = cb),
         },
       })
     }
@@ -95,7 +95,7 @@ export class AutoSaveForm extends React.Component {
         // form values changed
         const diff = deepDiff(prevData, currentData)
 
-        const newValues = Object.keys(diff).map(key => {
+        const newValues = Object.keys(diff).map((key) => {
           const name = key
           let value = currentData[key]
           if (value instanceof moment) {
@@ -144,14 +144,14 @@ export class AutoSaveForm extends React.Component {
       let timeout = null
       const newData = {} // one instance in memory (requestInProgress)
 
-      const createTimeout = increaseLocal => {
+      const createTimeout = (increaseLocal) => {
         if (increaseGlobal === true && increaseLocal === true) {
           this.setState(({ requestsToPerform }) => {
             return { requestsToPerform: requestsToPerform + 1 }
           })
         }
 
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           timeout = setTimeout(() => {
             dispatch(startSubmit(this.props.formName))
             newData['requestInProgress'] = true // boom
@@ -161,7 +161,7 @@ export class AutoSaveForm extends React.Component {
             })
 
             save(name, value, dispatch, this.props).then(
-              response => {
+              (response) => {
                 // save from `createReduxForm` method
                 dispatch(stopSubmit(this.props.formName))
                 resolve(response)
@@ -173,7 +173,7 @@ export class AutoSaveForm extends React.Component {
 
                   if (!_.isEmpty(errors)) {
                     // save errors for preventing removing errors when next error is triggered
-                    Object.keys(errors).map(fieldName => {
+                    Object.keys(errors).map((fieldName) => {
                       this.errors[fieldName] = errors[fieldName]
                     })
                   } else {

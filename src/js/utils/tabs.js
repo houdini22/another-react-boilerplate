@@ -58,7 +58,7 @@ const createSimplePresentation = (
 
 const generateCode = (componentName, options, content = '') => {
   let result = `<${componentName}`
-  Object.keys(options).forEach(key => {
+  Object.keys(options).forEach((key) => {
     if (key !== 'updateCount' && options[key]) {
       if (_.isString(options[key])) {
         result += ` ${key}='${options[key]}'`

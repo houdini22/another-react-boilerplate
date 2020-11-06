@@ -67,10 +67,10 @@ class SidebarBase extends React.Component {
           'layout__sidebar--floating': floatingSidebar,
           'layout__sidebar--expanded': sidebarExpanded,
         })}
-        onMouseEnter={e => {
+        onMouseEnter={(e) => {
           setLayoutOption('sidebarExpanded', true)
         }}
-        onMouseLeave={e => {
+        onMouseLeave={(e) => {
           setLayoutOption('sidebarExpanded', false)
         }}
       >
@@ -169,13 +169,13 @@ SidebarBase.propTypes = {
 }
 
 const Sidebar = connect(
-  state => {
+  (state) => {
     return {
       loginError: getLoginError(state),
       layout: getLayout(state),
     }
   },
-  dispatch => {
+  (dispatch) => {
     return bindActionCreators(
       {
         setLayoutOption: commonActions.setLayoutOption,

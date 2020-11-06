@@ -1,4 +1,4 @@
-@import "../variables";
+@import '../variables';
 
 .component-dropdown {
   display: inline-block;
@@ -19,7 +19,8 @@
       }
     }
 
-    .component-dropdown__dropdown-menu__items > .component-dropdown__dropdown-menu__items__item {
+    .component-dropdown__dropdown-menu__items
+      > .component-dropdown__dropdown-menu__items__item {
       .component-dropdown__dropdown-menu__items__item__submenu {
         position: absolute;
         top: 0;
@@ -36,7 +37,12 @@
       }
     }
 
-    & > .component-dropdown__dropdown-menu__items, & > .component-dropdown__dropdown-menu__items > .component-dropdown__dropdown-menu__items__item > .component-dropdown__dropdown-menu__items__item__submenu .component-dropdown__dropdown-menu__items {
+    & > .component-dropdown__dropdown-menu__items,
+    &
+      > .component-dropdown__dropdown-menu__items
+      > .component-dropdown__dropdown-menu__items__item
+      > .component-dropdown__dropdown-menu__items__item__submenu
+      .component-dropdown__dropdown-menu__items {
       position: absolute;
       top: 100%;
       left: 0;
@@ -472,7 +478,8 @@
   }
 
   &.component-dropdown--placement-left {
-    .component-dropdown__dropdown-menu__items > .component-dropdown__dropdown-menu__items__item {
+    .component-dropdown__dropdown-menu__items
+      > .component-dropdown__dropdown-menu__items__item {
       &:hover {
         & > .component-dropdown__dropdown-menu__items__item__submenu {
           & > .component-dropdown__dropdown-menu__items {
@@ -492,7 +499,8 @@
         right: 0;
       }
     }
-    .component-dropdown__dropdown-menu__items > .component-dropdown__dropdown-menu__items__item {
+    .component-dropdown__dropdown-menu__items
+      > .component-dropdown__dropdown-menu__items__item {
       &:hover {
         & > .component-dropdown__dropdown-menu__items__item__submenu {
           & > .component-dropdown__dropdown-menu__items {

@@ -9,7 +9,7 @@ import _ from 'lodash'
 export const FORM_NAME = 'ColPropsForm'
 
 export const submit = (values, dispatch, props) => {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     if (!values['xs']) {
       throw new SubmissionError({
         xs: 'Required.',

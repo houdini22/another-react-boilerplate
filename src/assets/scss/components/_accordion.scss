@@ -1,4 +1,4 @@
-@import "../variables";
+@import '../variables';
 
 .component-accordion {
   text-align: left;
@@ -85,7 +85,6 @@
         border-bottom: $COMPONENT_BORDER;
         cursor: pointer;
         & > component-accordion__item__header__content {
-
         }
         & > .component-accordion__item__header__arrow-icon {
           position: relative;

@@ -37,7 +37,7 @@ class BaseRowComponent extends React.Component {
           <Row
             {...props}
             builder
-            onClick={e => {
+            onClick={(e) => {
               e.stopPropagation()
 
               openModal({
@@ -120,9 +120,11 @@ const BaseSingleColComponent = ({ connectDropTarget, ...props }) => {
   )
 }
 
-const SingleColComponent = DropTarget('NAVIGATION_LINK', colTarget, collect)(
-  BaseSingleColComponent,
-)
+const SingleColComponent = DropTarget(
+  'NAVIGATION_LINK',
+  colTarget,
+  collect,
+)(BaseSingleColComponent)
 
 class BaseBuilderColComponent extends React.Component {
   constructor(props) {
@@ -146,7 +148,7 @@ class BaseBuilderColComponent extends React.Component {
         {({ openModal }) => (
           <SingleColComponent
             {...props}
-            onClick={e => {
+            onClick={(e) => {
               e.stopPropagation()
 
               openModal({
@@ -224,7 +226,7 @@ export class BuilderView extends React.Component {
   editComponent(key, values) {
     const { components } = this.state
 
-    const findArr = components => {
+    const findArr = (components) => {
       let found
       for (let i = 0; i < components.length; i++) {
         const c = components[i]
@@ -239,7 +241,7 @@ export class BuilderView extends React.Component {
 
     let arr = findArr(components)
 
-    const found = arr.find(c => c.key === key)
+    const found = arr.find((c) => c.key === key)
     found.props = values
 
     this.setState({ components })
@@ -248,7 +250,7 @@ export class BuilderView extends React.Component {
   removeComponent(key) {
     const { components } = this.state
 
-    const findArr = components => {
+    const findArr = (components) => {
       let found
       for (let i = 0; i < components.length; i++) {
         const c = components[i]
@@ -263,7 +265,7 @@ export class BuilderView extends React.Component {
 
     let arr = findArr(components)
 
-    const foundKey = arr.findIndex(c => c.key === key)
+    const foundKey = arr.findIndex((c) => c.key === key)
     arr.splice(foundKey, 1)
 
     this.setState({ components })

@@ -2,7 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import uuid from 'uuid'
+import { v4 as uuid } from 'uuid'
 import {
   selectors as modalSelectors,
   actions as modalActions,
@@ -34,7 +34,7 @@ class ModalManagerBase extends React.Component {
     const { openModal } = this.props
 
     if (!id) {
-      id = uuid.v4()
+      id = uuid()
     }
 
     let component = null
@@ -119,11 +119,11 @@ ModalManagerBase.propTypes = {
   closeModal: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   modal: modalSelectors.getState(state),
 })
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       openModal: modalActions.openModal,

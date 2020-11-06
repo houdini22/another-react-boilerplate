@@ -60,10 +60,10 @@ const FormContainer = compose(
       return new Promise((resolve, reject) => {
         http
           .post('/dummy-url', { [name]: value })
-          .then(response => {
+          .then((response) => {
             resolve(response['data'])
           })
-          .catch(error => {
+          .catch((error) => {
             reject(error)
           })
       })

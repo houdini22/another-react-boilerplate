@@ -36,7 +36,7 @@ ContainerBase.propTypes = {
   ]),
 }
 
-const Container = connect(state => {
+const Container = connect((state) => {
   return {
     layout: commonSelectors.getLayout(state),
   }

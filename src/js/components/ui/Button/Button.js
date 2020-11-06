@@ -49,8 +49,8 @@ class Button extends React.Component {
     ) {
       if (_.isFunction(onClick)) {
         const controller = {
-          setColor: color => this.setState({ color }),
-          setIsLoading: isLoading => this.setState({ isLoading }),
+          setColor: (color) => this.setState({ color }),
+          setIsLoading: (isLoading) => this.setState({ isLoading }),
         }
 
         onClick(event, controller)
@@ -100,10 +100,9 @@ class Button extends React.Component {
             'component-button--icon-only': iconOnly,
             [`component-button--color-${buttonGroupColor || color}`]:
               buttonGroupColor || color,
-            [`component-button--size-${pageHeaderSize ||
-              cardSize ||
-              buttonGroupSize ||
-              size}`]: pageHeaderSize || cardSize || buttonGroupSize || size,
+            [`component-button--size-${
+              pageHeaderSize || cardSize || buttonGroupSize || size
+            }`]: pageHeaderSize || cardSize || buttonGroupSize || size,
             'component-button--block': block,
             'component-button--disabled':
               isLoading || buttonGroupDisabled || disabled,
@@ -136,8 +135,8 @@ class Button extends React.Component {
                 <Link
                   to={navigationHref}
                   className={cx('component-button__navigation')}
-                  ref={e => (this.navigationRef = e)}
-                  onClick={e => {
+                  ref={(e) => (this.navigationRef = e)}
+                  onClick={(e) => {
                     e.preventDefault()
                     onClickNavigation()
                   }}

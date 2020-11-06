@@ -7,7 +7,7 @@ export const CLOSE_MODAL = 'modal::close-modal'
 // ------------------------------------
 // Actions
 // ------------------------------------
-const openModal = ({ id, component }) => dispatch => {
+const openModal = ({ id, component }) => (dispatch) => {
   dispatch({
     type: OPEN_MODAL,
     payload: {
@@ -17,7 +17,7 @@ const openModal = ({ id, component }) => dispatch => {
   })
 }
 
-const closeModal = id => dispatch => {
+const closeModal = (id) => (dispatch) => {
   dispatch({
     type: CLOSE_MODAL,
     payload: {
@@ -72,7 +72,7 @@ export default function userReducer(state = getInitialState(), action) {
 
 // selectors
 
-const getState = state => state['modal']
+const getState = (state) => state['modal']
 
 export const selectors = {
   getState,

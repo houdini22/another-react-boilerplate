@@ -109,7 +109,7 @@ class Form extends React.Component {
         <Col xs={6}>
           <Card header={<h1>Values</h1>}>
             <pre>
-              {Object.keys(data).map(key => {
+              {Object.keys(data).map((key) => {
                 return (
                   <p key={key}>
                     `{key}` = {String(data[key])}

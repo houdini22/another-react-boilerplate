@@ -8,22 +8,19 @@ import { bindActionCreators } from 'redux'
 
 const { setConnectionErrorModalVisible, setLayoutOption } = commonActions
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   common: commonSelectors['getState'](state),
 })
 
-const PageLayoutContainer = connect(
-  mapStateToProps,
-  dispatch => {
-    return bindActionCreators(
-      {
-        setConnectionErrorModalVisible,
-        setLayoutOption,
-      },
-      dispatch,
-    )
-  },
-)(PageLayout)
+const PageLayoutContainer = connect(mapStateToProps, (dispatch) => {
+  return bindActionCreators(
+    {
+      setConnectionErrorModalVisible,
+      setLayoutOption,
+    },
+    dispatch,
+  )
+})(PageLayout)
 
 export { PageLayoutContainer }
 export default { PageLayoutContainer }

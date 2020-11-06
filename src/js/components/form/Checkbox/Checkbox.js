@@ -7,7 +7,7 @@ import Transition from 'react-transition-group/Transition'
 import styles1 from '../../../../assets/scss/components/_checkbox.scss'
 import styles2 from '../../../../assets/scss/_animations.scss'
 
-const cx = classNames.bind({...styles1, ...styles2})
+const cx = classNames.bind({ ...styles1, ...styles2 })
 
 class Checkbox extends React.Component {
   constructor(props) {
@@ -49,7 +49,7 @@ class Checkbox extends React.Component {
           'component-checkbox--is-checked': checked,
           'component-checkbox--is-disabled': disabled,
         })}
-        onClick={e => this.handleClick(e)}
+        onClick={(e) => this.handleClick(e)}
       >
         {this.__reactstandin__isMounted && (
           <span>
@@ -75,12 +75,11 @@ class Checkbox extends React.Component {
             )}
           </span>
         )}
-        {!this.__reactstandin__isMounted &&
-          checked && (
-            <span>
-              <CheckIcon />
-            </span>
-          )}
+        {!this.__reactstandin__isMounted && checked && (
+          <span>
+            <CheckIcon />
+          </span>
+        )}
         <input
           {...props}
           disabled={disabled}

@@ -104,17 +104,17 @@ export class DropdownContainer extends React.Component {
                 [`component-dropdown--placement-${placement}`]: true,
                 'component-dropdown--transparent': transparent,
               })}
-              ref={e => (this.ref = e)}
+              ref={(e) => (this.ref = e)}
             >
               <div
                 className={cx('component-dropdown__trigger')}
-                ref={e => this.registerTriggerElement(e)}
+                ref={(e) => this.registerTriggerElement(e)}
               />
               <div
                 className={cx('component-dropdown__dropdown-menu', {
                   'component-dropdown__dropdown-menu--is-open': isOpen,
                 })}
-                ref={e => this.registerItemsElement(e)}
+                ref={(e) => this.registerItemsElement(e)}
               />
               {children}
             </div>
@@ -199,7 +199,7 @@ export class DropdownTrigger extends React.Component {
               arrow
               size={dropdownTriggerSize}
               color={dropdownTriggerColor}
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault()
 
                 if (dropdownTrigger === 'click') {
@@ -210,7 +210,7 @@ export class DropdownTrigger extends React.Component {
                   }
                 }
               }}
-              onMouseEnter={e => {
+              onMouseEnter={(e) => {
                 if (dropdownTrigger === 'hover') {
                   dropdownOpen()
                 }
@@ -317,7 +317,7 @@ export class DropdownItem extends React.Component {
             className={cx(
               'component-dropdown__dropdown-menu__items__item__submenu',
             )}
-            ref={e => this.registerItemsElement(e)}
+            ref={(e) => this.registerItemsElement(e)}
           />
           {getComponent()}
           {hasSubmenu && (

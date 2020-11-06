@@ -331,12 +331,12 @@ const ComponentsTabs = () => {
 }
 
 const IndexView = connect(
-  state => {
+  (state) => {
     return {
       layout: selectors.getLayout(state),
     }
   },
-  dispatch => {
+  (dispatch) => {
     return bindActionCreators(
       {
         setLayoutOption: actions.setLayoutOption,

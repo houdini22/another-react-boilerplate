@@ -1,4 +1,4 @@
-@import "../variables";
+@import '../variables';
 
 .component-alert {
   position: relative;
@@ -281,11 +281,12 @@
       .component-alert__icon-container--outer {
         .component-alert__icon-container--inner {
           position: relative;
-          &:after, &:before {
+          &:after,
+          &:before {
             left: 100%;
             top: 50%;
             border: solid transparent;
-            content: " ";
+            content: ' ';
             height: 0;
             width: 0;
             position: absolute;
@@ -311,11 +312,12 @@
       .component-alert__icon-container--outer {
         .component-alert__icon-container--inner {
           position: relative;
-          &:after, &:before {
+          &:after,
+          &:before {
             left: 100%;
             top: 50%;
             border: solid transparent;
-            content: " ";
+            content: ' ';
             height: 0;
             width: 0;
             position: absolute;
@@ -341,11 +343,12 @@
       .component-alert__icon-container--outer {
         .component-alert__icon-container--inner {
           position: relative;
-          &:after, &:before {
+          &:after,
+          &:before {
             left: 100%;
             top: 50%;
             border: solid transparent;
-            content: " ";
+            content: ' ';
             height: 0;
             width: 0;
             position: absolute;
@@ -371,11 +374,12 @@
       .component-alert__icon-container--outer {
         .component-alert__icon-container--inner {
           position: relative;
-          &:after, &:before {
+          &:after,
+          &:before {
             left: 100%;
             top: 50%;
             border: solid transparent;
-            content: " ";
+            content: ' ';
             height: 0;
             width: 0;
             position: absolute;
@@ -401,11 +405,12 @@
       .component-alert__icon-container--outer {
         .component-alert__icon-container--inner {
           position: relative;
-          &:after, &:before {
+          &:after,
+          &:before {
             left: 100%;
             top: 50%;
             border: solid transparent;
-            content: " ";
+            content: ' ';
             height: 0;
             width: 0;
             position: absolute;
@@ -431,11 +436,12 @@
       .component-alert__icon-container--outer {
         .component-alert__icon-container--inner {
           position: relative;
-          &:after, &:before {
+          &:after,
+          &:before {
             left: 100%;
             top: 50%;
             border: solid transparent;
-            content: " ";
+            content: ' ';
             height: 0;
             width: 0;
             position: absolute;
@@ -461,11 +467,12 @@
       .component-alert__icon-container--outer {
         .component-alert__icon-container--inner {
           position: relative;
-          &:after, &:before {
+          &:after,
+          &:before {
             left: 100%;
             top: 50%;
             border: solid transparent;
-            content: " ";
+            content: ' ';
             height: 0;
             width: 0;
             position: absolute;
@@ -491,11 +498,12 @@
       .component-alert__icon-container--outer {
         .component-alert__icon-container--inner {
           position: relative;
-          &:after, &:before {
+          &:after,
+          &:before {
             left: 100%;
             top: 50%;
             border: solid transparent;
-            content: " ";
+            content: ' ';
             height: 0;
             width: 0;
             position: absolute;
@@ -521,11 +529,12 @@
       .component-alert__icon-container--outer {
         .component-alert__icon-container--inner {
           position: relative;
-          &:after, &:before {
+          &:after,
+          &:before {
             left: 100%;
             top: 50%;
             border: solid transparent;
-            content: " ";
+            content: ' ';
             height: 0;
             width: 0;
             position: absolute;
@@ -551,11 +560,12 @@
       .component-alert__icon-container--outer {
         .component-alert__icon-container--inner {
           position: relative;
-          &:after, &:before {
+          &:after,
+          &:before {
             left: 100%;
             top: 50%;
             border: solid transparent;
-            content: " ";
+            content: ' ';
             height: 0;
             width: 0;
             position: absolute;
@@ -581,11 +591,12 @@
       .component-alert__icon-container--outer {
         .component-alert__icon-container--inner {
           position: relative;
-          &:after, &:before {
+          &:after,
+          &:before {
             left: 100%;
             top: 50%;
             border: solid transparent;
-            content: " ";
+            content: ' ';
             height: 0;
             width: 0;
             position: absolute;
@@ -611,11 +622,12 @@
       .component-alert__icon-container--outer {
         .component-alert__icon-container--inner {
           position: relative;
-          &:after, &:before {
+          &:after,
+          &:before {
             left: 100%;
             top: 50%;
             border: solid transparent;
-            content: " ";
+            content: ' ';
             height: 0;
             width: 0;
             position: absolute;
@@ -641,11 +653,12 @@
       .component-alert__icon-container--outer {
         .component-alert__icon-container--inner {
           position: relative;
-          &:after, &:before {
+          &:after,
+          &:before {
             left: 100%;
             top: 50%;
             border: solid transparent;
-            content: " ";
+            content: ' ';
             height: 0;
             width: 0;
             position: absolute;
@@ -671,11 +684,12 @@
       .component-alert__icon-container--outer {
         .component-alert__icon-container--inner {
           position: relative;
-          &:after, &:before {
+          &:after,
+          &:before {
             left: 100%;
             top: 50%;
             border: solid transparent;
-            content: " ";
+            content: ' ';
             height: 0;
             width: 0;
             position: absolute;
@@ -696,7 +710,7 @@
         }
       }
     }
-    
+
     &.component-alert--icon-highlighted.component-alert--outline.component-alert--color-default {
       .component-alert__icon-container--outer {
         border-right: 1px solid $default;

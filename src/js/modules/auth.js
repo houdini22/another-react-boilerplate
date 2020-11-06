@@ -1,7 +1,6 @@
 // import locationHelperBuilder from 'redux-auth-wrapper/history3/locationHelper'
 import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect'
 import { selectors } from '../reducers/auth'
-import { routerActions } from 'react-router-redux'
 
 // const locationHelper = locationHelperBuilder({})
 
@@ -9,8 +8,8 @@ const { getIsLoggedIn } = selectors
 
 export const userIsAuthenticated = connectedRouterRedirect({
   redirectPath: '/',
-  authenticatedSelector: state => getIsLoggedIn(state),
-  redirectAction: routerActions.push,
+  authenticatedSelector: (state) => getIsLoggedIn(state),
+  //redirectAction: routerActions.push,
   wrapperDisplayName: 'UserIsAuthenticated',
 })
 

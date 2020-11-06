@@ -22,7 +22,7 @@ class Breadcrumbs extends React.Component {
                 </Link>
               )}
               {!link && (
-                <a href="" onClick={e => e.preventDefault()}>
+                <a href="" onClick={(e) => e.preventDefault()}>
                   <span>{label}</span>
                 </a>
               )}

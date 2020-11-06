@@ -30,10 +30,10 @@ class SidebarHeaderBase extends React.Component {
       >
         <div
           className={cx('layout__header__logo')}
-          onMouseOver={e => {
+          onMouseOver={(e) => {
             setLayoutOption('sidebarExpanded', true)
           }}
-          onMouseOut={e => {
+          onMouseOut={(e) => {
             setLayoutOption('sidebarExpanded', false)
           }}
         >
@@ -63,10 +63,10 @@ SidebarHeaderBase.propTypes = {
 }
 
 const SidebarHeader = connect(
-  state => ({
+  (state) => ({
     layout: commonSelectors.getLayout(state),
   }),
-  dispatch => {
+  (dispatch) => {
     return bindActionCreators(
       {
         setLayoutOption: commonActions.setLayoutOption,

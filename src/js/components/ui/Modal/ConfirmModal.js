@@ -19,7 +19,7 @@ class ConfirmModal extends React.Component {
   }
 
   disableButtons() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState({ buttonsDisabled: true }, () => {
         resolve()
       })

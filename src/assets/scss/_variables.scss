@@ -112,22 +112,22 @@ $COMPONENT_PADDING_SINGLE: 15px;
 $COMPONENT_PADDING: $COMPONENT_PADDING_SINGLE;
 
 $COMPONENT_ELEMENT_PADDING_LG: 0.1em 1.3em;
-$COMPONENT_ELEMENT_MARGIN_LG: .65em;
+$COMPONENT_ELEMENT_MARGIN_LG: 0.65em;
 $COMPONENT_ELEMENT_FONT_SIZE_LG: 1.15em;
 $COMPONENT_FONT_SIZE_LG: 1.35em;
-$COMPONENT_PADDING_LG: .4em .7em;
+$COMPONENT_PADDING_LG: 0.4em 0.7em;
 
 $COMPONENT_ELEMENT_PADDING_MD: 0.35em 1.1em;
 $COMPONENT_ELEMENT_FONT_SIZE_MD: 1em;
 $COMPONENT_ELEMENT_MARGIN_MD: 1em;
 $COMPONENT_FONT_SIZE_MD: 1em;
-$COMPONENT_PADDING_MD: .5em .8em;
+$COMPONENT_PADDING_MD: 0.5em 0.8em;
 
 $COMPONENT_ELEMENT_PADDING_SM: 0.25em 0.75em;
 $COMPONENT_ELEMENT_FONT_SIZE_SM: 0.75em;
 $COMPONENT_ELEMENT_MARGIN_SM: 0.75em;
-$COMPONENT_FONT_SIZE_SM: .80em;
-$COMPONENT_PADDING_SM: .4em .7em;
+$COMPONENT_FONT_SIZE_SM: 0.8em;
+$COMPONENT_PADDING_SM: 0.4em 0.7em;
 
 // TABS
 $COMPONENT_TABS_TRIGGER_BORDER_WIDTH: 4px;
@@ -143,13 +143,13 @@ $mainBackground: #f5f5f5;
 
 $grid-breakpoints: (
   // Extra small screen / phone
-        xs: 0,
+  xs: 0,
   // Small screen / phone
-        sm: 768px,
+  sm: 768px,
   // Medium screen / tablet
-        md: 992px,
+  md: 992px,
   // Large screen / desktop
-        lg: 1200px,
+  lg: 1200px,
   // Extra large screen / wide desktop
-        xl: 1400px
+  xl: 1400px
 );

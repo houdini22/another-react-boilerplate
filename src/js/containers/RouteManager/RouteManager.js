@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 
-const parseQueryString = queryString => {
+const parseQueryString = (queryString) => {
   const query = {}
   const pairs = (queryString[0] === '?'
     ? queryString.substr(1)

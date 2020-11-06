@@ -14,7 +14,8 @@
 }
 
 .builder {
-  .component-row, .component-col {
+  .component-row,
+  .component-col {
     border: 3px solid $primary;
     cursor: pointer;
     min-height: 30px;

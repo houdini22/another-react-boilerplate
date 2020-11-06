@@ -9,7 +9,7 @@ const PageLayoutBase = ({ component: Component, layout, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={matchProps => (
+      render={(matchProps) => (
         <PageLayoutContainer layout={layout}>
           <Component {...matchProps} />
         </PageLayoutContainer>
@@ -22,7 +22,7 @@ PageLayoutBase.propTypes = {
   component: PropTypes.func.isRequired,
 }
 
-const PageLayout = connect(state => {
+const PageLayout = connect((state) => {
   return {
     layout: selectors.getLayout(state),
   }

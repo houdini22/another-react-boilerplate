@@ -12,7 +12,7 @@ export const SET_LAYOUT_OPTION = 'common::set-layout-option'
 
 // actions
 
-const setConnectionErrorModalVisible = value => dispatch => {
+const setConnectionErrorModalVisible = (value) => (dispatch) => {
   dispatch({ type: CONNECTION_ERROR_MODAL_VISIBLE, payload: value })
 
   const id = uuid()
@@ -27,7 +27,7 @@ const setConnectionErrorModalVisible = value => dispatch => {
   )
 }
 
-const setLayoutOption = (name, value) => dispatch => {
+const setLayoutOption = (name, value) => (dispatch) => {
   dispatch({ type: SET_LAYOUT_OPTION, payload: { name, value } })
 }
 
@@ -39,7 +39,7 @@ export const actions = {
 // action handlers
 
 const ACTION_HANDLERS = {
-  [CONNECTION_ERROR_MODAL_VISIBLE]: state => {
+  [CONNECTION_ERROR_MODAL_VISIBLE]: (state) => {
     return {
       ...state,
       connectionErrorModalVisible: state['connectionErrorModalVisible'] + 1,
@@ -76,10 +76,10 @@ export default function userReducer(state = initialState, action) {
 
 // selectors
 
-const getState = state => state['common']
-const getIsConnectionErrorModalVisible = state =>
+const getState = (state) => state['common']
+const getIsConnectionErrorModalVisible = (state) =>
   getState(state)['connectionErrorModalVisible']
-const getLayout = state => getState(state)['layout']
+const getLayout = (state) => getState(state)['layout']
 
 export const selectors = {
   getState,

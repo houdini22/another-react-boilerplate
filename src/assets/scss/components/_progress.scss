@@ -1,10 +1,10 @@
-@import "../variables";
+@import '../variables';
 
 .component-progress {
   display: flex;
   overflow: hidden;
-  font-size: .75em;
-  border-radius: .25em;
+  font-size: 0.75em;
+  border-radius: 0.25em;
 
   & > .component-progress__progress {
     display: flex;
@@ -12,9 +12,9 @@
     justify-content: center;
     color: #fff;
     text-align: center;
-    transition: width .6s ease;
+    transition: width 0.6s ease;
   }
-  
+
   &.component-progress--color-default {
     background-color: $default;
     & > .component-progress__progress {

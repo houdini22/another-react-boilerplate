@@ -117,7 +117,7 @@ class PopoverView extends React.Component {
                         Content{' '}
                         <a
                           href="#"
-                          onClick={e => {
+                          onClick={(e) => {
                             e.preventDefault()
                             close()
                           }}

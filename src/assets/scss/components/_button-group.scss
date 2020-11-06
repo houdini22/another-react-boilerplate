@@ -1,10 +1,10 @@
-@import "../variables";
+@import '../variables';
 
 .component-button-group {
   display: inline-block;
   overflow: hidden;
-  -webkit-border-radius: 0.3em;;
-  -moz-border-radius: 0.3em;;
+  -webkit-border-radius: 0.3em;
+  -moz-border-radius: 0.3em;
   border-radius: 0.3em;
   position: relative;
 
@@ -33,11 +33,11 @@
 
   &:not(.component-button-group--outline) {
     -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.18),
-    0 2px 4px rgba(0, 0, 0, 0.21);
+      0 2px 4px rgba(0, 0, 0, 0.21);
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.18), 0 2px 4px rgba(0, 0, 0, 0.21);
     &:hover {
       -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15),
-      0 3px 6px rgba(0, 0, 0, 0.2);
+        0 3px 6px rgba(0, 0, 0, 0.2);
       box-shadow: 0 0 3px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.2);
     }
   }

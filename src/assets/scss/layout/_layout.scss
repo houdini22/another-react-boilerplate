@@ -1,4 +1,4 @@
-@import "../variables";
+@import '../variables';
 
 .layout {
   width: 100%;
@@ -19,7 +19,7 @@
     width: $SIDEBAR_DESKTOP_WIDTH;
     background-color: $SIDEBAR_BACKGROUND_COLOR;
     z-index: 200;
-    transition: width .23s ease;
+    transition: width 0.23s ease;
 
     .layout__sidebar__content {
       height: 100%;
@@ -35,7 +35,7 @@
           }
         }
       }
-      
+
       .layout__sidebar__content__navigation {
         display: block;
         border-top: 1px solid lighten($logoBackgroundColor, 10);
@@ -197,7 +197,7 @@
 
     & > .layout__header__logo {
       width: $SIDEBAR_DESKTOP_WIDTH;
-      transition: width .23s ease;
+      transition: width 0.23s ease;
       background-color: $primary;
       padding: 0 18px;
       display: flex;
@@ -213,7 +213,7 @@
         height: 100%;
         display: flex;
         align-items: center;
-        font-family: "Spectral", serif;
+        font-family: 'Spectral', serif;
 
         .layout__header__logo__brand {
           font-size: 15px;
@@ -241,7 +241,6 @@
       height: 100%;
     }
 
-
     &.layout__header--floating {
       & > .layout__header__logo {
         width: $HEADER_DESKTOP_HEIGHT;
@@ -268,7 +267,7 @@
     position: relative;
     display: flex;
     height: 100%;
-    transition: margin-left .5s ease;
+    transition: margin-left 0.5s ease;
     z-index: 100;
 
     & > .layout__container__content {
@@ -276,7 +275,7 @@
       z-index: 200;
       display: flex;
       margin-bottom: $FOOTER_DESKTOP_HEIGHT;
-      transition: margin-bottom .5s ease;
+      transition: margin-bottom 0.5s ease;
 
       & > .layout__container__content__header {
         height: $HEADER_DESKTOP_HEIGHT;
@@ -308,7 +307,7 @@
         animation--duration: 0.3s;
         z-index: 10;
         flex: 1;
-        transition: margin-top .5s ease;
+        transition: margin-top 0.5s ease;
         margin-top: $HEADER_DESKTOP_HEIGHT;
 
         & > .component-section:last-child {

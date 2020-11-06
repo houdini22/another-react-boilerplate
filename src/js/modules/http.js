@@ -10,18 +10,18 @@ const instance = axios.create({
   timeout: config['api']['timeout'],
 })
 
-instance.interceptors.response.use(undefined, error => {
+instance.interceptors.response.use(undefined, (error) => {
   if (error.message === 'Network Error') {
     store.dispatch(setConnectionErrorModalVisible(true))
   }
   return Promise.reject(error)
 })
 
-const setAuthToken = token => {
+const setAuthToken = (token) => {
   instance.defaults.headers.common['X-SESSION-TOKEN'] = token
 }
 
-const processAPIerrorResponseToFormErrors = response => {
+const processAPIerrorResponseToFormErrors = (response) => {
   return {}
 }
 

@@ -18,7 +18,7 @@ export class Manager extends React.Component {
   }
 
   addTodo(name, text) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const { collection } = this.state
 
       collection.push({
@@ -33,7 +33,7 @@ export class Manager extends React.Component {
   deleteTodo(id) {
     const { collection } = this.state
 
-    const index = collection.findIndex(obj => obj.id === id)
+    const index = collection.findIndex((obj) => obj.id === id)
     collection.splice(index, 1)
 
     this.setState({ collection })

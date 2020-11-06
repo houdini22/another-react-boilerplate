@@ -1,4 +1,4 @@
-@import "../variables";
+@import '../variables';
 
 .component-table {
   display: flex;
@@ -520,7 +520,7 @@
       }
     }
   }
-  
+
   &.component-table--color-success {
     & > .component-table__thead {
       & > .component-table__row {

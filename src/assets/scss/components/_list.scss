@@ -1,4 +1,4 @@
-@import "../variables";
+@import '../variables';
 
 .component-list {
   position: relative;
@@ -42,9 +42,9 @@
   &.component-list--separated {
     .component-list__item {
       margin-bottom: 15px;
-      -webkit-box-shadow: 0 2px 10px -1px rgba(69,90,100,0.3);
-      box-shadow: 0 2px 10px -1px rgba(69,90,100,0.3);
-      border-radius: .25em;
+      -webkit-box-shadow: 0 2px 10px -1px rgba(69, 90, 100, 0.3);
+      box-shadow: 0 2px 10px -1px rgba(69, 90, 100, 0.3);
+      border-radius: 0.25em;
       border: 1px solid $default;
     }
   }

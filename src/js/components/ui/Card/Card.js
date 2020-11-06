@@ -93,7 +93,7 @@ class Card extends React.Component {
                 {withMinimizeIcon &&
                   this.renderButton({
                     href: '#',
-                    onClick: e => {
+                    onClick: (e) => {
                       e.preventDefault()
                       this.setState({ minimized: !minimized })
                     },
@@ -109,7 +109,7 @@ class Card extends React.Component {
                 {withCloseIcon &&
                   this.renderButton({
                     href: '#',
-                    onClick: e => {
+                    onClick: (e) => {
                       e.preventDefault()
                       if (_.isFunction(onClickClose)) {
                         onClickClose({

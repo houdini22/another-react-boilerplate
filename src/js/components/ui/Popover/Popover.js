@@ -121,7 +121,7 @@ class Container extends React.Component {
             [`component-popover--transparent`]: transparent,
             [className]: className,
           })}
-          ref={e => (this.ref = e)}
+          ref={(e) => (this.ref = e)}
           style={style}
         >
           {children}
@@ -134,7 +134,7 @@ class Container extends React.Component {
                   ? contentElementMarginTop
                   : 0,
             }}
-            ref={e => this.registerContentElement(e)}
+            ref={(e) => this.registerContentElement(e)}
           />
         </div>
       </AppContext.Provider>
@@ -228,7 +228,7 @@ class Trigger extends React.Component {
                   }
                 }
               }}
-              ref={e => {
+              ref={(e) => {
                 this.triggerElement = e
                 registerTriggerElement(e)
               }}

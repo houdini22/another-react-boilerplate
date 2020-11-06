@@ -7,7 +7,7 @@ import { LoadingOverlay } from '../LoadingOverlay/index'
 import styles1 from '../../../../assets/scss/components/_alert.scss'
 import styles2 from '../../../../assets/scss/_animations.scss'
 
-const cx = classNames.bind({...styles1, ...styles2})
+const cx = classNames.bind({ ...styles1, ...styles2 })
 
 const animationDuration = 700
 
@@ -44,7 +44,7 @@ class Alert extends React.Component {
   }
 
   setIsLoading(isLoading) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState({ isLoading }, () => resolve())
     })
   }

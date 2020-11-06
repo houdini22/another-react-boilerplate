@@ -23,7 +23,7 @@ export class Container extends React.Component {
 
   setActiveTab(activeTab) {
     const { tabs } = this.state
-    Object.keys(tabs).forEach(key => {
+    Object.keys(tabs).forEach((key) => {
       tabs[key]['isActive'] = key === activeTab
     })
     this.setState({ tabs })
@@ -57,7 +57,7 @@ export class Container extends React.Component {
   getActiveTab() {
     const { tabs } = this.state
     let activeTab = null
-    Object.keys(tabs).forEach(key => {
+    Object.keys(tabs).forEach((key) => {
       if (tabs[key]['isActive']) {
         activeTab = tabs[key]
       }
@@ -142,7 +142,7 @@ export class Container extends React.Component {
               )}
               <ul
                 className={cx('component-tabs__tabs__header__triggers')}
-                ref={e => this.registerTriggersElement(e)}
+                ref={(e) => this.registerTriggersElement(e)}
                 style={{
                   flex: flexTriggers,
                 }}
@@ -157,7 +157,7 @@ export class Container extends React.Component {
             <div className={cx('component-tabs__content__outer')}>
               <div
                 className={cx('component-tabs__content__outer__inner')}
-                ref={e => {
+                ref={(e) => {
                   this.registerContentElement(e)
                 }}
               >
@@ -230,7 +230,7 @@ export class Tab extends React.Component {
                 activateTab: () => {
                   setActiveTab(name)
                 },
-                changeTab: name => {
+                changeTab: (name) => {
                   setActiveTab(name)
                 },
                 tabs,

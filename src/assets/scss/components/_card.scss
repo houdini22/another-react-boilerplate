@@ -1,4 +1,4 @@
-@import "../variables";
+@import '../variables';
 
 .component-card {
   background: $COMPONENT_BACKGROUND;
@@ -18,8 +18,8 @@
   background-clip: border-box;
   text-align: left;
   margin-bottom: $COMPONENT_MARGIN_SINGLE;
-  -webkit-box-shadow: 0 2px 10px -1px rgba(69,90,100,0.3);
-  box-shadow: 0 2px 10px -1px rgba(69,90,100,0.3);
+  -webkit-box-shadow: 0 2px 10px -1px rgba(69, 90, 100, 0.3);
+  box-shadow: 0 2px 10px -1px rgba(69, 90, 100, 0.3);
 
   &:not(:first-child) {
     margin: $COMPONENT_MARGIN;
@@ -84,7 +84,6 @@
       }
 
       .component-card__header__actions {
-
         .component-card__header__actions__action-button {
           padding-left: 0.275em;
           padding-right: 0.275em;

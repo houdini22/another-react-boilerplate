@@ -50,10 +50,6 @@ module.exports = {
     ],
   },
   plugins: [new HtmlWebpackPlugin({ template: 'index.html' })],
-  externals: {
-    react: 'React',
-    'react-dom': 'ReactDOM',
-  },
   performance: {
     hints: false,
   },

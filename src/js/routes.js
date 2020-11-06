@@ -1,6 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { Switch, withRouter } from 'react-router'
+import { Switch, withRouter, BrowserRouter as Router } from 'react-router-dom'
 
 import { PageLayout } from './layouts'
 
@@ -35,16 +34,12 @@ import {
 import { userIsAuthenticated } from './modules/auth'
 import { ModalContainer } from './containers/Modal'
 
-const ConnectedSwitch = connect(state => ({
-  location: state['location'],
-}))(Switch)
-
 import { actions } from './reducers/common'
 const { setLayoutOption } = actions
 
 const AppContainer = () => (
-  <div>
-    <ConnectedSwitch>
+  <Router>
+    <Switch>
       <PageLayout path="/login" component={LoginView} />
       <PageLayout path="/faq" component={FaqView} />
       <PageLayout path="/contact-me" component={AboutView} />
@@ -77,9 +72,9 @@ const AppContainer = () => (
       <PageLayout path="/forms" component={FormsView} />
       <PageLayout path="/builder" component={BuilderView} />
       <PageLayout exact path="/" component={FaqView} />
-    </ConnectedSwitch>
+    </Switch>
     <ModalContainer />
-  </div>
+  </Router>
 )
 
 export const App = withRouter(AppContainer)

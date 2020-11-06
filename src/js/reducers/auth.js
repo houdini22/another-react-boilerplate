@@ -10,20 +10,20 @@ export const SET_LOGIN_ERROR = 'auth::set_login_error'
 // ------------------------------------
 // Actions
 // ------------------------------------
-const loggedIn = data => dispatch => {
+const loggedIn = (data) => (dispatch) => {
   dispatch({ type: LOGGED_IN, payload: data })
 }
 
-const loggedOff = () => dispatch => {
+const loggedOff = () => (dispatch) => {
   dispatch({ type: LOGGED_OFF })
 }
 
-const setLoginError = value => dispatch => {
+const setLoginError = (value) => (dispatch) => {
   dispatch({ type: SET_LOGIN_ERROR, payload: value })
 }
 
-const login = (email, password) => dispatch => {
-  return new Promise(resolve => {
+const login = (email, password) => (dispatch) => {
+  return new Promise((resolve) => {
     dispatch(setLoginError(false))
 
     http
@@ -31,7 +31,7 @@ const login = (email, password) => dispatch => {
         email,
         password,
       })
-      .then(response => {
+      .then((response) => {
         dispatch(loggedIn(response.data.data.user))
         setAuthToken(response.data.data.user.token)
         resolve()
@@ -42,8 +42,8 @@ const login = (email, password) => dispatch => {
   })
 }
 
-const logoff = () => dispatch => {
-  return new Promise(resolve => {
+const logoff = () => (dispatch) => {
+  return new Promise((resolve) => {
     http.post('/auth/logout').then(() => {
       dispatch(loggedOff())
       setAuthToken('')
@@ -71,7 +71,7 @@ const ACTION_HANDLERS = {
       user: payload,
     }
   },
-  [LOGGED_OFF]: state => {
+  [LOGGED_OFF]: (state) => {
     return {
       ...state,
       isLoggedIn: false,
@@ -103,9 +103,9 @@ export default function userReducer(state = getInitialState(), action) {
 
 // selectors
 
-const getState = state => state['auth']
-const getIsLoggedIn = state => getState(state)['isLoggedIn']
-const getLoginError = state => getState(state)['loginError']
+const getState = (state) => state['auth']
+const getIsLoggedIn = (state) => getState(state)['isLoggedIn']
+const getLoginError = (state) => getState(state)['loginError']
 
 export const selectors = {
   getState,

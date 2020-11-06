@@ -1,19 +1,19 @@
 import moment from 'moment'
 import config from '../config/index'
 
-const formatDateTimeAPI = date => {
+const formatDateTimeAPI = (date) => {
   return moment(date).format(config['api']['apiDateTimeFormat'])
 }
 
-const formatDateAPI = date => {
+const formatDateAPI = (date) => {
   return moment(date).format(config['api']['apiDateFormat'])
 }
 
-const formatDateTime = date => {
+const formatDateTime = (date) => {
   return moment(date).format(config['dateTimeFormat'])
 }
 
-const formatDate = date => {
+const formatDate = (date) => {
   return moment(date).format(config['dateFormat'])
 }
 

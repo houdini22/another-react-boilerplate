@@ -44,7 +44,7 @@ class PageLayout extends React.Component {
               <AuthManager>
                 {({ auth: { isLoggedIn, user }, logoff }) => (
                   <Navigation>
-                    {navigation.map(item => {
+                    {navigation.map((item) => {
                       const {
                         type,
                         caption,

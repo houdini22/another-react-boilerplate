@@ -24,11 +24,11 @@ ModalContainerBase.propTypes = {
   modal: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   modal: modalSelectors.getState(state),
 })
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({}, dispatch)
 }
 

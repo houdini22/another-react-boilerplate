@@ -1,40 +1,32 @@
 import { createStore, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import createHistory from 'history/createHashHistory'
-import { routerMiddleware, routerReducer } from 'react-router-redux'
+import { createHashHistory } from 'history'
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 import * as reducers from '../reducers/index'
 
 const reducer = combineReducers({
   ...reducers,
-  routing: routerReducer,
   form: formReducer,
 })
 
-export const history = createHistory()
+export const history = createHashHistory()
 
 function configureStoreProd(initialState) {
-  const reactRouterMiddleware = routerMiddleware(history)
-  const middlewares = [thunk, reactRouterMiddleware]
-
   return createStore(
     reducer,
     initialState,
-    compose(applyMiddleware(...middlewares)),
+    compose(applyMiddleware(thunk)),
   )
 }
 
 function configureStoreDev(initialState) {
-  const reactRouterMiddleware = routerMiddleware(history)
-  const middlewares = [thunk, reactRouterMiddleware]
-
   const composeEnhancers =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose // add support for Redux dev tools
   const store = createStore(
     reducer,
     initialState,
-    composeEnhancers(applyMiddleware(...middlewares)),
+    composeEnhancers(applyMiddleware(thunk)),
   )
 
   if (module.hot) {
