@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, withRouter, HashRouter as Router } from 'react-router-dom'
 
-import { PageLayout } from './layouts'
+import { PageLayout, BlankPageLayout } from './layouts'
 
 import { LoginView } from './routes/Login'
 import { FaqView } from './routes/Faq'
@@ -9,6 +9,7 @@ import { RateView } from './routes/Rate'
 import { FormsView } from './routes/Forms'
 import { AboutView } from './routes/About'
 import { BuilderView } from './routes/Builder/components/Builder'
+import { IndexView } from './routes/Index'
 
 import {
     AlertView,
@@ -29,6 +30,8 @@ import {
     ProgressView,
     AccordionView,
     ListView,
+    ColumnView,
+    TableView,
 } from './routes/StyleGuide'
 
 import { userIsAuthenticated } from './modules/auth'
@@ -76,13 +79,15 @@ const AppContainer = () => (
             <PageLayout path="/components/progress" component={ProgressView} />
             <PageLayout path="/components/popover" component={PopoverView} />
             <PageLayout path="/components/tabs" component={TabsView} />
-            <PageLayout path="/components/table" component={ListView} />
+            <PageLayout path="/components/table" component={TableView} />
+            <PageLayout path="/components/column" component={ColumnView} />
             <PageLayout
                 path="/components/typography"
                 component={TypographyView}
             />
             <PageLayout path="/forms" component={FormsView} />
             <PageLayout path="/builder" component={BuilderView} />
+            <BlankPageLayout path="/login-page" component={IndexView} />
             <PageLayout exact path="/" component={FaqView} />
         </Switch>
         <ModalContainer />

@@ -82,7 +82,7 @@ export class ComponentsPageHeader extends React.Component {
                                         <Dropdown.Item
                                             href="/components/col"
                                             highlighted={
-                                                path === '/components/col'
+                                                path === '/components/column'
                                             }
                                         >
                                             Column

@@ -17,6 +17,7 @@ import { TypographyView } from './components/TypographyView'
 import { ProgressView } from './components/ProgressView'
 import { TableView } from './components/TableView'
 import { ListView } from './components/ListView'
+import { ColumnView } from './components/ColumnView'
 
 export {
     ButtonView,
@@ -38,6 +39,7 @@ export {
     AccordionView,
     TableView,
     ListView,
+    ColumnView,
 }
 
 export default {
@@ -60,4 +62,5 @@ export default {
     AccordionView,
     TableView,
     ListView,
+    ColumnView,
 }

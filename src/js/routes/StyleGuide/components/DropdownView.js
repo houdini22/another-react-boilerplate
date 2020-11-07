@@ -32,6 +32,7 @@ class DropdownView extends React.Component {
                 component: 'Button',
                 placement: 'left',
                 updateCount: 0,
+                disableOutsideClick: false,
             },
         }
         this.setOptions = this.setOptions.bind(this)
@@ -57,6 +58,7 @@ class DropdownView extends React.Component {
             trigger,
             component,
             placement,
+            disableOutsideClick,
         } = options
 
         const getComponent = () => {
@@ -93,9 +95,9 @@ class DropdownView extends React.Component {
                                     triggerSize={triggerSize}
                                     triggerColor={triggerColor}
                                     color={color}
-                                    disableOutsideClick
                                     trigger={trigger}
                                     placement={placement}
+                                    disableOutsideClick={disableOutsideClick}
                                 >
                                     <Dropdown.Trigger
                                         component={getComponent()}

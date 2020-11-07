@@ -10,9 +10,7 @@ class IndexView extends React.Component {
         super(props)
     }
 
-    componentDidMount() {
-        this.props.socketConnect()
-    }
+    componentDidMount() {}
 
     render() {
         return (

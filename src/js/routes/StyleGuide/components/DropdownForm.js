@@ -199,6 +199,14 @@ class DropdownForm extends React.Component {
                                         component={FormField}
                                     />
                                 </Col>
+                                <Col xs={12}>
+                                    <Field
+                                        name="disableOutsideClick"
+                                        label="disableOutsideClick"
+                                        type="checkbox"
+                                        component={FormField}
+                                    />
+                                </Col>
                             </Row>
                         </Tabs.Content>
                     </Tabs.Tab>

@@ -11,7 +11,7 @@ const config = {
     dateTimeFormat: 'YYYY-MM-DD HH:mm:ss',
     dateFormat: 'YYYY-MM-DD',
     texts: {
-        version: 'v0.1',
+        version: 'v0.2alpha',
         frameworkName: (
             <span>
                 <strong>another</strong> boilerplate

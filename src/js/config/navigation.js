@@ -92,7 +92,7 @@ export const navigation = [
     },
     {
         type: 'link',
-        href: '/components/col',
+        href: '/components/column',
         caption: 'Column',
         icon: 'CO',
         componentType: 'column',
@@ -183,6 +183,16 @@ export const navigation = [
         caption: 'Forms',
         href: '/forms',
         icon: <FormsIcon />,
+    },
+    {
+        type: 'header',
+        caption: 'Pages',
+    },
+    {
+        type: 'link',
+        caption: 'Login Page',
+        href: '/login-page',
+        icon: 'LP',
     },
     /*{
     type: 'header',

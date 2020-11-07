@@ -112,13 +112,19 @@ export class FaqView extends React.Component {
                         <Card header={<h1>Changelog</h1>}>
                             <Row>
                                 <Col xs={3}>
-                                    <h4>
-                                        <b>2019-06-12</b>
-                                    </h4>
+                                    <ul>
+                                        <li>2019-06-12</li>
+                                        <li>2020-11-07</li>
+                                    </ul>
                                 </Col>
                                 <Col xs={6}>
-                                    <ul>
+                                    <ul
+                                        style={{
+                                            listStyleType: 'none',
+                                        }}
+                                    >
                                         <li>Initial release v0.1-alpha</li>
+                                        <li>Initial release v0.2-alpha</li>
                                     </ul>
                                 </Col>
                             </Row>

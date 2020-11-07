@@ -1,129 +1,63 @@
+@import '../_variables.scss';
+
 .route--index {
-    transition: all 1s ease;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-content: center;
+    align-items: center;
 
-    .route--index__container {
-        background: #eef5db;
-        height: 100%;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        align-content: center;
-        position: relative;
+    form {
+        width: 400px;
+        margin: 0 auto;
+        padding: 2em;
+        background: $mainBackground;
+        border-radius: $COMPONENT_BORDER_RADIUS;
 
-        & > span {
-            vertical-align: middle;
-            font-size: 35px;
-            flex: 1;
-            font-family: 'Spectral';
-            position: relative;
+        .buttons-container {
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-direction: row;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            -webkit-flex-wrap: nowrap;
+            -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+            -webkit-justify-content: flex-start;
+            -ms-flex-pack: start;
+            justify-content: flex-start;
+            -webkit-align-content: stretch;
+            -ms-flex-line-pack: stretch;
+            align-content: stretch;
+            -webkit-align-items: flex-start;
+            -ms-flex-align: start;
+            align-items: flex-start;
 
-            .component-button {
-                position: absolute;
-                top: 100%;
-                left: 50%;
-                width: 200px;
-                margin-left: -100px;
-                margin-top: 33px;
-            }
-        }
-
-        .route--index__container__actions {
-            display: none;
-        }
-    }
-
-    &.route--index--active {
-        display: block;
-
-        .route--index__container {
-            & > span {
-                position: absolute;
-                top: 15px;
-                right: 15px;
-            }
-
-            .route--index__container__actions {
-                display: block;
-                position: absolute;
-                top: 15px;
-                left: 15px;
-                right: 0;
-                text-align: right;
-                width: 215px;
-
-                .route--index__container__actions__action {
-                    margin-bottom: 15px;
-                    width: 230px;
-                }
-            }
-        }
-    }
-
-    .component-popover {
-        &.contact-popover {
-            & > .component-popover__content {
-                width: 763px;
-            }
-        }
-
-        & > .component-popover__content {
-            height: 415px;
-
-            form {
-                position: relative;
-                padding-bottom: $COMPONENT_MARGIN_SINGLE;
-
-                textarea {
-                    height: 278px;
-                }
+            :nth-child(1) {
+                -webkit-order: 0;
+                -ms-flex-order: 0;
+                order: 0;
+                -webkit-flex: 1 1 auto;
+                -ms-flex: 1 1 auto;
+                flex: 1 1 auto;
+                -webkit-align-self: auto;
+                -ms-flex-item-align: auto;
+                align-self: auto;
+                margin-right: 1em;
             }
 
-            & > .component-popover__content__outer {
-                & > .component-popover__content__outer__inner {
-                    & > .component-tabs {
-                        max-height: 596px;
-                        margin-bottom: 15px;
-
-                        & > .component-tabs__content {
-                            animation--delay: 200ms;
-                            width: 763px;
-
-                            .component-page-header {
-                                display: none;
-                            }
-
-                            .component-section__content {
-                                border: 0 none;
-                                padding: 0;
-                                margin: 0;
-
-                                & > .component-row {
-                                    //border-bottom: 1px solid $primary;
-                                    //padding-bottom: $COMPONENT_MARGIN_SINGLE;
-                                    //margin-bottom: $COMPONENT_MARGIN_SINGLE;
-                                }
-                            }
-                        }
-
-                        & > .component-tabs__tabs {
-                            & > .component-tabs__tabs__header {
-                                & > .component-tabs__tabs__header__triggers {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger {
-                                        &
-                                            > .component-tabs__tabs__header__triggers__trigger__link {
-                                            width: 230px;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        .component-tabs {
-                            margin-bottom: $COMPONENT_MARGIN_SINGLE;
-                        }
-                    }
-                }
+            :nth-child(2) {
+                margin-left: 1em;
+                -webkit-order: 0;
+                -ms-flex-order: 0;
+                order: 0;
+                -webkit-flex: 1 1 auto;
+                -ms-flex: 1 1 auto;
+                flex: 1 1 auto;
+                -webkit-align-self: auto;
+                -ms-flex-item-align: auto;
+                align-self: auto;
             }
         }
     }
