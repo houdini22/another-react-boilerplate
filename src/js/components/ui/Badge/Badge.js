@@ -18,6 +18,7 @@ class Badge extends React.Component {
             size,
             arrow,
             rounded,
+            roundless,
         } = this.props
 
         return cx('component-badge', {
@@ -27,6 +28,7 @@ class Badge extends React.Component {
             [`component-badge--link`]: href,
             [`component-badge--arrow`]: arrow,
             [`component-badge--rounded`]: rounded,
+            [`component-badge--roundless`]: roundless,
             [`component-badge--size-${
                 dropdownSize || cardSize || accordionSize || size
             }`]: dropdownSize || cardSize || accordionSize || size,

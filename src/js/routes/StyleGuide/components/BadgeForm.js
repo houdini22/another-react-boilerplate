@@ -113,6 +113,14 @@ class BadgeForm extends React.Component {
                                         component={FormField}
                                     />
                                 </Col>
+                                <Col xs={12}>
+                                    <Field
+                                        name="roundless"
+                                        label="roundless"
+                                        type="checkbox"
+                                        component={FormField}
+                                    />
+                                </Col>
                             </Row>
                         </Tabs.Content>
                     </Tabs.Tab>

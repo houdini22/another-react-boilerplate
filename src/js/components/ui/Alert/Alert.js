@@ -62,6 +62,7 @@ class Alert extends React.Component {
             withIconArrow,
             rounded,
             background,
+            size,
             ...props
         } = this.props
         const { animationStarted, remove, isLoading } = this.state
@@ -81,6 +82,7 @@ class Alert extends React.Component {
                     [`component-alert--rounded`]: rounded,
                     [`component-alert--background`]: background,
                     ['animation--fade-out-top']: animationStarted,
+                    [`component-alert--size-${size}`]: size,
                 })}
                 {...props}
             >

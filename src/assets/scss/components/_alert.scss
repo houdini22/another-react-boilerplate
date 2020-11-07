@@ -2,7 +2,6 @@
 
 .component-alert {
     position: relative;
-    padding: 0.75em 1.25em;
     margin-bottom: 1em;
     border: 1px solid transparent;
     border-radius: 0;
@@ -15,57 +14,106 @@
     }
 
     &:not(.component-alert--outline).component-alert--color-default {
-        .component-alert__close-icon {
-            .component--alert__close-icon__icon {
+        & > .component-alert__close-icon {
+            & > .component--alert__close-icon__icon {
                 color: $default_DARKEN_X2;
+            }
+        }
+        & > .component-alert__content {
+            & > div:nth-child(2) {
+                padding-top: 0.5em;
+                margin-top: 0.5em;
+                border-top: 1px solid $default_DARKEN_X2;
             }
         }
     }
 
     &:not(.component-alert--outline).component-alert--color-primary {
-        .component-alert__close-icon {
-            .component--alert__close-icon__icon {
+        & > .component-alert__close-icon {
+            & > .component--alert__close-icon__icon {
                 color: $primary_DARKEN_X2;
+            }
+        }
+        & > .component-alert__content {
+            & > div:nth-child(2) {
+                padding-top: 0.5em;
+                margin-top: 0.5em;
+                border-top: 1px solid $primary_DARKEN_X2;
             }
         }
     }
 
     &:not(.component-alert--outline).component-alert--color-secondary {
-        .component-alert__close-icon {
-            .component--alert__close-icon__icon {
+        & > .component-alert__close-icon {
+            & > .component--alert__close-icon__icon {
                 color: $secondary_DARKEN_X2;
+            }
+        }
+        & > .component-alert__content {
+            & > div:nth-child(2) {
+                padding-top: 0.5em;
+                margin-top: 0.5em;
+                border-top: 1px solid $secondary_DARKEN_X2;
             }
         }
     }
 
     &:not(.component-alert--outline).component-alert--color-success {
-        .component-alert__close-icon {
-            .component--alert__close-icon__icon {
+        & > .component-alert__close-icon {
+            & > .component--alert__close-icon__icon {
                 color: $success_DARKEN_X2;
+            }
+        }
+        & > .component-alert__content {
+            & > div:nth-child(2) {
+                padding-top: 0.5em;
+                margin-top: 0.5em;
+                border-top: 1px solid $success_DARKEN_X2;
             }
         }
     }
 
     &:not(.component-alert--outline).component-alert--color-danger {
-        .component-alert__close-icon {
-            .component--alert__close-icon__icon {
+        & > .component-alert__close-icon {
+            & > .component--alert__close-icon__icon {
                 color: $danger_DARKEN_X2;
+            }
+        }
+        & > .component-alert__content {
+            & > div:nth-child(2) {
+                padding-top: 0.5em;
+                margin-top: 0.5em;
+                border-top: 1px solid $danger_DARKEN_X2;
             }
         }
     }
 
     &:not(.component-alert--outline).component-alert--color-warning {
-        .component-alert__close-icon {
-            .component--alert__close-icon__icon {
+        & > .component-alert__close-icon {
+            & > .component--alert__close-icon__icon {
                 color: $warning_DARKEN_X2;
+            }
+        }
+        & > .component-alert__content {
+            & > div:nth-child(2) {
+                padding-top: 0.5em;
+                margin-top: 0.5em;
+                border-top: 1px solid $warning_DARKEN_X2;
             }
         }
     }
 
     &:not(.component-alert--outline).component-alert--color-info {
-        .component-alert__close-icon {
-            .component--alert__close-icon__icon {
+        & > .component-alert__close-icon {
+            & > .component--alert__close-icon__icon {
                 color: $info_DARKEN_X2;
+            }
+        }
+        & > .component-alert__content {
+            & > div:nth-child(2) {
+                padding-top: 0.5em;
+                margin-top: 0.5em;
+                border-top: 1px solid $info_DARKEN_X2;
             }
         }
     }
@@ -115,36 +163,100 @@
     &.component-alert--color-default.component-alert--outline {
         border-color: $default;
         color: $default_text_color;
+        & > .component-alert__content {
+            & > div:nth-child(2) {
+                padding-top: 0.5em;
+                margin-top: 0.5em;
+                border-top: 1px solid $default;
+            }
+        }
     }
 
     &.component-alert--color-primary.component-alert--outline {
         border-color: $primary;
         color: $primary;
+        & > .component-alert__content {
+            & > div:nth-child(2) {
+                padding-top: 0.5em;
+                margin-top: 0.5em;
+                border-top: 1px solid $primary;
+            }
+        }
     }
 
     &.component-alert--color-secondary.component-alert--outline {
         border-color: $secondary;
         color: $secondary;
+        & > .component-alert__content {
+            & > div:nth-child(2) {
+                padding-top: 0.5em;
+                margin-top: 0.5em;
+                border-top: 1px solid $secondary;
+            }
+        }
     }
 
     &.component-alert--color-success.component-alert--outline {
         border-color: $success;
         color: $success;
+        & > .component-alert__content {
+            & > div:nth-child(2) {
+                padding-top: 0.5em;
+                margin-top: 0.5em;
+                border-top: 1px solid $success;
+            }
+        }
     }
 
     &.component-alert--color-danger.component-alert--outline {
         border-color: $danger;
         color: $danger;
+        & > .component-alert__content {
+            & > div:nth-child(2) {
+                padding-top: 0.5em;
+                margin-top: 0.5em;
+                border-top: 1px solid $danger;
+            }
+        }
     }
 
     &.component-alert--color-warning.component-alert--outline {
         border-color: $warning;
         color: $warning;
+        & > .component-alert__content {
+            & > div:nth-child(2) {
+                padding-top: 0.5em;
+                margin-top: 0.5em;
+                border-top: 1px solid $warning;
+            }
+        }
     }
 
     &.component-alert--color-info.component-alert--outline {
         border-color: $info;
         color: $info;
+        & > .component-alert__content {
+            & > div:nth-child(2) {
+                padding-top: 0.5em;
+                margin-top: 0.5em;
+                border-top: 1px solid $info;
+            }
+        }
+    }
+
+    &.component-alert.component-alert--size-md {
+        padding: $COMPONENT_PADDING_MD;
+        font-size: $COMPONENT_ELEMENT_FONT_SIZE_MD;
+    }
+
+    &.component-alert.component-alert--size-sm {
+        padding: $COMPONENT_PADDING_SM;
+        font-size: $COMPONENT_ELEMENT_FONT_SIZE_SM;
+    }
+
+    &.component-alert.component-alert--size-lg {
+        padding: $COMPONENT_PADDING_LG;
+        font-size: $COMPONENT_ELEMENT_FONT_SIZE_LG;
     }
 
     &.component-alert--outline.component-alert--background {
@@ -802,18 +914,19 @@
         bottom: 0;
         right: 0;
         font-size: 14px;
-        width: 45px;
+        width: 35px;
         text-align: center;
         line-height: 45px;
         background: transparent;
         cursor: pointer;
         display: flex;
-        align-items: center;
+        align-items: baseline;
         justify-content: center;
 
         .component--alert__close-icon__icon {
             font-size: 1em;
             cursor: pointer;
+            margin-top: 8px;
         }
     }
 

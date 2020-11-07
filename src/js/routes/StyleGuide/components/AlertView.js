@@ -27,6 +27,7 @@ class AlertView extends React.Component {
                 rounded: false,
                 closeIcon: false,
                 updateCount: 0,
+                size: 'md',
             },
         }
     }
@@ -51,6 +52,7 @@ class AlertView extends React.Component {
             rounded,
             closeIcon,
             color,
+            size,
         } = options
 
         const code = generateCode('Alert', options)
@@ -80,9 +82,10 @@ class AlertView extends React.Component {
                                     iconHighlighted={iconHighlighted}
                                     rounded={rounded}
                                     closeIcon={closeIcon}
+                                    size={size}
                                 >
                                     <h4>This is an alert!</h4>
-                                    <p>Some content...</p>
+                                    <div>Some content...</div>
                                 </Alert>,
                                 code,
                                 {

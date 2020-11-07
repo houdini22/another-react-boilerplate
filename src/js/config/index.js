@@ -1,3 +1,6 @@
+import { SidebarHeader } from '../layouts/PageLayout/components'
+import React from 'react'
+
 const config = {
     api: {
         baseURL: 'http://javascript_framework.local/index.php/api/v1/',
@@ -9,7 +12,11 @@ const config = {
     dateFormat: 'YYYY-MM-DD',
     texts: {
         version: 'v0.1-alpha',
-        frameworkName: 'another',
+        frameworkName: (
+            <span>
+                <strong>another</strong> boilerplate
+            </span>
+        ),
     },
 }
 

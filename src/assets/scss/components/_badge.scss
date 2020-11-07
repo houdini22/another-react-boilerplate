@@ -19,6 +19,10 @@
         border-radius: 200px;
     }
 
+    &.component-badge--roundless {
+        border-radius: 0;
+    }
+
     &.component-badge--size-sm {
         top: -0.4em;
         font-size: #{$COMPONENT_ELEMENT_FONT_SIZE_SM - 0.05em};

@@ -8,7 +8,7 @@
         &.component-accordion--size-md {
             & > .component-accordion__item {
                 & > .component-accordion__item__header {
-                    line-height: 25px;
+                    line-height: calc(#{$COMPONENT_FONT_SIZE_MD} + 0.2rem);
 
                     & > .component-accordion__item__header__arrow-icon {
                         font-size: $COMPONENT_FONT_SIZE_MD;
@@ -30,7 +30,7 @@
         &.component-accordion--size-sm {
             & > .component-accordion__item {
                 & > .component-accordion__item__header {
-                    line-height: 25px;
+                    line-height: calc(#{$COMPONENT_FONT_SIZE_SM} + 0.2rem);
 
                     & > .component-accordion__item__header__arrow-icon {
                         font-size: $COMPONENT_FONT_SIZE_SM;
@@ -52,7 +52,7 @@
         &.component-accordion--size-lg {
             & > .component-accordion__item {
                 & > .component-accordion__item__header {
-                    line-height: 25px;
+                    line-height: calc(#{$COMPONENT_FONT_SIZE_LG} + 0.2rem);
 
                     & > .component-accordion__item__header__arrow-icon {
                         font-size: $COMPONENT_FONT_SIZE_LG;

@@ -19,6 +19,7 @@ class BadgeView extends React.Component {
                 right: false,
                 updateCount: 0,
                 rounded: false,
+                roundless: false,
             },
         }
     }
@@ -35,7 +36,16 @@ class BadgeView extends React.Component {
     render() {
         const { colSize1, colSize2, createPresentationTab } = this.props
         const { options } = this.state
-        const { color, outline, href, size, arrow, right, rounded } = options
+        const {
+            color,
+            outline,
+            href,
+            size,
+            arrow,
+            right,
+            rounded,
+            roundless,
+        } = options
 
         const code = generateCode('Badge', options)
 
@@ -65,6 +75,7 @@ class BadgeView extends React.Component {
                                         arrow={arrow}
                                         right={right}
                                         rounded={rounded}
+                                        roundless={roundless}
                                     >
                                         {color} {size}
                                     </Badge>

@@ -42,7 +42,6 @@
     "@testing-library/user-event": "^12.2.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "classnames": "^2.2.6",
-    "create-react-class": "^15.7.0",
     "css-loader": "^5.0.1",
     "file-loader": "^6.2.0",
     "history": "^5.0.0",

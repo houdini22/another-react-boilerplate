@@ -66,6 +66,28 @@ class AlertForm extends React.Component {
                                 </Col>
                                 <Col xs={12}>
                                     <Field
+                                        name="size"
+                                        label="size"
+                                        type="select"
+                                        options={[
+                                            {
+                                                label: 'sm',
+                                                value: 'sm',
+                                            },
+                                            {
+                                                label: 'md',
+                                                value: 'md',
+                                            },
+                                            {
+                                                label: 'lg',
+                                                value: 'lg',
+                                            },
+                                        ]}
+                                        component={FormField}
+                                    />
+                                </Col>
+                                <Col xs={12}>
+                                    <Field
                                         name="outline"
                                         label="outline"
                                         type="checkbox"
