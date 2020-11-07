@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -17,9 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name', 'email', 'password', 'nick',
     ];
 
     /**
@@ -28,8 +27,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password', 'remember_token', 'token',
     ];
 
     /**
@@ -40,4 +38,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function generateToken()
+    {
+        do {
+            $this->token = Str::random(32);
+            $passed = true;
+            try {
+                $this->save();
+            } catch (\Exception $e) {
+                $passed = false;
+            }
+        } while ($passed === false);
+    }
+
+    public static function getFromRequest(\Illuminate\Http\Request $request)
+    {
+        $token = $request->header('X-SESSION-TOKEN');
+        if ($token) {
+            $user = \App\Models\User::where('token', '=', $token)->first();
+            if ($user) {
+                return $user;
+            }
+        }
+        return false;
+    }
 }

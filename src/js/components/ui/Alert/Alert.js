@@ -145,6 +145,7 @@ Alert.propTypes = {
 
 Alert.defaultProps = {
     color: 'default',
+    size: 'md',
 }
 
 export { Alert }

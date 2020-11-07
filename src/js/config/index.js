@@ -3,7 +3,7 @@ import React from 'react'
 
 const config = {
     api: {
-        baseURL: 'http://javascript_framework.local/index.php/api/v1/',
+        baseURL: 'http://another-react-boilerplate.local/index.php/api/v1/',
         timeout: 10000,
         apiDateTimeFormat: 'YYYY-MM-DD HH:mm:ss',
         apiDateFormat: 'YYYY-MM-DD',
@@ -11,7 +11,7 @@ const config = {
     dateTimeFormat: 'YYYY-MM-DD HH:mm:ss',
     dateFormat: 'YYYY-MM-DD',
     texts: {
-        version: 'v0.1-alpha',
+        version: 'v0.1',
         frameworkName: (
             <span>
                 <strong>another</strong> boilerplate
