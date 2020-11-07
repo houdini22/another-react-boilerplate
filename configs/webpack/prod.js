@@ -1,12 +1,12 @@
 // production config
-const merge = require('webpack-merge');
-const {resolve} = require('path');
+const merge = require('webpack-merge')
+const { resolve } = require('path')
 
-const commonConfig = require('./common');
+const commonConfig = require('./common')
 
 module.exports = merge(commonConfig, {
     mode: 'production',
-    entry: ["@babel/polyfill", './index.js'],
+    entry: ['@babel/polyfill', './index.js'],
     devtool: 'source-map',
     output: {
         filename: 'js/bundle.[hash].min.js',
@@ -14,4 +14,4 @@ module.exports = merge(commonConfig, {
         publicPath: '/',
     },
     plugins: [],
-});
+})

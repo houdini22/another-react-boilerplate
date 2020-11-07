@@ -19,6 +19,7 @@ import {
     MdTabUnselected as TabIcon,
     MdTextFormat as TypographyIcon,
 } from 'react-icons/md'
+import { Badge } from '../components/ui/Badge'
 
 export const navigation = [
     {
@@ -28,7 +29,14 @@ export const navigation = [
     {
         type: 'link',
         href: '/faq',
-        caption: 'FAQ',
+        caption: (
+            <span>
+                FAQ{' '}
+                <Badge color="success" size="sm">
+                    new
+                </Badge>
+            </span>
+        ),
         icon: <InfoIcon />,
     },
     {

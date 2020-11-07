@@ -33,6 +33,7 @@
                 & > div:nth-child(2) {
                     display: none;
                 }
+
                 & > div:nth-child(3) {
                     div {
                         background-color: $primary !important;
@@ -62,6 +63,10 @@
                     }
 
                     .layout__sidebar__content__navigation__links__link {
+                        &:hover {
+                            background-color: lighten($SIDEBAR_BACKGROUND_COLOR, 10);
+                        }
+
                         a {
                             box-sizing: border-box;
                             display: block;
@@ -139,8 +144,8 @@
 
                         &.layout__sidebar__sidebar-tab-active {
                             background-color: lighten(
-                                $logoBackgroundColor,
-                                20
+                                    $logoBackgroundColor,
+                                    20
                             ) !important;
                         }
                     }
@@ -173,6 +178,7 @@
                                 visibility: hidden;
                             }
                         }
+
                         .layout__sidebar__content__navigation__links__link {
                             a {
                                 div {
@@ -186,6 +192,7 @@
                 }
             }
         }
+
         &.layout__sidebar--expanded {
             width: $SIDEBAR_DESKTOP_WIDTH;
         }
@@ -252,10 +259,12 @@
         &.layout__header--floating {
             & > .layout__header__logo {
                 width: $HEADER_DESKTOP_HEIGHT;
+
                 & > a {
                     display: none;
                 }
             }
+
             & > .layout__header__bar {
                 width: calc(100% - #{$HEADER_DESKTOP_HEIGHT});
             }
@@ -348,6 +357,7 @@
         .layout__sidebar {
             display: none;
         }
+
         .layout__container {
             margin-left: 0;
 
@@ -367,6 +377,7 @@
                 .layout__container__content__header {
                     display: none;
                 }
+
                 .layout__container__content__content {
                     margin-top: 0;
                 }
@@ -379,6 +390,7 @@
             .layout__container__content {
                 margin-bottom: 0;
             }
+
             .layout__container__footer {
                 display: none;
             }
