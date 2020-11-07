@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -55,9 +55,13 @@ class User extends Authenticatable
     public static function getFromRequest(\Illuminate\Http\Request $request)
     {
         $token = $request->header('X-SESSION-TOKEN');
+        
         if ($token) {
             $user = \App\Models\User::where('token', '=', $token)->first();
             if ($user) {
+                $user->last_active = Carbon::now();
+                $user->save();
+
                 return $user;
             }
         }

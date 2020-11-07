@@ -33,14 +33,12 @@ class ColumnView extends React.Component {
                                 </Row>,
                                 <Row>
                                     <Col xs={12}>
-                                        <pre>
-                                            {`<Row>
+                                        {`<Row>
     <Col xs={3}>xs=3</Col>
     <Col xs={3}>xs=3</Col>
     <Col xs={3}>xs=3</Col>
     <Col xs={3}>xs=3</Col>
 </Row>`}
-                                        </pre>
                                     </Col>
                                 </Row>,
                             )}
@@ -54,12 +52,10 @@ class ColumnView extends React.Component {
                                 </Row>,
                                 <Row>
                                     <Col xs={12}>
-                                        <pre>
-                                            {`<Row>
+                                        {`<Row>
     <Col xs={6}>xs=6</Col>
     <Col xs={6}>xs=6</Col>
 </Row>`}
-                                        </pre>
                                     </Col>
                                 </Row>,
                             )}

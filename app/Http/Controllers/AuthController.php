@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\User;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -13,7 +14,11 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+
             $user->generateToken();
+
+            $user->last_active = Carbon::now();
+            $user->save();
 
             return response()->json([
                 'data' => [
