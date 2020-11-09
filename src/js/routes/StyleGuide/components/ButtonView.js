@@ -24,6 +24,7 @@ class ButtonView extends React.Component {
                 icon: false,
                 iconOnly: false,
                 updateCount: 0,
+                navigationHref: '',
             },
         }
         this.setOptions = this.setOptions.bind(this)
@@ -53,6 +54,7 @@ class ButtonView extends React.Component {
             icon,
             iconOnly,
             color,
+            navigationHref,
         } = options
 
         const code = generateCode('Button', options, 'Click me!')
@@ -84,6 +86,7 @@ class ButtonView extends React.Component {
                                     borderless={borderless}
                                     icon={icon ? <ButtonIcon /> : undefined}
                                     iconOnly={iconOnly}
+                                    navigationHref={navigationHref}
                                 >
                                     Click me!
                                 </Button>,
@@ -93,58 +96,6 @@ class ButtonView extends React.Component {
                                 },
                             )}
                         </Col>
-                    </Row>
-                    <Row>
-                        {/*{outline && (
-                  <Label size="xs" color="info">
-                    Outline
-                  </Label>
-                )}
-                {size && (
-                  <Label size="xs" color="info">
-                    Size {size}
-                  </Label>
-                )}
-                {isLoading && (
-                  <Label size="xs" color="info">
-                    isLoading
-                  </Label>
-                )}
-                {block && (
-                  <Label size="xs" color="info">
-                    block
-                  </Label>
-                )}
-                {disabled && (
-                  <Label size="xs" color="info">
-                    disabled
-                  </Label>
-                )}
-                {rounded && (
-                  <Label size="xs" color="info">
-                    rounded
-                  </Label>
-                )}
-                {roundless && (
-                  <Label size="xs" color="info">
-                    roundless
-                  </Label>
-                )}
-                {borderless && (
-                  <Label size="xs" color="info">
-                    borderless
-                  </Label>
-                )}
-                {icon && (
-                  <Label size="xs" color="info">
-                    icon
-                  </Label>
-                )}
-                {iconOnly && (
-                  <Label size="xs" color="info">
-                    iconOnly
-                  </Label>
-                )}*/}
                     </Row>
                 </Section>
             </PageContent>

@@ -11,7 +11,9 @@ export class PagesView extends React.Component {
                 </PageHeader.Container>
                 <Row>
                     <Col xs={12}>
-                        <Button block>Login Page</Button>
+                        <Button block navigationHref="/pages/login-page">
+                            Login Page
+                        </Button>
                     </Col>
                 </Row>
             </PageContent>

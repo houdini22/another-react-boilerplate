@@ -3,7 +3,6 @@ import { Switch, withRouter, HashRouter as Router } from 'react-router-dom'
 
 import { PageLayout, BlankPageLayout } from './layouts'
 
-import { LoginView } from './routes/Login'
 import { FaqView } from './routes/Faq'
 import { RateView } from './routes/Rate'
 import { FormsView } from './routes/Forms'
@@ -39,12 +38,10 @@ import { userIsAuthenticated } from './modules/auth'
 import { ModalContainer } from './containers/Modal'
 
 import { actions } from './reducers/common'
-const { setLayoutOption } = actions
 
 const AppContainer = () => (
     <Router>
         <Switch>
-            <PageLayout path="/login" component={LoginView} />
             <PageLayout path="/faq" component={FaqView} />
             <PageLayout path="/contact-me" component={AboutView} />
             <PageLayout
@@ -87,9 +84,9 @@ const AppContainer = () => (
                 component={TypographyView}
             />
             <PageLayout path="/forms" component={FormsView} />
-            <PageLayout path="/pages" component={PagesView} />
             <PageLayout path="/builder" component={BuilderView} />
-            <BlankPageLayout path="/login-page" component={IndexView} />
+            <BlankPageLayout path="/pages/login-page" component={IndexView} />
+            <PageLayout path="/pages" component={PagesView} />
             <PageLayout exact path="/" component={FaqView} />
         </Switch>
         <ModalContainer />

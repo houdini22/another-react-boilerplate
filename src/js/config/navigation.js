@@ -220,7 +220,7 @@ export const navigation = [
             {
                 type: 'link',
                 caption: 'Login Page',
-                href: '/login-page',
+                href: '/pages/login-page',
                 icon: 'LP',
             },
         ],

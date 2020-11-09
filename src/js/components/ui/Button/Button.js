@@ -23,7 +23,7 @@ class Button extends React.Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         if (
             prevState['isLoading'] === this.state['isLoading'] &&
             this.props['isLoading'] !== prevProps['isLoading']
@@ -154,7 +154,6 @@ class Button extends React.Component {
                                     )}
                                     ref={(e) => (this.navigationRef = e)}
                                     onClick={(e) => {
-                                        e.preventDefault()
                                         onClickNavigation()
                                     }}
                                 >
@@ -197,6 +196,7 @@ Button.propTypes = {
 Button.defaultProps = {
     color: 'primary',
     type: 'submit',
+    onClickNavigation: () => null,
 }
 
 export { Button }

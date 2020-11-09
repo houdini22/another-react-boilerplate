@@ -177,6 +177,12 @@
                 background: $default_DARKEN_X3;
             }
         }
+        &.component-button--has-navigation {
+            .component-button__navigation {
+                border-left: 2px solid $default_DARKEN_X3;
+                color: $default_LIGHTEN_X3;
+            }
+        }
     }
     &.component-button--color-primary {
         background-color: $primary;
@@ -187,7 +193,13 @@
         }
         .loading-overlay-container {
             .spinner > * {
-                background: $primary_DARKEN_X3;
+                background: $primary_DARKEN_X1;
+            }
+        }
+        &.component-button--has-navigation {
+            .component-button__navigation {
+                border-left: 2px solid $primary_DARKEN_X1;
+                color: $primary_LIGHTEN_X3;
             }
         }
     }
@@ -200,7 +212,13 @@
         }
         .loading-overlay-container {
             .spinner > * {
-                background: $secondary_DARKEN_X3;
+                background: $secondary_DARKEN_X1;
+            }
+        }
+        &.component-button--has-navigation {
+            .component-button__navigation {
+                border-left: 2px solid $secondary_DARKEN_X3;
+                color: $secondary_LIGHTEN_X3;
             }
         }
     }
@@ -216,6 +234,12 @@
                 background: $success_DARKEN_X3;
             }
         }
+        &.component-button--has-navigation {
+            .component-button__navigation {
+                border-left: 2px solid $success_DARKEN_X1;
+                color: $success_LIGHTEN_X3;
+            }
+        }
     }
     &.component-button--color-info {
         background-color: $info;
@@ -227,6 +251,12 @@
         .loading-overlay-container {
             .spinner > * {
                 background: $info_DARKEN_X3;
+            }
+        }
+        &.component-button--has-navigation {
+            .component-button__navigation {
+                border-left: 2px solid $info_DARKEN_X1;
+                color: $info_LIGHTEN_X3;
             }
         }
     }
@@ -242,6 +272,12 @@
                 background: $warning_DARKEN_X3;
             }
         }
+        &.component-button--has-navigation {
+            .component-button__navigation {
+                border-left: 2px solid $warning_DARKEN_X1;
+                color: $warning_LIGHTEN_X3;
+            }
+        }
     }
     &.component-button--color-danger {
         background-color: $danger;
@@ -255,18 +291,15 @@
                 background: $danger_DARKEN_X3;
             }
         }
+        &.component-button--has-navigation {
+            .component-button__navigation {
+                border-left: 2px solid $danger_DARKEN_X1;
+                color: $danger_LIGHTEN_X3;
+            }
+        }
     }
 
     &.component-button--has-navigation {
-        &.component-button--outline {
-            &.component-button--color-secondary {
-                .component-button__navigation {
-                    border-left: 2px solid $secondary;
-                    color: $secondary;
-                }
-            }
-        }
-
         &.component-button--size-lg {
             padding-right: calc(0.7em + 45px);
 
