@@ -8,12 +8,12 @@ const cx = classNames.bind(styles)
 
 class Row extends React.Component {
     render() {
-        const { children, builder, ...props } = this.props
+        const { children, builder, className, ...props } = this.props
 
         return (
             <div
                 {...props}
-                className={cx('component-row', {
+                className={cx('component-row', className, {
                     [cx('builder')]: builder,
                     [cx('component-row--no-padding')]: props['noPadding'],
                 })}
@@ -30,6 +30,7 @@ Row.propTypes = {
         PropTypes.array.isRequired,
     ]),
     noPadding: PropTypes.bool,
+    className: PropTypes.string,
 }
 
 export { Row }

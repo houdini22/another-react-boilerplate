@@ -33,7 +33,7 @@ const TableFormContainer = compose(
         onChange,
         enableReinitialize: true,
         destroyOnUnmount: true,
-        form: 'TableForm',
+        form: 'AccordionForm',
     }),
 )(FormComponent)
 

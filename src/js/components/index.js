@@ -52,12 +52,12 @@ import {
     ItemHeader as AccordionItemHeader,
 } from './ui/Accordion'
 import {
-    Table as TableComponent,
+    Table as TableContainer,
     Th as ThComponent,
     THead as THeadComponent,
     TBody as TBodyComponent,
     Td as TdComponent,
-    Row as RowComponent,
+    Tr as TrComponent,
 } from './ui/Table'
 import {
     Container as ListContainer,
@@ -106,12 +106,12 @@ const Accordion = {
 }
 
 const Table = {
-    Table: TableComponent,
+    Container: TableContainer,
     Th: ThComponent,
     THead: THeadComponent,
     TBody: TBodyComponent,
     Td: TdComponent,
-    Row: RowComponent,
+    Tr: TrComponent,
 }
 
 const List = {

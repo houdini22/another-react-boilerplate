@@ -2,6 +2,8 @@ import React from 'react'
 import classNames from 'classnames/bind'
 import PropTypes from 'prop-types'
 import styles from '../../../../assets/scss/components/_table.scss'
+import { Row } from '../Row'
+import { Col } from '../Col'
 
 const cx = classNames.bind(styles)
 
@@ -49,12 +51,24 @@ class TBody extends React.Component {
     }
 }
 
+class Tr extends React.Component {
+    render() {
+        const { children, ...props } = this.props
+
+        return (
+            <Row {...props} className={cx('component-table__tr')}>
+                {children}
+            </Row>
+        )
+    }
+}
+
 class Th extends React.Component {
     render() {
         const { children, xs, alignCenter } = this.props
 
         return (
-            <div
+            <Col
                 className={cx(
                     'component-table__thead__th',
                     `component-table__thead__th--xs-${xs}`,
@@ -62,9 +76,10 @@ class Th extends React.Component {
                         'component-table__thead__th--align-center': alignCenter,
                     },
                 )}
+                xs={xs}
             >
                 {children}
-            </div>
+            </Col>
         )
     }
 }
@@ -83,7 +98,7 @@ class Td extends React.Component {
         const { children, xs, alignCenter } = this.props
 
         return (
-            <div
+            <Col
                 className={cx(
                     'component-table__tbody__td',
                     `component-table__tbody__td--xs-${xs}`,
@@ -91,9 +106,10 @@ class Td extends React.Component {
                         'component-table__tbody__td--align-center': alignCenter,
                     },
                 )}
+                xs={xs}
             >
                 {children}
-            </div>
+            </Col>
         )
     }
 }
@@ -107,13 +123,5 @@ Td.defaultProps = {
     xs: 12,
 }
 
-class Row extends React.Component {
-    render() {
-        const { children } = this.props
-
-        return <div className={cx('component-table__row')}>{children}</div>
-    }
-}
-
-export { Table, THead, Th, TBody, Td, Row }
-export default { Table, THead, Th, TBody, Td, Row }
+export { Table, THead, Th, TBody, Td, Tr }
+export default { Table, THead, Th, TBody, Td, Tr }

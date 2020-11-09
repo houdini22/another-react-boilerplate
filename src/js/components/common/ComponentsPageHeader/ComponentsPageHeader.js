@@ -154,14 +154,6 @@ export class ComponentsPageHeader extends React.Component {
                                             Progress
                                         </Dropdown.Item>
                                         <Dropdown.Item
-                                            href="/components/row"
-                                            highlighted={
-                                                path === '/components/row'
-                                            }
-                                        >
-                                            Row
-                                        </Dropdown.Item>
-                                        <Dropdown.Item
                                             href="/components/tabs"
                                             highlighted={
                                                 path === '/components/tabs'
