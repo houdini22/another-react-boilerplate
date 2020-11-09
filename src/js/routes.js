@@ -32,6 +32,7 @@ import {
     ListView,
     ColumnView,
     TableView,
+    PagesView,
 } from './routes/StyleGuide'
 
 import { userIsAuthenticated } from './modules/auth'
@@ -86,6 +87,7 @@ const AppContainer = () => (
                 component={TypographyView}
             />
             <PageLayout path="/forms" component={FormsView} />
+            <PageLayout path="/pages" component={PagesView} />
             <PageLayout path="/builder" component={BuilderView} />
             <BlankPageLayout path="/login-page" component={IndexView} />
             <PageLayout exact path="/" component={FaqView} />

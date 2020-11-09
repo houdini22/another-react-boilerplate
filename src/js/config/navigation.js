@@ -205,16 +205,16 @@ export const navigation = [
         children: [
             {
                 type: 'link',
-                caption: 'Forms',
+                caption: 'Auto-Save Form',
                 href: '/forms',
-                icon: <FormsIcon />,
+                icon: 'AS',
             },
         ],
     },
     {
         type: 'link',
         caption: 'Pages',
-        href: '',
+        href: '/pages',
         icon: 'PG',
         children: [
             {

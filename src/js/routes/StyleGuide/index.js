@@ -18,6 +18,7 @@ import { ProgressView } from './components/ProgressView'
 import { TableView } from './components/TableView'
 import { ListView } from './components/ListView'
 import { ColumnView } from './components/ColumnView'
+import { PagesView } from '../Pages/components/Pages'
 
 export {
     ButtonView,
@@ -40,6 +41,7 @@ export {
     TableView,
     ListView,
     ColumnView,
+    PagesView,
 }
 
 export default {
@@ -63,4 +65,5 @@ export default {
     TableView,
     ListView,
     ColumnView,
+    PagesView,
 }
