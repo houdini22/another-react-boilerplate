@@ -64,7 +64,10 @@
 
                     .layout__sidebar__content__navigation__links__link {
                         &:hover {
-                            background-color: lighten($SIDEBAR_BACKGROUND_COLOR, 10);
+                            background-color: lighten(
+                                $SIDEBAR_BACKGROUND_COLOR,
+                                10
+                            );
                         }
 
                         a {
@@ -144,8 +147,8 @@
 
                         &.layout__sidebar__sidebar-tab-active {
                             background-color: lighten(
-                                    $logoBackgroundColor,
-                                    20
+                                $logoBackgroundColor,
+                                20
                             ) !important;
                         }
                     }
