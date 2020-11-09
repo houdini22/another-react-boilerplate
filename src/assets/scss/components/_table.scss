@@ -171,36 +171,38 @@
             }
         }
 
-        & > .component-table__thead {
-            & > .component-table__tr {
-                &:first-child {
-                    & > .component-table__thead__th {
-                        border-top: 1px solid $primary;
+        &.component-table--bordered {
+            & > .component-table__thead {
+                & > .component-table__tr {
+                    &:first-child {
+                        & > .component-table__thead__th {
+                            border-top: 1px solid $primary;
+                        }
                     }
-                }
 
-                &:last-child {
-                    & > .component-table__thead__th {
-                        border-bottom: 0 none;
+                    &:last-child {
+                        & > .component-table__thead__th {
+                            border-bottom: 0 none;
+                        }
                     }
-                }
 
-                & > .component-table__thead__th {
-                    border-bottom: 1px solid $primary;
+                    & > .component-table__thead__th {
+                        border-bottom: 1px solid $primary;
+                    }
                 }
             }
-        }
 
-        & > .component-table__tbody {
-            & > .component-table__tr {
-                &:first-child {
-                    & > .component-table__tbody__td {
-                        border-top: 1px solid $primary;
+            & > .component-table__tbody {
+                & > .component-table__tr {
+                    &:first-child {
+                        & > .component-table__tbody__td {
+                            border-top: 1px solid $primary;
+                        }
                     }
-                }
 
-                & > .component-table__tbody__td {
-                    border-bottom: 1px solid $primary;
+                    & > .component-table__tbody__td {
+                        border-bottom: 1px solid $primary;
+                    }
                 }
             }
         }
@@ -235,36 +237,38 @@
             }
         }
 
-        & > .component-table__thead {
-            & > .component-table__tr {
-                &:first-child {
-                    & > .component-table__thead__th {
-                        border-top: 1px solid $secondary;
+        &.component-table--bordered {
+            & > .component-table__thead {
+                & > .component-table__tr {
+                    &:first-child {
+                        & > .component-table__thead__th {
+                            border-top: 1px solid $secondary;
+                        }
                     }
-                }
 
-                &:last-child {
-                    & > .component-table__thead__th {
-                        border-bottom: 0 none;
+                    &:last-child {
+                        & > .component-table__thead__th {
+                            border-bottom: 0 none;
+                        }
                     }
-                }
 
-                & > .component-table__thead__th {
-                    border-bottom: 1px solid $secondary;
+                    & > .component-table__thead__th {
+                        border-bottom: 1px solid $secondary;
+                    }
                 }
             }
-        }
 
-        & > .component-table__tbody {
-            & > .component-table__tr {
-                &:first-child {
-                    & > .component-table__tbody__td {
-                        border-top: 1px solid $secondary;
+            & > .component-table__tbody {
+                & > .component-table__tr {
+                    &:first-child {
+                        & > .component-table__tbody__td {
+                            border-top: 1px solid $secondary;
+                        }
                     }
-                }
 
-                & > .component-table__tbody__td {
-                    border-bottom: 1px solid $secondary;
+                    & > .component-table__tbody__td {
+                        border-bottom: 1px solid $secondary;
+                    }
                 }
             }
         }
@@ -299,36 +303,38 @@
             }
         }
 
-        & > .component-table__thead {
-            & > .component-table__tr {
-                &:first-child {
-                    & > .component-table__thead__th {
-                        border-top: 1px solid $danger;
+        &.component-table--bordered {
+            & > .component-table__thead {
+                & > .component-table__tr {
+                    &:first-child {
+                        & > .component-table__thead__th {
+                            border-top: 1px solid $danger;
+                        }
                     }
-                }
 
-                &:last-child {
-                    & > .component-table__thead__th {
-                        border-bottom: 0 none;
+                    &:last-child {
+                        & > .component-table__thead__th {
+                            border-bottom: 0 none;
+                        }
                     }
-                }
 
-                & > .component-table__thead__th {
-                    border-bottom: 1px solid $danger;
+                    & > .component-table__thead__th {
+                        border-bottom: 1px solid $danger;
+                    }
                 }
             }
-        }
 
-        & > .component-table__tbody {
-            & > .component-table__tr {
-                &:first-child {
-                    & > .component-table__tbody__td {
-                        border-top: 1px solid $danger;
+            & > .component-table__tbody {
+                & > .component-table__tr {
+                    &:first-child {
+                        & > .component-table__tbody__td {
+                            border-top: 1px solid $danger;
+                        }
                     }
-                }
 
-                & > .component-table__tbody__td {
-                    border-bottom: 1px solid $danger;
+                    & > .component-table__tbody__td {
+                        border-bottom: 1px solid $danger;
+                    }
                 }
             }
         }
@@ -363,36 +369,38 @@
             }
         }
 
-        & > .component-table__thead {
-            & > .component-table__tr {
-                &:first-child {
-                    & > .component-table__thead__th {
-                        border-top: 1px solid $warning;
+        &.component-table--bordered {
+            & > .component-table__thead {
+                & > .component-table__tr {
+                    &:first-child {
+                        & > .component-table__thead__th {
+                            border-top: 1px solid $warning;
+                        }
                     }
-                }
 
-                &:last-child {
-                    & > .component-table__thead__th {
-                        border-bottom: 0 none;
+                    &:last-child {
+                        & > .component-table__thead__th {
+                            border-bottom: 0 none;
+                        }
                     }
-                }
 
-                & > .component-table__thead__th {
-                    border-bottom: 1px solid $warning;
+                    & > .component-table__thead__th {
+                        border-bottom: 1px solid $warning;
+                    }
                 }
             }
-        }
 
-        & > .component-table__tbody {
-            & > .component-table__tr {
-                &:first-child {
-                    & > .component-table__tbody__td {
-                        border-top: 1px solid $warning;
+            & > .component-table__tbody {
+                & > .component-table__tr {
+                    &:first-child {
+                        & > .component-table__tbody__td {
+                            border-top: 1px solid $warning;
+                        }
                     }
-                }
 
-                & > .component-table__tbody__td {
-                    border-bottom: 1px solid $warning;
+                    & > .component-table__tbody__td {
+                        border-bottom: 1px solid $warning;
+                    }
                 }
             }
         }
@@ -427,36 +435,38 @@
             }
         }
 
-        & > .component-table__thead {
-            & > .component-table__tr {
-                &:first-child {
-                    & > .component-table__thead__th {
-                        border-top: 1px solid $success;
+        &.component-table--bordered {
+            & > .component-table__thead {
+                & > .component-table__tr {
+                    &:first-child {
+                        & > .component-table__thead__th {
+                            border-top: 1px solid $success;
+                        }
                     }
-                }
 
-                &:last-child {
-                    & > .component-table__thead__th {
-                        border-bottom: 0 none;
+                    &:last-child {
+                        & > .component-table__thead__th {
+                            border-bottom: 0 none;
+                        }
                     }
-                }
 
-                & > .component-table__thead__th {
-                    border-bottom: 1px solid $success;
+                    & > .component-table__thead__th {
+                        border-bottom: 1px solid $success;
+                    }
                 }
             }
-        }
 
-        & > .component-table__tbody {
-            & > .component-table__tr {
-                &:first-child {
-                    & > .component-table__tbody__td {
-                        border-top: 1px solid $success;
+            & > .component-table__tbody {
+                & > .component-table__tr {
+                    &:first-child {
+                        & > .component-table__tbody__td {
+                            border-top: 1px solid $success;
+                        }
                     }
-                }
 
-                & > .component-table__tbody__td {
-                    border-bottom: 1px solid $success;
+                    & > .component-table__tbody__td {
+                        border-bottom: 1px solid $success;
+                    }
                 }
             }
         }
@@ -491,36 +501,38 @@
             }
         }
 
-        & > .component-table__thead {
-            & > .component-table__tr {
-                &:first-child {
-                    & > .component-table__thead__th {
-                        border-top: 1px solid $info;
+        &.component-table--bordered {
+            & > .component-table__thead {
+                & > .component-table__tr {
+                    &:first-child {
+                        & > .component-table__thead__th {
+                            border-top: 1px solid $info;
+                        }
                     }
-                }
 
-                &:last-child {
-                    & > .component-table__thead__th {
-                        border-bottom: 0 none;
+                    &:last-child {
+                        & > .component-table__thead__th {
+                            border-bottom: 0 none;
+                        }
                     }
-                }
 
-                & > .component-table__thead__th {
-                    border-bottom: 1px solid $info;
+                    & > .component-table__thead__th {
+                        border-bottom: 1px solid $info;
+                    }
                 }
             }
-        }
 
-        & > .component-table__tbody {
-            & > .component-table__tr {
-                &:first-child {
-                    & > .component-table__tbody__td {
-                        border-top: 1px solid $info;
+            & > .component-table__tbody {
+                & > .component-table__tr {
+                    &:first-child {
+                        & > .component-table__tbody__td {
+                            border-top: 1px solid $info;
+                        }
                     }
-                }
 
-                & > .component-table__tbody__td {
-                    border-bottom: 1px solid $info;
+                    & > .component-table__tbody__td {
+                        border-bottom: 1px solid $info;
+                    }
                 }
             }
         }

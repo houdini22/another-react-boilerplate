@@ -196,6 +196,7 @@ Button.propTypes = {
 Button.defaultProps = {
     color: 'primary',
     type: 'submit',
+    size: 'md',
     onClickNavigation: () => null,
 }
 
