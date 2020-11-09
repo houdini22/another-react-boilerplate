@@ -20,6 +20,7 @@ import {
     MdTextFormat as TypographyIcon,
 } from 'react-icons/md'
 import { Badge } from '../components/ui/Badge'
+import { IoIosNotificationsOutline } from 'react-icons/all'
 
 export const navigation = [
     {
@@ -152,6 +153,13 @@ export const navigation = [
                 caption: 'Modal',
                 icon: <ModalIcon />,
                 componentType: 'modal',
+            },
+            {
+                type: 'link',
+                href: '/components/notifications',
+                caption: 'Notifications',
+                icon: <IoIosNotificationsOutline />,
+                componentType: 'notification',
             },
             {
                 type: 'link',

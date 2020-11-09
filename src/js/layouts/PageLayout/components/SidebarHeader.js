@@ -10,6 +10,8 @@ import {
 } from '../../../reducers/common'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/layout/_layout.scss'
+import { IoIosNotificationsOutline } from 'react-icons/all'
+import { SidebarHeaderNotifications } from './SidebarHeaderNotifications'
 
 const cx = classNames.bind(styles)
 
@@ -51,7 +53,12 @@ class SidebarHeaderBase extends React.Component {
                         <ToggleIcon />
                     </span>
                 </div>
-                <div className={cx('layout__header__bar')} />
+                <div className={cx('layout__header__bar')}>
+                    <div className={cx('layout__header__bar__left')} />
+                    <div className={cx('layout__header__bar__right')}>
+                        <SidebarHeaderNotifications />
+                    </div>
+                </div>
             </div>
         )
     }

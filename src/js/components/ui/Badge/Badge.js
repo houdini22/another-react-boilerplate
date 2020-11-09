@@ -117,6 +117,8 @@ Badge.propTypes = {
     arrow: PropTypes.bool,
     disableContext: PropTypes.bool,
     rounded: PropTypes.bool,
+    roundless: PropTypes.bool,
+    right: PropTypes.bool,
 }
 
 Badge.defaultProps = {

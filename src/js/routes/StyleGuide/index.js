@@ -19,6 +19,7 @@ import { TableView } from './components/TableView'
 import { ListView } from './components/ListView'
 import { ColumnView } from './components/ColumnView'
 import { PagesView } from '../Pages/components/Pages'
+import { NotificationsView } from './components/NotificationsView'
 
 export {
     ButtonView,
@@ -42,6 +43,7 @@ export {
     ListView,
     ColumnView,
     PagesView,
+    NotificationsView,
 }
 
 export default {
@@ -66,4 +68,5 @@ export default {
     ListView,
     ColumnView,
     PagesView,
+    NotificationsView,
 }

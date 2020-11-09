@@ -129,6 +129,15 @@ export class ComponentsPageHeader extends React.Component {
                                             Modal
                                         </Dropdown.Item>
                                         <Dropdown.Item
+                                            href="/components/notifications"
+                                            highlighted={
+                                                path ===
+                                                '/components/notifications'
+                                            }
+                                        >
+                                            Notifications
+                                        </Dropdown.Item>
+                                        <Dropdown.Item
                                             href="/components/page-header"
                                             highlighted={
                                                 path ===

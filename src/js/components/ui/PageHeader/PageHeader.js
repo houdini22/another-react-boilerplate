@@ -125,12 +125,9 @@ export class Container extends React.Component {
 }
 
 Container.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.element,
-        PropTypes.array,
-    ]),
+    children: PropTypes.any,
     size: PropTypes.string,
+    title: PropTypes.any,
 }
 
 Container.defaultProps = {

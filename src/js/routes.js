@@ -32,6 +32,7 @@ import {
     ColumnView,
     TableView,
     PagesView,
+    NotificationsView,
 } from './routes/StyleGuide'
 
 import { userIsAuthenticated } from './modules/auth'
@@ -73,6 +74,10 @@ const AppContainer = () => (
             <PageLayout
                 path="/components/page-header"
                 component={PageHeaderView}
+            />
+            <PageLayout
+                path="/components/notifications"
+                component={NotificationsView}
             />
             <PageLayout path="/components/progress" component={ProgressView} />
             <PageLayout path="/components/popover" component={PopoverView} />
