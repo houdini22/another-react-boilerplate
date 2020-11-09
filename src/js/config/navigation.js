@@ -58,7 +58,14 @@ export const navigation = [
     },
     {
         type: 'link',
-        caption: 'Components',
+        caption: (
+            <span>
+                Components{' '}
+                <Badge size={'sm'} color={'info'}>
+                    18
+                </Badge>
+            </span>
+        ),
         href: '',
         icon: 'UX',
         children: [

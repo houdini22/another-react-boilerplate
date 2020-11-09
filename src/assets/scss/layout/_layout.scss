@@ -118,6 +118,13 @@
                         &.layout__sidebar__content__navigation__links__link--active {
                             a {
                                 font-weight: bold;
+                                color: #fff;
+
+                                &
+                                    > div
+                                    > .layout__sidebar__content__navigation__links__link__caption {
+                                    padding-left: 5px;
+                                }
                             }
                         }
 
