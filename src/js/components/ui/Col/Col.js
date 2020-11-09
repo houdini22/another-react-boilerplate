@@ -27,10 +27,7 @@ class Col extends React.Component {
 }
 
 Col.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.element.isRequired,
-        PropTypes.array.isRequired,
-    ]),
+    children: PropTypes.any.isRequired,
     className: PropTypes.string,
     xs: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     sm: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

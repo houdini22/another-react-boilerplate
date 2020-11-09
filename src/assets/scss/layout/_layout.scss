@@ -63,13 +63,6 @@
                     }
 
                     .layout__sidebar__content__navigation__links__link {
-                        &:hover {
-                            background-color: lighten(
-                                $SIDEBAR_BACKGROUND_COLOR,
-                                10
-                            );
-                        }
-
                         a {
                             box-sizing: border-box;
                             display: block;
@@ -88,6 +81,13 @@
 
                             &:hover {
                                 color: #fff;
+
+                                &
+                                    > div
+                                    > .layout__sidebar__content__navigation__links__link__caption {
+                                    padding-left: 5px;
+                                    transition: padding-left 0.3s ease;
+                                }
                             }
 
                             & > div {
@@ -98,15 +98,19 @@
                                 .layout__sidebar__content__navigation__links__link__icon {
                                     width: 20px;
                                     text-align: center;
-                                    margin-right: 8px;
+                                    margin-right: 12px;
                                     display: inline-block;
-                                    font-size: 13px;
+                                    font-size: 17px;
                                     font-family: Arial, Helvetica, sans-serif;
                                 }
 
                                 .layout__sidebar__content__navigation__links__link__caption {
                                     display: inline-block;
                                     font-size: 13px;
+                                }
+
+                                .layout__sidebar__content__navigation__links__link__nested {
+                                    float: right;
                                 }
                             }
                         }
@@ -115,6 +119,15 @@
                             a {
                                 font-weight: bold;
                             }
+                        }
+
+                        &
+                            > .layout__sidebar__content__navigation__links__links {
+                            padding: $COMPONENT_PADDING_SM;
+                            background: lighten($SIDEBAR_BACKGROUND_COLOR, 10);
+                            margin-left: 20px;
+                            width: calc(100% - 40px);
+                            border-radius: $COMPONENT_BORDER_RADIUS;
                         }
                     }
                 }

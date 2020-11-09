@@ -58,10 +58,7 @@ class SidebarHeaderBase extends React.Component {
 }
 
 SidebarHeaderBase.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.element.isRequired,
-        PropTypes.string.isRequired,
-    ]),
+    children: PropTypes.any.isRequired,
 }
 
 const SidebarHeader = connect(
