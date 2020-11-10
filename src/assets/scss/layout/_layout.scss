@@ -365,8 +365,9 @@
                             border-radius: $COMPONENT_BORDER_RADIUS;
                             -webkit-box-shadow: 0 2px 10px -1px rgba(69, 90, 100, 0.3);
                             box-shadow: 0 2px 10px -1px rgba(69, 90, 100, 0.3);
+                            height: 300px;
 
-                            & > ul {
+                            ul {
                                 list-style-type: none;
                                 margin: 0;
                                 padding: 0;
@@ -380,6 +381,9 @@
 
                                     &.layout__header__bar__right__element--notifications__expanded__item--color-primary {
                                         background: $primary;
+                                        &:hover {
+                                            background: $primary_LIGHTEN_X1;
+                                        }
                                         & > a {
                                             color: $primary_text_color;
                                         }
@@ -387,6 +391,9 @@
 
                                     &.layout__header__bar__right__element--notifications__expanded__item--color-secondary {
                                         background: $secondary;
+                                        &:hover {
+                                            background: $secondary_LIGHTEN_X1;
+                                        }
                                         & > a {
                                             color: $secondary_text_color;
                                         }
@@ -394,6 +401,9 @@
 
                                     &.layout__header__bar__right__element--notifications__expanded__item--color-warning {
                                         background: $warning;
+                                        &:hover {
+                                            background: $warning_LIGHTEN_X1;
+                                        }
                                         & > a {
                                             color: $warning_text_color;
                                         }
@@ -401,6 +411,9 @@
 
                                     &.layout__header__bar__right__element--notifications__expanded__item--color-info {
                                         background: $info;
+                                        &:hover {
+                                            background: $info_LIGHTEN_X1;
+                                        }
                                         & > a {
                                             color: $info_text_color;
                                         }
@@ -408,6 +421,9 @@
 
                                     &.layout__header__bar__right__element--notifications__expanded__item--color-danger {
                                         background: $danger;
+                                        &:hover {
+                                            background: $danger_LIGHTEN_X1;
+                                        }
                                         & > a {
                                             color: $danger_text_color;
                                         }
@@ -415,6 +431,9 @@
 
                                     &.layout__header__bar__right__element--notifications__expanded__item--color-success {
                                         background: $success;
+                                        &:hover {
+                                            background: $success_LIGHTEN_X1;
+                                        }
                                         & > a {
                                             color: $success_text_color;
                                         }

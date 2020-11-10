@@ -14,6 +14,7 @@ import {
 import { bindActionCreators } from 'redux'
 import { Badge } from '../../../components'
 import { Link } from 'react-router-dom'
+import { Scrollbars } from 'react-custom-scrollbars'
 
 const cx = classNames.bind(styles)
 
@@ -79,51 +80,53 @@ class BaseSidebarHeaderNotifications extends React.Component {
                             'layout__header__bar__right__element--notifications__expanded',
                         )}
                     >
-                        <ul>
-                            {notifications.map(
-                                ({ type, text, href, title }) => {
-                                    return (
-                                        <li
-                                            className={cx({
-                                                'layout__header__bar__right__element--notifications__expanded__item': true,
-                                                [`layout__header__bar__right__element--notifications__expanded__item--color-${type}`]: true,
-                                            })}
-                                            key={`${type}-${text}-${href}`}
-                                        >
-                                            <Link to={href}>
-                                                <span
-                                                    className={cx(
-                                                        'layout__header__bar__right__element--notifications__expanded__item__icon',
-                                                    )}
-                                                >
-                                                    {this.getIcon(type)}
-                                                </span>
-                                                <span
-                                                    className={cx(
-                                                        'layout__header__bar__right__element--notifications__expanded__item__content',
-                                                    )}
-                                                >
+                        <Scrollbars style={{ height: '400px' }}>
+                            <ul>
+                                {notifications.map(
+                                    ({ type, text, href, title }) => {
+                                        return (
+                                            <li
+                                                className={cx({
+                                                    'layout__header__bar__right__element--notifications__expanded__item': true,
+                                                    [`layout__header__bar__right__element--notifications__expanded__item--color-${type}`]: true,
+                                                })}
+                                                key={`${type}-${text}-${href}`}
+                                            >
+                                                <Link to={href}>
                                                     <span
                                                         className={cx(
-                                                            'layout__header__bar__right__element--notifications__expanded__item__content__title',
+                                                            'layout__header__bar__right__element--notifications__expanded__item__icon',
                                                         )}
                                                     >
-                                                        {title}
+                                                        {this.getIcon(type)}
                                                     </span>
                                                     <span
                                                         className={cx(
-                                                            'layout__header__bar__right__element--notifications__expanded__item__content__text',
+                                                            'layout__header__bar__right__element--notifications__expanded__item__content',
                                                         )}
                                                     >
-                                                        {text}
+                                                        <span
+                                                            className={cx(
+                                                                'layout__header__bar__right__element--notifications__expanded__item__content__title',
+                                                            )}
+                                                        >
+                                                            {title}
+                                                        </span>
+                                                        <span
+                                                            className={cx(
+                                                                'layout__header__bar__right__element--notifications__expanded__item__content__text',
+                                                            )}
+                                                        >
+                                                            {text}
+                                                        </span>
                                                     </span>
-                                                </span>
-                                            </Link>
-                                        </li>
-                                    )
-                                },
-                            )}
-                        </ul>
+                                                </Link>
+                                            </li>
+                                        )
+                                    },
+                                )}
+                            </ul>
+                        </Scrollbars>
                     </div>
                 )}
             </span>

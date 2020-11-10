@@ -10,7 +10,6 @@ import {
 } from '../../../reducers/common'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/layout/_layout.scss'
-import { IoIosNotificationsOutline } from 'react-icons/all'
 import { SidebarHeaderNotifications } from './SidebarHeaderNotifications'
 
 const cx = classNames.bind(styles)

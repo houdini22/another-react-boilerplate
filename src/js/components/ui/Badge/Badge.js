@@ -104,11 +104,7 @@ class Badge extends React.Component {
 }
 
 Badge.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.element.isRequired,
-        PropTypes.array.isRequired,
-        PropTypes.string.isRequired,
-    ]),
+    children: PropTypes.any,
     color: PropTypes.string,
     className: PropTypes.string,
     outline: PropTypes.bool,
