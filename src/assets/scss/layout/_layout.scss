@@ -347,7 +347,9 @@
 
                         & > .layout__header__bar__right__element--notifications__button {
                             cursor: pointer;
-                            
+                            width: 45px;
+                            text-align: center;
+
                             & > .component-badge {
                                 font-size: .5rem;
                                 position: absolute;
