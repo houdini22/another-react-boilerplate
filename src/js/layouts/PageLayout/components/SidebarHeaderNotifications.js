@@ -15,6 +15,7 @@ import { bindActionCreators } from 'redux'
 import { Badge } from '../../../components'
 import { Link } from 'react-router-dom'
 import { Scrollbars } from 'react-custom-scrollbars'
+import { RouteManager } from '../../../containers/RouteManager'
 
 const cx = classNames.bind(styles)
 
@@ -62,18 +63,24 @@ class BaseSidebarHeaderNotifications extends React.Component {
                     'layout__header__bar__right__element--notifications',
                 )}
             >
-                <IoIosNotificationsOutline
-                    onClick={() => {
-                        this.setState({ expanded: !expanded }, () => {
-                            resetUnread()
-                        })
-                    }}
-                />
-                {unread > 0 && (
-                    <Badge size={'sm'} color={'warning'} rounded>
-                        {unread}
-                    </Badge>
-                )}
+                <div
+                    className={
+                        'layout__header__bar__right__element--notifications__button'
+                    }
+                >
+                    <IoIosNotificationsOutline
+                        onClick={() => {
+                            this.setState({ expanded: !expanded }, () => {
+                                resetUnread()
+                            })
+                        }}
+                    />
+                    {unread > 0 && (
+                        <Badge size={'sm'} color={'warning'} rounded>
+                            {unread}
+                        </Badge>
+                    )}
+                </div>
                 {expanded && notifications.length > 0 && (
                     <div
                         className={cx(
@@ -127,6 +134,15 @@ class BaseSidebarHeaderNotifications extends React.Component {
                                 )}
                             </ul>
                         </Scrollbars>
+                        <div
+                            className={
+                                'layout__header__bar__right__element--notifications__expanded__view-all'
+                            }
+                        >
+                            <Link to={'/notifications'}>
+                                View all notifications
+                            </Link>
+                        </div>
                     </div>
                 )}
             </span>

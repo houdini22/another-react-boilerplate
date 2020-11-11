@@ -344,13 +344,16 @@
 
                 & > .layout__header__bar__right__element {
                     &.layout__header__bar__right__element--notifications {
-                        cursor: pointer;
 
-                        & > .component-badge {
-                            font-size: .5rem;
-                            position: absolute;
-                            right: 10px;
-                            top: 10px;
+                        & > .layout__header__bar__right__element--notifications__button {
+                            cursor: pointer;
+                            
+                            & > .component-badge {
+                                font-size: .5rem;
+                                position: absolute;
+                                right: 10px;
+                                top: 10px;
+                            }
                         }
 
                         & > .layout__header__bar__right__element--notifications__expanded {
@@ -365,7 +368,7 @@
                             border-radius: $COMPONENT_BORDER_RADIUS;
                             -webkit-box-shadow: 0 2px 10px -1px rgba(69, 90, 100, 0.3);
                             box-shadow: 0 2px 10px -1px rgba(69, 90, 100, 0.3);
-                            height: 300px;
+                            height: 400px;
 
                             ul {
                                 list-style-type: none;
@@ -374,6 +377,7 @@
 
                                 & > li {
                                     padding: $COMPONENT_PADDING_LG;
+                                    cursor: pointer;
 
                                     &:hover {
                                         background: $default_LIGHTEN_X1;
@@ -465,6 +469,26 @@
                                                 font-size: 13px;
                                             }
                                         }
+                                    }
+                                }
+                            }
+
+                            & > .layout__header__bar__right__element--notifications__expanded__view-all {
+                                position: absolute;
+                                left: 0;
+                                right: 0;
+                                bottom: 0;
+                                height: 42px;
+                                text-align: center;
+                                font-size: 17px;
+                                border-top: 1px solid $default_DARKEN_X1;
+                                line-height: 42px;
+
+                                a {
+                                    display: block;
+
+                                    &:hover {
+                                        text-decoration: none;
                                     }
                                 }
                             }
