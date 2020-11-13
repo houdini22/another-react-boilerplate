@@ -65,6 +65,7 @@ import {
     Image as ListImage,
     ItemContent as ListItemContent,
 } from './ui/List'
+import { Tooltip } from './ui/Tooltip'
 
 const Tabs = {
     Container: TabContainer,
@@ -152,6 +153,7 @@ export {
     Accordion,
     Table,
     List,
+    Tooltip,
 }
 
 export default {
@@ -185,4 +187,5 @@ export default {
     Accordion,
     Table,
     List,
+    Tooltip,
 }

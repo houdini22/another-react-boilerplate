@@ -18,6 +18,7 @@ const createPresentationTab = (
                     onClick={() => {
                         Copy(code)
                     }}
+                    key={'copy_code'}
                 >
                     Copy Code
                 </Button>,

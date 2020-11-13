@@ -33,6 +33,7 @@ import {
     TableView,
     PagesView,
     NotificationsView,
+    TooltipView,
 } from './routes/StyleGuide'
 
 import { userIsAuthenticated } from './modules/auth'
@@ -83,6 +84,7 @@ const AppContainer = () => (
             <PageLayout path="/components/popover" component={PopoverView} />
             <PageLayout path="/components/tabs" component={TabsView} />
             <PageLayout path="/components/table" component={TableView} />
+            <PageLayout path="/components/tooltip" component={TooltipView} />
             <PageLayout path="/components/column" component={ColumnView} />
             <PageLayout
                 path="/components/typography"

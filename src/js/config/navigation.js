@@ -63,7 +63,7 @@ export const navigation = [
             <span>
                 Components{' '}
                 <Badge size={'sm'} color={'info'}>
-                    19
+                    20
                 </Badge>
             </span>
         ),
@@ -195,6 +195,13 @@ export const navigation = [
                 caption: 'Table',
                 icon: 'TA',
                 componentType: 'table',
+            },
+            {
+                type: 'link',
+                href: '/components/tooltip',
+                caption: 'Tooltip',
+                icon: 'TO',
+                componentType: 'Tooltip',
             },
             {
                 type: 'link',

@@ -1,0 +1,23 @@
+@import '../variables';
+
+.component-tooltip {
+    .component-tooltip__element {
+        display: inline-block;
+    }
+    .component-tooltip__tooltip {
+        position: fixed;
+        z-index: 20000;
+        background: #000;
+        color: #fff;
+        padding: $COMPONENT_PADDING_MD;
+        border-radius: $COMPONENT_BORDER_RADIUS;
+        font-size: $COMPONENT_FONT_SIZE_MD;
+    }
+
+    &.component-tooltip--outline {
+        .component-tooltip__tooltip {
+            background: #fff;
+            border: 1px solid #000;
+        }
+    }
+}

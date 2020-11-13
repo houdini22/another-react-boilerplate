@@ -80,7 +80,7 @@ export class ComponentsPageHeader extends React.Component {
                                             Card
                                         </Dropdown.Item>
                                         <Dropdown.Item
-                                            href="/components/col"
+                                            href="/components/column"
                                             highlighted={
                                                 path === '/components/column'
                                             }
@@ -177,6 +177,14 @@ export class ComponentsPageHeader extends React.Component {
                                             }
                                         >
                                             Table
+                                        </Dropdown.Item>
+                                        <Dropdown.Item
+                                            href="/components/tooltip"
+                                            highlighted={
+                                                path === '/components/tooltip'
+                                            }
+                                        >
+                                            Tooltip
                                         </Dropdown.Item>
                                         <Dropdown.Item
                                             href="/components/typography"
