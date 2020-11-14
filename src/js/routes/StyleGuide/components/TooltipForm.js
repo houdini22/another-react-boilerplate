@@ -150,6 +150,30 @@ class TooltipForm extends React.Component {
                                                 label: 'bottom-end',
                                                 value: 'bottom-end',
                                             },
+                                            {
+                                                label: 'left-start',
+                                                value: 'left-start',
+                                            },
+                                            {
+                                                label: 'left',
+                                                value: 'left',
+                                            },
+                                            {
+                                                label: 'left-end',
+                                                value: 'left-end',
+                                            },
+                                            {
+                                                label: 'right-start',
+                                                value: 'right-start',
+                                            },
+                                            {
+                                                label: 'right',
+                                                value: 'right',
+                                            },
+                                            {
+                                                label: 'right-end',
+                                                value: 'right-end',
+                                            },
                                         ]}
                                         component={FormField}
                                     />

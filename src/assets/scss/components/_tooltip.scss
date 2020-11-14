@@ -15,9 +15,54 @@
     }
 
     &.component-tooltip--outline {
-        .component-tooltip__tooltip {
-            background: #fff;
-            border: 1px solid #000;
+        &.component-tooltip--color-default {
+            .component-tooltip__tooltip {
+                background: #fff;
+                border: 1px solid #000;
+                color: #000;
+            }
+        }
+        &.component-tooltip--color-primary {
+            .component-tooltip__tooltip {
+                background: #fff;
+                border: 1px solid $primary;
+                color: $primary;
+            }
+        }
+        &.component-tooltip--color-secondary {
+            .component-tooltip__tooltip {
+                background: #fff;
+                border: 1px solid $secondary;
+                color: $secondary;
+            }
+        }
+        &.component-tooltip--color-info {
+            .component-tooltip__tooltip {
+                background: #fff;
+                border: 1px solid $info;
+                color: $info;
+            }
+        }
+        &.component-tooltip--color-warning {
+            .component-tooltip__tooltip {
+                background: #fff;
+                border: 1px solid $warning;
+                color: $warning;
+            }
+        }
+        &.component-tooltip--color-danger {
+            .component-tooltip__tooltip {
+                background: #fff;
+                border: 1px solid $danger;
+                color: $danger;
+            }
+        }
+        &.component-tooltip--color-danger {
+            .component-tooltip__tooltip {
+                background: #fff;
+                border: 1px solid $success;
+                color: $success;
+            }
         }
     }
 }

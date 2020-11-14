@@ -31,6 +31,18 @@ class Tooltip extends React.Component {
                     return left
                 case 'bottom-end':
                     return left + (elementWidth - tooltipWidth) - 20
+                case 'right-start':
+                    return left + 20 + elementWidth
+                case 'right':
+                    return left + 20 + elementWidth
+                case 'right-end':
+                    return left + 20 + elementWidth
+                case 'left-start':
+                    return left - tooltipWidth - 20
+                case 'left':
+                    return left - tooltipWidth - 20
+                case 'left-end':
+                    return left - tooltipWidth - 20
             }
             return left
         }
@@ -49,13 +61,19 @@ class Tooltip extends React.Component {
 
             switch (placement) {
                 case 'top-start':
-                    return top
+                    return top - 40
                 case 'top-end':
-                    return top
+                    return top - 40
                 case 'bottom-start':
                     return top + elementHeight + 10
                 case 'bottom-end':
                     return top + elementHeight + 10
+                case 'right-start':
+                    return top + elementHeight / 2 - 40
+                case 'right':
+                    return top + elementHeight / 2 - 20
+                case 'right-end':
+                    return top + elementHeight / 2
             }
         }
         return 0

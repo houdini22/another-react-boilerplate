@@ -31,6 +31,7 @@ Row.propTypes = {
     ]),
     noPadding: PropTypes.bool,
     className: PropTypes.string,
+    style: PropTypes.object,
 }
 
 export { Row }

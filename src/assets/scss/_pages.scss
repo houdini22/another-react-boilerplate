@@ -27,12 +27,12 @@
 }
 
 .presentation-tab {
+    position: relative;
     pre {
         margin-top: $COMPONENT_MARGIN_SINGLE;
         text-align: left;
-    }
-    .component-tabs__content__outer__inner__tab {
-        text-align: center;
+        overflow: scroll;
+        max-width: 100%;
     }
 }
 

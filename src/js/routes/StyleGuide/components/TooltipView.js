@@ -36,6 +36,12 @@ class TooltipView extends React.Component {
         const { options } = this.state
         const { outline, color, size, tooltip, placement, trigger } = options
 
+        const code = generateCode(
+            'Tooltip',
+            options,
+            '<Button>I have the tooltip</Button>',
+        )
+
         return (
             <PageContent>
                 <ComponentsPageHeader title="Tooltip" component="Tooltip" />
@@ -61,7 +67,7 @@ class TooltipView extends React.Component {
                                 >
                                     <Button>I have the tooltip</Button>
                                 </Tooltip>,
-                                '',
+                                code,
                                 {
                                     colSize: colSize1,
                                 },

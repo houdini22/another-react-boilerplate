@@ -33,6 +33,7 @@ Col.propTypes = {
     sm: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     md: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     lg: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    style: PropTypes.object,
 }
 
 export { Col }

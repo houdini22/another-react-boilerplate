@@ -24,6 +24,7 @@ const createPresentationTab = (
                 </Button>,
             ]}
             color="default"
+            className={'presentation-tab'}
         >
             <div className="text-center" style={{ padding: '10px' }}>
                 {presentation}
@@ -62,13 +63,13 @@ const generateCode = (componentName, options, content = '') => {
     Object.keys(options).forEach((key) => {
         if (key !== 'updateCount' && options[key]) {
             if (_.isString(options[key])) {
-                result += ` ${key}='${options[key]}'`
+                result += `\n\t${key}='${options[key]}'`
             } else if (_.isBoolean(options[key])) {
-                result += ` ${key}`
+                result += `\n\t${key}`
             }
         }
     })
-    result += `>${content}</${componentName}>`
+    result += `>\n\t\t${content}\n</${componentName}>`
     return result
 }
 
