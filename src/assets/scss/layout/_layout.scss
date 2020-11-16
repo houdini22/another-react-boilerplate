@@ -214,16 +214,23 @@
                                 }
                             }
 
-                            & > .layout__sidebar__content__navigation__links__links {
+                            &
+                                > .layout__sidebar__content__navigation__links__links {
                                 padding-left: 10px;
-                                background: lighten($SIDEBAR_BACKGROUND_COLOR, 10);
+                                background: lighten(
+                                    $SIDEBAR_BACKGROUND_COLOR,
+                                    10
+                                );
                                 margin: 0;
                                 margin-left: 10px;
                                 margin-right: 5px;
                                 border-radius: $COMPONENT_BORDER_RADIUS;
                                 width: auto;
 
-                                & > .layout__sidebar__content__navigation__links__link > a > div {
+                                &
+                                    > .layout__sidebar__content__navigation__links__link
+                                    > a
+                                    > div {
                                     padding: 0;
                                 }
                             }
@@ -344,21 +351,22 @@
 
                 & > .layout__header__bar__right__element {
                     &.layout__header__bar__right__element--notifications {
-
-                        & > .layout__header__bar__right__element--notifications__button {
+                        &
+                            > .layout__header__bar__right__element--notifications__button {
                             cursor: pointer;
                             width: 45px;
                             text-align: center;
 
                             & > .component-badge {
-                                font-size: .5rem;
+                                font-size: 0.5rem;
                                 position: absolute;
                                 right: 10px;
                                 top: 10px;
                             }
                         }
 
-                        & > .layout__header__bar__right__element--notifications__expanded {
+                        &
+                            > .layout__header__bar__right__element--notifications__expanded {
                             text-align: left;
                             position: fixed;
                             right: 10px;
@@ -450,7 +458,8 @@
                                         text-decoration: none !important;
                                         line-height: 25px;
 
-                                        & > .layout__header__bar__right__element--notifications__expanded__item__icon {
+                                        &
+                                            > .layout__header__bar__right__element--notifications__expanded__item__icon {
                                             margin-left: -10px;
                                             margin-right: 15px;
                                             font-size: 25px;
@@ -460,13 +469,16 @@
                                             }
                                         }
 
-                                        & > .layout__header__bar__right__element--notifications__expanded__item__content {
-                                            & > .layout__header__bar__right__element--notifications__expanded__item__content__title {
+                                        &
+                                            > .layout__header__bar__right__element--notifications__expanded__item__content {
+                                            &
+                                                > .layout__header__bar__right__element--notifications__expanded__item__content__title {
                                                 display: block;
                                                 font-size: 18px;
                                                 font-weight: bold;
                                             }
-                                            & > .layout__header__bar__right__element--notifications__expanded__item__content__text {
+                                            &
+                                                > .layout__header__bar__right__element--notifications__expanded__item__content__text {
                                                 line-height: 13px;
                                                 font-size: 13px;
                                             }
@@ -475,7 +487,8 @@
                                 }
                             }
 
-                            & > .layout__header__bar__right__element--notifications__expanded__view-all {
+                            &
+                                > .layout__header__bar__right__element--notifications__expanded__view-all {
                                 position: absolute;
                                 left: 0;
                                 right: 0;

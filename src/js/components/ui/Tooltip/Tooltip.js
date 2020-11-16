@@ -25,10 +25,14 @@ class Tooltip extends React.Component {
             switch (placement) {
                 case 'top-start':
                     return left
+                case 'top':
+                    return left + elementWidth / 2 - tooltipWidth / 2 - 10
                 case 'top-end':
                     return left + (elementWidth - tooltipWidth) - 20
                 case 'bottom-start':
                     return left
+                case 'bottom':
+                    return left + elementWidth / 2 - tooltipWidth / 2 - 10
                 case 'bottom-end':
                     return left + (elementWidth - tooltipWidth) - 20
                 case 'right-start':
@@ -38,11 +42,11 @@ class Tooltip extends React.Component {
                 case 'right-end':
                     return left + 20 + elementWidth
                 case 'left-start':
-                    return left - tooltipWidth - 20
+                    return left - tooltipWidth - 35
                 case 'left':
-                    return left - tooltipWidth - 20
+                    return left - tooltipWidth - 35
                 case 'left-end':
-                    return left - tooltipWidth - 20
+                    return left - tooltipWidth - 35
             }
             return left
         }
@@ -62,18 +66,28 @@ class Tooltip extends React.Component {
             switch (placement) {
                 case 'top-start':
                     return top - 40
+                case 'top':
+                    return top - 40
                 case 'top-end':
                     return top - 40
                 case 'bottom-start':
                     return top + elementHeight + 10
+                case 'bottom':
+                    return top + elementHeight + 10
                 case 'bottom-end':
                     return top + elementHeight + 10
                 case 'right-start':
-                    return top + elementHeight / 2 - 40
+                    return top + elementHeight / 2 - 32
                 case 'right':
-                    return top + elementHeight / 2 - 20
+                    return top + elementHeight / 2 - 17
                 case 'right-end':
-                    return top + elementHeight / 2
+                    return top + elementHeight / 2 - 2
+                case 'left-start':
+                    return top + elementHeight / 2 - 32
+                case 'left':
+                    return top + elementHeight / 2 - 17
+                case 'left-end':
+                    return top + elementHeight / 2 - 2
             }
         }
         return 0

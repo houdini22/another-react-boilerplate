@@ -9,9 +9,28 @@
         z-index: 20000;
         background: #000;
         color: #fff;
-        padding: $COMPONENT_PADDING_MD;
         border-radius: $COMPONENT_BORDER_RADIUS;
-        font-size: $COMPONENT_FONT_SIZE_MD;
+    }
+
+    &.component-tooltip--size-sm {
+        .component-tooltip__tooltip {
+            padding: $COMPONENT_PADDING_SM;
+            font-size: $COMPONENT_FONT_SIZE_SM;
+        }
+    }
+
+    &.component-tooltip--size-md {
+        .component-tooltip__tooltip {
+            padding: $COMPONENT_PADDING_MD;
+            font-size: $COMPONENT_FONT_SIZE_MD;
+        }
+    }
+
+    &.component-tooltip--size-lg {
+        .component-tooltip__tooltip {
+            padding: $COMPONENT_PADDING_LG;
+            font-size: $COMPONENT_FONT_SIZE_LG;
+        }
     }
 
     &:not(.component-tooltip--outline) {
