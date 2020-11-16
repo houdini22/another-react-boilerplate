@@ -55,7 +55,12 @@ class AlertView extends React.Component {
             size,
         } = options
 
-        const code = generateCode('Alert', options)
+        const code = generateCode(
+            'Alert',
+            options,
+            `<h4>This is an alert!</h4>
+                <div>Some content...</div>`,
+        )
 
         return (
             <PageContent>

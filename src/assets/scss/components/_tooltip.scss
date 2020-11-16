@@ -14,6 +14,58 @@
         font-size: $COMPONENT_FONT_SIZE_MD;
     }
 
+    &:not(.component-tooltip--outline) {
+        &.component-tooltip--color-default {
+            .component-tooltip__tooltip {
+                background: $default;
+                color: $default_text_color;
+                border: 1px solid $default_DARKEN_X3;
+            }
+        }
+        &.component-tooltip--color-primary {
+            .component-tooltip__tooltip {
+                background: $primary;
+                color: $primary_text_color;
+                border: 1px solid $primary_DARKEN_X3;
+            }
+        }
+        &.component-tooltip--color-secondary {
+            .component-tooltip__tooltip {
+                background: $secondary;
+                color: $secondary_text_color;
+                border: 1px solid $secondary_DARKEN_X3;
+            }
+        }
+        &.component-tooltip--color-info {
+            .component-tooltip__tooltip {
+                background: $info;
+                color: $info_text_color;
+                border: 1px solid $info_DARKEN_X3;
+            }
+        }
+        &.component-tooltip--color-warning {
+            .component-tooltip__tooltip {
+                background: $warning;
+                color: $warning_text_color;
+                border: 1px solid $warning_DARKEN_X3;
+            }
+        }
+        &.component-tooltip--color-danger {
+            .component-tooltip__tooltip {
+                background: $danger;
+                color: $danger_text_color;
+                border: 1px solid $danger_DARKEN_X3;
+            }
+        }
+        &.component-tooltip--color-success {
+            .component-tooltip__tooltip {
+                background: $success;
+                color: $success_text_color;
+                border: 1px solid $success_DARKEN_X3;
+            }
+        }
+    }
+
     &.component-tooltip--outline {
         &.component-tooltip--color-default {
             .component-tooltip__tooltip {
@@ -57,7 +109,7 @@
                 color: $danger;
             }
         }
-        &.component-tooltip--color-danger {
+        &.component-tooltip--color-success {
             .component-tooltip__tooltip {
                 background: #fff;
                 border: 1px solid $success;

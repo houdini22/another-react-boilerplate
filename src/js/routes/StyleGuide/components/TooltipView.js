@@ -18,6 +18,7 @@ class TooltipView extends React.Component {
                     'I am the tooltip! I am the tooltip! I am the tooltip!',
                 placement: 'top-start',
                 trigger: 'hover',
+                updateCount: 0,
             },
         }
     }

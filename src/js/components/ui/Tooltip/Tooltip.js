@@ -179,7 +179,6 @@ Tooltip.propTypes = {
 }
 
 Tooltip.defaultProps = {
-    color: 'default',
     size: 'md',
     placement: 'top',
     trigger: 'hover',

@@ -33,6 +33,10 @@ class TooltipForm extends React.Component {
                                         type="select"
                                         options={[
                                             {
+                                                label: 'none',
+                                                value: '',
+                                            },
+                                            {
                                                 label: 'default',
                                                 value: 'default',
                                             },
