@@ -10,6 +10,36 @@
         & > .component-table__tr {
             margin-bottom: 0;
 
+            &.component-table__tr--color-primary {
+                color: $primary_text_color;
+                background: $primary;
+            }
+
+            &.component-table__tr--color-secondary {
+                color: $secondary_text_color;
+                background: $secondary;
+            }
+
+            &.component-table__tr--color-info {
+                color: $info_text_color;
+                background: $info;
+            }
+
+            &.component-table__tr--color-danger {
+                color: $danger_text_color;
+                background: $danger;
+            }
+
+            &.component-table__tr--color-warning {
+                color: $warning_text_color;
+                background: $warning;
+            }
+
+            &.component-table__tr--color-success {
+                color: $primary_text_color;
+                background: $primary;
+            }
+
             & > .component-table__thead__th {
                 text-align: left;
                 font-weight: bold;
@@ -24,6 +54,36 @@
 
         & > .component-table__tr {
             margin-bottom: 0;
+
+            &.component-table__tr--color-primary {
+                color: $primary_text_color;
+                background: $primary;
+            }
+
+            &.component-table__tr--color-secondary {
+                color: $secondary_text_color;
+                background: $secondary;
+            }
+
+            &.component-table__tr--color-info {
+                color: $info_text_color;
+                background: $info;
+            }
+
+            &.component-table__tr--color-danger {
+                color: $danger_text_color;
+                background: $danger;
+            }
+
+            &.component-table__tr--color-warning {
+                color: $warning_text_color;
+                background: $warning;
+            }
+
+            &.component-table__tr--color-success {
+                color: $success_text_color;
+                background: $success;
+            }
 
             & > .component-table__tbody__td {
                 text-align: left;

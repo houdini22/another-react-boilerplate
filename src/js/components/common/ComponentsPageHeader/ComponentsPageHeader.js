@@ -210,10 +210,6 @@ export class ComponentsPageHeader extends React.Component {
 }
 
 ComponentsPageHeader.propTypes = {
-    title: PropTypes.oneOfType([
-        PropTypes.element.isRequired,
-        PropTypes.array.isRequired,
-        PropTypes.func.isRequired,
-    ]),
+    title: PropTypes.any,
     component: PropTypes.string,
 }

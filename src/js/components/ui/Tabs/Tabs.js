@@ -265,7 +265,7 @@ Tab.propTypes = {
         PropTypes.func.isRequired,
     ]),
     name: PropTypes.string,
-    setActiveTab: PropTypes.func.isRequired,
+    setActiveTab: PropTypes.func,
 }
 
 export class Trigger extends React.Component {
@@ -325,11 +325,7 @@ export class Trigger extends React.Component {
 }
 
 Trigger.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.element.isRequired,
-        PropTypes.array.isRequired,
-        PropTypes.func.isRequired,
-    ]),
+    children: PropTypes.any,
     noTab: PropTypes.bool,
     hidden: PropTypes.bool,
 }

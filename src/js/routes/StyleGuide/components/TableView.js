@@ -34,7 +34,51 @@ class TableView extends React.Component {
         const { options } = this.state
         const { bordered, color, size, striped } = options
 
-        const code = generateCode('Table', options)
+        const code = generateCode(
+            'Table',
+            options,
+            `<Table.THead>
+                    <Table.Tr>
+                        <Table.Th xs={4}>Header 1</Table.Th>
+                        <Table.Th xs={4}>Header 2</Table.Th>
+                        <Table.Th xs={4}>Header 3</Table.Th>
+                    </Table.Tr>
+                </Table.THead>
+                <Table.TBody>
+                    <Table.Tr>
+                        <Table.Td xs={4}>col 1</Table.Td>
+                        <Table.Td xs={4}>col 2</Table.Td>
+                        <Table.Td xs={4}>col 3</Table.Td>
+                    </Table.Tr>
+                    <Table.Tr>
+                        <Table.Td xs={4}>col 1</Table.Td>
+                        <Table.Td xs={4}>col 2</Table.Td>
+                        <Table.Td xs={4}>col 3</Table.Td>
+                    </Table.Tr>
+                    <Table.Tr>
+                        <Table.Td xs={4}>col 1</Table.Td>
+                        <Table.Td xs={4}>col 2</Table.Td>
+                        <Table.Td xs={4}>col 3</Table.Td>
+                    </Table.Tr>
+                    <Table.Tr>
+                        <Table.Td xs={4}>col 1</Table.Td>
+                        <Table.Td xs={4}>col 2</Table.Td>
+                        <Table.Td xs={4}>col 3</Table.Td>
+                    </Table.Tr>
+                    <Table.Tr color="success">
+                        <Table.Td xs={4}>
+                            contextual
+                        </Table.Td>
+                        <Table.Td xs={4}>success</Table.Td>
+                        <Table.Td xs={4}>color</Table.Td>
+                    </Table.Tr>
+                    <Table.Tr>
+                        <Table.Td xs={4}>col 1</Table.Td>
+                        <Table.Td xs={4}>col 2</Table.Td>
+                        <Table.Td xs={4}>col 3</Table.Td>
+                    </Table.Tr>
+                </Table.TBody>`,
+        )
 
         return (
             <PageContent>
@@ -85,15 +129,12 @@ class TableView extends React.Component {
                                             <Table.Td xs={4}>col 2</Table.Td>
                                             <Table.Td xs={4}>col 3</Table.Td>
                                         </Table.Tr>
-                                        <Table.Tr>
-                                            <Table.Td xs={4}>col 1</Table.Td>
-                                            <Table.Td xs={4}>col 2</Table.Td>
-                                            <Table.Td xs={4}>col 3</Table.Td>
-                                        </Table.Tr>
-                                        <Table.Tr>
-                                            <Table.Td xs={4}>col 1</Table.Td>
-                                            <Table.Td xs={4}>col 2</Table.Td>
-                                            <Table.Td xs={4}>col 3</Table.Td>
+                                        <Table.Tr color="success">
+                                            <Table.Td xs={4}>
+                                                contextual
+                                            </Table.Td>
+                                            <Table.Td xs={4}>success</Table.Td>
+                                            <Table.Td xs={4}>color</Table.Td>
                                         </Table.Tr>
                                         <Table.Tr>
                                             <Table.Td xs={4}>col 1</Table.Td>

@@ -222,7 +222,9 @@ BreadcrumbsItem.propTypes = {
     href: PropTypes.string,
 }
 
-BreadcrumbsItem.defaultProps = {}
+BreadcrumbsItem.defaultProps = {
+    href: '',
+}
 
 export class Actions extends React.Component {
     render() {

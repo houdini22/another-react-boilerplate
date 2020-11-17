@@ -53,10 +53,15 @@ class TBody extends React.Component {
 
 class Tr extends React.Component {
     render() {
-        const { children, ...props } = this.props
+        const { children, color, ...props } = this.props
 
         return (
-            <Row {...props} className={cx('component-table__tr')}>
+            <Row
+                {...props}
+                className={cx('component-table__tr', {
+                    [`component-table__tr--color-${color}`]: color,
+                })}
+            >
                 {children}
             </Row>
         )

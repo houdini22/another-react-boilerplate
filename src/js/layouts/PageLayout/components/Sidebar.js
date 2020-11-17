@@ -106,7 +106,11 @@ class SidebarBase extends React.Component {
                                 <div>
                                     {!isLoggedIn && [
                                         !loginError ? (
-                                            <Alert color="warning" outline>
+                                            <Alert
+                                                color="warning"
+                                                outline
+                                                key="warning"
+                                            >
                                                 <div
                                                     className={cx(
                                                         'text-center',
@@ -117,7 +121,11 @@ class SidebarBase extends React.Component {
                                             </Alert>
                                         ) : null,
                                         loginError ? (
-                                            <Alert color="danger" outline>
+                                            <Alert
+                                                color="danger"
+                                                outline
+                                                key="danger"
+                                            >
                                                 <div
                                                     className={cx(
                                                         'text-center',
@@ -130,7 +138,11 @@ class SidebarBase extends React.Component {
                                         <LoginFormContainer />,
                                     ]}
                                     {isLoggedIn && (
-                                        <Alert color="success" outline>
+                                        <Alert
+                                            color="success"
+                                            outline
+                                            key="success"
+                                        >
                                             <div className={cx('text-center')}>
                                                 Logged as:
                                                 <br />
