@@ -182,6 +182,22 @@ class TooltipForm extends React.Component {
                                         component={FormField}
                                     />
                                 </Col>
+                                <Col xs={12}>
+                                    <Field
+                                        name="dummy1"
+                                        type="hidden"
+                                        component={FormField}
+                                        label={'onOpen'}
+                                    />
+                                </Col>
+                                <Col xs={12}>
+                                    <Field
+                                        name="dummy2"
+                                        type="hidden"
+                                        component={FormField}
+                                        label={'onClose'}
+                                    />
+                                </Col>
                             </Row>
                         </Tabs.Content>
                     </Tabs.Tab>

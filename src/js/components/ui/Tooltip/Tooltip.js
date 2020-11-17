@@ -101,13 +101,20 @@ class Tooltip extends React.Component {
     }
 
     showTooltip() {
+        const { onOpen } = this.props
+
         this.setState({ show: true }, () => {
             this.calculateDimensions()
+            onOpen()
         })
     }
 
     hideTooltip() {
-        this.setState({ show: false })
+        const { onClose } = this.props
+
+        this.setState({ show: false }, () => {
+            onClose()
+        })
     }
 
     render() {
@@ -132,6 +139,7 @@ class Tooltip extends React.Component {
                     [`component-tooltip--outline`]: outline,
                     [`component-tooltip--size-${size}`]: size,
                     [`component-tooltip--size-${placement}`]: placement,
+                    [`component-tooltip--is-open`]: show,
                 })}
                 {...props}
             >
@@ -190,12 +198,16 @@ Tooltip.propTypes = {
     placement: PropTypes.string,
     tooltip: PropTypes.any,
     trigger: PropTypes.string,
+    onOpen: PropTypes.func,
+    onClose: PropTypes.func,
 }
 
 Tooltip.defaultProps = {
     size: 'md',
     placement: 'top',
     trigger: 'hover',
+    onOpen: () => null,
+    onClose: () => null,
 }
 
 export { Tooltip }
