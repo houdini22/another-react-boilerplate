@@ -1,0 +1,96 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "forceAllTransforms": true,
+        "ignoreBrowserslistConfig": false,
+        "modules": false,
+        "debug": false,
+        "targets": {
+          "browsers": [
+            "> 1%",
+            "iOS >= 8.0",
+            "Android >= 4.4",
+            "Chrome >= 30",
+            "Safari >= 6",
+            "Firefox ESR",
+            "Opera 12.1"
+          ],
+          "node": "8.10"
+        }
+      }
+    ],
+    // webpack understands the native import syntax, and uses it for tree shaking
+    "@babel/preset-react"
+    // Transpile React components to JavaScript
+  ],
+  "plugins": [
+    "react-hot-loader/babel",
+    // Enables React code to work with HMR.
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./src"
+        ]
+      }
+    ],
+    // Stage 0
+    "@babel/plugin-proposal-function-bind",
+    // Stage 1
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-proposal-logical-assignment-operators",
+    [
+      "@babel/plugin-proposal-optional-chaining",
+      {
+        "loose": false
+      }
+    ],
+    [
+      "@babel/plugin-proposal-pipeline-operator",
+      {
+        "proposal": "minimal"
+      }
+    ],
+    [
+      "@babel/plugin-proposal-nullish-coalescing-operator",
+      {
+        "loose": false
+      }
+    ],
+    "@babel/plugin-proposal-do-expressions",
+    // Stage 2
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ],
+    "@babel/plugin-proposal-function-sent",
+    "@babel/plugin-proposal-export-namespace-from",
+    "@babel/plugin-proposal-numeric-separator",
+    "@babel/plugin-proposal-throw-expressions",
+    // Stage 3
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-syntax-import-meta",
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": false
+      }
+    ],
+    "@babel/plugin-proposal-json-strings"
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        "@babel/preset-env",
+        "@babel/preset-react"
+      ],
+      "plugins": [
+        "@babel/plugin-transform-arrow-functions"
+      ]
+    }
+  }
+}

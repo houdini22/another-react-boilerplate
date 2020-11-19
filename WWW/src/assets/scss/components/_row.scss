@@ -1,0 +1,21 @@
+@import '../variables';
+
+.component-row {
+    &:not(.builder) {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+        padding-right: #{$COMPONENT_MARGIN_SINGLE / 2};
+        padding-left: #{$COMPONENT_MARGIN_SINGLE / 2};
+        margin-bottom: #{$COMPONENT_MARGIN_SINGLE / 2};
+    }
+    &.builder span {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+}

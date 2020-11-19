@@ -1,0 +1,155 @@
+//colors
+
+$logoBackgroundColor: lighten(#37474f, 10%);
+$SIDEBAR_BACKGROUND_COLOR: #263238;
+
+$color1: #50514f;
+$color10: #f1f4f6;
+
+$default: #d6d6d6;
+$primary: #448aff;
+$secondary: rgb(135, 132, 158);
+$info: #00bcd4;
+$warning: #ffba57;
+$success: #9ccc65;
+$danger: #ff5252;
+
+$defaultTextColor: #111;
+$DEFAULT_FONT_SIZE: 13px;
+
+$default_DARKEN_X1: darken($default, 10);
+$primary_DARKEN_X1: darken($primary, 10);
+$secondary_DARKEN_X1: lighten($secondary, 10);
+$info_DARKEN_X1: darken($info, 10);
+$warning_DARKEN_X1: darken($warning, 10);
+$success_DARKEN_X1: darken($success, 10);
+$danger_DARKEN_X1: darken($danger, 10);
+
+$default_DARKEN_X2: darken($default, 20);
+$primary_DARKEN_X2: darken($primary, 20);
+$secondary_DARKEN_X2: lighten($secondary, 20);
+$info_DARKEN_X2: darken($info, 20);
+$warning_DARKEN_X2: darken($warning, 20);
+$success_DARKEN_X2: darken($success, 20);
+$danger_DARKEN_X2: darken($danger, 20);
+
+$default_DARKEN_X3: darken($default, 20);
+$primary_DARKEN_X3: darken($primary, 30);
+$secondary_DARKEN_X3: lighten($secondary, 30);
+$info_DARKEN_X3: darken($info, 30);
+$warning_DARKEN_X3: darken($warning, 30);
+$success_DARKEN_X3: darken($success, 30);
+$danger_DARKEN_X3: darken($danger, 30);
+
+$default_LIGHTEN_X3: lighten($default, 30);
+$primary_LIGHTEN_X3: lighten($primary, 30);
+$secondary_LIGHTEN_X3: lighten($secondary, 30);
+$info_LIGHTEN_X3: lighten($info, 30);
+$warning_LIGHTEN_X3: lighten($warning, 30);
+$success_LIGHTEN_X3: lighten($success, 30);
+$danger_LIGHTEN_X3: lighten($danger, 30);
+
+$default_LIGHTEN_X2: lighten($default, 20);
+$primary_LIGHTEN_X2: lighten($primary, 20);
+$secondary_LIGHTEN_X2: lighten($secondary, 20);
+$info_LIGHTEN_X2: lighten($info, 20);
+$warning_LIGHTEN_X2: lighten($warning, 20);
+$success_LIGHTEN_X2: lighten($success, 20);
+$danger_LIGHTEN_X2: lighten($danger, 20);
+
+$default_LIGHTEN_X1: lighten($default, 10);
+$primary_LIGHTEN_X1: lighten($default, 10);
+$primary_LIGHTEN_X1: lighten($primary, 10);
+$secondary_LIGHTEN_X1: lighten($secondary, 10);
+$info_LIGHTEN_X1: lighten($info, 10);
+$warning_LIGHTEN_X1: lighten($warning, 10);
+$success_LIGHTEN_X1: lighten($success, 10);
+$danger_LIGHTEN_X1: lighten($danger, 10);
+
+$default_text_color: #505050;
+$primary_text_color: #fff;
+$secondary_text_color: #222;
+$info_text_color: #fff;
+$warning_text_color: #fff;
+$success_text_color: #fff;
+$danger_text_color: #fff;
+
+$default_text_color_DARKEN_X1: darken(#fff, 10%);
+$primary_text_color_DARKEN_X1: darken(#fff, 10%);
+$secondary_text_color_DARKEN_X1: darken(#222, 10%);
+$info_text_color_DARKEN_X1: darken(#fff, 10%);
+$warning_text_color_DARKEN_X1: darken(#222, 10%);
+$success_text_color_DARKEN_X1: darken(#fff, 10%);
+$danger_text_color_DARKEN_X1: darken(#fff, 10%);
+
+$default_text_color_DARKEN_X2: darken(#fff, 20%);
+$primary_text_color_DARKEN_X2: darken(#fff, 20%);
+$secondary_text_color_DARKEN_X2: darken(#222, 20%);
+$info_text_color_DARKEN_X2: darken(#fff, 20%);
+$warning_text_color_DARKEN_X2: darken(#222, 20%);
+$success_text_color_DARKEN_X2: darken(#fff, 20%);
+$danger_text_color_DARKEN_X2: darken(#fff, 20%);
+
+$default_text_color_DARKEN_X3: darken(#fff, 30%);
+$primary_text_color_DARKEN_X3: darken(#fff, 30%);
+$secondary_text_color_DARKEN_X3: darken(#222, 30%);
+$info_text_color_DARKEN_X3: darken(#fff, 30%);
+$warning_text_color_DARKEN_X3: darken(#222, 30%);
+$success_text_color_DARKEN_X3: darken(#fff, 30%);
+$danger_text_color_DARKEN_X3: darken(#fff, 30%);
+
+$SIDEBAR_DESKTOP_WIDTH: 280px;
+$FOOTER_DESKTOP_HEIGHT: 44px;
+$HEADER_DESKTOP_HEIGHT: 60px;
+
+$COMPONENT_BACKGROUND: #fff;
+$COMPONENT_BACKGROUND_DARKER: #fcfcfc;
+$COMPONENT_BORDER: 1px solid rgba(0, 0, 0, 0.125);
+$COMPONENT_BORDER_RADIUS: 5px;
+$COMPONENT_MARGIN_SINGLE: 20px;
+$COMPONENT_MARGIN: 0 0 #{$COMPONENT_MARGIN_SINGLE} 0;
+$COMPONENT_PADDING_SINGLE: 15px;
+$COMPONENT_PADDING: $COMPONENT_PADDING_SINGLE;
+
+$COMPONENT_ELEMENT_PADDING_LG: 0.625rem 1.5rem;
+$COMPONENT_ELEMENT_MARGIN_LG: 0.65em;
+$COMPONENT_ELEMENT_FONT_SIZE_LG: 1.15em;
+$COMPONENT_FONT_SIZE_LG: 1.35em;
+$COMPONENT_PADDING_LG: 0.4em 0.7em;
+
+$COMPONENT_ELEMENT_PADDING_MD: 0.35em 1.1em;
+$COMPONENT_ELEMENT_FONT_SIZE_MD: 1em;
+$COMPONENT_ELEMENT_MARGIN_MD: 1em;
+$COMPONENT_FONT_SIZE_MD: 1em;
+$COMPONENT_PADDING_MD: 0.5em 0.8em;
+
+$COMPONENT_ELEMENT_PADDING_SM: 0.25em 0.75em;
+$COMPONENT_ELEMENT_FONT_SIZE_SM: 0.75em;
+$COMPONENT_ELEMENT_MARGIN_SM: 0.75em;
+$COMPONENT_FONT_SIZE_SM: 0.6875rem;
+$COMPONENT_PADDING_SM: 0.4em 0.7em;
+
+// TABS
+$COMPONENT_TABS_TRIGGER_BORDER_WIDTH: 4px;
+
+// BADGE
+$BADGE_PADDING_SM: 0 4px;
+$BADGE_PADDING_MD: 2px 6px;
+$BADGE_PADDING_LG: 3px 8px;
+
+$FORM_LABEL_FONT_SIZE: 15px;
+
+$mainBackground: #f5f5f5;
+
+$grid-breakpoints: (
+    // Extra small screen / phone
+    xs: 0,
+    // Small screen / phone
+    sm: 768px,
+    // Medium screen / tablet
+    md: 992px,
+    // Large screen / desktop
+    lg: 1200px,
+    // Extra large screen / wide desktop
+    xl: 1400px
+);

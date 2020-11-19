@@ -1,0 +1,83 @@
+@import '../variables';
+
+.component-button-group {
+    display: inline-block;
+    overflow: hidden;
+    -webkit-border-radius: 0.3em;
+    -moz-border-radius: 0.3em;
+    border-radius: 0.3em;
+    position: relative;
+
+    .component-button {
+        border-radius: 0;
+
+        &:first-child {
+            border-top-left-radius: 0.3em;
+            border-bottom-left-radius: 0.3em;
+        }
+
+        &:last-child {
+            border-top-right-radius: 0.3em;
+            border-bottom-right-radius: 0.3em;
+        }
+
+        &:not(:first-child):not(:last-child) {
+            border-left: 0;
+            border-right: 0;
+        }
+
+        -webkit-box-shadow: none !important;
+        -moz-box-shadow: none !important;
+        box-shadow: none !important;
+    }
+
+    &:not(.component-button-group--outline) {
+        -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.18),
+            0 2px 4px rgba(0, 0, 0, 0.21);
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.18), 0 2px 4px rgba(0, 0, 0, 0.21);
+        &:hover {
+            -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15),
+                0 3px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.15),
+                0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    &.component-button-group--block {
+        display: flex;
+
+        .component-button {
+            flex: 1;
+        }
+    }
+
+    &.component-button-group--rounded {
+        border-radius: 100px;
+
+        .component-button {
+            border-radius: 0;
+
+            &:first-child {
+                border-top-left-radius: 100px;
+                border-bottom-left-radius: 100px;
+            }
+
+            &:last-child {
+                border-top-right-radius: 100px;
+                border-bottom-right-radius: 100px;
+            }
+        }
+    }
+
+    &.component-button-group--roundless {
+        border-radius: 0;
+
+        .component-button {
+            border-radius: 0;
+        }
+    }
+
+    &.component-button-group--outline {
+        overflow: visible;
+    }
+}

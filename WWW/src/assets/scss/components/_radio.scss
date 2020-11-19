@@ -1,0 +1,40 @@
+@import '../variables';
+
+.component-radio {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    border: $COMPONENT_BORDER;
+    line-height: 24px;
+    text-align: center;
+    font-size: 20px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    padding: 0;
+    color: darken($color1, 20);
+    vertical-align: middle;
+
+    &.component-radio--is-disabled {
+        background: lighten($color1, 50);
+        cursor: not-allowed;
+        .component-radio__dot {
+            background-color: lighten($color1, 20);
+        }
+    }
+
+    .component-radio__input {
+        display: none;
+    }
+
+    .component-radio__dot {
+        display: inline-block;
+        vertical-align: middle;
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background-color: #000;
+    }
+}
