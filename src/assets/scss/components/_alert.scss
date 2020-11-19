@@ -264,7 +264,7 @@
     }
 
     &.component-alert--with-icon {
-        padding-left: calc(45px + 1.25em);
+        padding-left: calc(45px + 1.25em) !important;
 
         &.component-alert--icon-highlighted {
             padding-left: calc(60px + 1.25em);

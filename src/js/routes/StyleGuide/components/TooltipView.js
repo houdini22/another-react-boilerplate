@@ -11,7 +11,6 @@ class TooltipView extends React.Component {
         super(props)
         this.state = {
             options: {
-                color: 'default',
                 outline: false,
                 size: 'md',
                 tooltip:

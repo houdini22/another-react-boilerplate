@@ -328,9 +328,9 @@
                 -webkit-order: 0;
                 -ms-flex-order: 0;
                 order: 0;
-                -webkit-flex: 0 1 auto;
-                -ms-flex: 0 1 auto;
-                flex: 0 1 auto;
+                -webkit-flex: 1 1 auto;
+                -ms-flex: 1 1 auto;
+                flex: 1 1 auto;
                 -webkit-align-self: auto;
                 -ms-flex-item-align: auto;
                 align-self: auto;
@@ -351,8 +351,9 @@
 
                 & > .layout__header__bar__right__element {
                     &.layout__header__bar__right__element--notifications {
-                        &
-                            > .layout__header__bar__right__element--notifications__button {
+                        display: inline-block;
+
+                        & > .layout__header__bar__right__element--notifications__button {
                             cursor: pointer;
                             width: 45px;
                             text-align: center;
@@ -366,8 +367,7 @@
                             }
                         }
 
-                        &
-                            > .layout__header__bar__right__element--notifications__expanded {
+                        & > .layout__header__bar__right__element--notifications__expanded {
                             text-align: left;
                             position: fixed;
                             right: 10px;

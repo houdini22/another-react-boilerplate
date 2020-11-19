@@ -65,29 +65,65 @@ class Tooltip extends React.Component {
 
             switch (placement) {
                 case 'top-start':
-                    return top - 40
+                    return top - 40 + scrollTop
                 case 'top':
-                    return top - 40
+                    return top - 40 + scrollTop
                 case 'top-end':
-                    return top - 40
+                    return top - 40 + scrollTop
                 case 'bottom-start':
-                    return top + elementHeight + 10
+                    return top + elementHeight + 10 + scrollTop
                 case 'bottom':
-                    return top + elementHeight + 10
+                    return top + elementHeight + 10 + scrollTop
                 case 'bottom-end':
-                    return top + elementHeight + 10
+                    return top + elementHeight + 10 + scrollTop
                 case 'right-start':
-                    return top + elementHeight / 2 - 32
+                    return (
+                        top +
+                        elementHeight / 2 -
+                        tooltipHeight / 2 +
+                        scrollTop -
+                        18
+                    )
                 case 'right':
-                    return top + elementHeight / 2 - 17
+                    return (
+                        top +
+                        elementHeight / 2 -
+                        tooltipHeight / 2 +
+                        scrollTop -
+                        6
+                    )
                 case 'right-end':
-                    return top + elementHeight / 2 - 2
+                    return (
+                        top +
+                        elementHeight / 2 -
+                        tooltipHeight / 2 +
+                        scrollTop +
+                        6
+                    )
                 case 'left-start':
-                    return top + elementHeight / 2 - 32
+                    return (
+                        top +
+                        elementHeight / 2 -
+                        tooltipHeight / 2 +
+                        scrollTop -
+                        18
+                    )
                 case 'left':
-                    return top + elementHeight / 2 - 17
+                    return (
+                        top +
+                        elementHeight / 2 -
+                        tooltipHeight / 2 +
+                        scrollTop -
+                        6
+                    )
                 case 'left-end':
-                    return top + elementHeight / 2 - 2
+                    return (
+                        top +
+                        elementHeight / 2 -
+                        tooltipHeight / 2 +
+                        scrollTop +
+                        6
+                    )
             }
         }
         return 0
