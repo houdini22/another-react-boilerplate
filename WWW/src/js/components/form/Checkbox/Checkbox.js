@@ -42,15 +42,6 @@ class Checkbox extends React.Component {
                             }}
                         </Transition>
                     )}
-                    {!checked && (
-                        <Transition timeout={0}>
-                            {() => (
-                                <span className={cx('animation--fade-out')}>
-                                    <CheckIcon />
-                                </span>
-                            )}
-                        </Transition>
-                    )}
                 </span>
 
                 <input
