@@ -14,7 +14,7 @@ class Checkbox extends React.Component {
         const { onChange, disabled } = this.props
 
         if (_.isFunction(onChange) && !disabled) {
-            this.el.click();
+            this.el.click()
             onChange(this.el.checked)
         }
     }
@@ -35,9 +35,7 @@ class Checkbox extends React.Component {
                         <Transition timeout={0}>
                             {() => {
                                 return (
-                                    <span
-                                        className={cx('animation--fade-in')}
-                                    >
+                                    <span className={cx('animation--fade-in')}>
                                         <CheckIcon />
                                     </span>
                                 )
@@ -60,7 +58,7 @@ class Checkbox extends React.Component {
                     disabled={disabled}
                     type="checkbox"
                     className={cx('component-checkbox__input')}
-                    ref={el => this.el = el}
+                    ref={(el) => (this.el = el)}
                 />
             </div>
         )

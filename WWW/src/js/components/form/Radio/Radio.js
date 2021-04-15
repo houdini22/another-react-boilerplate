@@ -24,7 +24,9 @@ class Radio extends React.Component {
         const { onChange, disabled } = this.props
 
         if (_.isFunction(onChange) && !disabled) {
-            onChange(!checked)
+            this.setState({ checked: !checked }, () => {
+                onChange(!checked)
+            })
         }
     }
 
