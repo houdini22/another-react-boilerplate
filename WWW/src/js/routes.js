@@ -34,6 +34,7 @@ import {
     PagesView,
     NotificationsView,
     TooltipView,
+    NewModalView,
 } from './routes/StyleGuide'
 
 import { userIsAuthenticated } from './modules/auth'
@@ -72,6 +73,7 @@ const AppContainer = () => (
                 component={LoadingOverlayView}
             />
             <PageLayout path="/components/modal" component={ModalView} />
+            <PageLayout path="/components/newmodal" component={NewModalView} />
             <PageLayout
                 path="/components/page-header"
                 component={PageHeaderView}

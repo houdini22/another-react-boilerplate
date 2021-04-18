@@ -156,6 +156,13 @@ export const navigation = [
             },
             {
                 type: 'link',
+                href: '/components/newmodal',
+                caption: 'NewModal',
+                icon: <ModalIcon />,
+                componentType: 'newmodal',
+            },
+            {
+                type: 'link',
                 href: '/components/notifications',
                 caption: 'Notifications',
                 icon: <IoIosNotificationsOutline />,

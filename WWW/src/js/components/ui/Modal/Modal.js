@@ -8,10 +8,6 @@ import styles from '../../../../assets/scss/components/_modal.scss'
 const cx = classNames.bind(styles)
 
 class Modal extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         const {
             title,

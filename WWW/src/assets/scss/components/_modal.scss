@@ -28,6 +28,15 @@
             }
         }
 
+        &.component-modal-container__modal--color-secondary {
+            .component-modal-container__modal__content {
+                .component-modal-container__modal__content__title {
+                    background-color: $secondary;
+                    color: #fff;
+                }
+            }
+        }
+
         &.component-modal-container__modal--color-info {
             .component-modal-container__modal__content {
                 .component-modal-container__modal__content__title {
@@ -66,16 +75,40 @@
 
         &.component-modal-container__modal--size-xs {
             width: 300px;
+            .component-modal-container__modal__content {
+                .component-modal-container__modal__content__title {
+                    font-size: 1.1em;
+                }
+            }
+        }
+
+        &.component-modal-container__modal--size-sm {
+            width: 500px;
+            .component-modal-container__modal__content {
+                .component-modal-container__modal__content__title {
+                    font-size: 1.1em;
+                }
+            }
         }
 
         &.component-modal-container__modal--size-lg {
             width: 900px;
+            .component-modal-container__modal__content {
+                .component-modal-container__modal__content__title {
+                    font-size: 1.3em;
+                }
+            }
         }
 
         &.component-modal-container__modal--size-full {
             width: 94%;
             margin-left: 3%;
             margin-right: 3%;
+            .component-modal-container__modal__content {
+                .component-modal-container__modal__content__title {
+                    font-size: 1.3em;
+                }
+            }
         }
 
         &.component-modal-container__modal--placement-center {
@@ -173,8 +206,9 @@
             border: 1px solid transparent;
 
             .component-modal-container__modal__content__title {
-                padding: $COMPONENT_PADDING;
+                padding: $COMPONENT_PADDING_MD;
                 position: relative;
+                font-size: 1.2em;
 
                 .component-modal-container__modal__content__title__title {
                     margin: 0;

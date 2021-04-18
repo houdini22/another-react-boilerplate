@@ -66,6 +66,12 @@ import {
     ItemContent as ListItemContent,
 } from './ui/List'
 import { Tooltip } from './ui/Tooltip'
+import {
+    NewModalContainer,
+    NewModalBody,
+    NewModalFooter,
+    NewModalHeader,
+} from './ui/NewModal'
 
 const Tabs = {
     Container: TabContainer,
@@ -122,6 +128,13 @@ const List = {
     ItemContent: ListItemContent,
 }
 
+const NewModal = {
+    Container: NewModalContainer,
+    Body: NewModalBody,
+    Header: NewModalHeader,
+    Footer: NewModalFooter,
+}
+
 export {
     LoadingOverlay,
     Button,
@@ -154,6 +167,7 @@ export {
     Table,
     List,
     Tooltip,
+    NewModal,
 }
 
 export default {
@@ -188,4 +202,5 @@ export default {
     Table,
     List,
     Tooltip,
+    NewModal,
 }

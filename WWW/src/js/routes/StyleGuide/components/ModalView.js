@@ -19,7 +19,7 @@ class ModalView extends React.Component {
 
         return (
             <PageContent>
-                <ComponentsPageHeader title="Modal" component="Modal" />
+                <ComponentsPageHeader title="NewModal" component="NewModal" />
                 <Section>
                     <Row>
                         <Col xs={3}>
@@ -34,7 +34,8 @@ class ModalView extends React.Component {
                                                         openModal({
                                                             title: (
                                                                 <div>
-                                                                    Basic Modal.
+                                                                    Basic
+                                                                    NewModal.
                                                                 </div>
                                                             ),
                                                             body: (
@@ -82,7 +83,7 @@ class ModalView extends React.Component {
     {({openModal}) => (
         <Button
             onClick={() => openModal({
-                title: (<div>Basic Modal.</div>),
+                title: (<div>Basic NewModal.</div>),
                 body: (
                     <div>
                         <p>Your content...</p>
@@ -117,7 +118,8 @@ class ModalView extends React.Component {
                                                         openModal({
                                                             title: (
                                                                 <div>
-                                                                    Basic Modal.
+                                                                    Basic
+                                                                    NewModal.
                                                                 </div>
                                                             ),
                                                             body: (
@@ -158,7 +160,7 @@ class ModalView extends React.Component {
     {({openModal}) => (
         <Button
             onClick={() => openModal({
-                title: (<div>Basic Modal.</div>),
+                title: (<div>Basic NewModal.</div>),
                 body: (
                     <div>
                         <p>Your content...</p>
@@ -194,7 +196,8 @@ class ModalView extends React.Component {
                                                         openModal({
                                                             title: (
                                                                 <div>
-                                                                    Basic Modal.
+                                                                    Basic
+                                                                    NewModal.
                                                                 </div>
                                                             ),
                                                             body: (
@@ -235,7 +238,7 @@ class ModalView extends React.Component {
     {({openModal}) => (
         <Button
             onClick={() => openModal({
-                title: (<div>Basic Modal.</div>),
+                title: (<div>Basic NewModal.</div>),
                 body: (
                     <div>
                         <p>Your content...</p>
@@ -271,7 +274,8 @@ class ModalView extends React.Component {
                                                         openModal({
                                                             title: (
                                                                 <div>
-                                                                    Basic Modal.
+                                                                    Basic
+                                                                    NewModal.
                                                                 </div>
                                                             ),
                                                             body: (
@@ -312,7 +316,7 @@ class ModalView extends React.Component {
     {({openModal}) => (
         <Button
             onClick={() => openModal({
-                title: (<div>Basic Modal.</div>),
+                title: (<div>Basic NewModal.</div>),
                 body: (
                     <div>
                         <p>Your content...</p>
@@ -348,7 +352,8 @@ class ModalView extends React.Component {
                                                         openModal({
                                                             title: (
                                                                 <div>
-                                                                    Basic Modal.
+                                                                    Basic
+                                                                    NewModal.
                                                                 </div>
                                                             ),
                                                             body: (
@@ -389,7 +394,7 @@ class ModalView extends React.Component {
     {({openModal}) => (
         <Button
             onClick={() => openModal({
-                title: (<div>Basic Modal.</div>),
+                title: (<div>Basic NewModal.</div>),
                 body: (
                     <div>
                         <p>Your content...</p>
@@ -426,7 +431,8 @@ class ModalView extends React.Component {
                                                         openModal({
                                                             title: (
                                                                 <div>
-                                                                    Basic Modal.
+                                                                    Basic
+                                                                    NewModal.
                                                                 </div>
                                                             ),
                                                             body: (
@@ -467,7 +473,7 @@ class ModalView extends React.Component {
     {({openModal}) => (
         <Button
             onClick={() => openModal({
-                title: (<div>Basic Modal.</div>),
+                title: (<div>Basic NewModal.</div>),
                 body: (
                     <div>
                         <p>Your content...</p>
@@ -504,7 +510,8 @@ class ModalView extends React.Component {
                                                         openModal({
                                                             title: (
                                                                 <div>
-                                                                    Basic Modal.
+                                                                    Basic
+                                                                    NewModal.
                                                                 </div>
                                                             ),
                                                             body: (
@@ -545,7 +552,7 @@ class ModalView extends React.Component {
     {({openModal}) => (
         <Button
             onClick={() => openModal({
-                title: (<div>Basic Modal.</div>),
+                title: (<div>Basic NewModal.</div>),
                 body: (
                     <div>
                         <p>Your content...</p>
@@ -581,7 +588,8 @@ class ModalView extends React.Component {
                                                         openModal({
                                                             title: (
                                                                 <div>
-                                                                    Basic Modal.
+                                                                    Basic
+                                                                    NewModal.
                                                                 </div>
                                                             ),
                                                             body: (
@@ -622,7 +630,7 @@ class ModalView extends React.Component {
     {({openModal}) => (
         <Button
             onClick={() => openModal({
-                title: (<div>Basic Modal.</div>),
+                title: (<div>Basic NewModal.</div>),
                 body: (
                     <div>
                         <p>Your content...</p>
@@ -659,7 +667,8 @@ class ModalView extends React.Component {
                                                         openModal({
                                                             title: (
                                                                 <div>
-                                                                    Basic Modal.
+                                                                    Basic
+                                                                    NewModal.
                                                                 </div>
                                                             ),
                                                             body: (
@@ -700,7 +709,7 @@ class ModalView extends React.Component {
     {({openModal}) => (
         <Button
             onClick={() => openModal({
-                title: (<div>Basic Modal.</div>),
+                title: (<div>Basic NewModal.</div>),
                 body: (
                     <div>
                         <p>Your content...</p>
@@ -736,7 +745,8 @@ class ModalView extends React.Component {
                                                         openModal({
                                                             title: (
                                                                 <div>
-                                                                    Basic Modal.
+                                                                    Basic
+                                                                    NewModal.
                                                                 </div>
                                                             ),
                                                             body: (
@@ -777,7 +787,7 @@ class ModalView extends React.Component {
     {({openModal}) => (
         <Button
             onClick={() => openModal({
-                title: (<div>Basic Modal.</div>),
+                title: (<div>Basic NewModal.</div>),
                 body: (
                     <div>
                         <p>Your content...</p>
@@ -812,7 +822,8 @@ class ModalView extends React.Component {
                                                         openModal({
                                                             title: (
                                                                 <div>
-                                                                    Basic Modal.
+                                                                    Basic
+                                                                    NewModal.
                                                                 </div>
                                                             ),
                                                             body: (
@@ -853,7 +864,7 @@ class ModalView extends React.Component {
     {({openModal}) => (
         <Button
             onClick={() => openModal({
-                title: (<div>Basic Modal.</div>),
+                title: (<div>Basic NewModal.</div>),
                 body: (
                     <div>
                         <p>Your content...</p>
@@ -889,7 +900,8 @@ class ModalView extends React.Component {
                                                         openModal({
                                                             title: (
                                                                 <div>
-                                                                    Basic Modal.
+                                                                    Basic
+                                                                    NewModal.
                                                                 </div>
                                                             ),
                                                             body: (
@@ -930,7 +942,7 @@ class ModalView extends React.Component {
     {({openModal}) => (
         <Button
             onClick={() => openModal({
-                title: (<div>Basic Modal.</div>),
+                title: (<div>Basic NewModal.</div>),
                 body: (
                     <div>
                         <p>Your content...</p>
@@ -966,7 +978,8 @@ class ModalView extends React.Component {
                                                         openModal({
                                                             title: (
                                                                 <div>
-                                                                    Basic Modal.
+                                                                    Basic
+                                                                    NewModal.
                                                                 </div>
                                                             ),
                                                             body: (
@@ -1007,7 +1020,7 @@ class ModalView extends React.Component {
     {({openModal}) => (
         <Button
             onClick={() => openModal({
-                title: (<div>Basic Modal.</div>),
+                title: (<div>Basic NewModal.</div>),
                 body: (
                     <div>
                         <p>Your content...</p>
