@@ -8,6 +8,8 @@ class ModalForm extends React.Component {
     }
 
     render() {
+        const { options } = this.props
+
         return (
             <form>
                 <Field
@@ -138,6 +140,36 @@ class ModalForm extends React.Component {
                                     />
                                 </Col>
                             </Row>
+                        </Tabs.Content>
+                    </Tabs.Tab>
+                    <Tabs.Tab name="code">
+                        <Tabs.Trigger>Code</Tabs.Trigger>
+                        <Tabs.Content>
+                            <pre>{`
+<Modal.Container
+    visible={true}
+    color={'${options['color']}'}
+    size={'${options['size']}'}
+    animation={'${options['animation']}'}
+    placement={'${options['placement']}'}
+>
+    <Modal.Header
+        closeIcon
+        close={() => {
+            this.setState({ opened: false })
+        }}
+    >
+        Header
+    </Modal.Header>
+    <Modal.Body>
+
+    </Modal.Body>
+    <Modal.Footer>
+        <Button color='secondary'>Cancel</Button>
+        <Button color='success'>OK</Button>
+    </Modal.Footer>
+</Modal.Container>
+`}</pre>
                         </Tabs.Content>
                     </Tabs.Tab>
                 </Tabs.Container>
