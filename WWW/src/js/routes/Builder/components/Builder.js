@@ -6,7 +6,6 @@ import { Button, Col, Row, Tabs } from '../../../components/index'
 import styles from '../../../../assets/scss/_helpers.scss'
 import styles2 from '../../../../assets/scss/components/_builder.scss'
 import { ColPropsFormContainer } from '../forms/ColPropsFormContainer'
-import { ModalManager } from '../../../containers/Modal'
 import { connect } from 'react-redux'
 import { submit } from 'redux-form'
 import { FORM_NAME } from '../forms/ColPropsFormContainer'
@@ -32,7 +31,8 @@ class BaseRowComponent extends React.Component {
         } = this.props
 
         return (
-            <ModalManager>
+            <></>
+            /*<ModalManager>
                 {({ openModal }) => (
                     <Row
                         {...props}
@@ -81,7 +81,7 @@ class BaseRowComponent extends React.Component {
                         {renderComponents(components)}
                     </Row>
                 )}
-            </ModalManager>
+            </ModalManager>*/
         )
     }
 }

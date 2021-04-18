@@ -1,9 +1,5 @@
 import React from 'react'
-import { actions as modalActions } from './modal'
 import { uuid } from '../utils/uuid'
-import { ConnectionErrorModal } from '../components/modals/ConnectionErrorModal'
-
-const { openModal, closeModal } = modalActions
 
 // constants
 export const CONNECTION_ERROR_MODAL_VISIBLE =
@@ -16,18 +12,6 @@ const setConnectionErrorModalVisible = (value) => (dispatch) => {
     dispatch({ type: CONNECTION_ERROR_MODAL_VISIBLE, payload: value })
 
     const id = uuid()
-
-    dispatch(
-        openModal({
-            id,
-            component: (
-                <ConnectionErrorModal
-                    close={() => dispatch(closeModal(id))}
-                    id={id}
-                />
-            ),
-        }),
-    )
 }
 
 const setLayoutOption = (name, value) => (dispatch) => {

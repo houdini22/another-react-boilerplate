@@ -7,26 +7,24 @@ import styles from '../../../../assets/scss/components/_modal.scss'
 
 const cx = classNames.bind(styles)
 
-class Modal extends React.Component {
+class ModalContainer extends React.Component {
     render() {
         const {
-            title,
-            body,
-            footer,
+            children,
             animation,
             color,
-            close,
-            closeIcon,
             size,
             placement,
+            visible,
         } = this.props
+
+        if (!visible) return null
 
         return (
             <div className={cx('component-modal-container')}>
                 <div
                     className={cx('component-modal-container__modal', {
-                        'animation--sweet-show':
-                            animation === 'sweet' && placement !== 'right',
+                        [`animation--${animation}`]: animation,
                         [`component-modal-container__modal--color-${color}`]: color,
                         [`component-modal-container__modal--size-${size}`]: size,
                         [`component-modal-container__modal--placement-${placement}`]: placement,
@@ -37,46 +35,7 @@ class Modal extends React.Component {
                             'component-modal-container__modal__content',
                         )}
                     >
-                        <div
-                            className={cx(
-                                'component-modal-container__modal__content__title',
-                            )}
-                        >
-                            <h2
-                                className={cx(
-                                    'component-modal-container__modal__content__title__title',
-                                )}
-                            >
-                                {_.isFunction(title) && title({ close })}
-                                {!_.isFunction(title) && title}
-                            </h2>
-                            {closeIcon && (
-                                <div
-                                    className={cx(
-                                        'component-modal-container__modal__content__title__close-icon',
-                                    )}
-                                    onClick={() => close()}
-                                >
-                                    <CloseIcon />
-                                </div>
-                            )}
-                        </div>
-                        <div
-                            className={cx(
-                                'component-modal-container__modal__content__body',
-                            )}
-                        >
-                            {_.isFunction(body) && body({ close })}
-                            {!_.isFunction(body) && body}
-                        </div>
-                        <div
-                            className={cx(
-                                'component-modal-container__modal__content__footer',
-                            )}
-                        >
-                            {_.isFunction(footer) && footer({ close })}
-                            {!_.isFunction(footer) && footer}
-                        </div>
+                        {children}
                     </div>
                 </div>
             </div>
@@ -84,7 +43,7 @@ class Modal extends React.Component {
     }
 }
 
-Modal.propTypes = {
+ModalContainer.propTypes = {
     children: PropTypes.oneOfType([
         PropTypes.element.isRequired,
         PropTypes.array.isRequired,
@@ -106,18 +65,113 @@ Modal.propTypes = {
         PropTypes.string.isRequired,
     ]),
     className: PropTypes.string,
-    id: PropTypes.string.isRequired,
     animation: PropTypes.string,
     closeIcon: PropTypes.bool,
     color: PropTypes.string,
-    close: PropTypes.func.isRequired,
     size: PropTypes.string,
     placement: PropTypes.string,
+    visible: PropTypes.bool,
 }
 
-Modal.defaultProps = {
+ModalContainer.defaultProps = {
     closeIcon: true,
 }
 
-export { Modal }
-export default { Modal }
+class ModalBody extends React.Component {
+    render() {
+        const { children, close } = this.props
+
+        return (
+            <div
+                className={cx(
+                    'component-modal-container__modal__content__body',
+                )}
+            >
+                {_.isFunction(children) && children({ close })}
+                {!_.isFunction(children) && children}
+            </div>
+        )
+    }
+}
+
+ModalBody.propTypes = {
+    children: PropTypes.oneOfType([
+        PropTypes.element.isRequired,
+        PropTypes.array.isRequired,
+        PropTypes.string.isRequired,
+    ]),
+}
+
+class ModalHeader extends React.Component {
+    render() {
+        const { children, closeIcon, close } = this.props
+
+        return (
+            <div
+                className={cx(
+                    'component-modal-container__modal__content__title',
+                )}
+            >
+                <h2
+                    className={cx(
+                        'component-modal-container__modal__content__title__title',
+                    )}
+                >
+                    {_.isFunction(children) && children({ close })}
+                    {!_.isFunction(children) && children}
+                </h2>
+                {closeIcon && (
+                    <div
+                        className={cx(
+                            'component-modal-container__modal__content__title__close-icon',
+                        )}
+                        onClick={() => close()}
+                    >
+                        <CloseIcon />
+                    </div>
+                )}
+            </div>
+        )
+    }
+}
+
+ModalHeader.propTypes = {
+    children: PropTypes.oneOfType([
+        PropTypes.element.isRequired,
+        PropTypes.array.isRequired,
+        PropTypes.string.isRequired,
+    ]),
+}
+
+class ModalFooter extends React.Component {
+    render() {
+        const { children, close } = this.props
+
+        return (
+            <div
+                className={cx(
+                    'component-modal-container__modal__content__footer',
+                )}
+            >
+                {_.isFunction(children) && children({ close })}
+                {!_.isFunction(children) && children}
+            </div>
+        )
+    }
+}
+
+ModalFooter.propTypes = {
+    children: PropTypes.oneOfType([
+        PropTypes.element.isRequired,
+        PropTypes.array.isRequired,
+        PropTypes.string.isRequired,
+    ]),
+}
+
+export { ModalContainer, ModalBody, ModalHeader, ModalFooter }
+export default {
+    ModalContainer,
+    ModalBody,
+    ModalHeader,
+    ModalFooter,
+}

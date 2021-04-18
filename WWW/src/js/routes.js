@@ -19,7 +19,6 @@ import {
     IconBoxView,
     LoadingOverlayView,
     LabelView,
-    ModalView,
     DropdownView,
     ButtonGroupView,
     PageHeaderView,
@@ -34,11 +33,10 @@ import {
     PagesView,
     NotificationsView,
     TooltipView,
-    NewModalView,
+    ModalView,
 } from './routes/StyleGuide'
 
 import { userIsAuthenticated } from './modules/auth'
-import { ModalContainer } from './containers/Modal'
 
 import { actions } from './reducers/common'
 
@@ -73,7 +71,6 @@ const AppContainer = () => (
                 component={LoadingOverlayView}
             />
             <PageLayout path="/components/modal" component={ModalView} />
-            <PageLayout path="/components/newmodal" component={NewModalView} />
             <PageLayout
                 path="/components/page-header"
                 component={PageHeaderView}
@@ -98,7 +95,6 @@ const AppContainer = () => (
             <PageLayout path="/pages" component={PagesView} />
             <PageLayout exact path="/" component={FaqView} />
         </Switch>
-        <ModalContainer />
     </Router>
 )
 

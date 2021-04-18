@@ -2,7 +2,7 @@ import React from 'react'
 import { Field } from 'redux-form'
 import { Col, FormField, Row, Tabs } from '../../../components/index'
 
-class NewModalForm extends React.Component {
+class ModalForm extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -85,6 +85,58 @@ class NewModalForm extends React.Component {
                                         component={FormField}
                                     />
                                 </Col>
+                                <Col xs={12}>
+                                    <Field
+                                        name="placement"
+                                        label="placement"
+                                        type="select"
+                                        options={[
+                                            {
+                                                label: 'default',
+                                                value: '',
+                                            },
+                                            {
+                                                label: 'center',
+                                                value: 'center',
+                                            },
+                                            {
+                                                label: 'bottom',
+                                                value: 'bottom',
+                                            },
+                                            {
+                                                label: 'right',
+                                                value: 'right',
+                                            },
+                                        ]}
+                                        component={FormField}
+                                    />
+                                </Col>
+                                <Col xs={12}>
+                                    <Field
+                                        name="animation"
+                                        label="animation"
+                                        type="select"
+                                        options={[
+                                            {
+                                                label: 'none',
+                                                value: '',
+                                            },
+                                            {
+                                                label: 'sweet-show',
+                                                value: 'sweet-show',
+                                            },
+                                            {
+                                                label: 'bounce-in-top',
+                                                value: 'bounce-in-top',
+                                            },
+                                            {
+                                                label: 'fade-in',
+                                                value: 'fade-in',
+                                            },
+                                        ]}
+                                        component={FormField}
+                                    />
+                                </Col>
                             </Row>
                         </Tabs.Content>
                     </Tabs.Tab>
@@ -94,7 +146,7 @@ class NewModalForm extends React.Component {
     }
 }
 
-NewModalForm.propTypes = {}
+ModalForm.propTypes = {}
 
-export { NewModalForm }
-export default { NewModalForm }
+export { ModalForm }
+export default { ModalForm }

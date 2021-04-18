@@ -1,15 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { PageContent } from '../../../layouts/PageLayout/components/index'
-import {
-    Button,
-    Row,
-    Col,
-    Section,
-    Alert,
-    Label,
-} from '../../../components/index'
-import { ModalManager } from '../../../containers/Modal/index'
+import { Row, Col, Section } from '../../../components/index'
 import { createPresentationTab } from '../../../utils/tabs'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 

@@ -1,6 +1,9 @@
-import { Modal } from './Modal'
-import { ConfirmModal } from './ConfirmModal'
-import { AlertModal } from './AlertModal'
+import { ModalContainer, ModalHeader, ModalBody, ModalFooter } from './Modal'
 
-export { Modal, ConfirmModal, AlertModal }
-export default { Modal, ConfirmModal, AlertModal }
+export { ModalContainer, ModalHeader, ModalBody, ModalFooter }
+export default {
+    ModalContainer,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+}

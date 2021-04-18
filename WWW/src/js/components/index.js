@@ -16,7 +16,6 @@ import { Alert } from './ui/Alert/index'
 import { ButtonGroup } from './ui/ButtonGroup'
 import { Label } from './ui/Label/index'
 import { Radio } from './form/Radio/index'
-import { Modal } from './ui/Modal/index'
 import {
     Container as PageHeaderContainer,
     Title as PageHeaderTitle,
@@ -66,12 +65,7 @@ import {
     ItemContent as ListItemContent,
 } from './ui/List'
 import { Tooltip } from './ui/Tooltip'
-import {
-    NewModalContainer,
-    NewModalBody,
-    NewModalFooter,
-    NewModalHeader,
-} from './ui/NewModal'
+import { ModalContainer, ModalBody, ModalFooter, ModalHeader } from './ui/Modal'
 
 const Tabs = {
     Container: TabContainer,
@@ -128,11 +122,11 @@ const List = {
     ItemContent: ListItemContent,
 }
 
-const NewModal = {
-    Container: NewModalContainer,
-    Body: NewModalBody,
-    Header: NewModalHeader,
-    Footer: NewModalFooter,
+const Modal = {
+    Container: ModalContainer,
+    Body: ModalBody,
+    Header: ModalHeader,
+    Footer: ModalFooter,
 }
 
 export {
@@ -167,7 +161,6 @@ export {
     Table,
     List,
     Tooltip,
-    NewModal,
 }
 
 export default {
@@ -202,5 +195,4 @@ export default {
     Table,
     List,
     Tooltip,
-    NewModal,
 }

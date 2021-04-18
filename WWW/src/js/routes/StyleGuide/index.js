@@ -9,7 +9,6 @@ import { IconBoxView } from './components/IconBoxView'
 import { LabelView } from './components/LabelView'
 import { LoadingOverlayView } from './components/LoadingOverlayView'
 import { ModalView } from './components/ModalView'
-import { NewModalView } from './components/NewModalView'
 import { TabsView } from './components/TabsView'
 import { ButtonGroupView } from './components/ButtonGroupView'
 import { PageHeaderView } from './components/PageHeaderView'
@@ -32,7 +31,6 @@ export {
     AlertView,
     LabelView,
     BadgeView,
-    ModalView,
     DropdownView,
     ButtonGroupView,
     PageHeaderView,
@@ -47,7 +45,7 @@ export {
     PagesView,
     NotificationsView,
     TooltipView,
-    NewModalView,
+    ModalView,
 }
 
 export default {
@@ -60,7 +58,6 @@ export default {
     LabelView,
     BadgeView,
     TabsView,
-    ModalView,
     DropdownView,
     ButtonGroupView,
     PageHeaderView,
@@ -74,5 +71,5 @@ export default {
     PagesView,
     NotificationsView,
     TooltipView,
-    NewModalView,
+    ModalView,
 }

@@ -326,7 +326,7 @@ const ComponentsTabs = () => {
                 </Tabs.Content>
             </Tabs.Tab>
             <Tabs.Tab name="Modal">
-                <Tabs.Trigger>NewModal</Tabs.Trigger>
+                <Tabs.Trigger>Modal</Tabs.Trigger>
                 <Tabs.Content>
                     <ModalView
                         colSize1={12}
