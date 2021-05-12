@@ -147,7 +147,7 @@ class ModalForm extends React.Component {
                         <Tabs.Content>
                             <pre>{`
 <Modal.Container
-    visible={true}
+    visible={this.state?.opened}
     color={'${options['color']}'}
     size={'${options['size']}'}
     animation={'${options['animation']}'}

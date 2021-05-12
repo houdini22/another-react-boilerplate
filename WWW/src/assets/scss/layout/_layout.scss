@@ -545,15 +545,15 @@
         margin-left: $SIDEBAR_DESKTOP_WIDTH;
         position: relative;
         display: flex;
-        height: 100%;
+        height: calc(100% - #{$HEADER_DESKTOP_HEIGHT});
         transition: margin-left 0.5s ease;
         z-index: 100;
+        margin-top: $HEADER_DESKTOP_HEIGHT;
 
         & > .layout__container__content {
             flex: 1;
             z-index: 200;
             display: flex;
-            margin-bottom: $FOOTER_DESKTOP_HEIGHT;
             transition: margin-bottom 0.5s ease;
 
             & > .layout__container__content__header {
@@ -587,7 +587,6 @@
                 z-index: 10;
                 flex: 1;
                 transition: margin-top 0.5s ease;
-                margin-top: $HEADER_DESKTOP_HEIGHT;
 
                 & > .component-section:last-child {
                     margin-bottom: $FOOTER_DESKTOP_HEIGHT;
