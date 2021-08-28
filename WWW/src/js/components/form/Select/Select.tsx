@@ -1,19 +1,17 @@
 import * as React from "react"
 import _ from 'lodash'
 
-export interface Option {
-    [index: number]: {
-        label: string;
-        value: string;
-    };
-}
+export interface OptionsFields {
+    label: string;
+    value: string;
+};
 
 interface SelectProps {
     type: string;
     placeholder: boolean | string;
     error: string;
     loading: boolean;
-    options: () => undefined | Option
+    options: () => OptionsFields[] | OptionsFields[]
 }
 
 class Select extends React.Component<SelectProps> {

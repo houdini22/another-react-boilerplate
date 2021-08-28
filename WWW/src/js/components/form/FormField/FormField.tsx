@@ -9,7 +9,7 @@ import {
     Radio,
 } from '../../index'
 import styles from '../../../../assets/scss/_inputs.scss'
-import {Option} from "../Select/Select";
+import {OptionsFields} from "../Select/Select";
 
 const cx = classNames.bind(styles)
 
@@ -19,7 +19,7 @@ interface FormFieldProps {
     type: string;
     placeholder: string;
     meta: {error: string};
-    options: Option,
+    options: OptionsFields[],
     html(): any;
     inputOnly: boolean;
     withError: boolean;

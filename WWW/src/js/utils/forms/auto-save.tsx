@@ -29,7 +29,7 @@ interface AutoSaveFormProps {
     save(name: string, value: string, dispatch: () => any, props: object): any;
     dispatch(cb: (formName: string) => any): any;
     handleSubmit(callback: () => any): any;
-    componentDidMount();
+    componentDidMount(controller: object);
     componentWillUnmount();
     initialValues: object;
     initialize(initialValues: object) : any;
@@ -43,11 +43,11 @@ interface AutoSaveFormState {
 }
 
 export class AutoSaveForm extends React.Component<AutoSaveFormProps, AutoSaveFormState> {
-    timeouts: {}
+    timeouts = {}
 
-    errors: {}
+    errors = {}
 
-    handlers: {}
+    handlers = {}
 
     autoSaveDisabled: boolean = false
 
