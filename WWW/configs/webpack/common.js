@@ -1,56 +1,38 @@
 // shared config (dev and prod)
-const { resolve } = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { resolve } = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
     },
-    context: resolve(__dirname, '../../src'),
+    context: resolve(__dirname, "../../src"),
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
-                use: ['babel-loader'],
+                test: [/\.jsx?$/, /\.tsx?$/],
+                use: ["babel-loader"],
                 exclude: /node_modules/,
             },
             {
                 test: /\.css$/,
+                use: ["style-loader", "css-loader"],
+            },
+            {
+                test: /\.(scss|sass)$/,
+                use: ["style-loader", "css-loader", "sass-loader"],
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg|woff|woff2|eot|ttf)$/i,
                 use: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            //modules: true,
-                            importLoaders: 1,
-                            //localIdentName: '[sha1:hash:hex:16]',
-                        },
-                    },
+                    "file-loader?hash=sha512&digest=hex&name=img/[contenthash].[ext]",
+                    "image-webpack-loader?bypassOnDebug&optipng.optimizationLevel=7&gifsicle.interlaced=false",
                 ],
-            },
-            {
-                test: /\.scss$/,
-                loaders: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            //modules: true,
-                            importLoaders: 1,
-                            //localIdentName: '[sha1:hash:hex:16]',
-                        },
-                    },
-                    'sass-loader',
-                ],
-            },
-            {
-                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-                loader: 'url-loader?limit=100000',
             },
         ],
     },
-    plugins: [new HtmlWebpackPlugin({ template: 'index.html' })],
+    plugins: [new HtmlWebpackPlugin({ template: "index.html.ejs" })],
     performance: {
         hints: false,
     },
-}
+};
