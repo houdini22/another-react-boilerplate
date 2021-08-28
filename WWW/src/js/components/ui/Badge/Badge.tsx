@@ -9,16 +9,16 @@ const cx = classNames.bind(styles)
 
 interface BadgeProps {
     children: any,
-    color: string,
-    className: string,
-    outline: boolean,
-    href: string,
-    size: string,
-    arrow: boolean,
-    disableContext: boolean,
-    rounded: boolean,
-    roundless: boolean,
-    right: boolean,
+    color?: string,
+    className?: string,
+    outline?: boolean,
+    href?: string,
+    size?: string,
+    arrow?: boolean,
+    disableContext?: boolean,
+    rounded?: boolean,
+    roundless?: boolean,
+    right?: boolean,
 }
 
 class Badge extends React.Component<BadgeProps> {

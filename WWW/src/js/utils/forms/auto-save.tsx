@@ -7,8 +7,9 @@ import {
 import _ from 'lodash'
 import { processAPIerrorResponseToFormErrors } from '../../modules/http'
 import { ifDeepDiff, deepDiff } from '../javascript'
-import moment from 'moment'
+import * as moment from 'moment'
 import { startSubmit, stopSubmit } from 'redux-form'
+import config from "../../config";
 
 const TIMEOUT = 1000
 
@@ -25,9 +26,16 @@ interface AutoSaveFormProps {
     data: object;
     component(): any;
     container(): any;
-    save(): any;
-    dispatch(): any;
-    handleSubmit(): any;
+    save(name: string, value: string, dispatch: () => any, props: object): any;
+    dispatch(cb: (formName: string) => any): any;
+    handleSubmit(callback: () => any): any;
+    componentDidMount();
+    componentWillUnmount();
+    initialValues: object;
+    initialize(initialValues: object) : any;
+    initialized: boolean;
+    formName: string;
+
 }
 
 interface AutoSaveFormState {
@@ -36,11 +44,17 @@ interface AutoSaveFormState {
 }
 
 export class AutoSaveForm extends React.Component<AutoSaveFormProps, AutoSaveFormState> {
+    timeouts: {}
+
+    errors: {}
+
+    handlers: {}
+
+    autoSaveDisabled: boolean = false
+
     constructor(props) {
         super(props)
-        this.timeouts = {} // timeouts for fields
-        this.errors = {} // save previous errors
-        this.handlers = {}
+
         this.state = {
             pendingRequests: 0,
             requestsToPerform: 0,

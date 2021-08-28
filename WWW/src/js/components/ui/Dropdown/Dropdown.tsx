@@ -10,13 +10,14 @@ import styles from '../../../../assets/scss/components/_dropdown.scss'
 const cx = classNames.bind(styles)
 
 interface DropdownContainerProps {
-    size: string;
-    color: string;
-    triggerSize: string;
-    triggerColor: string;
-    disableOutsideClick: string;
-    trigger: string;
-    placement: string;
+    size?: string;
+    color?: string;
+    triggerSize?: string;
+    triggerColor?: string;
+    disableOutsideClick?: string;
+    trigger?: string;
+    placement?: string;
+    transparent?: boolean;
 }
 
 interface DropdownContainerState {
@@ -274,9 +275,9 @@ export class DropdownMenu extends React.Component {
 }
 
 interface DropdownItemProps {
-    href: string;
-    highlighted: boolean;
-    type: string;
+    href?: string;
+    highlighted?: boolean;
+    type?: string;
 }
 
 interface DropdownItemState {
@@ -285,7 +286,7 @@ interface DropdownItemState {
     hasSubmenu: boolean;
 }
 
-export class DropdownItem extends React.Component<DropdownItemProps> {
+export class DropdownItem extends React.Component<DropdownItemProps, DropdownItemState> {
     state = {
         itemsElementRegistered: false,
         itemsElement: document.createElement('div'),

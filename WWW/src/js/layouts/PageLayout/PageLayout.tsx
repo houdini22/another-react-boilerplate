@@ -16,7 +16,12 @@ const cx = classNames.bind(styles)
 interface PageLayoutProps {
     children: any;
     common: object;
-    setConnectionErrorModalVisible(): any;
+    setConnectionErrorModalVisible(value: boolean): any;
+    layout: {
+        disableHeader: boolean;
+        disableFooter: boolean;
+        disableSidebar: boolean;
+    }
 }
 
 class PageLayout extends React.Component<PageLayoutProps> {

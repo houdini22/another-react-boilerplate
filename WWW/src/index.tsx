@@ -14,7 +14,7 @@ import './js/modules/database'
 
 const rootEl = document.getElementById('root')
 export const store = configureStore({})
-export const AppContext = React.createContext()
+export const AppContext = React.createContext({})
 
 const renderComponent = (Component) => {
     ReactDOM.render(

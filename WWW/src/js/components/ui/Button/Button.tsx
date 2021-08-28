@@ -15,25 +15,25 @@ const cx = classnames.bind(styles)
 
 interface ButtonProps {
     children: any;
-    isLoading: boolean;
+    isLoading?: boolean;
     onClick(event: any, controller: object): any;
-    size: string;
-    disabled: boolean;
-    color: string;
-    block: boolean;
-    icon: any;
-    iconOnly: boolean;
-    rounded: boolean;
-    outline: boolean;
-    roundless: boolean;
-    arrow: boolean;
-    className: string;
-    borderless: boolean;
-    type: "button" | "submit" | "reset";
-    navigationHref: string;
+    size?: string;
+    disabled?: boolean;
+    color?: string;
+    block?: boolean;
+    icon?: any;
+    iconOnly?: boolean;
+    rounded?: boolean;
+    outline?: boolean;
+    roundless?: boolean;
+    arrow?: boolean;
+    className?: string;
+    borderless?: boolean;
+    type?: "button" | "submit" | "reset";
+    navigationHref?: string;
     onClickNavigation(): any;
-    transparent: boolean;
-    style: object;
+    transparent?: boolean;
+    style?: object;
 }
 
 interface ButtonState {

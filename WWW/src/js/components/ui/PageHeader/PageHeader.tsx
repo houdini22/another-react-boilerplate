@@ -10,8 +10,8 @@ const cx = classNames.bind(styles)
 
 interface ContainerProps {
     children: any;
-    size: string;
-    title: any;
+    size?: string;
+    title?: any;
 }
 
 interface ContainerState {
@@ -181,7 +181,7 @@ export class Breadcrumbs extends React.Component<BreadcrumbsProps> {
 
 interface BreadcrumbsItemProps {
     children: any;
-    href: string;
+    href?: string;
 }
 
 export class BreadcrumbsItem extends React.Component<BreadcrumbsItemProps> {
