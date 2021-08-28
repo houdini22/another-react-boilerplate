@@ -8,8 +8,7 @@
         "prettier-write": "prettier --write \"{src,tests}/**/*.{js,jsx,css,scss}\"",
         "prettier-check": "prettier --list-different \"{src,tests}/**/*.{js,jsx,css,scss}\"",
         "start": "npm run start-dev",
-        "start-dev": "webpack serve --config=configs/webpack/dev.js",
-        "start-prod": "npm run build && node express.js"
+        "start-dev": "webpack serve --config=configs/webpack/dev.js"
     },
     "devDependencies": {
         "@babel/cli": "^7.13.16",
@@ -21,7 +20,8 @@
         "@types/jest": "^26.0.23",
         "@types/node": "^14.14.34",
         "@types/react": "^17.0.19",
-        "@types/react-dom": "^17.0.3",
+        "@types/react-dom": "^17.0.9",
+        "@types/react-redux": "^7.1.18",
         "@typescript-eslint/eslint-plugin": "^4.22.0",
         "@typescript-eslint/parser": "^4.22.0",
         "babel-loader": "^8.2.2",

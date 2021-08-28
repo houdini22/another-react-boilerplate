@@ -13,7 +13,7 @@ import './assets/scss/main.scss'
 import './js/modules/database'
 
 const rootEl = document.getElementById('root')
-export const store = configureStore()
+export const store = configureStore({})
 export const AppContext = React.createContext()
 
 const renderComponent = (Component) => {

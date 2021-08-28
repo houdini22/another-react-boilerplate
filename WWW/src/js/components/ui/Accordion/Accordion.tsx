@@ -25,10 +25,7 @@ interface AccordionStateProps {
 }
 
 class Container extends React.Component<AccordionContainerProps, AccordionStateProps> {
-    constructor(props) {
-        super(props)
-        this.state = { opened: '', registered: {} }
-    }
+    state = { opened: '', registered: {} }
 
     registerItem({ name }) {
         const { registered } = this.state
