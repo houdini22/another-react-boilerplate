@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import { LocalStorage } from '../../../modules/database'
 
 export class Manager extends React.Component {

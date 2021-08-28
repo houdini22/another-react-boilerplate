@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, PageHeader } from '../../../components'
 import { PageHeaderFormContainer } from './PageHeaderFormContainer'

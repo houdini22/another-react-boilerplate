@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import { FaUser as UserIcon } from 'react-icons/fa'
 import classNames from 'classnames/bind'
 import { Alert, Button } from '../../../components'
@@ -24,6 +24,16 @@ interface SidebarProps {
     children: any;
     onClickLogout(): any;
     isLoggedIn: boolean;
+    user: {
+        username: string;
+    }
+    loginError: string;
+    layout: {
+        floatingSidebar: boolean;
+        sidebarExpanded: boolean;
+    }
+    setLayoutOption(name: string, value: boolean) : any;
+    submit(formName: string) : any;
 }
 
 interface SidebarState {
@@ -32,12 +42,13 @@ interface SidebarState {
 }
 
 class SidebarBase extends React.Component<SidebarProps, SidebarState> {
+    state = {
+        userDropdownVisible: false,
+        activeTab: '',
+    }
+
     constructor(props) {
         super(props)
-        this.state = {
-            userDropdownVisible: false,
-            activeTab: '',
-        }
         this.switchTab = this.switchTab.bind(this)
     }
 

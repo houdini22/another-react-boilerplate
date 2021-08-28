@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import _ from 'lodash'
 
 export interface Option {
@@ -10,11 +10,13 @@ export interface Option {
 
 interface SelectProps {
     type: string;
-    options: Option;
     placeholder: boolean | string;
+    error: string;
+    loading: boolean;
+    options: () => undefined | Option
 }
 
-class Select extends React.Component {
+class Select extends React.Component<SelectProps> {
     renderPlaceholder() {
         const { placeholder } = this.props
         const caption = placeholder === true ? '--- choose ---' : placeholder

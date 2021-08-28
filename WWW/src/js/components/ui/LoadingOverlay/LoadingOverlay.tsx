@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/components/_loading-overlay.scss'
 

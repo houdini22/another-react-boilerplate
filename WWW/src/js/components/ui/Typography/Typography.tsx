@@ -1,10 +1,14 @@
-import React from 'react'
+import * as React from "react"
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/components/_typography.scss'
 
 const cx = classNames.bind(styles)
 
-class Container extends React.Component {
+interface ContainerProps {
+    children: any;
+}
+
+class Container extends React.Component<ContainerProps> {
     render() {
         const { children } = this.props
 

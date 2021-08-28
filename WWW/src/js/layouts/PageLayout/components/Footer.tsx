@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import { Copyright } from '../../../components'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/layout/_layout.scss'

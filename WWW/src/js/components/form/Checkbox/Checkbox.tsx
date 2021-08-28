@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import classNames from 'classnames/bind'
 import _ from 'lodash'
 import { FaCheck as CheckIcon } from 'react-icons/fa'
@@ -10,13 +10,16 @@ const cx = classNames.bind({ ...styles1, ...styles2 })
 
 interface CheckboxProps {
     error: string;
-    onChange(): any;
+    onChange(checked: boolean): any;
     checked: boolean;
     disabled: boolean;
     value: boolean | string
+    loading: boolean;
 }
 
 class Checkbox extends React.Component<CheckboxProps> {
+    el = null;
+
     handleClick(e) {
         const { onChange, disabled } = this.props
 

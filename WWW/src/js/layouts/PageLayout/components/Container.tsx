@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import { Footer } from './index'
 import connect from 'react-redux/es/connect/connect'
 import { selectors as commonSelectors } from '../../../reducers/common'
@@ -9,6 +9,10 @@ const cx = classNames.bind(styles)
 
 interface ContainterProps {
     children: any;
+    layout: {
+        floatingSidebar: boolean;
+        sidebarExpanded: boolean;
+    }
 }
 
 class ContainerBase extends React.Component<ContainterProps> {

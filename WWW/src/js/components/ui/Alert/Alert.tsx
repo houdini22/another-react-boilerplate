@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import classNames from 'classnames/bind'
 import { IoIosClose as CloseIcon } from 'react-icons/io'
 import _ from 'lodash'
@@ -17,22 +17,24 @@ interface AlertProps {
     className: string;
     outline: boolean;
     closeIcon: boolean;
-    onClickClose: () => undefined;
+    onClickClose(): any;
     withIcon: any;
     withIconArrow: boolean;
     iconHighlighted: boolean;
     rounded: boolean;
     background: boolean;
+    size: string;
 }
 
 class Alert extends React.Component<AlertProps> {
+    state = {
+        animationStarted: false,
+        remove: false,
+        isLoading: false,
+    }
+
     constructor(props) {
         super(props)
-        this.state = {
-            animationStarted: false,
-            remove: false,
-            isLoading: false,
-        }
 
         this.close = this.close.bind(this)
         this.setIsLoading = this.setIsLoading.bind(this)
@@ -59,7 +61,7 @@ class Alert extends React.Component<AlertProps> {
 
     setIsLoading(isLoading) {
         return new Promise((resolve) => {
-            this.setState({ isLoading }, () => resolve())
+            this.setState({ isLoading }, () => resolve(isLoading))
         })
     }
 

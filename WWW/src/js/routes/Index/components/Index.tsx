@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import styles from '../../../../assets/scss/routes/index.scss'
 import { LoginFormContainer } from '../../../components/common/LoginForm/LoginFormContainer'
 import classNames from 'classnames/bind'

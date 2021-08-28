@@ -1,17 +1,17 @@
-import React from 'react'
+import * as React from "react"
 import classNames from 'classnames/bind'
-
 import styles from '../../../../assets/scss/components/_row.scss'
 
 const cx = classNames.bind(styles)
 
 interface RowProps {
     children: any;
-    className: string,
     style: object,
+    builder: any;
+    className: string;
 }
 
-class Row extends React.Component {
+class Row extends React.Component<RowProps> {
     render() {
         const { children, builder, className, ...props } = this.props
 

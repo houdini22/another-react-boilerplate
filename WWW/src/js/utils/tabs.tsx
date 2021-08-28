@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import { Row, Col, Card, Button } from '../components'
 import _ from 'lodash'
 import Copy from 'copy-to-clipboard'

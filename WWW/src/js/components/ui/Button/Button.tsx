@@ -1,5 +1,5 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import * as React from "react"
+import * as ReactDOM from 'react-dom';
 import classnames from 'classnames/bind'
 import _ from 'lodash'
 import { LoadingOverlay } from '../LoadingOverlay'
@@ -16,7 +16,7 @@ const cx = classnames.bind(styles)
 interface ButtonProps {
     children: any;
     isLoading: boolean;
-    onClick(): any;
+    onClick(event: any, controller: object): any;
     size: string;
     disabled: boolean;
     color: string;
@@ -29,9 +29,11 @@ interface ButtonProps {
     arrow: boolean;
     className: string;
     borderless: boolean;
-    type: string;
+    type: "button" | "submit" | "reset";
     navigationHref: string;
     onClickNavigation(): any;
+    transparent: boolean;
+    style: object;
 }
 
 interface ButtonState {
@@ -40,6 +42,13 @@ interface ButtonState {
 }
 
 class Button extends React.Component<ButtonProps, ButtonState> {
+    state = {
+        color: 'primary',
+        isLoading: false
+    }
+
+    navigationRef = null
+
     constructor(props) {
         super(props)
         this.state = {

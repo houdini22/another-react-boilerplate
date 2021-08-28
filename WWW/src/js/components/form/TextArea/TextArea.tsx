@@ -1,7 +1,8 @@
-import React from 'react'
+import * as React from "react"
 
 interface TextAreaProps {
     error: string;
+    loading: boolean;
 }
 
 class TextArea extends React.Component<TextAreaProps> {

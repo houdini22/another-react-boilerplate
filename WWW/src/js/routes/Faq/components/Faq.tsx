@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Col, Row, Card, PageHeader } from '../../../components'
 import { FaInfo as InfoIcon } from 'react-icons/fa'
@@ -115,6 +115,7 @@ export class FaqView extends React.Component {
                                     <ul>
                                         <li>2019-06-12</li>
                                         <li>2020-11-07</li>
+                                        <li>2021-08-28</li>
                                     </ul>
                                 </Col>
                                 <Col xs={6}>
@@ -125,6 +126,7 @@ export class FaqView extends React.Component {
                                     >
                                         <li>Initial release v0.1-alpha</li>
                                         <li>Initial release v0.2-alpha</li>
+                                        <li>Release v0.3-alpha</li>
                                     </ul>
                                 </Col>
                             </Row>

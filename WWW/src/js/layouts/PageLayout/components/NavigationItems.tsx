@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import { NavigationHeader } from './NavigationHeader'
 import { NavigationLink } from './NavigationLink'
 import { AuthManager } from '../../../containers/AuthManager'

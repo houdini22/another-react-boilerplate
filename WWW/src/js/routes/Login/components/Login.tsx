@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { AuthManager } from '../../../containers/AuthManager'
 import { RouteManager } from '../../../containers/RouteManager'

@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import classnames from 'classnames/bind'
 import { AppContext } from '../../../../index'
 import { LoadingOverlay } from '../LoadingOverlay'
@@ -16,6 +16,7 @@ interface ButtonGroupProps {
     isLoading: boolean;
     disabled: boolean;
     borderless: boolean;
+    size: string;
 }
 
 class ButtonGroup extends React.Component<ButtonGroupProps> {

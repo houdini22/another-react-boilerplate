@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import classNames from 'classnames/bind'
 import { FaWindowClose as CloseIcon } from 'react-icons/fa'
 import _ from 'lodash'
@@ -54,6 +54,7 @@ class ModalContainer extends React.Component<ModalContainerProps> {
 
 interface ModalBodyProps {
     children: any;
+    close(): any;
 }
 
 class ModalBody extends React.Component<ModalBodyProps> {
@@ -75,6 +76,8 @@ class ModalBody extends React.Component<ModalBodyProps> {
 
 interface ModalHeaderProps {
     children: any;
+    closeIcon: any;
+    close(): any;
 }
 
 class ModalHeader extends React.Component<ModalHeaderProps> {
@@ -112,6 +115,7 @@ class ModalHeader extends React.Component<ModalHeaderProps> {
 
 interface ModalFooterProps {
     children: any;
+    close(): any;
 }
 
 class ModalFooter extends React.Component<ModalFooterProps> {

@@ -1,6 +1,6 @@
-import React from 'react'
+import * as React from "react"
 import { AppContext } from '../../../../index'
-import { createPortal, findDOMNode } from 'react-dom'
+import { createPortal } from 'react-dom'
 import classNames from 'classnames/bind'
 import _ from 'lodash'
 import jQuery from 'jquery'
@@ -18,6 +18,8 @@ interface ContainerProps {
     noPadding: boolean;
     disableOutsideClick: boolean;
     transparent: boolean;
+    trigger: any;
+    style: object;
 }
 
 interface ContainerState {
@@ -30,17 +32,16 @@ interface ContainerState {
 }
 
 class Container extends React.Component<ContainerProps, ContainerState> {
-    constructor(props) {
-        super(props)
-        this.state = {
-            isOpen: false,
-            contentElement: document.createElement('div'),
-            contentElementRegistered: false,
-            triggerElement: document.createElement('div'),
-            triggerElementRegistered: false,
-            contentElementMarginTop: 0,
-        }
+    state = {
+        isOpen: false,
+        contentElement: document.createElement('div'),
+        contentElementRegistered: false,
+        triggerElement: document.createElement('div'),
+        triggerElementRegistered: false,
+        contentElementMarginTop: 0,
     }
+
+    ref = null
 
     componentDidMount() {
         document.addEventListener(
@@ -176,6 +177,18 @@ interface TriggerProps {
 }
 
 class Trigger extends React.Component<TriggerProps> {
+    trigger = 'hover'
+
+    contentElement = null
+
+    triggerElement = null
+
+    isOpen = false
+
+    close = () => null
+
+    open = () => null
+
     constructor(props) {
         super(props)
 

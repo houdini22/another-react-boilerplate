@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import classNames from 'classnames/bind'
 import jQuery from 'jquery'
 import styles1 from '../../../../assets/scss/components/_tooltip.scss'
@@ -26,10 +26,11 @@ interface TooltipState {
 }
 
 class Tooltip extends React.Component<TooltipProps, TooltipState> {
-    constructor(props) {
-        super(props)
-        this.state = { show: false, left: 0, top: 0 }
-    }
+    state = { show: false, left: 0, top: 0 }
+
+    element = null
+
+    tooltip = null
 
     calculateLeft(placement) {
         const element = this.element

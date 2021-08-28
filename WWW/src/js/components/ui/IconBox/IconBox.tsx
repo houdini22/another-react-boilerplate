@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import { LoadingOverlay } from '../../index'
 
 interface IconBoxProps {
@@ -7,7 +7,7 @@ interface IconBoxProps {
     isLoading: boolean;
 }
 
-class IconBox extends React.Component {
+class IconBox extends React.Component<IconBoxProps> {
     render() {
         const { icon, children, isLoading } = this.props
 

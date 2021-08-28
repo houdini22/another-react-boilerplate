@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import { Link } from 'react-router-dom'
 import { FaHome as HomeIcon } from 'react-icons/fa'
 import classNames from 'classnames/bind'

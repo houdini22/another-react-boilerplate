@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import classNames from 'classnames/bind'
 import _ from 'lodash'
 import { AppContext } from '../../../../index'
@@ -34,16 +34,12 @@ interface ContainerState {
 }
 
 export class Container extends React.Component<ContainerProps, ContainerState> {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            tabs: {},
-            triggersElement: document.createElement('div'),
-            triggersElementRegistered: false,
-            contentElement: document.createElement('div'),
-            contentElementRegistered: false,
-        }
+    state = {
+        tabs: {},
+        triggersElement: document.createElement('div'),
+        triggersElementRegistered: false,
+        contentElement: document.createElement('div'),
+        contentElementRegistered: false,
     }
 
     setActiveTab(activeTab) {
@@ -262,6 +258,7 @@ interface TriggerProps {
     children: any;
     noTab: boolean;
     hidden: boolean;
+    onClick(): any;
 }
 
 export class Trigger extends React.Component<TriggerProps> {

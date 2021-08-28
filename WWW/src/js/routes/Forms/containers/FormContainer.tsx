@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import { compose } from 'redux'
 import { formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'

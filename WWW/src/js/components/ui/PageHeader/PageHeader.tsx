@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import classNames from 'classnames/bind'
 import { AppContext } from '../../../../index'
 import { createPortal } from 'react-dom'
@@ -25,17 +25,14 @@ interface ContainerState {
 }
 
 export class Container extends React.Component<ContainerProps, ContainerState> {
-    constructor(props) {
-        super(props)
-        this.state = {
-            titleElementRegistered: false,
-            titleElement: document.createElement('div'),
-            breadcrumbsElementRegistered: false,
-            breadcrumbsElement: document.createElement('div'),
-            actionsElementRegistered: false,
-            actionsElement: document.createElement('div'),
-            breadcrumbsExists: false,
-        }
+    state = {
+        titleElementRegistered: false,
+        titleElement: document.createElement('div'),
+        breadcrumbsElementRegistered: false,
+        breadcrumbsElement: document.createElement('div'),
+        actionsElementRegistered: false,
+        actionsElement: document.createElement('div'),
+        breadcrumbsExists: false,
     }
 
     registerTitleElement(e) {
@@ -160,6 +157,8 @@ interface BreadcrumbsProps {
 }
 
 export class Breadcrumbs extends React.Component<BreadcrumbsProps> {
+    setBreadcrumbsExists = null
+
     componentWillUnmount() {
         this.setBreadcrumbsExists(false)
     }

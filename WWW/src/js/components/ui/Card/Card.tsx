@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import classNames from 'classnames/bind'
 import _ from 'lodash'
 import { IoIosClose as CloseIcon } from 'react-icons/io'
@@ -31,12 +31,13 @@ interface CardProps {
 }
 
 class Card extends React.Component<CardProps> {
+    state = {
+        closed: false,
+        minimized: false,
+    }
+
     constructor(props) {
         super(props)
-        this.state = {
-            closed: false,
-            minimized: false,
-        }
         this.close = this.close.bind(this)
         this.maximize = this.maximize.bind(this)
     }

@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import { Link } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai'
@@ -14,6 +14,7 @@ interface NavigationLinkProps {
     icon: any;
     active: boolean;
     nested: any;
+    href: string;
 }
 
 interface NavigationLinkState {

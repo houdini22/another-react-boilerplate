@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import {
     FaKey as KeyIcon,
     FaExclamationTriangle as AlertIcon,
@@ -240,14 +240,4 @@ export const navigation = [
             },
         ],
     },
-    /*{
-    type: 'header',
-    caption: 'Builder',
-  },
-  {
-    type: 'link',
-    caption: 'Builder',
-    href: '/builder',
-    icon: 'BU',
-  },*/
 ]

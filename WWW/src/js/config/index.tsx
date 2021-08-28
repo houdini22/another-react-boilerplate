@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 
 const config = {
     api: {
@@ -10,7 +10,7 @@ const config = {
     dateTimeFormat: 'YYYY-MM-DD HH:mm:ss',
     dateFormat: 'YYYY-MM-DD',
     texts: {
-        version: 'v0.2alpha',
+        version: 'v0.3alpha',
         frameworkName: (
             <span>
                 <strong>another</strong> boilerplate

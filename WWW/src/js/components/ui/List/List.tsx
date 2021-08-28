@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/components/_list.scss'
 
@@ -50,6 +50,8 @@ class ItemContent extends React.Component {
 
 interface ImageProps {
     image: string;
+    children: any;
+    url: string;
 }
 
 class Image extends React.Component<ImageProps> {

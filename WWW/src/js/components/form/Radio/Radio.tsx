@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import classNames from 'classnames/bind'
 import _ from 'lodash'
 import Transition from 'react-transition-group/Transition'
@@ -7,15 +7,20 @@ import styles2 from '../../../../assets/scss/_animations.scss'
 
 interface RadioProps {
     error: string,
-    onChange(): any,
+    onChange(checked: boolean): any,
     checked: boolean,
     disabled: boolean,
     value: boolean | string;
+    loading: boolean;
+}
+
+interface RadioState {
+    checked: boolean;
 }
 
 const cx = classNames.bind({ ...styles1, ...styles2 })
 
-class Radio extends React.Component<RadioProps> {
+class Radio extends React.Component<RadioProps, RadioState> {
     constructor(props) {
         super(props)
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import { createPortal } from 'react-dom'
 import classNames from 'classnames/bind'
 import { AppContext } from '../../../../index'
@@ -28,17 +28,15 @@ interface DropdownContainerState {
 }
 
 export class DropdownContainer extends React.Component<DropdownContainerProps, DropdownContainerState> {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            isOpen: false,
-            triggerElement: document.createElement('div'),
-            triggerElementRegistered: false,
-            itemsElement: document.createElement('div'),
-            itemsElementRegistered: false,
-        }
+    state = {
+        isOpen: false,
+        triggerElement: document.createElement('div'),
+        triggerElementRegistered: false,
+        itemsElement: document.createElement('div'),
+        itemsElementRegistered: false,
     }
+
+    ref = null
 
     componentDidMount() {
         document.addEventListener(
@@ -148,7 +146,21 @@ export class DropdownContainer extends React.Component<DropdownContainerProps, D
     }
 }
 
-export class DropdownTrigger extends React.Component {
+interface DropdownTriggerProps {
+    children: any;
+    component: any;
+    transparent: boolean;
+}
+
+export class DropdownTrigger extends React.Component<DropdownTriggerProps> {
+    dropdownTrigger = 'hover';
+
+    itemsElement = null;
+
+    triggerElement = null;
+
+    dropdownClose = null;
+
     constructor(props) {
         super(props)
 
@@ -274,13 +286,10 @@ interface DropdownItemState {
 }
 
 export class DropdownItem extends React.Component<DropdownItemProps> {
-    constructor(props) {
-        super(props)
-        this.state = {
-            itemsElementRegistered: false,
-            itemsElement: document.createElement('div'),
-            hasSubmenu: undefined,
-        }
+    state = {
+        itemsElementRegistered: false,
+        itemsElement: document.createElement('div'),
+        hasSubmenu: undefined,
     }
 
     registerItemsElement(e) {

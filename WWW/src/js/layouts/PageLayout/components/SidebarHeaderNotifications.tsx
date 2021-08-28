@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import { IoIosNotificationsOutline } from 'react-icons/all'
 import { FaInfoCircle } from 'react-icons/fa'
 import { TiWarning } from 'react-icons/ti'
@@ -15,16 +15,31 @@ import { bindActionCreators } from 'redux'
 import { Badge } from '../../../components'
 import { Link } from 'react-router-dom'
 import { Scrollbars } from 'react-custom-scrollbars'
-import { RouteManager } from '../../../containers/RouteManager'
 
 const cx = classNames.bind(styles)
 
-class BaseSidebarHeaderNotifications extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            expanded: false,
-        }
+interface Notification {
+    [index: number]: {
+        type: string;
+        text: string;
+        href : string;
+        title: string;
+    }
+}
+
+interface SidebarHeaderNotificationsProps {
+    notifications: Notification;
+    unread: number;
+    resetUnread() : any;
+}
+
+interface SidebarHeaderNotificationsState {
+    expanded: boolean;
+}
+
+class BaseSidebarHeaderNotifications extends React.Component<SidebarHeaderNotificationsProps, SidebarHeaderNotificationsState> {
+    state = {
+        expanded: false,
     }
 
     getIcon(type) {

@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/components/_table.scss'
 import { Row } from '../Row'
@@ -9,6 +9,8 @@ const cx = classNames.bind(styles)
 interface TableProps {
     bordered: boolean;
     size: string;
+    striped: boolean;
+    color: string;
 }
 
 class Table extends React.Component<TableProps> {
@@ -46,7 +48,12 @@ class TBody extends React.Component {
     }
 }
 
-class Tr extends React.Component {
+interface TrProps {
+    color: string;
+    children: any;
+}
+
+class Tr extends React.Component<TrProps> {
     render() {
         const { children, color, ...props } = this.props
 

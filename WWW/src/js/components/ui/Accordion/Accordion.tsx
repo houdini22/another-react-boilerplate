@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react"
 import classNames from 'classnames/bind'
 import { AppContext } from '../../../../index'
 import {
@@ -20,12 +20,12 @@ interface AccordionContainerProps {
 }
 
 interface AccordionStateProps {
-    opened: boolean;
-    register: object;
+    opened: string;
+    registered: object;
 }
 
 class Container extends React.Component<AccordionContainerProps, AccordionStateProps> {
-    state = { opened: '', registered: {} }
+    state: AccordionStateProps = { opened: '', registered: {} }
 
     registerItem({ name }) {
         const { registered } = this.state
