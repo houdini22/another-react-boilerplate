@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { TableForm as FormComponent } from './TableForm'

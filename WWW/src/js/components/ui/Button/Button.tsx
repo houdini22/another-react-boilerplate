@@ -1,5 +1,5 @@
-import * as React from "react"
-import * as ReactDOM from 'react-dom';
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
 import classnames from 'classnames/bind'
 import _ from 'lodash'
 import { LoadingOverlay } from '../LoadingOverlay'
@@ -14,37 +14,37 @@ import styles from '../../../../assets/scss/components/_button.scss'
 const cx = classnames.bind(styles)
 
 interface ButtonProps {
-    children: any;
-    isLoading?: boolean;
-    onClick(event: any, controller: object): any;
-    size?: string;
-    disabled?: boolean;
-    color?: string;
-    block?: boolean;
-    icon?: any;
-    iconOnly?: boolean;
-    rounded?: boolean;
-    outline?: boolean;
-    roundless?: boolean;
-    arrow?: boolean;
-    className?: string;
-    borderless?: boolean;
-    type?: "button" | "submit" | "reset";
-    navigationHref?: string;
-    onClickNavigation?(): any;
-    transparent?: boolean;
-    style?: object;
+    children: any
+    isLoading?: boolean
+    onClick(event: any, controller: object): any
+    size?: string
+    disabled?: boolean
+    color?: string
+    block?: boolean
+    icon?: any
+    iconOnly?: boolean
+    rounded?: boolean
+    outline?: boolean
+    roundless?: boolean
+    arrow?: boolean
+    className?: string
+    borderless?: boolean
+    type?: 'button' | 'submit' | 'reset'
+    navigationHref?: string
+    onClickNavigation?(): any
+    transparent?: boolean
+    style?: object
 }
 
 interface ButtonState {
-    color: string;
-    isLoading: boolean;
+    color: string
+    isLoading: boolean
 }
 
 class Button extends React.Component<ButtonProps, ButtonState> {
     state = {
         color: 'primary',
-        isLoading: false
+        isLoading: false,
     }
 
     navigationRef = null
@@ -203,4 +203,4 @@ class Button extends React.Component<ButtonProps, ButtonState> {
 }
 
 export default { Button }
-export {Button}
+export { Button }

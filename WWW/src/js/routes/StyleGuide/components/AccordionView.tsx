@@ -1,36 +1,36 @@
-import * as React from "react"
+import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
+import { Row, Col, Section, Accordion, Badge, Label } from '../../../components'
 import {
-    Row,
-    Col,
-    Section,
-    Accordion,
-    Badge,
-    Label,
-} from '../../../components'
-import {createPresentationTab as _createPresentationTab, createSimplePresentation, generateCode} from '../../../utils/tabs'
+    createPresentationTab as _createPresentationTab,
+    createSimplePresentation,
+    generateCode,
+} from '../../../utils/tabs'
 import { AccordionFormContainer } from './AccordionFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface AccordionViewProps {
-    colSize1: number;
-    colSize2: number;
-    createPresentationTab(): any;
+    colSize1: number
+    colSize2: number
+    createPresentationTab(): any
 }
 
 interface AccordionViewState {
     options: {
-        color: string;
-        size: string;
-        rounded: boolean;
-        separated: boolean;
-        type: string;
-        updateCount: number;
-        closeIcon: boolean;
+        color: string
+        size: string
+        rounded: boolean
+        separated: boolean
+        type: string
+        updateCount: number
+        closeIcon: boolean
     }
 }
 
-class AccordionView extends React.Component<AccordionViewProps, AccordionViewState> {
+class AccordionView extends React.Component<
+    AccordionViewProps,
+    AccordionViewState
+> {
     constructor(props) {
         super(props)
         this.state = {
@@ -56,17 +56,14 @@ class AccordionView extends React.Component<AccordionViewProps, AccordionViewSta
     }
 
     render() {
-        const { colSize1 = 4, colSize2 = 12, createPresentationTab = _createPresentationTab } = this.props
-        const { options } = this.state
         const {
-            outline,
-            rounded,
-            color,
-            size,
-            separated,
-            type,
-            closeIcon,
-        } = options
+            colSize1 = 4,
+            colSize2 = 12,
+            createPresentationTab = _createPresentationTab,
+        } = this.props
+        const { options } = this.state
+        const { outline, rounded, color, size, separated, type, closeIcon } =
+            options
 
         const code = generateCode('Accordion', options)
 

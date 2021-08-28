@@ -1,35 +1,31 @@
-import * as React from "react"
+import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
+import { Row, Col, Section, Alert, Label, Tabs } from '../../../components'
 import {
-    Row,
-    Col,
-    Section,
-    Alert,
-    Label,
-    Tabs,
-} from '../../../components'
-import { createPresentationTab as _createPresentationTab, generateCode } from '../../../utils/tabs'
+    createPresentationTab as _createPresentationTab,
+    generateCode,
+} from '../../../utils/tabs'
 import { FaGlobe as AlertIcon } from 'react-icons/fa'
 import { AlertFormContainer } from './AlertFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface AlertViewProps {
-    colSize1: number,
-    colSize2: number,
-    createPresentationTab(): any;
+    colSize1: number
+    colSize2: number
+    createPresentationTab(): any
 }
 
 interface AlertViewState {
     options: {
-        color: string;
-        outline: boolean;
-        withIcon: boolean;
-        withIconArrow: boolean;
-        iconHighlighted: boolean;
-        rounded: boolean;
-        closeIcon: boolean;
-        updateCount: number,
-        size: string,
+        color: string
+        outline: boolean
+        withIcon: boolean
+        withIconArrow: boolean
+        iconHighlighted: boolean
+        rounded: boolean
+        closeIcon: boolean
+        updateCount: number
+        size: string
     }
 }
 
@@ -61,7 +57,11 @@ class AlertView extends React.Component<AlertViewProps, AlertViewState> {
     }
 
     render() {
-        const { colSize1 = 4, colSize2 = 12, createPresentationTab = _createPresentationTab } = this.props
+        const {
+            colSize1 = 4,
+            colSize2 = 12,
+            createPresentationTab = _createPresentationTab,
+        } = this.props
         const { options } = this.state
         const {
             outline,

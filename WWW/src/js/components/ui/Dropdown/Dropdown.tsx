@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { createPortal } from 'react-dom'
 import classNames from 'classnames/bind'
 import { AppContext } from '../../../../index'
@@ -10,25 +10,28 @@ import styles from '../../../../assets/scss/components/_dropdown.scss'
 const cx = classNames.bind(styles)
 
 interface DropdownContainerProps {
-    size?: string;
-    color?: string;
-    triggerSize?: string;
-    triggerColor?: string;
-    disableOutsideClick?: string;
-    trigger?: string;
-    placement?: string;
-    transparent?: boolean;
+    size?: string
+    color?: string
+    triggerSize?: string
+    triggerColor?: string
+    disableOutsideClick?: string
+    trigger?: string
+    placement?: string
+    transparent?: boolean
 }
 
 interface DropdownContainerState {
-    isOpen: boolean;
-    triggerElement: any;
-    triggerElementRegistered: boolean;
-    itemsElement: any;
-    itemsElementRegistered: boolean;
+    isOpen: boolean
+    triggerElement: any
+    triggerElementRegistered: boolean
+    itemsElement: any
+    itemsElementRegistered: boolean
 }
 
-export class DropdownContainer extends React.Component<DropdownContainerProps, DropdownContainerState> {
+export class DropdownContainer extends React.Component<
+    DropdownContainerProps,
+    DropdownContainerState
+> {
     state = {
         isOpen: false,
         triggerElement: document.createElement('div'),
@@ -120,7 +123,8 @@ export class DropdownContainer extends React.Component<DropdownContainerProps, D
                             className={cx('component-dropdown', {
                                 [`component-dropdown--size-${size}`]: size,
                                 [`component-dropdown--color-${color}`]: color,
-                                [`component-dropdown--placement-${placement}`]: true,
+                                [`component-dropdown--placement-${placement}`]:
+                                    true,
                                 'component-dropdown--transparent': transparent,
                             })}
                             ref={(e) => (this.ref = e)}
@@ -133,7 +137,8 @@ export class DropdownContainer extends React.Component<DropdownContainerProps, D
                                 className={cx(
                                     'component-dropdown__dropdown-menu',
                                     {
-                                        'component-dropdown__dropdown-menu--is-open': isOpen,
+                                        'component-dropdown__dropdown-menu--is-open':
+                                            isOpen,
                                     },
                                 )}
                                 ref={(e) => this.registerItemsElement(e)}
@@ -148,19 +153,19 @@ export class DropdownContainer extends React.Component<DropdownContainerProps, D
 }
 
 interface DropdownTriggerProps {
-    children: any;
-    component: any;
-    transparent: boolean;
+    children: any
+    component: any
+    transparent: boolean
 }
 
 export class DropdownTrigger extends React.Component<DropdownTriggerProps> {
-    dropdownTrigger = 'hover';
+    dropdownTrigger = 'hover'
 
-    itemsElement = null;
+    itemsElement = null
 
-    triggerElement = null;
+    triggerElement = null
 
-    dropdownClose = null;
+    dropdownClose = null
 
     constructor(props) {
         super(props)
@@ -275,18 +280,21 @@ export class DropdownMenu extends React.Component {
 }
 
 interface DropdownItemProps {
-    href?: string;
-    highlighted?: boolean;
-    type?: string;
+    href?: string
+    highlighted?: boolean
+    type?: string
 }
 
 interface DropdownItemState {
-    itemsElementRegistered: boolean;
-    itemsElement: any;
-    hasSubmenu: boolean;
+    itemsElementRegistered: boolean
+    itemsElement: any
+    hasSubmenu: boolean
 }
 
-export class DropdownItem extends React.Component<DropdownItemProps, DropdownItemState> {
+export class DropdownItem extends React.Component<
+    DropdownItemProps,
+    DropdownItemState
+> {
     state = {
         itemsElementRegistered: false,
         itemsElement: document.createElement('div'),
@@ -338,8 +346,10 @@ export class DropdownItem extends React.Component<DropdownItemProps, DropdownIte
                     className={cx(
                         'component-dropdown__dropdown-menu__items__item',
                         {
-                            [`component-dropdown__dropdown-menu__items__item--type-${type}`]: type,
-                            [`component-dropdown__dropdown-menu__items__item--highlighted`]: highlighted,
+                            [`component-dropdown__dropdown-menu__items__item--type-${type}`]:
+                                type,
+                            [`component-dropdown__dropdown-menu__items__item--highlighted`]:
+                                highlighted,
                         },
                     )}
                 >

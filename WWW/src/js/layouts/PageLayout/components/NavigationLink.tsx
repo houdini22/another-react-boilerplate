@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai'
@@ -10,18 +10,21 @@ import { NavigationItems } from './NavigationItems'
 const cx = classNames.bind(styles)
 
 interface NavigationLinkProps {
-    children: any;
-    icon: any;
-    active: boolean;
-    nested: any;
-    href: string;
+    children: any
+    icon: any
+    active: boolean
+    nested: any
+    href: string
 }
 
 interface NavigationLinkState {
-    expanded: boolean;
+    expanded: boolean
 }
 
-class NavigationLink extends React.Component<NavigationLinkProps, NavigationLinkState> {
+class NavigationLink extends React.Component<
+    NavigationLinkProps,
+    NavigationLinkState
+> {
     constructor(props) {
         super(props)
         this.state = {
@@ -40,7 +43,8 @@ class NavigationLink extends React.Component<NavigationLinkProps, NavigationLink
                         className={cx(
                             'layout__sidebar__content__navigation__links__link',
                             {
-                                'layout__sidebar__content__navigation__links__link--active': active,
+                                'layout__sidebar__content__navigation__links__link--active':
+                                    active,
                             },
                         )}
                     >

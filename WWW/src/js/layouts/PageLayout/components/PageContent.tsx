@@ -1,12 +1,12 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/layout/_layout.scss'
 
 const cx = classNames.bind(styles)
 
 interface PageContentProps {
-    children: any;
-    className: string;
+    children: any
+    className: string
 }
 
 class PageContent extends React.Component<PageContentProps> {

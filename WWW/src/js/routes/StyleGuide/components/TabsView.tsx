@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, Section } from '../../../components'
 import { FaFileImage as ImageIcon } from 'react-icons/fa'
@@ -7,23 +7,23 @@ import { TabsFormContainer } from './TabsFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface TabsViewProps {
-    colSize1: number;
-    colSize2: number;
+    colSize1: number
+    colSize2: number
 }
 
 interface TabsViewState {
     options: {
-        size: string;
-        color: string;
-        solid: boolean;
-        block: boolean;
-        aligned: boolean;
-        header: boolean;
-        left: boolean;
-        outline: boolean;
-        updateCount: number;
-        rounded: boolean;
-        below: boolean;
+        size: string
+        color: string
+        solid: boolean
+        block: boolean
+        aligned: boolean
+        header: boolean
+        left: boolean
+        outline: boolean
+        updateCount: number
+        rounded: boolean
+        below: boolean
     }
 }
 

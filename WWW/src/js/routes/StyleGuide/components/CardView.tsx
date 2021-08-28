@@ -1,5 +1,5 @@
-import * as React from "react"
-import {PageContent} from '../../../layouts/PageLayout/components'
+import * as React from 'react'
+import { PageContent } from '../../../layouts/PageLayout/components'
 import {
     Row,
     Col,
@@ -11,30 +11,30 @@ import {
     TextField,
     Checkbox,
 } from '../../../components'
-import {CardFormContainer} from './CardFormContainer'
-import {FaImage as CardIcon} from 'react-icons/fa'
-import {createPresentationTab as _createPresentationTab} from '../../../utils/tabs'
-import {ComponentsPageHeader} from '../../../components/common/ComponentsPageHeader'
+import { CardFormContainer } from './CardFormContainer'
+import { FaImage as CardIcon } from 'react-icons/fa'
+import { createPresentationTab as _createPresentationTab } from '../../../utils/tabs'
+import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface CardViewProps {
-    colSize1: number;
-    colSize2: number;
-    createPresentationTab(): any;
+    colSize1: number
+    colSize2: number
+    createPresentationTab(): any
 }
 
 interface CardViewState {
     options: {
-        color: string;
-        size: string;
-        withCloseIcon: boolean;
-        withMinimizeIcon: boolean;
-        header: boolean;
-        headerActions: boolean;
-        isLoading: boolean;
-        noBorderTop: boolean;
-        footer: boolean;
-        footerType: string;
-        updateCount: number;
+        color: string
+        size: string
+        withCloseIcon: boolean
+        withMinimizeIcon: boolean
+        header: boolean
+        headerActions: boolean
+        isLoading: boolean
+        noBorderTop: boolean
+        footer: boolean
+        footerType: string
+        updateCount: number
     }
 }
 
@@ -61,16 +61,17 @@ class CardView extends React.Component<CardViewProps, CardViewState> {
 
     setOptions(newOptions) {
         const {
-            options: {updateCount},
+            options: { updateCount },
         } = this.state
         this.setState({
-            options: {...newOptions, updateCount: updateCount + 1},
+            options: { ...newOptions, updateCount: updateCount + 1 },
         })
     }
 
     render() {
-        const {colSize1 = 4, createPresentationTab = _createPresentationTab} = this.props
-        const {options} = this.state
+        const { colSize1 = 4, createPresentationTab = _createPresentationTab } =
+            this.props
+        const { options } = this.state
         const {
             size,
             withCloseIcon,
@@ -86,7 +87,7 @@ class CardView extends React.Component<CardViewProps, CardViewState> {
 
         return (
             <PageContent>
-                <ComponentsPageHeader title="Card" component="Card"/>
+                <ComponentsPageHeader title="Card" component="Card" />
                 <Section>
                     <Row>
                         <Col xs={6}>
@@ -150,7 +151,7 @@ class CardView extends React.Component<CardViewProps, CardViewState> {
                                         header ? (
                                             <h1>
                                                 {' '}
-                                                <CardIcon/> Header
+                                                <CardIcon /> Header
                                             </h1>
                                         ) : (
                                             ''
@@ -159,27 +160,27 @@ class CardView extends React.Component<CardViewProps, CardViewState> {
                                     headerActions={
                                         headerActions
                                             ? [
-                                                <Button
-                                                    key="warning"
-                                                    color="warning"
-                                                >
-                                                    Action!
-                                                </Button>,
-                                                <Badge
-                                                    key="badge-info"
-                                                    color="info"
-                                                >
-                                                    33
-                                                </Badge>,
-                                                <Label
-                                                    key="label-danger"
-                                                    color="danger"
-                                                >
-                                                    ERROR!
-                                                </Label>,
-                                                <TextField placeholder="search"/>,
-                                                <Checkbox/>,
-                                            ]
+                                                  <Button
+                                                      key="warning"
+                                                      color="warning"
+                                                  >
+                                                      Action!
+                                                  </Button>,
+                                                  <Badge
+                                                      key="badge-info"
+                                                      color="info"
+                                                  >
+                                                      33
+                                                  </Badge>,
+                                                  <Label
+                                                      key="label-danger"
+                                                      color="danger"
+                                                  >
+                                                      ERROR!
+                                                  </Label>,
+                                                  <TextField placeholder="search" />,
+                                                  <Checkbox />,
+                                              ]
                                             : undefined
                                     }
                                     isLoading={isLoading}
@@ -202,5 +203,5 @@ class CardView extends React.Component<CardViewProps, CardViewState> {
     }
 }
 
-export {CardView}
-export default {CardView}
+export { CardView }
+export default { CardView }

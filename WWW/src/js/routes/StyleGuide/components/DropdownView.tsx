@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import {
     Row,
@@ -19,26 +19,29 @@ import styles from '../../../../assets/scss/_helpers.scss'
 const cx = classNames.bind(styles)
 
 interface DropdownViewProps {
-    colSize1: number,
-    colSize2: number,
-    createPresentationTab(): any;
+    colSize1: number
+    colSize2: number
+    createPresentationTab(): any
 }
 
 interface DropdownViewState {
     options: {
-        size: string;
-        color: string;
-        triggerSize: string;
-        triggerColor: string;
-        trigger: string;
-        component: string;
-        placement: string;
-        updateCount: number;
-        disableOutsideClick: boolean;
+        size: string
+        color: string
+        triggerSize: string
+        triggerColor: string
+        trigger: string
+        component: string
+        placement: string
+        updateCount: number
+        disableOutsideClick: boolean
     }
 }
 
-class DropdownView extends React.Component<DropdownViewProps, DropdownViewState> {
+class DropdownView extends React.Component<
+    DropdownViewProps,
+    DropdownViewState
+> {
     constructor(props) {
         super(props)
         this.state = {
@@ -67,7 +70,8 @@ class DropdownView extends React.Component<DropdownViewProps, DropdownViewState>
     }
 
     render() {
-        const { colSize1 = 4, createPresentationTab = _createPresentationTab } = this.props
+        const { colSize1 = 4, createPresentationTab = _createPresentationTab } =
+            this.props
         const { options } = this.state
         const {
             size,

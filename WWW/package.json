@@ -5,8 +5,8 @@
         "build": "npm run clean-dist && webpack --config=configs/webpack/prod && cp ../API/public/index.php ../dist/ && cp ../API/public/.htaccess ../dist/",
         "build:dev": "npm run clean-dist && webpack --config=configs/webpack/dev && cp ../API/public/index.php ../dist/ && cp ../API/public/.htaccess ../dist/",
         "clean-dist": "rm -f -r -d ../dist/*",
-        "prettier-write": "prettier --write \"{src,tests}/**/*.{js,jsx,css,scss}\"",
-        "prettier-check": "prettier --list-different \"{src,tests}/**/*.{js,jsx,css,scss}\"",
+        "prettier-write": "prettier --write \"{src,tests}/**/*.{js,jsx,css,scss,ts,tsx}\"",
+        "prettier-check": "prettier --list-different \"{src,tests}/**/*.{js,jsx,css,scss,ts,tsx}\"",
         "start": "npm run start-dev",
         "start-dev": "webpack serve --config=configs/webpack/dev.js"
     },

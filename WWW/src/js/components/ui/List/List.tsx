@@ -1,18 +1,23 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/components/_list.scss'
 
 const cx = classNames.bind(styles)
 
 interface ContainerProps {
-    color: string;
-    size: string;
-    separated: boolean;
+    color: string
+    size: string
+    separated: boolean
 }
 
 class Container extends React.Component<ContainerProps> {
     render() {
-        const { children, color = 'default', size = 'md', separated } = this.props
+        const {
+            children,
+            color = 'default',
+            size = 'md',
+            separated,
+        } = this.props
 
         return (
             <div
@@ -49,9 +54,9 @@ class ItemContent extends React.Component {
 }
 
 interface ImageProps {
-    image: string;
-    children: any;
-    url: string;
+    image: string
+    children: any
+    url: string
 }
 
 class Image extends React.Component<ImageProps> {

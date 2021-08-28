@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import { Link } from 'react-router-dom'
 import { FaAngleDown as ArrowIcon } from 'react-icons/fa'
@@ -8,17 +8,17 @@ import styles from '../../../../assets/scss/components/_badge.scss'
 const cx = classNames.bind(styles)
 
 interface BadgeProps {
-    children: any,
-    color?: string,
-    className?: string,
-    outline?: boolean,
-    href?: string,
-    size?: string,
-    arrow?: boolean,
-    disableContext?: boolean,
-    rounded?: boolean,
-    roundless?: boolean,
-    right?: boolean,
+    children: any
+    color?: string
+    className?: string
+    outline?: boolean
+    href?: string
+    size?: string
+    arrow?: boolean
+    disableContext?: boolean
+    rounded?: boolean
+    roundless?: boolean
+    right?: boolean
 }
 
 class Badge extends React.Component<BadgeProps> {

@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { compose } from 'redux'
 import { formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
@@ -13,7 +13,7 @@ import { http } from '../../../modules/http'
 export const FORM_NAME = 'sample-form'
 
 interface FormComponentContainerProps {
-    component(): any;
+    component(): any
 }
 
 // here is Form container, it has redux-form props from `reduxForm` factory and it separates API class from

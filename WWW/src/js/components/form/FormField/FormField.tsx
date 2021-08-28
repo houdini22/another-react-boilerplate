@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import {
     TextField,
@@ -9,20 +9,20 @@ import {
     Radio,
 } from '../../index'
 import styles from '../../../../assets/scss/_inputs.scss'
-import {OptionsFields} from "../Select/Select";
+import { OptionsFields } from '../Select/Select'
 
 const cx = classNames.bind(styles)
 
 interface FormFieldProps {
-    input: object;
-    label: string;
-    type: string;
-    placeholder: string;
-    meta: {error: string};
-    options: OptionsFields[],
-    html(): any;
-    inputOnly: boolean;
-    withError: boolean;
+    input: object
+    label: string
+    type: string
+    placeholder: string
+    meta: { error: string }
+    options: OptionsFields[]
+    html(): any
+    inputOnly: boolean
+    withError: boolean
 }
 
 class FormField extends React.Component<FormFieldProps> {
@@ -102,7 +102,8 @@ class FormField extends React.Component<FormFieldProps> {
             return (
                 <div
                     className={cx('component-form-field', {
-                        [`component-form-field--state-${validationState}`]: true,
+                        [`component-form-field--state-${validationState}`]:
+                            true,
                         [`component-form-field--type-${type}`]: type,
                     })}
                 >

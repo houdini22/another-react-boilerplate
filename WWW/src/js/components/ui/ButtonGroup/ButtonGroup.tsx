@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import classnames from 'classnames/bind'
 import { AppContext } from '../../../../index'
 import { LoadingOverlay } from '../LoadingOverlay'
@@ -7,16 +7,16 @@ import styles from '../../../../assets/scss/components/_button-group.scss'
 const cx = classnames.bind(styles)
 
 interface ButtonGroupProps {
-    children: any;
-    color: string;
-    outline: boolean;
-    block: boolean;
-    rounded: boolean;
-    roundless: boolean;
-    isLoading: boolean;
-    disabled: boolean;
-    borderless: boolean;
-    size: string;
+    children: any
+    color: string
+    outline: boolean
+    block: boolean
+    rounded: boolean
+    roundless: boolean
+    isLoading: boolean
+    disabled: boolean
+    borderless: boolean
+    size: string
 }
 
 class ButtonGroup extends React.Component<ButtonGroupProps> {

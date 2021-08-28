@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Col, Row, Card, PageHeader } from '../../../components'
 import { FaInfo as InfoIcon } from 'react-icons/fa'

@@ -1,16 +1,16 @@
-import * as React from "react"
+import * as React from 'react'
 import _ from 'lodash'
 
 export interface OptionsFields {
-    label: string;
-    value: string;
-};
+    label: string
+    value: string
+}
 
 interface SelectProps {
-    type: string;
-    placeholder: boolean | string;
-    error: string;
-    loading: boolean;
+    type: string
+    placeholder: boolean | string
+    error: string
+    loading: boolean
     options: () => OptionsFields[] | OptionsFields[]
 }
 

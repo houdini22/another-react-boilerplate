@@ -1,38 +1,35 @@
-import * as React from "react"
+import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
-import {
-    Row,
-    Col,
-    Section,
-    Button,
-    ButtonGroup,
-} from '../../../components'
+import { Row, Col, Section, Button, ButtonGroup } from '../../../components'
 import { ButtonGroupFormContainer } from './ButtonGroupFormContainer'
 import { createPresentationTab as _createPresentationTab } from '../../../utils/tabs'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface ButtonGroupViewProps {
-    colSize1: number;
-    colSize2: number;
-    createPresentationTab(): any;
+    colSize1: number
+    colSize2: number
+    createPresentationTab(): any
 }
 
 interface ButtonGroupViewState {
     options: {
-        color: string;
-        size: string;
-        outline: boolean;
-        block: boolean;
-        roudless: boolean;
-        rounded: boolean;
-        isLoading: boolean;
-        disabled: boolean;
-        borderless: boolean;
-        updateCount: number;
+        color: string
+        size: string
+        outline: boolean
+        block: boolean
+        roudless: boolean
+        rounded: boolean
+        isLoading: boolean
+        disabled: boolean
+        borderless: boolean
+        updateCount: number
     }
 }
 
-class ButtonGroupView extends React.Component<ButtonGroupViewProps, ButtonGroupViewState> {
+class ButtonGroupView extends React.Component<
+    ButtonGroupViewProps,
+    ButtonGroupViewState
+> {
     constructor(props) {
         super(props)
         this.state = {
@@ -62,7 +59,8 @@ class ButtonGroupView extends React.Component<ButtonGroupViewProps, ButtonGroupV
     }
 
     render() {
-        const { colSize1 = 4, createPresentationTab = _createPresentationTab } = this.props
+        const { colSize1 = 4, createPresentationTab = _createPresentationTab } =
+            this.props
         const { options } = this.state
         const {
             size,

@@ -1,10 +1,10 @@
-import * as React from "react"
-import * as ReactDOM from 'react-dom';
-import {AppContainer} from 'react-hot-loader'
-import {App} from './js/routes'
-import configureStore, {history} from './js/store/configure-store'
-import {Provider} from 'react-redux'
-import {Router} from 'react-router'
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
+import { AppContainer } from 'react-hot-loader'
+import { App } from './js/routes'
+import configureStore, { history } from './js/store/configure-store'
+import { Provider } from 'react-redux'
+import { Router } from 'react-router'
 
 import 'react-custom-scroll/dist/customScroll.css'
 import 'typeface-spectral'
@@ -21,7 +21,7 @@ const renderComponent = (Component) => {
         <AppContainer>
             <Provider store={store}>
                 <Router history={history}>
-                    <Component/>
+                    <Component />
                 </Router>
             </Provider>
         </AppContainer>,

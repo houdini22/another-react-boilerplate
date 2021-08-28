@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { Field } from 'redux-form'
 import { Button, FormField } from '../../index'
 import classNames from 'classnames/bind'
@@ -7,8 +7,8 @@ import styles from '../../../../assets/scss/_pages.scss'
 const cx = classNames.bind(styles)
 
 interface LoginFormProps {
-    handleSubmit(): any;
-    type: string;
+    handleSubmit(): any
+    type: string
 }
 
 export class LoginForm extends React.Component<LoginFormProps> {

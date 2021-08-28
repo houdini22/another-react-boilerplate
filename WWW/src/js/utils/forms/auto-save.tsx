@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import {
     reduxForm,
     getFormValues as getFormValuesRedux,
@@ -9,7 +9,7 @@ import { processAPIerrorResponseToFormErrors } from '../../modules/http'
 import { ifDeepDiff, deepDiff } from '../javascript'
 import * as moment from 'moment'
 import { startSubmit, stopSubmit } from 'redux-form'
-import config from "../../config";
+import config from '../../config'
 
 const TIMEOUT = 1000
 
@@ -23,26 +23,29 @@ export const isFullOfUndefined = (obj) => {
 }
 
 interface AutoSaveFormProps {
-    data: object;
-    component(): any;
-    container(): any;
-    save(name: string, value: string, dispatch: () => any, props: object): any;
-    dispatch(cb: (formName: string) => any): any;
-    handleSubmit(callback: () => any): any;
-    componentDidMount(controller: object);
-    componentWillUnmount();
-    initialValues: object;
-    initialize(initialValues: object) : any;
-    initialized: boolean;
-    formName: string;
+    data: object
+    component(): any
+    container(): any
+    save(name: string, value: string, dispatch: () => any, props: object): any
+    dispatch(cb: (formName: string) => any): any
+    handleSubmit(callback: () => any): any
+    componentDidMount(controller: object)
+    componentWillUnmount()
+    initialValues: object
+    initialize(initialValues: object): any
+    initialized: boolean
+    formName: string
 }
 
 interface AutoSaveFormState {
-    pendingRequests: number;
-    requestsToPerform: number;
+    pendingRequests: number
+    requestsToPerform: number
 }
 
-export class AutoSaveForm extends React.Component<AutoSaveFormProps, AutoSaveFormState> {
+export class AutoSaveForm extends React.Component<
+    AutoSaveFormProps,
+    AutoSaveFormState
+> {
     timeouts = {}
 
     errors = {}
@@ -71,12 +74,8 @@ export class AutoSaveForm extends React.Component<AutoSaveFormProps, AutoSaveFor
     }
 
     componentDidMount() {
-        const {
-            componentDidMount,
-            initialValues,
-            initialize,
-            initialized,
-        } = this.props
+        const { componentDidMount, initialValues, initialize, initialized } =
+            this.props
         const _self = this
 
         if (_.isFunction(componentDidMount)) {
@@ -204,9 +203,10 @@ export class AutoSaveForm extends React.Component<AutoSaveFormProps, AutoSaveFor
                             } = {}) => {
                                 // its a hack for triggering validation errors - handleSubmit is called when the errors occur
                                 handleSubmit(() => {
-                                    const errors = processAPIerrorResponseToFormErrors(
-                                        alerts,
-                                    )
+                                    const errors =
+                                        processAPIerrorResponseToFormErrors(
+                                            alerts,
+                                        )
 
                                     if (!_.isEmpty(errors)) {
                                         // save errors for preventing removing errors when next error is triggered
@@ -273,10 +273,8 @@ export class AutoSaveForm extends React.Component<AutoSaveFormProps, AutoSaveFor
     }
 
     render() {
-        const {
-            component: FormComponent,
-            container: FormComponentContainer,
-        } = this.props
+        const { component: FormComponent, container: FormComponentContainer } =
+            this.props
 
         // it has container with APIClient logic
         if (FormComponentContainer) {

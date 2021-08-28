@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/components/_table.scss'
 import { Row } from '../Row'
@@ -7,10 +7,10 @@ import { Col } from '../Col'
 const cx = classNames.bind(styles)
 
 interface TableProps {
-    bordered: boolean;
-    size: string;
-    striped: boolean;
-    color: string;
+    bordered: boolean
+    size: string
+    striped: boolean
+    color: string
 }
 
 class Table extends React.Component<TableProps> {
@@ -49,8 +49,8 @@ class TBody extends React.Component {
 }
 
 interface TrProps {
-    color: string;
-    children: any;
+    color: string
+    children: any
 }
 
 class Tr extends React.Component<TrProps> {
@@ -71,8 +71,8 @@ class Tr extends React.Component<TrProps> {
 }
 
 interface ThProps {
-    xs: number;
-    alignCenter: boolean;
+    xs: number
+    alignCenter: boolean
 }
 
 class Th extends React.Component<ThProps> {
@@ -97,8 +97,8 @@ class Th extends React.Component<ThProps> {
 }
 
 interface TdProps {
-    xs: number;
-    alignCenter: boolean;
+    xs: number
+    alignCenter: boolean
 }
 
 class Td extends React.Component<TdProps> {

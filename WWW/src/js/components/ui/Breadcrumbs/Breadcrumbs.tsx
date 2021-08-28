@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { FaHome as HomeIcon } from 'react-icons/fa'
 import classNames from 'classnames/bind'
@@ -8,13 +8,13 @@ const cx = classNames.bind(styles)
 
 interface Link {
     [index: number]: {
-        link: string,
-        label: string,
+        link: string
+        label: string
     }
 }
 
 interface BreadcrumbsProps {
-    links: Link;
+    links: Link
 }
 
 class Breadcrumbs extends React.Component<BreadcrumbsProps> {

@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import jQuery from 'jquery'
 import styles1 from '../../../../assets/scss/components/_tooltip.scss'
@@ -7,22 +7,22 @@ import styles2 from '../../../../assets/scss/_animations.scss'
 const cx = classNames.bind({ ...styles1, ...styles2 })
 
 interface TooltipProps {
-    children: any;
-    color: string;
-    className: string;
-    size: string;
-    outline: boolean;
-    placement: string;
-    tooltip: any;
-    trigger: string;
-    onOpen(): any;
-    onClose(): any;
+    children: any
+    color: string
+    className: string
+    size: string
+    outline: boolean
+    placement: string
+    tooltip: any
+    trigger: string
+    onOpen(): any
+    onClose(): any
 }
 
 interface TooltipState {
-    show: boolean;
-    left: number;
-    top: number;
+    show: boolean
+    left: number
+    top: number
 }
 
 class Tooltip extends React.Component<TooltipProps, TooltipState> {

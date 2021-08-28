@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import _ from 'lodash'
 import Transition from 'react-transition-group/Transition'
@@ -6,16 +6,16 @@ import styles1 from '../../../../assets/scss/components/_radio.scss'
 import styles2 from '../../../../assets/scss/_animations.scss'
 
 interface RadioProps {
-    error?: string,
-    onChange?(checked: boolean): any,
-    checked?: boolean,
-    disabled?: boolean,
-    value?: boolean | string;
-    loading?: boolean;
+    error?: string
+    onChange?(checked: boolean): any
+    checked?: boolean
+    disabled?: boolean
+    value?: boolean | string
+    loading?: boolean
 }
 
 interface RadioState {
-    checked: boolean;
+    checked: boolean
 }
 
 const cx = classNames.bind({ ...styles1, ...styles2 })

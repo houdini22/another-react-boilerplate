@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Card } from '../../../components/ui/Card'
 import { FaKey as KeyIcon } from 'react-icons/fa'

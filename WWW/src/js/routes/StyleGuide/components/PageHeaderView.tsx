@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, PageHeader } from '../../../components'
 import { PageHeaderFormContainer } from './PageHeaderFormContainer'
@@ -13,10 +13,10 @@ const cx = classNames.bind(styles)
 
 interface PageHeaderViewState {
     options: {
-        size: string;
-        breadcrumbs: boolean;
-        actions: boolean;
-        updateCount: number;
+        size: string
+        breadcrumbs: boolean
+        actions: boolean
+        updateCount: number
     }
 }
 

@@ -1,28 +1,31 @@
-import * as React from "react"
+import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, Section, Badge, Label } from '../../../components'
-import { createPresentationTab as _createPresentationTab, generateCode } from '../../../utils/tabs'
+import {
+    createPresentationTab as _createPresentationTab,
+    generateCode,
+} from '../../../utils/tabs'
 import { BadgeFormContainer } from './BadgeFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface BadgeViewProps {
-    colSize1: number;
-    colSize2: number;
-    createPresentationTab(): any;
+    colSize1: number
+    colSize2: number
+    createPresentationTab(): any
 }
 
 interface BadgeViewState {
     options: {
-        color: string;
-        outline: boolean;
-        href: string;
-        size: string;
-        arrow: boolean;
-        right: boolean;
-        updateCount: number;
-        rounded: boolean;
-        roundless: boolean;
-    },
+        color: string
+        outline: boolean
+        href: string
+        size: string
+        arrow: boolean
+        right: boolean
+        updateCount: number
+        rounded: boolean
+        roundless: boolean
+    }
 }
 
 class BadgeView extends React.Component<BadgeViewProps, BadgeViewState> {
@@ -53,18 +56,14 @@ class BadgeView extends React.Component<BadgeViewProps, BadgeViewState> {
     }
 
     render() {
-        const { colSize1 = 4, colSize2 = 12, createPresentationTab = _createPresentationTab } = this.props
-        const { options } = this.state
         const {
-            color,
-            outline,
-            href,
-            size,
-            arrow,
-            right,
-            rounded,
-            roundless,
-        } = options
+            colSize1 = 4,
+            colSize2 = 12,
+            createPresentationTab = _createPresentationTab,
+        } = this.props
+        const { options } = this.state
+        const { color, outline, href, size, arrow, right, rounded, roundless } =
+            options
 
         const code = generateCode('Badge', options)
 

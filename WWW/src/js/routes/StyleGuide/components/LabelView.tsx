@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, Section, Label } from '../../../components'
 import { createPresentationTab as _createPresentationTab } from '../../../utils/tabs'
@@ -6,23 +6,23 @@ import { LabelFormContainer } from './LabelFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface LabelViewProps {
-    colSize1: number;
-    colSize2: number;
-    createPresentationTab(): any;
+    colSize1: number
+    colSize2: number
+    createPresentationTab(): any
 }
 
 interface LabelViewState {
     options: {
-        color: string;
-        size: string;
-        rounded: boolean;
-        roundless: boolean;
-        block: boolean;
-        href: string;
-        striped: boolean;
-        outline: boolean;
-        arrow: boolean;
-        updateCount: number;
+        color: string
+        size: string
+        rounded: boolean
+        roundless: boolean
+        block: boolean
+        href: string
+        striped: boolean
+        outline: boolean
+        arrow: boolean
+        updateCount: number
     }
 }
 
@@ -56,7 +56,8 @@ class LabelView extends React.Component<LabelViewProps, LabelViewState> {
     }
 
     render() {
-        const { colSize1 = 4, createPresentationTab = _createPresentationTab } = this.props
+        const { colSize1 = 4, createPresentationTab = _createPresentationTab } =
+            this.props
         const { options } = this.state
         const {
             color,

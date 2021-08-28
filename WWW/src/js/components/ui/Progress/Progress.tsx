@@ -1,13 +1,13 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/components/_progress.scss'
 
 const cx = classNames.bind(styles)
 
 interface ProgressProps {
-    size: string;
-    color: string;
-    progress: number;
+    size: string
+    color: string
+    progress: number
 }
 
 class Progress extends React.Component<ProgressProps> {

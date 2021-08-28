@@ -1,11 +1,11 @@
-import * as React from "react"
+import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, Section } from '../../../components'
 import { createPresentationTab as _createPresentationTab } from '../../../utils/tabs'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface ColumnViewProps {
-    createPresentationTab(): any;
+    createPresentationTab(): any
 }
 
 class ColumnView extends React.Component<ColumnViewProps> {

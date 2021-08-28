@@ -1,9 +1,9 @@
-import * as React from "react"
+import * as React from 'react'
 
 interface TextAreaProps {
-    error?: string;
-    loading?: boolean;
-    placeholder?: string;
+    error?: string
+    loading?: boolean
+    placeholder?: string
 }
 
 class TextArea extends React.Component<TextAreaProps> {

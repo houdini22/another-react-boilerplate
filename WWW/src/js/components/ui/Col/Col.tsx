@@ -1,17 +1,17 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/components/_col.scss'
 
 const cx = classNames.bind(styles)
 
 interface ColProps {
-    children: any;
-    className: string;
-    xs: number | string;
-    sm: number | string;
-    md: number | string;
-    lg: number | string;
-    style: object;
+    children: any
+    className: string
+    xs: number | string
+    sm: number | string
+    md: number | string
+    lg: number | string
+    style: object
 }
 
 class Col extends React.Component<ColProps> {

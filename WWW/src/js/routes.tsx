@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { Switch, withRouter, HashRouter as Router } from 'react-router-dom'
 
 import { PageLayout, BlankPageLayout } from './layouts'

@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import { Link } from 'react-router-dom'
 import { FaAngleDown as ArrowIcon } from 'react-icons/fa'
@@ -8,19 +8,19 @@ import styles from '../../../../assets/scss/components/_label.scss'
 const cx = classNames.bind(styles)
 
 interface LabelProps {
-    children: any;
-    color: string;
-    className: string;
-    rounded: boolean;
-    roundless: boolean;
-    block: boolean;
-    href: string;
-    iconOnly: boolean;
-    striped: boolean;
-    outline: boolean;
-    arrow: boolean;
+    children: any
+    color: string
+    className: string
+    rounded: boolean
+    roundless: boolean
+    block: boolean
+    href: string
+    iconOnly: boolean
+    striped: boolean
+    outline: boolean
+    arrow: boolean
     size: string
-    disableContext: boolean;
+    disableContext: boolean
 }
 
 class Label extends React.Component<LabelProps> {

@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { Field } from 'redux-form'
 import { FormField, Button } from '../../index'
 import { RouteManager } from '../../../containers/RouteManager'
@@ -8,14 +8,13 @@ import styles from '../../../../assets/scss/routes/index.scss'
 const cx = classNames.bind(styles)
 
 interface LoginFormProps {
-    handleSubmit(): any;
-    submit() : any;
+    handleSubmit(): any
+    submit(): any
     initialValues: {
-        username: string;
+        username: string
     }
-    button: any;
+    button: any
 }
-
 
 export class LoginForm extends React.Component<LoginFormProps> {
     render() {

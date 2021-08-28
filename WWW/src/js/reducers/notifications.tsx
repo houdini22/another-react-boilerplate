@@ -6,17 +6,19 @@ export const RESET_UNREAD = 'notifications::reset-unread'
 // ------------------------------------
 // Actions
 // ------------------------------------
-const addNotification = ({ type, text, href, title }) => (dispatch) => {
-    dispatch({
-        type: ADD_NOTIFICATION,
-        payload: {
-            type,
-            text,
-            href,
-            title,
-        },
-    })
-}
+const addNotification =
+    ({ type, text, href, title }) =>
+    (dispatch) => {
+        dispatch({
+            type: ADD_NOTIFICATION,
+            payload: {
+                type,
+                text,
+                href,
+                title,
+            },
+        })
+    }
 
 const resetUnreadNotifications = () => (dispatch) => {
     dispatch({

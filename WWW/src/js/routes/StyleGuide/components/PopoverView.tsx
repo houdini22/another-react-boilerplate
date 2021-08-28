@@ -1,14 +1,10 @@
-import * as React from "react"
+import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
+import { Row, Col, Section, Label, Popover, Button } from '../../../components'
 import {
-    Row,
-    Col,
-    Section,
-    Label,
-    Popover,
-    Button,
-} from '../../../components'
-import { createPresentationTab as _createPresentationTab, generateCode } from '../../../utils/tabs'
+    createPresentationTab as _createPresentationTab,
+    generateCode,
+} from '../../../utils/tabs'
 import { PopoverFormContainer } from './PopoverFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 import classNames from 'classnames/bind'
@@ -17,21 +13,21 @@ import styles from '../../../../assets/scss/_animations.scss'
 const cx = classNames.bind(styles)
 
 interface PopoverViewProps {
-    colSize1: number,
-    colSize2: number,
-    createPresentationTab(): any;
+    colSize1: number
+    colSize2: number
+    createPresentationTab(): any
 }
 
 interface PopoverViewState {
     options: {
-        color: string;
-        outline: boolean;
-        pixelsWidth: number;
-        placement: string;
-        clean: boolean;
-        disableOutsideClick: boolean;
-        trigger: string;
-        updateCount: number;
+        color: string
+        outline: boolean
+        pixelsWidth: number
+        placement: string
+        clean: boolean
+        disableOutsideClick: boolean
+        trigger: string
+        updateCount: number
     }
 }
 
@@ -62,7 +58,11 @@ class PopoverView extends React.Component<PopoverViewProps, PopoverViewState> {
     }
 
     render() {
-        const { colSize1 = 4, colSize2 = 12, createPresentationTab = _createPresentationTab } = this.props
+        const {
+            colSize1 = 4,
+            colSize2 = 12,
+            createPresentationTab = _createPresentationTab,
+        } = this.props
         const { options } = this.state
         const {
             outline,

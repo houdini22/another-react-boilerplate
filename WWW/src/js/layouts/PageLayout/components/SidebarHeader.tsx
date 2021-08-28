@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import connect from 'react-redux/es/connect/connect'
 import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -14,12 +14,12 @@ import { SidebarHeaderNotifications } from './SidebarHeaderNotifications'
 const cx = classNames.bind(styles)
 
 interface SidebarHeaderProps {
-    children: any;
+    children: any
     layout: {
-        floatingSidebar: boolean;
-        sidebarExpanded: boolean;
-    };
-    setLayoutOption(name: string, value: boolean) : any;
+        floatingSidebar: boolean
+        sidebarExpanded: boolean
+    }
+    setLayoutOption(name: string, value: boolean): any
 }
 
 class SidebarHeaderBase extends React.Component<SidebarHeaderProps> {

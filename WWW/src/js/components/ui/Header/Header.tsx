@@ -1,9 +1,9 @@
-import * as React from "react"
+import * as React from 'react'
 import { LoadingOverlay } from '../../index'
 
 interface HeaderProps {
-    children: any;
-    isLoading: boolean;
+    children: any
+    isLoading: boolean
 }
 
 class Header extends React.Component<HeaderProps> {

@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import { IoIosClose as CloseIcon } from 'react-icons/io'
 import _ from 'lodash'
@@ -11,18 +11,18 @@ const cx = classNames.bind({ ...styles1, ...styles2 })
 const animationDuration = 700
 
 interface AlertProps {
-    children: any;
-    color?: string;
-    className?: string;
-    outline?: boolean;
-    closeIcon?: boolean;
-    onClickClose?(controller: object): any;
-    withIcon?: any;
-    withIconArrow?: boolean;
-    iconHighlighted?: boolean;
-    rounded?: boolean;
-    background?: boolean;
-    size?: string;
+    children: any
+    color?: string
+    className?: string
+    outline?: boolean
+    closeIcon?: boolean
+    onClickClose?(controller: object): any
+    withIcon?: any
+    withIconArrow?: boolean
+    iconHighlighted?: boolean
+    rounded?: boolean
+    background?: boolean
+    size?: string
 }
 
 class Alert extends React.Component<AlertProps> {

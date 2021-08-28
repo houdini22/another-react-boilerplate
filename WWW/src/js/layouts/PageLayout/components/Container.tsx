@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { Footer } from './index'
 import connect from 'react-redux/es/connect/connect'
 import { selectors as commonSelectors } from '../../../reducers/common'
@@ -8,10 +8,10 @@ import styles from '../../../../assets/scss/layout/_layout.scss'
 const cx = classNames.bind(styles)
 
 interface ContainerProps {
-    children: any;
+    children: any
     layout: {
-        floatingSidebar: boolean;
-        sidebarExpanded: boolean;
+        floatingSidebar: boolean
+        sidebarExpanded: boolean
     }
 }
 

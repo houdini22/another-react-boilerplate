@@ -1,15 +1,15 @@
-import * as React from "react"
+import * as React from 'react'
 import { AppContext } from '../../../../index'
 
 interface TextFieldProps {
-    error?: string;
+    error?: string
     size?: string
-    loading?: boolean;
+    loading?: boolean
     custom?: {
-        size: string;
+        size: string
     }
-    placeholder?: string;
-    type?: string;
+    placeholder?: string
+    type?: string
 }
 
 class TextField extends React.Component<TextFieldProps> {

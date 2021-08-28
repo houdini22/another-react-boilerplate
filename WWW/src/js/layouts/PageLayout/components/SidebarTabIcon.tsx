@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { Badge } from 'reactstrap'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/layout/_layout.scss'
@@ -6,17 +6,20 @@ import styles from '../../../../assets/scss/layout/_layout.scss'
 const cx = classNames.bind(styles)
 
 interface SidebarTabIconProps {
-    children: any;
-    icon: any;
-    iconCount: number;
-    iconCountColor: string;
+    children: any
+    icon: any
+    iconCount: number
+    iconCountColor: string
 }
 
 interface SidebarTabIconState {
-    hover: boolean;
+    hover: boolean
 }
 
-class SidebarTabIcon extends React.Component<SidebarTabIconProps, SidebarTabIconState> {
+class SidebarTabIcon extends React.Component<
+    SidebarTabIconProps,
+    SidebarTabIconState
+> {
     constructor(props) {
         super(props)
         this.state = {

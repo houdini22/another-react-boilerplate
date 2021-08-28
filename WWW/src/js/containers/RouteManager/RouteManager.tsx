@@ -1,11 +1,10 @@
-import * as React from "react"
+import * as React from 'react'
 import { withRouter } from 'react-router-dom'
 
 const parseQueryString = (queryString) => {
     const query = {}
-    const pairs = (queryString[0] === '?'
-        ? queryString.substr(1)
-        : queryString
+    const pairs = (
+        queryString[0] === '?' ? queryString.substr(1) : queryString
     ).split('&')
     for (let i = 0; i < pairs.length; i++) {
         const pair = pairs[i].split('=')
@@ -16,14 +15,14 @@ const parseQueryString = (queryString) => {
 
 interface RouteManagerProps {
     children(renderProps: {
-        history: any;
-        location: any;
-        match: any;
-        query: any;
-    }): any;
-    history: object;
-    location: object;
-    match: object;
+        history: any
+        location: any
+        match: any
+        query: any
+    }): any
+    history: object
+    location: object
+    match: object
 }
 
 class RouteManagerBase extends React.Component<RouteManagerProps> {

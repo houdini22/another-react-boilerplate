@@ -1,11 +1,11 @@
-import * as React from "react"
+import * as React from 'react'
 import { PageHeader, Dropdown, Button } from '../../index'
 import { FaHome as HomeIcon } from 'react-icons/fa'
 import { RouteManager } from '../../../containers/RouteManager'
 
 interface ComponentsPageHeaderProps {
-    title: any;
-    component: string;
+    title: any
+    component: string
 }
 
 export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderProps> {

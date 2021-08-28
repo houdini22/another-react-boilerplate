@@ -1,33 +1,36 @@
-import * as React from "react"
+import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, Section, Button, Label } from '../../../components'
-import { createPresentationTab as _createPresentationTab, generateCode } from '../../../utils/tabs'
+import {
+    createPresentationTab as _createPresentationTab,
+    generateCode,
+} from '../../../utils/tabs'
 import { ButtonFormContainer } from './ButtonFormContainer'
 import { FaImage as ButtonIcon } from 'react-icons/fa'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface ButtonViewProps {
-    colSize1: number;
-    colSize2: number;
-    createPresentationTab(): any;
+    colSize1: number
+    colSize2: number
+    createPresentationTab(): any
 }
 
 interface ButtonViewState {
     options: {
-        color: string;
-        size: string;
-        isLoading: boolean;
-        block: boolean;
-        disabled: boolean;
-        rounded: boolean;
-        outline: boolean;
-        roundless: boolean;
-        borderless: boolean;
-        icon: boolean;
-        iconOnly: boolean;
-        updateCount: number;
-        navigationHref: string;
-    },
+        color: string
+        size: string
+        isLoading: boolean
+        block: boolean
+        disabled: boolean
+        rounded: boolean
+        outline: boolean
+        roundless: boolean
+        borderless: boolean
+        icon: boolean
+        iconOnly: boolean
+        updateCount: number
+        navigationHref: string
+    }
 }
 
 class ButtonView extends React.Component<ButtonViewProps, ButtonViewState> {
@@ -63,7 +66,8 @@ class ButtonView extends React.Component<ButtonViewProps, ButtonViewState> {
     }
 
     render() {
-        const { colSize1 = 4, createPresentationTab = _createPresentationTab } = this.props
+        const { colSize1 = 4, createPresentationTab = _createPresentationTab } =
+            this.props
         const { options } = this.state
         const {
             size,

@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import { FaWindowClose as CloseIcon } from 'react-icons/fa'
 import _ from 'lodash'
@@ -7,25 +7,19 @@ import styles from '../../../../assets/scss/components/_modal.scss'
 const cx = classNames.bind(styles)
 
 interface ModalContainerProps {
-    children: any;
-    className: string;
-    animation: string;
-    color: string;
-    size: string;
-    placement: string;
-    visible: boolean;
+    children: any
+    className: string
+    animation: string
+    color: string
+    size: string
+    placement: string
+    visible: boolean
 }
 
 class ModalContainer extends React.Component<ModalContainerProps> {
     render() {
-        const {
-            children,
-            animation,
-            color,
-            size,
-            placement,
-            visible,
-        } = this.props
+        const { children, animation, color, size, placement, visible } =
+            this.props
 
         if (!visible) return null
 
@@ -34,9 +28,12 @@ class ModalContainer extends React.Component<ModalContainerProps> {
                 <div
                     className={cx('component-modal-container__modal', {
                         [`animation--${animation}`]: animation,
-                        [`component-modal-container__modal--color-${color}`]: color,
-                        [`component-modal-container__modal--size-${size}`]: size,
-                        [`component-modal-container__modal--placement-${placement}`]: placement,
+                        [`component-modal-container__modal--color-${color}`]:
+                            color,
+                        [`component-modal-container__modal--size-${size}`]:
+                            size,
+                        [`component-modal-container__modal--placement-${placement}`]:
+                            placement,
                     })}
                 >
                     <div
@@ -53,8 +50,8 @@ class ModalContainer extends React.Component<ModalContainerProps> {
 }
 
 interface ModalBodyProps {
-    children: any;
-    close(): any;
+    children: any
+    close(): any
 }
 
 class ModalBody extends React.Component<ModalBodyProps> {
@@ -75,9 +72,9 @@ class ModalBody extends React.Component<ModalBodyProps> {
 }
 
 interface ModalHeaderProps {
-    children: any;
-    closeIcon: any;
-    close(): any;
+    children: any
+    closeIcon: any
+    close(): any
 }
 
 class ModalHeader extends React.Component<ModalHeaderProps> {
@@ -114,8 +111,8 @@ class ModalHeader extends React.Component<ModalHeaderProps> {
 }
 
 interface ModalFooterProps {
-    children: any;
-    close(): any;
+    children: any
+    close(): any
 }
 
 class ModalFooter extends React.Component<ModalFooterProps> {

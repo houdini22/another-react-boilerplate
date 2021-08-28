@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import { AppContext } from '../../../../index'
 import { createPortal } from 'react-dom'
@@ -9,19 +9,19 @@ import styles from '../../../../assets/scss/components/_page-header.scss'
 const cx = classNames.bind(styles)
 
 interface ContainerProps {
-    children: any;
-    size?: string;
-    title?: any;
+    children: any
+    size?: string
+    title?: any
 }
 
 interface ContainerState {
-    titleElementRegistered: boolean;
-    titleElement: any;
-    breadcrumbsElementRegistered: boolean;
-    breadcrumbsElement: any;
-    actionsElementRegistered: boolean;
-    actionsElement: any;
-    breadcrumbsExists: boolean;
+    titleElementRegistered: boolean
+    titleElement: any
+    breadcrumbsElementRegistered: boolean
+    breadcrumbsElement: any
+    actionsElementRegistered: boolean
+    actionsElement: any
+    breadcrumbsExists: boolean
 }
 
 export class Container extends React.Component<ContainerProps, ContainerState> {
@@ -137,7 +137,7 @@ export class Container extends React.Component<ContainerProps, ContainerState> {
 }
 
 interface TitleProps {
-    children: any;
+    children: any
 }
 
 export class Title extends React.Component<TitleProps> {
@@ -153,7 +153,7 @@ export class Title extends React.Component<TitleProps> {
 }
 
 interface BreadcrumbsProps {
-    children: any;
+    children: any
 }
 
 export class Breadcrumbs extends React.Component<BreadcrumbsProps> {
@@ -180,8 +180,8 @@ export class Breadcrumbs extends React.Component<BreadcrumbsProps> {
 }
 
 interface BreadcrumbsItemProps {
-    children: any;
-    href?: string;
+    children: any
+    href?: string
 }
 
 export class BreadcrumbsItem extends React.Component<BreadcrumbsItemProps> {
@@ -211,7 +211,7 @@ export class BreadcrumbsItem extends React.Component<BreadcrumbsItemProps> {
 }
 
 interface ActionsProps {
-    children: any;
+    children: any
 }
 
 export class Actions extends React.Component<ActionsProps> {

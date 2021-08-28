@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { AppContext } from '../../../../index'
 import { createPortal } from 'react-dom'
 import classNames from 'classnames/bind'
@@ -9,26 +9,26 @@ import styles from '../../../../assets/scss/components/_popover.scss'
 const cx = classNames.bind(styles)
 
 interface ContainerProps {
-    children: any;
-    pixelsWidth: number;
-    outline: boolean;
-    color: string;
-    className: string;
-    placement: string;
-    noPadding: boolean;
-    disableOutsideClick: boolean;
-    transparent: boolean;
-    trigger: any;
-    style: object;
+    children: any
+    pixelsWidth: number
+    outline: boolean
+    color: string
+    className: string
+    placement: string
+    noPadding: boolean
+    disableOutsideClick: boolean
+    transparent: boolean
+    trigger: any
+    style: object
 }
 
 interface ContainerState {
-    isOpen: boolean;
-    contentElement: any;
-    contentElementRegistered: boolean;
-    triggerElement: any;
-    triggerElementRegistered: boolean;
-    contentElementMarginTop: number,
+    isOpen: boolean
+    contentElement: any
+    contentElementRegistered: boolean
+    triggerElement: any
+    triggerElementRegistered: boolean
+    contentElementMarginTop: number
 }
 
 class Container extends React.Component<ContainerProps, ContainerState> {
@@ -53,11 +53,8 @@ class Container extends React.Component<ContainerProps, ContainerState> {
     componentDidUpdate() {
         const { placement } = this.props
         if (placement === 'left-center' || placement === 'right-center') {
-            const {
-                triggerElement,
-                contentElement,
-                contentElementMarginTop,
-            } = this.state
+            const { triggerElement, contentElement, contentElementMarginTop } =
+                this.state
             const triggerElementHeight = jQuery(triggerElement).height()
             const contentElementHeight = jQuery(contentElement).height()
             const newMargin = -(
@@ -135,16 +132,16 @@ class Container extends React.Component<ContainerProps, ContainerState> {
                     contentElement,
                     pixelsWidth,
                     trigger,
-                    registerTriggerElement: this.registerTriggerElement.bind(
-                        this,
-                    ),
+                    registerTriggerElement:
+                        this.registerTriggerElement.bind(this),
                 }}
             >
                 <div
                     className={cx('component-popover', {
                         'component-popover--outline': outline,
                         [`component-popover--color-${color}`]: color,
-                        [`component-popover--placement-${placement}`]: placement,
+                        [`component-popover--placement-${placement}`]:
+                            placement,
                         [`component-popover--is-open`]: isOpen,
                         [`component-popover--no-padding`]: noPadding,
                         [`component-popover--transparent`]: transparent,
@@ -173,7 +170,7 @@ class Container extends React.Component<ContainerProps, ContainerState> {
 }
 
 interface TriggerProps {
-    children: any;
+    children: any
 }
 
 class Trigger extends React.Component<TriggerProps> {
@@ -272,8 +269,8 @@ class Trigger extends React.Component<TriggerProps> {
 }
 
 interface ContentProps {
-    children: any;
-    className: string;
+    children: any
+    className: string
 }
 
 class Content extends React.Component<ContentProps> {

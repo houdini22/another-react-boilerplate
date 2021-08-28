@@ -1,11 +1,6 @@
-import * as React from "react"
+import * as React from 'react'
 import { Scrollbars } from 'react-custom-scrollbars'
-import {
-    Sidebar,
-    SidebarHeader,
-    Navigation,
-    Container,
-} from './components'
+import { Sidebar, SidebarHeader, Navigation, Container } from './components'
 import { AuthManager } from '../../containers/AuthManager'
 import classNames from 'classnames/bind'
 import config from '../../config'
@@ -14,13 +9,13 @@ import styles from '../../../assets/scss/layout/_layout.scss'
 const cx = classNames.bind(styles)
 
 interface PageLayoutProps {
-    children: any;
-    common: object;
-    setConnectionErrorModalVisible(value: boolean): any;
+    children: any
+    common: object
+    setConnectionErrorModalVisible(value: boolean): any
     layout: {
-        disableHeader: boolean;
-        disableFooter: boolean;
-        disableSidebar: boolean;
+        disableHeader: boolean
+        disableFooter: boolean
+        disableSidebar: boolean
     }
 }
 

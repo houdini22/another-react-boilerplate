@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import { AppContext } from '../../../../index'
 import {
@@ -10,21 +10,24 @@ import styles from '../../../../assets/scss/components/_accordion.scss'
 const cx = classNames.bind(styles)
 
 interface AccordionContainerProps {
-    children: any;
-    color: string;
-    rounded: boolean;
-    size: string;
-    separated: boolean;
-    type: string;
-    closeIcon: boolean;
+    children: any
+    color: string
+    rounded: boolean
+    size: string
+    separated: boolean
+    type: string
+    closeIcon: boolean
 }
 
 interface AccordionStateProps {
-    opened: string;
-    registered: object;
+    opened: string
+    registered: object
 }
 
-class Container extends React.Component<AccordionContainerProps, AccordionStateProps> {
+class Container extends React.Component<
+    AccordionContainerProps,
+    AccordionStateProps
+> {
     state: AccordionStateProps = { opened: '', registered: {} }
 
     registerItem({ name }) {
@@ -97,14 +100,14 @@ class Item extends React.Component {
         return (
             <AppContext.Consumer>
                 {({
-                      registerItem,
-                      isOpened,
-                      open,
-                      close,
-                      size,
-                      type,
-                      closeIcon,
-                  }) => {
+                    registerItem,
+                    isOpened,
+                    open,
+                    close,
+                    size,
+                    type,
+                    closeIcon,
+                }) => {
                     registerItem(name)
 
                     return (
@@ -153,23 +156,23 @@ class ItemHeader extends React.Component {
                                 }}
                             >
                                 {type === 'minimal' &&
-                                isOpened(name) &&
-                                closeIcon && (
-                                    <ArrowIconUp
-                                        className={cx(
-                                            'component-accordion__item__header__arrow-icon',
-                                        )}
-                                    />
-                                )}
+                                    isOpened(name) &&
+                                    closeIcon && (
+                                        <ArrowIconUp
+                                            className={cx(
+                                                'component-accordion__item__header__arrow-icon',
+                                            )}
+                                        />
+                                    )}
                                 {type === 'minimal' &&
-                                !isOpened(name) &&
-                                closeIcon && (
-                                    <ArrowIconDown
-                                        className={cx(
-                                            'component-accordion__item__header__arrow-icon',
-                                        )}
-                                    />
-                                )}
+                                    !isOpened(name) &&
+                                    closeIcon && (
+                                        <ArrowIconDown
+                                            className={cx(
+                                                'component-accordion__item__header__arrow-icon',
+                                            )}
+                                        />
+                                    )}
                                 <div
                                     className={cx(
                                         'component-accordion__item__header__content',
@@ -179,23 +182,23 @@ class ItemHeader extends React.Component {
                                 </div>
 
                                 {type === 'boxed' &&
-                                isOpened(name) &&
-                                closeIcon && (
-                                    <ArrowIconUp
-                                        className={cx(
-                                            'component-accordion__item__header__arrow-icon',
-                                        )}
-                                    />
-                                )}
+                                    isOpened(name) &&
+                                    closeIcon && (
+                                        <ArrowIconUp
+                                            className={cx(
+                                                'component-accordion__item__header__arrow-icon',
+                                            )}
+                                        />
+                                    )}
                                 {type === 'boxed' &&
-                                !isOpened(name) &&
-                                closeIcon && (
-                                    <ArrowIconDown
-                                        className={cx(
-                                            'component-accordion__item__header__arrow-icon',
-                                        )}
-                                    />
-                                )}
+                                    !isOpened(name) &&
+                                    closeIcon && (
+                                        <ArrowIconDown
+                                            className={cx(
+                                                'component-accordion__item__header__arrow-icon',
+                                            )}
+                                        />
+                                    )}
                             </div>
                         </AppContext.Provider>
                     )

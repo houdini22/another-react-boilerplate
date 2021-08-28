@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, Section, Button } from '../../../components'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
@@ -7,13 +7,13 @@ import { ModalFormContainer } from './ModalFormContainer'
 
 interface ModalViewState {
     options: {
-        color: string;
-        updateCount: number;
-        size: string;
-        placement: string;
-        animation: string;
-    },
-    opened: boolean;
+        color: string
+        updateCount: number
+        size: string
+        placement: string
+        animation: string
+    }
+    opened: boolean
 }
 
 class ModalView extends React.Component<any, ModalViewState> {

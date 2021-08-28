@@ -1,23 +1,26 @@
-import * as React from "react"
+import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, Section, Table } from '../../../components'
-import { createPresentationTab as _createPresentationTab, generateCode } from '../../../utils/tabs'
+import {
+    createPresentationTab as _createPresentationTab,
+    generateCode,
+} from '../../../utils/tabs'
 import { TableFormContainer } from './TableFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface TableViewProps {
-    colSize1: number;
-    colSize2: number;
-    createPresentationTab: any;
+    colSize1: number
+    colSize2: number
+    createPresentationTab: any
 }
 
 interface TableViewState {
     options: {
-        color: string;
-        size: string;
-        bordered: boolean;
-        striped: boolean;
-        updateCount: number;
+        color: string
+        size: string
+        bordered: boolean
+        striped: boolean
+        updateCount: number
     }
 }
 
@@ -45,7 +48,11 @@ class TableView extends React.Component<TableViewProps, TableViewState> {
     }
 
     render() {
-        const { colSize1 = 4, colSize2 = 12, createPresentationTab = _createPresentationTab } = this.props
+        const {
+            colSize1 = 4,
+            colSize2 = 12,
+            createPresentationTab = _createPresentationTab,
+        } = this.props
         const { options } = this.state
         const { bordered, color, size, striped } = options
 

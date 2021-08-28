@@ -1,26 +1,32 @@
-import * as React from "react"
+import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, Section, Progress } from '../../../components'
-import { createPresentationTab as _createPresentationTab, generateCode } from '../../../utils/tabs'
+import {
+    createPresentationTab as _createPresentationTab,
+    generateCode,
+} from '../../../utils/tabs'
 import { ProgressFormContainer } from './ProgressFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface ProgressViewProps {
-    colSize1: number;
-    colSize2: number;
-    createPresentationTab(): any;
+    colSize1: number
+    colSize2: number
+    createPresentationTab(): any
 }
 
 interface ProgressViewState {
     options: {
-        color: string;
-        size: string;
-        progress: number;
-        updateCount: number;
+        color: string
+        size: string
+        progress: number
+        updateCount: number
     }
 }
 
-class ProgressView extends React.Component<ProgressViewProps, ProgressViewState> {
+class ProgressView extends React.Component<
+    ProgressViewProps,
+    ProgressViewState
+> {
     constructor(props) {
         super(props)
         this.state = {
@@ -44,7 +50,8 @@ class ProgressView extends React.Component<ProgressViewProps, ProgressViewState>
     }
 
     render() {
-        const { colSize1 = 4, createPresentationTab = _createPresentationTab } = this.props
+        const { colSize1 = 4, createPresentationTab = _createPresentationTab } =
+            this.props
         const { options } = this.state
         const { size, color, progress } = options
 

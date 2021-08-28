@@ -1,11 +1,11 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/layout/_layout.scss'
 
 const cx = classNames.bind(styles)
 
 interface ContainerHeaderProps {
-    children: any;
+    children: any
 }
 
 class ContainerHeader extends React.Component<ContainerHeaderProps> {

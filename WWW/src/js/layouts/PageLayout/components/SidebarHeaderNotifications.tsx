@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { IoIosNotificationsOutline } from 'react-icons/all'
 import { FaInfoCircle } from 'react-icons/fa'
 import { TiWarning } from 'react-icons/ti'
@@ -20,24 +20,27 @@ const cx = classNames.bind(styles)
 
 interface Notification {
     [index: number]: {
-        type: string;
-        text: string;
-        href : string;
-        title: string;
+        type: string
+        text: string
+        href: string
+        title: string
     }
 }
 
 interface SidebarHeaderNotificationsProps {
-    notifications: Notification;
-    unread: number;
-    resetUnread() : any;
+    notifications: Notification
+    unread: number
+    resetUnread(): any
 }
 
 interface SidebarHeaderNotificationsState {
-    expanded: boolean;
+    expanded: boolean
 }
 
-class BaseSidebarHeaderNotifications extends React.Component<SidebarHeaderNotificationsProps, SidebarHeaderNotificationsState> {
+class BaseSidebarHeaderNotifications extends React.Component<
+    SidebarHeaderNotificationsProps,
+    SidebarHeaderNotificationsState
+> {
     state = {
         expanded: false,
     }
@@ -109,8 +112,10 @@ class BaseSidebarHeaderNotifications extends React.Component<SidebarHeaderNotifi
                                         return (
                                             <li
                                                 className={cx({
-                                                    'layout__header__bar__right__element--notifications__expanded__item': true,
-                                                    [`layout__header__bar__right__element--notifications__expanded__item--color-${type}`]: true,
+                                                    'layout__header__bar__right__element--notifications__expanded__item':
+                                                        true,
+                                                    [`layout__header__bar__right__element--notifications__expanded__item--color-${type}`]:
+                                                        true,
                                                 })}
                                                 key={`${type}-${text}-${href}`}
                                             >

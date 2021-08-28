@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import _ from 'lodash'
 import { IoIosClose as CloseIcon } from 'react-icons/io'
@@ -14,20 +14,20 @@ import styles from '../../../../assets/scss/components/_card.scss'
 const cx = classNames.bind(styles)
 
 interface CardProps {
-    children: any;
-    headerActions: any;
-    header: any;
-    color: string,
-    withCloseIcon: boolean,
-    onClickClose(): any,
-    className: string,
-    withMinimizeIcon: boolean,
-    size: string,
-    isLoading: boolean,
-    noBorderTop: boolean,
+    children: any
+    headerActions: any
+    header: any
+    color: string
+    withCloseIcon: boolean
+    onClickClose(): any
+    className: string
+    withMinimizeIcon: boolean
+    size: string
+    isLoading: boolean
+    noBorderTop: boolean
     footer: any
     footerType: string
-    style: object,
+    style: object
 }
 
 class Card extends React.Component<CardProps> {
@@ -168,7 +168,8 @@ class Card extends React.Component<CardProps> {
                     </div>,
                     <div
                         className={cx('component-card__footer', {
-                            [`component-card__footer--type-${footerType}`]: footerType,
+                            [`component-card__footer--type-${footerType}`]:
+                                footerType,
                         })}
                     >
                         {_.isFunction(footer) && footer()}

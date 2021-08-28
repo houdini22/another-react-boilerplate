@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import _ from 'lodash'
 import { AppContext } from '../../../../index'
@@ -8,29 +8,29 @@ import styles from '../../../../assets/scss/components/_tabs.scss'
 const cx = classNames.bind(styles)
 
 interface ContainerProps {
-    onTabChange(): any;
-    aligned: boolean;
-    solid: boolean;
-    color: string;
-    block: boolean;
-    size: string;
-    header: any;
-    children: any;
-    left: boolean;
-    outline: boolean;
-    rounded: boolean;
-    animation: string;
-    className: string;
-    contentHeight: boolean | number;
-    below: boolean;
+    onTabChange(): any
+    aligned: boolean
+    solid: boolean
+    color: string
+    block: boolean
+    size: string
+    header: any
+    children: any
+    left: boolean
+    outline: boolean
+    rounded: boolean
+    animation: string
+    className: string
+    contentHeight: boolean | number
+    below: boolean
 }
 
 interface ContainerState {
-    tabs: object;
-    triggersElement: any;
-    triggersElementRegistered: boolean;
-    contentElement: any;
-    contentElementRegistered: boolean;
+    tabs: object
+    triggersElement: any
+    triggersElementRegistered: boolean
+    contentElement: any
+    contentElementRegistered: boolean
 }
 
 export class Container extends React.Component<ContainerProps, ContainerState> {
@@ -202,9 +202,9 @@ export class Container extends React.Component<ContainerProps, ContainerState> {
 }
 
 interface TabProps {
-    children: any;
-    name: string;
-    setActiveTab(): any;
+    children: any
+    name: string
+    setActiveTab(): any
 }
 
 export class Tab extends React.Component<TabProps> {
@@ -255,10 +255,10 @@ export class Tab extends React.Component<TabProps> {
 }
 
 interface TriggerProps {
-    children: any;
-    noTab: boolean;
-    hidden: boolean;
-    onClick(): any;
+    children: any
+    noTab: boolean
+    hidden: boolean
+    onClick(): any
 }
 
 export class Trigger extends React.Component<TriggerProps> {
@@ -318,7 +318,7 @@ export class Trigger extends React.Component<TriggerProps> {
 }
 
 interface ContentProps {
-    children: any;
+    children: any
 }
 
 export class Content extends React.Component<ContentProps> {
@@ -341,7 +341,8 @@ export class Content extends React.Component<ContentProps> {
                     const Component = () => (
                         <div
                             className={cx({
-                                'component-tabs__content__outer__inner__tab': true,
+                                'component-tabs__content__outer__inner__tab':
+                                    true,
                                 'component-tabs__content__outer__inner__tab--is-active':
                                     _.get(activeTab, 'tabName') === tabName,
                             })}
@@ -357,4 +358,3 @@ export class Content extends React.Component<ContentProps> {
         )
     }
 }
-

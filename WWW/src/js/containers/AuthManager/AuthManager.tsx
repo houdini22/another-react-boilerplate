@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {
@@ -8,11 +8,8 @@ import {
 
 interface AuthManagerProps {
     auth: object
-    children(renderProps: {
-        auth: any;
-        logoff() : any;
-    }): any;
-    logoff(): any;
+    children(renderProps: { auth: any; logoff(): any }): any
+    logoff(): any
 }
 
 class AuthManagerBase extends React.Component<AuthManagerProps> {

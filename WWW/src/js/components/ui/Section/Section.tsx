@@ -1,12 +1,12 @@
-import * as React from "react"
+import * as React from 'react'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/components/_section.scss'
 
 const cx = classNames.bind(styles)
 
 interface SectionProps {
-    children: any;
-    style: object;
+    children: any
+    style: object
 }
 
 class Section extends React.Component<SectionProps> {
