@@ -2,10 +2,6 @@ import * as React from "react"
 import { PageHeader, Dropdown, Button } from '../../index'
 import { FaHome as HomeIcon } from 'react-icons/fa'
 import { RouteManager } from '../../../containers/RouteManager'
-import classNames from 'classnames/bind'
-import styles from '../../../../assets/scss/components/_page-header.scss'
-
-const cx = classNames.bind(styles)
 
 interface ComponentsPageHeaderProps {
     title: any;

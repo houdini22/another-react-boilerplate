@@ -35,7 +35,6 @@ interface AutoSaveFormProps {
     initialize(initialValues: object) : any;
     initialized: boolean;
     formName: string;
-
 }
 
 interface AutoSaveFormState {
@@ -52,13 +51,14 @@ export class AutoSaveForm extends React.Component<AutoSaveFormProps, AutoSaveFor
 
     autoSaveDisabled: boolean = false
 
+    state = {
+        pendingRequests: 0,
+        requestsToPerform: 0,
+    }
+
     constructor(props) {
         super(props)
 
-        this.state = {
-            pendingRequests: 0,
-            requestsToPerform: 0,
-        }
         this.isRequestInProgress = this.isRequestInProgress.bind(this)
     }
 

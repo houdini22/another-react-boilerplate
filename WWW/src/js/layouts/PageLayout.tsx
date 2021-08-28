@@ -5,12 +5,14 @@ import { connect } from 'react-redux'
 import { selectors } from '../reducers/common'
 
 interface PageLayoutProps {
-    component(): any;
+    component: any;
     layout: {
         disableHeader: boolean;
         disableFooter: boolean;
         disableSidebar: boolean;
     }
+    path: string;
+    exact?: boolean;
 }
 
 const PageLayoutBase = ({ component: Component, layout, ...rest } : PageLayoutProps) => {

@@ -16,11 +16,11 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ["style-loader", "css-loader"],
+                use: ["style-loader", { loader: "css-loader", options: { modules: true } }],
             },
             {
                 test: /\.(scss|sass)$/,
-                use: ["style-loader", "css-loader", "sass-loader"],
+                use: ["style-loader", { loader: "css-loader", options: { modules: true } }, "sass-loader"],
             },
             {
                 test: /\.(jpe?g|png|gif|svg|woff|woff2|eot|ttf)$/i,

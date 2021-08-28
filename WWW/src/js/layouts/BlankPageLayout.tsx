@@ -4,7 +4,8 @@ import { BlankPageLayoutContainer } from './BlankPageLayout/BlankPageLayoutConta
 import { connect } from 'react-redux'
 
 interface BlankPageLayoutProps {
-    component(): any;
+    component: any;
+    path: string;
 }
 
 const BlankPageLayoutBase = ({ component: Component, ...rest } : BlankPageLayoutProps) => {
