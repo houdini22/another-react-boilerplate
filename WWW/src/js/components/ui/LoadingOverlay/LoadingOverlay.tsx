@@ -5,8 +5,8 @@ import styles from '../../../../assets/scss/components/_loading-overlay.scss'
 const cx = classNames.bind(styles)
 
 interface LoadingOverlayProps {
-    size: string;
-    noBackground: boolean;
+    size?: string;
+    noBackground?: boolean;
 }
 
 class LoadingOverlay extends React.Component<LoadingOverlayProps> {

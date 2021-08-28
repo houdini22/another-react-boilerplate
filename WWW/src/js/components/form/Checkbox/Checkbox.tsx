@@ -9,12 +9,12 @@ import styles2 from '../../../../assets/scss/_animations.scss'
 const cx = classNames.bind({ ...styles1, ...styles2 })
 
 interface CheckboxProps {
-    error: string;
-    onChange(checked: boolean): any;
-    checked: boolean;
-    disabled: boolean;
-    value: boolean | string
-    loading: boolean;
+    error?: string;
+    onChange?(checked: boolean): any;
+    checked?: boolean;
+    disabled?: boolean;
+    value?: boolean | string
+    loading?: boolean;
 }
 
 class Checkbox extends React.Component<CheckboxProps> {

@@ -6,12 +6,12 @@ import styles1 from '../../../../assets/scss/components/_radio.scss'
 import styles2 from '../../../../assets/scss/_animations.scss'
 
 interface RadioProps {
-    error: string,
-    onChange(checked: boolean): any,
-    checked: boolean,
-    disabled: boolean,
-    value: boolean | string;
-    loading: boolean;
+    error?: string,
+    onChange?(checked: boolean): any,
+    checked?: boolean,
+    disabled?: boolean,
+    value?: boolean | string;
+    loading?: boolean;
 }
 
 interface RadioState {

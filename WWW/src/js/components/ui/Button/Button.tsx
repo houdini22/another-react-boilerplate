@@ -31,7 +31,7 @@ interface ButtonProps {
     borderless?: boolean;
     type?: "button" | "submit" | "reset";
     navigationHref?: string;
-    onClickNavigation(): any;
+    onClickNavigation?(): any;
     transparent?: boolean;
     style?: object;
 }

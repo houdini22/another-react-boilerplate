@@ -5,7 +5,6 @@ import _ from 'lodash'
 import { LoadingOverlay } from '../LoadingOverlay'
 import styles1 from '../../../../assets/scss/components/_alert.scss'
 import styles2 from '../../../../assets/scss/_animations.scss'
-import PropTypes from "prop-types";
 
 const cx = classNames.bind({ ...styles1, ...styles2 })
 
@@ -13,17 +12,17 @@ const animationDuration = 700
 
 interface AlertProps {
     children: any;
-    color: string;
-    className: string;
-    outline: boolean;
-    closeIcon: boolean;
-    onClickClose(): any;
-    withIcon: any;
-    withIconArrow: boolean;
-    iconHighlighted: boolean;
-    rounded: boolean;
-    background: boolean;
-    size: string;
+    color?: string;
+    className?: string;
+    outline?: boolean;
+    closeIcon?: boolean;
+    onClickClose?(controller: object): any;
+    withIcon?: any;
+    withIconArrow?: boolean;
+    iconHighlighted?: boolean;
+    rounded?: boolean;
+    background?: boolean;
+    size?: string;
 }
 
 class Alert extends React.Component<AlertProps> {

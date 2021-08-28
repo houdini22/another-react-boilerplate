@@ -7,7 +7,7 @@ import styles from '../../../../assets/scss/layout/_layout.scss'
 
 const cx = classNames.bind(styles)
 
-interface ContainterProps {
+interface ContainerProps {
     children: any;
     layout: {
         floatingSidebar: boolean;
@@ -15,7 +15,7 @@ interface ContainterProps {
     }
 }
 
-class ContainerBase extends React.Component<ContainterProps> {
+class ContainerBase extends React.Component<ContainerProps> {
     render() {
         const {
             children,
