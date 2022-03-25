@@ -1,6 +1,5 @@
 import { createStore, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import { createHashHistory } from 'history'
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 import * as reducers from '../reducers'
@@ -9,8 +8,6 @@ const reducer = combineReducers({
     ...reducers,
     form: formReducer,
 })
-
-export const history = createHashHistory()
 
 function configureStoreProd(initialState) {
     return createStore(reducer, initialState, compose(applyMiddleware(thunk)))
@@ -24,14 +21,6 @@ function configureStoreDev(initialState) {
         initialState,
         composeEnhancers(applyMiddleware(thunk)),
     )
-
-    if (module.hot) {
-        // Enable Webpack hot module replacement for reducers
-        module.hot.accept('../reducers', () => {
-            const nextReducer = require('../reducers').default // eslint-disable-line global-require
-            store.replaceReducer(nextReducer)
-        })
-    }
 
     return store
 }

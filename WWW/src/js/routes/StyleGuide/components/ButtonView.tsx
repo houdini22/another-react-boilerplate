@@ -10,9 +10,9 @@ import { FaImage as ButtonIcon } from 'react-icons/fa'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface ButtonViewProps {
-    colSize1: number
-    colSize2: number
-    createPresentationTab(): any
+    colSize1?: number
+    colSize2?: number
+    createPresentationTab?(): any
 }
 
 interface ButtonViewState {

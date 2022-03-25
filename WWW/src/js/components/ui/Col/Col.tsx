@@ -6,12 +6,12 @@ const cx = classNames.bind(styles)
 
 interface ColProps {
     children: any
-    className: string
-    xs: number | string
-    sm: number | string
-    md: number | string
-    lg: number | string
-    style: object
+    className?: string
+    xs?: number | string
+    sm?: number | string
+    md?: number | string
+    lg?: number | string
+    style?: object
 }
 
 class Col extends React.Component<ColProps> {

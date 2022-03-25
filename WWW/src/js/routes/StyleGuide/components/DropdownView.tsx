@@ -19,9 +19,9 @@ import styles from '../../../../assets/scss/_helpers.scss'
 const cx = classNames.bind(styles)
 
 interface DropdownViewProps {
-    colSize1: number
-    colSize2: number
-    createPresentationTab(): any
+    colSize1?: number
+    colSize2?: number
+    createPresentationTab?(): any
 }
 
 interface DropdownViewState {

@@ -59,10 +59,10 @@ export class LoginForm extends React.Component<LoginFormProps> {
                     )}
                     {button && (
                         <RouteManager>
-                            {({ history: { push } }) => (
+                            {({ navigate }) => (
                                 <Button
                                     onClick={() => {
-                                        push('/register')
+                                        navigate('/register')
                                     }}
                                 >
                                     Register

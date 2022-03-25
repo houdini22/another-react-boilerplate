@@ -5,7 +5,7 @@ import { createPresentationTab as _createPresentationTab } from '../../../utils/
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface LoadingOverlayProps {
-    createPresentationTab(): any
+    createPresentationTab?(): any
 }
 
 class LoadingOverlayView extends React.Component<LoadingOverlayProps> {

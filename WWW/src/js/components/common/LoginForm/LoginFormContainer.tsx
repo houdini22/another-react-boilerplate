@@ -2,7 +2,7 @@ import { reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import LoginForm from './LoginForm'
 import { actions as authActions } from '../../../reducers/auth'
-import { withRouter } from 'react-router'
+import { withRouter } from '../../../helpers/router'
 import { compose } from 'redux'
 const { login } = authActions
 import { LocalStorage } from '../../../modules/database'

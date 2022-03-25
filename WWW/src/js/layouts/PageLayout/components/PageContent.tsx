@@ -6,7 +6,7 @@ const cx = classNames.bind(styles)
 
 interface PageContentProps {
     children: any
-    className: string
+    className?: string
 }
 
 class PageContent extends React.Component<PageContentProps> {

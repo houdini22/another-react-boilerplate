@@ -16,7 +16,7 @@ const cx = classnames.bind(styles)
 interface ButtonProps {
     children: any
     isLoading?: boolean
-    onClick(event: any, controller: object): any
+    onClick?(event: any, controller: object): any
     size?: string
     disabled?: boolean
     color?: string

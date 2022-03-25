@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter } from '../../helpers/router'
 
 const parseQueryString = (queryString) => {
     const query = {}
@@ -15,25 +15,25 @@ const parseQueryString = (queryString) => {
 
 interface RouteManagerProps {
     children(renderProps: {
-        history: any
+        params: any
         location: any
-        match: any
+        navigate: any
         query: any
     }): any
-    history: object
     location: object
-    match: object
+    navigate()
+    params: object
 }
 
 class RouteManagerBase extends React.Component<RouteManagerProps> {
     render() {
-        const { children, history, location, match } = this.props
+        const { children, location, navigate, params } = this.props
         const query = parseQueryString(location['search'])
 
         const renderProps = {
-            history,
+            params,
             location,
-            match,
+            navigate,
             query,
         }
 

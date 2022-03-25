@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { IoIosNotificationsOutline } from 'react-icons/all'
+import { IoIosNotificationsOutline } from 'react-icons/io'
 import { FaInfoCircle } from 'react-icons/fa'
 import { TiWarning } from 'react-icons/ti'
 import { CgDanger } from 'react-icons/cg'
-import { AiTwotoneLike } from 'react-icons/all'
+import { AiTwotoneLike } from 'react-icons/ai'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/layout/_layout.scss'
 import { connect } from 'react-redux'
@@ -82,9 +82,9 @@ class BaseSidebarHeaderNotifications extends React.Component<
                 )}
             >
                 <div
-                    className={
-                        cx('layout__header__bar__right__element--notifications__button')
-                    }
+                    className={cx(
+                        'layout__header__bar__right__element--notifications__button',
+                    )}
                 >
                     <IoIosNotificationsOutline
                         onClick={() => {
@@ -155,9 +155,9 @@ class BaseSidebarHeaderNotifications extends React.Component<
                             </ul>
                         </Scrollbars>
                         <div
-                            className={
-                                cx('layout__header__bar__right__element--notifications__expanded__view-all')
-                            }
+                            className={cx(
+                                'layout__header__bar__right__element--notifications__expanded__view-all',
+                            )}
                         >
                             <Link to={'/notifications'}>
                                 View all notifications

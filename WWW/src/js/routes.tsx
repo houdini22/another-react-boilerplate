@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { Switch, withRouter, HashRouter as Router } from 'react-router-dom'
-
-import { PageLayout, BlankPageLayout } from './layouts'
+import { Routes, HashRouter as Router, Route } from 'react-router-dom'
+import { PageLayoutContainer } from './layouts/PageLayout/PageLayoutContainer'
+import { BlankPageLayoutContainer } from './layouts/BlankPageLayout/BlankPageLayoutContainer'
 
 import { FaqView } from './routes/Faq'
 import { RateView } from './routes/Rate'
@@ -37,62 +37,236 @@ import {
 
 import { userIsAuthenticated } from './modules/auth'
 
-const AppContainer = () => (
+const App = () => (
     <Router>
-        <Switch>
-            <PageLayout path="/faq" component={FaqView} />
-            <PageLayout path="/contact-me" component={AboutView} />
-            <PageLayout
+        <Routes>
+            <Route
+                path="/contact-me"
+                element={
+                    <PageLayoutContainer>
+                        <AboutView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
                 path="/restricted-area"
-                component={userIsAuthenticated(RateView)}
+                element={
+                    <PageLayoutContainer>
+                        {userIsAuthenticated(RateView)}
+                    </PageLayoutContainer>
+                }
             />
-            <PageLayout
+            <Route
                 path="/components/accordion"
-                component={AccordionView}
+                element={
+                    <PageLayoutContainer>
+                        <AccordionView />
+                    </PageLayoutContainer>
+                }
             />
-            <PageLayout path="/components/alert" component={AlertView} />
-            <PageLayout path="/components/badge" component={BadgeView} />
-            <PageLayout path="/components/button" component={ButtonView} />
-            <PageLayout
+            <Route
+                path="/components/alert"
+                element={
+                    <PageLayoutContainer>
+                        <AlertView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
+                path="/components/badge"
+                element={
+                    <PageLayoutContainer>
+                        <BadgeView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
+                path="/components/button"
+                element={
+                    <PageLayoutContainer>
+                        <ButtonView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
                 path="/components/button-group"
-                component={ButtonGroupView}
+                element={
+                    <PageLayoutContainer>
+                        <ButtonGroupView />
+                    </PageLayoutContainer>
+                }
             />
-            <PageLayout path="/components/card" component={CardView} />
-            <PageLayout path="/components/dropdown" component={DropdownView} />
-            <PageLayout path="/components/header" component={HeaderView} />
-            <PageLayout path="/components/iconbox" component={IconBoxView} />
-            <PageLayout path="/components/label" component={LabelView} />
-            <PageLayout path="/components/list" component={ListView} />
-            <PageLayout
+            <Route
+                path="/components/card"
+                element={
+                    <PageLayoutContainer>
+                        <CardView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
+                path="/components/dropdown"
+                element={
+                    <PageLayoutContainer>
+                        <DropdownView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
+                path="/components/header"
+                element={
+                    <PageLayoutContainer>
+                        <HeaderView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
+                path="/components/iconbox"
+                element={
+                    <PageLayoutContainer>
+                        <IconBoxView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
+                path="/components/label"
+                element={
+                    <PageLayoutContainer>
+                        <LabelView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
+                path="/components/list"
+                element={
+                    <PageLayoutContainer>
+                        <ListView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
                 path="/components/loading-overlay"
-                component={LoadingOverlayView}
+                element={
+                    <PageLayoutContainer>
+                        <LoadingOverlayView />
+                    </PageLayoutContainer>
+                }
             />
-            <PageLayout path="/components/modal" component={ModalView} />
-            <PageLayout
+            <Route
+                path="/components/modal"
+                element={
+                    <PageLayoutContainer>
+                        <ModalView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
                 path="/components/page-header"
-                component={PageHeaderView}
+                element={
+                    <PageLayoutContainer>
+                        <PageHeaderView />
+                    </PageLayoutContainer>
+                }
             />
-            <PageLayout
+            <Route
                 path="/components/notifications"
-                component={NotificationsView}
+                element={
+                    <PageLayoutContainer>
+                        <NotificationsView />
+                    </PageLayoutContainer>
+                }
             />
-            <PageLayout path="/components/progress" component={ProgressView} />
-            <PageLayout path="/components/popover" component={PopoverView} />
-            <PageLayout path="/components/tabs" component={TabsView} />
-            <PageLayout path="/components/table" component={TableView} />
-            <PageLayout path="/components/tooltip" component={TooltipView} />
-            <PageLayout path="/components/column" component={ColumnView} />
-            <PageLayout
+            <Route
+                path="/components/progress"
+                element={
+                    <PageLayoutContainer>
+                        <ProgressView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
+                path="/components/popover"
+                element={
+                    <PageLayoutContainer>
+                        <PopoverView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
+                path="/components/tabs"
+                element={
+                    <PageLayoutContainer>
+                        <TabsView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
+                path="/components/table"
+                element={
+                    <PageLayoutContainer>
+                        <TableView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
+                path="/components/tooltip"
+                element={
+                    <PageLayoutContainer>
+                        <TooltipView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
+                path="/components/column"
+                element={
+                    <PageLayoutContainer>
+                        <ColumnView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
                 path="/components/typography"
-                component={TypographyView}
+                element={
+                    <PageLayoutContainer>
+                        <TypographyView />
+                    </PageLayoutContainer>
+                }
             />
-            <PageLayout path="/forms" component={FormsView} />
-            <BlankPageLayout path="/pages/login-page" component={IndexView} />
-            <PageLayout path="/pages" component={PagesView} />
-            <PageLayout exact path="/" component={FaqView} />
-        </Switch>
+            <Route
+                path="/forms"
+                element={
+                    <PageLayoutContainer>
+                        <FormsView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
+                path="/pages"
+                element={
+                    <PageLayoutContainer>
+                        <PagesView />
+                    </PageLayoutContainer>
+                }
+            />
+            <Route
+                path="/pages/login-page"
+                element={
+                    <BlankPageLayoutContainer>
+                        <IndexView />
+                    </BlankPageLayoutContainer>
+                }
+            />
+            <Route
+                path="/"
+                element={
+                    <PageLayoutContainer>
+                        <FaqView />
+                    </PageLayoutContainer>
+                }
+            />
+        </Routes>
     </Router>
 )
 
-export const App = withRouter(AppContainer)
+export { App }
 export default App

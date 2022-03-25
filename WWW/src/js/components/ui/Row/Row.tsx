@@ -6,9 +6,9 @@ const cx = classNames.bind(styles)
 
 interface RowProps {
     children: any
-    style: object
-    builder: any
-    className: string
+    style?: object
+    builder?: any
+    className?: string
 }
 
 class Row extends React.Component<RowProps> {

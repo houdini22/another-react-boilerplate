@@ -13,9 +13,9 @@ import styles from '../../../../assets/scss/_animations.scss'
 const cx = classNames.bind(styles)
 
 interface PopoverViewProps {
-    colSize1: number
-    colSize2: number
-    createPresentationTab(): any
+    colSize1?: number
+    colSize2?: number
+    createPresentationTab?(): any
 }
 
 interface PopoverViewState {

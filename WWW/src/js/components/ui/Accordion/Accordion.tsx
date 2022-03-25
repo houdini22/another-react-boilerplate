@@ -93,7 +93,12 @@ class Container extends React.Component<
     }
 }
 
-class Item extends React.Component {
+interface AccordionItemProps {
+    children: any
+    name: string
+}
+
+class Item extends React.Component<AccordionItemProps> {
     render() {
         const { children, name } = this.props
 

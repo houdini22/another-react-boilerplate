@@ -6,9 +6,9 @@ import { LabelFormContainer } from './LabelFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface LabelViewProps {
-    colSize1: number
-    colSize2: number
-    createPresentationTab(): any
+    colSize1?: number
+    colSize2?: number
+    createPresentationTab?(): any
 }
 
 interface LabelViewState {

@@ -5,7 +5,7 @@ import { createPresentationTab as _createPresentationTab } from '../../../utils/
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface ColumnViewProps {
-    createPresentationTab(): any
+    createPresentationTab?(): any
 }
 
 class ColumnView extends React.Component<ColumnViewProps> {

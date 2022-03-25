@@ -10,9 +10,9 @@ import { AlertFormContainer } from './AlertFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface AlertViewProps {
-    colSize1: number
-    colSize2: number
-    createPresentationTab(): any
+    colSize1?: number
+    colSize2?: number
+    createPresentationTab?(): any
 }
 
 interface AlertViewState {

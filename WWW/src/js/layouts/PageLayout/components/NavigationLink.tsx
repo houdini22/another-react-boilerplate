@@ -15,6 +15,7 @@ interface NavigationLinkProps {
     active: boolean
     nested: any
     href: string
+    componentType: any
 }
 
 interface NavigationLinkState {
@@ -37,60 +38,56 @@ class NavigationLink extends React.Component<
         const { expanded } = this.state
 
         return (
-            <RouteManager>
-                {({ match: { url } }) => (
-                    <li
-                        className={cx(
-                            'layout__sidebar__content__navigation__links__link',
-                            {
-                                'layout__sidebar__content__navigation__links__link--active':
-                                    active,
-                            },
-                        )}
-                    >
-                        <Link
-                            to={href}
-                            onClick={() => {
-                                if (!_.isEmpty(nested)) {
-                                    this.setState({
-                                        expanded: !expanded,
-                                    })
-                                }
-                            }}
-                        >
-                            <div>
-                                <span
-                                    className={cx(
-                                        'layout__sidebar__content__navigation__links__link__icon',
-                                    )}
-                                >
-                                    {icon}
-                                </span>
-                                <span
-                                    className={cx(
-                                        'layout__sidebar__content__navigation__links__link__caption',
-                                    )}
-                                >
-                                    {children}
-                                </span>
-                                {!_.isEmpty(nested) && (
-                                    <span
-                                        className={cx(
-                                            'layout__sidebar__content__navigation__links__link__nested',
-                                        )}
-                                    >
-                                        {!expanded && <AiOutlineRight />}
-                                        {!!expanded && <AiOutlineDown />}
-                                    </span>
-                                )}
-                            </div>
-                        </Link>
-                        {!_.isEmpty(nested) && expanded && (
-                            <NavigationItems items={nested} />
-                        )}
-                    </li>
+            <li
+                className={cx(
+                    'layout__sidebar__content__navigation__links__link',
+                    {
+                        'layout__sidebar__content__navigation__links__link--active':
+                            active,
+                    },
                 )}
-            </RouteManager>
+            >
+                <Link
+                    to={href}
+                    onClick={() => {
+                        if (!_.isEmpty(nested)) {
+                            this.setState({
+                                expanded: !expanded,
+                            })
+                        }
+                    }}
+                >
+                    <div>
+                        <span
+                            className={cx(
+                                'layout__sidebar__content__navigation__links__link__icon',
+                            )}
+                        >
+                            {icon}
+                        </span>
+                        <span
+                            className={cx(
+                                'layout__sidebar__content__navigation__links__link__caption',
+                            )}
+                        >
+                            {children}
+                        </span>
+                        {!_.isEmpty(nested) && (
+                            <span
+                                className={cx(
+                                    'layout__sidebar__content__navigation__links__link__nested',
+                                )}
+                            >
+                                {!expanded && <AiOutlineRight />}
+                                {!!expanded && <AiOutlineDown />}
+                            </span>
+                        )}
+                    </div>
+                </Link>
+                {!_.isEmpty(nested) && expanded && (
+                    <NavigationItems items={nested} />
+                )}
+            </li>
         )
     }
 }

@@ -6,7 +6,7 @@ const cx = classNames.bind(styles)
 
 interface SectionProps {
     children: any
-    style: object
+    style?: object
 }
 
 class Section extends React.Component<SectionProps> {

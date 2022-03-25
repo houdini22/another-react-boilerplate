@@ -49,7 +49,7 @@ class TBody extends React.Component {
 }
 
 interface TrProps {
-    color: string
+    color?: string
     children: any
 }
 
@@ -71,8 +71,8 @@ class Tr extends React.Component<TrProps> {
 }
 
 interface ThProps {
-    xs: number
-    alignCenter: boolean
+    xs?: number
+    alignCenter?: boolean
 }
 
 class Th extends React.Component<ThProps> {
@@ -97,8 +97,8 @@ class Th extends React.Component<ThProps> {
 }
 
 interface TdProps {
-    xs: number
-    alignCenter: boolean
+    xs?: number
+    alignCenter?: boolean
 }
 
 class Td extends React.Component<TdProps> {

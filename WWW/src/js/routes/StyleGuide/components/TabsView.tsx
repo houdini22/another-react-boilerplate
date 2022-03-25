@@ -7,8 +7,8 @@ import { TabsFormContainer } from './TabsFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface TabsViewProps {
-    colSize1: number
-    colSize2: number
+    colSize1?: number
+    colSize2?: number
 }
 
 interface TabsViewState {

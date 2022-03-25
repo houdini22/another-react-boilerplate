@@ -20,7 +20,7 @@ import {
     MdTextFormat as TypographyIcon,
 } from 'react-icons/md'
 import { Badge } from '../components/ui/Badge'
-import { IoIosNotificationsOutline } from 'react-icons/all'
+import { IoIosNotificationsOutline } from 'react-icons/io'
 
 export const navigation = [
     {
@@ -29,7 +29,7 @@ export const navigation = [
     },
     {
         type: 'link',
-        href: '/faq',
+        href: '/',
         caption: (
             <span>
                 FAQ{' '}

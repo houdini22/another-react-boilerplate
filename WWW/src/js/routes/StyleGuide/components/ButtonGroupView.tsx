@@ -6,9 +6,9 @@ import { createPresentationTab as _createPresentationTab } from '../../../utils/
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface ButtonGroupViewProps {
-    colSize1: number
-    colSize2: number
-    createPresentationTab(): any
+    colSize1?: number
+    colSize2?: number
+    createPresentationTab?(): any
 }
 
 interface ButtonGroupViewState {

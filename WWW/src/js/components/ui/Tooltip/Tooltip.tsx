@@ -8,15 +8,15 @@ const cx = classNames.bind({ ...styles1, ...styles2 })
 
 interface TooltipProps {
     children: any
-    color: string
-    className: string
-    size: string
-    outline: boolean
-    placement: string
-    tooltip: any
-    trigger: string
-    onOpen(): any
-    onClose(): any
+    color?: string
+    className?: string
+    size?: string
+    outline?: boolean
+    placement?: string
+    tooltip?: any
+    trigger?: string
+    onOpen?(): any
+    onClose?(): any
 }
 
 interface TooltipState {

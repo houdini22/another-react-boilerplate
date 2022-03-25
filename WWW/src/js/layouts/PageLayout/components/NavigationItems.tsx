@@ -11,7 +11,7 @@ const cx = classNames.bind(styles)
 const NavigationItems = ({ items }) => {
     return (
         <RouteManager>
-            {({ match: { url } }) => (
+            {({ location: { pathname } }) => (
                 <AuthManager>
                     {({ auth: { isLoggedIn, user }, logoff }) => (
                         <ul
@@ -47,7 +47,7 @@ const NavigationItems = ({ items }) => {
                                             href={href}
                                             icon={icon}
                                             key={`${type}-${caption}-${href}`}
-                                            active={url === href}
+                                            active={pathname === href}
                                             componentType={componentType}
                                             nested={children}
                                         >

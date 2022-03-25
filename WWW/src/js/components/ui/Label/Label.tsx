@@ -9,18 +9,19 @@ const cx = classNames.bind(styles)
 
 interface LabelProps {
     children: any
-    color: string
-    className: string
-    rounded: boolean
-    roundless: boolean
-    block: boolean
-    href: string
-    iconOnly: boolean
-    striped: boolean
-    outline: boolean
-    arrow: boolean
-    size: string
-    disableContext: boolean
+    color?: string
+    className?: string
+    rounded?: boolean
+    roundless?: boolean
+    block?: boolean
+    href?: string
+    iconOnly?: boolean
+    striped?: boolean
+    outline?: boolean
+    arrow?: boolean
+    size?: string
+    disableContext?: boolean
+    style?: object
 }
 
 class Label extends React.Component<LabelProps> {

@@ -10,16 +10,16 @@ const cx = classNames.bind(styles)
 
 interface ContainerProps {
     children: any
-    pixelsWidth: number
-    outline: boolean
-    color: string
-    className: string
-    placement: string
-    noPadding: boolean
-    disableOutsideClick: boolean
-    transparent: boolean
-    trigger: any
-    style: object
+    pixelsWidth?: number
+    outline?: boolean
+    color?: string
+    className?: string
+    placement?: string
+    noPadding?: boolean
+    disableOutsideClick?: boolean
+    transparent?: boolean
+    trigger?: any
+    style?: object
 }
 
 interface ContainerState {

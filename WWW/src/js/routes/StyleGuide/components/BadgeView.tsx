@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
-import { Row, Col, Section, Badge, Label } from '../../../components'
+import { Row, Col, Section, Badge } from '../../../components'
 import {
     createPresentationTab as _createPresentationTab,
     generateCode,
@@ -9,9 +9,9 @@ import { BadgeFormContainer } from './BadgeFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface BadgeViewProps {
-    colSize1: number
-    colSize2: number
-    createPresentationTab(): any
+    colSize1?: number
+    colSize2?: number
+    createPresentationTab?(): any
 }
 
 interface BadgeViewState {

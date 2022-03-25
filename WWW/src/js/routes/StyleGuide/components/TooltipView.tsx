@@ -9,9 +9,9 @@ import { TooltipFormContainer } from './TooltipFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface TooltipViewProps {
-    colSize1: number
-    colSize2: number
-    createPresentationTab: any
+    colSize1?: number
+    colSize2?: number
+    createPresentationTab?: any
 }
 
 interface TooltipViewState {
@@ -22,6 +22,7 @@ interface TooltipViewState {
         placement: string
         trigger: string
         updateCount: number
+        color: string
     }
 }
 

@@ -14,7 +14,7 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
 
         return (
             <RouteManager>
-                {({ match: { path } }) => (
+                {({ location: { pathname } }) => (
                     <PageHeader.Container>
                         <PageHeader.Title>{title}</PageHeader.Title>
                         <PageHeader.Breadcrumbs>
@@ -33,7 +33,8 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/accordion"
                                             highlighted={
-                                                path === '/components/accordion'
+                                                pathname ===
+                                                '/components/accordion'
                                             }
                                         >
                                             Accordion
@@ -41,7 +42,7 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/alert"
                                             highlighted={
-                                                path === '/components/alert'
+                                                pathname === '/components/alert'
                                             }
                                         >
                                             Alert
@@ -49,7 +50,7 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/badge"
                                             highlighted={
-                                                path === '/components/badge'
+                                                pathname === '/components/badge'
                                             }
                                         >
                                             Badge
@@ -57,7 +58,8 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/button"
                                             highlighted={
-                                                path === '/components/button'
+                                                pathname ===
+                                                '/components/button'
                                             }
                                         >
                                             Button
@@ -65,7 +67,7 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/button-group"
                                             highlighted={
-                                                path ===
+                                                pathname ===
                                                 '/components/button-group'
                                             }
                                         >
@@ -74,7 +76,7 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/card"
                                             highlighted={
-                                                path === '/components/card'
+                                                pathname === '/components/card'
                                             }
                                         >
                                             Card
@@ -82,7 +84,8 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/column"
                                             highlighted={
-                                                path === '/components/column'
+                                                pathname ===
+                                                '/components/column'
                                             }
                                         >
                                             Column
@@ -90,7 +93,8 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/dropdown"
                                             highlighted={
-                                                path === '/components/dropdown'
+                                                pathname ===
+                                                '/components/dropdown'
                                             }
                                         >
                                             Dropdown
@@ -98,7 +102,7 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/label"
                                             highlighted={
-                                                path === '/components/label'
+                                                pathname === '/components/label'
                                             }
                                         >
                                             Label
@@ -106,7 +110,7 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/list"
                                             highlighted={
-                                                path === '/components/list'
+                                                pathname === '/components/list'
                                             }
                                         >
                                             List
@@ -114,7 +118,7 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/loading-overlay"
                                             highlighted={
-                                                path ===
+                                                pathname ===
                                                 '/components/loading-overlay'
                                             }
                                         >
@@ -123,7 +127,7 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/modal"
                                             highlighted={
-                                                path === '/components/modal'
+                                                pathname === '/components/modal'
                                             }
                                         >
                                             Modal
@@ -131,7 +135,7 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/notifications"
                                             highlighted={
-                                                path ===
+                                                pathname ===
                                                 '/components/notifications'
                                             }
                                         >
@@ -140,7 +144,7 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/page-header"
                                             highlighted={
-                                                path ===
+                                                pathname ===
                                                 '/components/page-header'
                                             }
                                         >
@@ -149,7 +153,8 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/popover"
                                             highlighted={
-                                                path === '/components/popover'
+                                                pathname ===
+                                                '/components/popover'
                                             }
                                         >
                                             Popover
@@ -157,7 +162,8 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/progress"
                                             highlighted={
-                                                path === '/components/progress'
+                                                pathname ===
+                                                '/components/progress'
                                             }
                                         >
                                             Progress
@@ -165,7 +171,7 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/tabs"
                                             highlighted={
-                                                path === '/components/tabs'
+                                                pathname === '/components/tabs'
                                             }
                                         >
                                             Tabs
@@ -173,7 +179,7 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/table"
                                             highlighted={
-                                                path === '/components/table'
+                                                pathname === '/components/table'
                                             }
                                         >
                                             Table
@@ -181,7 +187,8 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/tooltip"
                                             highlighted={
-                                                path === '/components/tooltip'
+                                                pathname ===
+                                                '/components/tooltip'
                                             }
                                         >
                                             Tooltip
@@ -189,7 +196,7 @@ export class ComponentsPageHeader extends React.Component<ComponentsPageHeaderPr
                                         <Dropdown.Item
                                             href="/components/typography"
                                             highlighted={
-                                                path ===
+                                                pathname ===
                                                 '/components/typography'
                                             }
                                         >

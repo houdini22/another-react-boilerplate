@@ -8,21 +8,21 @@ import styles from '../../../../assets/scss/components/_tabs.scss'
 const cx = classNames.bind(styles)
 
 interface ContainerProps {
-    onTabChange(): any
-    aligned: boolean
-    solid: boolean
-    color: string
-    block: boolean
-    size: string
-    header: any
-    children: any
-    left: boolean
-    outline: boolean
-    rounded: boolean
-    animation: string
-    className: string
-    contentHeight: boolean | number
-    below: boolean
+    onTabChange?(): any
+    aligned?: boolean
+    solid?: boolean
+    color?: string
+    block?: boolean
+    size?: string
+    header?: any
+    children?: any
+    left?: boolean
+    outline?: boolean
+    rounded?: boolean
+    animation?: string
+    className?: string
+    contentHeight?: boolean | number
+    below?: boolean
 }
 
 interface ContainerState {
@@ -203,8 +203,8 @@ export class Container extends React.Component<ContainerProps, ContainerState> {
 
 interface TabProps {
     children: any
-    name: string
-    setActiveTab(): any
+    name?: string
+    setActiveTab?(): any
 }
 
 export class Tab extends React.Component<TabProps> {
@@ -256,9 +256,9 @@ export class Tab extends React.Component<TabProps> {
 
 interface TriggerProps {
     children: any
-    noTab: boolean
-    hidden: boolean
-    onClick(): any
+    noTab?: boolean
+    hidden?: boolean
+    onClick?(): any
 }
 
 export class Trigger extends React.Component<TriggerProps> {
@@ -318,7 +318,7 @@ export class Trigger extends React.Component<TriggerProps> {
 }
 
 interface ContentProps {
-    children: any
+    children?: any
 }
 
 export class Content extends React.Component<ContentProps> {

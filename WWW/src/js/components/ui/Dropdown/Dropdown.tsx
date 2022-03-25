@@ -14,7 +14,7 @@ interface DropdownContainerProps {
     color?: string
     triggerSize?: string
     triggerColor?: string
-    disableOutsideClick?: string
+    disableOutsideClick?: boolean
     trigger?: string
     placement?: string
     transparent?: boolean
@@ -154,8 +154,8 @@ export class DropdownContainer extends React.Component<
 
 interface DropdownTriggerProps {
     children: any
-    component: any
-    transparent: boolean
+    component?: any
+    transparent?: boolean
 }
 
 export class DropdownTrigger extends React.Component<DropdownTriggerProps> {

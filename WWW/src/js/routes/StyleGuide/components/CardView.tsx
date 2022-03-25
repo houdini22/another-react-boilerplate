@@ -17,9 +17,9 @@ import { createPresentationTab as _createPresentationTab } from '../../../utils/
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
 interface CardViewProps {
-    colSize1: number
-    colSize2: number
-    createPresentationTab(): any
+    colSize1?: number
+    colSize2?: number
+    createPresentationTab?(): any
 }
 
 interface CardViewState {

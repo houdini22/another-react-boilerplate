@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {createPortal} from 'react-dom'
+import { createPortal } from 'react-dom'
 import classNames from 'classnames/bind'
 import { FaWindowClose as CloseIcon } from 'react-icons/fa'
 import _ from 'lodash'
@@ -24,17 +24,17 @@ class ModalContainer extends React.Component<ModalContainerProps> {
 
         if (!visible) return null
 
-        return createPortal((
+        return createPortal(
             <div className={cx('component-modal-container')}>
                 <div
                     className={cx('component-modal-container__modal', {
                         [`animation--${animation}`]: animation,
                         [`component-modal-container__modal--color-${color}`]:
-                        color,
+                            color,
                         [`component-modal-container__modal--size-${size}`]:
-                        size,
+                            size,
                         [`component-modal-container__modal--placement-${placement}`]:
-                        placement,
+                            placement,
                     })}
                 >
                     <div
@@ -45,8 +45,9 @@ class ModalContainer extends React.Component<ModalContainerProps> {
                         {children}
                     </div>
                 </div>
-            </div>
-        ), document.body)
+            </div>,
+            document.body,
+        )
     }
 }
 
