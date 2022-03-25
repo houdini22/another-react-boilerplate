@@ -83,7 +83,7 @@ class BaseSidebarHeaderNotifications extends React.Component<
             >
                 <div
                     className={
-                        'layout__header__bar__right__element--notifications__button'
+                        cx('layout__header__bar__right__element--notifications__button')
                     }
                 >
                     <IoIosNotificationsOutline
@@ -156,7 +156,7 @@ class BaseSidebarHeaderNotifications extends React.Component<
                         </Scrollbars>
                         <div
                             className={
-                                'layout__header__bar__right__element--notifications__expanded__view-all'
+                                cx('layout__header__bar__right__element--notifications__expanded__view-all')
                             }
                         >
                             <Link to={'/notifications'}>

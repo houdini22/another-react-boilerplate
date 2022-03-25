@@ -23,6 +23,7 @@
         width: $SIDEBAR_DESKTOP_WIDTH;
         background-color: $SIDEBAR_BACKGROUND_COLOR;
         transition: width 0.23s ease;
+        z-index: 9999;
 
         .layout__sidebar__content {
             height: 100%;
@@ -254,6 +255,7 @@
         display: flex;
         align-items: center;
         background: $mainBackground;
+        z-index: 9999;
 
         & > .layout__header__logo {
             width: $SIDEBAR_DESKTOP_WIDTH;
@@ -358,7 +360,7 @@
                             text-align: center;
                             position: relative;
 
-                            & > .component-badge {
+                            & > :nth-child(2) {
                                 font-size: 0.5rem;
                                 position: absolute;
                                 right: 10px;
@@ -609,7 +611,7 @@
         }
 
         &.layout__container--floating {
-            margin-left: $HEADER_DESKTOP_HEIGHT;
+            margin-left: 70px;
         }
     }
 
