@@ -12,14 +12,11 @@ module.exports = merge(commonConfig, {
         'webpack/hot/only-dev-server', // bundle the client for hot reloading, only- means to only hot reload for successful updates
         './index.tsx', // the entry point of our app
     ],
-    devServer: {
-        hot: true, // enable HMR on the server
-    },
     devtool: 'cheap-module-source-map',
     plugins: [
     ],
     output: {
-        filename: 'js/bundle.[hash].min.js',
+        filename: 'js/bundle.[fullhash].min.js',
         path: resolve(__dirname, '../../../dist'),
         publicPath: '/',
     },

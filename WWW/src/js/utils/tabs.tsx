@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Row, Col, Card, Button } from '../components'
 import _ from 'lodash'
-import Copy from 'copy-to-clipboard'
+import * as Copy from 'copy-to-clipboard'
 
 const createPresentationTab = (
     options,

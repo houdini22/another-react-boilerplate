@@ -19,7 +19,7 @@ import {
     MdTabUnselected as TabIcon,
     MdTextFormat as TypographyIcon,
 } from 'react-icons/md'
-import { Badge } from '../components/ui/Badge'
+import { Badge } from '../components'
 import { IoIosNotificationsOutline } from 'react-icons/io'
 
 export const navigation = [

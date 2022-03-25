@@ -6,7 +6,7 @@ import {
 } from '../../reducers/common'
 import { bindActionCreators } from 'redux'
 
-const { setConnectionErrorModalVisible, setLayoutOption } = commonActions
+const { setConnectionErrorModalVisible } = commonActions
 
 const mapStateToProps = (state) => ({
     common: commonSelectors['getState'](state),

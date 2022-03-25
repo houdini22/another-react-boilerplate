@@ -1,5 +1,5 @@
 // shared config (dev and prod)
-const { resolve } = require("path");
+const {resolve} = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
@@ -16,22 +16,47 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ["style-loader", { loader: "css-loader", options: { modules: true } }],
+                use: ["style-loader", {loader: "css-loader", options: {modules: true}}],
             },
             {
                 test: /\.(scss|sass)$/,
-                use: ["style-loader", { loader: "css-loader", options: { modules: true } }, "sass-loader"],
+                use: ["style-loader", {loader: "css-loader", options: {modules: true}}, "sass-loader"],
             },
             {
-                test: /\.(jpe?g|png|gif|svg|woff|woff2|eot|ttf)$/i,
-                use: [
-                    "file-loader?hash=sha512&digest=hex&name=img/[contenthash].[ext]",
-                    "image-webpack-loader?bypassOnDebug&optipng.optimizationLevel=7&gifsicle.interlaced=false",
-                ],
+                test: /\.(jpe?g|png|gif)$/i,
+                type: 'asset/resource'
+            },
+            {
+                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'fonts/[hash][ext][query]'
+                }
+            },
+            {
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'fonts/[hash][ext][query]'
+                }
+            },
+            {
+                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'fonts/[hash][ext][query]'
+                }
+            },
+            {
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'icons/[hash][ext][query]'
+                }
             },
         ],
     },
-    plugins: [new HtmlWebpackPlugin({ template: "index.html.ejs" })],
+    plugins: [new HtmlWebpackPlugin({template: "index.html.ejs"})],
     performance: {
         hints: false,
     },

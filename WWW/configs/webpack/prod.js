@@ -9,7 +9,7 @@ module.exports = merge(commonConfig, {
     entry: ['@babel/polyfill', './index.tsx'],
     devtool: 'source-map',
     output: {
-        filename: 'js/bundle.[hash].min.js',
+        filename: 'js/bundle.[fullhash].min.js',
         path: resolve(__dirname, '../../../dist'),
         publicPath: '/',
     },
