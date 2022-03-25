@@ -38,6 +38,7 @@ class TooltipView extends React.Component<TooltipViewProps, TooltipViewState> {
                 placement: 'top-start',
                 trigger: 'hover',
                 updateCount: 0,
+                color: 'default',
             },
         }
     }

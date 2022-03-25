@@ -11,12 +11,13 @@ const cx = classNames.bind(styles)
 
 interface AccordionContainerProps {
     children: any
-    color: string
-    rounded: boolean
-    size: string
-    separated: boolean
-    type: string
-    closeIcon: boolean
+    color?: string
+    rounded?: boolean
+    size?: string
+    separated?: boolean
+    type?: string
+    closeIcon?: boolean
+    outline: boolean
 }
 
 interface AccordionStateProps {

@@ -24,6 +24,7 @@ interface AccordionViewState {
         type: string
         updateCount: number
         closeIcon: boolean
+        outline: boolean
     }
 }
 

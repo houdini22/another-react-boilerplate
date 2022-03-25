@@ -91,14 +91,12 @@ export class FaqView extends React.Component {
                                         <input
                                             type="image"
                                             src="https://www.paypalobjects.com/en_US/PL/i/btn/btn_donateCC_LG.gif"
-                                            border="0"
                                             name="submit"
                                             title="PayPal - The safer, easier way to pay online!"
                                             alt="Donate with PayPal button"
                                         />
                                         <img
                                             alt=""
-                                            border="0"
                                             src="https://www.paypal.com/en_PL/i/scr/pixel.gif"
                                             width="1"
                                             height="1"
@@ -116,6 +114,7 @@ export class FaqView extends React.Component {
                                         <li>2019-06-12</li>
                                         <li>2020-11-07</li>
                                         <li>2021-08-28</li>
+                                        <li>2022-03-25</li>
                                     </ul>
                                 </Col>
                                 <Col xs={6}>
@@ -127,6 +126,7 @@ export class FaqView extends React.Component {
                                         <li>Initial release v0.1-alpha</li>
                                         <li>Initial release v0.2-alpha</li>
                                         <li>Release v0.3-alpha</li>
+                                        <li>Release v0.3.1-alpha</li>
                                     </ul>
                                 </Col>
                             </Row>

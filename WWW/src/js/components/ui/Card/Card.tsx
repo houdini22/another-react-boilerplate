@@ -15,19 +15,19 @@ const cx = classNames.bind(styles)
 
 interface CardProps {
     children: any
-    headerActions: any
-    header: any
-    color: string
-    withCloseIcon: boolean
-    onClickClose(): any
-    className: string
-    withMinimizeIcon: boolean
-    size: string
-    isLoading: boolean
-    noBorderTop: boolean
-    footer: any
-    footerType: string
-    style: object
+    headerActions?: any
+    header?: any
+    color?: string
+    withCloseIcon?: boolean
+    onClickClose?(params): any
+    className?: string
+    withMinimizeIcon?: boolean
+    size?: string
+    isLoading?: boolean
+    noBorderTop?: boolean
+    footer?: any
+    footerType?: string
+    style?: object
 }
 
 class Card extends React.Component<CardProps> {

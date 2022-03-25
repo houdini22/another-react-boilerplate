@@ -4,7 +4,6 @@ import classNames from 'classnames/bind'
 import { AiOutlineRight, AiOutlineDown } from 'react-icons/ai'
 import styles from '../../../../assets/scss/layout/_layout.scss'
 import _ from 'lodash'
-import { RouteManager } from '../../../containers/RouteManager'
 import { NavigationItems } from './NavigationItems'
 
 const cx = classNames.bind(styles)

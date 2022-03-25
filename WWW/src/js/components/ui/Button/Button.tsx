@@ -14,7 +14,7 @@ import styles from '../../../../assets/scss/components/_button.scss'
 const cx = classnames.bind(styles)
 
 interface ButtonProps {
-    children: any
+    children?: any
     isLoading?: boolean
     onClick?(event: any, controller: object): any
     size?: string

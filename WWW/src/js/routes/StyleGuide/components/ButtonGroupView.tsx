@@ -17,7 +17,7 @@ interface ButtonGroupViewState {
         size: string
         outline: boolean
         block: boolean
-        roudless: boolean
+        roundless: boolean
         rounded: boolean
         isLoading: boolean
         disabled: boolean
@@ -38,7 +38,7 @@ class ButtonGroupView extends React.Component<
                 size: 'md',
                 outline: false,
                 block: false,
-                roudless: false,
+                roundless: false,
                 rounded: false,
                 isLoading: false,
                 disabled: false,
