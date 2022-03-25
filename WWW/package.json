@@ -73,5 +73,6 @@
         "redux-thunk": "^2.3.0",
         "roboto-fontface": "^0.10.0",
         "typeface-spectral": "^1.1.13"
-    }
+    },
+    "types": "./src/types.d.tsx"
 }
