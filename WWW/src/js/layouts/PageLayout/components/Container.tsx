@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Footer } from './index'
-import connect from 'react-redux/es/connect/connect'
+import {connect} from 'react-redux'
 import { selectors as commonSelectors } from '../../../reducers/common'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/layout/_layout.scss'

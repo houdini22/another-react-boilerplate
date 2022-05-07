@@ -26,6 +26,14 @@ interface TooltipState {
 }
 
 class Tooltip extends React.Component<TooltipProps, TooltipState> {
+    static defaultProps = {
+        onOpen: () => null,
+        onClose: () => null,
+        size: 'md',
+        placement: 'top',
+        trigger: 'hover',
+    }
+
     state = { show: false, left: 0, top: 0 }
 
     element = null
