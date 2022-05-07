@@ -12,15 +12,16 @@
         "fideloper/proxy": "^4.4.1",
         "fruitcake/laravel-cors": "^2.2.0",
         "guzzlehttp/guzzle": "^7.4.2",
-        "laravel/framework": "^8.83.5",
-        "laravel/tinker": "^2.7.1"
+        "kalnoy/nestedset": "^6.0",
+        "laravel/framework": "^8.83.11",
+        "laravel/tinker": "^2.7.2"
     },
     "require-dev": {
         "facade/ignition": "^2.17.5",
         "fakerphp/faker": "^1.19.9",
         "mockery/mockery": "^1.5.0",
         "nunomaduro/collision": "^5.11.0",
-        "phpunit/phpunit": "^9.5.19"
+        "phpunit/phpunit": "^9.5.20"
     },
     "config": {
         "optimize-autoloader": true,

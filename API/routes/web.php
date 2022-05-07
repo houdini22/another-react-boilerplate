@@ -9,6 +9,10 @@ Route::prefix('api/v1')->group(function () {
         sleep(2);
         abort(404);
     });
+
+    Route::prefix('cms')->group(function () {
+        Route::get('pages', '\App\Http\Controllers\CmsPagesController@getPages');
+    });
 });
 
 Route::get('/', function () {

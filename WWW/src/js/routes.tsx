@@ -8,6 +8,7 @@ import { RateView } from './routes/Rate'
 import { FormsView } from './routes/Forms'
 import { AboutView } from './routes/About'
 import { IndexView } from './routes/Index'
+import { CmsPagesView } from './routes/Cms'
 
 import {
     AlertView,
@@ -36,6 +37,7 @@ import {
 } from './routes/StyleGuide'
 
 import { userIsAuthenticated } from './modules/auth'
+import AddCategoryView from './routes/Cms/components/AddCategory'
 
 const App = () => (
     <Router>
@@ -243,6 +245,22 @@ const App = () => (
                 element={
                     <PageLayout>
                         <PagesView />
+                    </PageLayout>
+                }
+            />
+            <Route
+                path="/cms/pages"
+                element={
+                    <PageLayout>
+                        <CmsPagesView />
+                    </PageLayout>
+                }
+            />
+            <Route
+                path="/cms/pages/add_category"
+                element={
+                    <PageLayout>
+                        <AddCategoryView />
                     </PageLayout>
                 }
             />

@@ -240,4 +240,26 @@ export const navigation = [
             },
         ],
     },
+    {
+        type: 'link',
+        caption: (
+            <span>
+                CMS{' '}
+                <Badge color="success" size="sm">
+                    new
+                </Badge>
+            </span>
+        ),
+        href: '/cms/pages',
+        icon: null,
+        children: [
+            {
+                type: 'link',
+                href: '/cms/pages',
+                caption: 'Pages',
+                icon: 'PG',
+                componentType: 'accordion',
+            },
+        ],
+    },
 ]
