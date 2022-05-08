@@ -17,9 +17,9 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('tree_id');
             $table->string('category_name', 256)->default('');
-            $table->string('category_url', 256)->default('');
-            $table->unsignedBigInteger('index_document_id')->default(0);
-            $table->unsignedBigInteger('menu_category_id')->default(0);
+            $table->string('category_url', 256)->default(null)->nullable();
+            $table->unsignedBigInteger('index_document_id')->default(null)->nullable();
+            $table->unsignedBigInteger('menu_category_id')->default(null)->nullable();
 
             $table->timestamps();
 

@@ -59,6 +59,36 @@ const fetch =
         })
     }
 
+const fetchParentCategorySelectOptions = () => (dispatch) => {
+    return new Promise((resolve) => {
+        http.get('/cms/pages/fetchParentCategorySelectOptions')
+            .then(({ data: { options } }) => {
+                resolve(options)
+            })
+            .catch((e) => {})
+    })
+}
+
+const fetchIndexDocumentsSelectOptions = () => (dispatch) => {
+    return new Promise((resolve) => {
+        http.get('/cms/pages/fetchIndexDocumentsSelectOptions')
+            .then(({ data: { options } }) => {
+                resolve(options)
+            })
+            .catch((e) => {})
+    })
+}
+
+const addCategory = (values) => (dispatch) => {
+    return new Promise<void>((resolve) => {
+        http.post('/cms/pages/addCategory', values)
+            .then(() => {
+                resolve()
+            })
+            .catch((e) => {})
+    })
+}
+
 export const actions = {
     fetch,
     setIsLoaded,
@@ -66,6 +96,9 @@ export const actions = {
     setFetchError,
     setCurrentId,
     setCurrentNode,
+    fetchParentCategorySelectOptions,
+    fetchIndexDocumentsSelectOptions,
+    addCategory,
 }
 
 // ------------------------------------

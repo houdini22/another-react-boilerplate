@@ -85,12 +85,27 @@
                 background: $success;
             }
 
+            &.component-table__tr--is-clickable {
+                &:hover {
+                    & > .component-table__tbody__td {
+                        background-color: $color10;
+                        cursor: pointer;
+                    }
+                }
+            }
+
             & > .component-table__tbody__td {
                 text-align: left;
                 padding: $COMPONENT_PADDING_MD;
 
                 &.component-table__tbody__td--align-center {
                     text-align: center;
+                }
+                &.component-table__tbody__td--is-clickable {
+                    &:hover {
+                        background-color: $color10;
+                        cursor: pointer;
+                    }
                 }
             }
         }

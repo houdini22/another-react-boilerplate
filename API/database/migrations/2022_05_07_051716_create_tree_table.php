@@ -33,10 +33,10 @@ class CreateTreeTable extends Migration
             $table->string('tree_object_type')->default('');
             $table->string('tree_description')->default('');
             $table->boolean('tree_is_published')->default(true);
-            $table->dateTime('tree_published_from');
-            $table->dateTime('tree_published_to');
+            $table->dateTime('tree_published_from')->nullable()->default(null);
+            $table->dateTime('tree_published_to')->nullable()->default(null);
             $table->unsignedBigInteger('user_id')->unsigned()->default(0);
-            $table->unsignedBigInteger('copy_of_id')->unsigned()->default(0);
+            $table->unsignedBigInteger('copy_of_id')->unsigned()->default(null)->nullable();
             $table->timestamps();
             $table->nestedSet();
 

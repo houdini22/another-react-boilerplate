@@ -23,6 +23,7 @@ export class Manager extends React.Component {
             isLoaded,
             fetchError,
             currentNode,
+            setCurrentId,
         } = this.props
 
         const renderProps = {
@@ -31,6 +32,7 @@ export class Manager extends React.Component {
             isLoaded,
             fetchError,
             currentNode,
+            setCurrentId,
         }
 
         return children(renderProps)

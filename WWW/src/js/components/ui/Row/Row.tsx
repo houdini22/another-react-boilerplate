@@ -9,6 +9,7 @@ interface RowProps {
     style?: object
     builder?: any
     className?: string
+    onClick?: () => void
 }
 
 class Row extends React.Component<RowProps> {

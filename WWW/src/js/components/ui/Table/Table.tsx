@@ -51,17 +51,20 @@ class TBody extends React.Component {
 interface TrProps {
     color?: string
     children: any
+    onClick?: () => void
 }
 
 class Tr extends React.Component<TrProps> {
     render() {
-        const { children, color, ...props } = this.props
+        const { children, color, onClick, ...props } = this.props
 
         return (
             <Row
                 {...props}
+                onClick={onClick}
                 className={cx('component-table__tr', {
                     [`component-table__tr--color-${color}`]: color,
+                    [`component-table__tr--is-clickable`]: !!onClick,
                 })}
             >
                 {children}
@@ -77,17 +80,14 @@ interface ThProps {
 
 class Th extends React.Component<ThProps> {
     render() {
-        const { children, xs = 12, alignCenter } = this.props
+        const { children, xs, alignCenter } = this.props
 
         return (
             <Col
-                className={cx(
-                    'component-table__thead__th',
-                    `component-table__thead__th--xs-${xs}`,
-                    {
-                        'component-table__thead__th--align-center': alignCenter,
-                    },
-                )}
+                className={cx('component-table__thead__th', {
+                    [`component-table__thead__th--xs-${xs}`]: xs,
+                    'component-table__thead__th--align-center': alignCenter,
+                })}
                 xs={xs}
             >
                 {children}
@@ -99,11 +99,12 @@ class Th extends React.Component<ThProps> {
 interface TdProps {
     xs?: number
     alignCenter?: boolean
+    onClick: () => void
 }
 
 class Td extends React.Component<TdProps> {
     render() {
-        const { children, xs = 12, alignCenter } = this.props
+        const { children, xs, onClick, alignCenter } = this.props
 
         return (
             <Col
@@ -112,9 +113,11 @@ class Td extends React.Component<TdProps> {
                     `component-table__tbody__td--xs-${xs}`,
                     {
                         'component-table__tbody__td--align-center': alignCenter,
+                        'component-table__tbody__td--is-clickable': onClick,
                     },
                 )}
                 xs={xs}
+                onClick={onClick}
             >
                 {children}
             </Col>
