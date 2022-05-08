@@ -80,13 +80,7 @@ const fetchIndexDocumentsSelectOptions = () => (dispatch) => {
 }
 
 const addCategory = (values) => (dispatch) => {
-    return new Promise<void>((resolve) => {
-        http.post('/cms/pages/addCategory', values)
-            .then(() => {
-                resolve()
-            })
-            .catch((e) => {})
-    })
+    return http.post('/cms/pages/addCategory', values)
 }
 
 export const actions = {

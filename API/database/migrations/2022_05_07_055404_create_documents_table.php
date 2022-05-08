@@ -18,10 +18,10 @@ class CreateDocumentsTable extends Migration
             $table->unsignedBigInteger('tree_id');
             $table->string('document_name');
             $table->text('document_content');
-            $table->string('document_url', 256);
-            $table->string('document_meta_title', 256);
-            $table->string('document_meta_keywords', 512);
-            $table->string('document_meta_robots', 32);
+            $table->string('document_url', 256)->nullable()->default(null);
+            $table->string('document_meta_title', 256)->nullable()->default(null);
+            $table->string('document_meta_keywords', 512)->nullable()->default(null);
+            $table->string('document_meta_robots', 32)->nullable()->default(null);
 
             $table->timestamps();
 

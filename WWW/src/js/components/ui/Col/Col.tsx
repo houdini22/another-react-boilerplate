@@ -12,7 +12,7 @@ interface ColProps {
     md?: number | string
     lg?: number | string
     style?: object
-    onClick: () => void
+    onClick?: () => void
 }
 
 class Col extends React.Component<ColProps> {

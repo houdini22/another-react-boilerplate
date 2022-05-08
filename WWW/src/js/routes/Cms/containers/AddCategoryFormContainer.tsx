@@ -11,6 +11,7 @@ import { getFormValues } from '../../../utils/forms/auto-save'
 import * as moment from 'moment'
 import { formatDateTimeAPI } from '../../../helpers/date-time'
 import { actions } from '../../../reducers/cms-pages'
+import { processAPIerrorResponseToFormErrors } from '../../../modules/http'
 
 export const FORM_NAME = 'add-category-form-container'
 
@@ -85,9 +86,21 @@ const AddCategoryFormContainer = compose(
     reduxForm({
         form: FORM_NAME,
         onSubmit: (values, dispatch, { addCategory }) => {
-            return addCategory(values).then(() => {
-                console.log('ok')
-            })
+            return addCategory(values)
+                .then(() => {
+                    console.log('ok')
+                })
+                .catch(
+                    ({
+                        response: {
+                            data: { errors },
+                        },
+                    }) => {
+                        throw new SubmissionError(
+                            processAPIerrorResponseToFormErrors(errors),
+                        )
+                    },
+                )
         },
     }),
 )(AddCategoryFormContainerBase)

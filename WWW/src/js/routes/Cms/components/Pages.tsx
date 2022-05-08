@@ -3,7 +3,7 @@ import { PageContent } from '../../../layouts/PageLayout/components'
 import Manager from './Manager'
 import { RouteManager } from '../../../containers/RouteManager'
 import Header from './Header'
-import { Alert, Button, Card } from '../../../components'
+import { Alert, Button, Card, LoadingOverlay } from '../../../components'
 import { Table } from '../../../components'
 
 export class CmsPagesView extends React.Component {
@@ -34,8 +34,10 @@ export class CmsPagesView extends React.Component {
                                     <>
                                         <Card header={<h1>Filters</h1>}>
                                             Here will be filters
+                                            {isLoading && <LoadingOverlay />}
                                         </Card>
                                         <Card header={<h1>Tree</h1>}>
+                                            {isLoading && <LoadingOverlay />}
                                             <Table.Container>
                                                 <Table.THead>
                                                     <Table.Tr>
@@ -59,17 +61,6 @@ export class CmsPagesView extends React.Component {
                                                             <Table.Td
                                                                 xs={12}
                                                                 alignCenter
-                                                                onClick={() => {
-                                                                    setCurrentId(
-                                                                        currentNode.parent_id,
-                                                                    )
-                                                                }}
-                                                            >
-                                                                Up
-                                                            </Table.Td>
-                                                            <Table.Td
-                                                                xs={12}
-                                                                alignCenter
                                                             >
                                                                 <Alert color="info">
                                                                     No results
@@ -77,14 +68,36 @@ export class CmsPagesView extends React.Component {
                                                             </Table.Td>
                                                         </Table.Tr>
                                                     )}
+                                                    {currentNode.depth > 0 && (
+                                                        <Table.Tr>
+                                                            <Table.Td
+                                                                xs={12}
+                                                                alignCenter
+                                                                onClick={() => {
+                                                                    setCurrentId(
+                                                                        currentNode.parent_id,
+                                                                    )
+                                                                }}
+                                                            >
+                                                                <Button block>
+                                                                    Up
+                                                                </Button>
+                                                            </Table.Td>
+                                                        </Table.Tr>
+                                                    )}
                                                     {nodes.map((node) => {
                                                         return (
                                                             <Table.Tr
-                                                                onClick={() => {
-                                                                    setCurrentId(
-                                                                        node.id,
-                                                                    )
-                                                                }}
+                                                                onClick={
+                                                                    node.tree_object_type ===
+                                                                    'category'
+                                                                        ? () => {
+                                                                              setCurrentId(
+                                                                                  node.id,
+                                                                              )
+                                                                          }
+                                                                        : null
+                                                                }
                                                             >
                                                                 <Table.Td
                                                                     xs={3}
@@ -133,12 +146,12 @@ export class CmsPagesView extends React.Component {
                                                                 <Table.Td
                                                                     xs={3}
                                                                 >
-                                                                    {node.is_editable && (
-                                                                        <Button>
+                                                                    {node.tree_is_editable && (
+                                                                        <Button color="warning">
                                                                             Edit
                                                                         </Button>
                                                                     )}
-                                                                    {node.is_deletable && (
+                                                                    {node.tree_is_deletable && (
                                                                         <Button color="danger">
                                                                             Delete
                                                                         </Button>

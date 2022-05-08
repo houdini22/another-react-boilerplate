@@ -2,7 +2,11 @@ import * as React from 'react'
 import { Button, PageHeader } from '../../../components'
 import { RouteManager } from '../../../containers/RouteManager'
 
-export class Header extends React.Component {
+interface HeaderProps {
+    title: String
+}
+
+export class Header extends React.Component<HeaderProps> {
     render() {
         const { title } = this.props
         return (

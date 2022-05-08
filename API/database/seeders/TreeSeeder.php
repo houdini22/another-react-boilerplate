@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Document;
 use App\Models\Tree;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -53,7 +54,6 @@ class TreeSeeder extends Seeder
             'tree_menu_is_visible' => false,
             'tree_alias' => 'system_category',
             'tree_object_type' => 'category',
-
         ]);
 
         $systemCategory = Category::create([
@@ -65,5 +65,35 @@ class TreeSeeder extends Seeder
 
         $systemTree->category_id = $systemCategory->id;
         $systemTree->save();
+
+        // SYSTEM PAGES
+
+        $page404Tree = $systemTree->children()->create([
+            'tree_is_published' => true,
+            'tree_published_from' => Carbon::create(1988)->format('Y-m-d H:i:s'),
+            'tree_published_to' => Carbon::create(2099)->format('Y-m-d H:i:s'),
+            'tree_is_visible_frontend' => true,
+            'tree_is_visible_backend' => true,
+            'tree_is_visible_in_select' => true,
+            'tree_is_deletable' => false,
+            'tree_is_editable' => true,
+            'tree_has_edit_button' => true,
+            'tree_is_viewable' => true,
+            'tree_url_is_showable' => false,
+            'tree_url_is_editable' => false,
+            'tree_menu_is_visible' => false,
+            'tree_alias' => 'page_404',
+            'tree_object_type' => 'document',
+        ]);
+
+        $page404Document = Document::create([
+            'tree_id' => $page404Tree->id,
+            'document_name' => '404',
+            'document_content' => '404'
+        ]);
+        $page404Document->save();
+
+        $page404Tree->document_id = $page404Tree->id;
+        $page404Tree->save();
     }
 }

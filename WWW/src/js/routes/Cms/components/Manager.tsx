@@ -24,6 +24,7 @@ export class Manager extends React.Component {
             fetchError,
             currentNode,
             setCurrentId,
+            setIsLoading,
         } = this.props
 
         const renderProps = {
@@ -33,6 +34,7 @@ export class Manager extends React.Component {
             fetchError,
             currentNode,
             setCurrentId,
+            setIsLoading,
         }
 
         return children(renderProps)
@@ -50,6 +52,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         setCurrentId: (id) => dispatch(actions.setCurrentId(id)),
+        setIsLoading: (val) => dispatch(actions.setIsLoading(val)),
     }
 }
 

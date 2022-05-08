@@ -7,6 +7,7 @@ use App\Models\Tree;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Validator;
 
 class CmsPagesController extends Controller
 {
@@ -19,6 +20,7 @@ class CmsPagesController extends Controller
 
         $currentNode = Tree::where('id', '=', $request->get('parent_id'))
             ->where('copy_of_id', null)
+            ->withDepth()
             ->first();
         $nodes = $currentNode->children()->get();
 
@@ -97,6 +99,16 @@ class CmsPagesController extends Controller
 
     public function postAddCategory(Request $request) {
         $values = $request->post();
+
+        $validator = Validator::make($values, [
+            'category.category_name' => 'required|max:256',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 400);
+        }
 
         $parent = Tree::find($values['parent_id']);
 
