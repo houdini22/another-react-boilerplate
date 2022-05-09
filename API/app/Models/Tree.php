@@ -12,7 +12,7 @@ class Tree extends Model
     use NodeTrait;
 
     protected $table = 'tree';
-    protected $with = ['category', 'document'];
+    protected $with = ['category', 'document', 'link'];
     protected $fillable = [
         'tree_is_published',
         'tree_published_from',
@@ -39,5 +39,10 @@ class Tree extends Model
     public function document()
     {
         return $this->hasOne(Document::class);
+    }
+
+    public function link()
+    {
+        return $this->hasOne(Link::class);
     }
 }

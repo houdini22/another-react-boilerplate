@@ -40,6 +40,7 @@ import { userIsAuthenticated } from './modules/auth'
 import AddCategoryView from './routes/Cms/components/AddCategory'
 import AddDocumentView from './routes/Cms/components/AddDocument'
 import AddLinkView from './routes/Cms/components/AddLink'
+import { UsersView } from './routes/Users'
 
 const App = () => (
     <Router>
@@ -279,6 +280,14 @@ const App = () => (
                 element={
                     <PageLayout>
                         <AddDocumentView />
+                    </PageLayout>
+                }
+            />
+            <Route
+                path="/users"
+                element={
+                    <PageLayout>
+                        <UsersView />
                     </PageLayout>
                 }
             />

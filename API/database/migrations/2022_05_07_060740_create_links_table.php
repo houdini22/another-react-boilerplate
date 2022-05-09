@@ -18,10 +18,6 @@ class CreateLinksTable extends Migration
             $table->unsignedBigInteger('tree_id');
             $table->string('link_name', 256);
             $table->string('link_url', 256);
-            $table->boolean('link_is_module_link');
-            $table->string('link_route_name', 128);
-            $table->string('link_object_name', 64);
-            $table->unsignedBigInteger('link_object_id');
             $table->string('link_target', 24);
 
             $table->timestamps();

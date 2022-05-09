@@ -97,6 +97,8 @@
             & > .component-table__tbody__td {
                 text-align: left;
                 padding: $COMPONENT_PADDING_MD;
+                display: flex;
+                align-items: center;
 
                 &.component-table__tbody__td--align-center {
                     text-align: center;

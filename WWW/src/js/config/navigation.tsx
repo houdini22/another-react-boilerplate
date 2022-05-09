@@ -19,6 +19,9 @@ import {
     MdTabUnselected as TabIcon,
     MdTextFormat as TypographyIcon,
 } from 'react-icons/md'
+import { FaSitemap, FaUser } from 'react-icons/fa'
+import { AiOutlineOrderedList, AiOutlineUserAdd } from 'react-icons/ai'
+import { FiSettings } from 'react-icons/fi'
 import { Badge } from '../components'
 import { IoIosNotificationsOutline } from 'react-icons/io'
 
@@ -30,14 +33,7 @@ export const navigation = [
     {
         type: 'link',
         href: '/',
-        caption: (
-            <span>
-                FAQ{' '}
-                <Badge color="success" size="sm">
-                    new
-                </Badge>
-            </span>
-        ),
+        caption: <span>FAQ</span>,
         icon: <InfoIcon />,
     },
     {
@@ -251,14 +247,46 @@ export const navigation = [
             </span>
         ),
         href: '/cms/pages',
-        icon: null,
+        icon: <FaSitemap />,
         children: [
             {
                 type: 'link',
                 href: '/cms/pages',
                 caption: 'Pages',
-                icon: 'PG',
-                componentType: 'accordion',
+                icon: <AiOutlineOrderedList />,
+            },
+            {
+                type: 'link',
+                href: '/cms/settings',
+                caption: 'Settings',
+                icon: <FiSettings />,
+            },
+        ],
+    },
+    {
+        type: 'link',
+        caption: (
+            <span>
+                Users{' '}
+                <Badge color="success" size="sm">
+                    new
+                </Badge>
+            </span>
+        ),
+        href: '/users',
+        icon: <FaUser />,
+        children: [
+            {
+                type: 'link',
+                href: '/users',
+                caption: 'List',
+                icon: <AiOutlineOrderedList />,
+            },
+            {
+                type: 'link',
+                href: '/users/add',
+                caption: 'Add',
+                icon: <AiOutlineUserAdd />,
             },
         ],
     },

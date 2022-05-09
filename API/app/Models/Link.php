@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Document extends Model
+class Link extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'tree_id',
-        'document_name',
-        'document_url'
+        'link_name',
+        'link_url',
+        'link_target'
     ];
 }

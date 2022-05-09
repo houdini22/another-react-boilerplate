@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Document;
+use App\Models\Link;
 use App\Models\Tree;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -95,5 +96,94 @@ class TreeSeeder extends Seeder
 
         $page404Tree->document_id = $page404Tree->id;
         $page404Tree->save();
+
+        // SAMPLE CATEGORY
+
+        $sampleTree = $rootTree->children()->create([
+            'tree_is_published' => true,
+            'tree_published_from' => Carbon::create(1988)->format('Y-m-d H:i:s'),
+            'tree_published_to' => Carbon::create(2099)->format('Y-m-d H:i:s'),
+            'tree_is_visible_frontend' => true,
+            'tree_is_visible_backend' => true,
+            'tree_is_visible_in_select' => true,
+            'tree_is_deletable' => true,
+            'tree_is_editable' => true,
+            'tree_has_edit_button' => true,
+            'tree_is_viewable' => true,
+            'tree_url_is_showable' => true,
+            'tree_url_is_editable' => true,
+            'tree_menu_is_visible' => true,
+            'tree_object_type' => 'category',
+        ]);
+
+        $sampleCategory = Category::create([
+            'tree_id' => $sampleTree->id,
+            'category_name' => 'Sample category',
+            'category_url' => '/sample-category'
+        ]);
+        $sampleCategory->save();
+
+        $sampleTree->category_id = $sampleCategory->id;
+        $sampleTree->save();
+
+        // SAMPLE PAGES
+
+        $samplePageTree = $sampleTree->children()->create([
+            'tree_is_published' => true,
+            'tree_published_from' => Carbon::create(1988)->format('Y-m-d H:i:s'),
+            'tree_published_to' => Carbon::create(2099)->format('Y-m-d H:i:s'),
+            'tree_is_visible_frontend' => true,
+            'tree_is_visible_backend' => true,
+            'tree_is_visible_in_select' => true,
+            'tree_is_deletable' => true,
+            'tree_is_editable' => true,
+            'tree_has_edit_button' => true,
+            'tree_is_viewable' => true,
+            'tree_url_is_showable' => true,
+            'tree_url_is_editable' => true,
+            'tree_menu_is_visible' => true,
+            'tree_object_type' => 'document',
+        ]);
+
+        $samplePageDocument = Document::create([
+            'tree_id' => $samplePageTree->id,
+            'document_name' => '404',
+            'document_content' => '404',
+            'document_url' => '/sample-category/sample-document'
+        ]);
+        $samplePageDocument->save();
+
+        $samplePageTree->document_id = $samplePageDocument->id;
+        $samplePageTree->save();
+
+        // SAMPLE LINK
+
+        $sampleLinkTree = $sampleTree->children()->create([
+            'tree_is_published' => true,
+            'tree_published_from' => Carbon::create(1988)->format('Y-m-d H:i:s'),
+            'tree_published_to' => Carbon::create(2099)->format('Y-m-d H:i:s'),
+            'tree_is_visible_frontend' => true,
+            'tree_is_visible_backend' => true,
+            'tree_is_visible_in_select' => true,
+            'tree_is_deletable' => true,
+            'tree_is_editable' => true,
+            'tree_has_edit_button' => true,
+            'tree_is_viewable' => true,
+            'tree_url_is_showable' => true,
+            'tree_url_is_editable' => true,
+            'tree_menu_is_visible' => true,
+            'tree_object_type' => 'link',
+        ]);
+
+        $sampleLink = Link::create([
+            'tree_id' => $sampleLinkTree->id,
+            'link_name' => 'Google link',
+            'link_url' => 'https://google.com',
+            'link_target' => '_blank'
+        ]);
+        $sampleLink->save();
+
+        $sampleLinkTree->link_id = $sampleLink->id;
+        $sampleLinkTree->save();
     }
 }

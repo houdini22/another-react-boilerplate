@@ -3,16 +3,56 @@ import { PageContent } from '../../../layouts/PageLayout/components'
 import Manager from './Manager'
 import { RouteManager } from '../../../containers/RouteManager'
 import Header from './Header'
-import { Alert, Button, Card, LoadingOverlay } from '../../../components'
+import { Alert, Button, Card, LoadingOverlay, Modal } from '../../../components'
 import { Table } from '../../../components'
 import { CgArrowsVAlt } from 'react-icons/cg'
+import { BsPencil } from 'react-icons/bs'
+import { AiFillDelete } from 'react-icons/ai'
+import { MdTableRows } from 'react-icons/md'
+import { GrDocument } from 'react-icons/gr'
+import { AiOutlineLink } from 'react-icons/ai'
 
 export class CmsPagesView extends React.Component {
+    state = {
+        confirmDeleteVisible: false,
+    }
+
     render() {
+        const { confirmDeleteVisible } = this.state
+
         return (
             <RouteManager>
                 {({ navigate }) => (
                     <PageContent>
+                        <Modal.Container
+                            visible={confirmDeleteVisible}
+                            color={'danger'}
+                        >
+                            <Modal.Header
+                                closeIcon
+                                close={() => {
+                                    this.setState({
+                                        confirmDeleteVisible: false,
+                                    })
+                                }}
+                            >
+                                Confirm Delete
+                            </Modal.Header>
+                            <Modal.Body>
+                                <p>
+                                    Do you really want to delete this element?
+                                </p>
+                                <p>
+                                    All children of this element will be
+                                    removed.
+                                </p>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button color={'success'} block>
+                                    OK
+                                </Button>
+                            </Modal.Footer>
+                        </Modal.Container>
                         <Header title="CMS Pages" />
                         <Manager>
                             {({
@@ -83,7 +123,12 @@ export class CmsPagesView extends React.Component {
                                                                     )
                                                                 }}
                                                             >
-                                                                <Button block>
+                                                                <Button
+                                                                    block
+                                                                    color={
+                                                                        'default'
+                                                                    }
+                                                                >
                                                                     Up
                                                                 </Button>
                                                             </Table.Td>
@@ -105,10 +150,20 @@ export class CmsPagesView extends React.Component {
                                                             >
                                                                 <Table.Td
                                                                     xs={1}
+                                                                    alignCenter
                                                                 >
-                                                                    {
-                                                                        node.tree_object_type
-                                                                    }
+                                                                    {node.tree_object_type ===
+                                                                        'category' && (
+                                                                        <MdTableRows />
+                                                                    )}
+                                                                    {node.tree_object_type ===
+                                                                        'document' && (
+                                                                        <GrDocument />
+                                                                    )}
+                                                                    {node.tree_object_type ===
+                                                                        'link' && (
+                                                                        <AiOutlineLink />
+                                                                    )}
                                                                 </Table.Td>
                                                                 <Table.Td
                                                                     xs={3}
@@ -166,14 +221,33 @@ export class CmsPagesView extends React.Component {
                                                                     xs={2}
                                                                 >
                                                                     {!!node.tree_is_editable && (
-                                                                        <Button color="warning">
-                                                                            Edit
-                                                                        </Button>
+                                                                        <Button
+                                                                            color="warning"
+                                                                            icon={
+                                                                                <BsPencil />
+                                                                            }
+                                                                            iconOnly
+                                                                        />
                                                                     )}
                                                                     {!!node.tree_is_deletable && (
-                                                                        <Button color="danger">
-                                                                            Delete
-                                                                        </Button>
+                                                                        <Button
+                                                                            color="danger"
+                                                                            icon={
+                                                                                <AiFillDelete />
+                                                                            }
+                                                                            iconOnly
+                                                                            onClick={(
+                                                                                e,
+                                                                            ) => {
+                                                                                e.stopPropagation()
+                                                                                this.setState(
+                                                                                    {
+                                                                                        confirmDeleteVisible:
+                                                                                            true,
+                                                                                    },
+                                                                                )
+                                                                            }}
+                                                                        />
                                                                     )}
                                                                 </Table.Td>
                                                             </Table.Tr>
