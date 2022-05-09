@@ -1,6 +1,7 @@
 import * as React from 'react'
-import { Button, PageHeader } from '../../../components'
+import { Badge, Button, Dropdown, Label, PageHeader } from '../../../components'
 import { RouteManager } from '../../../containers/RouteManager'
+import { FaFileImage as ImageIcon } from 'react-icons/fa'
 
 interface HeaderProps {
     title: String
@@ -15,30 +16,37 @@ export class Header extends React.Component<HeaderProps> {
                     <PageHeader.Container>
                         <PageHeader.Title>{title}</PageHeader.Title>
                         <PageHeader.Actions>
-                            <Button
-                                color="success"
-                                onClick={() => {
-                                    navigate('/cms/pages/add_category')
-                                }}
+                            <Dropdown.Container
+                                triggerColor={'success'}
+                                placement={'right'}
                             >
-                                Add Category
-                            </Button>
-                            <Button
-                                color="success"
-                                onClick={() => {
-                                    navigate('/cms/pages/add_document')
-                                }}
-                            >
-                                Add Document
-                            </Button>
-                            <Button
-                                color="success"
-                                onClick={() => {
-                                    navigate('/cms/pages/add_link')
-                                }}
-                            >
-                                Add Link
-                            </Button>
+                                <Dropdown.Trigger component={Button}>
+                                    Add
+                                </Dropdown.Trigger>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item
+                                        onClick={() => {
+                                            navigate('/cms/pages/add_category')
+                                        }}
+                                    >
+                                        Category
+                                    </Dropdown.Item>{' '}
+                                    <Dropdown.Item
+                                        onClick={() => {
+                                            navigate('/cms/pages/add_document')
+                                        }}
+                                    >
+                                        Document
+                                    </Dropdown.Item>{' '}
+                                    <Dropdown.Item
+                                        onClick={() => {
+                                            navigate('/cms/pages/add_link')
+                                        }}
+                                    >
+                                        Link
+                                    </Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown.Container>
                         </PageHeader.Actions>
                     </PageHeader.Container>
                 )}

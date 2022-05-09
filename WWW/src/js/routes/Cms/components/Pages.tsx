@@ -5,6 +5,7 @@ import { RouteManager } from '../../../containers/RouteManager'
 import Header from './Header'
 import { Alert, Button, Card, LoadingOverlay } from '../../../components'
 import { Table } from '../../../components'
+import { CgArrowsVAlt } from 'react-icons/cg'
 
 export class CmsPagesView extends React.Component {
     render() {
@@ -41,6 +42,9 @@ export class CmsPagesView extends React.Component {
                                             <Table.Container>
                                                 <Table.THead>
                                                     <Table.Tr>
+                                                        <Table.Th xs={1}>
+                                                            Type
+                                                        </Table.Th>
                                                         <Table.Th xs={3}>
                                                             Name
                                                         </Table.Th>
@@ -50,7 +54,7 @@ export class CmsPagesView extends React.Component {
                                                         <Table.Th xs={3}>
                                                             Ordering
                                                         </Table.Th>
-                                                        <Table.Th xs={3}>
+                                                        <Table.Th xs={2}>
                                                             Actions
                                                         </Table.Th>
                                                     </Table.Tr>
@@ -100,6 +104,13 @@ export class CmsPagesView extends React.Component {
                                                                 }
                                                             >
                                                                 <Table.Td
+                                                                    xs={1}
+                                                                >
+                                                                    {
+                                                                        node.tree_object_type
+                                                                    }
+                                                                </Table.Td>
+                                                                <Table.Td
                                                                     xs={3}
                                                                 >
                                                                     {node.tree_object_type ===
@@ -141,17 +152,25 @@ export class CmsPagesView extends React.Component {
                                                                 <Table.Td
                                                                     xs={3}
                                                                 >
-                                                                    up down
+                                                                    <Button
+                                                                        icon={
+                                                                            <CgArrowsVAlt />
+                                                                        }
+                                                                        iconOnly
+                                                                        style={{
+                                                                            cursor: 'move',
+                                                                        }}
+                                                                    />
                                                                 </Table.Td>
                                                                 <Table.Td
-                                                                    xs={3}
+                                                                    xs={2}
                                                                 >
-                                                                    {node.tree_is_editable && (
+                                                                    {!!node.tree_is_editable && (
                                                                         <Button color="warning">
                                                                             Edit
                                                                         </Button>
                                                                     )}
-                                                                    {node.tree_is_deletable && (
+                                                                    {!!node.tree_is_deletable && (
                                                                         <Button color="danger">
                                                                             Delete
                                                                         </Button>

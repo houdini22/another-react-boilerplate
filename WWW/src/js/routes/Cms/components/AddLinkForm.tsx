@@ -2,9 +2,15 @@ import * as React from 'react'
 import { Field } from 'redux-form'
 import { Button, Card, Col, FormField, Row, Tabs } from '../../../components'
 
-class AddCategoryForm extends React.Component {
+class AddLinkForm extends React.Component {
     render() {
-        const { handleSubmit, categories, indexDocuments } = this.props
+        const { handleSubmit, categories } = this.props
+
+        const linkTargets = [
+            { label: '_self', value: '_self' },
+            { label: '_blank', value: '_blank' },
+            { label: '_top', value: '_top' },
+        ]
 
         return (
             <Row>
@@ -25,28 +31,10 @@ class AddCategoryForm extends React.Component {
                                                     options={categories}
                                                 />
                                                 <Field
-                                                    name="category.category_name"
-                                                    label="Category Name"
+                                                    name="link.link_name"
+                                                    label="Link Name"
                                                     type="text"
                                                     component={FormField}
-                                                />
-                                                <Field
-                                                    name="category.index_document_id"
-                                                    label="Index Document"
-                                                    type="select"
-                                                    component={FormField}
-                                                    options={indexDocuments}
-                                                    placeholder={'None'}
-                                                />
-                                                <Field
-                                                    name="category.menu_category_id"
-                                                    label="Display menu from"
-                                                    type="select"
-                                                    component={FormField}
-                                                    options={categories}
-                                                    placeholder={
-                                                        'Do not display menu'
-                                                    }
                                                 />
                                                 <Field
                                                     name="tree.tree_is_published"
@@ -67,10 +55,17 @@ class AddCategoryForm extends React.Component {
                                                     component={FormField}
                                                 />
                                                 <Field
-                                                    name="category.category_url"
+                                                    name="link.link_url"
                                                     label="URL"
                                                     type="text"
                                                     component={FormField}
+                                                />
+                                                <Field
+                                                    name="link.link_target"
+                                                    label="Target"
+                                                    type="select"
+                                                    component={FormField}
+                                                    options={linkTargets}
                                                 />
 
                                                 <div>
@@ -94,5 +89,5 @@ class AddCategoryForm extends React.Component {
     }
 }
 
-export { AddCategoryForm }
-export default { AddCategoryForm }
+export { AddLinkForm }
+export default { AddLinkForm }

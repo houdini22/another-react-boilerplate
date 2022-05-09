@@ -83,6 +83,10 @@ const addCategory = (values) => (dispatch) => {
     return http.post('/cms/pages/addCategory', values)
 }
 
+const addDocument = (values) => (dispatch) => {
+    return http.post('/cms/pages/addDocument', values)
+}
+
 export const actions = {
     fetch,
     setIsLoaded,
@@ -93,6 +97,7 @@ export const actions = {
     fetchParentCategorySelectOptions,
     fetchIndexDocumentsSelectOptions,
     addCategory,
+    addDocument,
 }
 
 // ------------------------------------

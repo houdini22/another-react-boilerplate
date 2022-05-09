@@ -283,6 +283,7 @@ interface DropdownItemProps {
     href?: string
     highlighted?: boolean
     type?: string
+    onClick?: () => void
 }
 
 interface DropdownItemState {
@@ -316,7 +317,7 @@ export class DropdownItem extends React.Component<
     }
 
     render() {
-        const { children, type, highlighted, href } = this.props
+        const { children, type, highlighted, href, onClick } = this.props
         const { itemsElement, hasSubmenu } = this.state
 
         const getComponent = () => {
@@ -352,6 +353,11 @@ export class DropdownItem extends React.Component<
                                 highlighted,
                         },
                     )}
+                    onClick={() => {
+                        if (typeof onClick === 'function') {
+                            onClick()
+                        }
+                    }}
                 >
                     <div
                         className={cx(

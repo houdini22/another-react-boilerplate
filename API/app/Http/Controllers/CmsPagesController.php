@@ -106,8 +106,8 @@ class CmsPagesController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'errors' => $validator->errors()
-            ], 400);
+                'errors' => $validator->messages(),
+            ], 422);
         }
 
         $parent = Tree::find($values['parent_id']);

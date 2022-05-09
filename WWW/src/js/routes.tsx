@@ -38,6 +38,8 @@ import {
 
 import { userIsAuthenticated } from './modules/auth'
 import AddCategoryView from './routes/Cms/components/AddCategory'
+import AddDocumentView from './routes/Cms/components/AddDocument'
+import AddLinkView from './routes/Cms/components/AddLink'
 
 const App = () => (
     <Router>
@@ -261,6 +263,22 @@ const App = () => (
                 element={
                     <PageLayout>
                         <AddCategoryView />
+                    </PageLayout>
+                }
+            />
+            <Route
+                path="/cms/pages/add_link"
+                element={
+                    <PageLayout>
+                        <AddLinkView />
+                    </PageLayout>
+                }
+            />
+            <Route
+                path="/cms/pages/add_document"
+                element={
+                    <PageLayout>
+                        <AddDocumentView />
                     </PageLayout>
                 }
             />

@@ -2,9 +2,9 @@ import * as React from 'react'
 import { Field } from 'redux-form'
 import { Button, Card, Col, FormField, Row, Tabs } from '../../../components'
 
-class AddCategoryForm extends React.Component {
+class AddDocumentForm extends React.Component {
     render() {
-        const { handleSubmit, categories, indexDocuments } = this.props
+        const { handleSubmit, categories } = this.props
 
         return (
             <Row>
@@ -25,28 +25,10 @@ class AddCategoryForm extends React.Component {
                                                     options={categories}
                                                 />
                                                 <Field
-                                                    name="category.category_name"
-                                                    label="Category Name"
+                                                    name="document.document_name"
+                                                    label="Document Name"
                                                     type="text"
                                                     component={FormField}
-                                                />
-                                                <Field
-                                                    name="category.index_document_id"
-                                                    label="Index Document"
-                                                    type="select"
-                                                    component={FormField}
-                                                    options={indexDocuments}
-                                                    placeholder={'None'}
-                                                />
-                                                <Field
-                                                    name="category.menu_category_id"
-                                                    label="Display menu from"
-                                                    type="select"
-                                                    component={FormField}
-                                                    options={categories}
-                                                    placeholder={
-                                                        'Do not display menu'
-                                                    }
                                                 />
                                                 <Field
                                                     name="tree.tree_is_published"
@@ -67,7 +49,7 @@ class AddCategoryForm extends React.Component {
                                                     component={FormField}
                                                 />
                                                 <Field
-                                                    name="category.category_url"
+                                                    name="document.document_url"
                                                     label="URL"
                                                     type="text"
                                                     component={FormField}
@@ -94,5 +76,5 @@ class AddCategoryForm extends React.Component {
     }
 }
 
-export { AddCategoryForm }
-export default { AddCategoryForm }
+export { AddDocumentForm }
+export default { AddDocumentForm }
