@@ -23,6 +23,7 @@ interface AlertProps {
     rounded?: boolean
     background?: boolean
     size?: string
+    alignCenter?: boolean
 }
 
 class Alert extends React.Component<AlertProps> {
@@ -78,6 +79,7 @@ class Alert extends React.Component<AlertProps> {
             rounded,
             background,
             size = 'md',
+            alignCenter,
             ...props
         } = this.props
         const { animationStarted, remove, isLoading } = this.state
@@ -98,6 +100,7 @@ class Alert extends React.Component<AlertProps> {
                     [`component-alert--background`]: background,
                     ['animation--fade-out-top']: animationStarted,
                     [`component-alert--size-${size}`]: size,
+                    [`component-alert--align-center`]: alignCenter,
                 })}
                 {...props}
             >

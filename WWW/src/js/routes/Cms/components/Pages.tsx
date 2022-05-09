@@ -24,6 +24,7 @@ import { formatDateTime } from '../../../helpers/date-time'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/components/_typography.scss'
 import { Typography } from '../../../components'
+import { FiltersFormContainer } from '../containers/FiltersFormContainer'
 
 const cx = classNames.bind(styles)
 
@@ -94,7 +95,7 @@ export class CmsPagesView extends React.Component {
                                             header={<h1>Filters</h1>}
                                             withMinimizeIcon
                                         >
-                                            Here will be filters
+                                            <FiltersFormContainer />
                                             {isLoading && <LoadingOverlay />}
                                         </Card>
                                         <Card
@@ -199,7 +200,10 @@ export class CmsPagesView extends React.Component {
                                                                 xs={12}
                                                                 alignCenter
                                                             >
-                                                                <Alert color="info">
+                                                                <Alert
+                                                                    color="info"
+                                                                    alignCenter
+                                                                >
                                                                     No results
                                                                 </Alert>
                                                             </Table.Td>
@@ -216,6 +220,12 @@ export class CmsPagesView extends React.Component {
                                                                                   node.id,
                                                                               )
                                                                           }
+                                                                        : null
+                                                                }
+                                                                color={
+                                                                    node.tree_object_type ===
+                                                                    'category'
+                                                                        ? 'default'
                                                                         : null
                                                                 }
                                                             >

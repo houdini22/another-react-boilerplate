@@ -55,6 +55,19 @@
         & > .component-table__tr {
             margin-bottom: 0;
 
+            &.component-table__tr--color-default {
+                .component-table__tbody__td {
+                    color: $default_text_color;
+                    background: $default;
+                }
+
+                &:hover {
+                    .component-table__tbody__td {
+                        background: $default_DARKEN_X1 !important;
+                    }
+                }
+            }
+
             &.component-table__tr--color-primary {
                 color: $primary_text_color;
                 background: $primary;

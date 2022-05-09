@@ -9,6 +9,12 @@
     width: 100%;
     text-align: left;
 
+    &.component-alert--align-center {
+        & > .component-alert__content {
+            text-align: center;
+        }
+    }
+
     &.component-alert--rounded {
         border-radius: $COMPONENT_BORDER_RADIUS;
     }

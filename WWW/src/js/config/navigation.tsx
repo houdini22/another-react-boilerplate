@@ -241,6 +241,10 @@ export const navigation = [
         ],
     },
     {
+        type: 'header',
+        caption: 'Application',
+    },
+    {
         type: 'link',
         caption: (
             <span>
