@@ -29,6 +29,7 @@ class Tree extends Model
         'tree_menu_is_visible',
         'tree_alias',
         'tree_object_type',
+        'tree_class'
     ];
 
     public function category()

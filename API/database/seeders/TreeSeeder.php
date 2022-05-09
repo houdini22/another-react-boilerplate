@@ -85,12 +85,12 @@ class TreeSeeder extends Seeder
             'tree_menu_is_visible' => false,
             'tree_alias' => 'page_404',
             'tree_object_type' => 'document',
+            'tree_class' => 'system_page'
         ]);
 
         $page404Document = Document::create([
             'tree_id' => $page404Tree->id,
             'document_name' => '404',
-            'document_content' => '404'
         ]);
         $page404Document->save();
 

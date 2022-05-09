@@ -21,6 +21,11 @@ import { GrDocument } from 'react-icons/gr'
 import { AiOutlineLink } from 'react-icons/ai'
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import { formatDateTime } from '../../../helpers/date-time'
+import classNames from 'classnames/bind'
+import styles from '../../../../assets/scss/components/_typography.scss'
+import { Typography } from '../../../components'
+
+const cx = classNames.bind(styles)
 
 export class CmsPagesView extends React.Component {
     state = {
@@ -85,7 +90,10 @@ export class CmsPagesView extends React.Component {
 
                                 return (
                                     <>
-                                        <Card header={<h1>Filters</h1>}>
+                                        <Card
+                                            header={<h1>Filters</h1>}
+                                            withMinimizeIcon
+                                        >
                                             Here will be filters
                                             {isLoading && <LoadingOverlay />}
                                         </Card>
@@ -298,7 +306,13 @@ export class CmsPagesView extends React.Component {
                                                                                 'top'
                                                                             }
                                                                         >
-                                                                            <AiOutlineEyeInvisible />
+                                                                            <Typography.Container>
+                                                                                <AiOutlineEyeInvisible
+                                                                                    className={cx(
+                                                                                        'text-danger',
+                                                                                    )}
+                                                                                />
+                                                                            </Typography.Container>
                                                                         </Tooltip>
                                                                     )}
                                                                     {!!node.tree_is_published && (
@@ -329,7 +343,13 @@ export class CmsPagesView extends React.Component {
                                                                                 'top'
                                                                             }
                                                                         >
-                                                                            <AiOutlineEye />
+                                                                            <Typography.Container>
+                                                                                <AiOutlineEye
+                                                                                    className={cx(
+                                                                                        'text-success',
+                                                                                    )}
+                                                                                />
+                                                                            </Typography.Container>
                                                                         </Tooltip>
                                                                     )}
                                                                 </Table.Td>
@@ -350,6 +370,8 @@ export class CmsPagesView extends React.Component {
                                                                     xs={2}
                                                                 >
                                                                     {!!(
+                                                                        node.tree_class !==
+                                                                            'system_page' &&
                                                                         node.tree_is_editable &&
                                                                         !node.tree_is_published
                                                                     ) && (
@@ -382,6 +404,8 @@ export class CmsPagesView extends React.Component {
                                                                         />
                                                                     )}
                                                                     {!!(
+                                                                        node.tree_class !==
+                                                                            'system_page' &&
                                                                         node.tree_is_editable &&
                                                                         !!node.tree_is_published
                                                                     ) && (

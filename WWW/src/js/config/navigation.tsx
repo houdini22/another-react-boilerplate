@@ -24,6 +24,10 @@ import { AiOutlineOrderedList, AiOutlineUserAdd } from 'react-icons/ai'
 import { FiSettings } from 'react-icons/fi'
 import { Badge } from '../components'
 import { IoIosNotificationsOutline } from 'react-icons/io'
+import { AiOutlinePlus } from 'react-icons/ai'
+import { MdTableRows } from 'react-icons/md'
+import { GrDocument } from 'react-icons/gr'
+import { AiOutlineLink } from 'react-icons/ai'
 
 export const navigation = [
     {
@@ -254,6 +258,32 @@ export const navigation = [
                 href: '/cms/pages',
                 caption: 'Pages',
                 icon: <AiOutlineOrderedList />,
+            },
+            {
+                type: 'link',
+                href: '/cms/pages',
+                caption: 'Add',
+                icon: <AiOutlinePlus />,
+                children: [
+                    {
+                        type: 'link',
+                        href: '/cms/pages/add_category',
+                        caption: 'Category',
+                        icon: <MdTableRows />,
+                    },
+                    {
+                        type: 'link',
+                        href: '/cms/pages/add_document',
+                        caption: 'Document',
+                        icon: <GrDocument />,
+                    },
+                    {
+                        type: 'link',
+                        href: '/cms/pages/add_link',
+                        caption: 'Link',
+                        icon: <AiOutlineLink />,
+                    },
+                ],
             },
             {
                 type: 'link',
