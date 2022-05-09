@@ -1,9 +1,16 @@
 @import '../variables';
 
 .component-tooltip {
+    display: inline-flex;
+
     .component-tooltip__element {
-        display: inline-block;
+        display: flex;
+        flex-grow: 1;
+        align-content: center;
+        text-align: center;
+        cursor: help;
     }
+
     .component-tooltip__tooltip {
         position: fixed;
         z-index: 20000;

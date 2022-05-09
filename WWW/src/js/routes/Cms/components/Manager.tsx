@@ -25,6 +25,8 @@ export class Manager extends React.Component {
             currentNode,
             setCurrentId,
             setIsLoading,
+            publish,
+            unpublish,
         } = this.props
 
         const renderProps = {
@@ -35,6 +37,8 @@ export class Manager extends React.Component {
             currentNode,
             setCurrentId,
             setIsLoading,
+            publish,
+            unpublish,
         }
 
         return children(renderProps)
@@ -53,6 +57,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setCurrentId: (id) => dispatch(actions.setCurrentId(id)),
         setIsLoading: (val) => dispatch(actions.setIsLoading(val)),
+        publish: (id) => dispatch(actions.publish(id)),
+        unpublish: (id) => dispatch(actions.unpublish(id)),
     }
 }
 

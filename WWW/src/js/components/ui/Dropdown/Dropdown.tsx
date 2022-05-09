@@ -153,12 +153,16 @@ export class DropdownContainer extends React.Component<
 }
 
 interface DropdownTriggerProps {
-    children: any
+    children?: any
     component?: any
     transparent?: boolean
+    componentProps?: object
 }
 
 export class DropdownTrigger extends React.Component<DropdownTriggerProps> {
+    static defaultProps = {
+        componentProps: {},
+    }
     dropdownTrigger = 'hover'
 
     itemsElement = null
@@ -197,7 +201,12 @@ export class DropdownTrigger extends React.Component<DropdownTriggerProps> {
     }
 
     render() {
-        const { component: Component, children, transparent } = this.props
+        const {
+            component: Component,
+            children,
+            transparent,
+            componentProps: { icon, iconOnly },
+        } = this.props
 
         return (
             <AppContext.Consumer>
@@ -224,6 +233,7 @@ export class DropdownTrigger extends React.Component<DropdownTriggerProps> {
                             color={dropdownTriggerColor}
                             onClick={(e) => {
                                 e.preventDefault()
+                                e.stopPropagation()
 
                                 if (dropdownTrigger === 'click') {
                                     if (dropdownIsOpen) {
@@ -240,6 +250,8 @@ export class DropdownTrigger extends React.Component<DropdownTriggerProps> {
                             }}
                             transparent={transparent}
                             disableContext
+                            icon={icon}
+                            iconOnly={iconOnly}
                         >
                             {children}
                         </Component>,

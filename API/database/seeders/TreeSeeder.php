@@ -126,6 +126,35 @@ class TreeSeeder extends Seeder
         $sampleTree->category_id = $sampleCategory->id;
         $sampleTree->save();
 
+        // SAMPLE SUBCATEGORY
+
+        $sampleTree2 = $sampleTree->children()->create([
+            'tree_is_published' => true,
+            'tree_published_from' => Carbon::create(1988)->format('Y-m-d H:i:s'),
+            'tree_published_to' => Carbon::create(2099)->format('Y-m-d H:i:s'),
+            'tree_is_visible_frontend' => true,
+            'tree_is_visible_backend' => true,
+            'tree_is_visible_in_select' => true,
+            'tree_is_deletable' => true,
+            'tree_is_editable' => true,
+            'tree_has_edit_button' => true,
+            'tree_is_viewable' => true,
+            'tree_url_is_showable' => true,
+            'tree_url_is_editable' => true,
+            'tree_menu_is_visible' => true,
+            'tree_object_type' => 'category',
+        ]);
+
+        $sampleCategory2 = Category::create([
+            'tree_id' => $sampleTree2->id,
+            'category_name' => 'Sample subcategory',
+            'category_url' => '/sample-category/sample-subcategory'
+        ]);
+        $sampleCategory2->save();
+
+        $sampleTree2->category_id = $sampleCategory2->id;
+        $sampleTree2->save();
+
         // SAMPLE PAGES
 
         $samplePageTree = $sampleTree->children()->create([
@@ -147,8 +176,7 @@ class TreeSeeder extends Seeder
 
         $samplePageDocument = Document::create([
             'tree_id' => $samplePageTree->id,
-            'document_name' => '404',
-            'document_content' => '404',
+            'document_name' => 'Sample document',
             'document_url' => '/sample-category/sample-document'
         ]);
         $samplePageDocument->save();

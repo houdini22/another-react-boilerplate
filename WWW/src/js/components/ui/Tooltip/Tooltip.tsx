@@ -94,7 +94,7 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
                 case 'top-start':
                     return top - 40 + scrollTop
                 case 'top':
-                    return top - 40 + scrollTop
+                    return top - 40 - scrollTop - tooltipHeight
                 case 'top-end':
                     return top - 40 + scrollTop
                 case 'bottom-start':
@@ -208,43 +208,41 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
                 })}
                 {...props}
             >
-                <div className={cx('component-tooltip')}>
-                    <div
-                        className={cx('component-tooltip__element')}
-                        onMouseEnter={() => {
-                            if (trigger === 'hover') {
-                                this.showTooltip()
-                            }
-                        }}
-                        onMouseLeave={() => {
-                            if (trigger === 'hover') {
-                                this.hideTooltip()
-                            }
-                        }}
-                        onClick={() => {
-                            if (trigger === 'click') {
-                                show ? this.hideTooltip() : this.showTooltip()
-                            }
-                        }}
-                        ref={(el) => {
-                            this.element = el
-                        }}
-                    >
-                        {children}
-                    </div>
-                    {show && (
-                        <div
-                            className={cx('component-tooltip__tooltip')}
-                            style={{
-                                left,
-                                top,
-                            }}
-                            ref={(el) => (this.tooltip = el)}
-                        >
-                            {tooltip}
-                        </div>
-                    )}
+                <div
+                    className={cx('component-tooltip__element')}
+                    onMouseEnter={() => {
+                        if (trigger === 'hover') {
+                            this.showTooltip()
+                        }
+                    }}
+                    onMouseLeave={() => {
+                        if (trigger === 'hover') {
+                            this.hideTooltip()
+                        }
+                    }}
+                    onClick={() => {
+                        if (trigger === 'click') {
+                            show ? this.hideTooltip() : this.showTooltip()
+                        }
+                    }}
+                    ref={(el) => {
+                        this.element = el
+                    }}
+                >
+                    {children}
                 </div>
+                {show && (
+                    <div
+                        className={cx('component-tooltip__tooltip')}
+                        style={{
+                            left,
+                            top,
+                        }}
+                        ref={(el) => (this.tooltip = el)}
+                    >
+                        {tooltip}
+                    </div>
+                )}
             </div>
         )
     }

@@ -14,6 +14,8 @@ Route::prefix('api/v1')->group(function () {
         Route::get('pages', '\App\Http\Controllers\CmsPagesController@getPages');
         Route::get('pages/fetchParentCategorySelectOptions', '\App\Http\Controllers\CmsPagesController@getParentCategorySelectOptions');
         Route::post('pages/addCategory', '\App\Http\Controllers\CmsPagesController@postAddCategory');
+        Route::post('pages/publish', '\App\Http\Controllers\CmsPagesController@postPublish');
+        Route::post('pages/unpublish', '\App\Http\Controllers\CmsPagesController@postUnpublish');
     });
 });
 

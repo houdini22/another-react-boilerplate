@@ -87,6 +87,18 @@ const addDocument = (values) => (dispatch) => {
     return http.post('/cms/pages/addDocument', values)
 }
 
+const publish = (id) => (dispatch, getState) => {
+    return http.post('/cms/pages/publish', { id }).then(() => {
+        dispatch(fetch(getCurrentNode(getState())['id']))
+    })
+}
+
+const unpublish = (id) => (dispatch, getState) => {
+    return http.post('/cms/pages/unpublish', { id }).then(() => {
+        dispatch(fetch(getCurrentNode(getState())['id']))
+    })
+}
+
 export const actions = {
     fetch,
     setIsLoaded,
@@ -98,6 +110,8 @@ export const actions = {
     fetchIndexDocumentsSelectOptions,
     addCategory,
     addDocument,
+    publish,
+    unpublish,
 }
 
 // ------------------------------------

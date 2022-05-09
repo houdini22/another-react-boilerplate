@@ -129,4 +129,24 @@ class CmsPagesController extends Controller
             'message' => 'ok'
         ]);
     }
+
+    public function postPublish(Request $request) {
+        $tree = Tree::find($request->post('id'));
+        $tree->tree_is_published = true;
+        $tree->save();
+
+        return response()->json([
+            'message' => 'ok'
+        ]);
+    }
+
+    public function postUnpublish(Request $request) {
+        $tree = Tree::find($request->post('id'));
+        $tree->tree_is_published = false;
+        $tree->save();
+
+        return response()->json([
+            'message' => 'ok'
+        ]);
+    }
 }

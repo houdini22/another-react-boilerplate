@@ -3,14 +3,24 @@ import { PageContent } from '../../../layouts/PageLayout/components'
 import Manager from './Manager'
 import { RouteManager } from '../../../containers/RouteManager'
 import Header from './Header'
-import { Alert, Button, Card, LoadingOverlay, Modal } from '../../../components'
+import {
+    Alert,
+    Button,
+    Card,
+    Dropdown,
+    LoadingOverlay,
+    Modal,
+    Tooltip,
+} from '../../../components'
 import { Table } from '../../../components'
 import { CgArrowsVAlt } from 'react-icons/cg'
 import { BsPencil } from 'react-icons/bs'
-import { AiFillDelete } from 'react-icons/ai'
+import { AiFillDelete, AiOutlinePlus } from 'react-icons/ai'
 import { MdTableRows } from 'react-icons/md'
 import { GrDocument } from 'react-icons/gr'
 import { AiOutlineLink } from 'react-icons/ai'
+import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
+import { formatDateTime } from '../../../helpers/date-time'
 
 export class CmsPagesView extends React.Component {
     state = {
@@ -62,6 +72,8 @@ export class CmsPagesView extends React.Component {
                                 isLoaded,
                                 fetchError,
                                 setCurrentId,
+                                publish,
+                                unpublish,
                             }) => {
                                 console.log(
                                     nodes,
@@ -77,7 +89,55 @@ export class CmsPagesView extends React.Component {
                                             Here will be filters
                                             {isLoading && <LoadingOverlay />}
                                         </Card>
-                                        <Card header={<h1>Tree</h1>}>
+                                        <Card
+                                            header={<h1>Pages</h1>}
+                                            headerActions={[
+                                                <Dropdown.Container
+                                                    triggerColor={'success'}
+                                                    placement={'right'}
+                                                >
+                                                    <Dropdown.Trigger
+                                                        component={Button}
+                                                        componentProps={{
+                                                            icon: (
+                                                                <AiOutlinePlus />
+                                                            ),
+                                                        }}
+                                                    >
+                                                        Add
+                                                    </Dropdown.Trigger>
+                                                    <Dropdown.Menu>
+                                                        <Dropdown.Item
+                                                            onClick={() => {
+                                                                navigate(
+                                                                    '/cms/pages/add_category',
+                                                                )
+                                                            }}
+                                                        >
+                                                            Category
+                                                        </Dropdown.Item>
+                                                        <Dropdown.Item
+                                                            onClick={() => {
+                                                                navigate(
+                                                                    '/cms/pages/add_document',
+                                                                )
+                                                            }}
+                                                        >
+                                                            Document
+                                                        </Dropdown.Item>
+                                                        <Dropdown.Item
+                                                            onClick={() => {
+                                                                navigate(
+                                                                    '/cms/pages/add_link',
+                                                                )
+                                                            }}
+                                                        >
+                                                            Link
+                                                        </Dropdown.Item>
+                                                    </Dropdown.Menu>
+                                                </Dropdown.Container>,
+                                            ]}
+                                        >
                                             {isLoading && <LoadingOverlay />}
                                             <Table.Container>
                                                 <Table.THead>
@@ -88,10 +148,13 @@ export class CmsPagesView extends React.Component {
                                                         <Table.Th xs={3}>
                                                             Name
                                                         </Table.Th>
-                                                        <Table.Th xs={3}>
+                                                        <Table.Th xs={4}>
                                                             URL
                                                         </Table.Th>
-                                                        <Table.Th xs={3}>
+                                                        <Table.Th xs={1}>
+                                                            Statuses
+                                                        </Table.Th>
+                                                        <Table.Th xs={1}>
                                                             Ordering
                                                         </Table.Th>
                                                         <Table.Th xs={2}>
@@ -100,18 +163,6 @@ export class CmsPagesView extends React.Component {
                                                     </Table.Tr>
                                                 </Table.THead>
                                                 <Table.TBody>
-                                                    {!nodes.length && (
-                                                        <Table.Tr>
-                                                            <Table.Td
-                                                                xs={12}
-                                                                alignCenter
-                                                            >
-                                                                <Alert color="info">
-                                                                    No results
-                                                                </Alert>
-                                                            </Table.Td>
-                                                        </Table.Tr>
-                                                    )}
                                                     {currentNode.depth > 0 && (
                                                         <Table.Tr>
                                                             <Table.Td
@@ -131,6 +182,18 @@ export class CmsPagesView extends React.Component {
                                                                 >
                                                                     Up
                                                                 </Button>
+                                                            </Table.Td>
+                                                        </Table.Tr>
+                                                    )}
+                                                    {!nodes.length && (
+                                                        <Table.Tr>
+                                                            <Table.Td
+                                                                xs={12}
+                                                                alignCenter
+                                                            >
+                                                                <Alert color="info">
+                                                                    No results
+                                                                </Alert>
                                                             </Table.Td>
                                                         </Table.Tr>
                                                     )}
@@ -185,7 +248,7 @@ export class CmsPagesView extends React.Component {
                                                                             .link_name}
                                                                 </Table.Td>
                                                                 <Table.Td
-                                                                    xs={3}
+                                                                    xs={4}
                                                                 >
                                                                     {node.tree_object_type ===
                                                                         'category' &&
@@ -205,7 +268,73 @@ export class CmsPagesView extends React.Component {
                                                                             .link_url}
                                                                 </Table.Td>
                                                                 <Table.Td
-                                                                    xs={3}
+                                                                    xs={1}
+                                                                >
+                                                                    {!node.tree_is_published && (
+                                                                        <Tooltip
+                                                                            tooltip={
+                                                                                <>
+                                                                                    <p>
+                                                                                        Published
+                                                                                        from:{' '}
+                                                                                        {node.tree_published_from
+                                                                                            ? formatDateTime(
+                                                                                                  node.tree_published_from,
+                                                                                              )
+                                                                                            : 'never'}
+                                                                                    </p>
+                                                                                    <p>
+                                                                                        Published
+                                                                                        to:{' '}
+                                                                                        {node.tree_published_to
+                                                                                            ? formatDateTime(
+                                                                                                  node.tree_published_to,
+                                                                                              )
+                                                                                            : 'never'}
+                                                                                    </p>
+                                                                                </>
+                                                                            }
+                                                                            placement={
+                                                                                'top'
+                                                                            }
+                                                                        >
+                                                                            <AiOutlineEyeInvisible />
+                                                                        </Tooltip>
+                                                                    )}
+                                                                    {!!node.tree_is_published && (
+                                                                        <Tooltip
+                                                                            tooltip={
+                                                                                <>
+                                                                                    <p>
+                                                                                        Published
+                                                                                        from:{' '}
+                                                                                        {node.tree_published_from
+                                                                                            ? formatDateTime(
+                                                                                                  node.tree_published_from,
+                                                                                              )
+                                                                                            : 'never'}
+                                                                                    </p>
+                                                                                    <p>
+                                                                                        Published
+                                                                                        to:{' '}
+                                                                                        {node.tree_published_to
+                                                                                            ? formatDateTime(
+                                                                                                  node.tree_published_to,
+                                                                                              )
+                                                                                            : 'never'}
+                                                                                    </p>
+                                                                                </>
+                                                                            }
+                                                                            placement={
+                                                                                'top'
+                                                                            }
+                                                                        >
+                                                                            <AiOutlineEye />
+                                                                        </Tooltip>
+                                                                    )}
+                                                                </Table.Td>
+                                                                <Table.Td
+                                                                    xs={1}
                                                                 >
                                                                     <Button
                                                                         icon={
@@ -220,6 +349,125 @@ export class CmsPagesView extends React.Component {
                                                                 <Table.Td
                                                                     xs={2}
                                                                 >
+                                                                    {!!(
+                                                                        node.tree_is_editable &&
+                                                                        !node.tree_is_published
+                                                                    ) && (
+                                                                        <Button
+                                                                            color="success"
+                                                                            icon={
+                                                                                <AiOutlineEye />
+                                                                            }
+                                                                            iconOnly
+                                                                            onClick={(
+                                                                                e,
+                                                                                {
+                                                                                    setIsLoading,
+                                                                                },
+                                                                            ) => {
+                                                                                e.stopPropagation()
+                                                                                setIsLoading(
+                                                                                    true,
+                                                                                )
+                                                                                publish(
+                                                                                    node.id,
+                                                                                ).then(
+                                                                                    () => {
+                                                                                        setIsLoading(
+                                                                                            false,
+                                                                                        )
+                                                                                    },
+                                                                                )
+                                                                            }}
+                                                                        />
+                                                                    )}
+                                                                    {!!(
+                                                                        node.tree_is_editable &&
+                                                                        !!node.tree_is_published
+                                                                    ) && (
+                                                                        <Button
+                                                                            color="danger"
+                                                                            icon={
+                                                                                <AiOutlineEyeInvisible />
+                                                                            }
+                                                                            iconOnly
+                                                                            onClick={(
+                                                                                e,
+                                                                                {
+                                                                                    setIsLoading,
+                                                                                },
+                                                                            ) => {
+                                                                                e.stopPropagation()
+                                                                                setIsLoading(
+                                                                                    true,
+                                                                                )
+                                                                                unpublish(
+                                                                                    node.id,
+                                                                                ).then(
+                                                                                    () => {
+                                                                                        setIsLoading(
+                                                                                            false,
+                                                                                        )
+                                                                                    },
+                                                                                )
+                                                                            }}
+                                                                        />
+                                                                    )}
+
+                                                                    {!!node.tree_is_editable &&
+                                                                        node.tree_object_type ===
+                                                                            'category' && (
+                                                                            <Dropdown.Container
+                                                                                triggerColor={
+                                                                                    'success'
+                                                                                }
+                                                                                placement={
+                                                                                    'right'
+                                                                                }
+                                                                            >
+                                                                                <Dropdown.Trigger
+                                                                                    component={
+                                                                                        Button
+                                                                                    }
+                                                                                    componentProps={{
+                                                                                        icon: (
+                                                                                            <AiOutlinePlus />
+                                                                                        ),
+                                                                                        iconOnly:
+                                                                                            true,
+                                                                                    }}
+                                                                                />
+                                                                                <Dropdown.Menu>
+                                                                                    <Dropdown.Item
+                                                                                        onClick={() => {
+                                                                                            navigate(
+                                                                                                '/cms/pages/add_category',
+                                                                                            )
+                                                                                        }}
+                                                                                    >
+                                                                                        Category
+                                                                                    </Dropdown.Item>
+                                                                                    <Dropdown.Item
+                                                                                        onClick={() => {
+                                                                                            navigate(
+                                                                                                '/cms/pages/add_document',
+                                                                                            )
+                                                                                        }}
+                                                                                    >
+                                                                                        Document
+                                                                                    </Dropdown.Item>
+                                                                                    <Dropdown.Item
+                                                                                        onClick={() => {
+                                                                                            navigate(
+                                                                                                '/cms/pages/add_link',
+                                                                                            )
+                                                                                        }}
+                                                                                    >
+                                                                                        Link
+                                                                                    </Dropdown.Item>
+                                                                                </Dropdown.Menu>
+                                                                            </Dropdown.Container>
+                                                                        )}
                                                                     {!!node.tree_is_editable && (
                                                                         <Button
                                                                             color="warning"
