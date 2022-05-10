@@ -9,7 +9,7 @@ import {
 } from 'redux-form'
 import { getFormValues } from '../../../utils/forms/auto-save'
 import * as moment from 'moment'
-import { formatDateTimeAPI } from '../../../helpers/date-time'
+import { formatDateTime, formatDateTimeAPI } from '../../../helpers/date-time'
 import { actions } from '../../../reducers/cms-pages'
 import { processAPIerrorResponseToFormErrors } from '../../../modules/http'
 import { withRouter } from '../../../helpers/router'
@@ -67,7 +67,9 @@ const AddCategoryFormContainer = compose(
                     tree: {
                         tree_is_published: true,
                         tree_published_from: formatDateTimeAPI(moment()),
-                        tree_published_to: null,
+                        tree_published_to: formatDateTimeAPI(
+                            moment(new Date(2099, 12)).format('YYYY'),
+                        ),
                     },
                 },
             }

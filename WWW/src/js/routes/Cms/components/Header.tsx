@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { Badge, Button, Dropdown, Label, PageHeader } from '../../../components'
 import { RouteManager } from '../../../containers/RouteManager'
-import { AiOutlinePlus } from 'react-icons/ai'
 
 interface HeaderProps {
     title: String

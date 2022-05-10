@@ -21,13 +21,14 @@ import {
 } from 'react-icons/md'
 import { FaSitemap, FaUser } from 'react-icons/fa'
 import { AiOutlineOrderedList, AiOutlineUserAdd } from 'react-icons/ai'
-import { FiSettings } from 'react-icons/fi'
 import { Badge } from '../components'
 import { IoIosNotificationsOutline } from 'react-icons/io'
-import { AiOutlinePlus } from 'react-icons/ai'
-import { MdTableRows } from 'react-icons/md'
-import { GrDocument } from 'react-icons/gr'
-import { AiOutlineLink } from 'react-icons/ai'
+import {
+    AddIcon,
+    CategoryIcon,
+    DocumentIcon,
+    LinkIcon,
+} from '../components/icons'
 
 export const navigation = [
     {
@@ -267,33 +268,27 @@ export const navigation = [
                 type: 'link',
                 href: '/cms/pages',
                 caption: 'Add',
-                icon: <AiOutlinePlus />,
+                icon: <AddIcon />,
                 children: [
                     {
                         type: 'link',
                         href: '/cms/pages/add_category',
                         caption: 'Category',
-                        icon: <MdTableRows />,
+                        icon: <CategoryIcon />,
                     },
                     {
                         type: 'link',
                         href: '/cms/pages/add_document',
                         caption: 'Document',
-                        icon: <GrDocument />,
+                        icon: <DocumentIcon />,
                     },
                     {
                         type: 'link',
                         href: '/cms/pages/add_link',
                         caption: 'Link',
-                        icon: <AiOutlineLink />,
+                        icon: <LinkIcon />,
                     },
                 ],
-            },
-            {
-                type: 'link',
-                href: '/cms/settings',
-                caption: 'Settings',
-                icon: <FiSettings />,
             },
         ],
     },

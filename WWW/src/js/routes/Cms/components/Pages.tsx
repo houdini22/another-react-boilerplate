@@ -13,18 +13,22 @@ import {
     Tooltip,
 } from '../../../components'
 import { Table } from '../../../components'
-import { CgArrowsVAlt } from 'react-icons/cg'
-import { BsPencil } from 'react-icons/bs'
-import { AiFillDelete, AiOutlinePlus } from 'react-icons/ai'
-import { MdTableRows } from 'react-icons/md'
-import { GrDocument } from 'react-icons/gr'
-import { AiOutlineLink } from 'react-icons/ai'
-import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import { formatDateTime } from '../../../helpers/date-time'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/components/_typography.scss'
 import { Typography } from '../../../components'
 import { FiltersFormContainer } from '../containers/FiltersFormContainer'
+import {
+    OrderingIcon,
+    EditIcon,
+    DeleteIcon,
+    AddIcon,
+    CategoryIcon,
+    DocumentIcon,
+    LinkIcon,
+    NotPublishedIcon,
+    PublishedIcon,
+} from '../../../components/icons'
 
 const cx = classNames.bind(styles)
 
@@ -138,9 +142,7 @@ export class CmsPagesView extends React.Component {
                                                     <Dropdown.Trigger
                                                         component={Button}
                                                         componentProps={{
-                                                            icon: (
-                                                                <AiOutlinePlus />
-                                                            ),
+                                                            icon: <AddIcon />,
                                                         }}
                                                     >
                                                         Add
@@ -265,15 +267,15 @@ export class CmsPagesView extends React.Component {
                                                                 >
                                                                     {node.tree_object_type ===
                                                                         'category' && (
-                                                                        <MdTableRows />
+                                                                        <CategoryIcon />
                                                                     )}
                                                                     {node.tree_object_type ===
                                                                         'document' && (
-                                                                        <GrDocument />
+                                                                        <DocumentIcon />
                                                                     )}
                                                                     {node.tree_object_type ===
                                                                         'link' && (
-                                                                        <AiOutlineLink />
+                                                                        <LinkIcon />
                                                                     )}
                                                                 </Table.Td>
                                                                 <Table.Td
@@ -347,7 +349,7 @@ export class CmsPagesView extends React.Component {
                                                                             }
                                                                         >
                                                                             <Typography.Container>
-                                                                                <AiOutlineEyeInvisible
+                                                                                <NotPublishedIcon
                                                                                     className={cx(
                                                                                         'text-danger',
                                                                                     )}
@@ -384,7 +386,7 @@ export class CmsPagesView extends React.Component {
                                                                             }
                                                                         >
                                                                             <Typography.Container>
-                                                                                <AiOutlineEye
+                                                                                <PublishedIcon
                                                                                     className={cx(
                                                                                         'text-success',
                                                                                     )}
@@ -398,7 +400,7 @@ export class CmsPagesView extends React.Component {
                                                                 >
                                                                     <Button
                                                                         icon={
-                                                                            <CgArrowsVAlt />
+                                                                            <OrderingIcon />
                                                                         }
                                                                         iconOnly
                                                                         style={{
@@ -418,7 +420,7 @@ export class CmsPagesView extends React.Component {
                                                                         <Button
                                                                             color="success"
                                                                             icon={
-                                                                                <AiOutlineEye />
+                                                                                <PublishedIcon />
                                                                             }
                                                                             iconOnly
                                                                             onClick={(
@@ -452,7 +454,7 @@ export class CmsPagesView extends React.Component {
                                                                         <Button
                                                                             color="danger"
                                                                             icon={
-                                                                                <AiOutlineEyeInvisible />
+                                                                                <NotPublishedIcon />
                                                                             }
                                                                             iconOnly
                                                                             onClick={(
@@ -495,7 +497,7 @@ export class CmsPagesView extends React.Component {
                                                                                     }
                                                                                     componentProps={{
                                                                                         icon: (
-                                                                                            <AiOutlinePlus />
+                                                                                            <AddIcon />
                                                                                         ),
                                                                                         iconOnly:
                                                                                             true,
@@ -536,7 +538,7 @@ export class CmsPagesView extends React.Component {
                                                                         <Button
                                                                             color="warning"
                                                                             icon={
-                                                                                <BsPencil />
+                                                                                <EditIcon />
                                                                             }
                                                                             iconOnly
                                                                         />
@@ -545,7 +547,7 @@ export class CmsPagesView extends React.Component {
                                                                         <Button
                                                                             color="danger"
                                                                             icon={
-                                                                                <AiFillDelete />
+                                                                                <DeleteIcon />
                                                                             }
                                                                             iconOnly
                                                                             onClick={(

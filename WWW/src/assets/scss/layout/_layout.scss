@@ -136,6 +136,14 @@
                             width: calc(100% - 40px);
                             border-radius: $COMPONENT_BORDER_RADIUS;
                         }
+
+                        .layout__sidebar__content__navigation__links__link {
+                            a {
+                                & > div {
+                                    padding: 0;
+                                }
+                            }
+                        }
                     }
                 }
             }

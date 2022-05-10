@@ -58,7 +58,9 @@ const AddDocumentFormContainer = compose(
                     tree: {
                         tree_is_published: true,
                         tree_published_from: formatDateTimeAPI(moment()),
-                        tree_published_to: null,
+                        tree_published_to: formatDateTimeAPI(
+                            moment(new Date(2099, 12)).format('YYYY'),
+                        ),
                     },
                 },
             }

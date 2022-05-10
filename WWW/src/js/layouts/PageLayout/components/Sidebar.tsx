@@ -167,7 +167,7 @@ class SidebarBase extends React.Component<SidebarProps, SidebarState> {
                                             <div className={cx('text-center')}>
                                                 Logged as:
                                                 <br />
-                                                {user['username']}
+                                                {user['email']}
                                             </div>
                                         </Alert>
                                     )}
@@ -183,6 +183,7 @@ class SidebarBase extends React.Component<SidebarProps, SidebarState> {
                                                 color="primary"
                                                 roundless
                                                 onClick={onClickLogout}
+                                                block
                                             >
                                                 Log out
                                             </Button>
@@ -193,6 +194,7 @@ class SidebarBase extends React.Component<SidebarProps, SidebarState> {
                                             color="primary"
                                             roundless
                                             onClick={() => submit(FORM_NAME)}
+                                            block
                                         >
                                             Log in
                                         </Button>
