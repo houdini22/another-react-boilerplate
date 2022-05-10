@@ -35,7 +35,7 @@ const setCurrentId = (currentId) => (dispatch) => {
 const fetch =
     (parent_id = 0) =>
     (dispatch) => {
-        return new Promise((resolve) => {
+        return new Promise<void>((resolve) => {
             dispatch(setIsLoading(true))
             dispatch(setIsLoaded(false))
             dispatch(setFetchError(null))
@@ -50,6 +50,7 @@ const fetch =
                     dispatch(setCurrentNode(currentNode))
                     dispatch(setIsLoading(false))
                     dispatch(setIsLoaded(true))
+                    resolve()
                 })
                 .catch((e) => {
                     dispatch(setIsLoading(false))
@@ -79,12 +80,40 @@ const fetchIndexDocumentsSelectOptions = () => (dispatch) => {
     })
 }
 
-const addCategory = (values) => (dispatch) => {
-    return http.post('/cms/pages/addCategory', values)
+const addCategory = (values) => (dispatch, getState) => {
+    return new Promise<void>((resolve) => {
+        return http.post('/cms/pages/addCategory', values).then(() => {
+            return dispatch(fetch(getCurrentNode(getState())['id'])).then(
+                () => {
+                    resolve()
+                },
+            )
+        })
+    })
 }
 
-const addDocument = (values) => (dispatch) => {
-    return http.post('/cms/pages/addDocument', values)
+const addDocument = (values) => (dispatch, getState) => {
+    return new Promise<void>((resolve) => {
+        return http.post('/cms/pages/addDocument', values).then(() => {
+            return dispatch(fetch(getCurrentNode(getState())['id'])).then(
+                () => {
+                    resolve()
+                },
+            )
+        })
+    })
+}
+
+const addLink = (values) => (dispatch, getState) => {
+    return new Promise<void>((resolve) => {
+        return http.post('/cms/pages/addLink', values).then(() => {
+            return dispatch(fetch(getCurrentNode(getState())['id'])).then(
+                () => {
+                    resolve()
+                },
+            )
+        })
+    })
 }
 
 const publish = (id) => (dispatch, getState) => {
@@ -99,6 +128,16 @@ const unpublish = (id) => (dispatch, getState) => {
     })
 }
 
+const deleteNode =
+    ({ id }) =>
+    (dispatch, getState) => {
+        return http
+            .delete('/cms/pages/deleteNode', { params: { id } })
+            .then(() => {
+                dispatch(fetch(getCurrentNode(getState())['id']))
+            })
+    }
+
 export const actions = {
     fetch,
     setIsLoaded,
@@ -112,6 +151,8 @@ export const actions = {
     addDocument,
     publish,
     unpublish,
+    deleteNode,
+    addLink,
 }
 
 // ------------------------------------

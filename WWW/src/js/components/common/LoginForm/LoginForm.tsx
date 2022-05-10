@@ -20,7 +20,6 @@ export class LoginForm extends React.Component<LoginFormProps> {
     render() {
         const {
             handleSubmit,
-            submit,
             initialValues: { username },
             button,
         } = this.props

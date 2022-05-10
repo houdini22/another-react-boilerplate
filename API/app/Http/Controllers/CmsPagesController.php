@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Document;
+use App\Models\Link;
 use App\Models\Tree;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,7 +32,8 @@ class CmsPagesController extends Controller
         ]);
     }
 
-    public function getParentCategorySelectOptions(Request $request) {
+    public function getParentCategorySelectOptions(Request $request)
+    {
         $user = User::getFromRequest($request);
         if (!$user) {
             return $this->response401();
@@ -48,11 +51,11 @@ class CmsPagesController extends Controller
         $traverse = function ($tree, $prefix = '-') use (&$traverse, &$options) {
             foreach ($tree as $t) {
                 $options[] = [
-                    'label' => $prefix.' '.$t->category->category_name,
+                    'label' => $prefix . ' ' . $t->category->category_name,
                     'value' => $t->id,
                 ];
 
-                $traverse($t->children, $prefix.'-');
+                $traverse($t->children, $prefix . '-');
             }
         };
 
@@ -63,7 +66,8 @@ class CmsPagesController extends Controller
         ]);
     }
 
-    public function getIndexDocumentsSelectOptions(Request $request) {
+    public function getIndexDocumentsSelectOptions(Request $request)
+    {
         $user = User::getFromRequest($request);
         if (!$user) {
             return $this->response401();
@@ -82,11 +86,11 @@ class CmsPagesController extends Controller
         $traverse = function ($tree, $prefix = '-') use (&$traverse, &$options) {
             foreach ($tree as $t) {
                 $options[] = [
-                    'label' => $prefix.' '.$t->document->document_name,
+                    'label' => $prefix . ' ' . $t->document->document_name,
                     'value' => $t->id,
                 ];
 
-                $traverse($t->children, $prefix.'-');
+                $traverse($t->children, $prefix . '-');
             }
         };
 
@@ -97,11 +101,13 @@ class CmsPagesController extends Controller
         ]);
     }
 
-    public function postAddCategory(Request $request) {
+    public function postAddCategory(Request $request)
+    {
         $values = $request->post();
 
         $validator = Validator::make($values, [
             'category.category_name' => 'required|max:256',
+            'category.category_url' => 'required|max:256'
         ]);
 
         if ($validator->fails()) {
@@ -116,6 +122,7 @@ class CmsPagesController extends Controller
             'tree_is_published' => Arr::get($values, 'tree.tree_is_published'),
             'tree_published_from' => Arr::get($values, 'tree.tree_published_from'),
             'tree_published_to' => Arr::get($values, 'tree.tree_published_to'),
+            'tree_object_type' => 'category',
         ]);
 
         $category = new Category(Arr::get($values, 'category'));
@@ -126,11 +133,13 @@ class CmsPagesController extends Controller
         $tree->save();
 
         return response()->json([
-            'message' => 'ok'
+            'message' => 'ok',
+            'tree' => Tree::find($tree->id)->toArray(),
         ]);
     }
 
-    public function postPublish(Request $request) {
+    public function postPublish(Request $request)
+    {
         $tree = Tree::find($request->post('id'));
         $tree->tree_is_published = true;
         $tree->save();
@@ -140,13 +149,107 @@ class CmsPagesController extends Controller
         ]);
     }
 
-    public function postUnpublish(Request $request) {
+    public function postUnpublish(Request $request)
+    {
         $tree = Tree::find($request->post('id'));
         $tree->tree_is_published = false;
         $tree->save();
 
         return response()->json([
             'message' => 'ok'
+        ]);
+    }
+
+    public function deleteDeleteNode(Request $request)
+    {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $node = Tree::find($request->get('id'));
+
+        foreach ($node->descendants as $d) {
+            $d->delete();
+        }
+        $node->delete();
+
+        return response()->json([
+            'message' => 'ok'
+        ]);
+    }
+
+    public function postAddDocument(Request $request)
+    {
+        $values = $request->post();
+
+        $validator = Validator::make($values, [
+            'document.document_name' => 'required|max:256',
+            'document.document_url' => 'required|max:256'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->messages(),
+            ], 422);
+        }
+
+        $parent = Tree::find($values['parent_id']);
+
+        $tree = $parent->children()->create([
+            'tree_is_published' => Arr::get($values, 'tree.tree_is_published'),
+            'tree_published_from' => Arr::get($values, 'tree.tree_published_from'),
+            'tree_published_to' => Arr::get($values, 'tree.tree_published_to'),
+            'tree_object_type' => 'document',
+        ]);
+
+        $document = new Document(Arr::get($values, 'document'));
+        $document->tree_id = $tree->id;
+        $document->save();
+
+        $tree->document_id = $document->id;
+        $tree->save();
+
+        return response()->json([
+            'message' => 'ok',
+            'tree' => Tree::find($tree->id)->toArray(),
+        ]);
+    }
+
+    public function postAddLink(Request $request)
+    {
+        $values = $request->post();
+
+        $validator = Validator::make($values, [
+            'link.link_name' => 'required|max:256',
+            'link.link_url' => 'required|max:256'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->messages(),
+            ], 422);
+        }
+
+        $parent = Tree::find($values['parent_id']);
+
+        $tree = $parent->children()->create([
+            'tree_is_published' => Arr::get($values, 'tree.tree_is_published'),
+            'tree_published_from' => Arr::get($values, 'tree.tree_published_from'),
+            'tree_published_to' => Arr::get($values, 'tree.tree_published_to'),
+            'tree_object_type' => 'link',
+        ]);
+
+        $link = new Link(Arr::get($values, 'link'));
+        $link->tree_id = $tree->id;
+        $link->save();
+
+        $tree->link_id = $link->id;
+        $tree->save();
+
+        return response()->json([
+            'message' => 'ok',
+            'tree' => Tree::find($tree->id)->toArray(),
         ]);
     }
 }

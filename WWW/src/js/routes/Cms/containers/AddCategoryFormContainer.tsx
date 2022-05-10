@@ -12,6 +12,7 @@ import * as moment from 'moment'
 import { formatDateTimeAPI } from '../../../helpers/date-time'
 import { actions } from '../../../reducers/cms-pages'
 import { processAPIerrorResponseToFormErrors } from '../../../modules/http'
+import { withRouter } from '../../../helpers/router'
 
 export const FORM_NAME = 'add-category-form-container'
 
@@ -51,12 +52,13 @@ class AddCategoryFormContainerBase extends React.Component {
 }
 
 const AddCategoryFormContainer = compose(
+    withRouter,
     connect(
         ({ cmsPages: { currentId } }, props) => {
             return {
                 initialValues: {
                     category: {
-                        category_name: '',
+                        category_name: null,
                         category_url: null,
                         index_document_id: null,
                         menu_category_id: null,
@@ -85,10 +87,10 @@ const AddCategoryFormContainer = compose(
     ),
     reduxForm({
         form: FORM_NAME,
-        onSubmit: (values, dispatch, { addCategory }) => {
+        onSubmit: (values, dispatch, { addCategory, navigate }) => {
             return addCategory(values)
                 .then(() => {
-                    console.log('ok')
+                    navigate('/cms/pages')
                 })
                 .catch(
                     ({

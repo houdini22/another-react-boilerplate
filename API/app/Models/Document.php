@@ -12,6 +12,10 @@ class Document extends Model
     protected $fillable = [
         'tree_id',
         'document_name',
-        'document_url'
+        'document_url',
+        'document_meta_title',
+        'document_meta_keywords',
+        'document_meta_description',
+        'document_meta_robots',
     ];
 }

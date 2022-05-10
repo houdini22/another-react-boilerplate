@@ -12,6 +12,7 @@ import * as moment from 'moment'
 import { formatDateTimeAPI } from '../../../helpers/date-time'
 import { actions } from '../../../reducers/cms-pages'
 import { processAPIerrorResponseToFormErrors } from '../../../modules/http'
+import { withRouter } from '../../../helpers/router'
 
 export const FORM_NAME = 'add-document-form-container'
 
@@ -40,6 +41,7 @@ class AddDocumentFormContainerBase extends React.Component {
 }
 
 const AddDocumentFormContainer = compose(
+    withRouter,
     connect(
         ({ cmsPages: { currentId } }, props) => {
             return {
@@ -47,6 +49,10 @@ const AddDocumentFormContainer = compose(
                     document: {
                         document_name: null,
                         document_url: null,
+                        document_meta_title: null,
+                        document_meta_keywords: null,
+                        document_meta_description: null,
+                        document_meta_robots: null,
                     },
                     parent_id: currentId,
                     tree: {
@@ -70,10 +76,10 @@ const AddDocumentFormContainer = compose(
     ),
     reduxForm({
         form: FORM_NAME,
-        onSubmit: (values, dispatch, { addDocument }) => {
+        onSubmit: (values, dispatch, { addDocument, navigate }) => {
             return addDocument(values)
                 .then(() => {
-                    console.log('ok')
+                    navigate('/cms/pages')
                 })
                 .catch(
                     ({

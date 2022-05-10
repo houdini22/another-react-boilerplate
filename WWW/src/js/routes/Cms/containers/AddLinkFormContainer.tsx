@@ -12,6 +12,7 @@ import * as moment from 'moment'
 import { formatDateTimeAPI } from '../../../helpers/date-time'
 import { actions } from '../../../reducers/cms-pages'
 import { processAPIerrorResponseToFormErrors } from '../../../modules/http'
+import { withRouter } from '../../../helpers/router'
 
 export const FORM_NAME = 'add-link-form-container'
 
@@ -40,12 +41,15 @@ class AddLinkFormContainerBase extends React.Component {
 }
 
 const AddLinkFormContainer = compose(
+    withRouter,
     connect(
         ({ cmsPages: { currentId } }, props) => {
             return {
                 initialValues: {
                     link: {
                         link_name: null,
+                        link_url: null,
+                        link_target: '_self',
                     },
                     parent_id: currentId,
                     tree: {
@@ -61,7 +65,7 @@ const AddLinkFormContainer = compose(
                 {
                     fetchParentCategorySelectOptions:
                         actions.fetchParentCategorySelectOptions,
-                    addDocument: actions.addDocument,
+                    addLink: actions.addLink,
                 },
                 dispatch,
             )
@@ -69,10 +73,10 @@ const AddLinkFormContainer = compose(
     ),
     reduxForm({
         form: FORM_NAME,
-        onSubmit: (values, dispatch, { addLink }) => {
+        onSubmit: (values, dispatch, { addLink, navigate }) => {
             return addLink(values)
                 .then(() => {
-                    console.log('ok')
+                    navigate('/cms/pages')
                 })
                 .catch(
                     ({

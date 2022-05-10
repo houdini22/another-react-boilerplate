@@ -31,44 +31,16 @@ const cx = classNames.bind(styles)
 export class CmsPagesView extends React.Component {
     state = {
         confirmDeleteVisible: false,
+        nodeToDelete: null,
     }
 
     render() {
-        const { confirmDeleteVisible } = this.state
+        const { confirmDeleteVisible, nodeToDelete } = this.state
 
         return (
             <RouteManager>
                 {({ navigate }) => (
                     <PageContent>
-                        <Modal.Container
-                            visible={confirmDeleteVisible}
-                            color={'danger'}
-                        >
-                            <Modal.Header
-                                closeIcon
-                                close={() => {
-                                    this.setState({
-                                        confirmDeleteVisible: false,
-                                    })
-                                }}
-                            >
-                                Confirm Delete
-                            </Modal.Header>
-                            <Modal.Body>
-                                <p>
-                                    Do you really want to delete this element?
-                                </p>
-                                <p>
-                                    All children of this element will be
-                                    removed.
-                                </p>
-                            </Modal.Body>
-                            <Modal.Footer>
-                                <Button color={'success'} block>
-                                    OK
-                                </Button>
-                            </Modal.Footer>
-                        </Modal.Container>
                         <Header title="CMS Pages" />
                         <Manager>
                             {({
@@ -80,6 +52,7 @@ export class CmsPagesView extends React.Component {
                                 setCurrentId,
                                 publish,
                                 unpublish,
+                                deleteNode,
                             }) => {
                                 console.log(
                                     nodes,
@@ -91,6 +64,63 @@ export class CmsPagesView extends React.Component {
 
                                 return (
                                     <>
+                                        <Modal.Container
+                                            visible={confirmDeleteVisible}
+                                            color={'danger'}
+                                        >
+                                            <Modal.Header
+                                                closeIcon
+                                                close={() => {
+                                                    this.setState({
+                                                        confirmDeleteVisible:
+                                                            false,
+                                                    })
+                                                }}
+                                            >
+                                                Confirm Delete
+                                            </Modal.Header>
+                                            <Modal.Body>
+                                                <p>
+                                                    Do you really want to delete
+                                                    this element?
+                                                </p>
+                                                <p>
+                                                    All children of this element
+                                                    will be removed.
+                                                </p>
+                                            </Modal.Body>
+                                            <Modal.Footer>
+                                                <Button
+                                                    color={'success'}
+                                                    block
+                                                    onClick={(
+                                                        e,
+                                                        { setIsLoading },
+                                                    ) => {
+                                                        setIsLoading(true)
+                                                        deleteNode(
+                                                            nodeToDelete,
+                                                        ).then(() => {
+                                                            this.setState(
+                                                                {
+                                                                    confirmDeleteVisible:
+                                                                        false,
+                                                                    nodeToDelete:
+                                                                        null,
+                                                                },
+                                                                () => {
+                                                                    setIsLoading(
+                                                                        false,
+                                                                    )
+                                                                },
+                                                            )
+                                                        })
+                                                    }}
+                                                >
+                                                    OK
+                                                </Button>
+                                            </Modal.Footer>
+                                        </Modal.Container>
                                         <Card
                                             header={<h1>Filters</h1>}
                                             withMinimizeIcon
@@ -526,6 +556,8 @@ export class CmsPagesView extends React.Component {
                                                                                     {
                                                                                         confirmDeleteVisible:
                                                                                             true,
+                                                                                        nodeToDelete:
+                                                                                            node,
                                                                                     },
                                                                                 )
                                                                             }}

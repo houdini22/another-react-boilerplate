@@ -54,20 +54,50 @@ class AddDocumentForm extends React.Component {
                                                     type="text"
                                                     component={FormField}
                                                 />
-
-                                                <div>
-                                                    <Button
-                                                        color="success"
-                                                        type="submit"
-                                                    >
-                                                        Save
-                                                    </Button>
-                                                </div>
+                                            </>
+                                        )}
+                                    </Tabs.Content>
+                                </Tabs.Tab>
+                                <Tabs.Tab name="meta">
+                                    <Tabs.Trigger>Meta</Tabs.Trigger>
+                                    <Tabs.Content>
+                                        {({ changeTab }) => (
+                                            <>
+                                                <Field
+                                                    name="document.document_meta_title"
+                                                    label="Title"
+                                                    type="text"
+                                                    component={FormField}
+                                                />
+                                                <Field
+                                                    name="document.document_meta_keywords"
+                                                    label="Keywords"
+                                                    type="text"
+                                                    component={FormField}
+                                                />
+                                                <Field
+                                                    name="document.document_meta_description"
+                                                    label="Description"
+                                                    type="text"
+                                                    component={FormField}
+                                                />
+                                                <Field
+                                                    name="document.document_meta_robots"
+                                                    label="Robots"
+                                                    type="text"
+                                                    component={FormField}
+                                                />
                                             </>
                                         )}
                                     </Tabs.Content>
                                 </Tabs.Tab>
                             </Tabs.Container>
+
+                            <div>
+                                <Button color="success" type="submit">
+                                    Save
+                                </Button>
+                            </div>
                         </form>
                     </Card>
                 </Col>

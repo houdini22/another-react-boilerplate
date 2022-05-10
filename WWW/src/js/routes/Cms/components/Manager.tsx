@@ -27,6 +27,7 @@ export class Manager extends React.Component {
             setIsLoading,
             publish,
             unpublish,
+            deleteNode,
         } = this.props
 
         const renderProps = {
@@ -39,6 +40,7 @@ export class Manager extends React.Component {
             setIsLoading,
             publish,
             unpublish,
+            deleteNode,
         }
 
         return children(renderProps)
@@ -59,6 +61,7 @@ const mapDispatchToProps = (dispatch) => {
         setIsLoading: (val) => dispatch(actions.setIsLoading(val)),
         publish: (id) => dispatch(actions.publish(id)),
         unpublish: (id) => dispatch(actions.unpublish(id)),
+        deleteNode: (node) => dispatch(actions.deleteNode(node)),
     }
 }
 
