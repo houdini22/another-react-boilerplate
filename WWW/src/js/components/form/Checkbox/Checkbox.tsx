@@ -19,7 +19,7 @@ interface CheckboxProps {
 }
 
 interface CheckboxState {
-    checked: boolean;
+    checked: boolean
 }
 
 class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
@@ -30,23 +30,23 @@ class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
     }
 
     componentDidMount() {
-        const {checked} = this.props;
-        this.setState({checked});
+        const { checked } = this.props
+        this.setState({ checked })
     }
 
     handleClick(e) {
-        const {checked} = this.state;
+        const { checked } = this.state
         const { onChange, disabled } = this.props
-        jQuery(this.el).trigger("click");
+        jQuery(this.el).trigger('click')
         if (_.isFunction(onChange) && !disabled) {
             onChange(this.el.checked)
         }
-        this.setState({checked: !checked})
+        this.setState({ checked: !checked })
     }
 
     render() {
         const { error, disabled, loading, ...props } = this.props
-        const { checked } = this.state;
+        const { checked } = this.state
 
         return (
             <div

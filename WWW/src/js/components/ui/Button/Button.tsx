@@ -129,7 +129,8 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                         ...rest
                     } = this.props
 
-                    const { isLoading: isLoadingState, color = 'primary' } = this.state
+                    const { isLoading: isLoadingState, color = 'primary' } =
+                        this.state
 
                     const classes = cx('component-button', className, {
                         'component-button--is-loading': isLoading,
@@ -161,7 +162,10 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                     })
 
                     const isDisabled =
-                        (isLoading || isLoadingState) || buttonGroupDisabled || disabled
+                        isLoading ||
+                        isLoadingState ||
+                        buttonGroupDisabled ||
+                        disabled
 
                     return (
                         <button
@@ -174,7 +178,9 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                         >
                             {icon}
                             {!iconOnly && <span>{children}</span>}
-                            {(isLoading || isLoadingState) && <LoadingOverlay size="xs" />}
+                            {(isLoading || isLoadingState) && (
+                                <LoadingOverlay size="xs" />
+                            )}
                             {arrow && (
                                 <ArrowDownIcon
                                     className={cx(
