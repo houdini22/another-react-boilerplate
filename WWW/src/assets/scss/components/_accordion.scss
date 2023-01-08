@@ -75,11 +75,11 @@
             & > .component-accordion__item__header {
                 padding-top: 5px;
                 padding-bottom: 5px;
-                cursor: pointer;
+                cursor: pointer;;
 
                 & > .component-accordion__item__header__arrow-icon {
                     float: left;
-                    top: 6px;
+                    top: 3px;
                     position: relative;
                 }
             }
@@ -141,6 +141,16 @@
                     & > .component-accordion__item__header__arrow-icon {
                         color: $success;
                     }
+                }
+            }
+        }
+    }
+
+    &.component-accordion--type-minimal {
+        & > .component-accordion__item {
+            & > .component-accordion__item__header {
+                & > .component-accordion__item__header__content {
+                    text-decoration: underline;
                 }
             }
         }

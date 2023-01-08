@@ -1,6 +1,7 @@
 import * as React from 'react'
 import classNames from 'classnames/bind'
 import jQuery from 'jquery'
+import _ from 'lodash'
 import styles1 from '../../../../assets/scss/components/_tooltip.scss'
 import styles2 from '../../../../assets/scss/_animations.scss'
 
@@ -160,7 +161,9 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
 
         this.setState({ show: true }, () => {
             this.calculateDimensions()
-            onOpen()
+            if (_.isFunction(onOpen)) {
+                onOpen()
+            }
         })
     }
 
@@ -168,7 +171,9 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
         const { onClose } = this.props
 
         this.setState({ show: false }, () => {
-            onClose()
+            if (_.isFunction(onClose)) {
+                onClose()
+            }
         })
     }
 

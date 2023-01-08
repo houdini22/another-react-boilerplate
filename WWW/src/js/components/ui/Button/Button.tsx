@@ -124,10 +124,12 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                         onClickNavigation = () => null,
                         transparent,
                         style,
+                        isLoading,
+                        href,
                         ...rest
                     } = this.props
 
-                    const { isLoading, color = 'primary' } = this.state
+                    const { isLoading: isLoadingState, color = 'primary' } = this.state
 
                     const classes = cx('component-button', className, {
                         'component-button--is-loading': isLoading,
@@ -159,7 +161,7 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                     })
 
                     const isDisabled =
-                        isLoading || buttonGroupDisabled || disabled
+                        (isLoading || isLoadingState) || buttonGroupDisabled || disabled
 
                     return (
                         <button
@@ -172,7 +174,7 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                         >
                             {icon}
                             {!iconOnly && <span>{children}</span>}
-                            {isLoading && <LoadingOverlay size="xs" />}
+                            {(isLoading || isLoadingState) && <LoadingOverlay size="xs" />}
                             {arrow && (
                                 <ArrowDownIcon
                                     className={cx(

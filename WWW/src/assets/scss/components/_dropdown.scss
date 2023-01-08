@@ -138,13 +138,19 @@
                     }
                 }
 
-                &:not(.component-dropdown__dropdown-menu__items__item--type-header):not(.component-dropdown__dropdown-menu__items__item--type-disabled) {
+                &:not(
+                        .component-dropdown__dropdown-menu__items__item--type-header
+                    ):not(
+                        .component-dropdown__dropdown-menu__items__item--type-disabled
+                    ) {
                     a {
                         cursor: pointer;
                     }
                 }
 
-                svg:not(.component-dropdown__dropdown-menu__items__item__sub-menu-icon) {
+                svg:not(
+                        .component-dropdown__dropdown-menu__items__item__sub-menu-icon
+                    ) {
                     margin-right: 12px;
                     float: left;
                     top: 0;
@@ -237,7 +243,11 @@
                         }
                     }
 
-                    &:not(.component-dropdown__dropdown-menu__items__item--type-header):not(.component-dropdown__dropdown-menu__items__item--type-disabled) {
+                    &:not(
+                            .component-dropdown__dropdown-menu__items__item--type-header
+                        ):not(
+                            .component-dropdown__dropdown-menu__items__item--type-disabled
+                        ) {
                         a:hover {
                             background: $primary_DARKEN_X1;
                         }
@@ -283,7 +293,11 @@
                         }
                     }
 
-                    &:not(.component-dropdown__dropdown-menu__items__item--type-header):not(.component-dropdown__dropdown-menu__items__item--type-disabled) {
+                    &:not(
+                            .component-dropdown__dropdown-menu__items__item--type-header
+                        ):not(
+                            .component-dropdown__dropdown-menu__items__item--type-disabled
+                        ) {
                         a:hover {
                             background: $secondary_DARKEN_X1;
                         }
@@ -329,7 +343,11 @@
                         }
                     }
 
-                    &:not(.component-dropdown__dropdown-menu__items__item--type-header):not(.component-dropdown__dropdown-menu__items__item--type-disabled) {
+                    &:not(
+                            .component-dropdown__dropdown-menu__items__item--type-header
+                        ):not(
+                            .component-dropdown__dropdown-menu__items__item--type-disabled
+                        ) {
                         a:hover {
                             background: $info_DARKEN_X1;
                         }
@@ -375,7 +393,11 @@
                         }
                     }
 
-                    &:not(.component-dropdown__dropdown-menu__items__item--type-header):not(.component-dropdown__dropdown-menu__items__item--type-disabled) {
+                    &:not(
+                            .component-dropdown__dropdown-menu__items__item--type-header
+                        ):not(
+                            .component-dropdown__dropdown-menu__items__item--type-disabled
+                        ) {
                         a:hover {
                             background: $success_DARKEN_X1;
                         }
@@ -421,7 +443,11 @@
                         }
                     }
 
-                    &:not(.component-dropdown__dropdown-menu__items__item--type-header):not(.component-dropdown__dropdown-menu__items__item--type-disabled) {
+                    &:not(
+                            .component-dropdown__dropdown-menu__items__item--type-header
+                        ):not(
+                            .component-dropdown__dropdown-menu__items__item--type-disabled
+                        ) {
                         a:hover {
                             background: $danger_DARKEN_X1;
                         }
@@ -467,7 +493,11 @@
                         }
                     }
 
-                    &:not(.component-dropdown__dropdown-menu__items__item--type-header):not(.component-dropdown__dropdown-menu__items__item--type-disabled) {
+                    &:not(
+                            .component-dropdown__dropdown-menu__items__item--type-header
+                        ):not(
+                            .component-dropdown__dropdown-menu__items__item--type-disabled
+                        ) {
                         a:hover {
                             background: $warning_DARKEN_X1;
                         }
