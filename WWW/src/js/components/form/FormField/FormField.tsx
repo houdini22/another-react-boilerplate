@@ -37,6 +37,7 @@ class FormField extends React.Component<FormFieldProps> {
             html,
             inputOnly,
             withError = true,
+            htmlAfter,
             ...custom
         } = this.props
 
@@ -111,6 +112,15 @@ class FormField extends React.Component<FormFieldProps> {
                         className={cx('component-form-field__input-container')}
                     >
                         {inputComponent}
+                        {htmlAfter && (
+                            <p
+                                className={cx(
+                                    'component-form-field__input-container__html-after',
+                                )}
+                            >
+                                {htmlAfter}
+                            </p>
+                        )}
                         {error && withError && (
                             <p
                                 className={cx(
@@ -141,6 +151,15 @@ class FormField extends React.Component<FormFieldProps> {
                 </div>
                 <div className={cx('component-form-field__input-container')}>
                     {inputComponent}
+                    {htmlAfter && (
+                        <p
+                            className={cx(
+                                'component-form-field__input-container__html-after',
+                            )}
+                        >
+                            {htmlAfter}
+                        </p>
+                    )}
                     {error && (
                         <p
                             className={cx(

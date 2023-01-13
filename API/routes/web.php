@@ -9,6 +9,8 @@ Route::prefix('api/v1')->group(function () {
         sleep(2);
         abort(404);
     });
+    Route::get('/captcha', '\App\Http\Controllers\CaptchaServiceController@getCaptcha');
+    Route::post('/contact', '\App\Http\Controllers\ContactController@postIndex');
 });
 
 Route::get('/', function () {

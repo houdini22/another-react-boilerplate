@@ -3,7 +3,8 @@ import { Field } from 'redux-form'
 import { Button, FormField } from '../../index'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/_pages.scss'
-
+import { apiURL } from '../../../helpers/api'
+import { BiHelpCircle } from 'react-icons/bi'
 const cx = classNames.bind(styles)
 
 interface LoginFormProps {
@@ -11,9 +12,16 @@ interface LoginFormProps {
     type: string
 }
 
-export class LoginForm extends React.Component<LoginFormProps> {
+export class ContactForm extends React.Component<LoginFormProps> {
+    constructor(props) {
+        super(props)
+        this.state = {
+            captchaRandom: Math.random(),
+        }
+    }
     render() {
         const { handleSubmit, type } = this.props
+        const { captchaRandom } = this.state
 
         return (
             <form onSubmit={handleSubmit} className={cx('contact-form')}>
@@ -36,6 +44,33 @@ export class LoginForm extends React.Component<LoginFormProps> {
                         inputOnly
                         autoComplete="off"
                     />
+                    {/*
+                    <Field
+                        name="captcha_image"
+                        component={FormField}
+                        type="html"
+                        htmlAfter={(
+                            <span><BiHelpCircle/> Click to reload.</span>
+                        )}
+                        html={() => {
+                            return (
+                                <div>
+                                    <img className={cx('contact-form__captcha')} src={apiURL(`captcha/math?${captchaRandom}`)} alt={""} onClick={() => {
+                                        this.setState({captchaRandom: Math.random()})
+                                    }} />
+                                </div>
+                            )
+                        }}
+                    />*/}
+                    {/*<Field
+                        name="captcha"
+                        component={FormField}
+                        type="text"
+                        placeholder="Text from image"
+                        inputOnly
+                        autoComplete="off"
+                        size={type === 'popover' ? 'sm' : undefined}
+                    />*/}
                 </div>
                 <div>
                     <Button
@@ -51,4 +86,4 @@ export class LoginForm extends React.Component<LoginFormProps> {
     }
 }
 
-export default LoginForm
+export default ContactForm

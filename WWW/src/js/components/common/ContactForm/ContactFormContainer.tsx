@@ -1,16 +1,26 @@
-import { reduxForm, formValueSelector } from 'redux-form'
+import { reduxForm, formValueSelector, SubmissionError } from 'redux-form'
 import { connect } from 'react-redux'
 import ContactForm from './ContactForm'
-import { withRouter } from 'react-router'
 import { compose } from 'redux'
-import _ from 'lodash'
+import { withRouter } from '../../../helpers/router'
+import {
+    http,
+    processAPIerrorResponseToFormErrors,
+} from '../../../modules/http'
 
 const onSubmit = (values, dispatch, props) => {
-    const { close } = props
-    console.log(values)
-    if (_.isFunction(close)) {
-        close()
-    }
+    const { resetForm } = props
+
+    return http
+        .post('/contact', values)
+        .then(() => {
+            resetForm()
+        })
+        .catch((response) => {
+            throw new SubmissionError(
+                processAPIerrorResponseToFormErrors(response),
+            )
+        })
 }
 export const FORM_NAME = 'ContactForm'
 const selector = formValueSelector(FORM_NAME)
@@ -24,6 +34,7 @@ const ContactFormContainer = compose(
         initialValues: {
             email: '',
             message: '',
+            captcha: '',
         },
     }),
 )(ContactForm)

@@ -22,7 +22,14 @@ const setAuthToken = (token) => {
 }
 
 const processAPIerrorResponseToFormErrors = (response) => {
-    return {}
+    const { response: { data: { errors = {} } = {} } = {} } = response
+    const res = {}
+
+    Object.keys(errors).forEach((key) => {
+        res[key] = errors[key].join('\n')
+    })
+
+    return res
 }
 
 export default instance
