@@ -1,22 +1,46 @@
 import { reduxForm, formValueSelector, SubmissionError } from 'redux-form'
 import { connect } from 'react-redux'
 import ContactForm from './ContactForm'
-import { compose } from 'redux'
+import { bindActionCreators, compose } from 'redux'
 import { withRouter } from '../../../helpers/router'
 import {
     http,
     processAPIerrorResponseToFormErrors,
 } from '../../../modules/http'
+import { actions, selectors } from '../../../reducers/contactform'
 
 const onSubmit = (values, dispatch, props) => {
-    const { resetForm } = props
+    const {
+        resetForm,
+        setContactFormIsLoading,
+        setContactFormMessage,
+        resetContactFormCaptcha,
+    } = props
+
+    setContactFormIsLoading(true)
+    setContactFormMessage({
+        message: null,
+        type: null,
+    })
 
     return http
         .post('/contact', values)
         .then(() => {
             resetForm()
+            setContactFormIsLoading(false)
+            setContactFormMessage({
+                message: 'Email was sent.',
+                type: 'success',
+            })
+            resetContactFormCaptcha()
         })
         .catch((response) => {
+            setContactFormMessage({
+                message: 'Error occurred during form validation error!',
+                type: 'danger',
+            })
+            setContactFormIsLoading(false)
+            resetContactFormCaptcha()
             throw new SubmissionError(
                 processAPIerrorResponseToFormErrors(response),
             )
@@ -26,7 +50,23 @@ export const FORM_NAME = 'ContactForm'
 const selector = formValueSelector(FORM_NAME)
 
 const ContactFormContainer = compose(
-    connect(),
+    connect(
+        (state) => ({
+            isLoading: selectors.getContactFormIsLoading(state),
+            message: selectors.getContactFormMessage(state),
+            captcha: selectors.getContactFormCaptcha(state),
+        }),
+        (dispatch) => {
+            return bindActionCreators(
+                {
+                    setContactFormIsLoading: actions.setContactFormIsLoading,
+                    setContactFormMessage: actions.setContactFormMessage,
+                    resetContactFormCaptcha: actions.resetContactFormCaptcha,
+                },
+                dispatch,
+            )
+        },
+    ),
     withRouter,
     reduxForm({
         form: FORM_NAME,

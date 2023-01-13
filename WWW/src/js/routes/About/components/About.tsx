@@ -59,9 +59,7 @@ export class AboutView extends React.Component {
                         </Card>
                     </Col>
                     <Col xs={12} sm={12} md={6}>
-                        <Card header={<h1>Form</h1>}>
-                            <ContactFormContainer />
-                        </Card>
+                        <ContactFormContainer />
                     </Col>
                 </Row>
             </PageContent>
