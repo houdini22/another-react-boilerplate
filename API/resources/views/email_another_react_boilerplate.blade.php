@@ -1,1 +1,1 @@
-@yield('message')
+{{$mesage}}

@@ -17,7 +17,7 @@ class ContactController extends Controller
             'validation.captcha' => 'Captcha code is incorrect.'
         ]);
 
-        Mail::send(['text' => 'email_another_react_boilerplate'], [
+        Mail::send('email_another_react_boilerplate', [
             'message' => $request->get('message')
         ], function ($message) use ($request) {
             $message->to('ja@baniowski.pro', 'Michał Baniowski')->subject('Email from another-react-boilerplate.baniowski.pro');
