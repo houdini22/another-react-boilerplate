@@ -11,7 +11,7 @@ import { actions, selectors } from '../../../reducers/contactform'
 
 const onSubmit = (values, dispatch, props) => {
     const {
-        resetForm,
+        reset,
         setContactFormIsLoading,
         setContactFormMessage,
         resetContactFormCaptcha,
@@ -26,10 +26,10 @@ const onSubmit = (values, dispatch, props) => {
     return http
         .post('/contact', values)
         .then(() => {
-            resetForm()
+            reset()
             setContactFormIsLoading(false)
             setContactFormMessage({
-                message: 'Email was sent.',
+                message: 'Your e-mail was sent.',
                 type: 'success',
             })
             resetContactFormCaptcha()

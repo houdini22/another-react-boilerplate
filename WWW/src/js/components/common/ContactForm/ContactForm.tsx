@@ -40,7 +40,7 @@ export class ContactForm extends React.Component<LoginFormProps> {
                             name="email"
                             component={FormField}
                             type="text"
-                            placeholder="E-mail"
+                            placeholder="Your e-mail"
                             inputOnly
                             autoComplete="off"
                             size={type === 'popover' ? 'sm' : undefined}
@@ -50,7 +50,7 @@ export class ContactForm extends React.Component<LoginFormProps> {
                             name="message"
                             component={FormField}
                             type="textarea"
-                            placeholder="Message"
+                            placeholder="Message..."
                             inputOnly
                             autoComplete="off"
                         />
