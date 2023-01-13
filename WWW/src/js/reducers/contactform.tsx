@@ -17,7 +17,7 @@ const setContactFormIsLoading = (isLoading) => (dispatch) => {
 }
 const resetContactFormCaptcha = (isLoading) => (dispatch) => {
     dispatch({
-        type: SET_CONTACT_FORM_IS_LOADING,
+        type: SET_CONTACT_FORM_MESSAGE,
         payload: isLoading,
     })
 }
