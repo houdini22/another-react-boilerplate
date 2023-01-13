@@ -33,8 +33,8 @@ class SidebarHeaderBase extends React.Component<SidebarHeaderProps> {
         return (
             <div
                 className={cx('layout__header', {
-                    'layout__header--floating': floatingSidebar,
-                    'layout__header--expanded': sidebarExpanded,
+                    [cx('layout__header--floating')]: floatingSidebar,
+                    [cx('layout__header--expanded')]: sidebarExpanded,
                 })}
             >
                 <div

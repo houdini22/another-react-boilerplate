@@ -10,7 +10,7 @@ const config = {
     dateTimeFormat: 'YYYY-MM-DD HH:mm:ss',
     dateFormat: 'YYYY-MM-DD',
     texts: {
-        version: 'v0.3.1alpha',
+        version: 'v0.3.1',
         frameworkName: (
             <span>
                 <strong>another</strong> boilerplate
