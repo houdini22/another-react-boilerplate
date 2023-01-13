@@ -1,1 +1,1 @@
-{{$mesage}}
+{{$message}}
