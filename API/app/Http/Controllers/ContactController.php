@@ -12,13 +12,14 @@ class ContactController extends Controller
         $request->validate([
             'email' => 'required|email',
             'message' => 'required',
-            //'captcha' => 'required|captcha'
+            'captcha' => 'required|captcha'
         ], [
             'validation.captcha' => 'Captcha code is incorrect.'
         ]);
 
         Mail::send('email_another_react_boilerplate', [
-            'message' => $request->get('message')
+            'message_email' => $request->get('email'),
+            'message_body' => $request->get('message'),
         ], function ($message) use ($request) {
             $message->to('ja@baniowski.pro', 'Michał Baniowski')->subject('Email from another-react-boilerplate.baniowski.pro');
             $message->from($request->get('email'));

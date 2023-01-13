@@ -44,7 +44,6 @@ export class ContactForm extends React.Component<LoginFormProps> {
                         inputOnly
                         autoComplete="off"
                     />
-                    {/*
                     <Field
                         name="captcha_image"
                         component={FormField}
@@ -61,16 +60,16 @@ export class ContactForm extends React.Component<LoginFormProps> {
                                 </div>
                             )
                         }}
-                    />*/}
-                    {/*<Field
+                    />
+                    <Field
                         name="captcha"
                         component={FormField}
                         type="text"
-                        placeholder="Text from image"
+                        placeholder="Math result from image"
                         inputOnly
                         autoComplete="off"
                         size={type === 'popover' ? 'sm' : undefined}
-                    />*/}
+                    />
                 </div>
                 <div>
                     <Button
