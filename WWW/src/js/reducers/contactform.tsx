@@ -17,14 +17,14 @@ const setContactFormIsLoading = (isLoading) => (dispatch) => {
 }
 const resetContactFormCaptcha = (isLoading) => (dispatch) => {
     dispatch({
-        type: SET_CONTACT_FORM_MESSAGE,
+        type: RESET_CONTACT_FORM_CAPTCHA,
         payload: isLoading,
     })
 }
 
 const setContactFormMessage = (message) => (dispatch) => {
     dispatch({
-        type: RESET_CONTACT_FORM_CAPTCHA,
+        type: SET_CONTACT_FORM_MESSAGE,
         payload: message,
     })
 }
