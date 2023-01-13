@@ -99,14 +99,6 @@ class ButtonGroupForm extends React.Component {
                                 </Col>
                                 <Col xs={12}>
                                     <Field
-                                        name="href"
-                                        label="href"
-                                        type="text"
-                                        component={FormField}
-                                    />
-                                </Col>
-                                <Col xs={12}>
-                                    <Field
                                         name="arrow"
                                         label="Arrow"
                                         type="checkbox"

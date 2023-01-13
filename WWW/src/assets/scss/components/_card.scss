@@ -141,9 +141,14 @@
             background: $default;
             color: $default_text_color;
             .component-card__header__actions {
-                .component-card__header__actions__action-button {
-                    color: $default_text_color_DARKEN_X1;
+                svg {
+                    color: $default_text_color_DARKEN_X3;
                 }
+            }
+        }
+        &.component-card--solid-background {
+            .component-card__content {
+                background: $default_LIGHTEN_X3;
             }
         }
     }
@@ -154,9 +159,14 @@
             background: $primary;
             color: $primary_text_color;
             .component-card__header__actions {
-                .component-card__header__actions__action-button {
-                    color: $primary_text_color_DARKEN_X1;
+                svg {
+                    color: $primary_text_color_DARKEN_X3;
                 }
+            }
+        }
+        &.component-card--solid-background {
+            .component-card__content {
+                background: $primary_LIGHTEN_X3;
             }
         }
     }
@@ -167,9 +177,14 @@
             background: $secondary;
             color: $secondary_text_color;
             .component-card__header__actions {
-                .component-card__header__actions__action-button {
-                    color: $secondary_text_color_DARKEN_X1;
+                svg {
+                    color: $secondary_text_color_DARKEN_X3;
                 }
+            }
+        }
+        &.component-card--solid-background {
+            .component-card__content {
+                background: $secondary_LIGHTEN_X3;
             }
         }
     }
@@ -180,9 +195,14 @@
             background: $info;
             color: $info_text_color;
             .component-card__header__actions {
-                .component-card__header__actions__action-button {
-                    color: $info_text_color_DARKEN_X1;
+                svg {
+                    color: $info_text_color_DARKEN_X3;
                 }
+            }
+        }
+        &.component-card--solid-background {
+            .component-card__content {
+                background: $info_LIGHTEN_X3;
             }
         }
     }
@@ -193,9 +213,14 @@
             background: $warning;
             color: $warning_text_color;
             .component-card__header__actions {
-                .component-card__header__actions__action-button {
-                    color: $warning_text_color_DARKEN_X1;
+                svg {
+                    color: $warning_text_color_DARKEN_X3;
                 }
+            }
+        }
+        &.component-card--solid-background {
+            .component-card__content {
+                background: $warning_LIGHTEN_X3;
             }
         }
     }
@@ -206,9 +231,14 @@
             background: $success;
             color: $success_text_color;
             .component-card__header__actions {
-                .component-card__header__actions__action-button {
-                    color: $success_text_color_DARKEN_X1;
+                svg {
+                    color: $success_text_color_DARKEN_X3;
                 }
+            }
+        }
+        &.component-card--solid-background {
+            .component-card__content {
+                background: $success_LIGHTEN_X3;
             }
         }
     }
@@ -219,9 +249,14 @@
             background: $danger;
             color: $danger_text_color;
             .component-card__header__actions {
-                .component-card__header__actions__action-button {
-                    color: $danger_text_color_DARKEN_X1;
+                svg {
+                    color: $danger_text_color_DARKEN_X3;
                 }
+            }
+        }
+        &.component-card--solid-background {
+            .component-card__content {
+                background: $danger_LIGHTEN_X3;
             }
         }
     }

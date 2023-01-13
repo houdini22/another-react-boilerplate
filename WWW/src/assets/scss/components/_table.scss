@@ -11,33 +11,33 @@
             margin-bottom: 0;
 
             &.component-table__tr--color-primary {
-                color: $primary_text_color;
-                background: $primary;
+                color: $primary_text_color !important;
+                background: $primary !important;
             }
 
             &.component-table__tr--color-secondary {
-                color: $secondary_text_color;
-                background: $secondary;
+                color: $secondary_text_color !important;
+                background: $secondary !important;
             }
 
             &.component-table__tr--color-info {
-                color: $info_text_color;
-                background: $info;
+                color: $info_text_color !important;
+                background: $info !important;
             }
 
             &.component-table__tr--color-danger {
-                color: $danger_text_color;
-                background: $danger;
+                color: $danger_text_color !important;
+                background: $danger !important;
             }
 
             &.component-table__tr--color-warning {
-                color: $warning_text_color;
-                background: $warning;
+                color: $warning_text_color !important;
+                background: $warning !important;
             }
 
             &.component-table__tr--color-success {
-                color: $primary_text_color;
-                background: $primary;
+                color: $primary_text_color !important;
+                background: $primary !important;
             }
 
             & > .component-table__thead__th {
@@ -56,33 +56,33 @@
             margin-bottom: 0;
 
             &.component-table__tr--color-primary {
-                color: $primary_text_color;
-                background: $primary;
+                color: $primary_text_color !important;
+                background: $primary !important;
             }
 
             &.component-table__tr--color-secondary {
-                color: $secondary_text_color;
-                background: $secondary;
+                color: $secondary_text_color !important;
+                background: $secondary !important;
             }
 
             &.component-table__tr--color-info {
-                color: $info_text_color;
-                background: $info;
+                color: $info_text_color !important;
+                background: $info !important;
             }
 
             &.component-table__tr--color-danger {
-                color: $danger_text_color;
-                background: $danger;
+                color: $danger_text_color !important;
+                background: $danger !important;
             }
 
             &.component-table__tr--color-warning {
-                color: $warning_text_color;
-                background: $warning;
+                color: $warning_text_color !important;
+                background: $warning !important;
             }
 
             &.component-table__tr--color-success {
-                color: $success_text_color;
-                background: $success;
+                color: $success_text_color !important;
+                background: $success !important;
             }
 
             & > .component-table__tbody__td {
@@ -215,19 +215,15 @@
     &.component-table--color-primary {
         & > .component-table__thead {
             & > .component-table__tr {
-                & > .component-table__thead__th {
                     background: $primary;
                     color: $primary_text_color;
-                }
             }
         }
 
         & > .component-table__tbody {
             & > .component-table__tr {
-                & > .component-table__tbody__td {
                     background: $primary_LIGHTEN_X2;
                     color: $primary_text_color;
-                }
             }
         }
 
@@ -270,9 +266,7 @@
         &.component-table--striped {
             & > .component-table__tbody {
                 & > .component-table__tr:nth-child(2n + 1) {
-                    & > .component-table__tbody__td {
                         background: $primary_LIGHTEN_X1;
-                    }
                 }
             }
         }
@@ -281,19 +275,15 @@
     &.component-table--color-secondary {
         & > .component-table__thead {
             & > .component-table__tr {
-                & > .component-table__thead__th {
                     background: $secondary;
                     color: $secondary_text_color;
-                }
             }
         }
 
         & > .component-table__tbody {
             & > .component-table__tr {
-                & > .component-table__tbody__td {
                     background: $secondary_LIGHTEN_X2;
                     color: $secondary_text_color;
-                }
             }
         }
 
@@ -347,19 +337,15 @@
     &.component-table--color-danger {
         & > .component-table__thead {
             & > .component-table__tr {
-                & > .component-table__thead__th {
                     background: $danger;
                     color: $danger_text_color;
-                }
             }
         }
 
         & > .component-table__tbody {
             & > .component-table__tr {
-                & > .component-table__tbody__td {
                     background: $danger_LIGHTEN_X2;
                     color: $danger_text_color;
-                }
             }
         }
 
@@ -413,19 +399,15 @@
     &.component-table--color-warning {
         & > .component-table__thead {
             & > .component-table__tr {
-                & > .component-table__thead__th {
                     background: $warning;
                     color: $warning_text_color;
-                }
             }
         }
 
         & > .component-table__tbody {
             & > .component-table__tr {
-                & > .component-table__tbody__td {
                     background: $warning_LIGHTEN_X2;
                     color: $warning_text_color;
-                }
             }
         }
 
@@ -479,19 +461,15 @@
     &.component-table--color-success {
         & > .component-table__thead {
             & > .component-table__tr {
-                & > .component-table__thead__th {
                     background: $success;
                     color: $success_text_color;
-                }
             }
         }
 
         & > .component-table__tbody {
             & > .component-table__tr {
-                & > .component-table__tbody__td {
                     background: $success_LIGHTEN_X2;
                     color: $success_text_color;
-                }
             }
         }
 
@@ -545,19 +523,15 @@
     &.component-table--color-info {
         & > .component-table__thead {
             & > .component-table__tr {
-                & > .component-table__thead__th {
                     background: $info;
                     color: $info_text_color;
-                }
             }
         }
 
         & > .component-table__tbody {
             & > .component-table__tr {
-                & > .component-table__tbody__td {
                     background: $info_LIGHTEN_X2;
                     color: $info_text_color;
-                }
             }
         }
 

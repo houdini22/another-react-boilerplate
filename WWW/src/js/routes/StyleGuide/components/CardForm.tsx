@@ -123,6 +123,14 @@ class CardForm extends React.Component {
                                 </Col>
                                 <Col xs={12}>
                                     <Field
+                                        name="solidBackground"
+                                        label="Solid Background"
+                                        type="checkbox"
+                                        component={FormField}
+                                    />
+                                </Col>
+                                <Col xs={12}>
+                                    <Field
                                         name="footer"
                                         label="footer"
                                         type="checkbox"
