@@ -89,15 +89,17 @@ class ButtonView extends React.Component<ButtonViewProps, ButtonViewState> {
         return (
             <PageContent>
                 <ComponentsPageHeader title="Button" component="Button" />
-                <Section>
-                    <Row>
-                        <Col xs={6}>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <ButtonFormContainer
                                 options={options}
                                 setOptions={this.setOptions}
                             />
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             {createPresentationTab(
                                 <span />,
                                 <Button
@@ -122,9 +124,9 @@ class ButtonView extends React.Component<ButtonViewProps, ButtonViewState> {
                                     colSize: colSize1,
                                 },
                             )}
-                        </Col>
-                    </Row>
-                </Section>
+                        </Section>
+                    </Col>
+                </Row>
             </PageContent>
         )
     }

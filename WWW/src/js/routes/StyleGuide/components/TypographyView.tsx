@@ -20,9 +20,9 @@ class TypographyView extends React.Component {
                     title="Typography"
                     component="Typography"
                 />
-                <Section>
-                    <Row>
-                        <Col xs={6}>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <Card header={<h1>Headings</h1>}>
                                 <Typography.Container>
                                     <h1>
@@ -51,8 +51,10 @@ class TypographyView extends React.Component {
                                     </h6>
                                 </Typography.Container>
                             </Card>
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <Card header={<h1>Lists</h1>}>
                                 <Typography.Container>
                                     <h5>Ordered list</h5>
@@ -110,8 +112,10 @@ class TypographyView extends React.Component {
                                     </ul>
                                 </Typography.Container>
                             </Card>
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <Card header={<h1>Inline elements</h1>}>
                                 <Typography.Container>
                                     <p>
@@ -149,8 +153,10 @@ class TypographyView extends React.Component {
                                     </p>
                                 </Typography.Container>
                             </Card>
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <Card header={<h1>Text colors</h1>}>
                                 <Typography.Container>
                                     <p className={cx('text-default')}>
@@ -176,8 +182,10 @@ class TypographyView extends React.Component {
                                     </p>
                                 </Typography.Container>
                             </Card>
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <Card header={<h1>Blocks</h1>}>
                                 <Typography.Container>
                                     <blockquote>
@@ -190,9 +198,9 @@ class TypographyView extends React.Component {
                                     </blockquote>
                                 </Typography.Container>
                             </Card>
-                        </Col>
-                    </Row>
-                </Section>
+                        </Section>
+                    </Col>
+                </Row>
             </PageContent>
         )
     }

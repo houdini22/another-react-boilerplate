@@ -1,15 +1,16 @@
 @import '../variables';
 
 .component-button-group {
-    display: inline-block;
+    display: flex;
     overflow: hidden;
     -webkit-border-radius: 0.3em;
     -moz-border-radius: 0.3em;
     border-radius: 0.3em;
     position: relative;
 
-    .component-button {
+    & > * {
         border-radius: 0;
+        flex: 1;
 
         &:first-child {
             border-top-left-radius: 0.3em;
@@ -46,7 +47,7 @@
     &.component-button-group--block {
         display: flex;
 
-        .component-button {
+        & > * {
             flex: 1;
         }
     }
@@ -54,7 +55,7 @@
     &.component-button-group--rounded {
         border-radius: 100px;
 
-        .component-button {
+        & > * {
             border-radius: 0;
 
             &:first-child {
@@ -72,7 +73,7 @@
     &.component-button-group--roundless {
         border-radius: 0;
 
-        .component-button {
+        & > * {
             border-radius: 0;
         }
     }

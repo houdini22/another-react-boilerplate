@@ -2,7 +2,8 @@ import * as React from 'react'
 
 const config = {
     api: {
-        baseURL: 'https://another-react-boilerplate.baniowski.pro/index.php/api/v1/',
+        baseURL:
+            'https://another-react-boilerplate.baniowski.pro/index.php/api/v1/',
         timeout: 100000,
         apiDateTimeFormat: 'YYYY-MM-DD HH:mm:ss',
         apiDateFormat: 'YYYY-MM-DD',

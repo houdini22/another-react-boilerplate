@@ -75,15 +75,17 @@ class TabsView extends React.Component<TabsViewProps, TabsViewState> {
         return (
             <PageContent>
                 <ComponentsPageHeader title="Tabs" component="Tabs" />
-                <Section>
-                    <Row>
-                        <Col xs={6}>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <TabsFormContainer
                                 options={options}
                                 setOptions={this.setOptions}
                             />
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <Tabs.Container
                                 header={
                                     header ? (
@@ -162,9 +164,9 @@ class TabsView extends React.Component<TabsViewProps, TabsViewState> {
                                     <Tabs.Content />
                                 </Tabs.Tab>
                             </Tabs.Container>
-                        </Col>
-                    </Row>
-                </Section>
+                        </Section>
+                    </Col>
+                </Row>
             </PageContent>
         )
     }

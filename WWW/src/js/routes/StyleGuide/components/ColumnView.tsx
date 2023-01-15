@@ -15,9 +15,9 @@ class ColumnView extends React.Component<ColumnViewProps> {
         return (
             <PageContent>
                 <ComponentsPageHeader title="Column" component="Column" />
-                <Section>
-                    <Row>
-                        <Col xs={6}>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Section>
                             {createPresentationTab(
                                 'Basic',
                                 <Row>
@@ -37,8 +37,10 @@ class ColumnView extends React.Component<ColumnViewProps> {
                                     </Col>
                                 </Row>,
                             )}
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             {createPresentationTab(
                                 'Basic',
                                 <Row>
@@ -54,9 +56,9 @@ class ColumnView extends React.Component<ColumnViewProps> {
                                     </Col>
                                 </Row>,
                             )}
-                        </Col>
-                    </Row>
-                </Section>
+                        </Section>
+                    </Col>
+                </Row>
             </PageContent>
         )
     }

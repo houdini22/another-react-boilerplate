@@ -145,9 +145,7 @@
     &.component-table--striped {
         & > .component-table__tbody {
             & > .component-table__tr:nth-child(2n + 1) {
-                & > .component-table__tbody__td {
-                    background: $default_LIGHTEN_X1;
-                }
+                background: $default_LIGHTEN_X1;
             }
         }
     }
@@ -215,15 +213,15 @@
     &.component-table--color-primary {
         & > .component-table__thead {
             & > .component-table__tr {
-                    background: $primary;
-                    color: $primary_text_color;
+                background: $primary;
+                color: $primary_text_color;
             }
         }
 
         & > .component-table__tbody {
             & > .component-table__tr {
-                    background: $primary_LIGHTEN_X2;
-                    color: $primary_text_color;
+                background: $primary_LIGHTEN_X2;
+                color: $primary_text_color;
             }
         }
 
@@ -266,7 +264,7 @@
         &.component-table--striped {
             & > .component-table__tbody {
                 & > .component-table__tr:nth-child(2n + 1) {
-                        background: $primary_LIGHTEN_X1;
+                    background: $primary_LIGHTEN_X1;
                 }
             }
         }
@@ -275,15 +273,15 @@
     &.component-table--color-secondary {
         & > .component-table__thead {
             & > .component-table__tr {
-                    background: $secondary;
-                    color: $secondary_text_color;
+                background: $secondary;
+                color: $secondary_text_color;
             }
         }
 
         & > .component-table__tbody {
             & > .component-table__tr {
-                    background: $secondary_LIGHTEN_X2;
-                    color: $secondary_text_color;
+                background: $secondary_LIGHTEN_X2;
+                color: $secondary_text_color;
             }
         }
 
@@ -337,15 +335,15 @@
     &.component-table--color-danger {
         & > .component-table__thead {
             & > .component-table__tr {
-                    background: $danger;
-                    color: $danger_text_color;
+                background: $danger;
+                color: $danger_text_color;
             }
         }
 
         & > .component-table__tbody {
             & > .component-table__tr {
-                    background: $danger_LIGHTEN_X2;
-                    color: $danger_text_color;
+                background: $danger_LIGHTEN_X2;
+                color: $danger_text_color;
             }
         }
 
@@ -399,15 +397,15 @@
     &.component-table--color-warning {
         & > .component-table__thead {
             & > .component-table__tr {
-                    background: $warning;
-                    color: $warning_text_color;
+                background: $warning;
+                color: $warning_text_color;
             }
         }
 
         & > .component-table__tbody {
             & > .component-table__tr {
-                    background: $warning_LIGHTEN_X2;
-                    color: $warning_text_color;
+                background: $warning_LIGHTEN_X2;
+                color: $warning_text_color;
             }
         }
 
@@ -461,15 +459,15 @@
     &.component-table--color-success {
         & > .component-table__thead {
             & > .component-table__tr {
-                    background: $success;
-                    color: $success_text_color;
+                background: $success;
+                color: $success_text_color;
             }
         }
 
         & > .component-table__tbody {
             & > .component-table__tr {
-                    background: $success_LIGHTEN_X2;
-                    color: $success_text_color;
+                background: $success_LIGHTEN_X2;
+                color: $success_text_color;
             }
         }
 
@@ -523,15 +521,15 @@
     &.component-table--color-info {
         & > .component-table__thead {
             & > .component-table__tr {
-                    background: $info;
-                    color: $info_text_color;
+                background: $info;
+                color: $info_text_color;
             }
         }
 
         & > .component-table__tbody {
             & > .component-table__tr {
-                    background: $info_LIGHTEN_X2;
-                    color: $info_text_color;
+                background: $info_LIGHTEN_X2;
+                color: $info_text_color;
             }
         }
 

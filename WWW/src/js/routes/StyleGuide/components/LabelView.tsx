@@ -74,15 +74,17 @@ class LabelView extends React.Component<LabelViewProps, LabelViewState> {
         return (
             <PageContent>
                 <ComponentsPageHeader title="Label" component="Label" />
-                <Section>
-                    <Row>
-                        <Col xs={6}>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <LabelFormContainer
                                 options={options}
                                 setOptions={this.setOptions}
                             />
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             {createPresentationTab(
                                 <span>
                                     Options
@@ -136,9 +138,9 @@ class LabelView extends React.Component<LabelViewProps, LabelViewState> {
                                     colSize: colSize1,
                                 },
                             )}
-                        </Col>
-                    </Row>
-                </Section>
+                        </Section>
+                    </Col>
+                </Row>
             </PageContent>
         )
     }

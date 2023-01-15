@@ -612,6 +612,7 @@
             color: #636c72;
             height: $FOOTER_DESKTOP_HEIGHT;
             background: #fff;
+            z-index: 9999;
 
             &.layout__container__footer--floating-sidebar {
                 left: 90px;

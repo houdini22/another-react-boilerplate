@@ -80,15 +80,17 @@ class ButtonGroupView extends React.Component<
                     title="ButtonGroup"
                     component="ButtonGroup"
                 />
-                <Section>
-                    <Row>
-                        <Col xs={6}>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <ButtonGroupFormContainer
                                 options={options}
                                 setOptions={this.setOptions}
                             />
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             {createPresentationTab(
                                 <span>Options</span>,
                                 <ButtonGroup
@@ -117,9 +119,9 @@ class ButtonGroupView extends React.Component<
                                     colSize: colSize1,
                                 },
                             )}
-                        </Col>
-                    </Row>
-                </Section>
+                        </Section>
+                    </Col>
+                </Row>
             </PageContent>
         )
     }
