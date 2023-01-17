@@ -55,6 +55,7 @@ class SidebarHeaderBase extends React.Component<SidebarHeaderProps> {
                         className={cx('layout__header__logo__toggle')}
                         onClick={() => {
                             setLayoutOption('floatingSidebar', !floatingSidebar)
+                            setLayoutOption('sidebarExpanded', !sidebarExpanded)
                         }}
                     >
                         <ToggleIcon />
