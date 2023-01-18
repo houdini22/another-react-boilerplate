@@ -1,35 +1,78 @@
 @import 'variables';
 
-.component-form-field {
-    &:not(.component-form-field--type-hidden) {
-        margin-bottom: $COMPONENT_MARGIN_SINGLE;
+@-webkit-keyframes animation--search-field__input-container {
+    0% {
+        padding-right: 30px;
+        padding-left: 0;
     }
+    100% {
+        padding-right: 0;
+        padding-left: 30px;
+    }
+}
 
-    .component-form-field__label {
-        label {
-            color: $defaultTextColor;
-            position: relative;
-            margin-bottom: 0;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            width: 100%;
-            font-size: 11px;
+@keyframes animation--search-field {
+    0% {
+        padding-right: 30px;
+        padding-left: 0;
+    }
+    100% {
+        padding-right: 0;
+        padding-left: 30px;
+    }
+}
 
-            span {
-                width: 100%;
-                display: inline-block;
-            }
+@-webkit-keyframes animation--search-field__input-container__icon {
+    0% {
+        padding-right: 30px;
+        padding-left: 0;
+    }
+    100% {
+        padding-right: 0;
+        padding-left: 30px;
+    }
+}
 
-            .loading-overlay-container {
-                width: 20px;
-                height: 20px;
-                right: 0;
-                position: relative;
+@keyframes animation--search-field__input-container__icon {
+    0% {
+        left: auto;
+        right: 0;
+    }
+    100% {
+        left: 0;
+        right: auto;
+    }
+}
+
+.component-form-field {
+    display: flex;
+    width: 100%;
+    position: relative;
+
+    &.component-form-field--is-focused {
+        .component-form-field__input-container {
+            padding-right: 0;
+            padding-left: 30px;
+            -webkit-animation: animation--search-field__input-container 0.3s
+                cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+            animation: animation--search-field__input-container 0.3s
+                cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+            .component-form-field__input-container__icon {
+                left: 0;
+                right: auto;
+                -webkit-animation: animation--search-field__input-container__icon
+                    0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+                animation: animation--search-field__input-container__icon 0.3s
+                    cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
             }
         }
     }
+
     .component-form-field__input-container {
+        flex: 1;
+        padding-right: 30px;
+        position: relative;
+
         input[type='text'],
         input[type='number'],
         input[type='password'] {
@@ -52,38 +95,14 @@
                 color: lighten(#000, 35%);
             }
         }
-        select {
-            height: 28px;
-            background: transparent;
-            border: 0 none;
-            border-radius: 0;
-            font-size: 13px;
-            border-bottom: 2px solid $default;
-            width: 100%;
-            outline: 0 none;
-            color: #000;
 
-            &::placeholder {
-                color: lighten(#000, 35%);
-            }
-        }
-        textarea {
-            min-height: 100px;
-            border: 0 none;
-            border-bottom: 2px solid $default;
-            padding: 0;
-            width: 100%;
-            font-size: 13px;
-            outline: 0 none;
-
-            &::placeholder {
-                color: lighten(#000, 35%);
-            }
-        }
-        .component-form-field__input-container__error {
-            font-size: $COMPONENT_FONT_SIZE_MD;
-            color: $danger;
-            margin-bottom: 0;
+        .component-form-field__input-container__icon {
+            position: absolute;
+            top: 0;
+            left: auto;
+            bottom: 0;
+            right: 0;
+            font-size: 1.5em;
         }
     }
 
@@ -94,12 +113,6 @@
             input[type='password'] {
                 border-bottom-color: $success;
             }
-            select {
-                border-bottom-color: $success;
-            }
-            textarea {
-                border-bottom-color: $success;
-            }
         }
     }
 
@@ -107,12 +120,6 @@
         .component-form-field__input-container {
             input[type='text'],
             input[type='number'] {
-                border-bottom-color: $danger;
-            }
-            select {
-                border-bottom-color: $danger;
-            }
-            textarea {
                 border-bottom-color: $danger;
             }
         }

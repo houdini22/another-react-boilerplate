@@ -2,22 +2,14 @@ import * as React from 'react'
 
 const config = {
     api: {
-        baseURL:
-            'https://another-react-boilerplate.baniowski.pro/index.php/api/v1/',
+        baseURL: 'https://imdb-api.com/en/API/',
         timeout: 100000,
         apiDateTimeFormat: 'YYYY-MM-DD HH:mm:ss',
         apiDateFormat: 'YYYY-MM-DD',
+        key: 'k_kp45kn9j',
     },
     dateTimeFormat: 'YYYY-MM-DD HH:mm:ss',
     dateFormat: 'YYYY-MM-DD',
-    texts: {
-        version: 'v0.3.1',
-        frameworkName: (
-            <span>
-                <strong>another</strong> boilerplate
-            </span>
-        ),
-    },
 }
 
 export default config

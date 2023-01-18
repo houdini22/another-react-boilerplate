@@ -1,5 +1,4 @@
-import { IndexView } from './components/Index'
-import IndexContainer from './containers/IndexContainer'
+import AboutView from './components/Index'
 
-export { IndexView, IndexContainer }
-export default { IndexView, IndexContainer }
+export { AboutView }
+export default { AboutView }

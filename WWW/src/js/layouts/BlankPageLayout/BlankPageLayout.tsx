@@ -1,6 +1,6 @@
 import * as React from 'react'
 import classNames from 'classnames/bind'
-import styles from '../../../assets/scss/layout/_layout.scss'
+import styles from '../../../assets/scss/layout/_blank_page_layout.scss'
 
 const cx = classNames.bind(styles)
 

@@ -267,6 +267,9 @@
         font-weight: 400;
         position: relative;
         color: $defaultTextColor;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
 
         h1,
         h2,
@@ -279,7 +282,6 @@
             margin-top: -4px;
             display: inline-block;
             vertical-align: middle;
-
             svg {
                 margin-right: 5px;
                 display: inline-block;

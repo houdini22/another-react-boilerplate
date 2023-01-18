@@ -1,0 +1,24 @@
+@import '../variables';
+
+.layout--blank-page {
+    width: 100%;
+    min-height: 100%;
+
+    .layout__header {
+        height: 5em;
+        background-color: $primary;
+        display: flex;
+        text-align: center;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+
+        .layout__header__container {
+            display: flex;
+            flex: 0.6;
+        }
+    }
+}
