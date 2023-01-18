@@ -21,26 +21,61 @@
         padding-left: 30px;
     }
 }
-
-@-webkit-keyframes animation--search-field__input-container__icon {
+@-webkit-keyframes animation--search-field__input-container2 {
     0% {
+        padding-right: 0;
+        padding-left: 30px;
+    }
+    100% {
         padding-right: 30px;
         padding-left: 0;
     }
-    100% {
+}
+
+@keyframes animation--search-field2 {
+    0% {
         padding-right: 0;
         padding-left: 30px;
+    }
+    100% {
+        padding-right: 30px;
+        padding-left: 0;
+    }
+}
+
+@-webkit-keyframes animation--search-field__input-container__icon {
+    0% {
+        left: calc(100% - 20px);
+    }
+    100% {
+        left: 0;
     }
 }
 
 @keyframes animation--search-field__input-container__icon {
     0% {
-        left: auto;
-        right: 0;
+        left: calc(100% - 20px);
     }
     100% {
         left: 0;
-        right: auto;
+    }
+}
+
+@-webkit-keyframes animation--search-field__input-container__icon2 {
+    0% {
+        left: 0;
+    }
+    100% {
+        left: calc(100% - 20px);
+    }
+}
+
+@keyframes animation--search-field__input-container__icon2 {
+    0% {
+        left: 0;
+    }
+    100% {
+        left: calc(100% - 20px);
     }
 }
 
@@ -63,6 +98,22 @@
                 -webkit-animation: animation--search-field__input-container__icon
                     0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
                 animation: animation--search-field__input-container__icon 0.3s
+                    cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+            }
+        }
+    }
+
+    &.component-form-field--is-blurred {
+        .component-form-field__input-container {
+            -webkit-animation: animation--search-field__input-container2 0.3s
+                cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+            animation: animation--search-field__input-container2 0.3s
+                cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+            .component-form-field__input-container__icon {
+                left: calc(100% - 20px);
+                -webkit-animation: animation--search-field__input-container__icon2
+                    0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+                animation: animation--search-field__input-container__icon2 0.3s
                     cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
             }
         }

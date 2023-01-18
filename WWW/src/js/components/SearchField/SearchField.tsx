@@ -21,6 +21,7 @@ export const SearchField = ({
         <div
             className={cx('component-form-field', {
                 [cx('component-form-field--is-focused')]: searchFieldFocused,
+                [cx('component-form-field--is-blurred')]: !searchFieldFocused,
             })}
         >
             <div className={cx('component-form-field__input-container')}>
