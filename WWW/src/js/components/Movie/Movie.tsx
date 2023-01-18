@@ -2,6 +2,7 @@ import * as React from 'react'
 import classNames from 'classnames/bind'
 import styles from '../../../assets/scss/components/_movie.scss'
 import { Card } from '../Card'
+import { IoLogoFacebook } from 'react-icons/io'
 
 const cx = classNames.bind(styles)
 
@@ -24,6 +25,7 @@ class Movie extends React.Component<LoadingOverlayProps> {
             >
                 <div className={cx('movie__img-container')}>
                     <img src={image} alt={''} />
+                    <IoLogoFacebook />
                 </div>
                 <div className={cx('movie__description-container')}>
                     <p>
