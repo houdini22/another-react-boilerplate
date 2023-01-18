@@ -24,7 +24,10 @@ class Movie extends React.Component<LoadingOverlayProps> {
                 header={<h3>{title}</h3>}
             >
                 <div className={cx('movie__img-container')}>
-                    <img src={image} alt={''} />
+                    <div>
+                        <img src={image} alt={''} />
+                        <div />
+                    </div>
                     <IoLogoFacebook />
                 </div>
                 <div className={cx('movie__description-container')}>
