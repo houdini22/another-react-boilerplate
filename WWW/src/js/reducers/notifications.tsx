@@ -81,7 +81,7 @@ const ACTION_HANDLERS = {
     },
     [ADD_TOAST_NOTIFICATION]: (
         state,
-        { payload: { type, text, href, title } },
+        { payload: { type, text, href, title, id } },
     ) => {
         return {
             ...state,
@@ -93,6 +93,7 @@ const ACTION_HANDLERS = {
                     text,
                     href,
                     title,
+                    id,
                 },
             ],
         }
