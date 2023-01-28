@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Badge } from 'reactstrap'
+import { Badge } from '../../../components'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/layout/_layout.scss'
 
