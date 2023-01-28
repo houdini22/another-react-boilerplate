@@ -84,8 +84,32 @@ class ModalView extends React.Component<any, ModalViewState> {
                                     />
                                 </Modal.Body>
                                 <Modal.Footer>
-                                    <Button color={'secondary'}>Cancel</Button>
-                                    <Button color={'success'}>OK</Button>
+                                    {({ close }) => {
+                                        return (
+                                            <>
+                                                <Button
+                                                    color={'secondary'}
+                                                    onClick={() =>
+                                                        this.setState({
+                                                            opened: false,
+                                                        })
+                                                    }
+                                                >
+                                                    Cancel
+                                                </Button>
+                                                <Button
+                                                    color={'success'}
+                                                    onClick={() =>
+                                                        this.setState({
+                                                            opened: false,
+                                                        })
+                                                    }
+                                                >
+                                                    OK
+                                                </Button>
+                                            </>
+                                        )
+                                    }}
                                 </Modal.Footer>
                             </Modal.Container>
                         </Col>

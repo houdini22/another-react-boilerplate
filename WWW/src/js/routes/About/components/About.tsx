@@ -2,6 +2,7 @@ import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, Card, PageHeader } from '../../../components'
 import { IoIosMail as ContactIcon } from 'react-icons/io'
+import { ContactFormContainer } from '../../../components/common/ContactForm/ContactFormContainer'
 
 export class AboutView extends React.Component {
     render() {
@@ -13,7 +14,7 @@ export class AboutView extends React.Component {
                     </PageHeader.Title>
                 </PageHeader.Container>
                 <Row>
-                    <Col xs={6}>
+                    <Col xs={12} sm={12} md={6}>
                         <Card header={<h1>Author</h1>}>
                             <Row>
                                 <Col xs={3}>
@@ -48,14 +49,17 @@ export class AboutView extends React.Component {
                                 </Col>
                                 <Col xs={9} style={{ textAlign: 'right' }}>
                                     <a
-                                        href="https://linkedin.com/in/michal-baniowski-a376606"
+                                        href="https://www.linkedin.com/in/micha%C5%82-baniowski-34474a25b/"
                                         target="_blank"
                                     >
-                                        https://linkedin.com/in/michal-baniowski-a376606
+                                        https://www.linkedin.com/in/michał-baniowski-34474a25b/
                                     </a>
                                 </Col>
                             </Row>
                         </Card>
+                    </Col>
+                    <Col xs={12} sm={12} md={6}>
+                        <ContactFormContainer />
                     </Col>
                 </Row>
             </PageContent>

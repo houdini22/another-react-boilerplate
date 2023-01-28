@@ -16,8 +16,13 @@ Create API/.env file with database credentials.
 
 ```npm install```
 
-```npm run build```
+```npm run build``` or ```npm start```
 
 ---
 
 And you are ready to go.
+
+
+### Demo
+
+[https://another-react-boilerplate.baniowski.pro](https://another-react-boilerplate.baniowski.pro)

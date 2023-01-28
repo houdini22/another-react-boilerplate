@@ -32,7 +32,7 @@ class ContainerBase extends React.Component<ContainerProps> {
                 <div className={cx('layout__container__content')}>
                     {children}
                 </div>
-                <Footer />
+                <Footer floatingSidebar={floatingSidebar} />
             </div>
         )
     }

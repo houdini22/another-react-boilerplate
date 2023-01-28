@@ -3,6 +3,7 @@ import classNames from 'classnames/bind'
 import _ from 'lodash'
 import { FaCheck as CheckIcon } from 'react-icons/fa'
 import Transition from 'react-transition-group/Transition'
+import jQuery from 'jquery'
 import styles1 from '../../../../assets/scss/components/_checkbox.scss'
 import styles2 from '../../../../assets/scss/_animations.scss'
 
@@ -17,20 +18,35 @@ interface CheckboxProps {
     loading?: boolean
 }
 
-class Checkbox extends React.Component<CheckboxProps> {
+interface CheckboxState {
+    checked: boolean
+}
+
+class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
     el = null
 
-    handleClick(e) {
-        const { onChange, disabled } = this.props
+    state = {
+        checked: false,
+    }
 
+    componentDidMount() {
+        const { checked } = this.props
+        this.setState({ checked })
+    }
+
+    handleClick(e) {
+        const { checked } = this.state
+        const { onChange, disabled } = this.props
+        jQuery(this.el).trigger('click')
         if (_.isFunction(onChange) && !disabled) {
-            this.el.click()
             onChange(this.el.checked)
         }
+        this.setState({ checked: !checked })
     }
 
     render() {
-        const { error, disabled, loading, checked, ...props } = this.props
+        const { error, disabled, loading, ...props } = this.props
+        const { checked } = this.state
 
         return (
             <div

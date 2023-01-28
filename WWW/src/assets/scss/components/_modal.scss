@@ -238,6 +238,10 @@
             .component-modal-container__modal__content__footer {
                 padding: $COMPONENT_PADDING;
                 text-align: right;
+
+                & > * {
+                    margin-left: $COMPONENT_MARGIN_SINGLE;
+                }
             }
         }
     }

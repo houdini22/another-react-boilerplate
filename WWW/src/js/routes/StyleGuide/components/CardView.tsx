@@ -35,6 +35,7 @@ interface CardViewState {
         footer: boolean
         footerType: string
         updateCount: number
+        solidBackground: boolean
     }
 }
 
@@ -54,6 +55,7 @@ class CardView extends React.Component<CardViewProps, CardViewState> {
                 footer: false,
                 footerType: '',
                 updateCount: 0,
+                solidBackground: false,
             },
         }
         this.setOptions = this.setOptions.bind(this)
@@ -83,20 +85,23 @@ class CardView extends React.Component<CardViewProps, CardViewState> {
             footer,
             footerType,
             color,
+            solidBackground,
         } = options
 
         return (
             <PageContent>
                 <ComponentsPageHeader title="Card" component="Card" />
-                <Section>
-                    <Row>
-                        <Col xs={6}>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <CardFormContainer
                                 options={options}
                                 setOptions={this.setOptions}
                             />
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             {createPresentationTab(
                                 <span>
                                     Options
@@ -147,6 +152,7 @@ class CardView extends React.Component<CardViewProps, CardViewState> {
                                     size={size}
                                     withCloseIcon={withCloseIcon}
                                     withMinimizeIcon={withMinimizeIcon}
+                                    solidBackground={solidBackground}
                                     header={
                                         header ? (
                                             <h1>
@@ -160,26 +166,14 @@ class CardView extends React.Component<CardViewProps, CardViewState> {
                                     headerActions={
                                         headerActions
                                             ? [
-                                                  <Button
-                                                      key="warning"
-                                                      color="warning"
-                                                  >
-                                                      Action!
-                                                  </Button>,
                                                   <Badge
                                                       key="badge-info"
                                                       color="info"
                                                   >
                                                       33
                                                   </Badge>,
-                                                  <Label
-                                                      key="label-danger"
-                                                      color="danger"
-                                                  >
-                                                      ERROR!
-                                                  </Label>,
+
                                                   <TextField placeholder="search" />,
-                                                  <Checkbox />,
                                               ]
                                             : undefined
                                     }
@@ -195,9 +189,9 @@ class CardView extends React.Component<CardViewProps, CardViewState> {
                                     colSize: colSize1,
                                 },
                             )}
-                        </Col>
-                    </Row>
-                </Section>
+                        </Section>
+                    </Col>
+                </Row>
             </PageContent>
         )
     }

@@ -180,7 +180,7 @@
         &.component-button--has-navigation {
             .component-button__navigation {
                 border-left: 2px solid $default_DARKEN_X3;
-                color: $default_LIGHTEN_X3;
+                color: $default_text_color;
             }
         }
     }
@@ -217,8 +217,8 @@
         }
         &.component-button--has-navigation {
             .component-button__navigation {
-                border-left: 2px solid $secondary_DARKEN_X3;
-                color: $secondary_LIGHTEN_X3;
+                border-left: 2px solid $secondary_text_color;
+                color: $secondary_text_color;
             }
         }
     }

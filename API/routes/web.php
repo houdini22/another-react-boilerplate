@@ -10,6 +10,9 @@ Route::prefix('api/v1')->group(function () {
         abort(404);
     });
 
+    Route::get('/captcha', '\App\Http\Controllers\CaptchaServiceController@getCaptcha');
+    Route::post('/contact', '\App\Http\Controllers\ContactController@postIndex');
+
     Route::prefix('cms')->group(function () {
         Route::get('pages', '\App\Http\Controllers\CmsPagesController@getPages');
         Route::get('pages/fetchParentCategorySelectOptions', '\App\Http\Controllers\CmsPagesController@getParentCategorySelectOptions');

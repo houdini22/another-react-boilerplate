@@ -5,6 +5,7 @@ import { AuthManager } from '../../containers/AuthManager'
 import classNames from 'classnames/bind'
 import config from '../../config'
 import styles from '../../../assets/scss/layout/_layout.scss'
+import { Notifications } from './components/Notifications'
 
 const cx = classNames.bind(styles)
 
@@ -64,6 +65,8 @@ class PageLayout extends React.Component<PageLayoutProps> {
                         </Sidebar>
 
                         <Container>{children}</Container>
+
+                        <Notifications />
                     </div>
                 )}
             </AuthManager>

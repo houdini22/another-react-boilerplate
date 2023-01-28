@@ -105,16 +105,18 @@ class TableView extends React.Component<TableViewProps, TableViewState> {
         return (
             <PageContent>
                 <ComponentsPageHeader title="Table" component="Table" />
-                <Section>
-                    <Row>
-                        <Col xs={6}>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <TableFormContainer
                                 options={options}
                                 setOptions={this.setOptions.bind(this)}
                                 colSize1={colSize2}
                             />
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             {createPresentationTab(
                                 <span />,
                                 <Table.Container
@@ -170,9 +172,9 @@ class TableView extends React.Component<TableViewProps, TableViewState> {
                                     colSize: colSize1,
                                 },
                             )}
-                        </Col>
-                    </Row>
-                </Section>
+                        </Section>
+                    </Col>
+                </Row>
             </PageContent>
         )
     }

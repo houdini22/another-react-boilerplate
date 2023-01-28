@@ -28,9 +28,9 @@ class LoadingOverlayView extends React.Component<LoadingOverlayProps> {
                     title="LoadingOverlay"
                     component="LoadingOverlay"
                 />
-                <Section>
-                    <Row>
-                        <Col xs={6}>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Section>
                             {createPresentationTab(
                                 <span>Basic</span>,
                                 <Row>
@@ -48,8 +48,10 @@ class LoadingOverlayView extends React.Component<LoadingOverlayProps> {
                                 </Row>,
                                 code1,
                             )}
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             {createPresentationTab(
                                 <span>
                                     Size <Label color="info">xs</Label>
@@ -69,9 +71,9 @@ class LoadingOverlayView extends React.Component<LoadingOverlayProps> {
                                 </Row>,
                                 code2,
                             )}
-                        </Col>
-                    </Row>
-                </Section>
+                        </Section>
+                    </Col>
+                </Row>
             </PageContent>
         )
     }

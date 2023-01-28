@@ -102,15 +102,17 @@ class DropdownView extends React.Component<
         return (
             <PageContent>
                 <ComponentsPageHeader title="Dropdown" component="Dropdown" />
-                <Section>
-                    <Row>
-                        <Col xs={6}>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <DropdownFormContainer
                                 options={options}
                                 setOptions={this.setOptions}
                             />
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             {createPresentationTab(
                                 <span>Basic</span>,
                                 <Dropdown.Container
@@ -198,9 +200,9 @@ class DropdownView extends React.Component<
                                     colSize: colSize1,
                                 },
                             )}
-                        </Col>
-                    </Row>
-                </Section>
+                        </Section>
+                    </Col>
+                </Row>
             </PageContent>
         )
     }

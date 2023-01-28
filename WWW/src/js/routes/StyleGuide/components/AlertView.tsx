@@ -84,16 +84,18 @@ class AlertView extends React.Component<AlertViewProps, AlertViewState> {
         return (
             <PageContent>
                 <ComponentsPageHeader title="Alert" component="Alert" />
-                <Section>
-                    <Row>
-                        <Col xs={6}>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <AlertFormContainer
                                 options={options}
                                 setOptions={this.setOptions.bind(this)}
                                 colSize1={colSize2}
                             />
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             {createPresentationTab(
                                 <span />,
                                 <Alert
@@ -116,10 +118,12 @@ class AlertView extends React.Component<AlertViewProps, AlertViewState> {
                                     colSize: colSize1,
                                 },
                             )}
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <Tabs.Container
                                 left
                                 solid
@@ -188,9 +192,9 @@ class AlertView extends React.Component<AlertViewProps, AlertViewState> {
                                     </Tabs.Content>
                                 </Tabs.Tab>
                             </Tabs.Container>
-                        </Col>
-                    </Row>
-                </Section>
+                        </Section>
+                    </Col>
+                </Row>
             </PageContent>
         )
     }

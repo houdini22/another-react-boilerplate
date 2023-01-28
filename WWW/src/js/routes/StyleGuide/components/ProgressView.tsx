@@ -60,15 +60,17 @@ class ProgressView extends React.Component<
         return (
             <PageContent>
                 <ComponentsPageHeader title="Progress" component="Progress" />
-                <Section>
-                    <Row>
-                        <Col xs={6}>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <ProgressFormContainer
                                 options={options}
                                 setOptions={this.setOptions}
                             />
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             {createPresentationTab(
                                 <span>Options</span>,
                                 <Row>
@@ -85,9 +87,9 @@ class ProgressView extends React.Component<
                                     colSize: colSize1,
                                 },
                             )}
-                        </Col>
-                    </Row>
-                </Section>
+                        </Section>
+                    </Col>
+                </Row>
             </PageContent>
         )
     }

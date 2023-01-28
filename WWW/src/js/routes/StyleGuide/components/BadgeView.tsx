@@ -70,16 +70,18 @@ class BadgeView extends React.Component<BadgeViewProps, BadgeViewState> {
         return (
             <PageContent>
                 <ComponentsPageHeader title="Badge" component="Badge" />
-                <Section>
-                    <Row>
-                        <Col xs={6}>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <BadgeFormContainer
                                 options={options}
                                 setOptions={this.setOptions.bind(this)}
                                 colSize1={colSize2}
                             />
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             {createPresentationTab(
                                 <span />,
                                 <p style={{ position: 'relative' }}>
@@ -103,9 +105,9 @@ class BadgeView extends React.Component<BadgeViewProps, BadgeViewState> {
                                     colSize: colSize1,
                                 },
                             )}
-                        </Col>
-                    </Row>
-                </Section>
+                        </Section>
+                    </Col>
+                </Row>
             </PageContent>
         )
     }

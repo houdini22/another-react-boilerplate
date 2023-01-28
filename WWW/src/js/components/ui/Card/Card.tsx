@@ -28,6 +28,7 @@ interface CardProps {
     footer?: any
     footerType?: string
     style?: object
+    solidBackground?: boolean
 }
 
 class Card extends React.Component<CardProps> {
@@ -72,6 +73,7 @@ class Card extends React.Component<CardProps> {
             footer,
             footerType,
             style,
+            solidBackground,
         } = this.props
         const { closed, minimized } = this.state
 
@@ -86,6 +88,7 @@ class Card extends React.Component<CardProps> {
                     [`component-card--with-close-icon`]: withCloseIcon,
                     [`component-card--size-${size}`]: size,
                     [`component-card--no-border-top`]: noBorderTop,
+                    [`component-card--solid-background`]: solidBackground,
                     [className]: true,
                 })}
                 style={style}

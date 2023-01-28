@@ -1,5 +1,4 @@
 import axios from 'axios'
-import _ from 'lodash'
 import { actions as commonActions } from '../reducers/common'
 import { store } from '../../index'
 import config from '../config'
@@ -22,15 +21,15 @@ const setAuthToken = (token) => {
     instance.defaults.headers.common['X-SESSION-TOKEN'] = token
 }
 
-const processAPIerrorResponseToFormErrors = (obj) => {
-    const result = {}
+const processAPIerrorResponseToFormErrors = (response) => {
+    const { response: { data: { errors = {} } = {} } = {} } = response
+    const res = {}
 
-    Object.keys(obj).forEach((fieldName) => {
-        const errors = obj[fieldName].join('\n')
-        _.set(result, fieldName, errors)
+    Object.keys(errors).forEach((key) => {
+        res[key] = errors[key].join('\n')
     })
 
-    return result
+    return res
 }
 
 export default instance

@@ -89,10 +89,10 @@ class SidebarBase extends React.Component<SidebarProps, SidebarState> {
                     'layout__sidebar--expanded': sidebarExpanded,
                 })}
                 onMouseEnter={(e) => {
-                    setLayoutOption('sidebarExpanded', true)
+                    //setLayoutOption('sidebarExpanded', true)
                 }}
                 onMouseLeave={(e) => {
-                    setLayoutOption('sidebarExpanded', false)
+                    //setLayoutOption('sidebarExpanded', false)
                 }}
             >
                 <div className={cx('layout__sidebar__content')}>{children}</div>

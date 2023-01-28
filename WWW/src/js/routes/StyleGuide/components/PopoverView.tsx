@@ -79,16 +79,18 @@ class PopoverView extends React.Component<PopoverViewProps, PopoverViewState> {
         return (
             <PageContent>
                 <ComponentsPageHeader title="Popover" component="Popover" />
-                <Section>
-                    <Row>
-                        <Col xs={6}>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <PopoverFormContainer
                                 options={options}
                                 setOptions={this.setOptions.bind(this)}
                                 colSize1={colSize2}
                             />
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             {createPresentationTab(
                                 <span>
                                     Options
@@ -155,9 +157,9 @@ class PopoverView extends React.Component<PopoverViewProps, PopoverViewState> {
                                     colSize: colSize1,
                                 },
                             )}
-                        </Col>
-                    </Row>
-                </Section>
+                        </Section>
+                    </Col>
+                </Row>
             </PageContent>
         )
     }

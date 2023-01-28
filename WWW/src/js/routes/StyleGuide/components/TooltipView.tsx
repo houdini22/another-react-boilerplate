@@ -70,16 +70,18 @@ class TooltipView extends React.Component<TooltipViewProps, TooltipViewState> {
         return (
             <PageContent>
                 <ComponentsPageHeader title="Tooltip" component="Tooltip" />
-                <Section>
-                    <Row>
-                        <Col xs={6}>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Section>
                             <TooltipFormContainer
                                 options={options}
                                 setOptions={this.setOptions.bind(this)}
                                 colSize1={colSize2}
                             />
-                        </Col>
-                        <Col xs={6}>
+                        </Section>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Section>
                             {createPresentationTab(
                                 <span />,
                                 <Tooltip
@@ -97,9 +99,9 @@ class TooltipView extends React.Component<TooltipViewProps, TooltipViewState> {
                                     colSize: colSize1,
                                 },
                             )}
-                        </Col>
-                    </Row>
-                </Section>
+                        </Section>
+                    </Col>
+                </Row>
             </PageContent>
         )
     }

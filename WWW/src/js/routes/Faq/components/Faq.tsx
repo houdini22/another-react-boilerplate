@@ -14,35 +14,35 @@ export class FaqView extends React.Component {
                     </PageHeader.Title>
                 </PageHeader.Container>
                 <Row>
-                    <Col xs={6}>
+                    <Col xs={12} sm={12} md={6}>
                         <Card header={<h1>FAQ</h1>}>
                             <Row>
-                                <Col xs={3}>
+                                <Col xs={4}>
                                     <h4>
                                         <strong>Codename:</strong>
                                     </h4>
                                 </Col>
-                                <Col xs={9} style={{ textAlign: 'right' }}>
+                                <Col xs={8} style={{ textAlign: 'right' }}>
                                     {config.texts.frameworkName} framework
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={3}>
+                                <Col xs={4}>
                                     <h4>
                                         <strong>Version:</strong>
                                     </h4>
                                 </Col>
-                                <Col xs={9} style={{ textAlign: 'right' }}>
+                                <Col xs={8} style={{ textAlign: 'right' }}>
                                     {config.texts.version}
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={3}>
+                                <Col xs={4}>
                                     <h4>
                                         <strong>Github:</strong>
                                     </h4>
                                 </Col>
-                                <Col xs={9} style={{ textAlign: 'right' }}>
+                                <Col xs={8} style={{ textAlign: 'right' }}>
                                     <a
                                         href="https://github.com/houdini22/another-react-boilerplate"
                                         target="_blank"
@@ -52,22 +52,22 @@ export class FaqView extends React.Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={3}>
+                                <Col xs={4}>
                                     <h4>
                                         <strong>Copyright:</strong>
                                     </h4>
                                 </Col>
-                                <Col xs={9} style={{ textAlign: 'right' }}>
+                                <Col xs={8} style={{ textAlign: 'right' }}>
                                     © 2017 Michał Baniowski
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={3}>
+                                <Col xs={4}>
                                     <h4>
                                         <strong>Donate:</strong>
                                     </h4>
                                 </Col>
-                                <Col xs={9} style={{ textAlign: 'right' }}>
+                                <Col xs={8} style={{ textAlign: 'right' }}>
                                     <form
                                         action="https://www.paypal.com/cgi-bin/webscr"
                                         method="post"
@@ -100,18 +100,19 @@ export class FaqView extends React.Component {
                             </Row>
                         </Card>
                     </Col>
-                    <Col xs={6}>
+                    <Col xs={12} sm={12} md={6}>
                         <Card header={<h1>Changelog</h1>}>
                             <Row>
-                                <Col xs={3}>
+                                <Col xs={4}>
                                     <ul>
                                         <li>2019-06-12</li>
                                         <li>2020-11-07</li>
                                         <li>2021-08-28</li>
                                         <li>2022-03-25</li>
+                                        <li>2023-01-13</li>
                                     </ul>
                                 </Col>
-                                <Col xs={6}>
+                                <Col xs={8}>
                                     <ul
                                         style={{
                                             listStyleType: 'none',
@@ -121,6 +122,7 @@ export class FaqView extends React.Component {
                                         <li>Initial release v0.2-alpha</li>
                                         <li>Release v0.3-alpha</li>
                                         <li>Release v0.3.1-alpha</li>
+                                        <li>Release v0.3.1</li>
                                     </ul>
                                 </Col>
                             </Row>
