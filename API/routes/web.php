@@ -23,6 +23,14 @@ Route::prefix('api/v1')->group(function () {
         Route::post('pages/addDocument', '\App\Http\Controllers\CmsPagesController@postAddDocument');
         Route::post('pages/addLink', '\App\Http\Controllers\CmsPagesController@postAddLink');
     });
+
+    Route::prefix('users')->group(function() {
+        Route::get('list', '\App\Http\Controllers\UsersController@getList');
+        Route::get('get/{id}', '\App\Http\Controllers\UsersController@getGet');
+        Route::delete('delete/{id}', '\App\Http\Controllers\UsersController@deleteDeleteUser');
+        Route::put('edit', '\App\Http\Controllers\UsersController@postEdit');
+        Route::post('add', '\App\Http\Controllers\UsersController@postAdd');
+    });
 });
 
 Route::get('/', function () {

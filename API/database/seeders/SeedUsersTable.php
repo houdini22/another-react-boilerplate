@@ -19,6 +19,7 @@ class SeedUsersTable extends Seeder
             [
                 'name' => 'admin',
                 'email' => 'michal.baniowski@gmail.com',
+                'status' => 1,
                 'password' => bcrypt('admin'),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()

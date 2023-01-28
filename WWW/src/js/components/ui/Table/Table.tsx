@@ -7,10 +7,11 @@ import { Col } from '../Col'
 const cx = classNames.bind(styles)
 
 interface TableProps {
-    bordered: boolean
-    size: string
-    striped: boolean
-    color: string
+    bordered?: boolean
+    size?: string
+    striped?: boolean
+    color?: string
+    children: any
 }
 
 class Table extends React.Component<TableProps> {
@@ -99,7 +100,8 @@ class Th extends React.Component<ThProps> {
 interface TdProps {
     xs?: number
     alignCenter?: boolean
-    onClick: () => void
+    onClick?: () => void
+    children: any
 }
 
 class Td extends React.Component<TdProps> {

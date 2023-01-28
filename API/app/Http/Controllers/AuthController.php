@@ -14,21 +14,28 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+            if ($user->status === User::$STATUS_NOT_ACTIVE) {
+                return response()->json([
+                    'message' => 'ERR_STATUS_NOT_ACTIVE'
+                ], 403);
+            }
 
-            $user->generateToken();
+            if ($user->status === User::$STATUS_ACTIVE) {
+                $user->generateToken();
 
-            $user->last_active = Carbon::now();
-            $user->save();
+                $user->last_active = Carbon::now();
+                $user->save();
 
-            return response()->json([
-                'data' => [
-                    'user' => [
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'token' => $user->token,
+                return response()->json([
+                    'data' => [
+                        'user' => [
+                            'name' => $user->name,
+                            'email' => $user->email,
+                            'token' => $user->token,
+                        ]
                     ]
-                ]
-            ]);
+                ]);
+            }
         }
 
         return response()->json([

@@ -240,7 +240,11 @@
                 text-align: right;
 
                 & > * {
-                    margin-left: $COMPONENT_MARGIN_SINGLE;
+                    margin-bottom: $COMPONENT_MARGIN_SINGLE;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
                 }
             }
         }

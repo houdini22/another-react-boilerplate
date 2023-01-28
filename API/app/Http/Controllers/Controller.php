@@ -17,4 +17,11 @@ class Controller extends BaseController
             'message' => 'NOT_AUTHORIZED',
         ], 401);
     }
+
+    public function response404()
+    {
+        return response()->json([
+            'message' => 'NOT_FOUND',
+        ], 404);
+    }
 }

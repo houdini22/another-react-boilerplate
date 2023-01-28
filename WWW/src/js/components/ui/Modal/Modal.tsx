@@ -9,12 +9,12 @@ const cx = classNames.bind(styles)
 
 interface ModalContainerProps {
     children: any
-    className: string
-    animation: string
-    color: string
-    size: string
-    placement: string
-    visible: boolean
+    className?: string
+    animation?: string
+    color?: string
+    size?: string
+    placement?: string
+    visible?: boolean
 }
 
 class ModalContainer extends React.Component<ModalContainerProps> {
@@ -53,7 +53,7 @@ class ModalContainer extends React.Component<ModalContainerProps> {
 
 interface ModalBodyProps {
     children: any
-    close(): any
+    close?(): any
 }
 
 class ModalBody extends React.Component<ModalBodyProps> {
@@ -75,8 +75,8 @@ class ModalBody extends React.Component<ModalBodyProps> {
 
 interface ModalHeaderProps {
     children: any
-    closeIcon: any
-    close(): any
+    closeIcon?: any
+    close?(): any
 }
 
 class ModalHeader extends React.Component<ModalHeaderProps> {
@@ -114,7 +114,7 @@ class ModalHeader extends React.Component<ModalHeaderProps> {
 
 interface ModalFooterProps {
     children: any
-    close(): any
+    close?(): any
 }
 
 class ModalFooter extends React.Component<ModalFooterProps> {

@@ -41,7 +41,6 @@ import AddCategoryView from './routes/Cms/components/AddCategory'
 import AddDocumentView from './routes/Cms/components/AddDocument'
 import AddLinkView from './routes/Cms/components/AddLink'
 import { UsersView } from './routes/Users'
-
 const App = () => (
     <Router>
         <Routes>

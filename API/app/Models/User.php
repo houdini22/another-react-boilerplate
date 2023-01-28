@@ -12,13 +12,17 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    static public $STATUS_NOT_ACTIVE = 0;
+
+    static public $STATUS_ACTIVE = 1;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'nick',
+        'name', 'email', 'password', 'status',
     ];
 
     /**
@@ -55,7 +59,7 @@ class User extends Authenticatable
     public static function getFromRequest(\Illuminate\Http\Request $request)
     {
         $token = $request->header('X-SESSION-TOKEN');
-        
+
         if ($token) {
             $user = \App\Models\User::where('token', '=', $token)->first();
             if ($user) {
