@@ -30,6 +30,7 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                 <UserRolesManager id={id}>
                                     {({
                                         role,
+                                        roles,
                                         isLoading,
                                         setIsLoading,
                                         editRole,
@@ -56,6 +57,7 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                                     initialValues={{
                                                                         role_id: role.id,
                                                                     }}
+                                                                    role={role}
                                                                     setIsLoading={setIsLoading}
                                                                     onSubmit={(values, props) => {
                                                                         return editRole(values).then(
@@ -100,6 +102,7 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                                             role_id: role.id,
                                                                         }}
                                                                         role={role}
+                                                                        roles={roles}
                                                                         permissions={permissions}
                                                                         onSubmit={(values) => {
                                                                             setIsLoading(true)
@@ -190,7 +193,7 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                                                             }}
                                                                                         >
                                                                                             <DeleteIcon /> Remove from
-                                                                                            user
+                                                                                            Role
                                                                                         </Dropdown.Item>
                                                                                         {is_deletable == 1 && (
                                                                                             <Dropdown.Item

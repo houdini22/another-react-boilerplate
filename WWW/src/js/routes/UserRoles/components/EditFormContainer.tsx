@@ -13,7 +13,7 @@ const EditFormContainer = compose(
     reduxForm({
         onChange,
         enableReinitialize: true,
-        destroyOnUnmount: false,
+        destroyOnUnmount: true,
         form: 'EditRoleForm',
     }),
 )(FormComponent)
