@@ -107,7 +107,7 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                         arrow,
                         borderless,
                         className,
-                        type = 'submit',
+                        type = 'button',
                         navigationHref,
                         onClickNavigation = () => null,
                         transparent,

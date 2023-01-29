@@ -171,6 +171,25 @@ const addUserRole =
                 })
         })
     }
+
+const sendActivationEmail =
+    ({ id }) =>
+    (dispatch) => {
+        return new Promise<void>((resolve, reject) => {
+            dispatch(setFetchError(null))
+
+            http.post(`/users/send_activation_email`, {
+                id,
+            })
+                .then(({ data: { user } }) => {
+                    resolve()
+                })
+                .catch((e) => {
+                    dispatch(setFetchError(e))
+                    reject(e)
+                })
+        })
+    }
 export const actions = {
     fetch,
     fetchOne,
@@ -183,6 +202,7 @@ export const actions = {
     deleteUser,
     deleteUserRole,
     addUserRole,
+    sendActivationEmail,
 }
 
 // ------------------------------------

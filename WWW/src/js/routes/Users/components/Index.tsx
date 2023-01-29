@@ -13,11 +13,13 @@ import {
     PageHeader,
     Row,
     Table,
+    Tooltip,
 } from '../../../components'
 import { UsersManager } from '../containers/UsersManager'
 import { EditIcon, DeleteIcon } from '../../../components/icons'
 import EditModal from './EditModal'
 import AddModal from './AddModal'
+import { formatDateTime } from '../../../helpers/date-time'
 
 export class UsersView extends React.Component {
     state = {
@@ -124,24 +126,48 @@ export class UsersView extends React.Component {
                                         <Table.Container bordered striped>
                                             <Table.THead>
                                                 <Table.Tr>
-                                                    <Table.Th xs={1}>ID</Table.Th>
-                                                    <Table.Th xs={3}>Name</Table.Th>
-                                                    <Table.Th xs={3}>Email</Table.Th>
-                                                    <Table.Th xs={3}>Roles</Table.Th>
-                                                    <Table.Th xs={2}>Actions</Table.Th>
+                                                    <Table.Th xs={1} md={1}>
+                                                        ID
+                                                    </Table.Th>
+                                                    <Table.Th xs={5} md={2}>
+                                                        Name
+                                                    </Table.Th>
+                                                    <Table.Th xs={6} md={2}>
+                                                        Email
+                                                    </Table.Th>
+                                                    <Table.Th xs={12} md={3}>
+                                                        Roles
+                                                    </Table.Th>
+                                                    <Table.Th xs={6} md={2}>
+                                                        Status
+                                                    </Table.Th>
+                                                    <Table.Th xs={6} md={2}>
+                                                        Actions
+                                                    </Table.Th>
                                                 </Table.Tr>
                                             </Table.THead>
                                             <Table.TBody>
                                                 {users.map((user) => {
                                                     return (
                                                         <Table.Tr key={user.id}>
-                                                            <Table.Td xs={1}>{user.id}</Table.Td>
-                                                            <Table.Td xs={3}>{user.name}</Table.Td>
-                                                            <Table.Td xs={3}>{user.email}</Table.Td>
-                                                            <Table.Td xs={3}>
+                                                            <Table.Td xs={1} md={1}>
+                                                                {user.id}
+                                                            </Table.Td>
+                                                            <Table.Td xs={5} md={2}>
+                                                                {user.name}
+                                                            </Table.Td>
+                                                            <Table.Td xs={6} md={2}>
+                                                                {user.email}
+                                                            </Table.Td>
+                                                            <Table.Td xs={12} md={3}>
                                                                 <div>
                                                                     {user?.roles?.map(
-                                                                        ({ id: _id, name, guard_name }) => (
+                                                                        ({
+                                                                            id: _id,
+                                                                            name,
+                                                                            guard_name,
+                                                                            is_deletable: _is_deletable,
+                                                                        }) => (
                                                                             <Dropdown.Container
                                                                                 size={'sm'}
                                                                                 triggerSize={'lg'}
@@ -181,27 +207,62 @@ export class UsersView extends React.Component {
                                                                     )}
                                                                 </div>
                                                             </Table.Td>
-                                                            <Table.Td xs={2}>
-                                                                <Button
-                                                                    icon={<EditIcon />}
-                                                                    iconOnly
-                                                                    color={'warning'}
-                                                                    onClick={() => {
-                                                                        this.setState({
-                                                                            edit: user.id,
-                                                                        })
-                                                                    }}
-                                                                />
-                                                                <Button
-                                                                    icon={<DeleteIcon />}
-                                                                    iconOnly
-                                                                    color={'danger'}
-                                                                    onClick={() => {
-                                                                        this.setState({
-                                                                            confirmDeleteModalVisible: user.id,
-                                                                        })
-                                                                    }}
-                                                                />
+                                                            <Table.Td xs={6} md={2}>
+                                                                <Tooltip
+                                                                    tooltip={
+                                                                        <div>
+                                                                            <Row>
+                                                                                {user.status === 1 && (
+                                                                                    <>
+                                                                                        <Col xs={6}>
+                                                                                            <strong>
+                                                                                                Email verified at:
+                                                                                            </strong>
+                                                                                        </Col>
+                                                                                        <Col xs={6}>
+                                                                                            {formatDateTime(
+                                                                                                user.email_verified_at,
+                                                                                            )}
+                                                                                        </Col>
+                                                                                    </>
+                                                                                )}
+                                                                            </Row>
+                                                                        </div>
+                                                                    }
+                                                                >
+                                                                    {user.status === 0 && (
+                                                                        <Label color={'danger'}>Not active</Label>
+                                                                    )}
+                                                                    {user.status === 1 && (
+                                                                        <Label color={'success'}>Active</Label>
+                                                                    )}
+                                                                </Tooltip>
+                                                            </Table.Td>
+                                                            <Table.Td xs={6} md={2}>
+                                                                <div>
+                                                                    <Button
+                                                                        icon={<EditIcon />}
+                                                                        iconOnly
+                                                                        color={'warning'}
+                                                                        onClick={() => {
+                                                                            this.setState({
+                                                                                edit: user.id,
+                                                                            })
+                                                                        }}
+                                                                    />
+                                                                    {user.is_deletable == 1 && (
+                                                                        <Button
+                                                                            icon={<DeleteIcon />}
+                                                                            iconOnly
+                                                                            color={'danger'}
+                                                                            onClick={() => {
+                                                                                this.setState({
+                                                                                    confirmDeleteModalVisible: user.id,
+                                                                                })
+                                                                            }}
+                                                                        />
+                                                                    )}
+                                                                </div>
                                                             </Table.Td>
                                                         </Table.Tr>
                                                     )

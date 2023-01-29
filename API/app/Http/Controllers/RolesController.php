@@ -110,14 +110,12 @@ class RolesController extends Controller
             return $this->response401();
         }
 
-        $role = Role::with('permissions')->find($request->segments()[4]);
-        if (!$role) {
-            return $this->response404();
-        }
-
         $request->validate([
             'permission' => 'required',
+            'role_id' => 'required|exists:roles,id'
         ]);
+
+        $role = Role::with('permissions')->find($request->post('role_id'));
 
         if ($request->post('permission') === 'add') {
             $request->validate([
@@ -152,7 +150,7 @@ class RolesController extends Controller
         ]);
     }
 
-    public function deleteDeletePermission(Request $request)
+    public function deleteDeleteUserPermission(Request $request)
     {
         $user = User::getFromRequest($request);
         if (!$user) {
@@ -170,6 +168,25 @@ class RolesController extends Controller
         }
 
         $permission->removeRole($role);
+
+        return response()->json([
+            'msg' => 'ok',
+        ]);
+    }
+
+    public function deleteDeletePermission(Request $request)
+    {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $permission = Permission::find($request->route('permission_id'));
+        if (!$permission) {
+            return $this->response404();
+        }
+
+        $permission->delete();
 
         return response()->json([
             'msg' => 'ok',

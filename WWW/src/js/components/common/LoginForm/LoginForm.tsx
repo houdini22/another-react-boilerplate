@@ -47,15 +47,7 @@ export class LoginForm extends React.Component<LoginFormProps> {
                     autoFocus={!!username}
                 />
                 <div className={cx('buttons-container')}>
-                    {button && (
-                        <Button
-                            onClick={() => {
-                                //submit()
-                            }}
-                        >
-                            Login
-                        </Button>
-                    )}
+                    {button && <Button type={'submit'}>Login</Button>}
                     {button && (
                         <RouteManager>
                             {({ navigate }) => (

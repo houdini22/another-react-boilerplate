@@ -16,6 +16,7 @@ interface UserRolesManagerProps {
     addPermission: Function
     fetchPermissions: Function
     deletePermission: Function
+    deleteUserPermission: Function
     role: any
     permissions: any
 }
@@ -26,6 +27,7 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps> {
         if (id) {
             fetchOne(id)
             fetchPermissions()
+            fetch()
         } else {
             fetch()
         }
@@ -44,6 +46,7 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps> {
             addPermission,
             fetchPermissions,
             deletePermission,
+            deleteUserPermission,
             permissions,
             fetchOne,
         } = this.props
@@ -58,6 +61,7 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps> {
             addPermission,
             fetchPermissions,
             deletePermission,
+            deleteUserPermission,
             permissions,
             fetchOne,
         }
@@ -84,6 +88,7 @@ const UserRolesManager = connect(mapStateToProps, (dispatch) => {
             deleteRole: commonActions.deleteRole,
             addPermission: commonActions.addPermission,
             fetchPermissions: commonActions.fetchPermissions,
+            deleteUserPermission: commonActions.deleteUserPermission,
             deletePermission: commonActions.deletePermission,
         },
         dispatch,

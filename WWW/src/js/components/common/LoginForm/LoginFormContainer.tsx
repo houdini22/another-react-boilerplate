@@ -7,8 +7,8 @@ import { compose } from 'redux'
 const { login } = authActions
 import { LocalStorage } from '../../../modules/database'
 
-const onSubmit = (values, dispatch) => {
-    dispatch(login(values['username'], values['password'])).then(() => {
+const onSubmit = (values, dispatch, props) => {
+    return dispatch(login(values['username'], values['password'])).then(() => {
         LocalStorage.update(
             'LoginFormContainer',
             () => true,
@@ -18,6 +18,10 @@ const onSubmit = (values, dispatch) => {
             },
         )
         LocalStorage.commit()
+
+        const { navigate } = props
+
+        navigate('/')
     })
 }
 export const FORM_NAME = 'LoginForm'

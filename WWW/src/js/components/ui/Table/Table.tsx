@@ -77,20 +77,24 @@ class Tr extends React.Component<TrProps> {
 interface ThProps {
     children: any
     xs?: number
+
+    md?: number
     alignCenter?: boolean
 }
 
 class Th extends React.Component<ThProps> {
     render() {
-        const { children, xs, alignCenter } = this.props
+        const { children, xs, md, alignCenter } = this.props
 
         return (
             <Col
                 className={cx('component-table__thead__th', {
                     [`component-table__thead__th--xs-${xs}`]: xs,
+                    [`component-table__thead__th--md-${md}`]: md,
                     'component-table__thead__th--align-center': alignCenter,
                 })}
                 xs={xs}
+                md={md}
             >
                 {children}
             </Col>
@@ -100,6 +104,7 @@ class Th extends React.Component<ThProps> {
 
 interface TdProps {
     xs?: number
+    md?: number
     alignCenter?: boolean
     onClick?: () => void
     children: any
@@ -107,15 +112,18 @@ interface TdProps {
 
 class Td extends React.Component<TdProps> {
     render() {
-        const { children, xs, onClick, alignCenter } = this.props
+        const { children, xs, md, onClick, alignCenter } = this.props
 
         return (
             <Col
-                className={cx('component-table__tbody__td', `component-table__tbody__td--xs-${xs}`, {
+                className={cx('component-table__tbody__td', {
                     'component-table__tbody__td--align-center': alignCenter,
                     'component-table__tbody__td--is-clickable': onClick,
+                    [`component-table__tbody__td--xs-${xs}`]: xs,
+                    [`component-table__tbody__td--md-${md}`]: md,
                 })}
                 xs={xs}
+                md={md}
                 onClick={onClick}
             >
                 {children}

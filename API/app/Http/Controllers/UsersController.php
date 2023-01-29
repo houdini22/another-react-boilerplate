@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -168,5 +169,41 @@ class UsersController extends Controller
         return response()->json([
             'msg' => 'ok',
         ]);
+    }
+
+    public function postSendActivationEmail(Request $request)
+    {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $user = User::find($request->post('id'));
+        if (!$user) {
+            return $this->response404();
+        }
+
+        $user->email_verified_at = NULL;
+        $user->email_verify_token = \Illuminate\Support\Str::random(16);
+        $user->save();
+
+        return response()->json([
+            'user' => $user->toArray(),
+        ]);
+    }
+
+    public function getActivate(Request $request)
+    {
+        $user = User::where('email_verify_token', $request->route('email_verified_token'))
+        ->get()->first();
+        if (!$user) {
+            return $this->response404();
+        }
+
+        $user->email_verify_token = NULL;
+        $user->email_verified_at = Carbon::now();
+        $user->save();
+
+        return redirect('/#/users/account_activated');
     }
 }

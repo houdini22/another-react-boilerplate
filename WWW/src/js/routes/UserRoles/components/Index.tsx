@@ -19,16 +19,18 @@ import { EditIcon, DeleteIcon } from '../../../components/icons'
 import EditModal from './EditModal'
 import AddModal from './AddModal'
 import { NotificationsManager } from '../../../containers/NotificationsManager'
+import AddPermissionModal from './AddPermissionModal'
 
 export class UsersView extends React.Component {
     state = {
         confirmDeleteModalVisible: false,
         edit: false,
         addModalVisible: false,
+        addPermissionModalVisible: false,
     }
 
     render() {
-        const { confirmDeleteModalVisible, edit, addModalVisible } = this.state
+        const { confirmDeleteModalVisible, edit, addModalVisible, addPermissionModalVisible } = this.state
 
         return (
             <RouteManager>
@@ -36,7 +38,15 @@ export class UsersView extends React.Component {
                     <NotificationsManager>
                         {({ addToastNotification }) => (
                             <UserRolesManager>
-                                {({ roles, isLoading, deleteRole, fetch, setIsLoading, deletePermission }) => {
+                                {({
+                                    roles,
+                                    isLoading,
+                                    deleteRole,
+                                    fetch,
+                                    setIsLoading,
+                                    deletePermission,
+                                    deleteUserPermission,
+                                }) => {
                                     return (
                                         <PageContent>
                                             <AddModal
@@ -44,6 +54,15 @@ export class UsersView extends React.Component {
                                                 close={() => {
                                                     this.setState({
                                                         addModalVisible: false,
+                                                    })
+                                                    fetch()
+                                                }}
+                                            />
+                                            <AddPermissionModal
+                                                visible={addPermissionModalVisible}
+                                                close={() => {
+                                                    this.setState({
+                                                        addPermissionModalVisible: false,
                                                     })
                                                     fetch()
                                                 }}
@@ -124,7 +143,17 @@ export class UsersView extends React.Component {
                                                             })
                                                         }}
                                                     >
-                                                        Add
+                                                        Add Role
+                                                    </Button>
+                                                    <Button
+                                                        color={'success'}
+                                                        onClick={() => {
+                                                            this.setState({
+                                                                addPermissionModalVisible: true,
+                                                            })
+                                                        }}
+                                                    >
+                                                        Add Permission
                                                     </Button>
                                                 </PageHeader.Actions>
                                             </PageHeader.Container>
@@ -149,7 +178,12 @@ export class UsersView extends React.Component {
                                                                     <Table.Td xs={4}>
                                                                         <div>
                                                                             {role?.permissions?.map(
-                                                                                ({ id: _id, name, guard_name }) => {
+                                                                                ({
+                                                                                    id: _id,
+                                                                                    name,
+                                                                                    guard_name,
+                                                                                    is_deletable: _is_deletable,
+                                                                                }) => {
                                                                                     return (
                                                                                         <div key={name}>
                                                                                             <Dropdown.Container
@@ -171,7 +205,7 @@ export class UsersView extends React.Component {
                                                                                                                 true,
                                                                                                             )
 
-                                                                                                            return deletePermission(
+                                                                                                            return deleteUserPermission(
                                                                                                                 role,
                                                                                                                 {
                                                                                                                     id: _id,
@@ -197,8 +231,46 @@ export class UsersView extends React.Component {
                                                                                                         }}
                                                                                                     >
                                                                                                         <DeleteIcon />{' '}
-                                                                                                        Delete
+                                                                                                        Remove from user
                                                                                                     </Dropdown.Item>
+                                                                                                    {_is_deletable ==
+                                                                                                        1 && (
+                                                                                                        <Dropdown.Item
+                                                                                                            color="danger"
+                                                                                                            onClick={() => {
+                                                                                                                setIsLoading(
+                                                                                                                    true,
+                                                                                                                )
+
+                                                                                                                return deletePermission(
+                                                                                                                    {
+                                                                                                                        id: _id,
+                                                                                                                    },
+                                                                                                                ).then(
+                                                                                                                    () => {
+                                                                                                                        fetch().then(
+                                                                                                                            () => {
+                                                                                                                                setIsLoading(
+                                                                                                                                    false,
+                                                                                                                                )
+                                                                                                                                addToastNotification(
+                                                                                                                                    {
+                                                                                                                                        title: 'Delete success.',
+                                                                                                                                        text: 'Permission has been deleted.',
+                                                                                                                                        type: 'success',
+                                                                                                                                    },
+                                                                                                                                )
+                                                                                                                            },
+                                                                                                                        )
+                                                                                                                    },
+                                                                                                                )
+                                                                                                            }}
+                                                                                                        >
+                                                                                                            <DeleteIcon />{' '}
+                                                                                                            Delete
+                                                                                                            Permission
+                                                                                                        </Dropdown.Item>
+                                                                                                    )}
                                                                                                 </Dropdown.Menu>
                                                                                             </Dropdown.Container>
                                                                                         </div>
@@ -208,26 +280,31 @@ export class UsersView extends React.Component {
                                                                         </div>
                                                                     </Table.Td>
                                                                     <Table.Td xs={3}>
-                                                                        <Button
-                                                                            icon={<EditIcon />}
-                                                                            iconOnly
-                                                                            color={'warning'}
-                                                                            onClick={() => {
-                                                                                this.setState({
-                                                                                    edit: role.id,
-                                                                                })
-                                                                            }}
-                                                                        />
-                                                                        <Button
-                                                                            icon={<DeleteIcon />}
-                                                                            iconOnly
-                                                                            color={'danger'}
-                                                                            onClick={() => {
-                                                                                this.setState({
-                                                                                    confirmDeleteModalVisible: role.id,
-                                                                                })
-                                                                            }}
-                                                                        />
+                                                                        <div>
+                                                                            <Button
+                                                                                icon={<EditIcon />}
+                                                                                iconOnly
+                                                                                color={'warning'}
+                                                                                onClick={() => {
+                                                                                    this.setState({
+                                                                                        edit: role.id,
+                                                                                    })
+                                                                                }}
+                                                                            />
+                                                                            {role.is_deletable == 1 && (
+                                                                                <Button
+                                                                                    icon={<DeleteIcon />}
+                                                                                    iconOnly
+                                                                                    color={'danger'}
+                                                                                    onClick={() => {
+                                                                                        this.setState({
+                                                                                            confirmDeleteModalVisible:
+                                                                                                role.id,
+                                                                                        })
+                                                                                    }}
+                                                                                />
+                                                                            )}
+                                                                        </div>
                                                                     </Table.Td>
                                                                 </Table.Tr>
                                                             )

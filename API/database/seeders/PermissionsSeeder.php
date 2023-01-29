@@ -17,7 +17,8 @@ class PermissionsSeeder extends Seeder
     {
         Permission::insert([[
             'name' => 'can_everything',
-            'guard_name' => 'web'
+            'guard_name' => 'web',
+            'is_deletable' => false,
         ]]);
 
         $permission = Permission::find(1);

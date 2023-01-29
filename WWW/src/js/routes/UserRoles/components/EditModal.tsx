@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { RouteManager } from '../../../containers/RouteManager'
-import { Card, Dropdown, Label, LoadingOverlay, Modal, Section, Tabs } from '../../../components'
+import { Badge, Card, Dropdown, Label, LoadingOverlay, Modal, Section, Tabs } from '../../../components'
 import { UserRolesManager } from '../containers/UserRolesManager'
 import { EditIcon } from '../../../components/icons'
 import { EditFormContainer } from './EditFormContainer'
@@ -39,6 +39,7 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                         deletePermission,
                                         permissions,
                                         fetchPermissions,
+                                        deleteUserPermission,
                                     }) => {
                                         return (
                                             <>
@@ -52,7 +53,9 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                             <Tabs.Trigger>Data</Tabs.Trigger>
                                                             <Tabs.Content>
                                                                 <EditFormContainer
-                                                                    initialValues={role}
+                                                                    initialValues={{
+                                                                        role_id: role.id,
+                                                                    }}
                                                                     setIsLoading={setIsLoading}
                                                                     onSubmit={(values, props) => {
                                                                         return editRole(values).then(
@@ -84,16 +87,27 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                             </Tabs.Content>
                                                         </Tabs.Tab>
                                                         <Tabs.Tab name="permissions">
-                                                            <Tabs.Trigger>Permissions</Tabs.Trigger>
+                                                            <Tabs.Trigger>
+                                                                Permissions{' '}
+                                                                <Badge color={'info'}>
+                                                                    {role?.permissions?.length}
+                                                                </Badge>
+                                                            </Tabs.Trigger>
                                                             <Tabs.Content>
                                                                 <Card header={<h1>Add Permissions</h1>}>
                                                                     <AddPermissionFormContainer
+                                                                        initialValues={{
+                                                                            role_id: role.id,
+                                                                        }}
                                                                         role={role}
                                                                         permissions={permissions}
                                                                         onSubmit={(values) => {
                                                                             setIsLoading(true)
 
-                                                                            return addPermission(role, values).then(
+                                                                            return addPermission(
+                                                                                { id: role.id },
+                                                                                { ...values, role_id: role.id },
+                                                                            ).then(
                                                                                 () => {
                                                                                     Promise.all([
                                                                                         fetchPermissions(),
@@ -127,7 +141,12 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                                 </Card>
                                                                 <Card header={<h1>Permissions</h1>}>
                                                                     {role?.permissions?.map(
-                                                                        ({ id: _id, name, guard_name }) => {
+                                                                        ({
+                                                                            id: _id,
+                                                                            name,
+                                                                            guard_name,
+                                                                            is_deletable,
+                                                                        }) => {
                                                                             return (
                                                                                 <Dropdown.Container
                                                                                     size={'sm'}
@@ -146,7 +165,7 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                                                             onClick={() => {
                                                                                                 setIsLoading(true)
 
-                                                                                                return deletePermission(
+                                                                                                return deleteUserPermission(
                                                                                                     role,
                                                                                                     {
                                                                                                         id: _id,
@@ -156,7 +175,7 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                                                                         {
                                                                                                             type: 'success',
                                                                                                             title: 'Delete success.',
-                                                                                                            text: 'Permissions has been deleted.',
+                                                                                                            text: 'Permission has been removed.',
                                                                                                         },
                                                                                                     )
                                                                                                     Promise.all([
@@ -170,8 +189,44 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                                                                 })
                                                                                             }}
                                                                                         >
-                                                                                            <DeleteIcon /> Delete
+                                                                                            <DeleteIcon /> Remove from
+                                                                                            user
                                                                                         </Dropdown.Item>
+                                                                                        {is_deletable == 1 && (
+                                                                                            <Dropdown.Item
+                                                                                                color="danger"
+                                                                                                onClick={() => {
+                                                                                                    setIsLoading(true)
+
+                                                                                                    return deletePermission(
+                                                                                                        {
+                                                                                                            id: _id,
+                                                                                                        },
+                                                                                                    ).then(() => {
+                                                                                                        addToastNotification(
+                                                                                                            {
+                                                                                                                type: 'success',
+                                                                                                                title: 'Delete success.',
+                                                                                                                text: 'Permission has been deleted.',
+                                                                                                            },
+                                                                                                        )
+                                                                                                        Promise.all([
+                                                                                                            fetch(),
+                                                                                                            fetchOne(
+                                                                                                                id,
+                                                                                                            ),
+                                                                                                        ]).then(() => {
+                                                                                                            setIsLoading(
+                                                                                                                false,
+                                                                                                            )
+                                                                                                        })
+                                                                                                    })
+                                                                                                }}
+                                                                                            >
+                                                                                                <DeleteIcon /> Delete
+                                                                                                Permission
+                                                                                            </Dropdown.Item>
+                                                                                        )}
                                                                                     </Dropdown.Menu>
                                                                                 </Dropdown.Container>
                                                                             )

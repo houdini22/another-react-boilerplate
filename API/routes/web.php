@@ -26,6 +26,7 @@ Route::prefix('api/v1')->group(function () {
 
     Route::prefix('users')->group(function() {
         Route::get('list', '\App\Http\Controllers\UsersController@getList');
+        Route::post('send_activation_email', '\App\Http\Controllers\UsersController@postSendActivationEmail');
         Route::get('get/{id}', '\App\Http\Controllers\UsersController@getGet');
         Route::delete('delete/{id}', '\App\Http\Controllers\UsersController@deleteDeleteUser');
         Route::put('edit', '\App\Http\Controllers\UsersController@postEdit');
@@ -47,7 +48,8 @@ Route::prefix('api/v1')->group(function () {
         Route::prefix('permissions')->group(function() {
             Route::get('list', '\App\Http\Controllers\RolesController@getPermissionList');
             Route::post('{role_id}/add', '\App\Http\Controllers\RolesController@postPermissionAdd');
-            Route::delete('delete/{role_id}/{permission_id}', '\App\Http\Controllers\RolesController@deleteDeletePermission');
+            Route::delete('delete/{role_id}/{permission_id}', '\App\Http\Controllers\RolesController@deleteDeleteUserPermission');
+            Route::delete('delete/{permission_id}', '\App\Http\Controllers\RolesController@deleteDeletePermission');
         });
     });
 });
@@ -55,3 +57,5 @@ Route::prefix('api/v1')->group(function () {
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/users/activate/{email_verified_token}', '\App\Http\Controllers\UsersController@getActivate');

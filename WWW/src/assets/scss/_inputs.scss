@@ -4,6 +4,9 @@
     &:not(.component-form-field--type-hidden) {
         margin-bottom: $COMPONENT_MARGIN_SINGLE;
     }
+    &.component-form-field--type-hidden {
+        display: none;
+    }
 
     .component-form-field__label {
         label {

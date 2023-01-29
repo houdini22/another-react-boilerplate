@@ -8,6 +8,7 @@ interface UsersManagerProps {
     fetch: Function
     fetchOne: Function
     users: any
+    user: any
     id?: number
     setIsLoading: Function
     editUser: Function
@@ -15,6 +16,7 @@ interface UsersManagerProps {
     deleteUser: Function
     deleteUserRole: Function
     addUserRole: Function
+    sendActivationEmail: Function
 }
 
 class UsersManagerBase extends React.Component<UsersManagerProps> {
@@ -40,6 +42,7 @@ class UsersManagerBase extends React.Component<UsersManagerProps> {
             deleteUserRole,
             addUserRole,
             fetchOne,
+            sendActivationEmail,
         } = this.props
         const renderProps = {
             users,
@@ -52,6 +55,7 @@ class UsersManagerBase extends React.Component<UsersManagerProps> {
             deleteUserRole,
             addUserRole,
             fetchOne,
+            sendActivationEmail,
         }
 
         return children(renderProps)
@@ -75,6 +79,7 @@ const UsersManager = connect(mapStateToProps, (dispatch) => {
             deleteUser: commonActions.deleteUser,
             deleteUserRole: commonActions.deleteUserRole,
             addUserRole: commonActions.addUserRole,
+            sendActivationEmail: commonActions.sendActivationEmail,
         },
         dispatch,
     )

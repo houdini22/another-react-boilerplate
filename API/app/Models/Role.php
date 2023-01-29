@@ -12,4 +12,7 @@ class Role extends RoleBase
     protected $fillable = [
         'name', 'guard_name'
     ];
+    protected $casts = [
+        'is_deletable' => 'boolean',
+    ];
 }

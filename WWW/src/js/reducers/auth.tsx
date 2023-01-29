@@ -23,7 +23,7 @@ const setLoginError = (value) => (dispatch) => {
 }
 
 const login = (email, password) => (dispatch) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         dispatch(setLoginError(false))
 
         http.post('/auth/login', {
@@ -37,6 +37,7 @@ const login = (email, password) => (dispatch) => {
             })
             .catch(() => {
                 dispatch(setLoginError(true))
+                reject()
             })
     })
 }

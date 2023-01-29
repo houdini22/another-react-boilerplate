@@ -32,7 +32,7 @@ class EditForm extends React.Component {
                     ]}
                     component={FormField}
                 />
-                <Button color="success" type="submit">
+                <Button color="success" type="submit" block>
                     Save
                 </Button>
             </form>

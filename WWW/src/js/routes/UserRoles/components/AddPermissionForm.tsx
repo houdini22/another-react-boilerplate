@@ -7,6 +7,7 @@ interface AddPermissionFormProps {
     permission: string
     permissions: Array
     role: any
+    roles: Array
 }
 
 class AddPermissionForm extends React.Component<AddPermissionFormProps> {
@@ -15,12 +16,12 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps> {
     }
 
     render() {
-        const { handleSubmit, permission, permissions, role } = this.props
+        const { handleSubmit, permission, permissions, role, roles } = this.props
 
         return (
             <form onSubmit={handleSubmit}>
                 <Field
-                    name="permission"
+                    name={'permission'}
                     label="Permission"
                     type="select"
                     options={[
@@ -42,8 +43,29 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps> {
                     ]}
                     component={FormField}
                 />
+                <Field
+                    type={'hidden'}
+                    name={'role_id'}
+                    value={role?.id || 0}
+                    component={FormField}
+                    inputOnly
+                    style={{ display: 'none' }}
+                />
                 {permission === 'add' && (
                     <>
+                        <Field
+                            name="role_id"
+                            label="Role"
+                            type="select"
+                            placeholder={'--- choose ---'}
+                            options={roles?.map(({ id, name, guard_name }) => {
+                                return {
+                                    label: `${name} - ${guard_name}`,
+                                    value: id,
+                                }
+                            })}
+                            component={FormField}
+                        />
                         <Field name="name" label="Name" type="text" component={FormField} />
                         <Field name="guard_name" label="Guard Name" type="text" component={FormField} />
                     </>

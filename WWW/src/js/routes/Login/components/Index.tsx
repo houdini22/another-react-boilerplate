@@ -13,7 +13,11 @@ class IndexView extends React.Component {
     componentDidMount() {}
 
     render() {
-        return <div className={cx('route--index')}></div>
+        return (
+            <div className={cx('route--index')}>
+                <LoginFormContainer button />
+            </div>
+        )
     }
 }
 
