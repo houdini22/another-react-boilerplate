@@ -18,6 +18,7 @@ interface DropdownContainerProps {
     trigger?: string
     placement?: string
     transparent?: boolean
+    children: any
 }
 
 interface DropdownContainerState {
@@ -28,10 +29,7 @@ interface DropdownContainerState {
     itemsElementRegistered: boolean
 }
 
-export class DropdownContainer extends React.Component<
-    DropdownContainerProps,
-    DropdownContainerState
-> {
+export class DropdownContainer extends React.Component<DropdownContainerProps, DropdownContainerState> {
     state = {
         isOpen: false,
         triggerElement: document.createElement('div'),
@@ -43,17 +41,11 @@ export class DropdownContainer extends React.Component<
     ref = null
 
     componentDidMount() {
-        document.addEventListener(
-            'mousedown',
-            this.handleClickOutside.bind(this),
-        )
+        document.addEventListener('mousedown', this.handleClickOutside.bind(this))
     }
 
     componentWillUnmount() {
-        document.removeEventListener(
-            'mousedown',
-            this.handleClickOutside.bind(this),
-        )
+        document.removeEventListener('mousedown', this.handleClickOutside.bind(this))
     }
 
     handleClickOutside(event) {
@@ -123,8 +115,7 @@ export class DropdownContainer extends React.Component<
                             className={cx('component-dropdown', {
                                 [`component-dropdown--size-${size}`]: size,
                                 [`component-dropdown--color-${color}`]: color,
-                                [`component-dropdown--placement-${placement}`]:
-                                    true,
+                                [`component-dropdown--placement-${placement}`]: true,
                                 'component-dropdown--transparent': transparent,
                             })}
                             ref={(e) => (this.ref = e)}
@@ -134,13 +125,9 @@ export class DropdownContainer extends React.Component<
                                 ref={(e) => this.registerTriggerElement(e)}
                             />
                             <div
-                                className={cx(
-                                    'component-dropdown__dropdown-menu',
-                                    {
-                                        'component-dropdown__dropdown-menu--is-open':
-                                            isOpen,
-                                    },
-                                )}
+                                className={cx('component-dropdown__dropdown-menu', {
+                                    'component-dropdown__dropdown-menu--is-open': isOpen,
+                                })}
                                 ref={(e) => this.registerItemsElement(e)}
                             />
                             {children}
@@ -189,10 +176,7 @@ export class DropdownTrigger extends React.Component<DropdownTriggerProps> {
         if (this.__reactstandin__isMounted) {
             if (this.dropdownTrigger === 'hover') {
                 if (e.target) {
-                    if (
-                        !this.itemsElement.contains(e.target) &&
-                        !this.triggerElement.contains(e.target)
-                    ) {
+                    if (!this.itemsElement.contains(e.target) && !this.triggerElement.contains(e.target)) {
                         this.dropdownClose()
                     }
                 }
@@ -274,15 +258,7 @@ export class DropdownMenu extends React.Component {
                         setHasSubmenu()
                     }
 
-                    const component = (
-                        <ul
-                            className={cx(
-                                'component-dropdown__dropdown-menu__items',
-                            )}
-                        >
-                            {children}
-                        </ul>
-                    )
+                    const component = <ul className={cx('component-dropdown__dropdown-menu__items')}>{children}</ul>
 
                     return createPortal(component, itemsElement)
                 }}
@@ -296,6 +272,8 @@ interface DropdownItemProps {
     highlighted?: boolean
     type?: string
     onClick?: () => void
+    children: any
+    color?: string
 }
 
 interface DropdownItemState {
@@ -304,10 +282,7 @@ interface DropdownItemState {
     hasSubmenu: boolean
 }
 
-export class DropdownItem extends React.Component<
-    DropdownItemProps,
-    DropdownItemState
-> {
+export class DropdownItem extends React.Component<DropdownItemProps, DropdownItemState> {
     state = {
         itemsElementRegistered: false,
         itemsElement: document.createElement('div'),
@@ -329,7 +304,7 @@ export class DropdownItem extends React.Component<
     }
 
     render() {
-        const { children, type, highlighted, href, onClick } = this.props
+        const { children, type, highlighted, href, onClick, color } = this.props
         const { itemsElement, hasSubmenu } = this.state
 
         const getComponent = () => {
@@ -356,15 +331,11 @@ export class DropdownItem extends React.Component<
                 }}
             >
                 <li
-                    className={cx(
-                        'component-dropdown__dropdown-menu__items__item',
-                        {
-                            [`component-dropdown__dropdown-menu__items__item--type-${type}`]:
-                                type,
-                            [`component-dropdown__dropdown-menu__items__item--highlighted`]:
-                                highlighted,
-                        },
-                    )}
+                    className={cx('component-dropdown__dropdown-menu__items__item', {
+                        [`component-dropdown__dropdown-menu__items__item--type-${type}`]: type,
+                        [`component-dropdown__dropdown-menu__items__item--color-${color}`]: color,
+                        [`component-dropdown__dropdown-menu__items__item--highlighted`]: highlighted,
+                    })}
                     onClick={() => {
                         if (typeof onClick === 'function') {
                             onClick()
@@ -372,17 +343,13 @@ export class DropdownItem extends React.Component<
                     }}
                 >
                     <div
-                        className={cx(
-                            'component-dropdown__dropdown-menu__items__item__submenu',
-                        )}
+                        className={cx('component-dropdown__dropdown-menu__items__item__submenu')}
                         ref={(e) => this.registerItemsElement(e)}
                     />
                     {getComponent()}
                     {hasSubmenu && (
                         <ArrowRightIcon
-                            className={cx(
-                                'component-dropdown__dropdown-menu__items__item__sub-menu-icon',
-                            )}
+                            className={cx('component-dropdown__dropdown-menu__items__item__sub-menu-icon')}
                         />
                     )}
                 </li>

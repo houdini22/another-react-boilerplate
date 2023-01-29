@@ -21,10 +21,7 @@ class Progress extends React.Component<ProgressProps> {
                     [`component-progress--color-${color}`]: color,
                 })}
             >
-                <div
-                    className={cx('component-progress__progress')}
-                    style={{ width: `${progress}%` }}
-                />
+                <div className={cx('component-progress__progress')} style={{ width: `${progress}%` }} />
             </div>
         )
     }

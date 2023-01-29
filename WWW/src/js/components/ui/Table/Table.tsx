@@ -75,6 +75,7 @@ class Tr extends React.Component<TrProps> {
 }
 
 interface ThProps {
+    children: any
     xs?: number
     alignCenter?: boolean
 }
@@ -110,14 +111,10 @@ class Td extends React.Component<TdProps> {
 
         return (
             <Col
-                className={cx(
-                    'component-table__tbody__td',
-                    `component-table__tbody__td--xs-${xs}`,
-                    {
-                        'component-table__tbody__td--align-center': alignCenter,
-                        'component-table__tbody__td--is-clickable': onClick,
-                    },
-                )}
+                className={cx('component-table__tbody__td', `component-table__tbody__td--xs-${xs}`, {
+                    'component-table__tbody__td--align-center': alignCenter,
+                    'component-table__tbody__td--is-clickable': onClick,
+                })}
                 xs={xs}
                 onClick={onClick}
             >

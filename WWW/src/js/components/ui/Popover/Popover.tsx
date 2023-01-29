@@ -44,23 +44,16 @@ class Container extends React.Component<ContainerProps, ContainerState> {
     ref = null
 
     componentDidMount() {
-        document.addEventListener(
-            'mousedown',
-            this.handleClickOutside.bind(this),
-        )
+        document.addEventListener('mousedown', this.handleClickOutside.bind(this))
     }
 
     componentDidUpdate() {
         const { placement } = this.props
         if (placement === 'left-center' || placement === 'right-center') {
-            const { triggerElement, contentElement, contentElementMarginTop } =
-                this.state
+            const { triggerElement, contentElement, contentElementMarginTop } = this.state
             const triggerElementHeight = jQuery(triggerElement).height()
             const contentElementHeight = jQuery(contentElement).height()
-            const newMargin = -(
-                contentElementHeight / 2 -
-                triggerElementHeight / 2
-            )
+            const newMargin = -(contentElementHeight / 2 - triggerElementHeight / 2)
             if (contentElementMarginTop !== newMargin) {
                 this.setState({
                     contentElementMarginTop: newMargin,
@@ -70,10 +63,7 @@ class Container extends React.Component<ContainerProps, ContainerState> {
     }
 
     componentWillUnmount() {
-        document.removeEventListener(
-            'mousedown',
-            this.handleClickOutside.bind(this),
-        )
+        document.removeEventListener('mousedown', this.handleClickOutside.bind(this))
     }
 
     handleClickOutside(event) {
@@ -132,16 +122,14 @@ class Container extends React.Component<ContainerProps, ContainerState> {
                     contentElement,
                     pixelsWidth,
                     trigger,
-                    registerTriggerElement:
-                        this.registerTriggerElement.bind(this),
+                    registerTriggerElement: this.registerTriggerElement.bind(this),
                 }}
             >
                 <div
                     className={cx('component-popover', {
                         'component-popover--outline': outline,
                         [`component-popover--color-${color}`]: color,
-                        [`component-popover--placement-${placement}`]:
-                            placement,
+                        [`component-popover--placement-${placement}`]: placement,
                         [`component-popover--is-open`]: isOpen,
                         [`component-popover--no-padding`]: noPadding,
                         [`component-popover--transparent`]: transparent,
@@ -156,8 +144,7 @@ class Container extends React.Component<ContainerProps, ContainerState> {
                         style={{
                             width: Number(pixelsWidth),
                             marginTop:
-                                placement === 'right-center' ||
-                                placement === 'left-center'
+                                placement === 'right-center' || placement === 'left-center'
                                     ? contentElementMarginTop
                                     : 0,
                         }}
@@ -204,10 +191,7 @@ class Trigger extends React.Component<TriggerProps> {
         if (this.__reactstandin__isMounted) {
             if (this.trigger === 'hover') {
                 if (e.target) {
-                    if (
-                        !this.contentElement.contains(e.target) &&
-                        !this.triggerElement.contains(e.target)
-                    ) {
+                    if (!this.contentElement.contains(e.target) && !this.triggerElement.contains(e.target)) {
                         if (this.isOpen) {
                             this.close()
                         }
@@ -226,14 +210,7 @@ class Trigger extends React.Component<TriggerProps> {
 
         return (
             <AppContext.Consumer>
-                {({
-                    open,
-                    close,
-                    isOpen,
-                    contentElement,
-                    trigger,
-                    registerTriggerElement,
-                }) => {
+                {({ open, close, isOpen, contentElement, trigger, registerTriggerElement }) => {
                     this.contentElement = contentElement
                     this.trigger = trigger
                     this.close = close
@@ -257,8 +234,7 @@ class Trigger extends React.Component<TriggerProps> {
                                 registerTriggerElement(e)
                             }}
                         >
-                            {_.isFunction(children) &&
-                                children({ open, close, isOpen })}
+                            {_.isFunction(children) && children({ open, close, isOpen })}
                             {!_.isFunction(children) && children}
                         </div>
                     )
@@ -286,13 +262,8 @@ class Content extends React.Component<ContentProps> {
                                 [className]: className,
                             })}
                         >
-                            <div
-                                className={cx(
-                                    'component-popover__content__outer__inner',
-                                )}
-                            >
-                                {_.isFunction(children) &&
-                                    children({ close, open, isOpen })}
+                            <div className={cx('component-popover__content__outer__inner')}>
+                                {_.isFunction(children) && children({ close, open, isOpen })}
                                 {!_.isFunction(children) && children}
                             </div>
                         </div>,

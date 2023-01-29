@@ -50,11 +50,7 @@ class Breadcrumbs extends React.Component<BreadcrumbsProps> {
     render() {
         const { links } = this.props
 
-        return (
-            <div className={cx('component-page-header__breadcrumbs--inner')}>
-                {this.renderLinks(links)}
-            </div>
-        )
+        return <div className={cx('component-page-header__breadcrumbs--inner')}>{this.renderLinks(links)}</div>
     }
 }
 

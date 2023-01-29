@@ -12,12 +12,7 @@ interface ContainerProps {
 
 class Container extends React.Component<ContainerProps> {
     render() {
-        const {
-            children,
-            color = 'default',
-            size = 'md',
-            separated,
-        } = this.props
+        const { children, color = 'default', size = 'md', separated } = this.props
 
         return (
             <div
@@ -45,11 +40,7 @@ class ItemContent extends React.Component {
     render() {
         const { children } = this.props
 
-        return (
-            <div className={cx('component-list__item__content')}>
-                {children}
-            </div>
-        )
+        return <div className={cx('component-list__item__content')}>{children}</div>
     }
 }
 

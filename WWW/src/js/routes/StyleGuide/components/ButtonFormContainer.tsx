@@ -19,10 +19,7 @@ const onChange = (values, dispatch, props) => {
         newValues['iconOnly'] = false
     }
 
-    if (
-        !_.isEqual(options, newValues) &&
-        newValues['updateCount'] === options['updateCount']
-    ) {
+    if (!_.isEqual(options, newValues) && newValues['updateCount'] === options['updateCount']) {
         setOptions(newValues)
     }
 }

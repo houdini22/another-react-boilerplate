@@ -15,12 +15,7 @@ class TooltipForm extends React.Component {
 
         return (
             <form>
-                <Field
-                    name="updateCount"
-                    type="hidden"
-                    component={FormField}
-                    inputOnly
-                />
+                <Field name="updateCount" type="hidden" component={FormField} inputOnly />
                 <Tabs.Container color="default" left solid header="Options">
                     <Tabs.Tab name="presentation">
                         <Tabs.Trigger>Presentation</Tabs.Trigger>
@@ -91,20 +86,10 @@ class TooltipForm extends React.Component {
                                     />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="outline"
-                                        label="outline"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="outline" label="outline" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="tooltip"
-                                        label="tooltip"
-                                        type="text"
-                                        component={FormField}
-                                    />
+                                    <Field name="tooltip" label="tooltip" type="text" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
                                     <Field
@@ -183,20 +168,10 @@ class TooltipForm extends React.Component {
                                     />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="dummy1"
-                                        type="hidden"
-                                        component={FormField}
-                                        label={'onOpen'}
-                                    />
+                                    <Field name="dummy1" type="hidden" component={FormField} label={'onOpen'} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="dummy2"
-                                        type="hidden"
-                                        component={FormField}
-                                        label={'onClose'}
-                                    />
+                                    <Field name="dummy2" type="hidden" component={FormField} label={'onClose'} />
                                 </Col>
                             </Row>
                         </Tabs.Content>

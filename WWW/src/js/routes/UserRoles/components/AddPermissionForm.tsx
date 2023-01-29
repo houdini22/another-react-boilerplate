@@ -6,6 +6,7 @@ interface AddPermissionFormProps {
     handleSubmit: Function
     permission: string
     permissions: Array
+    role: any
 }
 
 class AddPermissionForm extends React.Component<AddPermissionFormProps> {
@@ -14,7 +15,7 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps> {
     }
 
     render() {
-        const { handleSubmit, permission, permissions } = this.props
+        const { handleSubmit, permission, permissions, role } = this.props
 
         return (
             <form onSubmit={handleSubmit}>
@@ -35,6 +36,7 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps> {
                             return {
                                 value: id,
                                 label: `${name} - ${guard_name}`,
+                                disabled: role?.permissions?.find(({ id: _id }) => id === _id),
                             }
                         }) || []),
                     ]}
@@ -42,18 +44,8 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps> {
                 />
                 {permission === 'add' && (
                     <>
-                        <Field
-                            name="name"
-                            label="Name"
-                            type="text"
-                            component={FormField}
-                        />
-                        <Field
-                            name="guard_name"
-                            label="Guard Name"
-                            type="text"
-                            component={FormField}
-                        />
+                        <Field name="name" label="Name" type="text" component={FormField} />
+                        <Field name="guard_name" label="Guard Name" type="text" component={FormField} />
                     </>
                 )}
                 <Button color="success" type="submit" block>

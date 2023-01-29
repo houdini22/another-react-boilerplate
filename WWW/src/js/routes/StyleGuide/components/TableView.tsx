@@ -1,10 +1,7 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, Section, Table } from '../../../components'
-import {
-    createPresentationTab as _createPresentationTab,
-    generateCode,
-} from '../../../utils/tabs'
+import { createPresentationTab as _createPresentationTab, generateCode } from '../../../utils/tabs'
 import { TableFormContainer } from './TableFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
@@ -48,11 +45,7 @@ class TableView extends React.Component<TableViewProps, TableViewState> {
     }
 
     render() {
-        const {
-            colSize1 = 4,
-            colSize2 = 12,
-            createPresentationTab = _createPresentationTab,
-        } = this.props
+        const { colSize1 = 4, colSize2 = 12, createPresentationTab = _createPresentationTab } = this.props
         const { options } = this.state
         const { bordered, color, size, striped } = options
 
@@ -119,12 +112,7 @@ class TableView extends React.Component<TableViewProps, TableViewState> {
                         <Section>
                             {createPresentationTab(
                                 <span />,
-                                <Table.Container
-                                    color={color}
-                                    size={size}
-                                    bordered={bordered}
-                                    striped={striped}
-                                >
+                                <Table.Container color={color} size={size} bordered={bordered} striped={striped}>
                                     <Table.THead>
                                         <Table.Tr>
                                             <Table.Th xs={4}>Header 1</Table.Th>
@@ -154,9 +142,7 @@ class TableView extends React.Component<TableViewProps, TableViewState> {
                                             <Table.Td xs={4}>col 3</Table.Td>
                                         </Table.Tr>
                                         <Table.Tr color="success">
-                                            <Table.Td xs={4}>
-                                                contextual
-                                            </Table.Td>
+                                            <Table.Td xs={4}>contextual</Table.Td>
                                             <Table.Td xs={4}>success</Table.Td>
                                             <Table.Td xs={4}>color</Table.Td>
                                         </Table.Tr>

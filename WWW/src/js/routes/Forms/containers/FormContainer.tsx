@@ -3,11 +3,7 @@ import { compose } from 'redux'
 import { formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import { Form as FormComponent } from '../components/Form'
-import {
-    AutoSaveForm,
-    getFormValues,
-    prepareAutoSaveForm,
-} from '../../../utils/forms/auto-save'
+import { AutoSaveForm, getFormValues, prepareAutoSaveForm } from '../../../utils/forms/auto-save'
 import { http } from '../../../modules/http'
 
 export const FORM_NAME = 'sample-form'
@@ -26,12 +22,7 @@ class FormComponentContainer extends React.Component<FormComponentContainerProps
     render() {
         const { component: ChildComponent, ...props } = this.props // presentation component - form with FormFields
 
-        return (
-            <ChildComponent
-                {...props}
-                someMethod={this.someMethod.bind(this)}
-            />
-        )
+        return <ChildComponent {...props} someMethod={this.someMethod.bind(this)} />
     }
 }
 

@@ -1,15 +1,6 @@
 import * as React from 'react'
 import { RouteManager } from '../../../containers/RouteManager'
-import {
-    Alert,
-    Button,
-    Card,
-    Dropdown,
-    LoadingOverlay,
-    Modal,
-    PageHeader,
-    Table,
-} from '../../../components'
+import { Alert, Button, Card, Dropdown, LoadingOverlay, Modal, PageHeader, Table } from '../../../components'
 import { UsersManager } from '../containers/UsersManager'
 import { AddIcon } from '../../../components/icons'
 import { EditFormContainer } from './EditFormContainer'
@@ -31,13 +22,7 @@ export class AddModalView extends React.Component<EditModalViewProps> {
                 {({ navigate }) => (
                     <Modal.Container color={'danger'} visible={visible}>
                         <UsersManager id={id}>
-                            {({
-                                user,
-                                isLoading,
-                                setIsLoading,
-                                addUser,
-                                fetch,
-                            }) => {
+                            {({ user, isLoading, setIsLoading, addUser, fetch }) => {
                                 return (
                                     <>
                                         {isLoading && <LoadingOverlay />}
@@ -51,15 +36,11 @@ export class AddModalView extends React.Component<EditModalViewProps> {
                                                 onSubmit={(values, props) => {
                                                     return addUser(values).then(
                                                         (data) => {
-                                                            fetch().then(() =>
-                                                                close(),
-                                                            )
+                                                            fetch().then(() => close())
                                                         },
                                                         (response) => {
                                                             throw new SubmissionError(
-                                                                processAPIerrorResponseToFormErrors(
-                                                                    response,
-                                                                ),
+                                                                processAPIerrorResponseToFormErrors(response),
                                                             )
                                                         },
                                                     )

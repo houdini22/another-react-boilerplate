@@ -1,10 +1,7 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, Section, Progress } from '../../../components'
-import {
-    createPresentationTab as _createPresentationTab,
-    generateCode,
-} from '../../../utils/tabs'
+import { createPresentationTab as _createPresentationTab, generateCode } from '../../../utils/tabs'
 import { ProgressFormContainer } from './ProgressFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
@@ -23,10 +20,7 @@ interface ProgressViewState {
     }
 }
 
-class ProgressView extends React.Component<
-    ProgressViewProps,
-    ProgressViewState
-> {
+class ProgressView extends React.Component<ProgressViewProps, ProgressViewState> {
     constructor(props) {
         super(props)
         this.state = {
@@ -50,8 +44,7 @@ class ProgressView extends React.Component<
     }
 
     render() {
-        const { colSize1 = 4, createPresentationTab = _createPresentationTab } =
-            this.props
+        const { colSize1 = 4, createPresentationTab = _createPresentationTab } = this.props
         const { options } = this.state
         const { size, color, progress } = options
 
@@ -63,10 +56,7 @@ class ProgressView extends React.Component<
                 <Row>
                     <Col xs={12} md={6}>
                         <Section>
-                            <ProgressFormContainer
-                                options={options}
-                                setOptions={this.setOptions}
-                            />
+                            <ProgressFormContainer options={options} setOptions={this.setOptions} />
                         </Section>
                     </Col>
                     <Col xs={12} md={6}>
@@ -75,11 +65,7 @@ class ProgressView extends React.Component<
                                 <span>Options</span>,
                                 <Row>
                                     <Col xs={12}>
-                                        <Progress
-                                            color={color}
-                                            size={size}
-                                            progress={progress}
-                                        />
+                                        <Progress color={color} size={size} progress={progress} />
                                     </Col>
                                 </Row>,
                                 code,

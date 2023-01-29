@@ -44,12 +44,7 @@ class FiltersForm extends React.Component {
                         },
                     ]}
                 />
-                <Field
-                    name="phrase"
-                    label="Search phrase"
-                    type="text"
-                    component={FormField}
-                />
+                <Field name="phrase" label="Search phrase" type="text" component={FormField} />
             </form>
         )
     }

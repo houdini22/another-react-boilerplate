@@ -67,12 +67,8 @@ export class ContactForm extends React.Component<LoginFormProps> {
                                 return (
                                     <div>
                                         <img
-                                            className={cx(
-                                                'contact-form__captcha',
-                                            )}
-                                            src={apiURL(
-                                                `captcha/math?${captcha}`,
-                                            )}
+                                            className={cx('contact-form__captcha')}
+                                            src={apiURL(`captcha/math?${captcha}`)}
                                             alt={''}
                                             onClick={() => {
                                                 resetContactFormCaptcha()
@@ -93,11 +89,7 @@ export class ContactForm extends React.Component<LoginFormProps> {
                         />
                     </div>
                     <div>
-                        <Button
-                            type="submit"
-                            outline={type === 'popover'}
-                            color="primary"
-                        >
+                        <Button type="submit" outline={type === 'popover'} color="primary">
                             Send
                         </Button>
                     </div>

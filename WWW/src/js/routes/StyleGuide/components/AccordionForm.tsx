@@ -10,12 +10,7 @@ class AccordionForm extends React.Component {
     render() {
         return (
             <form>
-                <Field
-                    name="updateCount"
-                    type="hidden"
-                    component={FormField}
-                    inputOnly
-                />
+                <Field name="updateCount" type="hidden" component={FormField} inputOnly />
                 <Tabs.Container color="default" left solid header="Options">
                     <Tabs.Tab name="presentation">
                         <Tabs.Trigger>Presentation</Tabs.Trigger>
@@ -100,28 +95,13 @@ class AccordionForm extends React.Component {
                                     />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="rounded"
-                                        label="rounded"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="rounded" label="rounded" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="separated"
-                                        label="separated"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="separated" label="separated" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="closeIcon"
-                                        label="close icon"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="closeIcon" label="close icon" type="checkbox" component={FormField} />
                                 </Col>
                             </Row>
                         </Tabs.Content>

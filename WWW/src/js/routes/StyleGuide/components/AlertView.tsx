@@ -1,10 +1,7 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, Section, Alert, Label, Tabs } from '../../../components'
-import {
-    createPresentationTab as _createPresentationTab,
-    generateCode,
-} from '../../../utils/tabs'
+import { createPresentationTab as _createPresentationTab, generateCode } from '../../../utils/tabs'
 import { FaGlobe as AlertIcon } from 'react-icons/fa'
 import { AlertFormContainer } from './AlertFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
@@ -57,22 +54,9 @@ class AlertView extends React.Component<AlertViewProps, AlertViewState> {
     }
 
     render() {
-        const {
-            colSize1 = 4,
-            colSize2 = 12,
-            createPresentationTab = _createPresentationTab,
-        } = this.props
+        const { colSize1 = 4, colSize2 = 12, createPresentationTab = _createPresentationTab } = this.props
         const { options } = this.state
-        const {
-            outline,
-            withIcon,
-            withIconArrow,
-            iconHighlighted,
-            rounded,
-            closeIcon,
-            color,
-            size,
-        } = options
+        const { outline, withIcon, withIconArrow, iconHighlighted, rounded, closeIcon, color, size } = options
 
         const code = generateCode(
             'Alert',
@@ -101,9 +85,7 @@ class AlertView extends React.Component<AlertViewProps, AlertViewState> {
                                 <Alert
                                     color={color}
                                     outline={outline}
-                                    withIcon={
-                                        withIcon ? <AlertIcon /> : undefined
-                                    }
+                                    withIcon={withIcon ? <AlertIcon /> : undefined}
                                     withIconArrow={withIconArrow}
                                     iconHighlighted={iconHighlighted}
                                     rounded={rounded}
@@ -124,12 +106,7 @@ class AlertView extends React.Component<AlertViewProps, AlertViewState> {
                 <Row>
                     <Col xs={12} md={6}>
                         <Section>
-                            <Tabs.Container
-                                left
-                                solid
-                                color="default"
-                                header="Custom"
-                            >
+                            <Tabs.Container left solid color="default" header="Custom">
                                 <Tabs.Tab name="onClickClose">
                                     <Tabs.Trigger>onClickClose</Tabs.Trigger>
                                     <Tabs.Content>
@@ -162,10 +139,7 @@ class AlertView extends React.Component<AlertViewProps, AlertViewState> {
                                         <Alert
                                             color="primary"
                                             closeIcon
-                                            onClickClose={({
-                                                close,
-                                                setIsLoading,
-                                            }) => {
+                                            onClickClose={({ close, setIsLoading }) => {
                                                 setIsLoading(true)
                                                 setTimeout(() => {
                                                     close()

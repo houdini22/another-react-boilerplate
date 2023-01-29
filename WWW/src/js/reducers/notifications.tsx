@@ -6,8 +6,7 @@ import md5 from 'md5'
 export const ADD_NOTIFICATION = 'notifications::add-notification'
 export const RESET_UNREAD = 'notifications::reset-unread'
 export const ADD_TOAST_NOTIFICATION = 'notifications::add-toast-notification'
-export const REMOVE_TOAST_NOTIFICATION =
-    'notifications::remove-toast-notification'
+export const REMOVE_TOAST_NOTIFICATION = 'notifications::remove-toast-notification'
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -80,10 +79,7 @@ const ACTION_HANDLERS = {
             ],
         }
     },
-    [ADD_TOAST_NOTIFICATION]: (
-        state,
-        { payload: { type, text, href, title, id } },
-    ) => {
+    [ADD_TOAST_NOTIFICATION]: (state, { payload: { type, text, href, title, id } }) => {
         return {
             ...state,
             unread: state.unread + 1,

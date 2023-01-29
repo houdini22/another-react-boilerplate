@@ -1,10 +1,7 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, Section, Button, Label } from '../../../components'
-import {
-    createPresentationTab as _createPresentationTab,
-    generateCode,
-} from '../../../utils/tabs'
+import { createPresentationTab as _createPresentationTab, generateCode } from '../../../utils/tabs'
 import { ButtonFormContainer } from './ButtonFormContainer'
 import { FaImage as ButtonIcon } from 'react-icons/fa'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
@@ -66,8 +63,7 @@ class ButtonView extends React.Component<ButtonViewProps, ButtonViewState> {
     }
 
     render() {
-        const { colSize1 = 4, createPresentationTab = _createPresentationTab } =
-            this.props
+        const { colSize1 = 4, createPresentationTab = _createPresentationTab } = this.props
         const { options } = this.state
         const {
             size,
@@ -92,10 +88,7 @@ class ButtonView extends React.Component<ButtonViewProps, ButtonViewState> {
                 <Row>
                     <Col xs={12} md={6}>
                         <Section>
-                            <ButtonFormContainer
-                                options={options}
-                                setOptions={this.setOptions}
-                            />
+                            <ButtonFormContainer options={options} setOptions={this.setOptions} />
                         </Section>
                     </Col>
                     <Col xs={12} md={6}>

@@ -1,10 +1,7 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, Section, Label, Popover, Button } from '../../../components'
-import {
-    createPresentationTab as _createPresentationTab,
-    generateCode,
-} from '../../../utils/tabs'
+import { createPresentationTab as _createPresentationTab, generateCode } from '../../../utils/tabs'
 import { PopoverFormContainer } from './PopoverFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 import classNames from 'classnames/bind'
@@ -58,21 +55,9 @@ class PopoverView extends React.Component<PopoverViewProps, PopoverViewState> {
     }
 
     render() {
-        const {
-            colSize1 = 4,
-            colSize2 = 12,
-            createPresentationTab = _createPresentationTab,
-        } = this.props
+        const { colSize1 = 4, colSize2 = 12, createPresentationTab = _createPresentationTab } = this.props
         const { options } = this.state
-        const {
-            outline,
-            pixelsWidth,
-            placement,
-            clean,
-            color,
-            disableOutsideClick,
-            trigger,
-        } = options
+        const { outline, pixelsWidth, placement, clean, color, disableOutsideClick, trigger } = options
 
         const code = generateCode('Popover', options, 'Content')
 
@@ -131,11 +116,7 @@ class PopoverView extends React.Component<PopoverViewProps, PopoverViewState> {
                                     <Popover.Trigger>
                                         <Button>Trigger</Button>
                                     </Popover.Trigger>
-                                    <Popover.Content
-                                        className={cx(
-                                            'animation--swing-in-top-fwd',
-                                        )}
-                                    >
+                                    <Popover.Content className={cx('animation--swing-in-top-fwd')}>
                                         {({ close }) => (
                                             <div>
                                                 Content{' '}

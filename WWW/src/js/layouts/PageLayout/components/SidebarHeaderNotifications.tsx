@@ -7,10 +7,7 @@ import { AiTwotoneLike } from 'react-icons/ai'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/layout/_layout.scss'
 import { connect } from 'react-redux'
-import {
-    selectors as notificationsSelectors,
-    actions as notificationsActions,
-} from '../../../reducers/notifications'
+import { selectors as notificationsSelectors, actions as notificationsActions } from '../../../reducers/notifications'
 import { bindActionCreators } from 'redux'
 import { Badge } from '../../../components'
 import { Link } from 'react-router-dom'
@@ -81,11 +78,7 @@ class BaseSidebarHeaderNotifications extends React.Component<
                     'layout__header__bar__right__element--notifications',
                 )}
             >
-                <div
-                    className={cx(
-                        'layout__header__bar__right__element--notifications__button',
-                    )}
-                >
+                <div className={cx('layout__header__bar__right__element--notifications__button')}>
                     <IoIosNotificationsOutline
                         onClick={() => {
                             this.setState({ expanded: !expanded }, () => {
@@ -100,68 +93,56 @@ class BaseSidebarHeaderNotifications extends React.Component<
                     )}
                 </div>
                 {expanded && notifications.length > 0 && (
-                    <div
-                        className={cx(
-                            'layout__header__bar__right__element--notifications__expanded',
-                        )}
-                    >
+                    <div className={cx('layout__header__bar__right__element--notifications__expanded')}>
                         <Scrollbars style={{ height: '400px' }}>
                             <ul>
-                                {notifications.map(
-                                    ({ type, text, href, title }) => {
-                                        return (
-                                            <li
-                                                className={cx({
-                                                    'layout__header__bar__right__element--notifications__expanded__item':
-                                                        true,
-                                                    [`layout__header__bar__right__element--notifications__expanded__item--color-${type}`]:
-                                                        true,
-                                                })}
-                                                key={`${type}-${text}-${href}`}
-                                            >
-                                                <Link to={href}>
+                                {notifications.map(({ type, text, href, title }) => {
+                                    return (
+                                        <li
+                                            className={cx({
+                                                'layout__header__bar__right__element--notifications__expanded__item':
+                                                    true,
+                                                [`layout__header__bar__right__element--notifications__expanded__item--color-${type}`]:
+                                                    true,
+                                            })}
+                                            key={`${type}-${text}-${href}`}
+                                        >
+                                            <Link to={href}>
+                                                <span
+                                                    className={cx(
+                                                        'layout__header__bar__right__element--notifications__expanded__item__icon',
+                                                    )}
+                                                >
+                                                    {this.getIcon(type)}
+                                                </span>
+                                                <span
+                                                    className={cx(
+                                                        'layout__header__bar__right__element--notifications__expanded__item__content',
+                                                    )}
+                                                >
                                                     <span
                                                         className={cx(
-                                                            'layout__header__bar__right__element--notifications__expanded__item__icon',
+                                                            'layout__header__bar__right__element--notifications__expanded__item__content__title',
                                                         )}
                                                     >
-                                                        {this.getIcon(type)}
+                                                        {title}
                                                     </span>
                                                     <span
                                                         className={cx(
-                                                            'layout__header__bar__right__element--notifications__expanded__item__content',
+                                                            'layout__header__bar__right__element--notifications__expanded__item__content__text',
                                                         )}
                                                     >
-                                                        <span
-                                                            className={cx(
-                                                                'layout__header__bar__right__element--notifications__expanded__item__content__title',
-                                                            )}
-                                                        >
-                                                            {title}
-                                                        </span>
-                                                        <span
-                                                            className={cx(
-                                                                'layout__header__bar__right__element--notifications__expanded__item__content__text',
-                                                            )}
-                                                        >
-                                                            {text}
-                                                        </span>
+                                                        {text}
                                                     </span>
-                                                </Link>
-                                            </li>
-                                        )
-                                    },
-                                )}
+                                                </span>
+                                            </Link>
+                                        </li>
+                                    )
+                                })}
                             </ul>
                         </Scrollbars>
-                        <div
-                            className={cx(
-                                'layout__header__bar__right__element--notifications__expanded__view-all',
-                            )}
-                        >
-                            <Link to={'/notifications'}>
-                                View all notifications
-                            </Link>
+                        <div className={cx('layout__header__bar__right__element--notifications__expanded__view-all')}>
+                            <Link to={'/notifications'}>View all notifications</Link>
                         </div>
                     </div>
                 )}
@@ -176,10 +157,7 @@ const SidebarHeaderNotifications = connect(
         unread: notificationsSelectors.getUnreadNotifications(state),
     }),
     (dispatch) => {
-        return bindActionCreators(
-            { resetUnread: notificationsActions.resetUnreadNotifications },
-            dispatch,
-        )
+        return bindActionCreators({ resetUnread: notificationsActions.resetUnreadNotifications }, dispatch)
     },
 )(BaseSidebarHeaderNotifications)
 

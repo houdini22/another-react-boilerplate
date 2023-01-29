@@ -1,13 +1,6 @@
 import * as React from 'react'
 import classNames from 'classnames/bind'
-import {
-    TextField,
-    Select,
-    Checkbox,
-    TextArea,
-    LoadingOverlay,
-    Radio,
-} from '../../index'
+import { TextField, Select, Checkbox, TextArea, LoadingOverlay, Radio } from '../../index'
 import styles from '../../../../assets/scss/_inputs.scss'
 import { OptionsFields } from '../Select/Select'
 
@@ -49,25 +42,13 @@ class FormField extends React.Component<FormFieldProps> {
             case 'hidden':
             case 'password':
                 inputComponent = (
-                    <TextField
-                        {...input}
-                        {...custom}
-                        placeholder={placeholder}
-                        type={type}
-                        error={error}
-                    />
+                    <TextField {...input} {...custom} placeholder={placeholder} type={type} error={error} />
                 )
                 break
 
             case 'select':
                 inputComponent = (
-                    <Select
-                        {...input}
-                        {...custom}
-                        options={options}
-                        placeholder={placeholder}
-                        error={error}
-                    />
+                    <Select {...input} {...custom} options={options} placeholder={placeholder} error={error} />
                 )
                 break
 
@@ -76,9 +57,7 @@ class FormField extends React.Component<FormFieldProps> {
                 break
 
             case 'checkbox':
-                inputComponent = (
-                    <Checkbox {...input} {...custom} error={error} />
-                )
+                inputComponent = <Checkbox {...input} {...custom} error={error} />
                 break
 
             case 'radio':
@@ -86,14 +65,7 @@ class FormField extends React.Component<FormFieldProps> {
                 break
 
             case 'textarea':
-                inputComponent = (
-                    <TextArea
-                        {...input}
-                        {...custom}
-                        error={error}
-                        placeholder={placeholder}
-                    />
-                )
+                inputComponent = <TextArea {...input} {...custom} error={error} placeholder={placeholder} />
                 break
         }
 
@@ -103,32 +75,17 @@ class FormField extends React.Component<FormFieldProps> {
             return (
                 <div
                     className={cx('component-form-field', {
-                        [`component-form-field--state-${validationState}`]:
-                            true,
+                        [`component-form-field--state-${validationState}`]: true,
                         [`component-form-field--type-${type}`]: type,
                     })}
                 >
-                    <div
-                        className={cx('component-form-field__input-container')}
-                    >
+                    <div className={cx('component-form-field__input-container')}>
                         {inputComponent}
                         {htmlAfter && (
-                            <p
-                                className={cx(
-                                    'component-form-field__input-container__html-after',
-                                )}
-                            >
-                                {htmlAfter}
-                            </p>
+                            <p className={cx('component-form-field__input-container__html-after')}>{htmlAfter}</p>
                         )}
                         {error && withError && (
-                            <p
-                                className={cx(
-                                    'component-form-field__input-container__error',
-                                )}
-                            >
-                                {error}
-                            </p>
+                            <p className={cx('component-form-field__input-container__error')}>{error}</p>
                         )}
                     </div>
                 </div>
@@ -144,31 +101,15 @@ class FormField extends React.Component<FormFieldProps> {
                 <div className={cx('component-form-field__label')}>
                     <label>
                         <span>{label}</span>
-                        {custom['loading'] && (
-                            <LoadingOverlay size="xs" noBackground />
-                        )}
+                        {custom['loading'] && <LoadingOverlay size="xs" noBackground />}
                     </label>
                 </div>
                 <div className={cx('component-form-field__input-container')}>
                     {inputComponent}
                     {htmlAfter && (
-                        <p
-                            className={cx(
-                                'component-form-field__input-container__html-after',
-                            )}
-                        >
-                            {htmlAfter}
-                        </p>
+                        <p className={cx('component-form-field__input-container__html-after')}>{htmlAfter}</p>
                     )}
-                    {error && (
-                        <p
-                            className={cx(
-                                'component-form-field__input-container__error',
-                            )}
-                        >
-                            {error}
-                        </p>
-                    )}
+                    {error && <p className={cx('component-form-field__input-container__error')}>{error}</p>}
                 </div>
             </div>
         )

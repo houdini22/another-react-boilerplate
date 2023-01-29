@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -15,7 +16,11 @@ class UsersController extends Controller
             return $this->response401();
         }
 
-        $users = User::with('roles')->orderBy('id', 'ASC')->get();
+        $users = User::with('roles')
+            ->with('permissions')
+            ->with('roles.permissions')
+            ->orderBy('id', 'ASC')
+            ->get();
 
         return response()->json([
             'users' => $users->toArray(),
@@ -29,7 +34,9 @@ class UsersController extends Controller
             return $this->response401();
         }
 
-        $user = User::find($id);
+        $user = User::with('roles')
+            ->with('roles.permissions')
+            ->find($id);
 
         return response()->json([
             'user' => $user->toArray(),
@@ -109,6 +116,54 @@ class UsersController extends Controller
         }
 
         $user->delete();
+
+        return response()->json([
+            'msg' => 'ok',
+        ]);
+    }
+
+    public function deleteDeleteUserRole(Request $request)
+    {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $user = User::find($request->segments()[5]);
+        if (!$user) {
+            return $this->response404();
+        }
+
+        $role = Role::find($request->segments()[6]);
+        if (!$role) {
+            return $this->response404();
+        }
+
+        $user->removeRole($role);
+
+        return response()->json([
+            'msg' => 'ok',
+        ]);
+    }
+
+    public function postAddUserRole(Request $request)
+    {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $user = User::find($request->segments()[5]);
+        if (!$user) {
+            return $this->response404();
+        }
+
+        $role = Role::find($request->segments()[6]);
+        if (!$role) {
+            return $this->response404();
+        }
+
+        $user->assignRole($role);
 
         return response()->json([
             'msg' => 'ok',

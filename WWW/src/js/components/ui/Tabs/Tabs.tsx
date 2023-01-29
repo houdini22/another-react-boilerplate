@@ -156,9 +156,7 @@ export class Container extends React.Component<ContainerProps, ContainerState> {
                         <div className={cx('component-tabs__tabs__header')}>
                             {header && (
                                 <div
-                                    className={cx(
-                                        'component-tabs__tabs__header__title',
-                                    )}
+                                    className={cx('component-tabs__tabs__header__title')}
                                     style={{
                                         flex: flexTitle,
                                     }}
@@ -167,9 +165,7 @@ export class Container extends React.Component<ContainerProps, ContainerState> {
                                 </div>
                             )}
                             <ul
-                                className={cx(
-                                    'component-tabs__tabs__header__triggers',
-                                )}
+                                className={cx('component-tabs__tabs__header__triggers')}
                                 ref={(e) => this.registerTriggersElement(e)}
                                 style={{
                                     flex: flexTriggers,
@@ -184,9 +180,7 @@ export class Container extends React.Component<ContainerProps, ContainerState> {
                     >
                         <div className={cx('component-tabs__content__outer')}>
                             <div
-                                className={cx(
-                                    'component-tabs__content__outer__inner',
-                                )}
+                                className={cx('component-tabs__content__outer__inner')}
                                 ref={(e) => {
                                     this.registerContentElement(e)
                                 }}
@@ -270,18 +264,10 @@ export class Trigger extends React.Component<TriggerProps> {
         const { children, noTab, onClick, hidden } = this.props
         return (
             <AppContext.Consumer>
-                {({
-                    tabName,
-                    activateTab,
-                    tabs = {},
-                    activeTab,
-                    triggersElement,
-                } = {}) => {
+                {({ tabName, activateTab, tabs = {}, activeTab, triggersElement } = {}) => {
                     return createPortal(
                         <li
-                            className={cx(
-                                'component-tabs__tabs__header__triggers__trigger',
-                            )}
+                            className={cx('component-tabs__tabs__header__triggers__trigger')}
                             style={{
                                 display: hidden ? 'none' : 'inherit',
                             }}
@@ -295,14 +281,10 @@ export class Trigger extends React.Component<TriggerProps> {
                                         onClick()
                                     }
                                 }}
-                                className={cx(
-                                    'component-tabs__tabs__header__triggers__trigger__link',
-                                    {
-                                        'component-tabs__tabs__header__triggers__trigger__link--is-active':
-                                            _.get(activeTab, 'tabName') ===
-                                            tabName,
-                                    },
-                                )}
+                                className={cx('component-tabs__tabs__header__triggers__trigger__link', {
+                                    'component-tabs__tabs__header__triggers__trigger__link--is-active':
+                                        _.get(activeTab, 'tabName') === tabName,
+                                })}
                             >
                                 <a href>
                                     <span>{children}</span>
@@ -331,18 +313,11 @@ export class Content extends React.Component<ContentProps> {
 
         return (
             <AppContext.Consumer>
-                {({
-                    contentElement,
-                    activeTab,
-                    tabName,
-                    changeTab,
-                    contentHeight,
-                } = {}) => {
+                {({ contentElement, activeTab, tabName, changeTab, contentHeight } = {}) => {
                     const Component = () => (
                         <div
                             className={cx({
-                                'component-tabs__content__outer__inner__tab':
-                                    true,
+                                'component-tabs__content__outer__inner__tab': true,
                                 'component-tabs__content__outer__inner__tab--is-active':
                                     _.get(activeTab, 'tabName') === tabName,
                             })}

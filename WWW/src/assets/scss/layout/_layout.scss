@@ -82,9 +82,7 @@
                             &:hover {
                                 color: #fff;
 
-                                &
-                                    > div
-                                    > .layout__sidebar__content__navigation__links__link__caption {
+                                & > div > .layout__sidebar__content__navigation__links__link__caption {
                                     padding-left: 5px;
                                     transition: padding-left 0.3s ease;
                                 }
@@ -120,16 +118,13 @@
                                 font-weight: bold;
                                 color: #fff;
 
-                                &
-                                    > div
-                                    > .layout__sidebar__content__navigation__links__link__caption {
+                                & > div > .layout__sidebar__content__navigation__links__link__caption {
                                     padding-left: 5px;
                                 }
                             }
                         }
 
-                        &
-                            > .layout__sidebar__content__navigation__links__links {
+                        & > .layout__sidebar__content__navigation__links__links {
                             padding: $COMPONENT_PADDING_SM;
                             background: lighten($SIDEBAR_BACKGROUND_COLOR, 10);
                             margin-left: 20px;
@@ -174,10 +169,7 @@
                         position: relative;
 
                         &.layout__sidebar__sidebar-tab-active {
-                            background-color: lighten(
-                                $logoBackgroundColor,
-                                20
-                            ) !important;
+                            background-color: lighten($logoBackgroundColor, 20) !important;
                         }
                     }
                 }
@@ -227,23 +219,16 @@
                                 }
                             }
 
-                            &
-                                > .layout__sidebar__content__navigation__links__links {
+                            & > .layout__sidebar__content__navigation__links__links {
                                 padding-left: 10px;
-                                background: lighten(
-                                    $SIDEBAR_BACKGROUND_COLOR,
-                                    10
-                                );
+                                background: lighten($SIDEBAR_BACKGROUND_COLOR, 10);
                                 margin: 0;
                                 margin-left: 10px;
                                 margin-right: 5px;
                                 border-radius: $COMPONENT_BORDER_RADIUS;
                                 width: auto;
 
-                                &
-                                    > .layout__sidebar__content__navigation__links__link
-                                    > a
-                                    > div {
+                                & > .layout__sidebar__content__navigation__links__link > a > div {
                                     padding: 0;
                                 }
                             }
@@ -368,8 +353,7 @@
                     &.layout__header__bar__right__element--notifications {
                         display: inline-block;
 
-                        &
-                            > .layout__header__bar__right__element--notifications__button {
+                        & > .layout__header__bar__right__element--notifications__button {
                             cursor: pointer;
                             width: 45px;
                             text-align: center;
@@ -383,8 +367,7 @@
                             }
                         }
 
-                        &
-                            > .layout__header__bar__right__element--notifications__expanded {
+                        & > .layout__header__bar__right__element--notifications__expanded {
                             text-align: left;
                             position: fixed;
                             right: 10px;
@@ -476,8 +459,7 @@
                                         text-decoration: none !important;
                                         line-height: 25px;
 
-                                        &
-                                            > .layout__header__bar__right__element--notifications__expanded__item__icon {
+                                        & > .layout__header__bar__right__element--notifications__expanded__item__icon {
                                             margin-left: -10px;
                                             margin-right: 15px;
                                             font-size: 25px;
@@ -505,8 +487,7 @@
                                 }
                             }
 
-                            &
-                                > .layout__header__bar__right__element--notifications__expanded__view-all {
+                            & > .layout__header__bar__right__element--notifications__expanded__view-all {
                                 position: absolute;
                                 left: 0;
                                 right: 0;
@@ -764,8 +745,7 @@
                         text-decoration: none !important;
                         line-height: 25px;
 
-                        &
-                            > .layout__notifications__container__notification__icon {
+                        & > .layout__notifications__container__notification__icon {
                             margin: 0;
                             font-size: 25px;
                             position: relative;
@@ -779,16 +759,13 @@
                             }
                         }
 
-                        &
-                            > .layout__notifications__container__notification__content {
-                            &
-                                > .layout__notifications__container__notification__content__title {
+                        & > .layout__notifications__container__notification__content {
+                            & > .layout__notifications__container__notification__content__title {
                                 display: block;
                                 font-size: 18px;
                                 font-weight: bold;
                             }
-                            &
-                                > .layout__notifications__container__notification__content__text {
+                            & > .layout__notifications__container__notification__content__text {
                                 line-height: 13px;
                                 font-size: 13px;
                             }

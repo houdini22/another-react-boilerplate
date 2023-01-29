@@ -7,6 +7,7 @@ import {
     Card,
     Col,
     Dropdown,
+    Label,
     LoadingOverlay,
     Modal,
     PageHeader,
@@ -32,7 +33,7 @@ export class UsersView extends React.Component {
             <RouteManager>
                 {({ navigate }) => (
                     <UsersManager>
-                        {({ users, isLoading, deleteUser, fetch }) => {
+                        {({ users, isLoading, deleteUser, fetch, deleteUserRole, setIsLoading }) => {
                             return (
                                 <PageContent>
                                     <AddModal
@@ -51,28 +52,21 @@ export class UsersView extends React.Component {
                                         }}
                                     />
                                     <Modal.Container
-                                        visible={
-                                            typeof confirmDeleteModalVisible !==
-                                            'boolean'
-                                        }
+                                        visible={typeof confirmDeleteModalVisible !== 'boolean'}
                                         color={'danger'}
                                     >
                                         <Modal.Header
                                             closeIcon
                                             close={() => {
                                                 this.setState({
-                                                    confirmDeleteModalVisible:
-                                                        false,
+                                                    confirmDeleteModalVisible: false,
                                                 })
                                             }}
                                         >
                                             Confirm Delete
                                         </Modal.Header>
                                         <Modal.Body>
-                                            <p>
-                                                Do you really want to delete
-                                                this element?
-                                            </p>
+                                            <p>Do you really want to delete this element?</p>
                                         </Modal.Body>
                                         <Modal.Footer>
                                             <Row>
@@ -81,8 +75,7 @@ export class UsersView extends React.Component {
                                                         color={'secondary'}
                                                         onClick={() => {
                                                             this.setState({
-                                                                confirmDeleteModalVisible:
-                                                                    false,
+                                                                confirmDeleteModalVisible: false,
                                                             })
                                                         }}
                                                         block
@@ -94,19 +87,12 @@ export class UsersView extends React.Component {
                                                     <Button
                                                         color={'success'}
                                                         onClick={() => {
-                                                            deleteUser(
-                                                                confirmDeleteModalVisible,
-                                                            ).then(() => {
-                                                                fetch().then(
-                                                                    () => {
-                                                                        this.setState(
-                                                                            {
-                                                                                confirmDeleteModalVisible:
-                                                                                    false,
-                                                                            },
-                                                                        )
-                                                                    },
-                                                                )
+                                                            deleteUser(confirmDeleteModalVisible).then(() => {
+                                                                fetch().then(() => {
+                                                                    this.setState({
+                                                                        confirmDeleteModalVisible: false,
+                                                                    })
+                                                                })
                                                             })
                                                         }}
                                                         block
@@ -118,9 +104,7 @@ export class UsersView extends React.Component {
                                         </Modal.Footer>
                                     </Modal.Container>
                                     <PageHeader.Container>
-                                        <PageHeader.Title>
-                                            Users
-                                        </PageHeader.Title>
+                                        <PageHeader.Title>Users</PageHeader.Title>
                                         <PageHeader.Actions>
                                             <Button
                                                 color={'success'}
@@ -138,51 +122,84 @@ export class UsersView extends React.Component {
                                     <>
                                         {isLoading && <LoadingOverlay />}
                                         <Table.Container bordered striped>
+                                            <Table.THead>
+                                                <Table.Tr>
+                                                    <Table.Th xs={1}>ID</Table.Th>
+                                                    <Table.Th xs={3}>Name</Table.Th>
+                                                    <Table.Th xs={3}>Email</Table.Th>
+                                                    <Table.Th xs={3}>Roles</Table.Th>
+                                                    <Table.Th xs={2}>Actions</Table.Th>
+                                                </Table.Tr>
+                                            </Table.THead>
                                             <Table.TBody>
                                                 {users.map((user) => {
                                                     return (
                                                         <Table.Tr key={user.id}>
-                                                            <Table.Td xs={1}>
-                                                                {user.id}
-                                                            </Table.Td>
-                                                            <Table.Td xs={4}>
-                                                                {user.name}
-                                                            </Table.Td>
-                                                            <Table.Td xs={4}>
-                                                                {user.email}
-                                                            </Table.Td>
+                                                            <Table.Td xs={1}>{user.id}</Table.Td>
+                                                            <Table.Td xs={3}>{user.name}</Table.Td>
+                                                            <Table.Td xs={3}>{user.email}</Table.Td>
                                                             <Table.Td xs={3}>
+                                                                <div>
+                                                                    {user?.roles?.map(
+                                                                        ({ id: _id, name, guard_name }) => (
+                                                                            <Dropdown.Container
+                                                                                size={'sm'}
+                                                                                triggerSize={'lg'}
+                                                                                key={_id}
+                                                                            >
+                                                                                <Dropdown.Trigger
+                                                                                    size="lg"
+                                                                                    component={Label}
+                                                                                >
+                                                                                    {name} - {guard_name}
+                                                                                </Dropdown.Trigger>
+                                                                                <Dropdown.Menu>
+                                                                                    <Dropdown.Item
+                                                                                        color="danger"
+                                                                                        onClick={() => {
+                                                                                            setIsLoading(true)
+
+                                                                                            return deleteUserRole(
+                                                                                                {
+                                                                                                    id: user.id,
+                                                                                                },
+                                                                                                {
+                                                                                                    id: _id,
+                                                                                                },
+                                                                                            ).then(() => {
+                                                                                                fetch().then(() => {
+                                                                                                    setIsLoading(false)
+                                                                                                })
+                                                                                            })
+                                                                                        }}
+                                                                                    >
+                                                                                        <DeleteIcon /> Delete
+                                                                                    </Dropdown.Item>
+                                                                                </Dropdown.Menu>
+                                                                            </Dropdown.Container>
+                                                                        ),
+                                                                    )}
+                                                                </div>
+                                                            </Table.Td>
+                                                            <Table.Td xs={2}>
                                                                 <Button
-                                                                    icon={
-                                                                        <EditIcon />
-                                                                    }
+                                                                    icon={<EditIcon />}
                                                                     iconOnly
-                                                                    color={
-                                                                        'warning'
-                                                                    }
+                                                                    color={'warning'}
                                                                     onClick={() => {
-                                                                        this.setState(
-                                                                            {
-                                                                                edit: user.id,
-                                                                            },
-                                                                        )
+                                                                        this.setState({
+                                                                            edit: user.id,
+                                                                        })
                                                                     }}
                                                                 />
                                                                 <Button
-                                                                    icon={
-                                                                        <DeleteIcon />
-                                                                    }
+                                                                    icon={<DeleteIcon />}
                                                                     iconOnly
-                                                                    color={
-                                                                        'danger'
-                                                                    }
+                                                                    color={'danger'}
                                                                     onClick={() => {
-                                                                        this.setState(
-                                                                            {
-                                                                                confirmDeleteModalVisible:
-                                                                                    user.id,
-                                                                            },
-                                                                        )
+                                                                        this.setState({
+                                                                            confirmDeleteModalVisible: user.id,
+                                                                        })
                                                                     }}
                                                                 />
                                                             </Table.Td>

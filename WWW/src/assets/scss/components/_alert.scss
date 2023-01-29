@@ -332,9 +332,7 @@
             }
         }
 
-        &:not(
-                .component-alert--outline
-            ).component-alert--icon-highlighted.component-alert--color-default {
+        &:not(.component-alert--outline).component-alert--icon-highlighted.component-alert--color-default {
             .component-alert__icon-container--outer {
                 background: $default_DARKEN_X1;
                 .component-alert__icon-container--inner {
@@ -343,9 +341,7 @@
             }
         }
 
-        &:not(
-                .component-alert--outline
-            ).component-alert--icon-highlighted.component-alert--color-primary {
+        &:not(.component-alert--outline).component-alert--icon-highlighted.component-alert--color-primary {
             .component-alert__icon-container--outer {
                 background: $primary_DARKEN_X1;
                 .component-alert__icon-container--inner {
@@ -354,9 +350,7 @@
             }
         }
 
-        &:not(
-                .component-alert--outline
-            ).component-alert--icon-highlighted.component-alert--color-secondary {
+        &:not(.component-alert--outline).component-alert--icon-highlighted.component-alert--color-secondary {
             .component-alert__icon-container--outer {
                 background: $secondary_DARKEN_X1;
                 .component-alert__icon-container--inner {
@@ -365,9 +359,7 @@
             }
         }
 
-        &:not(
-                .component-alert--outline
-            ).component-alert--icon-highlighted.component-alert--color-success {
+        &:not(.component-alert--outline).component-alert--icon-highlighted.component-alert--color-success {
             .component-alert__icon-container--outer {
                 background: $success_DARKEN_X1;
                 .component-alert__icon-container--inner {
@@ -376,9 +368,7 @@
             }
         }
 
-        &:not(
-                .component-alert--outline
-            ).component-alert--icon-highlighted.component-alert--color-danger {
+        &:not(.component-alert--outline).component-alert--icon-highlighted.component-alert--color-danger {
             .component-alert__icon-container--outer {
                 background: $danger_DARKEN_X1;
                 .component-alert__icon-container--inner {
@@ -387,9 +377,7 @@
             }
         }
 
-        &:not(
-                .component-alert--outline
-            ).component-alert--icon-highlighted.component-alert--color-warning {
+        &:not(.component-alert--outline).component-alert--icon-highlighted.component-alert--color-warning {
             .component-alert__icon-container--outer {
                 background: $warning_DARKEN_X1;
                 .component-alert__icon-container--inner {
@@ -398,9 +386,7 @@
             }
         }
 
-        &:not(
-                .component-alert--outline
-            ).component-alert--icon-highlighted.component-alert--color-info {
+        &:not(.component-alert--outline).component-alert--icon-highlighted.component-alert--color-info {
             .component-alert__icon-container--outer {
                 background: $info_DARKEN_X1;
                 .component-alert__icon-container--inner {

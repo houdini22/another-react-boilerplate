@@ -49,17 +49,11 @@ class PageHeaderView extends React.Component<any, PageHeaderViewState> {
 
         return (
             <PageContent>
-                <ComponentsPageHeader
-                    title="PageHeader"
-                    component="PageHeader"
-                />
+                <ComponentsPageHeader title="PageHeader" component="PageHeader" />
                 <div style={{ marginBottom: 30 }}>
                     <Row>
                         <Col xs={12}>
-                            <PageHeaderFormContainer
-                                options={options}
-                                setOptions={this.setOptions}
-                            />
+                            <PageHeaderFormContainer options={options} setOptions={this.setOptions} />
                         </Col>
                     </Row>
                 </div>
@@ -70,9 +64,7 @@ class PageHeaderView extends React.Component<any, PageHeaderViewState> {
                             <PageHeader.BreadcrumbsItem href="/">
                                 <HomeIcon /> Home
                             </PageHeader.BreadcrumbsItem>
-                            <PageHeader.BreadcrumbsItem href="/components">
-                                Components
-                            </PageHeader.BreadcrumbsItem>
+                            <PageHeader.BreadcrumbsItem href="/components">Components</PageHeader.BreadcrumbsItem>
                             <PageHeader.BreadcrumbsItem href="/components/page-header">
                                 PageHeader
                             </PageHeader.BreadcrumbsItem>
@@ -82,17 +74,12 @@ class PageHeaderView extends React.Component<any, PageHeaderViewState> {
                         <PageHeader.Actions>
                             <Button color="info">Some button</Button>
                             <Dropdown.Container placement="right">
-                                <Dropdown.Trigger component={Button}>
-                                    Actions
-                                </Dropdown.Trigger>
+                                <Dropdown.Trigger component={Button}>Actions</Dropdown.Trigger>
                                 <Dropdown.Menu>
                                     <Dropdown.Item>Action 1</Dropdown.Item>
                                     <Dropdown.Item>
                                         Action 2
-                                        <Label
-                                            color="warning"
-                                            className={cx('pull-right')}
-                                        >
+                                        <Label color="warning" className={cx('pull-right')}>
                                             33
                                         </Label>
                                     </Dropdown.Item>

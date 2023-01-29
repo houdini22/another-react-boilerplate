@@ -7,10 +7,7 @@ import {
     FaWpforms as FormsIcon,
     FaInfo as InfoIcon,
 } from 'react-icons/fa'
-import {
-    IoIosMail as ContactIcon,
-    IoIosArrowDropdownCircle as DropdownIcon,
-} from 'react-icons/io'
+import { IoIosMail as ContactIcon, IoIosArrowDropdownCircle as DropdownIcon } from 'react-icons/io'
 import {
     MdLabel as LabelIcon,
     MdRadioButtonChecked as ButtonIcon,
@@ -23,12 +20,7 @@ import { FaSitemap, FaUser } from 'react-icons/fa'
 import { AiOutlineOrderedList, AiOutlineUserAdd } from 'react-icons/ai'
 import { Badge } from '../components'
 import { IoIosNotificationsOutline } from 'react-icons/io'
-import {
-    AddIcon,
-    CategoryIcon,
-    DocumentIcon,
-    LinkIcon,
-} from '../components/icons'
+import { AddIcon, CategoryIcon, DocumentIcon, LinkIcon } from '../components/icons'
 
 export const navigation = [
     {

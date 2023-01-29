@@ -197,6 +197,7 @@ const deletePermission =
                 })
         })
     }
+
 export const actions = {
     fetch,
     fetchOne,

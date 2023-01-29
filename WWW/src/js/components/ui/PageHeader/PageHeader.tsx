@@ -74,12 +74,7 @@ export class Container extends React.Component<ContainerProps, ContainerState> {
 
     render() {
         const { children, size = 'md' } = this.props
-        const {
-            titleElement,
-            breadcrumbsElement,
-            actionsElement,
-            breadcrumbsExists,
-        } = this.state
+        const { titleElement, breadcrumbsElement, actionsElement, breadcrumbsExists } = this.state
 
         return (
             <AppContext.Provider
@@ -97,36 +92,22 @@ export class Container extends React.Component<ContainerProps, ContainerState> {
                     })}
                 >
                     <div className={cx('component-page-header__content')}>
-                        <div
-                            className={cx(
-                                'component-page-header__content__title',
-                            )}
-                        >
+                        <div className={cx('component-page-header__content__title')}>
                             <h2 ref={(e) => this.registerTitleElement(e)} />
                         </div>
                         <div
-                            className={cx(
-                                'component-page-header__content__actions',
-                            )}
+                            className={cx('component-page-header__content__actions')}
                             ref={(e) => this.registerActionsElement(e)}
                         />
                     </div>
                     <div
-                        className={cx(
-                            'component-page-header__breadcrumbs--outer',
-                        )}
+                        className={cx('component-page-header__breadcrumbs--outer')}
                         style={{
                             display: breadcrumbsExists ? 'block' : 'none',
                         }}
                     >
-                        <div
-                            className={cx(
-                                'component-page-header__breadcrumbs--inner',
-                            )}
-                        >
-                            <ul
-                                ref={(e) => this.registerBreadcrumbsElement(e)}
-                            />
+                        <div className={cx('component-page-header__breadcrumbs--inner')}>
+                            <ul ref={(e) => this.registerBreadcrumbsElement(e)} />
                         </div>
                     </div>
                     {children}
@@ -144,11 +125,7 @@ export class Title extends React.Component<TitleProps> {
     render() {
         const { children } = this.props
 
-        return (
-            <AppContext.Consumer>
-                {({ titleElement }) => createPortal(children, titleElement)}
-            </AppContext.Consumer>
-        )
+        return <AppContext.Consumer>{({ titleElement }) => createPortal(children, titleElement)}</AppContext.Consumer>
     }
 }
 
@@ -219,9 +196,7 @@ export class Actions extends React.Component<ActionsProps> {
         const { children } = this.props
 
         return (
-            <AppContext.Consumer>
-                {({ actionsElement }) => createPortal(children, actionsElement)}
-            </AppContext.Consumer>
+            <AppContext.Consumer>{({ actionsElement }) => createPortal(children, actionsElement)}</AppContext.Consumer>
         )
     }
 }

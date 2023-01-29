@@ -2,11 +2,7 @@ import * as React from 'react'
 import { bindActionCreators, compose } from 'redux'
 import { connect } from 'react-redux'
 import { AddDocumentForm } from '../components/AddDocumentForm'
-import {
-    reduxForm,
-    getFormValues as getFormValuesRedux,
-    SubmissionError,
-} from 'redux-form'
+import { reduxForm, getFormValues as getFormValuesRedux, SubmissionError } from 'redux-form'
 import { getFormValues } from '../../../utils/forms/auto-save'
 import * as moment from 'moment'
 import { formatDateTimeAPI } from '../../../helpers/date-time'
@@ -58,9 +54,7 @@ const AddDocumentFormContainer = compose(
                     tree: {
                         tree_is_published: true,
                         tree_published_from: formatDateTimeAPI(moment()),
-                        tree_published_to: formatDateTimeAPI(
-                            moment(new Date(2099, 12)).format('YYYY'),
-                        ),
+                        tree_published_to: formatDateTimeAPI(moment(new Date(2099, 12)).format('YYYY')),
                     },
                 },
             }
@@ -68,8 +62,7 @@ const AddDocumentFormContainer = compose(
         (dispatch) => {
             return bindActionCreators(
                 {
-                    fetchParentCategorySelectOptions:
-                        actions.fetchParentCategorySelectOptions,
+                    fetchParentCategorySelectOptions: actions.fetchParentCategorySelectOptions,
                     addDocument: actions.addDocument,
                 },
                 dispatch,
@@ -89,9 +82,7 @@ const AddDocumentFormContainer = compose(
                             data: { errors },
                         },
                     }) => {
-                        throw new SubmissionError(
-                            processAPIerrorResponseToFormErrors(errors),
-                        )
+                        throw new SubmissionError(processAPIerrorResponseToFormErrors(errors))
                     },
                 )
         },

@@ -3,15 +3,7 @@ import { PageContent } from '../../../layouts/PageLayout/components'
 import Manager from './Manager'
 import { RouteManager } from '../../../containers/RouteManager'
 import Header from './Header'
-import {
-    Alert,
-    Button,
-    Card,
-    Dropdown,
-    LoadingOverlay,
-    Modal,
-    Tooltip,
-} from '../../../components'
+import { Alert, Button, Card, Dropdown, LoadingOverlay, Modal, Tooltip } from '../../../components'
 import { Table } from '../../../components'
 import { formatDateTime } from '../../../helpers/date-time'
 import classNames from 'classnames/bind'
@@ -58,64 +50,39 @@ export class CmsPagesView extends React.Component {
                                 unpublish,
                                 deleteNode,
                             }) => {
-                                console.log(
-                                    nodes,
-                                    currentNode,
-                                    isLoaded,
-                                    isLoading,
-                                    fetchError,
-                                )
+                                console.log(nodes, currentNode, isLoaded, isLoading, fetchError)
 
                                 return (
                                     <>
-                                        <Modal.Container
-                                            visible={confirmDeleteVisible}
-                                            color={'danger'}
-                                        >
+                                        <Modal.Container visible={confirmDeleteVisible} color={'danger'}>
                                             <Modal.Header
                                                 closeIcon
                                                 close={() => {
                                                     this.setState({
-                                                        confirmDeleteVisible:
-                                                            false,
+                                                        confirmDeleteVisible: false,
                                                     })
                                                 }}
                                             >
                                                 Confirm Delete
                                             </Modal.Header>
                                             <Modal.Body>
-                                                <p>
-                                                    Do you really want to delete
-                                                    this element?
-                                                </p>
-                                                <p>
-                                                    All children of this element
-                                                    will be removed.
-                                                </p>
+                                                <p>Do you really want to delete this element?</p>
+                                                <p>All children of this element will be removed.</p>
                                             </Modal.Body>
                                             <Modal.Footer>
                                                 <Button
                                                     color={'success'}
                                                     block
-                                                    onClick={(
-                                                        e,
-                                                        { setIsLoading },
-                                                    ) => {
+                                                    onClick={(e, { setIsLoading }) => {
                                                         setIsLoading(true)
-                                                        deleteNode(
-                                                            nodeToDelete,
-                                                        ).then(() => {
+                                                        deleteNode(nodeToDelete).then(() => {
                                                             this.setState(
                                                                 {
-                                                                    confirmDeleteVisible:
-                                                                        false,
-                                                                    nodeToDelete:
-                                                                        null,
+                                                                    confirmDeleteVisible: false,
+                                                                    nodeToDelete: null,
                                                                 },
                                                                 () => {
-                                                                    setIsLoading(
-                                                                        false,
-                                                                    )
+                                                                    setIsLoading(false)
                                                                 },
                                                             )
                                                         })
@@ -125,20 +92,14 @@ export class CmsPagesView extends React.Component {
                                                 </Button>
                                             </Modal.Footer>
                                         </Modal.Container>
-                                        <Card
-                                            header={<h1>Filters</h1>}
-                                            withMinimizeIcon
-                                        >
+                                        <Card header={<h1>Filters</h1>} withMinimizeIcon>
                                             <FiltersFormContainer />
                                             {isLoading && <LoadingOverlay />}
                                         </Card>
                                         <Card
                                             header={<h1>Pages</h1>}
                                             headerActions={[
-                                                <Dropdown.Container
-                                                    triggerColor={'success'}
-                                                    placement={'right'}
-                                                >
+                                                <Dropdown.Container triggerColor={'success'} placement={'right'}>
                                                     <Dropdown.Trigger
                                                         component={Button}
                                                         componentProps={{
@@ -150,27 +111,21 @@ export class CmsPagesView extends React.Component {
                                                     <Dropdown.Menu>
                                                         <Dropdown.Item
                                                             onClick={() => {
-                                                                navigate(
-                                                                    '/cms/pages/add_category',
-                                                                )
+                                                                navigate('/cms/pages/add_category')
                                                             }}
                                                         >
                                                             Category
                                                         </Dropdown.Item>
                                                         <Dropdown.Item
                                                             onClick={() => {
-                                                                navigate(
-                                                                    '/cms/pages/add_document',
-                                                                )
+                                                                navigate('/cms/pages/add_document')
                                                             }}
                                                         >
                                                             Document
                                                         </Dropdown.Item>
                                                         <Dropdown.Item
                                                             onClick={() => {
-                                                                navigate(
-                                                                    '/cms/pages/add_link',
-                                                                )
+                                                                navigate('/cms/pages/add_link')
                                                             }}
                                                         >
                                                             Link
@@ -183,24 +138,12 @@ export class CmsPagesView extends React.Component {
                                             <Table.Container>
                                                 <Table.THead>
                                                     <Table.Tr>
-                                                        <Table.Th xs={1}>
-                                                            Type
-                                                        </Table.Th>
-                                                        <Table.Th xs={3}>
-                                                            Name
-                                                        </Table.Th>
-                                                        <Table.Th xs={4}>
-                                                            URL
-                                                        </Table.Th>
-                                                        <Table.Th xs={1}>
-                                                            Statuses
-                                                        </Table.Th>
-                                                        <Table.Th xs={1}>
-                                                            Ordering
-                                                        </Table.Th>
-                                                        <Table.Th xs={2}>
-                                                            Actions
-                                                        </Table.Th>
+                                                        <Table.Th xs={1}>Type</Table.Th>
+                                                        <Table.Th xs={3}>Name</Table.Th>
+                                                        <Table.Th xs={4}>URL</Table.Th>
+                                                        <Table.Th xs={1}>Statuses</Table.Th>
+                                                        <Table.Th xs={1}>Ordering</Table.Th>
+                                                        <Table.Th xs={2}>Actions</Table.Th>
                                                     </Table.Tr>
                                                 </Table.THead>
                                                 <Table.TBody>
@@ -210,17 +153,10 @@ export class CmsPagesView extends React.Component {
                                                                 xs={12}
                                                                 alignCenter
                                                                 onClick={() => {
-                                                                    setCurrentId(
-                                                                        currentNode.parent_id,
-                                                                    )
+                                                                    setCurrentId(currentNode.parent_id)
                                                                 }}
                                                             >
-                                                                <Button
-                                                                    block
-                                                                    color={
-                                                                        'default'
-                                                                    }
-                                                                >
+                                                                <Button block color={'default'}>
                                                                     Up
                                                                 </Button>
                                                             </Table.Td>
@@ -228,14 +164,8 @@ export class CmsPagesView extends React.Component {
                                                     )}
                                                     {!nodes.length && (
                                                         <Table.Tr>
-                                                            <Table.Td
-                                                                xs={12}
-                                                                alignCenter
-                                                            >
-                                                                <Alert
-                                                                    color="info"
-                                                                    alignCenter
-                                                                >
+                                                            <Table.Td xs={12} alignCenter>
+                                                                <Alert color="info" alignCenter>
                                                                     No results
                                                                 </Alert>
                                                             </Table.Td>
@@ -245,88 +175,50 @@ export class CmsPagesView extends React.Component {
                                                         return (
                                                             <Table.Tr
                                                                 onClick={
-                                                                    node.tree_object_type ===
-                                                                    'category'
+                                                                    node.tree_object_type === 'category'
                                                                         ? () => {
-                                                                              setCurrentId(
-                                                                                  node.id,
-                                                                              )
+                                                                              setCurrentId(node.id)
                                                                           }
                                                                         : null
                                                                 }
                                                                 color={
-                                                                    node.tree_object_type ===
-                                                                    'category'
+                                                                    node.tree_object_type === 'category'
                                                                         ? 'default'
                                                                         : null
                                                                 }
                                                             >
-                                                                <Table.Td
-                                                                    xs={1}
-                                                                    alignCenter
-                                                                >
-                                                                    {node.tree_object_type ===
-                                                                        'category' && (
+                                                                <Table.Td xs={1} alignCenter>
+                                                                    {node.tree_object_type === 'category' && (
                                                                         <CategoryIcon />
                                                                     )}
-                                                                    {node.tree_object_type ===
-                                                                        'document' && (
+                                                                    {node.tree_object_type === 'document' && (
                                                                         <DocumentIcon />
                                                                     )}
-                                                                    {node.tree_object_type ===
-                                                                        'link' && (
-                                                                        <LinkIcon />
-                                                                    )}
+                                                                    {node.tree_object_type === 'link' && <LinkIcon />}
                                                                 </Table.Td>
-                                                                <Table.Td
-                                                                    xs={3}
-                                                                >
-                                                                    {node.tree_object_type ===
-                                                                        'category' &&
-                                                                        node
-                                                                            .category
-                                                                            .category_name}
-                                                                    {node.tree_object_type ===
-                                                                        'document' &&
-                                                                        node
-                                                                            .document
-                                                                            .document_name}
-                                                                    {node.tree_object_type ===
-                                                                        'link' &&
-                                                                        node
-                                                                            .link
-                                                                            .link_name}
+                                                                <Table.Td xs={3}>
+                                                                    {node.tree_object_type === 'category' &&
+                                                                        node.category.category_name}
+                                                                    {node.tree_object_type === 'document' &&
+                                                                        node.document.document_name}
+                                                                    {node.tree_object_type === 'link' &&
+                                                                        node.link.link_name}
                                                                 </Table.Td>
-                                                                <Table.Td
-                                                                    xs={4}
-                                                                >
-                                                                    {node.tree_object_type ===
-                                                                        'category' &&
-                                                                        (node
-                                                                            .category
-                                                                            .category_url ||
-                                                                            '---')}
-                                                                    {node.tree_object_type ===
-                                                                        'document' &&
-                                                                        node
-                                                                            .document
-                                                                            .document_url}
-                                                                    {node.tree_object_type ===
-                                                                        'link' &&
-                                                                        node
-                                                                            .link
-                                                                            .link_url}
+                                                                <Table.Td xs={4}>
+                                                                    {node.tree_object_type === 'category' &&
+                                                                        (node.category.category_url || '---')}
+                                                                    {node.tree_object_type === 'document' &&
+                                                                        node.document.document_url}
+                                                                    {node.tree_object_type === 'link' &&
+                                                                        node.link.link_url}
                                                                 </Table.Td>
-                                                                <Table.Td
-                                                                    xs={1}
-                                                                >
+                                                                <Table.Td xs={1}>
                                                                     {!node.tree_is_published && (
                                                                         <Tooltip
                                                                             tooltip={
                                                                                 <>
                                                                                     <p>
-                                                                                        Published
-                                                                                        from:{' '}
+                                                                                        Published from:{' '}
                                                                                         {node.tree_published_from
                                                                                             ? formatDateTime(
                                                                                                   node.tree_published_from,
@@ -334,8 +226,7 @@ export class CmsPagesView extends React.Component {
                                                                                             : 'never'}
                                                                                     </p>
                                                                                     <p>
-                                                                                        Published
-                                                                                        to:{' '}
+                                                                                        Published to:{' '}
                                                                                         {node.tree_published_to
                                                                                             ? formatDateTime(
                                                                                                   node.tree_published_to,
@@ -344,15 +235,11 @@ export class CmsPagesView extends React.Component {
                                                                                     </p>
                                                                                 </>
                                                                             }
-                                                                            placement={
-                                                                                'top'
-                                                                            }
+                                                                            placement={'top'}
                                                                         >
                                                                             <Typography.Container>
                                                                                 <NotPublishedIcon
-                                                                                    className={cx(
-                                                                                        'text-danger',
-                                                                                    )}
+                                                                                    className={cx('text-danger')}
                                                                                 />
                                                                             </Typography.Container>
                                                                         </Tooltip>
@@ -362,8 +249,7 @@ export class CmsPagesView extends React.Component {
                                                                             tooltip={
                                                                                 <>
                                                                                     <p>
-                                                                                        Published
-                                                                                        from:{' '}
+                                                                                        Published from:{' '}
                                                                                         {node.tree_published_from
                                                                                             ? formatDateTime(
                                                                                                   node.tree_published_from,
@@ -371,8 +257,7 @@ export class CmsPagesView extends React.Component {
                                                                                             : 'never'}
                                                                                     </p>
                                                                                     <p>
-                                                                                        Published
-                                                                                        to:{' '}
+                                                                                        Published to:{' '}
                                                                                         {node.tree_published_to
                                                                                             ? formatDateTime(
                                                                                                   node.tree_published_to,
@@ -381,126 +266,74 @@ export class CmsPagesView extends React.Component {
                                                                                     </p>
                                                                                 </>
                                                                             }
-                                                                            placement={
-                                                                                'top'
-                                                                            }
+                                                                            placement={'top'}
                                                                         >
                                                                             <Typography.Container>
                                                                                 <PublishedIcon
-                                                                                    className={cx(
-                                                                                        'text-success',
-                                                                                    )}
+                                                                                    className={cx('text-success')}
                                                                                 />
                                                                             </Typography.Container>
                                                                         </Tooltip>
                                                                     )}
                                                                 </Table.Td>
-                                                                <Table.Td
-                                                                    xs={1}
-                                                                >
+                                                                <Table.Td xs={1}>
                                                                     <Button
-                                                                        icon={
-                                                                            <OrderingIcon />
-                                                                        }
+                                                                        icon={<OrderingIcon />}
                                                                         iconOnly
                                                                         style={{
                                                                             cursor: 'move',
                                                                         }}
                                                                     />
                                                                 </Table.Td>
-                                                                <Table.Td
-                                                                    xs={2}
-                                                                >
+                                                                <Table.Td xs={2}>
                                                                     {!!(
-                                                                        node.tree_class !==
-                                                                            'system_page' &&
+                                                                        node.tree_class !== 'system_page' &&
                                                                         node.tree_is_editable &&
                                                                         !node.tree_is_published
                                                                     ) && (
                                                                         <Button
                                                                             color="success"
-                                                                            icon={
-                                                                                <PublishedIcon />
-                                                                            }
+                                                                            icon={<PublishedIcon />}
                                                                             iconOnly
-                                                                            onClick={(
-                                                                                e,
-                                                                                {
-                                                                                    setIsLoading,
-                                                                                },
-                                                                            ) => {
+                                                                            onClick={(e, { setIsLoading }) => {
                                                                                 e.stopPropagation()
-                                                                                setIsLoading(
-                                                                                    true,
-                                                                                )
-                                                                                publish(
-                                                                                    node.id,
-                                                                                ).then(
-                                                                                    () => {
-                                                                                        setIsLoading(
-                                                                                            false,
-                                                                                        )
-                                                                                    },
-                                                                                )
+                                                                                setIsLoading(true)
+                                                                                publish(node.id).then(() => {
+                                                                                    setIsLoading(false)
+                                                                                })
                                                                             }}
                                                                         />
                                                                     )}
                                                                     {!!(
-                                                                        node.tree_class !==
-                                                                            'system_page' &&
+                                                                        node.tree_class !== 'system_page' &&
                                                                         node.tree_is_editable &&
                                                                         !!node.tree_is_published
                                                                     ) && (
                                                                         <Button
                                                                             color="danger"
-                                                                            icon={
-                                                                                <NotPublishedIcon />
-                                                                            }
+                                                                            icon={<NotPublishedIcon />}
                                                                             iconOnly
-                                                                            onClick={(
-                                                                                e,
-                                                                                {
-                                                                                    setIsLoading,
-                                                                                },
-                                                                            ) => {
+                                                                            onClick={(e, { setIsLoading }) => {
                                                                                 e.stopPropagation()
-                                                                                setIsLoading(
-                                                                                    true,
-                                                                                )
-                                                                                unpublish(
-                                                                                    node.id,
-                                                                                ).then(
-                                                                                    () => {
-                                                                                        setIsLoading(
-                                                                                            false,
-                                                                                        )
-                                                                                    },
-                                                                                )
+                                                                                setIsLoading(true)
+                                                                                unpublish(node.id).then(() => {
+                                                                                    setIsLoading(false)
+                                                                                })
                                                                             }}
                                                                         />
                                                                     )}
 
                                                                     {!!node.tree_is_editable &&
-                                                                        node.tree_object_type ===
-                                                                            'category' && (
+                                                                        node.tree_object_type === 'category' && (
                                                                             <Dropdown.Container
-                                                                                triggerColor={
-                                                                                    'success'
-                                                                                }
-                                                                                placement={
-                                                                                    'right'
-                                                                                }
+                                                                                triggerColor={'success'}
+                                                                                placement={'right'}
                                                                             >
                                                                                 <Dropdown.Trigger
-                                                                                    component={
-                                                                                        Button
-                                                                                    }
+                                                                                    component={Button}
                                                                                     componentProps={{
-                                                                                        icon: (
-                                                                                            <AddIcon />
-                                                                                        ),
-                                                                                        iconOnly:
-                                                                                            true,
+                                                                                        icon: <AddIcon />,
+                                                                                        iconOnly: true,
                                                                                     }}
                                                                                 />
                                                                                 <Dropdown.Menu>
@@ -537,31 +370,21 @@ export class CmsPagesView extends React.Component {
                                                                     {!!node.tree_is_editable && (
                                                                         <Button
                                                                             color="warning"
-                                                                            icon={
-                                                                                <EditIcon />
-                                                                            }
+                                                                            icon={<EditIcon />}
                                                                             iconOnly
                                                                         />
                                                                     )}
                                                                     {!!node.tree_is_deletable && (
                                                                         <Button
                                                                             color="danger"
-                                                                            icon={
-                                                                                <DeleteIcon />
-                                                                            }
+                                                                            icon={<DeleteIcon />}
                                                                             iconOnly
-                                                                            onClick={(
-                                                                                e,
-                                                                            ) => {
+                                                                            onClick={(e) => {
                                                                                 e.stopPropagation()
-                                                                                this.setState(
-                                                                                    {
-                                                                                        confirmDeleteVisible:
-                                                                                            true,
-                                                                                        nodeToDelete:
-                                                                                            node,
-                                                                                    },
-                                                                                )
+                                                                                this.setState({
+                                                                                    confirmDeleteVisible: true,
+                                                                                    nodeToDelete: node,
+                                                                                })
                                                                             }}
                                                                         />
                                                                     )}

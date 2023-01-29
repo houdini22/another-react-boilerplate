@@ -21,13 +21,9 @@ export class AboutView extends React.Component {
                                     <h4>Email address: </h4>
                                 </Col>
                                 <Col xs={9} style={{ textAlign: 'right' }}>
-                                    <a href="mailto:michal.baniowski@gmail.com">
-                                        michal.baniowski@gmail.com
-                                    </a>
+                                    <a href="mailto:michal.baniowski@gmail.com">michal.baniowski@gmail.com</a>
                                     <br />
-                                    <a href="mailto:baniczek@gmail.com">
-                                        baniczek@gmail.com
-                                    </a>
+                                    <a href="mailto:baniczek@gmail.com">baniczek@gmail.com</a>
                                 </Col>
                             </Row>
                             <Row>
@@ -35,10 +31,7 @@ export class AboutView extends React.Component {
                                     <h4>Github: </h4>
                                 </Col>
                                 <Col xs={9} style={{ textAlign: 'right' }}>
-                                    <a
-                                        href="https://github.com/houdini22"
-                                        target="_blank"
-                                    >
+                                    <a href="https://github.com/houdini22" target="_blank">
                                         https://github.com/houdini22
                                     </a>
                                 </Col>

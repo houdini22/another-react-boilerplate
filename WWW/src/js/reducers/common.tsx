@@ -1,8 +1,7 @@
 import * as React from 'react'
 
 // constants
-export const CONNECTION_ERROR_MODAL_VISIBLE =
-    'common::connection_error_modal_visible'
+export const CONNECTION_ERROR_MODAL_VISIBLE = 'common::connection_error_modal_visible'
 export const SET_LAYOUT_OPTION = 'common::set-layout-option'
 
 // actions
@@ -26,8 +25,7 @@ const ACTION_HANDLERS = {
     [CONNECTION_ERROR_MODAL_VISIBLE]: (state) => {
         return {
             ...state,
-            connectionErrorModalVisible:
-                state['connectionErrorModalVisible'] + 1,
+            connectionErrorModalVisible: state['connectionErrorModalVisible'] + 1,
         }
     },
     [SET_LAYOUT_OPTION]: (state, { payload: { name, value } }) => {
@@ -62,8 +60,7 @@ export default function userReducer(state = initialState, action) {
 // selectors
 
 const getState = (state) => state['common']
-const getIsConnectionErrorModalVisible = (state) =>
-    getState(state)['connectionErrorModalVisible']
+const getIsConnectionErrorModalVisible = (state) => getState(state)['connectionErrorModalVisible']
 const getLayout = (state) => getState(state)['layout']
 
 export const selectors = {

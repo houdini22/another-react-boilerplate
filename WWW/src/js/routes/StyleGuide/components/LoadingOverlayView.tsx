@@ -24,10 +24,7 @@ class LoadingOverlayView extends React.Component<LoadingOverlayProps> {
 
         return (
             <PageContent>
-                <ComponentsPageHeader
-                    title="LoadingOverlay"
-                    component="LoadingOverlay"
-                />
+                <ComponentsPageHeader title="LoadingOverlay" component="LoadingOverlay" />
                 <Row>
                     <Col xs={12} md={6}>
                         <Section>

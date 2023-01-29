@@ -14,12 +14,7 @@ interface TextFieldProps {
 
 class TextField extends React.Component<TextFieldProps> {
     render() {
-        const {
-            error,
-            loading,
-            custom: { size, ...customProps } = {},
-            ...props
-        } = this.props
+        const { error, loading, custom: { size, ...customProps } = {}, ...props } = this.props
 
         return (
             <AppContext.Consumer>

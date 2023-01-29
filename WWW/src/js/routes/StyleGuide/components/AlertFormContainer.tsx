@@ -34,10 +34,7 @@ const onChange = (values, dispatch, props) => {
         }
     }
 
-    if (
-        !_.isEqual(options, newValues) &&
-        newValues['updateCount'] === options['updateCount']
-    ) {
+    if (!_.isEqual(options, newValues) && newValues['updateCount'] === options['updateCount']) {
         setOptions(newValues)
     }
 }

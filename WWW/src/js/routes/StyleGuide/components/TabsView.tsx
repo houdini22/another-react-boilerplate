@@ -59,18 +59,7 @@ class TabsView extends React.Component<TabsViewProps, TabsViewState> {
 
     render() {
         const { options } = this.state
-        const {
-            size,
-            block,
-            solid,
-            color,
-            aligned,
-            header,
-            left,
-            outline,
-            rounded,
-            below,
-        } = options
+        const { size, block, solid, color, aligned, header, left, outline, rounded, below } = options
 
         return (
             <PageContent>
@@ -78,10 +67,7 @@ class TabsView extends React.Component<TabsViewProps, TabsViewState> {
                 <Row>
                     <Col xs={12} md={6}>
                         <Section>
-                            <TabsFormContainer
-                                options={options}
-                                setOptions={this.setOptions}
-                            />
+                            <TabsFormContainer options={options} setOptions={this.setOptions} />
                         </Section>
                     </Col>
                     <Col xs={12} md={6}>

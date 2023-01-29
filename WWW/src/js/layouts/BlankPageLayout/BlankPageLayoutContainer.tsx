@@ -1,9 +1,6 @@
 import { connect } from 'react-redux'
 import { BlankPageLayout } from './BlankPageLayout'
-import {
-    actions as commonActions,
-    selectors as commonSelectors,
-} from '../../reducers/common'
+import { actions as commonActions, selectors as commonSelectors } from '../../reducers/common'
 import { bindActionCreators } from 'redux'
 
 const { setConnectionErrorModalVisible } = commonActions

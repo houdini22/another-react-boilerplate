@@ -16,38 +16,29 @@ class TypographyView extends React.Component {
     render() {
         return (
             <PageContent>
-                <ComponentsPageHeader
-                    title="Typography"
-                    component="Typography"
-                />
+                <ComponentsPageHeader title="Typography" component="Typography" />
                 <Row>
                     <Col xs={12} md={6}>
                         <Section>
                             <Card header={<h1>Headings</h1>}>
                                 <Typography.Container>
                                     <h1>
-                                        This is H1 heading{' '}
-                                        <small>with subheading</small>
+                                        This is H1 heading <small>with subheading</small>
                                     </h1>
                                     <h2>
-                                        This is H2 heading{' '}
-                                        <small>with subheading</small>
+                                        This is H2 heading <small>with subheading</small>
                                     </h2>
                                     <h3>
-                                        This is H3 heading{' '}
-                                        <small>with subheading</small>
+                                        This is H3 heading <small>with subheading</small>
                                     </h3>
                                     <h4>
-                                        This is H4 heading{' '}
-                                        <small>with subheading</small>
+                                        This is H4 heading <small>with subheading</small>
                                     </h4>
                                     <h5>
-                                        This is H5 heading{' '}
-                                        <small>with subheading</small>
+                                        This is H5 heading <small>with subheading</small>
                                     </h5>
                                     <h6>
-                                        This is H6 heading{' '}
-                                        <small>with subheading</small>
+                                        This is H6 heading <small>with subheading</small>
                                     </h6>
                                 </Typography.Container>
                             </Card>
@@ -69,15 +60,9 @@ class TypographyView extends React.Component {
                                                 <li>
                                                     Nested third item
                                                     <ol>
-                                                        <li>
-                                                            Nested first item
-                                                        </li>
-                                                        <li>
-                                                            Nested second item
-                                                        </li>
-                                                        <li>
-                                                            Nested third item
-                                                        </li>
+                                                        <li>Nested first item</li>
+                                                        <li>Nested second item</li>
+                                                        <li>Nested third item</li>
                                                     </ol>
                                                 </li>
                                             </ol>
@@ -96,15 +81,9 @@ class TypographyView extends React.Component {
                                                 <li>
                                                     Nested third item
                                                     <ul>
-                                                        <li>
-                                                            Nested first item
-                                                        </li>
-                                                        <li>
-                                                            Nested second item
-                                                        </li>
-                                                        <li>
-                                                            Nested third item
-                                                        </li>
+                                                        <li>Nested first item</li>
+                                                        <li>Nested second item</li>
+                                                        <li>Nested third item</li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -119,37 +98,22 @@ class TypographyView extends React.Component {
                             <Card header={<h1>Inline elements</h1>}>
                                 <Typography.Container>
                                     <p>
-                                        You can use the mark tag to{' '}
-                                        <mark>highlight</mark> text.
+                                        You can use the mark tag to <mark>highlight</mark> text.
                                     </p>
                                     <p>
-                                        <s>
-                                            This line of text is meant to be
-                                            treated as no longer accurate.
-                                        </s>
+                                        <s>This line of text is meant to be treated as no longer accurate.</s>
                                     </p>
                                     <p>
-                                        <u>
-                                            This line of text will render as
-                                            underlined
-                                        </u>
+                                        <u>This line of text will render as underlined</u>
                                     </p>
                                     <p>
-                                        <small>
-                                            This line of text is meant to be
-                                            treated as fine print.
-                                        </small>
+                                        <small>This line of text is meant to be treated as fine print.</small>
                                     </p>
                                     <p>
-                                        <strong>
-                                            This line rendered as bold text.
-                                        </strong>
+                                        <strong>This line rendered as bold text.</strong>
                                     </p>
                                     <p>
-                                        <em>
-                                            This line rendered as italicized
-                                            text.
-                                        </em>
+                                        <em>This line rendered as italicized text.</em>
                                     </p>
                                 </Typography.Container>
                             </Card>
@@ -159,27 +123,13 @@ class TypographyView extends React.Component {
                         <Section>
                             <Card header={<h1>Text colors</h1>}>
                                 <Typography.Container>
-                                    <p className={cx('text-default')}>
-                                        default text color
-                                    </p>
-                                    <p className={cx('text-primary')}>
-                                        primary text color
-                                    </p>
-                                    <p className={cx('text-secondary')}>
-                                        secondary text color
-                                    </p>
-                                    <p className={cx('text-info')}>
-                                        info text color
-                                    </p>
-                                    <p className={cx('text-success')}>
-                                        success text color
-                                    </p>
-                                    <p className={cx('text-warning')}>
-                                        warning text color
-                                    </p>
-                                    <p className={cx('text-danger')}>
-                                        danger text color
-                                    </p>
+                                    <p className={cx('text-default')}>default text color</p>
+                                    <p className={cx('text-primary')}>primary text color</p>
+                                    <p className={cx('text-secondary')}>secondary text color</p>
+                                    <p className={cx('text-info')}>info text color</p>
+                                    <p className={cx('text-success')}>success text color</p>
+                                    <p className={cx('text-warning')}>warning text color</p>
+                                    <p className={cx('text-danger')}>danger text color</p>
                                 </Typography.Container>
                             </Card>
                         </Section>
@@ -190,9 +140,8 @@ class TypographyView extends React.Component {
                                 <Typography.Container>
                                     <blockquote>
                                         <p>
-                                            Two things are infinite: the
-                                            universe and human stupidity; and
-                                            I'm not sure about the universe.
+                                            Two things are infinite: the universe and human stupidity; and I'm not sure
+                                            about the universe.
                                         </p>
                                         <footer>Albert Einstein</footer>
                                     </blockquote>

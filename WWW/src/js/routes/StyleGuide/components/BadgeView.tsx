@@ -1,10 +1,7 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, Section, Badge } from '../../../components'
-import {
-    createPresentationTab as _createPresentationTab,
-    generateCode,
-} from '../../../utils/tabs'
+import { createPresentationTab as _createPresentationTab, generateCode } from '../../../utils/tabs'
 import { BadgeFormContainer } from './BadgeFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 
@@ -56,14 +53,9 @@ class BadgeView extends React.Component<BadgeViewProps, BadgeViewState> {
     }
 
     render() {
-        const {
-            colSize1 = 4,
-            colSize2 = 12,
-            createPresentationTab = _createPresentationTab,
-        } = this.props
+        const { colSize1 = 4, colSize2 = 12, createPresentationTab = _createPresentationTab } = this.props
         const { options } = this.state
-        const { color, outline, href, size, arrow, right, rounded, roundless } =
-            options
+        const { color, outline, href, size, arrow, right, rounded, roundless } = options
 
         const code = generateCode('Badge', options)
 

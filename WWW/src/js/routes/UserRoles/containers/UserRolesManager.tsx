@@ -1,8 +1,5 @@
 import * as React from 'react'
-import {
-    selectors as commonSelectors,
-    actions as commonActions,
-} from '../../../reducers/roles'
+import { selectors as commonSelectors, actions as commonActions } from '../../../reducers/roles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 

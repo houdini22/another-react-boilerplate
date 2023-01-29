@@ -19,8 +19,7 @@
             }
         }
 
-        .component-dropdown__dropdown-menu__items
-            > .component-dropdown__dropdown-menu__items__item {
+        .component-dropdown__dropdown-menu__items > .component-dropdown__dropdown-menu__items__item {
             .component-dropdown__dropdown-menu__items__item__submenu {
                 position: absolute;
                 top: 0;
@@ -110,6 +109,13 @@
                     }
                 }
 
+                &.component-dropdown__dropdown-menu__items__item--color-danger {
+                    & > a {
+                        color: $danger_text_color;
+                        background: $danger;
+                    }
+                }
+
                 &.component-dropdown__dropdown-menu__items__item--highlighted {
                     background-color: $default !important;
                     & > a:hover {
@@ -139,9 +145,7 @@
                     }
                 }
 
-                &:not(
-                        .component-dropdown__dropdown-menu__items__item--type-header
-                    ):not(
+                &:not(.component-dropdown__dropdown-menu__items__item--type-header):not(
                         .component-dropdown__dropdown-menu__items__item--type-disabled
                     ) {
                     a {
@@ -149,9 +153,7 @@
                     }
                 }
 
-                svg:not(
-                        .component-dropdown__dropdown-menu__items__item__sub-menu-icon
-                    ) {
+                svg:not(.component-dropdown__dropdown-menu__items__item__sub-menu-icon) {
                     margin-right: 12px;
                     float: left;
                     top: 0;
@@ -244,9 +246,7 @@
                         }
                     }
 
-                    &:not(
-                            .component-dropdown__dropdown-menu__items__item--type-header
-                        ):not(
+                    &:not(.component-dropdown__dropdown-menu__items__item--type-header):not(
                             .component-dropdown__dropdown-menu__items__item--type-disabled
                         ) {
                         a:hover {
@@ -294,9 +294,7 @@
                         }
                     }
 
-                    &:not(
-                            .component-dropdown__dropdown-menu__items__item--type-header
-                        ):not(
+                    &:not(.component-dropdown__dropdown-menu__items__item--type-header):not(
                             .component-dropdown__dropdown-menu__items__item--type-disabled
                         ) {
                         a:hover {
@@ -344,9 +342,7 @@
                         }
                     }
 
-                    &:not(
-                            .component-dropdown__dropdown-menu__items__item--type-header
-                        ):not(
+                    &:not(.component-dropdown__dropdown-menu__items__item--type-header):not(
                             .component-dropdown__dropdown-menu__items__item--type-disabled
                         ) {
                         a:hover {
@@ -394,9 +390,7 @@
                         }
                     }
 
-                    &:not(
-                            .component-dropdown__dropdown-menu__items__item--type-header
-                        ):not(
+                    &:not(.component-dropdown__dropdown-menu__items__item--type-header):not(
                             .component-dropdown__dropdown-menu__items__item--type-disabled
                         ) {
                         a:hover {
@@ -444,9 +438,7 @@
                         }
                     }
 
-                    &:not(
-                            .component-dropdown__dropdown-menu__items__item--type-header
-                        ):not(
+                    &:not(.component-dropdown__dropdown-menu__items__item--type-header):not(
                             .component-dropdown__dropdown-menu__items__item--type-disabled
                         ) {
                         a:hover {
@@ -494,9 +486,7 @@
                         }
                     }
 
-                    &:not(
-                            .component-dropdown__dropdown-menu__items__item--type-header
-                        ):not(
+                    &:not(.component-dropdown__dropdown-menu__items__item--type-header):not(
                             .component-dropdown__dropdown-menu__items__item--type-disabled
                         ) {
                         a:hover {
@@ -509,8 +499,7 @@
     }
 
     &.component-dropdown--placement-left {
-        .component-dropdown__dropdown-menu__items
-            > .component-dropdown__dropdown-menu__items__item {
+        .component-dropdown__dropdown-menu__items > .component-dropdown__dropdown-menu__items__item {
             &:hover {
                 & > .component-dropdown__dropdown-menu__items__item__submenu {
                     & > .component-dropdown__dropdown-menu__items {
@@ -530,8 +519,7 @@
                 right: 0;
             }
         }
-        .component-dropdown__dropdown-menu__items
-            > .component-dropdown__dropdown-menu__items__item {
+        .component-dropdown__dropdown-menu__items > .component-dropdown__dropdown-menu__items__item {
             &:hover {
                 & > .component-dropdown__dropdown-menu__items__item__submenu {
                     & > .component-dropdown__dropdown-menu__items {

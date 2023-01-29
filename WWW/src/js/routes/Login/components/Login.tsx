@@ -14,33 +14,20 @@ export class LoginView extends React.Component {
                         {({ query: { msg } }) => (
                             <PageContent>
                                 {msg === 'not_authenticated' && (
-                                    <Alert
-                                        color="danger"
-                                        className="error-message"
-                                    >
+                                    <Alert color="danger" className="error-message">
                                         Akcja wymaga zalogowania!
                                     </Alert>
                                 )}
-                                {msg === 'logged_off' && (
-                                    <Alert color="info">
-                                        Zostałeś wylogowany!
-                                    </Alert>
-                                )}
+                                {msg === 'logged_off' && <Alert color="info">Zostałeś wylogowany!</Alert>}
                                 <div className="login__login-container-outer">
                                     <div className="login__login-container-inner">
                                         {loginError && (
-                                            <Alert
-                                                color="danger"
-                                                className="error-message"
-                                            >
+                                            <Alert color="danger" className="error-message">
                                                 Złe dane logowania!
                                             </Alert>
                                         )}
                                         {isLoggedIn && (
-                                            <Alert
-                                                color="success"
-                                                className="success-message"
-                                            >
+                                            <Alert color="success" className="success-message">
                                                 Jesteś zalogowany!
                                             </Alert>
                                         )}

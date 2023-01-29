@@ -9,10 +9,7 @@ class NotificationsView extends React.Component {
     render() {
         return (
             <PageContent>
-                <ComponentsPageHeader
-                    title="Notifications"
-                    component="Notifications"
-                />
+                <ComponentsPageHeader title="Notifications" component="Notifications" />
                 <Section>
                     <Row>
                         <Col xs={12}>

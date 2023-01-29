@@ -13,20 +13,8 @@ export class AddCategoryView extends React.Component {
                     <PageContent>
                         <Header title="Add Document" />
                         <Manager>
-                            {({
-                                nodes,
-                                currentNode,
-                                isLoading,
-                                isLoaded,
-                                fetchError,
-                            }) => {
-                                console.log(
-                                    nodes,
-                                    currentNode,
-                                    isLoaded,
-                                    isLoading,
-                                    fetchError,
-                                )
+                            {({ nodes, currentNode, isLoading, isLoaded, fetchError }) => {
+                                console.log(nodes, currentNode, isLoaded, isLoading, fetchError)
                             }}
                         </Manager>
                         <AddDocumentFormContainer />

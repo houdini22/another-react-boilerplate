@@ -15,9 +15,7 @@ class Section extends React.Component<SectionProps> {
 
         return (
             <div className={cx('component-section')} style={style}>
-                <div className={cx('component-section__content')}>
-                    {children}
-                </div>
+                <div className={cx('component-section__content')}>{children}</div>
             </div>
         )
     }

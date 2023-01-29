@@ -8,10 +8,7 @@ import { FaInfoCircle } from 'react-icons/fa'
 import { TiWarning } from 'react-icons/ti'
 import { CgDanger } from 'react-icons/cg'
 import { AiTwotoneLike } from 'react-icons/ai'
-import {
-    selectors as commonSelectors,
-    ToastNotification,
-} from '../../../reducers/notifications'
+import { selectors as commonSelectors, ToastNotification } from '../../../reducers/notifications'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -53,53 +50,41 @@ class NotificationsBase extends React.Component<NotificationsProps> {
             <div className={cx('layout__notifications')}>
                 <div className={cx('layout__notifications__container')}>
                     <ul>
-                        {toastNotifications.map(
-                            ({ id, type, text, title, href }) => {
-                                return (
-                                    <li
-                                        className={cx(
-                                            'layout__notifications__container__notification',
-                                            'animation--sweet-show',
-                                            {
-                                                [cx(
-                                                    `layout__notifications__container__notification--color-${type}`,
-                                                )]: type,
-                                            },
-                                        )}
-                                    >
-                                        <Link to={href}>
+                        {toastNotifications.map(({ id, type, text, title, href }) => {
+                            return (
+                                <li
+                                    className={cx(
+                                        'layout__notifications__container__notification',
+                                        'animation--sweet-show',
+                                        {
+                                            [cx(`layout__notifications__container__notification--color-${type}`)]: type,
+                                        },
+                                    )}
+                                >
+                                    <Link to={href}>
+                                        <span className={cx('layout__notifications__container__notification__icon')}>
+                                            {this.getIcon(type)}
+                                        </span>
+                                        <span className={cx('layout__notifications__container__notification__content')}>
                                             <span
                                                 className={cx(
-                                                    'layout__notifications__container__notification__icon',
+                                                    'layout__notifications__container__notification__content__title',
                                                 )}
                                             >
-                                                {this.getIcon(type)}
+                                                {title}
                                             </span>
                                             <span
                                                 className={cx(
-                                                    'layout__notifications__container__notification__content',
+                                                    'layout__notifications__container__notification__content__text',
                                                 )}
                                             >
-                                                <span
-                                                    className={cx(
-                                                        'layout__notifications__container__notification__content__title',
-                                                    )}
-                                                >
-                                                    {title}
-                                                </span>
-                                                <span
-                                                    className={cx(
-                                                        'layout__notifications__container__notification__content__text',
-                                                    )}
-                                                >
-                                                    {text}
-                                                </span>
+                                                {text}
                                             </span>
-                                        </Link>
-                                    </li>
-                                )
-                            },
-                        )}
+                                        </span>
+                                    </Link>
+                                </li>
+                            )
+                        })}
                     </ul>
                 </div>
             </div>

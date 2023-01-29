@@ -12,18 +12,8 @@ class EditForm extends React.Component {
 
         return (
             <form onSubmit={handleSubmit}>
-                <Field
-                    name="name"
-                    label="Name"
-                    type="text"
-                    component={FormField}
-                />
-                <Field
-                    name="guard_name"
-                    label="Guard Name"
-                    type="text"
-                    component={FormField}
-                />
+                <Field name="name" label="Name" type="text" component={FormField} />
+                <Field name="guard_name" label="Guard Name" type="text" component={FormField} />
                 <Button color="success" type="submit" block>
                     Save
                 </Button>

@@ -1,10 +1,7 @@
 import * as React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {
-    selectors as authSelectors,
-    actions as authActions,
-} from '../../reducers/auth'
+import { selectors as authSelectors, actions as authActions } from '../../reducers/auth'
 
 interface AuthManagerProps {
     auth: object
@@ -37,10 +34,7 @@ const mapDispatchToProps = (dispatch) => {
     )
 }
 
-const AuthManager = connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(AuthManagerBase)
+const AuthManager = connect(mapStateToProps, mapDispatchToProps)(AuthManagerBase)
 
 export { AuthManager }
 export default { AuthManager }

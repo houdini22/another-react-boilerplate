@@ -105,16 +105,8 @@ class Alert extends React.Component<AlertProps> {
                 {...props}
             >
                 {withIcon && (
-                    <div
-                        className={cx('component-alert__icon-container--outer')}
-                    >
-                        <div
-                            className={cx(
-                                'component-alert__icon-container--inner',
-                            )}
-                        >
-                            {withIcon}
-                        </div>
+                    <div className={cx('component-alert__icon-container--outer')}>
+                        <div className={cx('component-alert__icon-container--inner')}>{withIcon}</div>
                     </div>
                 )}
                 <div className={cx('component-alert__content')}>{children}</div>
@@ -132,9 +124,7 @@ class Alert extends React.Component<AlertProps> {
                             }
                         }}
                     >
-                        <CloseIcon
-                            className={cx('component--alert__close-icon__icon')}
-                        />
+                        <CloseIcon className={cx('component--alert__close-icon__icon')} />
                     </div>
                 )}
                 {isLoading && <LoadingOverlay size="xs" />}

@@ -51,9 +51,8 @@ class Label extends React.Component<LabelProps> {
             [`component-label--striped`]: striped,
             [`component-label--outline`]: outline,
             [`component-label--arrow`]: arrow,
-            [`component-label--size-${
-                dropdownSize || cardSize || accordionSize || size
-            }`]: dropdownSize || cardSize || accordionSize || size,
+            [`component-label--size-${dropdownSize || cardSize || accordionSize || size}`]:
+                dropdownSize || cardSize || accordionSize || size,
         })
     }
 
@@ -102,9 +101,7 @@ class Label extends React.Component<LabelProps> {
                     return (
                         <div
                             className={this.renderClassName(
-                                disableContext
-                                    ? {}
-                                    : { cardSize, dropdownSize, accordionSize },
+                                disableContext ? {} : { cardSize, dropdownSize, accordionSize },
                             )}
                             {...props}
                         >

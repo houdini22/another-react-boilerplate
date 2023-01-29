@@ -3,19 +3,11 @@ import { connect } from 'react-redux'
 import ContactForm from './ContactForm'
 import { bindActionCreators, compose } from 'redux'
 import { withRouter } from '../../../helpers/router'
-import {
-    http,
-    processAPIerrorResponseToFormErrors,
-} from '../../../modules/http'
+import { http, processAPIerrorResponseToFormErrors } from '../../../modules/http'
 import { actions, selectors } from '../../../reducers/contactform'
 
 const onSubmit = (values, dispatch, props) => {
-    const {
-        reset,
-        setContactFormIsLoading,
-        setContactFormMessage,
-        resetContactFormCaptcha,
-    } = props
+    const { reset, setContactFormIsLoading, setContactFormMessage, resetContactFormCaptcha } = props
 
     setContactFormIsLoading(true)
     setContactFormMessage({
@@ -41,9 +33,7 @@ const onSubmit = (values, dispatch, props) => {
             })
             setContactFormIsLoading(false)
             resetContactFormCaptcha()
-            throw new SubmissionError(
-                processAPIerrorResponseToFormErrors(response),
-            )
+            throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
         })
 }
 export const FORM_NAME = 'ContactForm'

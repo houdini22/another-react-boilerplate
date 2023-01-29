@@ -56,20 +56,9 @@ class LabelView extends React.Component<LabelViewProps, LabelViewState> {
     }
 
     render() {
-        const { colSize1 = 4, createPresentationTab = _createPresentationTab } =
-            this.props
+        const { colSize1 = 4, createPresentationTab = _createPresentationTab } = this.props
         const { options } = this.state
-        const {
-            color,
-            size,
-            rounded,
-            roundless,
-            block,
-            href,
-            striped,
-            outline,
-            arrow,
-        } = options
+        const { color, size, rounded, roundless, block, href, striped, outline, arrow } = options
 
         return (
             <PageContent>
@@ -77,10 +66,7 @@ class LabelView extends React.Component<LabelViewProps, LabelViewState> {
                 <Row>
                     <Col xs={12} md={6}>
                         <Section>
-                            <LabelFormContainer
-                                options={options}
-                                setOptions={this.setOptions}
-                            />
+                            <LabelFormContainer options={options} setOptions={this.setOptions} />
                         </Section>
                     </Col>
                     <Col xs={12} md={6}>

@@ -12,20 +12,10 @@ class PopoverForm extends React.Component {
 
         return (
             <form>
-                <Field
-                    name="updateCount"
-                    type="hidden"
-                    component={FormField}
-                    inputOnly
-                />
+                <Field name="updateCount" type="hidden" component={FormField} inputOnly />
                 <Row>
                     <Col xs={12}>
-                        <Tabs.Container
-                            color="default"
-                            left
-                            solid
-                            header="Options"
-                        >
+                        <Tabs.Container color="default" left solid header="Options">
                             <Tabs.Tab name="presentation">
                                 <Tabs.Trigger>Presentation</Tabs.Trigger>
                                 <Tabs.Content>
@@ -85,12 +75,7 @@ class PopoverForm extends React.Component {
                                             />
                                         </Col>
                                         <Col xs={12}>
-                                            <Field
-                                                name="clean"
-                                                label="clean"
-                                                type="checkbox"
-                                                component={FormField}
-                                            />
+                                            <Field name="clean" label="clean" type="checkbox" component={FormField} />
                                         </Col>
                                         <Col xs={12}>
                                             <Field

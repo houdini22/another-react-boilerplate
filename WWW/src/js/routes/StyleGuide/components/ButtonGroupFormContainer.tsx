@@ -18,10 +18,7 @@ const onChange = (values, dispatch, props) => {
     } else if (options['roundless'] && newValues['rounded']) {
         newValues['roundless'] = false
     }
-    if (
-        !_.isEqual(options, newValues) &&
-        newValues['updateCount'] === options['updateCount']
-    ) {
+    if (!_.isEqual(options, newValues) && newValues['updateCount'] === options['updateCount']) {
         setOptions(newValues)
     }
 }

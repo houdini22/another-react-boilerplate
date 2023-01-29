@@ -12,12 +12,7 @@ class NotificationsForm extends React.Component {
 
         return (
             <form>
-                <Field
-                    name="updateCount"
-                    type="hidden"
-                    component={FormField}
-                    inputOnly
-                />
+                <Field name="updateCount" type="hidden" component={FormField} inputOnly />
                 <Tabs.Container color="default" left solid header="Options">
                     <Tabs.Tab name="presentation">
                         <Tabs.Trigger>Presentation</Tabs.Trigger>
@@ -62,28 +57,13 @@ class NotificationsForm extends React.Component {
                                     />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="title"
-                                        label="title"
-                                        type="text"
-                                        component={FormField}
-                                    />
+                                    <Field name="title" label="title" type="text" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="text"
-                                        label="text"
-                                        type="text"
-                                        component={FormField}
-                                    />
+                                    <Field name="text" label="text" type="text" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="href"
-                                        label="href"
-                                        type="text"
-                                        component={FormField}
-                                    />
+                                    <Field name="href" label="href" type="text" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
                                     <Button onClick={handleSubmit} block>

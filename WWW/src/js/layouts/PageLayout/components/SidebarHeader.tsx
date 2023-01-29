@@ -3,10 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { MdViewHeadline as ToggleIcon } from 'react-icons/md'
-import {
-    selectors as commonSelectors,
-    actions as commonActions,
-} from '../../../reducers/common'
+import { selectors as commonSelectors, actions as commonActions } from '../../../reducers/common'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/layout/_layout.scss'
 import { SidebarHeaderNotifications } from './SidebarHeaderNotifications'
@@ -47,9 +44,7 @@ class SidebarHeaderBase extends React.Component<SidebarHeaderProps> {
                     }}
                 >
                     <Link to="/">
-                        <h1 className={cx('layout__header__logo__brand')}>
-                            {children}
-                        </h1>
+                        <h1 className={cx('layout__header__logo__brand')}>{children}</h1>
                     </Link>
                     <span
                         className={cx('layout__header__logo__toggle')}

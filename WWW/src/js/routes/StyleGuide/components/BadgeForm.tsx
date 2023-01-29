@@ -10,12 +10,7 @@ class BadgeForm extends React.Component {
     render() {
         return (
             <form>
-                <Field
-                    name="updateCount"
-                    type="hidden"
-                    component={FormField}
-                    inputOnly
-                />
+                <Field name="updateCount" type="hidden" component={FormField} inputOnly />
                 <Tabs.Container color="default" left solid header="Options">
                     <Tabs.Tab name="presentation">
                         <Tabs.Trigger>Presentation</Tabs.Trigger>
@@ -82,44 +77,19 @@ class BadgeForm extends React.Component {
                                     />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="outline"
-                                        label="outline"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="outline" label="outline" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="href"
-                                        label="href"
-                                        type="text"
-                                        component={FormField}
-                                    />
+                                    <Field name="href" label="href" type="text" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="arrow"
-                                        label="arrow"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="arrow" label="arrow" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="rounded"
-                                        label="rounded"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="rounded" label="rounded" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="roundless"
-                                        label="roundless"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="roundless" label="roundless" type="checkbox" component={FormField} />
                                 </Col>
                             </Row>
                         </Tabs.Content>

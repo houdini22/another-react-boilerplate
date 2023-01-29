@@ -23,16 +23,7 @@ interface BadgeProps {
 
 class Badge extends React.Component<BadgeProps> {
     renderClassName({ cardSize, dropdownSize, accordionSize } = {}) {
-        const {
-            color = 'default',
-            className,
-            outline,
-            href,
-            size,
-            arrow,
-            rounded,
-            roundless,
-        } = this.props
+        const { color = 'default', className, outline, href, size, arrow, rounded, roundless } = this.props
 
         return cx('component-badge', {
             [className]: className,
@@ -42,9 +33,8 @@ class Badge extends React.Component<BadgeProps> {
             [`component-badge--arrow`]: arrow,
             [`component-badge--rounded`]: rounded,
             [`component-badge--roundless`]: roundless,
-            [`component-badge--size-${
-                dropdownSize || cardSize || accordionSize || size
-            }`]: dropdownSize || cardSize || accordionSize || size,
+            [`component-badge--size-${dropdownSize || cardSize || accordionSize || size}`]:
+                dropdownSize || cardSize || accordionSize || size,
         })
     }
 
@@ -80,13 +70,7 @@ class Badge extends React.Component<BadgeProps> {
                                 to={href}
                             >
                                 {children}
-                                {arrow && (
-                                    <ArrowIcon
-                                        className={cx(
-                                            'component-badge__arrow-icon',
-                                        )}
-                                    />
-                                )}
+                                {arrow && <ArrowIcon className={cx('component-badge__arrow-icon')} />}
                             </Link>
                         )
                     }
@@ -94,20 +78,12 @@ class Badge extends React.Component<BadgeProps> {
                     return (
                         <div
                             className={this.renderClassName(
-                                disableContext
-                                    ? {}
-                                    : { cardSize, dropdownSize, accordionSize },
+                                disableContext ? {} : { cardSize, dropdownSize, accordionSize },
                             )}
                             {...props}
                         >
                             {children}
-                            {arrow && (
-                                <ArrowIcon
-                                    className={cx(
-                                        'component-badge__arrow-icon',
-                                    )}
-                                />
-                            )}
+                            {arrow && <ArrowIcon className={cx('component-badge__arrow-icon')} />}
                         </div>
                     )
                 }}

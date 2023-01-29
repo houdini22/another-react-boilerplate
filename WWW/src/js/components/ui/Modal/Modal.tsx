@@ -19,8 +19,7 @@ interface ModalContainerProps {
 
 class ModalContainer extends React.Component<ModalContainerProps> {
     render() {
-        const { children, animation, color, size, placement, visible } =
-            this.props
+        const { children, animation, color, size, placement, visible } = this.props
 
         if (!visible) return null
 
@@ -29,21 +28,12 @@ class ModalContainer extends React.Component<ModalContainerProps> {
                 <div
                     className={cx('component-modal-container__modal', {
                         [`animation--${animation}`]: animation,
-                        [`component-modal-container__modal--color-${color}`]:
-                            color,
-                        [`component-modal-container__modal--size-${size}`]:
-                            size,
-                        [`component-modal-container__modal--placement-${placement}`]:
-                            placement,
+                        [`component-modal-container__modal--color-${color}`]: color,
+                        [`component-modal-container__modal--size-${size}`]: size,
+                        [`component-modal-container__modal--placement-${placement}`]: placement,
                     })}
                 >
-                    <div
-                        className={cx(
-                            'component-modal-container__modal__content',
-                        )}
-                    >
-                        {children}
-                    </div>
+                    <div className={cx('component-modal-container__modal__content')}>{children}</div>
                 </div>
             </div>,
             document.body,
@@ -61,11 +51,7 @@ class ModalBody extends React.Component<ModalBodyProps> {
         const { children, close } = this.props
 
         return (
-            <div
-                className={cx(
-                    'component-modal-container__modal__content__body',
-                )}
-            >
+            <div className={cx('component-modal-container__modal__content__body')}>
                 {_.isFunction(children) && children({ close })}
                 {!_.isFunction(children) && children}
             </div>
@@ -84,24 +70,14 @@ class ModalHeader extends React.Component<ModalHeaderProps> {
         const { children, closeIcon, close } = this.props
 
         return (
-            <div
-                className={cx(
-                    'component-modal-container__modal__content__title',
-                )}
-            >
-                <h2
-                    className={cx(
-                        'component-modal-container__modal__content__title__title',
-                    )}
-                >
+            <div className={cx('component-modal-container__modal__content__title')}>
+                <h2 className={cx('component-modal-container__modal__content__title__title')}>
                     {_.isFunction(children) && children({ close })}
                     {!_.isFunction(children) && children}
                 </h2>
                 {closeIcon && (
                     <div
-                        className={cx(
-                            'component-modal-container__modal__content__title__close-icon',
-                        )}
+                        className={cx('component-modal-container__modal__content__title__close-icon')}
                         onClick={() => close()}
                     >
                         <CloseIcon />
@@ -122,11 +98,7 @@ class ModalFooter extends React.Component<ModalFooterProps> {
         const { children, close } = this.props
 
         return (
-            <div
-                className={cx(
-                    'component-modal-container__modal__content__footer',
-                )}
-            >
+            <div className={cx('component-modal-container__modal__content__footer')}>
                 {_.isFunction(children) && children({ close })}
                 {!_.isFunction(children) && children}
             </div>

@@ -10,12 +10,7 @@ class LabelForm extends React.Component {
     render() {
         return (
             <form>
-                <Field
-                    name="updateCount"
-                    type="hidden"
-                    component={FormField}
-                    inputOnly
-                />
+                <Field name="updateCount" type="hidden" component={FormField} inputOnly />
                 <Tabs.Container color="default" left solid header="Options">
                     <Tabs.Tab name="presentation">
                         <Tabs.Trigger>Presentation</Tabs.Trigger>
@@ -82,60 +77,25 @@ class LabelForm extends React.Component {
                                     />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="href"
-                                        label="Href"
-                                        type="text"
-                                        component={FormField}
-                                    />
+                                    <Field name="href" label="Href" type="text" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="rounded"
-                                        label="Rounded"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="rounded" label="Rounded" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="roundless"
-                                        label="Roundless"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="roundless" label="Roundless" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="block"
-                                        label="Block"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="block" label="Block" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="striped"
-                                        label="Striped"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="striped" label="Striped" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="outline"
-                                        label="Outline"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="outline" label="Outline" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="arrow"
-                                        label="Arrow"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="arrow" label="Arrow" type="checkbox" component={FormField} />
                                 </Col>
                             </Row>
                         </Tabs.Content>
@@ -145,12 +105,7 @@ class LabelForm extends React.Component {
                         <Tabs.Content>
                             <Row>
                                 <Col xs={12}>
-                                    <Field
-                                        name="isLoading"
-                                        label="Is Loading"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="isLoading" label="Is Loading" type="checkbox" component={FormField} />
                                 </Col>
                             </Row>
                         </Tabs.Content>

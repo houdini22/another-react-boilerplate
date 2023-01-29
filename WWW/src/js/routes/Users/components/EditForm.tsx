@@ -12,30 +12,10 @@ class EditForm extends React.Component {
 
         return (
             <form onSubmit={handleSubmit}>
-                <Field
-                    name="name"
-                    label="Name"
-                    type="text"
-                    component={FormField}
-                />
-                <Field
-                    name="email"
-                    label="Email"
-                    type="text"
-                    component={FormField}
-                />
-                <Field
-                    name="password"
-                    label="Password"
-                    type="password"
-                    component={FormField}
-                />
-                <Field
-                    name="confirm_password"
-                    label="Confirm password"
-                    type="password"
-                    component={FormField}
-                />
+                <Field name="name" label="Name" type="text" component={FormField} />
+                <Field name="email" label="Email" type="text" component={FormField} />
+                <Field name="password" label="Password" type="password" component={FormField} />
+                <Field name="confirm_password" label="Confirm password" type="password" component={FormField} />
                 <Field
                     name="status"
                     label="Status"

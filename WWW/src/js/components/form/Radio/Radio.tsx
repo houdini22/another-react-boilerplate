@@ -59,9 +59,7 @@ class Radio extends React.Component<RadioProps, RadioState> {
                         {() => {
                             return (
                                 <span className={cx('animation--fade-in')}>
-                                    <span
-                                        className={cx('component-radio__dot')}
-                                    />
+                                    <span className={cx('component-radio__dot')} />
                                 </span>
                             )
                         }}

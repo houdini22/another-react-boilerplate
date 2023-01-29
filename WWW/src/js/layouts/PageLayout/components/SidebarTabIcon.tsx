@@ -16,10 +16,7 @@ interface SidebarTabIconState {
     hover: boolean
 }
 
-class SidebarTabIcon extends React.Component<
-    SidebarTabIconProps,
-    SidebarTabIconState
-> {
+class SidebarTabIcon extends React.Component<SidebarTabIconProps, SidebarTabIconState> {
     constructor(props) {
         super(props)
         this.state = {
@@ -48,18 +45,12 @@ class SidebarTabIcon extends React.Component<
                 <div className={cx('sidebar-tab-icon__icon-box-icon')}>
                     {icon}
                     {typeof iconCount !== 'undefined' && (
-                        <Badge
-                            color={iconCountColor}
-                            className={cx('sidebar-tab-icon__icon-badge')}
-                            size="sm"
-                        >
+                        <Badge color={iconCountColor} className={cx('sidebar-tab-icon__icon-badge')} size="sm">
                             {iconCount}
                         </Badge>
                     )}
                 </div>
-                <div className={cx('sidebar-tab-icon__icon-box-caption')}>
-                    {children}
-                </div>
+                <div className={cx('sidebar-tab-icon__icon-box-caption')}>{children}</div>
             </div>
         )
     }

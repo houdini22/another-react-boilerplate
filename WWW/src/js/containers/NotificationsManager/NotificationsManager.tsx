@@ -1,8 +1,5 @@
 import * as React from 'react'
-import {
-    selectors as commonSelectors,
-    actions as commonActions,
-} from '../../reducers/notifications'
+import { selectors as commonSelectors, actions as commonActions } from '../../reducers/notifications'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 

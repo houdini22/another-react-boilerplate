@@ -1,15 +1,6 @@
 import * as React from 'react'
 import { RouteManager } from '../../../containers/RouteManager'
-import {
-    Alert,
-    Button,
-    Card,
-    Dropdown,
-    LoadingOverlay,
-    Modal,
-    PageHeader,
-    Table,
-} from '../../../components'
+import { Alert, Button, Card, Dropdown, LoadingOverlay, Modal, PageHeader, Table } from '../../../components'
 import { UserRolesManager } from '../containers/UserRolesManager'
 import { AddIcon } from '../../../components/icons'
 import { EditFormContainer } from './EditFormContainer'
@@ -45,15 +36,11 @@ export class AddModalView extends React.Component<EditModalViewProps> {
                                                 onSubmit={(values, props) => {
                                                     return addRole(values).then(
                                                         (data) => {
-                                                            fetch().then(() =>
-                                                                close(),
-                                                            )
+                                                            fetch().then(() => close())
                                                         },
                                                         (response) => {
                                                             throw new SubmissionError(
-                                                                processAPIerrorResponseToFormErrors(
-                                                                    response,
-                                                                ),
+                                                                processAPIerrorResponseToFormErrors(response),
                                                             )
                                                         },
                                                     )

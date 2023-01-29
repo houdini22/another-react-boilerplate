@@ -105,53 +105,17 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
                 case 'bottom-end':
                     return top + elementHeight + 10 + scrollTop
                 case 'right-start':
-                    return (
-                        top +
-                        elementHeight / 2 -
-                        tooltipHeight / 2 +
-                        scrollTop -
-                        18
-                    )
+                    return top + elementHeight / 2 - tooltipHeight / 2 + scrollTop - 18
                 case 'right':
-                    return (
-                        top +
-                        elementHeight / 2 -
-                        tooltipHeight / 2 +
-                        scrollTop -
-                        6
-                    )
+                    return top + elementHeight / 2 - tooltipHeight / 2 + scrollTop - 6
                 case 'right-end':
-                    return (
-                        top +
-                        elementHeight / 2 -
-                        tooltipHeight / 2 +
-                        scrollTop +
-                        6
-                    )
+                    return top + elementHeight / 2 - tooltipHeight / 2 + scrollTop + 6
                 case 'left-start':
-                    return (
-                        top +
-                        elementHeight / 2 -
-                        tooltipHeight / 2 +
-                        scrollTop -
-                        18
-                    )
+                    return top + elementHeight / 2 - tooltipHeight / 2 + scrollTop - 18
                 case 'left':
-                    return (
-                        top +
-                        elementHeight / 2 -
-                        tooltipHeight / 2 +
-                        scrollTop -
-                        6
-                    )
+                    return top + elementHeight / 2 - tooltipHeight / 2 + scrollTop - 6
                 case 'left-end':
-                    return (
-                        top +
-                        elementHeight / 2 -
-                        tooltipHeight / 2 +
-                        scrollTop +
-                        6
-                    )
+                    return top + elementHeight / 2 - tooltipHeight / 2 + scrollTop + 6
             }
         }
         return 0

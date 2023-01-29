@@ -21,10 +21,7 @@ interface NavigationLinkState {
     expanded: boolean
 }
 
-class NavigationLink extends React.Component<
-    NavigationLinkProps,
-    NavigationLinkState
-> {
+class NavigationLink extends React.Component<NavigationLinkProps, NavigationLinkState> {
     constructor(props) {
         super(props)
         this.state = {
@@ -38,13 +35,9 @@ class NavigationLink extends React.Component<
 
         return (
             <li
-                className={cx(
-                    'layout__sidebar__content__navigation__links__link',
-                    {
-                        'layout__sidebar__content__navigation__links__link--active':
-                            active,
-                    },
-                )}
+                className={cx('layout__sidebar__content__navigation__links__link', {
+                    'layout__sidebar__content__navigation__links__link--active': active,
+                })}
             >
                 <Link
                     to={href}
@@ -57,35 +50,19 @@ class NavigationLink extends React.Component<
                     }}
                 >
                     <div>
-                        <span
-                            className={cx(
-                                'layout__sidebar__content__navigation__links__link__icon',
-                            )}
-                        >
-                            {icon}
-                        </span>
-                        <span
-                            className={cx(
-                                'layout__sidebar__content__navigation__links__link__caption',
-                            )}
-                        >
+                        <span className={cx('layout__sidebar__content__navigation__links__link__icon')}>{icon}</span>
+                        <span className={cx('layout__sidebar__content__navigation__links__link__caption')}>
                             {children}
                         </span>
                         {!_.isEmpty(nested) && (
-                            <span
-                                className={cx(
-                                    'layout__sidebar__content__navigation__links__link__nested',
-                                )}
-                            >
+                            <span className={cx('layout__sidebar__content__navigation__links__link__nested')}>
                                 {!expanded && <AiOutlineRight />}
                                 {!!expanded && <AiOutlineDown />}
                             </span>
                         )}
                     </div>
                 </Link>
-                {!_.isEmpty(nested) && expanded && (
-                    <NavigationItems items={nested} />
-                )}
+                {!_.isEmpty(nested) && expanded && <NavigationItems items={nested} />}
             </li>
         )
     }

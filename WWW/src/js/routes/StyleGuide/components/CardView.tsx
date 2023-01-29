@@ -1,16 +1,6 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
-import {
-    Row,
-    Col,
-    Section,
-    Card,
-    Button,
-    Badge,
-    Label,
-    TextField,
-    Checkbox,
-} from '../../../components'
+import { Row, Col, Section, Card, Button, Badge, Label, TextField, Checkbox } from '../../../components'
 import { CardFormContainer } from './CardFormContainer'
 import { FaImage as CardIcon } from 'react-icons/fa'
 import { createPresentationTab as _createPresentationTab } from '../../../utils/tabs'
@@ -71,8 +61,7 @@ class CardView extends React.Component<CardViewProps, CardViewState> {
     }
 
     render() {
-        const { colSize1 = 4, createPresentationTab = _createPresentationTab } =
-            this.props
+        const { colSize1 = 4, createPresentationTab = _createPresentationTab } = this.props
         const { options } = this.state
         const {
             size,
@@ -94,10 +83,7 @@ class CardView extends React.Component<CardViewProps, CardViewState> {
                 <Row>
                     <Col xs={12} md={6}>
                         <Section>
-                            <CardFormContainer
-                                options={options}
-                                setOptions={this.setOptions}
-                            />
+                            <CardFormContainer options={options} setOptions={this.setOptions} />
                         </Section>
                     </Col>
                     <Col xs={12} md={6}>
@@ -166,10 +152,7 @@ class CardView extends React.Component<CardViewProps, CardViewState> {
                                     headerActions={
                                         headerActions
                                             ? [
-                                                  <Badge
-                                                      key="badge-info"
-                                                      color="info"
-                                                  >
+                                                  <Badge key="badge-info" color="info">
                                                       33
                                                   </Badge>,
 

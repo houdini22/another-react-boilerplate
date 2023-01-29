@@ -25,23 +25,9 @@ import {
 } from './ui/PageHeader'
 import { Breadcrumbs } from './ui/Breadcrumbs'
 import { Copyright } from './common/Copyright'
-import {
-    Container as PopoverContainer,
-    Trigger as PopoverTrigger,
-    Content as PopoverContent,
-} from './ui/Popover'
-import {
-    Container as TabContainer,
-    Content as TabContent,
-    Trigger as TabTrigger,
-    Tab,
-} from './ui/Tabs'
-import {
-    DropdownContainer,
-    DropdownTrigger,
-    DropdownMenu,
-    DropdownItem,
-} from './ui/Dropdown'
+import { Container as PopoverContainer, Trigger as PopoverTrigger, Content as PopoverContent } from './ui/Popover'
+import { Container as TabContainer, Content as TabContent, Trigger as TabTrigger, Tab } from './ui/Tabs'
+import { DropdownContainer, DropdownTrigger, DropdownMenu, DropdownItem } from './ui/Dropdown'
 import { Container as TypographyContainer } from './ui/Typography'
 import { Progress } from './ui/Progress'
 import {

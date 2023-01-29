@@ -44,9 +44,7 @@ class AddCategoryForm extends React.Component {
                                                     type="select"
                                                     component={FormField}
                                                     options={categories}
-                                                    placeholder={
-                                                        'Do not display menu'
-                                                    }
+                                                    placeholder={'Do not display menu'}
                                                 />
                                                 <Field
                                                     name="tree.tree_is_published"
@@ -74,10 +72,7 @@ class AddCategoryForm extends React.Component {
                                                 />
 
                                                 <div>
-                                                    <Button
-                                                        color="success"
-                                                        type="submit"
-                                                    >
+                                                    <Button color="success" type="submit">
                                                         Save
                                                     </Button>
                                                 </div>

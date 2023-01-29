@@ -2,10 +2,7 @@ import * as React from 'react'
 import classNames from 'classnames/bind'
 import _ from 'lodash'
 import { IoIosClose as CloseIcon } from 'react-icons/io'
-import {
-    FiMinimize2 as MinimizeIcon,
-    FiMaximize2 as MaximizeIcon,
-} from 'react-icons/fi'
+import { FiMinimize2 as MinimizeIcon, FiMaximize2 as MaximizeIcon } from 'react-icons/fi'
 import { Button } from '../Button'
 import { AppContext } from '../../../../index'
 import { LoadingOverlay } from '../LoadingOverlay'
@@ -102,18 +99,12 @@ class Card extends React.Component<CardProps> {
                         <div className={cx('component-card__header')}>
                             {_.isFunction(header) && header()}
                             {!_.isFunction(header) && header}
-                            <div
-                                className={cx(
-                                    'component-card__header__actions',
-                                )}
-                            >
+                            <div className={cx('component-card__header__actions')}>
                                 {_.isFunction(headerActions) &&
                                     headerActions({
                                         maximize: this.maximize,
                                     })}
-                                {!_.isFunction(headerActions) &&
-                                    !_.isEmpty(headerActions) &&
-                                    headerActions}
+                                {!_.isFunction(headerActions) && !_.isEmpty(headerActions) && headerActions}
                                 {withMinimizeIcon &&
                                     this.renderButton({
                                         href: '#',
@@ -127,14 +118,9 @@ class Card extends React.Component<CardProps> {
                                         outline: true,
                                         roundless: true,
                                         borderless: true,
-                                        icon: minimized ? (
-                                            <MaximizeIcon />
-                                        ) : (
-                                            <MinimizeIcon />
-                                        ),
+                                        icon: minimized ? <MaximizeIcon /> : <MinimizeIcon />,
                                         color,
-                                        className:
-                                            'component-card__header__actions__action-button',
+                                        className: 'component-card__header__actions__action-button',
                                         size,
                                     })}
                                 {withCloseIcon &&
@@ -156,8 +142,7 @@ class Card extends React.Component<CardProps> {
                                         borderless: true,
                                         icon: <CloseIcon />,
                                         color,
-                                        className:
-                                            'component-card__header__actions__action-button',
+                                        className: 'component-card__header__actions__action-button',
                                         size,
                                     })}
                             </div>
@@ -171,8 +156,7 @@ class Card extends React.Component<CardProps> {
                     </div>,
                     <div
                         className={cx('component-card__footer', {
-                            [`component-card__footer--type-${footerType}`]:
-                                footerType,
+                            [`component-card__footer--type-${footerType}`]: footerType,
                         })}
                     >
                         {_.isFunction(footer) && footer()}

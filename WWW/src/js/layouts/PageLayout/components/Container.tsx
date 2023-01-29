@@ -29,9 +29,7 @@ class ContainerBase extends React.Component<ContainerProps> {
                     'layout__container--sidebar-expanded': sidebarExpanded,
                 })}
             >
-                <div className={cx('layout__container__content')}>
-                    {children}
-                </div>
+                <div className={cx('layout__container__content')}>{children}</div>
                 <Footer floatingSidebar={floatingSidebar} />
             </div>
         )

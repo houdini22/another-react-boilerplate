@@ -1,9 +1,5 @@
 import * as React from 'react'
-import {
-    reduxForm,
-    getFormValues as getFormValuesRedux,
-    SubmissionError,
-} from 'redux-form'
+import { reduxForm, getFormValues as getFormValuesRedux, SubmissionError } from 'redux-form'
 import _ from 'lodash'
 import { processAPIerrorResponseToFormErrors } from '../../modules/http'
 import { ifDeepDiff, deepDiff } from '../javascript'
@@ -42,10 +38,7 @@ interface AutoSaveFormState {
     requestsToPerform: number
 }
 
-export class AutoSaveForm extends React.Component<
-    AutoSaveFormProps,
-    AutoSaveFormState
-> {
+export class AutoSaveForm extends React.Component<AutoSaveFormProps, AutoSaveFormState> {
     timeouts = {}
 
     errors = {}
@@ -74,8 +67,7 @@ export class AutoSaveForm extends React.Component<
     }
 
     componentDidMount() {
-        const { componentDidMount, initialValues, initialize, initialized } =
-            this.props
+        const { componentDidMount, initialValues, initialize, initialized } = this.props
         const _self = this
 
         if (_.isFunction(componentDidMount)) {
@@ -117,10 +109,7 @@ export class AutoSaveForm extends React.Component<
         if (!_.isEmpty(prevData) && !_.isEmpty(currentData)) {
             // data received... (prevProps['data'] can be undefined at initialization)
 
-            if (
-                ifDeepDiff(prevData, currentData) &&
-                !isFullOfUndefined(prevData)
-            ) {
+            if (ifDeepDiff(prevData, currentData) && !isFullOfUndefined(prevData)) {
                 // form values changed
                 const diff = deepDiff(prevData, currentData)
 
@@ -143,9 +132,7 @@ export class AutoSaveForm extends React.Component<
             }
         }
 
-        if (
-            prevState['requestsToPerform'] !== this.state['requestsToPerform']
-        ) {
+        if (prevState['requestsToPerform'] !== this.state['requestsToPerform']) {
             if (this.state['requestsToPerform'] === 0) {
                 if (_.isFunction(this.handlers['onUnlock'])) {
                     this.handlers['onUnlock']()
@@ -159,10 +146,7 @@ export class AutoSaveForm extends React.Component<
     }
 
     isRequestInProgress(fieldName) {
-        return (
-            this.timeouts[fieldName] &&
-            this.timeouts[fieldName]['requestInProgress']
-        )
+        return this.timeouts[fieldName] && this.timeouts[fieldName]['requestInProgress']
     }
 
     handleSave(newValues, increaseGlobal = true) {
@@ -198,21 +182,15 @@ export class AutoSaveForm extends React.Component<
                                 dispatch(stopSubmit(this.props.formName))
                                 resolve(response)
                             },
-                            ({
-                                response: { data: { alerts = [] } = {} } = {},
-                            } = {}) => {
+                            ({ response: { data: { alerts = [] } = {} } = {} } = {}) => {
                                 // its a hack for triggering validation errors - handleSubmit is called when the errors occur
                                 handleSubmit(() => {
-                                    const errors =
-                                        processAPIerrorResponseToFormErrors(
-                                            alerts,
-                                        )
+                                    const errors = processAPIerrorResponseToFormErrors(alerts)
 
                                     if (!_.isEmpty(errors)) {
                                         // save errors for preventing removing errors when next error is triggered
                                         Object.keys(errors).map((fieldName) => {
-                                            this.errors[fieldName] =
-                                                errors[fieldName]
+                                            this.errors[fieldName] = errors[fieldName]
                                         })
                                     } else {
                                         this.errors[name] = 'Server error.'
@@ -273,8 +251,7 @@ export class AutoSaveForm extends React.Component<
     }
 
     render() {
-        const { component: FormComponent, container: FormComponentContainer } =
-            this.props
+        const { component: FormComponent, container: FormComponentContainer } = this.props
 
         // it has container with APIClient logic
         if (FormComponentContainer) {
@@ -288,12 +265,7 @@ export class AutoSaveForm extends React.Component<
         }
 
         // only presentation component
-        return (
-            <FormComponent
-                {...this.props}
-                isRequestInProgress={this.isRequestInProgress}
-            />
-        )
+        return <FormComponent {...this.props} isRequestInProgress={this.isRequestInProgress} />
     }
 }
 
@@ -307,10 +279,7 @@ export class AutoSaveForm extends React.Component<
  * @param enableReinitialize
  * @returns {*}
  */
-export const prepareAutoSaveForm = (
-    component,
-    { name, save, change, container, enableReinitialize = false } = {},
-) => {
+export const prepareAutoSaveForm = (component, { name, save, change, container, enableReinitialize = false } = {}) => {
     const props = {
         save,
         onChange: change,

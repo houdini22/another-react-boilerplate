@@ -3,12 +3,7 @@ import { Row, Col, Card, Button } from '../components'
 import _ from 'lodash'
 import * as Copy from 'copy-to-clipboard'
 
-const createPresentationTab = (
-    options,
-    presentation,
-    code,
-    { colSize = 12, copy = true } = {},
-) => {
+const createPresentationTab = (options, presentation, code, { colSize = 12, copy = true } = {}) => {
     return (
         <Card
             header={<h1>Presentation</h1>}
@@ -38,12 +33,7 @@ const createPresentationTab = (
     )
 }
 
-const createSimplePresentation = (
-    header,
-    presentation,
-    code,
-    { colSize = 12, copy = true } = {},
-) => {
+const createSimplePresentation = (header, presentation, code, { colSize = 12, copy = true } = {}) => {
     return (
         <Col xs={colSize} className="presentation-tab-simple">
             <div>

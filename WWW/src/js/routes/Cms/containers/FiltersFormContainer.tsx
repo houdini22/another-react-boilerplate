@@ -1,11 +1,7 @@
 import * as React from 'react'
 import { bindActionCreators, compose } from 'redux'
 import { connect } from 'react-redux'
-import {
-    reduxForm,
-    getFormValues as getFormValuesRedux,
-    SubmissionError,
-} from 'redux-form'
+import { reduxForm, getFormValues as getFormValuesRedux, SubmissionError } from 'redux-form'
 import { getFormValues } from '../../../utils/forms/auto-save'
 import * as moment from 'moment'
 import { processAPIerrorResponseToFormErrors } from '../../../modules/http'

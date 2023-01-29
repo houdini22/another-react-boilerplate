@@ -150,8 +150,7 @@
 
                         & > span {
                             & > svg {
-                                font-size: #{$COMPONENT_ELEMENT_FONT_SIZE_LG *
-                                    1.3 / 1.3};
+                                font-size: #{$COMPONENT_ELEMENT_FONT_SIZE_LG * 1.3 / 1.3};
                             }
                         }
                     }
@@ -159,8 +158,7 @@
 
                 & > .component-tabs__tabs__header__triggers {
                     & > .component-tabs__tabs__header__triggers__trigger {
-                        &
-                            > .component-tabs__tabs__header__triggers__trigger__link {
+                        & > .component-tabs__tabs__header__triggers__trigger__link {
                             padding: $COMPONENT_ELEMENT_PADDING_LG;
 
                             a {
@@ -209,8 +207,7 @@
 
                 & > .component-tabs__tabs__header__triggers {
                     & > .component-tabs__tabs__header__triggers__trigger {
-                        &
-                            > .component-tabs__tabs__header__triggers__trigger__link {
+                        & > .component-tabs__tabs__header__triggers__trigger__link {
                             padding: $COMPONENT_ELEMENT_PADDING_MD;
 
                             a {
@@ -259,8 +256,7 @@
 
                 & > .component-tabs__tabs__header__triggers {
                     & > .component-tabs__tabs__header__triggers__trigger {
-                        &
-                            > .component-tabs__tabs__header__triggers__trigger__link {
+                        & > .component-tabs__tabs__header__triggers__trigger__link {
                             padding: $COMPONENT_ELEMENT_PADDING_SM;
 
                             a {
@@ -299,30 +295,24 @@
                 & > .component-tabs__tabs__header {
                     & > .component-tabs__tabs__header__title {
                         background: $default;
-                        border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                            solid $default;
-                        border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid
-                            $default;
+                        border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $default;
+                        border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $default;
                         color: $default_text_color;
                     }
 
                     & > .component-tabs__tabs__header__triggers {
                         & > .component-tabs__tabs__header__triggers__trigger {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger__link {
+                            & > .component-tabs__tabs__header__triggers__trigger__link {
                                 background: $default;
-                                border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                    solid $default;
-                                border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                    solid $default;
+                                border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $default;
+                                border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $default;
 
                                 & > a {
                                     color: $default_text_color;
                                 }
 
                                 &.component-tabs__tabs__header__triggers__trigger__link--is-active {
-                                    border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                        solid $default_DARKEN_X3;
+                                    border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $default_DARKEN_X3;
                                 }
                             }
                         }
@@ -341,10 +331,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-top: 2px solid $default;
                                         border-bottom: 2px solid $default;
                                     }
@@ -365,17 +353,14 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
+                                & > .component-tabs__tabs__header__triggers__trigger {
                                     &:last-child {
-                                        &
-                                            > .component-tabs__tabs__header__triggers__trigger__link {
+                                        & > .component-tabs__tabs__header__triggers__trigger__link {
                                             border-bottom-width: 0;
                                         }
                                     }
 
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border: 0 none;
                                         border-bottom: 2px solid $default;
                                     }
@@ -400,17 +385,14 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-bottom: 2px solid $default;
                                     }
                                 }
 
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border-left: 2px solid $default;
                                     border-right: 2px solid $default;
                                     border-top: 2px solid $default;
@@ -434,10 +416,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border: 2px solid $default;
                                     }
                                 }
@@ -451,11 +431,9 @@
                         & > .component-tabs__tabs {
                             & > .component-tabs__tabs__header {
                                 & > .component-tabs__tabs__header__triggers {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger {
                                         &:last-child {
-                                            &
-                                                > .component-tabs__tabs__header__triggers__trigger__link {
+                                            & > .component-tabs__tabs__header__triggers__trigger__link {
                                                 border-right: 0 none;
                                             }
                                         }
@@ -477,17 +455,14 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
+                                & > .component-tabs__tabs__header__triggers__trigger {
                                     &:first-child {
-                                        &
-                                            > .component-tabs__tabs__header__triggers__trigger__link {
+                                        & > .component-tabs__tabs__header__triggers__trigger__link {
                                             border-left: 0 none;
                                         }
                                     }
 
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-top: 0 none;
                                         border-bottom-width: 0;
                                     }
@@ -511,17 +486,14 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-right: 2px solid $default;
                                     }
                                 }
 
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border: 2px solid $default;
                                     border-right: 0 none;
                                     border-bottom-width: 0;
@@ -556,30 +528,24 @@
                 & > .component-tabs__tabs__header {
                     & > .component-tabs__tabs__header__title {
                         background: $primary;
-                        border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                            solid $primary;
-                        border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid
-                            $primary;
+                        border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $primary;
+                        border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $primary;
                         color: $primary_text_color;
                     }
 
                     & > .component-tabs__tabs__header__triggers {
                         & > .component-tabs__tabs__header__triggers__trigger {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger__link {
+                            & > .component-tabs__tabs__header__triggers__trigger__link {
                                 background: $primary;
-                                border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                    solid $primary;
-                                border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                    solid $primary;
+                                border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $primary;
+                                border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $primary;
 
                                 & > a {
                                     color: $primary_text_color;
                                 }
 
                                 &.component-tabs__tabs__header__triggers__trigger__link--is-active {
-                                    border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                        solid $primary_DARKEN_X3;
+                                    border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $primary_DARKEN_X3;
                                 }
                             }
                         }
@@ -598,10 +564,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-top: 2px solid $primary;
                                         border-bottom: 2px solid $primary;
                                     }
@@ -619,10 +583,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-right: 0 none;
                                     }
                                 }
@@ -642,17 +604,14 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-bottom: 2px solid $primary;
                                     }
                                 }
 
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border-left: 2px solid $primary;
                                     border-right: 2px solid $primary;
                                     border-top: 2px solid $primary;
@@ -676,10 +635,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border: 2px solid $primary;
                                     }
                                 }
@@ -701,17 +658,14 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
+                                & > .component-tabs__tabs__header__triggers__trigger {
                                     &:first-child {
-                                        &
-                                            > .component-tabs__tabs__header__triggers__trigger__link {
+                                        & > .component-tabs__tabs__header__triggers__trigger__link {
                                             border-left: 0 none;
                                         }
                                     }
 
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-top: 0 none;
                                         border-bottom-width: 0;
                                     }
@@ -735,17 +689,14 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-right: 2px solid $primary;
                                     }
                                 }
 
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border: 2px solid $primary;
                                     border-right: 0 none;
                                     border-bottom-width: 0;
@@ -780,30 +731,24 @@
                 & > .component-tabs__tabs__header {
                     & > .component-tabs__tabs__header__title {
                         background: $secondary;
-                        border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                            solid $secondary;
-                        border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid
-                            $secondary;
+                        border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $secondary;
+                        border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $secondary;
                         color: $secondary_text_color;
                     }
 
                     & > .component-tabs__tabs__header__triggers {
                         & > .component-tabs__tabs__header__triggers__trigger {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger__link {
+                            & > .component-tabs__tabs__header__triggers__trigger__link {
                                 background: $secondary;
-                                border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                    solid $secondary;
-                                border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                    solid $secondary;
+                                border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $secondary;
+                                border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $secondary;
 
                                 & > a {
                                     color: $secondary_text_color;
                                 }
 
                                 &.component-tabs__tabs__header__triggers__trigger__link--is-active {
-                                    border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                        solid $secondary_DARKEN_X3;
+                                    border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $secondary_DARKEN_X3;
                                 }
                             }
                         }
@@ -822,10 +767,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-top: 2px solid $secondary;
                                         border-bottom: 2px solid $secondary;
                                     }
@@ -843,10 +786,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-right: 0 none;
                                     }
                                 }
@@ -866,17 +807,14 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-bottom: 2px solid $secondary;
                                     }
                                 }
 
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border-left: 2px solid $secondary;
                                     border-right: 2px solid $secondary;
                                     border-top: 2px solid $secondary;
@@ -900,10 +838,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border: 2px solid $secondary;
                                     }
                                 }
@@ -925,17 +861,14 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
+                                & > .component-tabs__tabs__header__triggers__trigger {
                                     &:first-child {
-                                        &
-                                            > .component-tabs__tabs__header__triggers__trigger__link {
+                                        & > .component-tabs__tabs__header__triggers__trigger__link {
                                             border-left: 0 none;
                                         }
                                     }
 
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-top: 0 none;
                                         border-bottom-width: 0;
                                     }
@@ -959,17 +892,14 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-right: 2px solid $secondary;
                                     }
                                 }
 
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border: 2px solid $secondary;
                                     border-right: 0 none;
                                     border-bottom-width: 0;
@@ -1004,30 +934,24 @@
                 & > .component-tabs__tabs__header {
                     & > .component-tabs__tabs__header__title {
                         background: $info;
-                        border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                            solid $info;
-                        border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid
-                            $info;
+                        border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $info;
+                        border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $info;
                         color: $info_text_color;
                     }
 
                     & > .component-tabs__tabs__header__triggers {
                         & > .component-tabs__tabs__header__triggers__trigger {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger__link {
+                            & > .component-tabs__tabs__header__triggers__trigger__link {
                                 background: $info;
-                                border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                    solid $info;
-                                border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                    solid $info;
+                                border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $info;
+                                border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $info;
 
                                 & > a {
                                     color: $info_text_color;
                                 }
 
                                 &.component-tabs__tabs__header__triggers__trigger__link--is-active {
-                                    border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                        solid $info_DARKEN_X3;
+                                    border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $info_DARKEN_X3;
                                 }
                             }
                         }
@@ -1046,10 +970,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-top: 2px solid $info;
                                         border-bottom: 2px solid $info;
                                     }
@@ -1067,10 +989,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-right: 0 none;
                                     }
                                 }
@@ -1090,17 +1010,14 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-bottom: 2px solid $info;
                                     }
                                 }
 
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border-left: 2px solid $info;
                                     border-right: 2px solid $info;
                                     border-top: 2px solid $info;
@@ -1124,10 +1041,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border: 2px solid $info;
                                     }
                                 }
@@ -1149,17 +1064,14 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
+                                & > .component-tabs__tabs__header__triggers__trigger {
                                     &:first-child {
-                                        &
-                                            > .component-tabs__tabs__header__triggers__trigger__link {
+                                        & > .component-tabs__tabs__header__triggers__trigger__link {
                                             border-left: 0 none;
                                         }
                                     }
 
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-top: 0 none;
                                         border-bottom-width: 0;
                                     }
@@ -1183,17 +1095,14 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-right: 2px solid $info;
                                     }
                                 }
 
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border: 2px solid $info;
                                     border-right: 0 none;
                                     border-bottom-width: 0;
@@ -1228,30 +1137,24 @@
                 & > .component-tabs__tabs__header {
                     & > .component-tabs__tabs__header__title {
                         background: $success;
-                        border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                            solid $success;
-                        border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid
-                            $success;
+                        border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $success;
+                        border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $success;
                         color: $success_text_color;
                     }
 
                     & > .component-tabs__tabs__header__triggers {
                         & > .component-tabs__tabs__header__triggers__trigger {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger__link {
+                            & > .component-tabs__tabs__header__triggers__trigger__link {
                                 background: $success;
-                                border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                    solid $success;
-                                border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                    solid $success;
+                                border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $success;
+                                border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $success;
 
                                 & > a {
                                     color: $success_text_color;
                                 }
 
                                 &.component-tabs__tabs__header__triggers__trigger__link--is-active {
-                                    border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                        solid $success_DARKEN_X3;
+                                    border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $success_DARKEN_X3;
                                 }
                             }
                         }
@@ -1270,10 +1173,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-top: 2px solid $success;
                                         border-bottom: 2px solid $success;
                                     }
@@ -1291,10 +1192,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-right: 0 none;
                                     }
                                 }
@@ -1314,17 +1213,14 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-bottom: 2px solid $success;
                                     }
                                 }
 
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border-left: 2px solid $success;
                                     border-right: 2px solid $success;
                                     border-top: 2px solid $success;
@@ -1348,10 +1244,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border: 2px solid $success;
                                     }
                                 }
@@ -1373,17 +1267,14 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
+                                & > .component-tabs__tabs__header__triggers__trigger {
                                     &:first-child {
-                                        &
-                                            > .component-tabs__tabs__header__triggers__trigger__link {
+                                        & > .component-tabs__tabs__header__triggers__trigger__link {
                                             border-left: 0 none;
                                         }
                                     }
 
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-top: 0 none;
                                         border-bottom-width: 0;
                                     }
@@ -1407,17 +1298,14 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-right: 2px solid $success;
                                     }
                                 }
 
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border: 2px solid $success;
                                     border-right: 0 none;
                                     border-bottom-width: 0;
@@ -1452,30 +1340,24 @@
                 & > .component-tabs__tabs__header {
                     & > .component-tabs__tabs__header__title {
                         background: $warning;
-                        border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                            solid $warning;
-                        border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid
-                            $warning;
+                        border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $warning;
+                        border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $warning;
                         color: $warning_text_color;
                     }
 
                     & > .component-tabs__tabs__header__triggers {
                         & > .component-tabs__tabs__header__triggers__trigger {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger__link {
+                            & > .component-tabs__tabs__header__triggers__trigger__link {
                                 background: $warning;
-                                border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                    solid $warning;
-                                border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                    solid $warning;
+                                border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $warning;
+                                border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $warning;
 
                                 & > a {
                                     color: $warning_text_color;
                                 }
 
                                 &.component-tabs__tabs__header__triggers__trigger__link--is-active {
-                                    border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                        solid $warning_DARKEN_X3;
+                                    border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $warning_DARKEN_X3;
                                 }
                             }
                         }
@@ -1494,10 +1376,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-top: 2px solid $warning;
                                         border-bottom: 2px solid $warning;
                                     }
@@ -1515,10 +1395,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-right: 0 none;
                                     }
                                 }
@@ -1538,17 +1416,14 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-bottom: 2px solid $warning;
                                     }
                                 }
 
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border-left: 2px solid $warning;
                                     border-right: 2px solid $warning;
                                     border-top: 2px solid $warning;
@@ -1572,10 +1447,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border: 2px solid $warning;
                                     }
                                 }
@@ -1597,17 +1470,14 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
+                                & > .component-tabs__tabs__header__triggers__trigger {
                                     &:first-child {
-                                        &
-                                            > .component-tabs__tabs__header__triggers__trigger__link {
+                                        & > .component-tabs__tabs__header__triggers__trigger__link {
                                             border-left: 0 none;
                                         }
                                     }
 
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-top: 0 none;
                                         border-bottom-width: 0;
                                     }
@@ -1631,17 +1501,14 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-right: 2px solid $warning;
                                     }
                                 }
 
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border: 2px solid $warning;
                                     border-right: 0 none;
                                     border-bottom-width: 0;
@@ -1676,30 +1543,24 @@
                 & > .component-tabs__tabs__header {
                     & > .component-tabs__tabs__header__title {
                         background: $danger;
-                        border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                            solid $danger;
-                        border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid
-                            $danger;
+                        border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $danger;
+                        border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $danger;
                         color: $danger_text_color;
                     }
 
                     & > .component-tabs__tabs__header__triggers {
                         & > .component-tabs__tabs__header__triggers__trigger {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger__link {
+                            & > .component-tabs__tabs__header__triggers__trigger__link {
                                 background: $danger;
-                                border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                    solid $danger;
-                                border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                    solid $danger;
+                                border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $danger;
+                                border-top: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $danger;
 
                                 & > a {
                                     color: $danger_text_color;
                                 }
 
                                 &.component-tabs__tabs__header__triggers__trigger__link--is-active {
-                                    border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH
-                                        solid $danger_DARKEN_X3;
+                                    border-bottom: $COMPONENT_TABS_TRIGGER_BORDER_WIDTH solid $danger_DARKEN_X3;
                                 }
                             }
                         }
@@ -1718,10 +1579,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-top: 2px solid $danger;
                                         border-bottom: 2px solid $danger;
                                     }
@@ -1739,10 +1598,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-right: 0 none;
                                     }
                                 }
@@ -1762,17 +1619,14 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-bottom: 2px solid $danger;
                                     }
                                 }
 
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border-left: 2px solid $danger;
                                     border-right: 2px solid $danger;
                                     border-top: 2px solid $danger;
@@ -1796,10 +1650,8 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border: 2px solid $danger;
                                     }
                                 }
@@ -1821,17 +1673,14 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
+                                & > .component-tabs__tabs__header__triggers__trigger {
                                     &:first-child {
-                                        &
-                                            > .component-tabs__tabs__header__triggers__trigger__link {
+                                        & > .component-tabs__tabs__header__triggers__trigger__link {
                                             border-left: 0 none;
                                         }
                                     }
 
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-top: 0 none;
                                         border-bottom-width: 0;
                                     }
@@ -1855,17 +1704,14 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger__link {
+                                    & > .component-tabs__tabs__header__triggers__trigger__link {
                                         border-right: 2px solid $danger;
                                     }
                                 }
 
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border: 2px solid $danger;
                                     border-right: 0 none;
                                     border-bottom-width: 0;
@@ -1896,8 +1742,7 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
                                     margin-right: 0;
                                 }
@@ -1921,8 +1766,7 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
                                     margin-right: 0;
                                 }
@@ -1946,8 +1790,7 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
                                     margin-right: 0;
                                 }
@@ -1973,8 +1816,7 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
                                     margin-bottom: 0;
                                 }
@@ -1994,8 +1836,7 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
                                     margin-bottom: 0;
                                 }
@@ -2015,8 +1856,7 @@
                         }
 
                         & > .component-tabs__tabs__header__triggers {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger {
+                            & > .component-tabs__tabs__header__triggers__trigger {
                                 &:last-child {
                                     margin-bottom: 0;
                                 }
@@ -2048,8 +1888,7 @@
 
                 & > .component-tabs__tabs__header__triggers {
                     & > .component-tabs__tabs__header__triggers__trigger {
-                        &
-                            > .component-tabs__tabs__header__triggers__trigger__link {
+                        & > .component-tabs__tabs__header__triggers__trigger__link {
                             & > a {
                                 justify-content: center;
                             }
@@ -2084,8 +1923,7 @@
                 & > .component-tabs__tabs__header {
                     & > .component-tabs__tabs__header__triggers {
                         & > .component-tabs__tabs__header__triggers__trigger {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger__link {
+                            & > .component-tabs__tabs__header__triggers__trigger__link {
                                 &.component-tabs__tabs__header__triggers__trigger__link--is-active {
                                     & > a {
                                         & > span {
@@ -2105,8 +1943,7 @@
                 & > .component-tabs__tabs__header {
                     & > .component-tabs__tabs__header__triggers {
                         & > .component-tabs__tabs__header__triggers__trigger {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger__link {
+                            & > .component-tabs__tabs__header__triggers__trigger__link {
                                 &.component-tabs__tabs__header__triggers__trigger__link--is-active {
                                     & > a {
                                         //text-align: right;
@@ -2133,8 +1970,7 @@
                     & > .component-tabs__tabs__header__triggers__trigger {
                         display: block;
 
-                        &
-                            > .component-tabs__tabs__header__triggers__trigger__link {
+                        & > .component-tabs__tabs__header__triggers__trigger__link {
                             display: block;
 
                             & > a {
@@ -2161,8 +1997,7 @@
 
                     & > .component-tabs__tabs__header__triggers {
                         & > .component-tabs__tabs__header__triggers__trigger {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger__link {
+                            & > .component-tabs__tabs__header__triggers__trigger__link {
                                 text-align: center;
                             }
                         }
@@ -2198,8 +2033,7 @@
             & > .component-tabs__tabs__header {
                 & > .component-tabs__tabs__header__triggers {
                     & > .component-tabs__tabs__header__triggers__trigger {
-                        &
-                            > .component-tabs__tabs__header__triggers__trigger__link {
+                        & > .component-tabs__tabs__header__triggers__trigger__link {
                             &.component-tabs__tabs__header__triggers__trigger__link--is-active {
                                 & > a {
                                     & > span {
@@ -2233,8 +2067,7 @@
                 & > .component-tabs__tabs__header__triggers {
                     & > .component-tabs__tabs__header__triggers__trigger {
                         &:last-child {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger__link {
+                            & > .component-tabs__tabs__header__triggers__trigger__link {
                                 border-right: 0 none;
                             }
                         }
@@ -2256,13 +2089,10 @@
                         &:not(.component-tabs--has-header) {
                             & > .component-tabs__tabs {
                                 & > .component-tabs__tabs__header {
-                                    &
-                                        > .component-tabs__tabs__header__triggers {
-                                        &
-                                            > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers {
+                                        & > .component-tabs__tabs__header__triggers__trigger {
                                             &:first-child {
-                                                &
-                                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                                     border-top-left-radius: $COMPONENT_BORDER_RADIUS;
                                                 }
                                             }
@@ -2279,11 +2109,9 @@
                                 }
 
                                 & > .component-tabs__tabs__header__triggers {
-                                    &
-                                        > .component-tabs__tabs__header__triggers__trigger {
+                                    & > .component-tabs__tabs__header__triggers__trigger {
                                         &:last-child {
-                                            &
-                                                > .component-tabs__tabs__header__triggers__trigger__link {
+                                            & > .component-tabs__tabs__header__triggers__trigger__link {
                                                 border-top-right-radius: $COMPONENT_BORDER_RADIUS;
                                             }
                                         }
@@ -2339,11 +2167,9 @@
                     & > .component-tabs__tabs {
                         & > .component-tabs__tabs__header {
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
+                                & > .component-tabs__tabs__header__triggers__trigger {
                                     &:first-child {
-                                        &
-                                            > .component-tabs__tabs__header__triggers__trigger__link {
+                                        & > .component-tabs__tabs__header__triggers__trigger__link {
                                             border-top-left-radius: $COMPONENT_BORDER_RADIUS;
                                             border-top-right-radius: $COMPONENT_BORDER_RADIUS;
                                         }
@@ -2363,11 +2189,9 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
+                                & > .component-tabs__tabs__header__triggers__trigger {
                                     &:last-child {
-                                        &
-                                            > .component-tabs__tabs__header__triggers__trigger__link {
+                                        & > .component-tabs__tabs__header__triggers__trigger__link {
                                             border-bottom-left-radius: $COMPONENT_BORDER_RADIUS;
                                             border-bottom-right-radius: $COMPONENT_BORDER_RADIUS;
                                         }
@@ -2390,11 +2214,9 @@
                             }
 
                             & > .component-tabs__tabs__header__triggers {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger {
+                                & > .component-tabs__tabs__header__triggers__trigger {
                                     &:last-child {
-                                        &
-                                            > .component-tabs__tabs__header__triggers__trigger__link {
+                                        & > .component-tabs__tabs__header__triggers__trigger__link {
                                             border-bottom-left-radius: $COMPONENT_BORDER_RADIUS;
                                         }
                                     }
@@ -2420,8 +2242,7 @@
 
                     & > .component-tabs__tabs__header__triggers {
                         & > .component-tabs__tabs__header__triggers__trigger {
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger__link {
+                            & > .component-tabs__tabs__header__triggers__trigger__link {
                                 border-radius: 100px;
                             }
                         }
@@ -2463,16 +2284,14 @@
                     & > .component-tabs__tabs__header__triggers {
                         & > .component-tabs__tabs__header__triggers__trigger {
                             &:first-child {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border-top-left-radius: 0 !important;
                                     border-bottom-left-radius: $COMPONENT_BORDER_RADIUS;
                                 }
                             }
 
                             &:last-child {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border-top-right-radius: 0 !important;
                                     border-bottom-right-radius: $COMPONENT_BORDER_RADIUS;
                                 }
@@ -2496,23 +2315,20 @@
                     & > .component-tabs__tabs__header__triggers {
                         & > .component-tabs__tabs__header__triggers__trigger {
                             &:first-child {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border-top-left-radius: 0 !important;
                                     border-bottom-left-radius: $COMPONENT_BORDER_RADIUS;
                                 }
                             }
 
                             &:last-child {
-                                &
-                                    > .component-tabs__tabs__header__triggers__trigger__link {
+                                & > .component-tabs__tabs__header__triggers__trigger__link {
                                     border-top-right-radius: 0 !important;
                                     border-bottom-right-radius: $COMPONENT_BORDER_RADIUS;
                                 }
                             }
 
-                            &
-                                > .component-tabs__tabs__header__triggers__trigger__link {
+                            & > .component-tabs__tabs__header__triggers__trigger__link {
                                 border-top-width: 0 !important;
                                 border-bottom-width: 2px !important;
                             }

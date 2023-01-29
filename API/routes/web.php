@@ -30,6 +30,11 @@ Route::prefix('api/v1')->group(function () {
         Route::delete('delete/{id}', '\App\Http\Controllers\UsersController@deleteDeleteUser');
         Route::put('edit', '\App\Http\Controllers\UsersController@postEdit');
         Route::post('add', '\App\Http\Controllers\UsersController@postAdd');
+
+        Route::prefix('roles')->group(function() {
+            Route::delete('delete/{user_id}/{role_id}', '\App\Http\Controllers\UsersController@deleteDeleteUserRole');
+            Route::post('add/{user_id}/{role_id}', '\App\Http\Controllers\UsersController@postAddUserRole');
+        });
     });
 
     Route::prefix('roles')->group(function() {

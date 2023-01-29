@@ -138,6 +138,39 @@ const deleteUser =
         })
     }
 
+const deleteUserRole =
+    ({ id: user_id }, { id: role_id }) =>
+    (dispatch) => {
+        return new Promise<void>((resolve, reject) => {
+            dispatch(setFetchError(null))
+
+            http.delete(`/users/roles/delete/${user_id}/${role_id}`)
+                .then(({ data: { user } }) => {
+                    resolve()
+                })
+                .catch((e) => {
+                    dispatch(setFetchError(e))
+                    reject(e)
+                })
+        })
+    }
+
+const addUserRole =
+    ({ id: user_id }, { id: role_id = 0 } = {}) =>
+    (dispatch) => {
+        return new Promise<void>((resolve, reject) => {
+            dispatch(setFetchError(null))
+
+            http.post(`/users/roles/add/${user_id}/${role_id}`)
+                .then(({ data: { user } }) => {
+                    resolve()
+                })
+                .catch((e) => {
+                    dispatch(setFetchError(e))
+                    reject(e)
+                })
+        })
+    }
 export const actions = {
     fetch,
     fetchOne,
@@ -148,6 +181,8 @@ export const actions = {
     editUser,
     addUser,
     deleteUser,
+    deleteUserRole,
+    addUserRole,
 }
 
 // ------------------------------------

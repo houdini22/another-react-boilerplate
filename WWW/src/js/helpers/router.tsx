@@ -6,14 +6,7 @@ export const withRouter = (Component) => {
         let location = useLocation()
         let navigate = useNavigate()
         let params = useParams()
-        return (
-            <Component
-                {...props}
-                location={location}
-                navigate={navigate}
-                params={params}
-            />
-        )
+        return <Component {...props} location={location} navigate={navigate} params={params} />
     }
 
     return ComponentWithRouterProp

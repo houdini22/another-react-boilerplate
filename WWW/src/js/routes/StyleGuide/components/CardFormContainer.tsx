@@ -13,47 +13,23 @@ const onChange = (values, dispatch, props) => {
         ...values,
     }
 
-    if (
-        !options['header'] &&
-        newValues['headerActions'] &&
-        !newValues['header']
-    ) {
+    if (!options['header'] && newValues['headerActions'] && !newValues['header']) {
         newValues['header'] = true
-    } else if (
-        !options['header'] &&
-        newValues['withCloseIcon'] &&
-        !newValues['header']
-    ) {
+    } else if (!options['header'] && newValues['withCloseIcon'] && !newValues['header']) {
         newValues['header'] = true
-    } else if (
-        !options['header'] &&
-        newValues['withMinimizeIcon'] &&
-        !newValues['header']
-    ) {
+    } else if (!options['header'] && newValues['withMinimizeIcon'] && !newValues['header']) {
         newValues['header'] = true
     } else if (options['header'] && !newValues['header']) {
         newValues['headerActions'] = false
         newValues['withCloseIcon'] = false
         newValues['withMinimizeIcon'] = false
-    } else if (
-        !newValues['footer'] &&
-        !options['footer'] &&
-        newValues['footerType'] &&
-        !options['footerType']
-    ) {
+    } else if (!newValues['footer'] && !options['footer'] && newValues['footerType'] && !options['footerType']) {
         newValues['footer'] = true
-    } else if (
-        !newValues['footer'] &&
-        options['footer'] &&
-        newValues['footerType']
-    ) {
+    } else if (!newValues['footer'] && options['footer'] && newValues['footerType']) {
         newValues['footerType'] = ''
     }
 
-    if (
-        !_.isEqual(options, newValues) &&
-        newValues['updateCount'] === options['updateCount']
-    ) {
+    if (!_.isEqual(options, newValues) && newValues['updateCount'] === options['updateCount']) {
         setOptions(newValues)
     }
 }

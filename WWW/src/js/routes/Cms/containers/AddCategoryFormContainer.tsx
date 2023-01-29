@@ -2,11 +2,7 @@ import * as React from 'react'
 import { bindActionCreators, compose } from 'redux'
 import { connect } from 'react-redux'
 import { AddCategoryForm } from '../components/AddCategoryForm'
-import {
-    reduxForm,
-    getFormValues as getFormValuesRedux,
-    SubmissionError,
-} from 'redux-form'
+import { reduxForm, getFormValues as getFormValuesRedux, SubmissionError } from 'redux-form'
 import { getFormValues } from '../../../utils/forms/auto-save'
 import * as moment from 'moment'
 import { formatDateTime, formatDateTimeAPI } from '../../../helpers/date-time'
@@ -67,9 +63,7 @@ const AddCategoryFormContainer = compose(
                     tree: {
                         tree_is_published: true,
                         tree_published_from: formatDateTimeAPI(moment()),
-                        tree_published_to: formatDateTimeAPI(
-                            moment(new Date(2099, 12)).format('YYYY'),
-                        ),
+                        tree_published_to: formatDateTimeAPI(moment(new Date(2099, 12)).format('YYYY')),
                     },
                 },
             }
@@ -77,10 +71,8 @@ const AddCategoryFormContainer = compose(
         (dispatch) => {
             return bindActionCreators(
                 {
-                    fetchParentCategorySelectOptions:
-                        actions.fetchParentCategorySelectOptions,
-                    fetchIndexDocumentsSelectOptions:
-                        actions.fetchIndexDocumentsSelectOptions,
+                    fetchParentCategorySelectOptions: actions.fetchParentCategorySelectOptions,
+                    fetchIndexDocumentsSelectOptions: actions.fetchIndexDocumentsSelectOptions,
                     addCategory: actions.addCategory,
                 },
                 dispatch,
@@ -100,9 +92,7 @@ const AddCategoryFormContainer = compose(
                             data: { errors },
                         },
                     }) => {
-                        throw new SubmissionError(
-                            processAPIerrorResponseToFormErrors(errors),
-                        )
+                        throw new SubmissionError(processAPIerrorResponseToFormErrors(errors))
                     },
                 )
         },

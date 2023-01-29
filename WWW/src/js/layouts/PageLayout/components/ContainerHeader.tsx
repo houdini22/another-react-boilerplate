@@ -12,11 +12,7 @@ class ContainerHeader extends React.Component<ContainerHeaderProps> {
     render() {
         const { children } = this.props
 
-        return (
-            <div className={cx('layout__container__content__header')}>
-                {children}
-            </div>
-        )
+        return <div className={cx('layout__container__content__header')}>{children}</div>
     }
 }
 

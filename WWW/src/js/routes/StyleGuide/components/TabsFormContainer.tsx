@@ -13,40 +13,17 @@ const onChange = (values, dispatch, props) => {
         ...values,
     }
 
-    if (
-        newValues['block'] &&
-        newValues['solid'] &&
-        options['block'] &&
-        !options['solid']
-    ) {
+    if (newValues['block'] && newValues['solid'] && options['block'] && !options['solid']) {
         newValues['block'] = false
-    } else if (
-        newValues['block'] &&
-        newValues['solid'] &&
-        !options['block'] &&
-        options['solid']
-    ) {
+    } else if (newValues['block'] && newValues['solid'] && !options['block'] && options['solid']) {
         newValues['solid'] = false
-    } else if (
-        newValues['left'] &&
-        newValues['below'] &&
-        !options['left'] &&
-        options['below']
-    ) {
+    } else if (newValues['left'] && newValues['below'] && !options['left'] && options['below']) {
         newValues['below'] = false
-    } else if (
-        newValues['left'] &&
-        newValues['below'] &&
-        options['left'] &&
-        !options['below']
-    ) {
+    } else if (newValues['left'] && newValues['below'] && options['left'] && !options['below']) {
         newValues['left'] = false
     }
 
-    if (
-        !_.isEqual(options, newValues) &&
-        newValues['updateCount'] === options['updateCount']
-    ) {
+    if (!_.isEqual(options, newValues) && newValues['updateCount'] === options['updateCount']) {
         setOptions(newValues)
     }
 }

@@ -15,12 +15,7 @@ class AlertForm extends React.Component {
 
         return (
             <form>
-                <Field
-                    name="updateCount"
-                    type="hidden"
-                    component={FormField}
-                    inputOnly
-                />
+                <Field name="updateCount" type="hidden" component={FormField} inputOnly />
                 <Tabs.Container color="default" left solid header="Options">
                     <Tabs.Tab name="presentation">
                         <Tabs.Trigger>Presentation</Tabs.Trigger>
@@ -87,36 +82,16 @@ class AlertForm extends React.Component {
                                     />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="outline"
-                                        label="outline"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="outline" label="outline" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="rounded"
-                                        label="rounded"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="rounded" label="rounded" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="closeIcon"
-                                        label="closeIcon"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="closeIcon" label="closeIcon" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="withIcon"
-                                        label="withIcon"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="withIcon" label="withIcon" type="checkbox" component={FormField} />
                                 </Col>
                                 {withIcon && [
                                     <Col xs={12}>

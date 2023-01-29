@@ -1,11 +1,9 @@
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const SET_CONTACT_FORM_IS_LOADING =
-    'contact-form::set-contact-form-is-loading'
+export const SET_CONTACT_FORM_IS_LOADING = 'contact-form::set-contact-form-is-loading'
 export const SET_CONTACT_FORM_MESSAGE = 'contact-form::set-contact-form-message'
-export const RESET_CONTACT_FORM_CAPTCHA =
-    'contact-form::reset-contact-form-captcha'
+export const RESET_CONTACT_FORM_CAPTCHA = 'contact-form::reset-contact-form-captcha'
 // ------------------------------------
 // Actions
 // ------------------------------------

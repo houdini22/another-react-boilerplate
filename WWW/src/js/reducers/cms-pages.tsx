@@ -83,11 +83,9 @@ const fetchIndexDocumentsSelectOptions = () => (dispatch) => {
 const addCategory = (values) => (dispatch, getState) => {
     return new Promise<void>((resolve) => {
         return http.post('/cms/pages/addCategory', values).then(() => {
-            return dispatch(fetch(getCurrentNode(getState())['id'])).then(
-                () => {
-                    resolve()
-                },
-            )
+            return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                resolve()
+            })
         })
     })
 }
@@ -95,11 +93,9 @@ const addCategory = (values) => (dispatch, getState) => {
 const addDocument = (values) => (dispatch, getState) => {
     return new Promise<void>((resolve) => {
         return http.post('/cms/pages/addDocument', values).then(() => {
-            return dispatch(fetch(getCurrentNode(getState())['id'])).then(
-                () => {
-                    resolve()
-                },
-            )
+            return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                resolve()
+            })
         })
     })
 }
@@ -107,11 +103,9 @@ const addDocument = (values) => (dispatch, getState) => {
 const addLink = (values) => (dispatch, getState) => {
     return new Promise<void>((resolve) => {
         return http.post('/cms/pages/addLink', values).then(() => {
-            return dispatch(fetch(getCurrentNode(getState())['id'])).then(
-                () => {
-                    resolve()
-                },
-            )
+            return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                resolve()
+            })
         })
     })
 }
@@ -131,11 +125,9 @@ const unpublish = (id) => (dispatch, getState) => {
 const deleteNode =
     ({ id }) =>
     (dispatch, getState) => {
-        return http
-            .delete('/cms/pages/deleteNode', { params: { id } })
-            .then(() => {
-                dispatch(fetch(getCurrentNode(getState())['id']))
-            })
+        return http.delete('/cms/pages/deleteNode', { params: { id } }).then(() => {
+            dispatch(fetch(getCurrentNode(getState())['id']))
+        })
     }
 
 export const actions = {

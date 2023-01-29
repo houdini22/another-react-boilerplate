@@ -26,10 +26,7 @@ interface ButtonGroupViewState {
     }
 }
 
-class ButtonGroupView extends React.Component<
-    ButtonGroupViewProps,
-    ButtonGroupViewState
-> {
+class ButtonGroupView extends React.Component<ButtonGroupViewProps, ButtonGroupViewState> {
     constructor(props) {
         super(props)
         this.state = {
@@ -59,34 +56,17 @@ class ButtonGroupView extends React.Component<
     }
 
     render() {
-        const { colSize1 = 4, createPresentationTab = _createPresentationTab } =
-            this.props
+        const { colSize1 = 4, createPresentationTab = _createPresentationTab } = this.props
         const { options } = this.state
-        const {
-            size,
-            outline,
-            block,
-            rounded,
-            roundless,
-            isLoading,
-            disabled,
-            borderless,
-            color,
-        } = options
+        const { size, outline, block, rounded, roundless, isLoading, disabled, borderless, color } = options
 
         return (
             <PageContent>
-                <ComponentsPageHeader
-                    title="ButtonGroup"
-                    component="ButtonGroup"
-                />
+                <ComponentsPageHeader title="ButtonGroup" component="ButtonGroup" />
                 <Row>
                     <Col xs={12} md={6}>
                         <Section>
-                            <ButtonGroupFormContainer
-                                options={options}
-                                setOptions={this.setOptions}
-                            />
+                            <ButtonGroupFormContainer options={options} setOptions={this.setOptions} />
                         </Section>
                     </Col>
                     <Col xs={12} md={6}>

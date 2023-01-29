@@ -53,12 +53,7 @@ const App = () => (
                     </PageLayout>
                 }
             />
-            <Route
-                path="/restricted-area"
-                element={
-                    <PageLayout>{userIsAuthenticated(RateView)}</PageLayout>
-                }
-            />
+            <Route path="/restricted-area" element={<PageLayout>{userIsAuthenticated(RateView)}</PageLayout>} />
             <Route
                 path="/components/accordion"
                 element={

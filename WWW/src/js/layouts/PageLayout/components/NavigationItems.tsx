@@ -14,33 +14,17 @@ const NavigationItems = ({ items }) => {
             {({ location: { pathname } }) => (
                 <AuthManager>
                     {({ auth: { isLoggedIn, user }, logoff }) => (
-                        <ul
-                            className={cx(
-                                'layout__sidebar__content__navigation__links__links',
-                            )}
-                        >
+                        <ul className={cx('layout__sidebar__content__navigation__links__links')}>
                             {items.map((item) => {
-                                const {
-                                    type,
-                                    caption,
-                                    href,
-                                    icon,
-                                    authorizationRequired,
-                                    componentType,
-                                    children,
-                                } = item
+                                const { type, caption, href, icon, authorizationRequired, componentType, children } =
+                                    item
 
                                 if (!isLoggedIn && authorizationRequired) {
                                     return null
                                 }
 
                                 if (type === 'header') {
-                                    return (
-                                        <NavigationHeader
-                                            caption={caption}
-                                            key={`${type}-${caption}`}
-                                        />
-                                    )
+                                    return <NavigationHeader caption={caption} key={`${type}-${caption}`} />
                                 } else if (type === 'link') {
                                     return (
                                         <NavigationLink

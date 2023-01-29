@@ -11,8 +11,7 @@ class Footer extends React.Component {
         return (
             <div
                 className={cx('layout__container__footer', {
-                    [cx('layout__container__footer--floating-sidebar')]:
-                        floatingSidebar,
+                    [cx('layout__container__footer--floating-sidebar')]: floatingSidebar,
                 })}
             >
                 <Copyright />

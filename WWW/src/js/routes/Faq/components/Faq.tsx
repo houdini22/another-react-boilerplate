@@ -43,10 +43,7 @@ export class FaqView extends React.Component {
                                     </h4>
                                 </Col>
                                 <Col xs={8} style={{ textAlign: 'right' }}>
-                                    <a
-                                        href="https://github.com/houdini22/another-react-boilerplate"
-                                        target="_blank"
-                                    >
+                                    <a href="https://github.com/houdini22/another-react-boilerplate" target="_blank">
                                         https://github.com/houdini22/another-react-boilerplate
                                     </a>
                                 </Col>
@@ -68,26 +65,10 @@ export class FaqView extends React.Component {
                                     </h4>
                                 </Col>
                                 <Col xs={8} style={{ textAlign: 'right' }}>
-                                    <form
-                                        action="https://www.paypal.com/cgi-bin/webscr"
-                                        method="post"
-                                        target="_top"
-                                    >
-                                        <input
-                                            type="hidden"
-                                            name="cmd"
-                                            value="_donations"
-                                        />
-                                        <input
-                                            type="hidden"
-                                            name="business"
-                                            value="4DPGFK2XZLYUC"
-                                        />
-                                        <input
-                                            type="hidden"
-                                            name="currency_code"
-                                            value="PLN"
-                                        />
+                                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                        <input type="hidden" name="cmd" value="_donations" />
+                                        <input type="hidden" name="business" value="4DPGFK2XZLYUC" />
+                                        <input type="hidden" name="currency_code" value="PLN" />
                                         <input
                                             type="image"
                                             src="https://www.paypalobjects.com/en_US/PL/i/btn/btn_donateCC_LG.gif"

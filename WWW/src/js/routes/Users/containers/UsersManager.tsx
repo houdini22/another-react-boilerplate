@@ -1,8 +1,5 @@
 import * as React from 'react'
-import {
-    selectors as commonSelectors,
-    actions as commonActions,
-} from '../../../reducers/users'
+import { selectors as commonSelectors, actions as commonActions } from '../../../reducers/users'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -16,6 +13,8 @@ interface UsersManagerProps {
     editUser: Function
     addUser: Function
     deleteUser: Function
+    deleteUserRole: Function
+    addUserRole: Function
 }
 
 class UsersManagerBase extends React.Component<UsersManagerProps> {
@@ -38,6 +37,9 @@ class UsersManagerBase extends React.Component<UsersManagerProps> {
             addUser,
             fetch,
             deleteUser,
+            deleteUserRole,
+            addUserRole,
+            fetchOne,
         } = this.props
         const renderProps = {
             users,
@@ -47,6 +49,9 @@ class UsersManagerBase extends React.Component<UsersManagerProps> {
             addUser,
             fetch,
             deleteUser,
+            deleteUserRole,
+            addUserRole,
+            fetchOne,
         }
 
         return children(renderProps)
@@ -68,6 +73,8 @@ const UsersManager = connect(mapStateToProps, (dispatch) => {
             editUser: commonActions.editUser,
             addUser: commonActions.addUser,
             deleteUser: commonActions.deleteUser,
+            deleteUserRole: commonActions.deleteUserRole,
+            addUserRole: commonActions.addUserRole,
         },
         dispatch,
     )

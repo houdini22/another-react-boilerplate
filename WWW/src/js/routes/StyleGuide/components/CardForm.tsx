@@ -10,12 +10,7 @@ class CardForm extends React.Component {
     render() {
         return (
             <form>
-                <Field
-                    name="updateCount"
-                    type="hidden"
-                    component={FormField}
-                    inputOnly
-                />
+                <Field name="updateCount" type="hidden" component={FormField} inputOnly />
                 <Tabs.Container color="default" left solid header="Options">
                     <Tabs.Tab name="presentation">
                         <Tabs.Trigger>Presentation</Tabs.Trigger>
@@ -82,12 +77,7 @@ class CardForm extends React.Component {
                                     />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="header"
-                                        label="Header"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="header" label="Header" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
                                     <Field
@@ -130,12 +120,7 @@ class CardForm extends React.Component {
                                     />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="footer"
-                                        label="footer"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="footer" label="footer" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
                                     <Field
@@ -169,12 +154,7 @@ class CardForm extends React.Component {
                         <Tabs.Content>
                             <Row>
                                 <Col xs={12}>
-                                    <Field
-                                        name="isLoading"
-                                        label="Is Loading"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="isLoading" label="Is Loading" type="checkbox" component={FormField} />
                                 </Col>
                             </Row>
                         </Tabs.Content>

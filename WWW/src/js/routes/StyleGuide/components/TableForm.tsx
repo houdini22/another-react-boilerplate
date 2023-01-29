@@ -10,12 +10,7 @@ class TableForm extends React.Component {
     render() {
         return (
             <form>
-                <Field
-                    name="updateCount"
-                    type="hidden"
-                    component={FormField}
-                    inputOnly
-                />
+                <Field name="updateCount" type="hidden" component={FormField} inputOnly />
                 <Tabs.Container color="default" left solid header="Options">
                     <Tabs.Tab name="presentation">
                         <Tabs.Trigger>Presentation</Tabs.Trigger>
@@ -82,20 +77,10 @@ class TableForm extends React.Component {
                                     />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="bordered"
-                                        label="bordered"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="bordered" label="bordered" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="striped"
-                                        label="striped"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="striped" label="striped" type="checkbox" component={FormField} />
                                 </Col>
                             </Row>
                         </Tabs.Content>

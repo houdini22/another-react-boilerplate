@@ -28,9 +28,9 @@ class Select extends React.Component<SelectProps> {
         return (
             <select {...props}>
                 {placeholder && this.renderPlaceholder()}
-                {_options.map(({ label, value }) => {
+                {_options.map(({ label, value, disabled }) => {
                     return (
-                        <option key={value} value={value}>
+                        <option key={value} value={value} disabled={disabled}>
                             {label}
                         </option>
                     )
