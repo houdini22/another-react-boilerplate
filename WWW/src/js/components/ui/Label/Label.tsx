@@ -22,6 +22,7 @@ interface LabelProps {
     size?: string
     disableContext?: boolean
     style?: object
+    onClick?: Function
 }
 
 class Label extends React.Component<LabelProps> {

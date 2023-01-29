@@ -270,4 +270,44 @@ class UsersController extends Controller
             'msg' => 'ok',
         ]);
     }
+
+    public function postActivate(Request $request)
+    {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $user = User::find($request->route('id'));
+        if (!$user) {
+            return $this->response404();
+        }
+
+        $user->status = 1;
+        $user->save();
+
+        return response()->json([
+            'user' => $user->toArray(),
+        ]);
+    }
+
+    public function postDeactivate(Request $request)
+    {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $user = User::find($request->route('id'));
+        if (!$user) {
+            return $this->response404();
+        }
+
+        $user->status = 0;
+        $user->save();
+
+        return response()->json([
+            'user' => $user->toArray(),
+        ]);
+    }
 }

@@ -244,6 +244,34 @@ const forceLogin =
                 })
         })
     }
+const activateUser = (user) => (dispatch) => {
+    return new Promise<void>((resolve, reject) => {
+        dispatch(setFetchError(null))
+
+        http.post(`/users/activate/${user.id}`, { user })
+            .then(({ data: { user } }) => {
+                resolve()
+            })
+            .catch((e) => {
+                dispatch(setFetchError(e))
+                reject(e)
+            })
+    })
+}
+const deactivateUser = (user) => (dispatch) => {
+    return new Promise<void>((resolve, reject) => {
+        dispatch(setFetchError(null))
+
+        http.post(`/users/deactivate/${user.id}`, { user })
+            .then(({ data: { user } }) => {
+                resolve()
+            })
+            .catch((e) => {
+                dispatch(setFetchError(e))
+                reject(e)
+            })
+    })
+}
 export const actions = {
     fetch,
     fetchOne,
@@ -260,6 +288,8 @@ export const actions = {
     sendAvatar,
     forceLogin,
     setUploadProgress,
+    activateUser,
+    deactivateUser,
 }
 
 // ------------------------------------

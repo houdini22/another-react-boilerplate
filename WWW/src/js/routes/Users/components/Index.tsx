@@ -39,7 +39,16 @@ export class UsersView extends React.Component {
                     <UserRolesManager>
                         {({ deleteRole }) => (
                             <UsersManager>
-                                {({ users, isLoading, deleteUser, fetch, deleteUserRole, setIsLoading }) => {
+                                {({
+                                    users,
+                                    isLoading,
+                                    deleteUser,
+                                    fetch,
+                                    deleteUserRole,
+                                    setIsLoading,
+                                    activateUser,
+                                    deactivateUser,
+                                }) => {
                                     return (
                                         <PageContent>
                                             <AddModal
@@ -280,12 +289,36 @@ export class UsersView extends React.Component {
                                                                             }
                                                                         >
                                                                             {user.status === 0 && (
-                                                                                <Label color={'danger'}>
+                                                                                <Label
+                                                                                    color={'danger'}
+                                                                                    onClick={() => {
+                                                                                        setIsLoading(true)
+
+                                                                                        activateUser(user).then(() => {
+                                                                                            setIsLoading(false)
+                                                                                            fetch()
+                                                                                        })
+                                                                                    }}
+                                                                                >
                                                                                     Not active
                                                                                 </Label>
                                                                             )}
                                                                             {user.status === 1 && (
-                                                                                <Label color={'success'}>Active</Label>
+                                                                                <Label
+                                                                                    color={'success'}
+                                                                                    onClick={() => {
+                                                                                        setIsLoading(true)
+
+                                                                                        deactivateUser(user).then(
+                                                                                            () => {
+                                                                                                setIsLoading(false)
+                                                                                                fetch()
+                                                                                            },
+                                                                                        )
+                                                                                    }}
+                                                                                >
+                                                                                    Active
+                                                                                </Label>
                                                                             )}
                                                                         </Tooltip>
                                                                     </Table.Td>

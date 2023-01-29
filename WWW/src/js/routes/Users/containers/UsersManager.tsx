@@ -21,6 +21,8 @@ interface UsersManagerProps {
     sendAvatar: Function
     uploadProgress: number
     setUploadProgress: Function
+    activateUser: Function
+    deactivateUser: Function
 }
 
 class UsersManagerBase extends React.Component<UsersManagerProps> {
@@ -51,6 +53,8 @@ class UsersManagerBase extends React.Component<UsersManagerProps> {
             forceLogin,
             uploadProgress,
             setUploadProgress,
+            activateUser,
+            deactivateUser,
         } = this.props
         const renderProps = {
             users,
@@ -68,6 +72,8 @@ class UsersManagerBase extends React.Component<UsersManagerProps> {
             forceLogin,
             uploadProgress,
             setUploadProgress,
+            activateUser,
+            deactivateUser,
         }
 
         return (
@@ -100,6 +106,8 @@ const UsersManager = connect(mapStateToProps, (dispatch) => {
             sendAvatar: commonActions.sendAvatar,
             forceLogin: commonActions.forceLogin,
             setUploadProgress: commonActions.setUploadProgress,
+            activateUser: commonActions.activateUser,
+            deactivateUser: commonActions.deactivateUser,
         },
         dispatch,
     )

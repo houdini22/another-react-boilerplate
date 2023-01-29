@@ -28,6 +28,8 @@ Route::prefix('api/v1')->group(function () {
     Route::prefix('users')->group(function() {
         Route::get('list', '\App\Http\Controllers\UsersController@getList');
         Route::post('send_activation_email', '\App\Http\Controllers\UsersController@postSendActivationEmail');
+        Route::post('activate/{id}', '\App\Http\Controllers\UsersController@postActivate');
+        Route::post('deactivate/{id}', '\App\Http\Controllers\UsersController@postDeactivate');
         Route::get('activate', '\App\Http\Controllers\UsersController@getActivate');
         Route::get('get/{id}', '\App\Http\Controllers\UsersController@getGet');
         Route::delete('delete/{id}', '\App\Http\Controllers\UsersController@deleteDeleteUser');
