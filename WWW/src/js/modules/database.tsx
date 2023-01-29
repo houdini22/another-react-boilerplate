@@ -6,6 +6,7 @@ if (LocalStorage.isNew()) {
     LocalStorage.createTableWithData('LoginFormContainer', [
         {
             email: '',
+            token: '',
         },
     ])
     LocalStorage.commit()

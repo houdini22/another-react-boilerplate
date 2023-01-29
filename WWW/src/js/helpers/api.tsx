@@ -1,3 +1,3 @@
 export const apiURL = (uri) => {
-    return `http://another-react-boilerplate.local/${uri}`
+    return `http://localhost:8000/${uri}`
 }

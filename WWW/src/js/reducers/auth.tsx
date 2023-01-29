@@ -1,4 +1,5 @@
 import { http, setAuthToken } from '../modules/http'
+import { LocalStorage } from '../modules/database'
 
 // ------------------------------------
 // Constants
@@ -33,6 +34,42 @@ const login = (email, password) => (dispatch) => {
             .then((response) => {
                 dispatch(loggedIn(response.data.data.user))
                 setAuthToken(response.data.data.user.token)
+
+                LocalStorage.update('LoginFormContainer', { ID: 1 }, (row) => {
+                    row.email = response.data.data.user.email
+                    row.token = response.data.data.user.token
+                    return row
+                })
+                LocalStorage.commit()
+
+                resolve(response.data.data.user)
+            })
+            .catch(() => {
+                dispatch(setLoginError(true))
+                reject()
+            })
+    })
+}
+
+const loginWithToken = (email, token) => (dispatch) => {
+    return new Promise((resolve, reject) => {
+        dispatch(setLoginError(false))
+
+        http.post('/auth/login_with_token', {
+            email,
+            token,
+        })
+            .then((response) => {
+                dispatch(loggedIn(response.data.data.user))
+                setAuthToken(response.data.data.user.token)
+
+                LocalStorage.update('LoginFormContainer', { ID: 1 }, (row) => {
+                    row.email = response.data.data.user.email
+                    row.token = response.data.data.user.token
+                    return row
+                })
+                LocalStorage.commit()
+
                 resolve(response.data.data.user)
             })
             .catch(() => {
@@ -58,6 +95,7 @@ export const actions = {
     setLoginError,
     login,
     logoff,
+    loginWithToken,
 }
 
 // ------------------------------------

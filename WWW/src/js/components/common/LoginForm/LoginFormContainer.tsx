@@ -9,19 +9,12 @@ import { LocalStorage } from '../../../modules/database'
 
 const onSubmit = (values, dispatch, props) => {
     return dispatch(login(values['username'], values['password'])).then(() => {
-        LocalStorage.update(
-            'LoginFormContainer',
-            () => true,
-            (row) => {
-                row['email'] = values['username']
-                return row
-            },
-        )
-        LocalStorage.commit()
+        const {
+            navigate,
+            searchParams: { back },
+        } = props
 
-        const { navigate } = props
-
-        navigate('/')
+        navigate(`${back}`)
     })
 }
 export const FORM_NAME = 'LoginForm'

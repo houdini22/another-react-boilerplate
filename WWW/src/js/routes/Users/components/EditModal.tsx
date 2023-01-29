@@ -81,11 +81,11 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                                 <strong>Avatar:</strong>
                                                             </Col>
                                                             <Col xs={6} style={{ marginBottom: 10 }}>
-                                                                {user?.avatar_id != 0 && (
+                                                                {user?.avatar?.id != 0 && (
                                                                     <div>
                                                                         <img
                                                                             src={apiURL(
-                                                                                `files/preview/${user.avatar_id}`,
+                                                                                `files/preview/${user.avatar?.id}`,
                                                                             )}
                                                                             style={{ maxWidth: 128, marginBottom: 20 }}
                                                                         />
@@ -106,14 +106,20 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                                     <UploadAvatarFormContainer
                                                                         onChange={(e) => {
                                                                             setIsLoading(true)
-                                                                            sendAvatar(
-                                                                                user,
-                                                                                _.get(e?.target?.files, 0),
-                                                                            ).then(() => {
-                                                                                fetchOne(id).then(() => {
-                                                                                    setIsLoading(true)
+                                                                            if (_.get(e?.target?.files, 0)) {
+                                                                                sendAvatar(
+                                                                                    user,
+                                                                                    _.get(e?.target?.files, 0),
+                                                                                ).then(() => {
+                                                                                    Promise.all([
+                                                                                        fetchOne(id),
+                                                                                        fetch(),
+                                                                                    ]).then(() => {
+                                                                                        setIsLoading(false)
+                                                                                    })
+                                                                                    fetchOne(id).then(() => {})
                                                                                 })
-                                                                            })
+                                                                            }
                                                                         }}
                                                                     />
                                                                 )}

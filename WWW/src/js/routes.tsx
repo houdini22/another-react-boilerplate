@@ -7,7 +7,7 @@ import { IndexView } from './routes/Index'
 import { IndexView as LoginView } from './routes/Login'
 import { CmsPagesView } from './routes/Cms'
 
-import { userIsAuthenticated } from './modules/auth'
+import { UserIsAuthenticatedRoute } from './modules/auth'
 import AddCategoryView from './routes/Cms/components/AddCategory'
 import AddDocumentView from './routes/Cms/components/AddDocument'
 import AddLinkView from './routes/Cms/components/AddLink'
@@ -21,7 +21,9 @@ const App = () => (
                 path="/cms/pages"
                 element={
                     <PageLayout>
-                        <CmsPagesView />
+                        <UserIsAuthenticatedRoute>
+                            <CmsPagesView />
+                        </UserIsAuthenticatedRoute>
                     </PageLayout>
                 }
             />
@@ -29,7 +31,9 @@ const App = () => (
                 path="/cms/pages/add_category"
                 element={
                     <PageLayout>
-                        <AddCategoryView />
+                        <UserIsAuthenticatedRoute>
+                            <AddCategoryView />
+                        </UserIsAuthenticatedRoute>
                     </PageLayout>
                 }
             />
@@ -37,7 +41,9 @@ const App = () => (
                 path="/cms/pages/add_link"
                 element={
                     <PageLayout>
-                        <AddLinkView />
+                        <UserIsAuthenticatedRoute>
+                            <AddLinkView />
+                        </UserIsAuthenticatedRoute>
                     </PageLayout>
                 }
             />
@@ -45,7 +51,9 @@ const App = () => (
                 path="/cms/pages/add_document"
                 element={
                     <PageLayout>
-                        <AddDocumentView />
+                        <UserIsAuthenticatedRoute>
+                            <AddDocumentView />
+                        </UserIsAuthenticatedRoute>
                     </PageLayout>
                 }
             />
@@ -53,7 +61,9 @@ const App = () => (
                 path="/users"
                 element={
                     <PageLayout>
-                        <UsersView />
+                        <UserIsAuthenticatedRoute>
+                            <UsersView />
+                        </UserIsAuthenticatedRoute>
                     </PageLayout>
                 }
             />
@@ -77,7 +87,9 @@ const App = () => (
                 path="/roles"
                 element={
                     <PageLayout>
-                        <UserRolesView />
+                        <UserIsAuthenticatedRoute>
+                            <UserRolesView />
+                        </UserIsAuthenticatedRoute>
                     </PageLayout>
                 }
             />
@@ -85,7 +97,9 @@ const App = () => (
                 path="/"
                 element={
                     <PageLayout>
-                        <IndexView />
+                        <UserIsAuthenticatedRoute>
+                            <IndexView />
+                        </UserIsAuthenticatedRoute>
                     </PageLayout>
                 }
             />

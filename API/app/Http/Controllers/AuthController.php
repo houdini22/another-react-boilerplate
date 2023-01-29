@@ -45,6 +45,45 @@ class AuthController extends Controller
         ], 401);
     }
 
+    public function postLoginWithToken(Request $request)
+    {
+        $credentials = $request->only('email', 'token');
+        $user = User::where('email', $credentials['email'])->where('token', $credentials['token'])->first();
+
+        if (!$user) {
+            return $this->response401();
+        }
+
+        if ($user->status === User::$STATUS_NOT_ACTIVE) {
+            return response()->json([
+                'message' => 'ERR_STATUS_NOT_ACTIVE'
+            ], 403);
+        }
+
+        if ($user->status === User::$STATUS_ACTIVE) {
+            $user->generateToken();
+
+            $user->last_active = Carbon::now();
+            $user->save();
+
+            return response()->json([
+                'data' => [
+                    'user' => [
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'token' => $user->token,
+                        'roles' => $user->roles->pluck('name'),
+                        'permissions' => $user->getPermissionsViaRoles()->pluck('name')
+                    ]
+                ]
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'ERR'
+        ], 401);
+    }
+
     public function postLogout(Request $request)
     {
         $user = User::getFromRequest($request);

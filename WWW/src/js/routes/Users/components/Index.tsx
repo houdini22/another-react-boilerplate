@@ -159,14 +159,17 @@ export class UsersView extends React.Component {
                                                                     </Table.Td>
                                                                     <Table.Td xs={5} md={2}>
                                                                         {user.avatar_id != 0 && (
-                                                                            <img
-                                                                                src={apiURL(
-                                                                                    `/files/preview/${user.avatar_id}`,
-                                                                                )}
-                                                                                style={{ maxWidth: 128 }}
-                                                                            />
+                                                                            <div>
+                                                                                <img
+                                                                                    src={apiURL(
+                                                                                        `files/preview/${user.avatar_id}`,
+                                                                                    )}
+                                                                                    style={{ maxWidth: 64 }}
+                                                                                />{' '}
+                                                                                {user.name}
+                                                                            </div>
                                                                         )}
-                                                                        {user.name}
+                                                                        {user.avatar_id == 0 && user.name}
                                                                     </Table.Td>
                                                                     <Table.Td xs={6} md={2}>
                                                                         {user.email}
