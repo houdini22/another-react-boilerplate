@@ -31,6 +31,20 @@ Route::prefix('api/v1')->group(function () {
         Route::put('edit', '\App\Http\Controllers\UsersController@postEdit');
         Route::post('add', '\App\Http\Controllers\UsersController@postAdd');
     });
+
+    Route::prefix('roles')->group(function() {
+        Route::get('list', '\App\Http\Controllers\RolesController@getList');
+        Route::get('get/{id}', '\App\Http\Controllers\RolesController@getGet');
+        Route::delete('delete/{id}', '\App\Http\Controllers\RolesController@deleteDeleteRole');
+        Route::post('edit', '\App\Http\Controllers\RolesController@postEdit');
+        Route::post('add', '\App\Http\Controllers\RolesController@postAdd');
+
+        Route::prefix('permissions')->group(function() {
+            Route::get('list', '\App\Http\Controllers\RolesController@getPermissionList');
+            Route::post('{role_id}/add', '\App\Http\Controllers\RolesController@postPermissionAdd');
+            Route::delete('delete/{role_id}/{permission_id}', '\App\Http\Controllers\RolesController@deleteDeletePermission');
+        });
+    });
 });
 
 Route::get('/', function () {

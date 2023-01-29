@@ -313,9 +313,9 @@ export const navigation = [
             },
             {
                 type: 'link',
-                href: '/users/add',
-                caption: 'Add',
-                icon: <AiOutlineUserAdd />,
+                href: '/roles',
+                caption: 'Roles',
+                icon: <AiOutlineOrderedList />,
             },
         ],
     },

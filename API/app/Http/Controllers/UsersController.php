@@ -15,7 +15,7 @@ class UsersController extends Controller
             return $this->response401();
         }
 
-        $users = User::orderBy('id', 'ASC')->get();
+        $users = User::with('roles')->orderBy('id', 'ASC')->get();
 
         return response()->json([
             'users' => $users->toArray(),

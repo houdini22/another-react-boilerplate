@@ -682,7 +682,7 @@
         bottom: calc(44px + #{$COMPONENT_ELEMENT_MARGIN_MD});
         right: $COMPONENT_ELEMENT_MARGIN_MD;
         width: 400px;
-        z-index: 9999;
+        z-index: 999999;
 
         & > .layout__notifications__container {
             ul {

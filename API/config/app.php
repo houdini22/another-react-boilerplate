@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Kalnoy\Nestedset\NestedSetServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
     ],
 
     /*

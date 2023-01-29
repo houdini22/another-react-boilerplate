@@ -41,6 +41,7 @@ import AddCategoryView from './routes/Cms/components/AddCategory'
 import AddDocumentView from './routes/Cms/components/AddDocument'
 import AddLinkView from './routes/Cms/components/AddLink'
 import { UsersView } from './routes/Users'
+import { UserRolesView } from './routes/UserRoles'
 const App = () => (
     <Router>
         <Routes>
@@ -287,6 +288,14 @@ const App = () => (
                 element={
                     <PageLayout>
                         <UsersView />
+                    </PageLayout>
+                }
+            />
+            <Route
+                path="/roles"
+                element={
+                    <PageLayout>
+                        <UserRolesView />
                     </PageLayout>
                 }
             />

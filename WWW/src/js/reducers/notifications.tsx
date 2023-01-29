@@ -58,6 +58,7 @@ const resetUnreadNotifications = () => (dispatch) => {
 export const actions = {
     addNotification,
     resetUnreadNotifications,
+    addToastNotification,
 }
 
 // ------------------------------------
