@@ -12,7 +12,7 @@ class File extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'extension', 'file_path', 'mime'];
+    protected $fillable = ['name', 'extension', 'file_path', 'mime', 'type'];
 
     public static function upload(UploadedFile $file) {
         $newFile = new File;
@@ -23,6 +23,7 @@ class File extends Model
             'extension' => $file->clientExtension(),
             'file_path' => '/uploads/user_avatar/' . $fileName,
             'mime' => $file->getMimeType(),
+            'type' => 'file',
         ]);
         $newFile->save();
 

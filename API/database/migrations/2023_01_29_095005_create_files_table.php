@@ -22,7 +22,7 @@ class CreateFilesTable extends Migration
             $table->integer('height')->nullable()->default(null);
             $table->integer('preview_count')->default(0);
             $table->integer('download_count')->default(0);
-            $table->string('file_path');
+            $table->string('file_path')->unique();
             $table->string('type')->default('');
             $table->timestamps();
         });

@@ -72,6 +72,7 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                 </Modal.Header>
                                                 <Modal.Body>
                                                     <Card header={<h1>Details</h1>}>
+                                                        {isLoading && <LoadingOverlay />}
                                                         <Typography.Container>
                                                             <h2>{user.name}</h2>
                                                         </Typography.Container>
@@ -190,6 +191,7 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                         </Row>
                                                     </Card>
                                                     <Tabs.Container left solid>
+                                                        {isLoading && <LoadingOverlay />}
                                                         <Tabs.Tab name={'data'}>
                                                             <Tabs.Trigger>Data</Tabs.Trigger>
                                                             <Tabs.Content>
