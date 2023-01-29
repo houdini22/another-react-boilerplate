@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use Illuminate\Http\Request;
+use Intervention\Image\Image;
 
 class FilesController extends Controller
 {
@@ -13,8 +14,22 @@ class FilesController extends Controller
             return $this->response404();
         }
 
-        return response()->file(storage_path('app/public' . $file->file_path), [
-            'Content-Type' => 'image/png'
-        ]);
+        $file->preview_count += 1;
+        $file->save();
+
+        $filePath = storage_path('app/public' . $file->file_path);
+        $deleteAfterSend = false;
+
+        if ($request->query('width') && $request->query('height')) {
+            $image_resize = \Intervention\Image\Facades\Image::make($filePath);
+            $image_resize->resize($request->query('width'), $request->query('height') );
+            $filePath = storage_path('app/public/' .  $file->file_path . $request->query('width') . '_' . $request->query('height') . '.' . $file->extension);
+            $deleteAfterSend = true;
+            $image_resize->save($filePath);
+        }
+
+        return response()->file($filePath, [
+            'Content-Type' => $file->mime,
+        ])->deleteFileAfterSend($deleteAfterSend);
     }
 }

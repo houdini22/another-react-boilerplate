@@ -2,6 +2,7 @@ import * as React from 'react'
 import { selectors as commonSelectors, actions as commonActions } from '../../../reducers/users'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { AuthManager } from '../../../containers/AuthManager'
 
 interface UsersManagerProps {
     children: any
@@ -63,7 +64,11 @@ class UsersManagerBase extends React.Component<UsersManagerProps> {
             forceLogin,
         }
 
-        return children(renderProps)
+        return (
+            <>
+                <AuthManager>{() => <>{children(renderProps)}</>}</AuthManager>
+            </>
+        )
     }
 }
 

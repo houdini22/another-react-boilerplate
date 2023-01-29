@@ -60,7 +60,7 @@ class AuthController extends Controller
             ], 403);
         }
 
-        if ($user->status === User::$STATUS_ACTIVE) {
+        if ($user->status === User::$STATUS_ACTIVE && $user->email_verified_at !== NULL) {
             $user->generateToken();
 
             $user->last_active = Carbon::now();

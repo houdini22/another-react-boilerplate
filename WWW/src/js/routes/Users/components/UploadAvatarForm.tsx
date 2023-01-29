@@ -12,7 +12,14 @@ class UploadAvatarForm extends React.Component {
 
         return (
             <form onSubmit={handleSubmit} encType={'multipart/form-data'}>
-                <Field name="avatar" label="File" type="file" component={FormField} onChange={(e) => onChange(e)} />
+                <Field
+                    name="avatar"
+                    label="File"
+                    type="file"
+                    component={FormField}
+                    onChange={(e) => onChange(e)}
+                    accept={'image/png,image/gif,image/jpg'}
+                />
             </form>
         )
     }

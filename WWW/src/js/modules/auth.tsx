@@ -1,28 +1,26 @@
 // import locationHelperBuilder from 'redux-auth-wrapper/history3/locationHelper'
-import * as React from 'react';
+import * as React from 'react'
 import { selectors, actions as commonActions } from '../reducers/auth'
-import {bindActionCreators, compose} from "redux";
-import {connect} from "react-redux";
-import {Navigate} from "react-router";
-import {withRouter} from "../helpers/router";
-import {LocalStorage} from "./database";
+import { bindActionCreators, compose } from 'redux'
+import { connect } from 'react-redux'
+import { Navigate } from 'react-router'
+import { withRouter } from '../helpers/router'
+import { LocalStorage } from './database'
+import createReactClass from 'create-react-class'
 
 // const locationHelper = locationHelperBuilder({})
 
 const { getIsLoggedIn } = selectors
 
 const mapStateToProps = (state) => ({
-    isLoggedIn: getIsLoggedIn(state)
+    isLoggedIn: getIsLoggedIn(state),
 })
 
 interface UserIsAuthenticatedRouteProps {
-    children: any;
-    isLoggedIn: boolean;
+    children: any
+    isLoggedIn: boolean
     location?: {
-        pathname?: string;
-        params?: {
-            back?: string;
-        }
+        pathname?: string
     }
     loginWithToken: Function
     navigate: Function
@@ -30,27 +28,29 @@ interface UserIsAuthenticatedRouteProps {
 
 class UserIsAuthenticatedRouteBase extends React.Component<UserIsAuthenticatedRouteProps> {
     componentDidMount() {
-        const {isLoggedIn, navigate, loginWithToken} = this.props;
-        const {email, token} = LocalStorage.queryAll("LoginFormContainer", {query: {ID: 1}})[0];
+        const {
+            isLoggedIn,
+            navigate,
+            loginWithToken,
+            location: { pathname },
+        } = this.props
+        const { email, token } = LocalStorage.queryAll('LoginFormContainer', { query: { ID: 1 } })[0]
         if (!isLoggedIn) {
-            loginWithToken(email, token).then(() => null);
+            loginWithToken(email, token).then(
+                () => null,
+                () => navigate(`/login?back=${pathname}`),
+            )
         }
     }
 
     render() {
-        const {isLoggedIn, location: {pathname}, children} = this.props;
-
-        if (!isLoggedIn) {
-            return (
-                <>
-                    <Navigate to={`/login?back=${pathname}`}/>
-                </>
-            )
-        }
-
-        return (<>
-            {children}
-        </>);
+        const { children } = this.props
+        const Component = createReactClass({
+            render: function () {
+                return <>{children}</>
+            },
+        })
+        return <Component />
     }
 }
 const UserIsAuthenticatedRoute = compose(
@@ -62,7 +62,7 @@ const UserIsAuthenticatedRoute = compose(
             dispatch,
         )
     }),
-    withRouter
+    withRouter,
 )(UserIsAuthenticatedRouteBase)
 
 export { UserIsAuthenticatedRoute }

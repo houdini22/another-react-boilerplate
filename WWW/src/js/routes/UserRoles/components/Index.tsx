@@ -231,7 +231,7 @@ export class UsersView extends React.Component {
                                                                                                         }}
                                                                                                     >
                                                                                                         <DeleteIcon />{' '}
-                                                                                                        Remove from user
+                                                                                                        Remove from Role
                                                                                                     </Dropdown.Item>
                                                                                                     {_is_deletable ==
                                                                                                         1 && (

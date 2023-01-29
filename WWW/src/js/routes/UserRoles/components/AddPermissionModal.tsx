@@ -22,7 +22,7 @@ export class AddPermissionModal extends React.Component<EditModalViewProps> {
                 {({ navigate }) => (
                     <Modal.Container color={'danger'} visible={visible}>
                         <UserRolesManager id={id}>
-                            {({ isLoading, setIsLoading, addPermission, fetch, roles, role }) => {
+                            {({ isLoading, setIsLoading, addPermission, fetch, roles, role, permissions }) => {
                                 return (
                                     <>
                                         {isLoading && <LoadingOverlay />}
@@ -39,6 +39,7 @@ export class AddPermissionModal extends React.Component<EditModalViewProps> {
                                                 }}
                                                 roles={roles}
                                                 role={role}
+                                                permissions={permissions}
                                                 setIsLoading={setIsLoading}
                                                 onSubmit={(values, props) => {
                                                     return addPermission({ id: values.role_id }, values).then(

@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>CMS</title>
-    <script defer src="/js/bundle.1a31eebe73d314512941.min.js"/>
+    <script defer src="/js/bundle.f65abb3c2bcc89162345.min.js"/>
 </head>
 <body>
 <div id="root" style="min-height: 100%"></div>

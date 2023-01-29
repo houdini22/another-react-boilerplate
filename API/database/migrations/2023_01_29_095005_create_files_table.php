@@ -17,6 +17,11 @@ class CreateFilesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('extension');
+            $table->string('mime');
+            $table->integer('width')->nullable()->default(null);
+            $table->integer('height')->nullable()->default(null);
+            $table->integer('preview_count')->default(0);
+            $table->integer('download_count')->default(0);
             $table->string('file_path');
             $table->string('type')->default('');
             $table->timestamps();

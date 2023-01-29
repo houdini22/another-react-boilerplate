@@ -81,7 +81,7 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                                 <strong>Avatar:</strong>
                                                             </Col>
                                                             <Col xs={6} style={{ marginBottom: 10 }}>
-                                                                {user?.avatar?.id != 0 && (
+                                                                {user?.avatar?.id != null && (
                                                                     <div>
                                                                         <img
                                                                             src={apiURL(
@@ -116,6 +116,10 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                                                         fetch(),
                                                                                     ]).then(() => {
                                                                                         setIsLoading(false)
+                                                                                        this.setState({
+                                                                                            uploadAvatarFormVisible:
+                                                                                                false,
+                                                                                        })
                                                                                     })
                                                                                     fetchOne(id).then(() => {})
                                                                                 })

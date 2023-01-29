@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class File extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'extension', 'file_path'];
+    protected $fillable = ['name', 'extension', 'file_path', 'mime'];
 
     public static function upload(UploadedFile $file) {
         $newFile = new File;
@@ -21,8 +22,18 @@ class File extends Model
             'name' => $file->getClientOriginalName(),
             'extension' => $file->clientExtension(),
             'file_path' => '/uploads/user_avatar/' . $fileName,
+            'mime' => $file->getMimeType(),
         ]);
         $newFile->save();
+
+        try {
+            $image = Image::make(storage_path('app/public/' . $newFile->file_path));
+            $newFile->width = $image->width();
+            $newFile->height = $image->height();
+            $newFile->save();
+        } catch(\Intervention\Image\Exception\NotReadableException $e) {
+
+        }
 
         return $newFile;
     }

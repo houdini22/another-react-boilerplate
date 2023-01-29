@@ -158,11 +158,11 @@ export class UsersView extends React.Component {
                                                                         {user.id}
                                                                     </Table.Td>
                                                                     <Table.Td xs={5} md={2}>
-                                                                        {user.avatar_id != 0 && (
+                                                                        {user?.avatar?.id != null && (
                                                                             <div>
                                                                                 <img
                                                                                     src={apiURL(
-                                                                                        `files/preview/${user.avatar_id}`,
+                                                                                        `files/preview/${user?.avatar?.id}?width=200&height=200`,
                                                                                     )}
                                                                                     style={{ maxWidth: 64 }}
                                                                                 />{' '}
@@ -266,9 +266,12 @@ export class UsersView extends React.Component {
                                                                                                     </strong>
                                                                                                 </Col>
                                                                                                 <Col xs={6}>
-                                                                                                    {formatDateTime(
-                                                                                                        user.email_verified_at,
-                                                                                                    )}
+                                                                                                    {user.email_verified_at !=
+                                                                                                    null
+                                                                                                        ? formatDateTime(
+                                                                                                              user.email_verified_at,
+                                                                                                          )
+                                                                                                        : 'never'}
                                                                                                 </Col>
                                                                                             </>
                                                                                         )}

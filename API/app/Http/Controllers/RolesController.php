@@ -119,8 +119,8 @@ class RolesController extends Controller
 
         if ($request->post('permission') === 'add') {
             $request->validate([
-                'name' => 'required|unique:permission,name',
-                'guard_name' => 'required|unique:permission,guard_name',
+                'name' => 'required|unique:permissions,name',
+                'guard_name' => 'required',
             ]);
             $permission = new Permission();
             $permission->fill($request->post());

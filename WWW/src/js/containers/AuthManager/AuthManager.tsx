@@ -23,6 +23,7 @@ class AuthManagerBase extends React.Component<AuthManagerProps> {
 
 const mapStateToProps = (state) => ({
     auth: authSelectors.getState(state),
+    isLoggedIn: authSelectors.getIsLoggedIn(state),
 })
 
 const mapDispatchToProps = (dispatch) => {

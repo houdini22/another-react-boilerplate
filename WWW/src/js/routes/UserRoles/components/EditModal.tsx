@@ -103,9 +103,7 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                                         }}
                                                                         role={role}
                                                                         roles={roles}
-                                                                        permissions={permissions.filter(
-                                                                            ({ role_id }) => role_id === role.id,
-                                                                        )}
+                                                                        permissions={permissions}
                                                                         onSubmit={(values) => {
                                                                             setIsLoading(true)
 
