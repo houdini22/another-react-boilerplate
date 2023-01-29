@@ -27,10 +27,13 @@ Route::prefix('api/v1')->group(function () {
     Route::prefix('users')->group(function() {
         Route::get('list', '\App\Http\Controllers\UsersController@getList');
         Route::post('send_activation_email', '\App\Http\Controllers\UsersController@postSendActivationEmail');
+        Route::get('activate', '\App\Http\Controllers\UsersController@getActivate');
         Route::get('get/{id}', '\App\Http\Controllers\UsersController@getGet');
         Route::delete('delete/{id}', '\App\Http\Controllers\UsersController@deleteDeleteUser');
         Route::put('edit', '\App\Http\Controllers\UsersController@postEdit');
         Route::post('add', '\App\Http\Controllers\UsersController@postAdd');
+        Route::post('change_avatar/{id}', '\App\Http\Controllers\UsersController@postChangeAvatar');
+        Route::post('force_login/{id}', '\App\Http\Controllers\UsersController@postForceLogin');
 
         Route::prefix('roles')->group(function() {
             Route::delete('delete/{user_id}/{role_id}', '\App\Http\Controllers\UsersController@deleteDeleteUserRole');

@@ -62,6 +62,7 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps> {
                                 return {
                                     label: `${name} - ${guard_name}`,
                                     value: id,
+                                    selected: id === role.id,
                                 }
                             })}
                             component={FormField}

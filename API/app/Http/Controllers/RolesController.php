@@ -115,12 +115,12 @@ class RolesController extends Controller
             'role_id' => 'required|exists:roles,id'
         ]);
 
-        $role = Role::with('permissions')->find($request->post('role_id'));
+        $role = Role::find($request->post('role_id'));
 
         if ($request->post('permission') === 'add') {
             $request->validate([
-                'name' => 'required',
-                'guard_name' => 'required',
+                'name' => 'required|unique:permission,name',
+                'guard_name' => 'required|unique:permission,guard_name',
             ]);
             $permission = new Permission();
             $permission->fill($request->post());

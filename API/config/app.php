@@ -232,4 +232,5 @@ return [
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
     ],
 
+    'from_email' => 'noreply@laravel.app'
 ];

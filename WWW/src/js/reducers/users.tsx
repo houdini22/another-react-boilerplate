@@ -190,6 +190,46 @@ const sendActivationEmail =
                 })
         })
     }
+
+const sendAvatar =
+    ({ id }, file) =>
+    (dispatch) => {
+        return new Promise<void>((resolve, reject) => {
+            dispatch(setFetchError(null))
+
+            const formData = new FormData()
+            formData.append('avatar', file)
+
+            http.post(`/users/change_avatar/${id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+                .then(({ data: { user } }) => {
+                    resolve()
+                })
+                .catch((e) => {
+                    dispatch(setFetchError(e))
+                    reject(e)
+                })
+        })
+    }
+const forceLogin =
+    ({ id }) =>
+    (dispatch) => {
+        return new Promise<void>((resolve, reject) => {
+            dispatch(setFetchError(null))
+
+            http.post(`/users/force_login/${id}`)
+                .then(({ data: { user } }) => {
+                    resolve()
+                })
+                .catch((e) => {
+                    dispatch(setFetchError(e))
+                    reject(e)
+                })
+        })
+    }
 export const actions = {
     fetch,
     fetchOne,
@@ -203,6 +243,8 @@ export const actions = {
     deleteUserRole,
     addUserRole,
     sendActivationEmail,
+    sendAvatar,
+    forceLogin,
 }
 
 // ------------------------------------

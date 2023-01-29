@@ -12,4 +12,6 @@ class Permission extends PermissionsBase
     protected $fillable = [
         'name', 'guard_name'
     ];
+
+    protected $table = "permissions";
 }

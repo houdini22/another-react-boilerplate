@@ -40,6 +40,7 @@ class FormField extends React.Component<FormFieldProps> {
             case 'text':
             case 'number':
             case 'hidden':
+            case 'file':
             case 'password':
                 inputComponent = (
                     <TextField {...input} {...custom} placeholder={placeholder} type={type} error={error} />

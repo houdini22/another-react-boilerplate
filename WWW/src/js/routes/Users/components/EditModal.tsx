@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { PageContent } from '../../../layouts/PageLayout/components'
+import _ from 'lodash'
 import { RouteManager } from '../../../containers/RouteManager'
 import {
     Alert,
@@ -26,6 +26,7 @@ import { AddRoleFormContainer } from './AddRoleFormContainer'
 import { UserRolesManager } from '../../UserRoles/containers/UserRolesManager'
 import { DeleteIcon } from '../../../components/icons'
 import { formatDateTime } from '../../../helpers/date-time'
+import { UploadAvatarFormContainer } from './UploadAvatarFormContainer'
 interface EditModalViewProps {
     visible: boolean
     id: number
@@ -33,8 +34,12 @@ interface EditModalViewProps {
 }
 
 export class EditModalView extends React.Component<EditModalViewProps> {
+    state = {
+        uploadAvatarFormVisible: false,
+    }
     render() {
         const { visible, id, close } = this.props
+        const { uploadAvatarFormVisible } = this.state
 
         return (
             <RouteManager>
@@ -53,6 +58,8 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                         addUserRole,
                                         deleteUserRole,
                                         sendActivationEmail,
+                                        sendAvatar,
+                                        forceLogin,
                                     }) => {
                                         return (
                                             <>
@@ -69,16 +76,70 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                             <h3>{user.email}</h3>
                                                         </Typography.Container>
                                                         <Row>
-                                                            <Col xs={6}>
+                                                            <Col xs={6} style={{ marginBottom: 10 }}>
+                                                                <strong>Avatar:</strong>
+                                                            </Col>
+                                                            <Col xs={6} style={{ marginBottom: 10 }}>
+                                                                <Button
+                                                                    size={'xs'}
+                                                                    onClick={() =>
+                                                                        this.setState({
+                                                                            uploadAvatarFormVisible: true,
+                                                                        })
+                                                                    }
+                                                                >
+                                                                    Upload Avatar
+                                                                </Button>
+                                                                {uploadAvatarFormVisible === true && (
+                                                                    <UploadAvatarFormContainer
+                                                                        onChange={(e) => {
+                                                                            setIsLoading(true)
+                                                                            sendAvatar(
+                                                                                user,
+                                                                                _.get(e?.target?.files, 0),
+                                                                            ).then(() => {
+                                                                                fetchOne(id).then(() => {
+                                                                                    setIsLoading(true)
+                                                                                })
+                                                                            })
+                                                                        }}
+                                                                    />
+                                                                )}
+                                                            </Col>
+                                                            <Col xs={6} style={{ marginBottom: 10 }}>
+                                                                <strong>Last active at:</strong>
+                                                            </Col>
+                                                            <Col xs={6} style={{ marginBottom: 10 }}>
+                                                                {!!user.last_active
+                                                                    ? formatDateTime(user.last_active)
+                                                                    : '---'}{' '}
+                                                                {!!user.last_active && !!user.token && (
+                                                                    <Button
+                                                                        size={'xs'}
+                                                                        onClick={() => {
+                                                                            forceLogin(user).then(() => {
+                                                                                Promise.all([
+                                                                                    fetch(),
+                                                                                    fetchOne(id),
+                                                                                ]).then(() => {})
+                                                                            })
+                                                                        }}
+                                                                    >
+                                                                        Force Login
+                                                                    </Button>
+                                                                )}
+                                                            </Col>
+                                                            <Col xs={6} style={{ marginBottom: 10 }}>
                                                                 <strong>Email verified at:</strong>
                                                             </Col>
-                                                            <Col xs={6}>
+                                                            <Col xs={6} style={{ marginBottom: 10 }}>
                                                                 {user.status === 1 && (
                                                                     <span>
                                                                         {!!user.email_verified_at &&
                                                                             formatDateTime(user.email_verified_at)}
                                                                         {!user.email_verified_at && 'never'}{' '}
                                                                         <Button
+                                                                            isLoading={isLoading}
                                                                             size={'xs'}
                                                                             color={'warning'}
                                                                             onClick={() => {
@@ -196,6 +257,7 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                                                                 }}
                                                                                             >
                                                                                                 <DeleteIcon /> Delete
+                                                                                                from User
                                                                                             </Dropdown.Item>
                                                                                         }
                                                                                     </Dropdown.Menu>

@@ -22,15 +22,15 @@ class Select extends React.Component<SelectProps> {
     }
 
     render() {
-        const { error, options, loading, placeholder, ...props } = this.props
+        const { error, options, loading, placeholder, value, ...props } = this.props
         const _options = _.isFunction(options) ? options() : options
 
         return (
             <select {...props}>
                 {placeholder && this.renderPlaceholder()}
-                {_options.map(({ label, value, disabled }) => {
+                {_options.map(({ label, value: _value, disabled, selected }) => {
                     return (
-                        <option key={value} value={value} disabled={disabled}>
+                        <option key={_value} value={_value} disabled={disabled} selected={selected || value === _value}>
                             {label}
                         </option>
                     )

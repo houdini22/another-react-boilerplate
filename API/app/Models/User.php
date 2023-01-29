@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'status', 'is_deletable'
+        'name', 'email', 'password', 'status', 'is_deletable', 'avatar'
     ];
 
     /**
@@ -32,7 +32,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'token',
+        'password', 'remember_token',
     ];
 
     /**
@@ -72,5 +72,9 @@ class User extends Authenticatable
             }
         }
         return false;
+    }
+
+    public function avatar() {
+        return $this->hasOne(File::class, 'id', 'avatar_id');
     }
 }

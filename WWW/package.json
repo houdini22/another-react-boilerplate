@@ -4,7 +4,7 @@
     "scripts": {
         "build": "npm run clean-dist && webpack --config=configs/webpack/prod && cp ../API/public/index.php ../dist/ && cp ../API/public/.htaccess ../dist/ && cp ../API/public/favicon.ico ../dist/",
         "build:dev": "npm run clean-dist && webpack --config=configs/webpack/dev && cp ../API/public/index.php ../dist/ && cp ../API/public/.htaccess ../dist/ && cp ../API/public/favicon.ico ../dist/",
-        "clean-dist": "rm -f -r -d ../dist/*",
+        "clean-dist": "rm -f -r -d ../API/public/js/* && rm -f -r -d ../API/public/fonts/*",
         "prettier-write": "prettier --write \"{src,tests}/**/*.{js,jsx,css,scss,ts,tsx}\"",
         "prettier-check": "prettier --list-different \"{src,tests}/**/*.{js,jsx,css,scss,ts,tsx}\"",
         "start": "npm run start-dev",

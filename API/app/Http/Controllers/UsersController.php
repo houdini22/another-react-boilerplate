@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
@@ -20,6 +22,7 @@ class UsersController extends Controller
         $users = User::with('roles')
             ->with('permissions')
             ->with('roles.permissions')
+            ->with('avatar')
             ->orderBy('id', 'ASC')
             ->get();
 
@@ -37,6 +40,7 @@ class UsersController extends Controller
 
         $user = User::with('roles')
             ->with('roles.permissions')
+            ->with('avatar')
             ->find($id);
 
         return response()->json([
@@ -154,12 +158,12 @@ class UsersController extends Controller
             return $this->response401();
         }
 
-        $user = User::find($request->segments()[5]);
+        $user = User::find($request->route('user_id'));
         if (!$user) {
             return $this->response404();
         }
 
-        $role = Role::find($request->segments()[6]);
+        $role = Role::find($request->route('role_id'));
         if (!$role) {
             return $this->response404();
         }
@@ -187,6 +191,13 @@ class UsersController extends Controller
         $user->email_verify_token = \Illuminate\Support\Str::random(16);
         $user->save();
 
+        Mail::send('email_users_activate_account', [
+            'url' => url('/users/activate/' . $user->email_verify_token),
+        ], function ($message) use ($request, $user) {
+            $message->to($user->email, $user->email)->subject('Activate account on ' . url('/'));
+            $message->from(config('app.from_email'));
+        });
+
         return response()->json([
             'user' => $user->toArray(),
         ]);
@@ -205,5 +216,51 @@ class UsersController extends Controller
         $user->save();
 
         return redirect('/#/users/account_activated');
+    }
+
+    public function postChangeAvatar(Request $request)
+    {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $user = User::find($request->route('id'));
+        if (!$user) {
+            return $this->response404();
+        }
+
+        $request->validate([
+            'avatar' => 'required|file|max:2048'
+        ]);
+
+        $file = File::upload($request->file('avatar'));
+
+        $user->avatar_id = $file->id;
+        $user->save();
+
+        return response()->json([
+            'msg' => 'ok',
+        ]);
+    }
+
+    public function postForceLogin(Request $request)
+    {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $user = User::find($request->route('id'));
+        if (!$user) {
+            return $this->response404();
+        }
+
+        $user->token = NULL;
+        $user->save();
+
+        return response()->json([
+            'msg' => 'ok',
+        ]);
     }
 }
