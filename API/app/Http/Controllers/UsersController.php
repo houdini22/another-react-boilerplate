@@ -234,6 +234,10 @@ class UsersController extends Controller
             'avatar' => 'required|file|max:2048'
         ]);
 
+        if ($user->avatar()) {
+            $user->avatar()->delete();
+        }
+
         $file = File::upload($request->file('avatar'));
 
         $user->avatar_id = $file->id;

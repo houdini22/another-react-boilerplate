@@ -21,6 +21,7 @@ import EditModal from './EditModal'
 import AddModal from './AddModal'
 import { formatDateTime } from '../../../helpers/date-time'
 import { UserRolesManager } from '../../UserRoles/containers/UserRolesManager'
+import { apiURL } from '../../../helpers/api'
 
 export class UsersView extends React.Component {
     state = {
@@ -157,6 +158,14 @@ export class UsersView extends React.Component {
                                                                         {user.id}
                                                                     </Table.Td>
                                                                     <Table.Td xs={5} md={2}>
+                                                                        {user.avatar_id != 0 && (
+                                                                            <img
+                                                                                src={apiURL(
+                                                                                    `/files/preview/${user.avatar_id}`,
+                                                                                )}
+                                                                                style={{ maxWidth: 128 }}
+                                                                            />
+                                                                        )}
                                                                         {user.name}
                                                                     </Table.Td>
                                                                     <Table.Td xs={6} md={2}>

@@ -62,3 +62,7 @@ Route::get('/', function () {
 });
 
 Route::get('/users/activate/{email_verified_token}', '\App\Http\Controllers\UsersController@getActivate');
+
+Route::prefix('files')->group(function() {
+    Route::get('preview/{file_id}', '\App\Http\Controllers\FilesController@getPreview');
+});

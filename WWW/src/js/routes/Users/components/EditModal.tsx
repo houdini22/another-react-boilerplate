@@ -27,6 +27,7 @@ import { UserRolesManager } from '../../UserRoles/containers/UserRolesManager'
 import { DeleteIcon } from '../../../components/icons'
 import { formatDateTime } from '../../../helpers/date-time'
 import { UploadAvatarFormContainer } from './UploadAvatarFormContainer'
+import { apiURL } from '../../../helpers/api'
 interface EditModalViewProps {
     visible: boolean
     id: number
@@ -80,6 +81,17 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                                 <strong>Avatar:</strong>
                                                             </Col>
                                                             <Col xs={6} style={{ marginBottom: 10 }}>
+                                                                {user?.avatar_id != 0 && (
+                                                                    <div>
+                                                                        <img
+                                                                            src={apiURL(
+                                                                                `files/preview/${user.avatar_id}`,
+                                                                            )}
+                                                                            style={{ maxWidth: 128, marginBottom: 20 }}
+                                                                        />
+                                                                    </div>
+                                                                )}
+
                                                                 <Button
                                                                     size={'xs'}
                                                                     onClick={() =>
