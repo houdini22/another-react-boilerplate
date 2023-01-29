@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Field } from 'redux-form'
-import { Button, FormField } from '../../../components'
+import { FormField, Progress } from '../../../components'
 
 class UploadAvatarForm extends React.Component {
     constructor(props) {
@@ -8,10 +8,11 @@ class UploadAvatarForm extends React.Component {
     }
 
     render() {
-        const { handleSubmit, submit, onChange } = this.props
+        const { handleSubmit, submit, onChange, uploadProgress } = this.props
 
         return (
             <form onSubmit={handleSubmit} encType={'multipart/form-data'}>
+                {uploadProgress !== -1 && <Progress progress={uploadProgress} />}
                 <Field
                     name="avatar"
                     label="File"

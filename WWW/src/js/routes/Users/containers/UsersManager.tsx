@@ -19,6 +19,8 @@ interface UsersManagerProps {
     addUserRole: Function
     sendActivationEmail: Function
     sendAvatar: Function
+    uploadProgress: number
+    setUploadProgress: Function
 }
 
 class UsersManagerBase extends React.Component<UsersManagerProps> {
@@ -47,6 +49,8 @@ class UsersManagerBase extends React.Component<UsersManagerProps> {
             sendActivationEmail,
             sendAvatar,
             forceLogin,
+            uploadProgress,
+            setUploadProgress,
         } = this.props
         const renderProps = {
             users,
@@ -62,6 +66,8 @@ class UsersManagerBase extends React.Component<UsersManagerProps> {
             sendActivationEmail,
             sendAvatar,
             forceLogin,
+            uploadProgress,
+            setUploadProgress,
         }
 
         return (
@@ -76,6 +82,7 @@ const mapStateToProps = (state) => ({
     users: commonSelectors['getUsers'](state),
     user: commonSelectors['getUser'](state),
     isLoading: commonSelectors['getIsLoading'](state),
+    uploadProgress: commonSelectors['getUploadProgress'](state),
 })
 
 const UsersManager = connect(mapStateToProps, (dispatch) => {
@@ -92,6 +99,7 @@ const UsersManager = connect(mapStateToProps, (dispatch) => {
             sendActivationEmail: commonActions.sendActivationEmail,
             sendAvatar: commonActions.sendAvatar,
             forceLogin: commonActions.forceLogin,
+            setUploadProgress: commonActions.setUploadProgress,
         },
         dispatch,
     )

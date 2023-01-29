@@ -5,8 +5,8 @@ import styles from '../../../../assets/scss/components/_progress.scss'
 const cx = classNames.bind(styles)
 
 interface ProgressProps {
-    size: string
-    color: string
+    size?: string
+    color?: string
     progress: number
 }
 

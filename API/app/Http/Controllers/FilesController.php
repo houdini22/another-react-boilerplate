@@ -22,7 +22,7 @@ class FilesController extends Controller
 
         if ($request->query('width') && $request->query('height')) {
             $image_resize = \Intervention\Image\Facades\Image::make($filePath);
-            $image_resize->resize($request->query('width'), $request->query('height') );
+            $image_resize->fit($request->query('width'), $request->query('height') );
             $filePath = storage_path('app/public/' .  $file->file_path . $request->query('width') . '_' . $request->query('height') . '.' . $file->extension);
             $deleteAfterSend = true;
             $image_resize->save($filePath);

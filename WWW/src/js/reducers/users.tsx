@@ -5,6 +5,7 @@ const SET_IS_LOADED = 'users::set-is-loaded'
 const SET_FETCH_ERROR = 'users::set-fetch-error'
 const SET_USERS = 'users::set-users'
 const SET_USER = 'users::set-user'
+const SET_UPLOAD_PROGRESS = 'users::set-upload-progress'
 
 const setIsLoading = (data) => (dispatch) => {
     dispatch({ type: SET_IS_LOADING, payload: data })
@@ -24,6 +25,10 @@ const setUsers = (data) => (dispatch) => {
 
 const setUser = (data) => (dispatch) => {
     dispatch({ type: SET_USER, payload: data })
+}
+
+const setUploadProgress = (data) => (dispatch) => {
+    dispatch({ type: SET_UPLOAD_PROGRESS, payload: data })
 }
 
 const fetch = () => (dispatch) => {
@@ -200,10 +205,19 @@ const sendAvatar =
             const formData = new FormData()
             formData.append('avatar', file)
 
+            const onUploadProgress = (progressEvent) => {
+                const { loaded, total } = progressEvent
+                let percent = Math.floor((loaded * 100) / total)
+                if (percent <= 100) {
+                    dispatch(setUploadProgress(percent))
+                }
+            }
+
             http.post(`/users/change_avatar/${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
+                onUploadProgress,
             })
                 .then(({ data: { user } }) => {
                     resolve()
@@ -245,6 +259,7 @@ export const actions = {
     sendActivationEmail,
     sendAvatar,
     forceLogin,
+    setUploadProgress,
 }
 
 // ------------------------------------
@@ -281,6 +296,12 @@ const ACTION_HANDLERS = {
             user: payload,
         }
     },
+    [SET_UPLOAD_PROGRESS]: (state, { payload }) => {
+        return {
+            ...state,
+            uploadProgress: payload,
+        }
+    },
 }
 
 // ------------------------------------
@@ -293,6 +314,7 @@ const getInitialState = () => ({
     isLoading: false,
     isLoaded: false,
     fetchError: null,
+    uploadProgress: -1,
 })
 
 export default function cmsPagesReducer(state = getInitialState(), action) {
@@ -308,6 +330,7 @@ const getUser = (state) => getState(state)['user']
 const getIsLoading = (state) => getState(state)['isLoading']
 const getIsLoaded = (state) => getState(state)['isLoaded']
 const getFetchError = (state) => getState(state)['fetchError']
+const getUploadProgress = (state) => getState(state)['uploadProgress']
 export const selectors = {
     getState,
     getUsers,
@@ -315,4 +338,5 @@ export const selectors = {
     getIsLoaded,
     getFetchError,
     getUser,
+    getUploadProgress,
 }

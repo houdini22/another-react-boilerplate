@@ -71,7 +71,10 @@ class UsersController extends Controller
             'password_confirmation' => 'min:3|max:50'
         ]);
 
-        $user->fill($request->post());
+        $values = $request->post();
+        unset($values['avatar']);
+
+        $user->fill($values);
 
         if ($request->post('password')) {
             $user->password = bcrypt($request->post('password'));

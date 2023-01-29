@@ -61,6 +61,8 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                         sendActivationEmail,
                                         sendAvatar,
                                         forceLogin,
+                                        uploadProgress,
+                                        setUploadProgress,
                                     }) => {
                                         return (
                                             <>
@@ -104,8 +106,10 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                                 </Button>
                                                                 {uploadAvatarFormVisible === true && (
                                                                     <UploadAvatarFormContainer
+                                                                        uploadProgress={uploadProgress}
                                                                         onChange={(e) => {
                                                                             setIsLoading(true)
+                                                                            setUploadProgress(-1)
                                                                             if (_.get(e?.target?.files, 0)) {
                                                                                 sendAvatar(
                                                                                     user,

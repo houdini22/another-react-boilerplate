@@ -14,6 +14,9 @@ instance.interceptors.response.use(undefined, (error) => {
     if (error.message === 'Network Error') {
         store.dispatch(setConnectionErrorModalVisible(true))
     }
+    if (error.response.status === 401) {
+        // todo
+    }
     return Promise.reject(error)
 })
 
