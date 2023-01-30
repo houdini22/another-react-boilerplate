@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Intervention\Image\Image;
 
@@ -31,5 +32,67 @@ class FilesController extends Controller
         return response()->file($filePath, [
             'Content-Type' => $file->mime,
         ])->deleteFileAfterSend($deleteAfterSend);
+    }
+    public function getList(Request $request) {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $files = File::orderBy('id', 'DESC')->get();
+
+        return response()->json([
+            'files' => $files->toArray(),
+        ]);
+    }
+    public function deleteFile(Request $request) {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $file = File::find($request->route('id'));
+        if (!$file) {
+            return $this->response404();
+        }
+
+        $file->delete();
+
+        return response()->json([
+            'msg' => 'ok',
+        ]);
+    }
+    public function postUpload(Request $request) {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $files = $request->allFiles();
+        foreach ($files as $f) {
+            $file = File::upload($f);
+        }
+
+        return response()->json([
+            'msg' => 'ok',
+        ]);
+    }
+    public function postEdit(Request $request) {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $file = File::find($request->route('id'));
+        if (!$file) {
+            return $this->response404();
+        }
+
+        $file->fill($request->post());
+        $file->save();
+
+        return response()->json([
+            'msg' => 'ok',
+        ]);
     }
 }

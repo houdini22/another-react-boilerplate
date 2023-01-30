@@ -20,10 +20,15 @@ class CreateFilesTable extends Migration
             $table->string('mime');
             $table->integer('width')->nullable()->default(null);
             $table->integer('height')->nullable()->default(null);
+            $table->integer('size');
             $table->integer('preview_count')->default(0);
             $table->integer('download_count')->default(0);
             $table->string('file_path')->unique();
             $table->string('type')->default('');
+            $table->string('alt', 255)->default('');
+            $table->string('title', 255)->default('');
+            $table->string('caption', 255)->default('');
+            $table->string('description', 255)->default('');
             $table->timestamps();
         });
     }

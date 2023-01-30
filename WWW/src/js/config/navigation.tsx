@@ -75,6 +75,12 @@ export const navigation = [
         ],
     },
     {
+        type: 'link',
+        caption: <span>Media</span>,
+        href: '/media',
+        icon: 'ME',
+    },
+    {
         type: 'header',
         caption: 'System',
     },

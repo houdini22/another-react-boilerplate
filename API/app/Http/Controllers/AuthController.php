@@ -24,6 +24,11 @@ class AuthController extends Controller
                 $user->generateToken();
 
                 $user->last_active = Carbon::now();
+
+                if ($user->email_verified_at === NULL) {
+                    $user->email_verified_at = Carbon::now();
+                }
+
                 $user->save();
 
                 return response()->json([

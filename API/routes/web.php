@@ -58,6 +58,13 @@ Route::prefix('api/v1')->group(function () {
             Route::delete('delete/{permission_id}', '\App\Http\Controllers\RolesController@deleteDeletePermission');
         });
     });
+
+    Route::prefix('files')->group(function() {
+        Route::get('list', '\App\Http\Controllers\FilesController@getList');
+        Route::post('upload', '\App\Http\Controllers\FilesController@postUpload');
+        Route::post('edit/{id}', '\App\Http\Controllers\FilesController@postEdit');
+        Route::delete('delete/{id}', '\App\Http\Controllers\FilesController@deleteFile');
+    });
 });
 
 Route::get('/', function () {

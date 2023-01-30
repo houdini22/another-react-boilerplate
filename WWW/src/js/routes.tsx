@@ -14,6 +14,7 @@ import AddLinkView from './routes/Cms/components/AddLink'
 import { UsersView } from './routes/Users'
 import { UserRolesView } from './routes/UserRoles'
 import { UsersAccountActivated } from './routes/UsersAccountActivated'
+import { MediaView } from './routes/Media'
 const App = () => (
     <Router>
         <Routes>
@@ -89,6 +90,16 @@ const App = () => (
                     <PageLayout>
                         <UserIsAuthenticatedRoute>
                             <UserRolesView />
+                        </UserIsAuthenticatedRoute>
+                    </PageLayout>
+                }
+            />
+            <Route
+                path="/media"
+                element={
+                    <PageLayout>
+                        <UserIsAuthenticatedRoute>
+                            <MediaView />
                         </UserIsAuthenticatedRoute>
                     </PageLayout>
                 }
