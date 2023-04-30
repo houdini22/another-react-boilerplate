@@ -13,7 +13,7 @@ interface EditModalViewProps {
     close?(): Function
 }
 
-export class AddModalView extends React.Component<EditModalViewProps> {
+export class AddModalView extends React.Component<EditModalViewProps, null> {
     render() {
         const { visible, id, close } = this.props
 
@@ -22,7 +22,7 @@ export class AddModalView extends React.Component<EditModalViewProps> {
                 {({ navigate }) => (
                     <Modal.Container color={'danger'} visible={visible}>
                         <UsersManager id={id}>
-                            {({ user, isLoading, setIsLoading, addUser, fetch }) => {
+                            {({ isLoading, setIsLoading, addUser, fetch }) => {
                                 return (
                                     <>
                                         {isLoading && <LoadingOverlay />}

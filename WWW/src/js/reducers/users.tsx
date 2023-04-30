@@ -120,28 +120,26 @@ const fetchOne =
         })
     }
 
-const deleteUser =
-    (id = 0) =>
-    (dispatch) => {
-        return new Promise<void>((resolve, reject) => {
-            dispatch(setIsLoading(true))
-            dispatch(setIsLoaded(false))
-            dispatch(setFetchError(null))
+const deleteUser = (id) => (dispatch) => {
+    return new Promise<void>((resolve, reject) => {
+        dispatch(setIsLoading(true))
+        dispatch(setIsLoaded(false))
+        dispatch(setFetchError(null))
 
-            http.delete(`/users/delete/${id}`)
-                .then(({ data: { user } }) => {
-                    dispatch(setIsLoading(false))
-                    dispatch(setIsLoaded(true))
-                    resolve()
-                })
-                .catch((e) => {
-                    dispatch(setIsLoading(false))
-                    dispatch(setIsLoaded(false))
-                    dispatch(setFetchError(e))
-                    reject(e)
-                })
-        })
-    }
+        http.delete(`/users/delete/${id}`)
+            .then(({ data: { user } }) => {
+                dispatch(setIsLoading(false))
+                dispatch(setIsLoaded(true))
+                resolve()
+            })
+            .catch((e) => {
+                dispatch(setIsLoading(false))
+                dispatch(setIsLoaded(false))
+                dispatch(setFetchError(e))
+                reject(e)
+            })
+    })
+}
 
 const deleteUserRole =
     ({ id: user_id }, { id: role_id }) =>

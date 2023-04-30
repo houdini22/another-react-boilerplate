@@ -7,30 +7,30 @@ import { OptionsFields } from '../Select/Select'
 const cx = classNames.bind(styles)
 
 interface FormFieldProps {
-    input: object
-    label: string
+    input?: object
+    label?: string
     type: string
-    placeholder: string
-    meta: { error: string }
-    options: OptionsFields[]
-    html(): any
-    inputOnly: boolean
-    withError: boolean
+    placeholder?: string
+    meta?: { error: string }
+    options?: OptionsFields[]
+    html?(): any
+    inputOnly?: boolean
+    withError?: boolean
 }
 
 class FormField extends React.Component<FormFieldProps> {
     render() {
         const {
-            input,
-            label,
-            type,
-            placeholder,
-            meta: { error },
-            options,
-            html,
-            inputOnly,
+            input = {},
+            label = '',
+            type = '',
+            placeholder = '',
+            meta: { error } = {},
+            options = [],
+            html = () => '',
+            inputOnly = false,
             withError = true,
-            htmlAfter,
+            htmlAfter = '',
             ...custom
         } = this.props
 

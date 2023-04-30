@@ -25,13 +25,11 @@ interface UsersManagerProps {
     deactivateUser: Function
 }
 
-class UsersManagerBase extends React.Component<UsersManagerProps> {
+class UsersManagerBase extends React.Component<UsersManagerProps, null> {
     componentDidMount() {
-        const { fetch, fetchOne, id } = this.props
+        const { fetchOne, id } = this.props
         if (id) {
             fetchOne(id)
-        } else {
-            fetch()
         }
     }
 

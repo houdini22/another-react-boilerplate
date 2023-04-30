@@ -36,7 +36,7 @@ const setAuthToken = (token) => {
 }
 
 const processAPIerrorResponseToFormErrors = (response) => {
-    const { response: { data: { errors = {} } = {} } = {} } = response
+    const { data: { errors = {} } = {} } = response
     const res = {}
 
     Object.keys(errors).forEach((key) => {

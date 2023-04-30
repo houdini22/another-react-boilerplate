@@ -43,6 +43,7 @@ import {
     TBody as TBodyComponent,
     Td as TdComponent,
     Tr as TrComponent,
+    TFoot as TFootComponent,
 } from './ui/Table'
 import {
     Container as ListContainer,
@@ -99,6 +100,7 @@ const Table = {
     TBody: TBodyComponent,
     Td: TdComponent,
     Tr: TrComponent,
+    TFoot: TFootComponent,
 }
 
 const List = {

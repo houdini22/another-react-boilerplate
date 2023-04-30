@@ -552,7 +552,7 @@
             transition: margin-bottom 0.5s ease;
             height: calc(100vh - 44px - 60px);
 
-            & > .layout__container__content__header {
+            .layout__container__content__header {
                 height: $HEADER_DESKTOP_HEIGHT;
                 line-height: $HEADER_DESKTOP_HEIGHT;
                 background: $SIDEBAR_BACKGROUND_COLOR;
@@ -576,7 +576,7 @@
                 }
             }
 
-            & > .layout__container__content__content {
+            .layout__container__content__content {
                 padding: 15px;
                 animation--name: fadeIn;
                 animation--duration: 0.3s;

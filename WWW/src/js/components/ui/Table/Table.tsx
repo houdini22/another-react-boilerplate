@@ -49,6 +49,22 @@ class TBody extends React.Component {
     }
 }
 
+class TFoot extends React.Component {
+    render() {
+        const { children, alignRight } = this.props
+
+        return (
+            <div
+                className={cx('component-table__tfoot', {
+                    [cx('component-table__tfoot--align-right')]: alignRight,
+                })}
+            >
+                {children}
+            </div>
+        )
+    }
+}
+
 interface TrProps {
     color?: string
     children: any
@@ -132,5 +148,5 @@ class Td extends React.Component<TdProps> {
     }
 }
 
-export { Table, THead, Th, TBody, Td, Tr }
-export default { Table, THead, Th, TBody, Td, Tr }
+export { Table, THead, Th, TBody, Td, Tr, TFoot }
+export default { Table, THead, Th, TBody, Td, Tr, TFoot }

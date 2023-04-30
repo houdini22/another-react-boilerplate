@@ -49,6 +49,14 @@
         }
     }
 
+    & > .component-table__tfoot {
+        width: 100%;
+
+        &.component-table__tfoot--align-right {
+            text-align: right;
+        }
+    }
+
     & > .component-table__tbody {
         width: 100%;
 
@@ -121,6 +129,11 @@
                         background-color: $color10;
                         cursor: pointer;
                     }
+                }
+
+                & > div > * {
+                    margin-right: 5px;
+                    margin-bottom: 5px;
                 }
             }
         }

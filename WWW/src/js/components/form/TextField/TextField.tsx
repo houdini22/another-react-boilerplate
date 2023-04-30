@@ -18,7 +18,7 @@ class TextField extends React.Component<TextFieldProps> {
     input: HTMLInputElement
 
     onChange(e) {
-        const { onChange, type } = this.props
+        const { onChange = (e) => null, type } = this.props
 
         if (type === 'file') {
             onChange(e)

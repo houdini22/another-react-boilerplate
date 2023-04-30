@@ -1,0 +1,41 @@
+@import '../variables';
+
+.list-manager-container {
+    width: 100%;
+
+    .pagination {
+        margin-top: 15px;
+        display: block;
+
+        .pages {
+            text-align: center;
+        }
+    }
+
+    .filters {
+        margin-bottom: 15px;
+
+        & > * {
+            margin-bottom: 5px;
+        }
+
+        .filter {
+            & > span:nth-child(1) {
+                height: 31px;
+                line-height: 31px;
+                width: 25%;
+                display: inline-block;
+            }
+
+            & > *:not(span:nth-child(1)) {
+                width: 75%;
+                display: inline-flex;
+                margin: 0;
+                & > * {
+                    margin: 0;
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}

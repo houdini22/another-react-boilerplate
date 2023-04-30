@@ -1,4 +1,4 @@
-import { Table, THead, Th, Td, TBody, Tr } from './Table'
+import { Table, THead, Th, Td, TBody, Tr, TFoot } from './Table'
 
-export { Table, THead, Th, Td, TBody, Tr }
-export default { Table, THead, Th, Td, TBody, Tr }
+export { Table, THead, Th, Td, TBody, Tr, TFoot }
+export default { Table, THead, Th, Td, TBody, Tr, TFoot }
