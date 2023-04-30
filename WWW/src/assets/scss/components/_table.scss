@@ -3,6 +3,7 @@
 .component-table {
     display: flex;
     flex-direction: column;
+    padding: 0 15px;
 
     & > .component-table__thead {
         width: 100%;

@@ -195,7 +195,7 @@
     & > .component-popover__content {
         position: absolute;
         bottom: calc(100% + #{$COMPONENT_MARGIN_SINGLE});
-        min-height: 200px;
+        min-height: calc(200px + #{$COMPONENT_PADDING} + #{$COMPONENT_PADDING});
         display: none;
         z-index: 1;
 

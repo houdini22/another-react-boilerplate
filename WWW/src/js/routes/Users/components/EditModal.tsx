@@ -2,7 +2,6 @@ import * as React from 'react'
 import _ from 'lodash'
 import { RouteManager } from '../../../containers/RouteManager'
 import {
-    Alert,
     Badge,
     Button,
     Card,
@@ -11,9 +10,7 @@ import {
     Label,
     LoadingOverlay,
     Modal,
-    PageHeader,
     Row,
-    Table,
     Tabs,
     Typography,
 } from '../../../components'
@@ -34,7 +31,11 @@ interface EditModalViewProps {
     close?(): Function
 }
 
-export class EditModalView extends React.Component<EditModalViewProps> {
+interface EditModalState {
+    uploadAvatarFormVisible: boolean
+}
+
+export class EditModalView extends React.Component<EditModalViewProps, EditModalState> {
     state = {
         uploadAvatarFormVisible: false,
     }
@@ -54,7 +55,6 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                         isLoading,
                                         setIsLoading,
                                         editUser,
-                                        fetch,
                                         fetchOne,
                                         addUserRole,
                                         deleteUserRole,
@@ -65,7 +65,7 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                         setUploadProgress,
                                     }) => {
                                         return (
-                                            <>
+                                            <div>
                                                 {isLoading && <LoadingOverlay />}
                                                 <Modal.Header close={close} closeIcon>
                                                     <EditIcon /> Edit User
@@ -197,14 +197,12 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                             <Tabs.Content>
                                                                 <EditFormContainer
                                                                     initialValues={user}
-                                                                    setIsLoading={setIsLoading}
-                                                                    onSubmit={(values, props) => {
+                                                                    onSubmit={(values) => {
                                                                         return editUser({ ...user, ...values }).then(
                                                                             () => {
-                                                                                Promise.all([
-                                                                                    fetch(),
-                                                                                    fetchOne(id),
-                                                                                ]).then(() => {})
+                                                                                Promise.all([fetchOne(id)]).then(
+                                                                                    () => {},
+                                                                                )
                                                                             },
                                                                             (response) => {
                                                                                 throw new SubmissionError(
@@ -233,9 +231,7 @@ export class EditModalView extends React.Component<EditModalViewProps> {
 
                                                                             addUserRole(user, { id: role }).then(() => {
                                                                                 fetchOne(id).then(() => {
-                                                                                    fetch().then(() => {
-                                                                                        setIsLoading(false)
-                                                                                    })
+                                                                                    setIsLoading(false)
                                                                                 })
                                                                             })
                                                                         }}
@@ -272,7 +268,6 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                                                                         },
                                                                                                     ).then(() => {
                                                                                                         Promise.all([
-                                                                                                            fetch(),
                                                                                                             fetchOne(
                                                                                                                 id,
                                                                                                             ),
@@ -335,7 +330,6 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                                                                                     () => {
                                                                                                                         Promise.all(
                                                                                                                             [
-                                                                                                                                fetch(),
                                                                                                                                 fetchOne(
                                                                                                                                     id,
                                                                                                                                 ),
@@ -370,8 +364,7 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                         </Tabs.Tab>
                                                     </Tabs.Container>
                                                 </Modal.Body>
-                                                <Modal.Footer></Modal.Footer>
-                                            </>
+                                            </div>
                                         )
                                     }}
                                 </UsersManager>

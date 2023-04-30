@@ -246,7 +246,7 @@ class Trigger extends React.Component<TriggerProps> {
 
 interface ContentProps {
     children: any
-    className: string
+    className?: string
 }
 
 class Content extends React.Component<ContentProps> {

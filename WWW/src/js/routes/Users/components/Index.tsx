@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { RouteManager } from '../../../containers/RouteManager'
-import { Button, LoadingOverlay, PageHeader } from '../../../components'
+import { Button, Card, LoadingOverlay, PageHeader } from '../../../components'
 import { UsersManager } from '../containers/UsersManager'
 import EditModal from './EditModal'
 import AddModal from './AddModal'
@@ -11,6 +11,8 @@ import ConfirmDeleteModal from './ConfirmDeleteModal'
 import { Pagination } from '../../../components/common/List/Pagination'
 import UsersTable from './UsersTable'
 import UsersFilters from './UsersFilters'
+import { ifDeepDiff } from '../../../utils/javascript'
+import { FaHome as HomeIcon } from 'react-icons/fa'
 
 interface UsersViewState {
     deleteUserId: number | boolean
@@ -45,22 +47,20 @@ export class UsersView extends React.Component<null, UsersViewState> {
 
     render() {
         const { deleteUserId, editUserId, addUser } = this.state
-
+        const defaultFilters = {
+            order_by: 'id',
+            order_direction: 'asc',
+            items_per_page: 15,
+            search: '',
+            status: 'active_or_not_active',
+            avatar: 'has_or_has_not',
+        }
         return (
             <RouteManager>
                 {({ navigate }) => (
                     <UserRolesManager>
                         {({ deleteRole }) => (
-                            <ListManager
-                                url={'/users/list'}
-                                defaultFilters={{
-                                    order_by: 'id',
-                                    order_direction: 'asc',
-                                    items_per_page: 15,
-                                    search: '',
-                                    status: 'active_or_not_active',
-                                }}
-                            >
+                            <ListManager url={'/users/list'} defaultFilters={defaultFilters}>
                                 {({
                                     fetch,
                                     setFilter,
@@ -105,36 +105,68 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                 Add
                                                             </Button>
                                                         </PageHeader.Actions>
+                                                        <PageHeader.Breadcrumbs>
+                                                            <PageHeader.BreadcrumbsItem href="/">
+                                                                <HomeIcon /> Home
+                                                            </PageHeader.BreadcrumbsItem>
+                                                            <PageHeader.BreadcrumbsItem href="/users">
+                                                                Users
+                                                            </PageHeader.BreadcrumbsItem>
+                                                        </PageHeader.Breadcrumbs>
                                                     </PageHeader.Container>
-                                                    <UsersFilters
-                                                        filters={filters}
-                                                        setFilter={setFilter}
-                                                        fetch={fetch}
-                                                    />
-                                                    <UsersTable
-                                                        users={data}
-                                                        setIsLoading={setIsLoading}
-                                                        deleteUserRole={deleteUserRole}
-                                                        fetch={fetch}
-                                                        deleteRole={deleteRole}
-                                                        activateUser={activateUser}
-                                                        deactivateUser={deactivateUser}
-                                                        setUserToEdit={this.setUserToEdit.bind(this)}
-                                                        setUserToDelete={this.setUserToDelete.bind(this)}
-                                                        page={page}
-                                                        perPage={perPage}
-                                                        total={total}
-                                                        totalPages={totalPages}
-                                                    />
-                                                    <Pagination
-                                                        links={links}
-                                                        page={page}
-                                                        fetch={fetch}
-                                                        setPage={setPage}
-                                                        hasNextPage={hasNextPage}
-                                                        hasPrevPage={hasPrevPage}
-                                                        totalPages={totalPages}
-                                                    />
+                                                    <Card
+                                                        header={<h1>Filters</h1>}
+                                                        headerActions={[
+                                                            <Button
+                                                                color={'secondary'}
+                                                                onClick={() => resetFilters()}
+                                                                disabled={!ifDeepDiff(defaultFilters, filters)}
+                                                            >
+                                                                Reset Filters
+                                                            </Button>,
+                                                        ]}
+                                                    >
+                                                        <UsersFilters
+                                                            filters={filters}
+                                                            setFilter={setFilter}
+                                                            fetch={fetch}
+                                                        />
+                                                    </Card>
+                                                    <Card>
+                                                        <Pagination
+                                                            links={links}
+                                                            page={page}
+                                                            fetch={fetch}
+                                                            setPage={setPage}
+                                                            hasNextPage={hasNextPage}
+                                                            hasPrevPage={hasPrevPage}
+                                                            totalPages={totalPages}
+                                                        />
+                                                        <UsersTable
+                                                            users={data}
+                                                            setIsLoading={setIsLoading}
+                                                            deleteUserRole={deleteUserRole}
+                                                            fetch={fetch}
+                                                            deleteRole={deleteRole}
+                                                            activateUser={activateUser}
+                                                            deactivateUser={deactivateUser}
+                                                            setUserToEdit={this.setUserToEdit.bind(this)}
+                                                            setUserToDelete={this.setUserToDelete.bind(this)}
+                                                            page={page}
+                                                            perPage={perPage}
+                                                            total={total}
+                                                            totalPages={totalPages}
+                                                        />
+                                                        <Pagination
+                                                            links={links}
+                                                            page={page}
+                                                            fetch={fetch}
+                                                            setPage={setPage}
+                                                            hasNextPage={hasNextPage}
+                                                            hasPrevPage={hasPrevPage}
+                                                            totalPages={totalPages}
+                                                        />
+                                                    </Card>
                                                     {isLoading && <LoadingOverlay />}
                                                 </PageContent>
                                             )

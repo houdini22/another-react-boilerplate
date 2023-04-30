@@ -146,13 +146,9 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
     resetFilters() {
         const { defaultFilters } = this.props
 
-        const promises = []
-
-        Object.keys(defaultFilters).forEach((name) => {
-            promises.push(this.setFilter(name, defaultFilters[name]))
+        this.setState({ filters: defaultFilters }, () => {
+            this.fetch()
         })
-
-        Promise.all(promises).then(() => this.fetch())
     }
 
     render() {

@@ -19,6 +19,28 @@ export class Filters extends React.Component<FiltersProps, null> {
                     filters={filters}
                     options={[
                         {
+                            label: 'Has or has not avatar',
+                            value: 'has_or_has_not',
+                        },
+                        {
+                            label: 'Has avatar',
+                            value: 'has',
+                        },
+                        {
+                            label: 'Has not avatar',
+                            value: 'has_not',
+                        },
+                    ]}
+                    type={'radio'}
+                    name={'avatar'}
+                    setFilter={setFilter}
+                    fetch={fetch}
+                    label={'Avatar'}
+                />
+                <Filter
+                    filters={filters}
+                    options={[
+                        {
                             label: 'Active or Not Active',
                             value: 'active_or_not_active',
                         },
@@ -65,7 +87,7 @@ export class Filters extends React.Component<FiltersProps, null> {
                             value: 15,
                         },
                         {
-                            label: '40',
+                            label: '50',
                             value: 50,
                         },
                         {

@@ -19,15 +19,35 @@ class UsersController extends Controller
             return $this->response401();
         }
 
+        $filters = $request->get('filters');
+
         $users = User::with('roles')
             ->with('permissions')
             ->with('roles.permissions')
             ->with('avatar')
-            ->orderBy('id', 'ASC')
-            ->get();
+            ->orderBy($filters['order_by'], $filters['order_direction'])
+            ->where(function ($query) use ($filters) {
+                $query->where('email', 'like', "%{$filters['search']}%")
+                    ->orWhere('name', 'like', "%{$filters['search']}%");
+            })
+            ->where(function ($query) use ($filters) {
+                if ($filters['status'] !== 'active_or_not_active') {
+                    $query->where('status', $filters['status'] === 'active' ? 1 : 0);
+                }
+            })
+            ->where(function ($query) use ($filters) {
+                if ($filters['avatar'] !== 'has_or_has_not') {
+                    if ($filters['avatar'] === 'has') {
+                        $query->whereNotNull('avatar_id');
+                    } else {
+                        $query->whereNull('avatar_id');
+                    }
+                }
+            })
+            ->paginate($filters['items_per_page']);
 
         return response()->json([
-            'users' => $users->toArray(),
+            'data' => $users->toArray(),
         ]);
     }
 
@@ -96,7 +116,7 @@ class UsersController extends Controller
 
         $request->validate([
             'email' => 'required|email|unique:users,email',
-            'name' => 'required|unique:users,name',
+            'name' => 'required|unique:users,name|alpha_dash',
             'password' => 'required|min:3|max:50|same:confirm_password',
             'confirm_password' => 'required|min:3|max:50',
         ]);
@@ -209,7 +229,7 @@ class UsersController extends Controller
     public function getActivate(Request $request)
     {
         $user = User::where('email_verify_token', $request->route('email_verified_token'))
-        ->get()->first();
+            ->get()->first();
         if (!$user) {
             return $this->response404();
         }

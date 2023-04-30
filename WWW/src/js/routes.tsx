@@ -15,6 +15,7 @@ import { UsersView } from './routes/Users'
 import { UserRolesView } from './routes/UserRoles'
 import { UsersAccountActivated } from './routes/UsersAccountActivated'
 import { MediaView } from './routes/Media'
+import { UsersEditView } from './routes/UsersEdit'
 const App = () => (
     <Router>
         <Routes>
@@ -64,6 +65,16 @@ const App = () => (
                     <PageLayout>
                         <UserIsAuthenticatedRoute>
                             <UsersView />
+                        </UserIsAuthenticatedRoute>
+                    </PageLayout>
+                }
+            />
+            <Route
+                path="/users/edit"
+                element={
+                    <PageLayout>
+                        <UserIsAuthenticatedRoute>
+                            <UsersEditView />
                         </UserIsAuthenticatedRoute>
                     </PageLayout>
                 }
