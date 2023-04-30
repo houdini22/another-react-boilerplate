@@ -5,7 +5,7 @@ import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
 
-class IndexView extends React.Component {
+class IndexView extends React.Component<null, null> {
     constructor(props) {
         super(props)
     }

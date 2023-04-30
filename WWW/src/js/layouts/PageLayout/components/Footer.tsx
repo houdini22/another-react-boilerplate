@@ -5,7 +5,11 @@ import styles from '../../../../assets/scss/layout/_layout.scss'
 
 const cx = classNames.bind(styles)
 
-class Footer extends React.Component {
+interface FooterProps {
+    floatingSidebar: boolean
+}
+
+class Footer extends React.Component<FooterProps, null> {
     render() {
         const { floatingSidebar } = this.props
         return (

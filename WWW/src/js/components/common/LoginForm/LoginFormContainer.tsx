@@ -1,7 +1,7 @@
 import { reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import LoginForm from './LoginForm'
-import { actions as authActions } from '../../../reducers/auth'
+import { actions as authActions, selectors as authSelectors } from '../../../reducers/auth'
 import { withRouter } from '../../../helpers/router'
 import { compose } from 'redux'
 const { login } = authActions
@@ -32,6 +32,8 @@ const LoginFormContainer = compose(
                 })[0]['email'],
                 password: '',
             },
+            isLoading: authSelectors.getIsLoading(state),
+            loginError: authSelectors.getLoginError(state),
         }
     }),
     withRouter,

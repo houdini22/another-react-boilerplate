@@ -5,7 +5,7 @@ import { RouteManager } from '../../../containers/RouteManager'
 import LoginFormContainer from '../../../components/common/LoginForm/LoginFormContainer'
 import { Alert } from '../../../components'
 
-export class LoginView extends React.Component {
+export class LoginView extends React.Component<null, null> {
     render() {
         return (
             <AuthManager>

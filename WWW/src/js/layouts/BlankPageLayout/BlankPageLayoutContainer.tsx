@@ -7,6 +7,7 @@ const { setConnectionErrorModalVisible } = commonActions
 
 const mapStateToProps = (state) => ({
     common: commonSelectors['getState'](state),
+    connectionErrorModalVisible: commonSelectors.getIsConnectionErrorModalVisible(state),
 })
 
 const BlankPageLayoutContainer = connect(mapStateToProps, (dispatch) => {

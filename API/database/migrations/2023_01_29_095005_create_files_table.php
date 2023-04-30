@@ -25,10 +25,10 @@ class CreateFilesTable extends Migration
             $table->integer('download_count')->default(0);
             $table->string('file_path')->unique();
             $table->string('type')->default('');
-            $table->string('alt', 255)->default('');
-            $table->string('title', 255)->default('');
-            $table->string('caption', 255)->default('');
-            $table->string('description', 255)->default('');
+            $table->string('alt', 255)->nullable()->default(null);
+            $table->string('title', 255)->nullable()->default(null);
+            $table->string('caption', 255)->nullable()->default(null);
+            $table->string('description', 255)->nullable()->default(null);
             $table->timestamps();
         });
     }

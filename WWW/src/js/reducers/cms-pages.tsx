@@ -15,10 +15,6 @@ const setIsLoaded = (data) => (dispatch) => {
     dispatch({ type: SET_IS_LOADED, payload: data })
 }
 
-const setFetchError = (data) => (dispatch) => {
-    dispatch({ type: SET_FETCH_ERROR, payload: data })
-}
-
 const setNodes = (data) => (dispatch) => {
     dispatch({ type: SET_NODES, payload: data })
 }
@@ -38,7 +34,7 @@ const fetch =
         return new Promise<void>((resolve) => {
             dispatch(setIsLoading(true))
             dispatch(setIsLoaded(false))
-            dispatch(setFetchError(null))
+            setNodes([])
 
             http.get('/cms/pages', {
                 params: {
@@ -53,9 +49,7 @@ const fetch =
                     resolve()
                 })
                 .catch((e) => {
-                    dispatch(setIsLoading(false))
                     dispatch(setIsLoaded(false))
-                    dispatch(setFetchError(e))
                 })
         })
     }
@@ -134,7 +128,6 @@ export const actions = {
     fetch,
     setIsLoaded,
     setIsLoading,
-    setFetchError,
     setCurrentId,
     setCurrentNode,
     fetchParentCategorySelectOptions,

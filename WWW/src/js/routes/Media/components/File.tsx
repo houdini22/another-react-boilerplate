@@ -139,6 +139,7 @@ export class FileView extends React.Component<FileProps, FileState> {
                                             initialValues={{ ...file, url: apiURL(`files/download/${id}`) }}
                                             addToastNotification={addToastNotification}
                                             editFile={editFile}
+                                            fetch={fetch}
                                         />
                                     )}
                                 </NotificationsManager>

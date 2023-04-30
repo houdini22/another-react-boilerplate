@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Field } from 'redux-form'
-import { FormField, Button } from '../../index'
+import { FormField, Button, LoadingOverlay, Alert } from '../../index'
 import { RouteManager } from '../../../containers/RouteManager'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/routes/index.scss'
@@ -16,16 +16,19 @@ interface LoginFormProps {
     button: any
 }
 
-export class LoginForm extends React.Component<LoginFormProps> {
+export class LoginForm extends React.Component<LoginFormProps, null> {
     render() {
         const {
             handleSubmit,
             initialValues: { username },
             button,
+            isLoading,
+            loginError,
         } = this.props
 
         return (
             <form onSubmit={handleSubmit}>
+                {loginError && <Alert color={'danger'}>{loginError}</Alert>}
                 <Field
                     name="username"
                     component={FormField}
@@ -62,6 +65,7 @@ export class LoginForm extends React.Component<LoginFormProps> {
                         </RouteManager>
                     )}
                 </div>
+                {isLoading && <LoadingOverlay />}
             </form>
         )
     }

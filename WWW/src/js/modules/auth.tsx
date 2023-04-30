@@ -1,14 +1,10 @@
-// import locationHelperBuilder from 'redux-auth-wrapper/history3/locationHelper'
 import * as React from 'react'
 import { selectors, actions as commonActions } from '../reducers/auth'
 import { bindActionCreators, compose } from 'redux'
 import { connect } from 'react-redux'
-import { Navigate } from 'react-router'
 import { withRouter } from '../helpers/router'
 import { LocalStorage } from './database'
 import createReactClass from 'create-react-class'
-
-// const locationHelper = locationHelperBuilder({})
 
 const { getIsLoggedIn } = selectors
 
@@ -26,7 +22,7 @@ interface UserIsAuthenticatedRouteProps {
     navigate: Function
 }
 
-class UserIsAuthenticatedRouteBase extends React.Component<UserIsAuthenticatedRouteProps> {
+class UserIsAuthenticatedRouteBase extends React.Component<UserIsAuthenticatedRouteProps, null> {
     componentDidMount() {
         const {
             isLoggedIn,

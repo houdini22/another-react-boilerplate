@@ -13,6 +13,7 @@
         padding: 2em;
         background: $mainBackground;
         border-radius: $COMPONENT_BORDER_RADIUS;
+        position: relative;
 
         .buttons-container {
             display: -ms-flexbox;
