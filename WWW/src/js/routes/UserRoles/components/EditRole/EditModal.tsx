@@ -1,14 +1,14 @@
 import * as React from 'react'
-import { RouteManager } from '../../../containers/RouteManager'
-import { Badge, Card, Dropdown, Label, LoadingOverlay, Modal, Section, Tabs } from '../../../components'
-import { UserRolesManager } from '../containers/UserRolesManager'
-import { EditIcon } from '../../../components/icons'
+import { RouteManager } from '../../../../containers/RouteManager'
+import { Badge, Button, Card, Dropdown, Label, LoadingOverlay, Modal, Section, Tabs } from '../../../../components'
+import { UserRolesManager } from '../../containers/UserRolesManager'
+import { EditIcon } from '../../../../components/icons'
 import { EditFormContainer } from './EditFormContainer'
 import { SubmissionError } from 'redux-form'
-import { processAPIerrorResponseToFormErrors } from '../../../modules/http'
-import { AddPermissionFormContainer } from './AddPermissionFormContainer'
-import { NotificationsManager } from '../../../containers/NotificationsManager'
-import { DeleteIcon } from '../../../components/icons'
+import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
+import { AddPermissionFormContainer } from '../AddPermission/AddPermissionFormContainer'
+import { NotificationsManager } from '../../../../containers/NotificationsManager'
+import { DeleteIcon } from '../../../../components/icons'
 
 interface EditModalViewProps {
     visible: boolean
@@ -26,7 +26,7 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                 {({ navigate }) => (
                     <NotificationsManager>
                         {({ addToastNotification }) => (
-                            <Modal.Container color={'danger'} visible={visible}>
+                            <Modal.Container color={'primary'} visible={visible}>
                                 <UserRolesManager id={id}>
                                     {({
                                         role,
@@ -99,7 +99,11 @@ export class EditModalView extends React.Component<EditModalViewProps> {
                                                         </Tabs.Tab>
                                                     </Tabs.Container>
                                                 </Modal.Body>
-                                                <Modal.Footer></Modal.Footer>
+                                                <Modal.Footer>
+                                                    <Button color={'secondary'} block onClick={() => close()}>
+                                                        Cancel
+                                                    </Button>
+                                                </Modal.Footer>
                                             </>
                                         )
                                     }}

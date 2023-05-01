@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Field } from 'redux-form'
-import { Button, FormField } from '../../../components'
+import { Button, FormField } from '../../../../components'
 
 interface AddPermissionFormProps {
     handleSubmit: Function
@@ -58,17 +58,34 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps> {
                             label="Role"
                             type="select"
                             placeholder={'--- choose ---'}
-                            options={roles?.map(({ id, name, guard_name }) => {
-                                return {
-                                    label: `${name} - ${guard_name}`,
-                                    value: id,
-                                    selected: id === role.id,
-                                }
-                            })}
+                            options={roles
+                                ?.sort(({ name: labelA }, { name: labelB }) => labelA.localeCompare(labelB))
+                                .map(({ id, name, guard_name }) => {
+                                    return {
+                                        label: `${name} - ${guard_name}`,
+                                        value: id,
+                                        selected: id === role.id,
+                                    }
+                                })}
                             component={FormField}
                         />
                         <Field name="name" label="Name" type="text" component={FormField} />
-                        <Field name="guard_name" label="Guard Name" type="text" component={FormField} />
+                        <Field
+                            name="guard_name"
+                            label="Guard"
+                            type="select"
+                            options={[
+                                {
+                                    value: 'web',
+                                    label: 'web',
+                                },
+                                {
+                                    value: 'api',
+                                    label: 'api',
+                                },
+                            ]}
+                            component={FormField}
+                        />
                     </>
                 )}
                 <Button color="success" type="submit" block>

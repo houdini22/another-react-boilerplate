@@ -15,16 +15,17 @@ import {
     Table,
 } from '../../../components'
 import { UserRolesManager } from '../containers/UserRolesManager'
-import EditModal from './EditModal'
-import AddModal from './AddModal'
+import EditModal from './EditRole/EditModal'
+import AddModal from './AddRole/AddModal'
 import { NotificationsManager } from '../../../containers/NotificationsManager'
-import AddPermissionModal from './AddPermissionModal'
+import AddPermissionModal from './AddPermission/AddPermissionModal'
 import { ListManager } from '../../../components/common/List/ListManager'
 import RolesTable from './RolesTable'
 import { Pagination } from '../../../components/common/List/Pagination'
 import RolesFilters from './RolesFilters'
 import { ifDeepDiff } from '../../../utils/javascript'
 import { FaHome as HomeIcon } from 'react-icons/fa'
+import Header from './Header'
 
 export class UsersView extends React.Component {
     state = {
@@ -153,11 +154,13 @@ export class UsersView extends React.Component {
                                                 <PageContent>
                                                     <AddModal
                                                         visible={addModalVisible}
-                                                        close={() => this.closeAddModal().then(() => fetch())}
+                                                        close={() => this.closeAddModal()}
+                                                        fetch={fetch}
                                                     />
                                                     <AddPermissionModal
                                                         visible={addPermissionModalVisible}
-                                                        close={() => this.closePermissionsModal().then(() => fetch())}
+                                                        close={() => this.closePermissionsModal()}
+                                                        fetch={fetch}
                                                     />
                                                     <EditModal
                                                         visible={typeof edit !== 'boolean'}
@@ -210,34 +213,8 @@ export class UsersView extends React.Component {
                                                             </Row>
                                                         </Modal.Footer>
                                                     </Modal.Container>
-                                                    <PageHeader.Container>
-                                                        <PageHeader.Title>Roles</PageHeader.Title>
-                                                        <PageHeader.Actions>
-                                                            <Button
-                                                                color={'success'}
-                                                                onClick={() => this.openAddModal()}
-                                                            >
-                                                                Add Role
-                                                            </Button>
-                                                            <Button
-                                                                color={'success'}
-                                                                onClick={() => this.openPermissionsModal()}
-                                                            >
-                                                                Add Permission
-                                                            </Button>
-                                                        </PageHeader.Actions>
-                                                        <PageHeader.Breadcrumbs>
-                                                            <PageHeader.BreadcrumbsItem href="/">
-                                                                <HomeIcon /> Home
-                                                            </PageHeader.BreadcrumbsItem>
-                                                            <PageHeader.BreadcrumbsItem href="/users">
-                                                                Users
-                                                            </PageHeader.BreadcrumbsItem>
-                                                            <PageHeader.BreadcrumbsItem href="/roles">
-                                                                Roles
-                                                            </PageHeader.BreadcrumbsItem>
-                                                        </PageHeader.Breadcrumbs>
-                                                    </PageHeader.Container>
+
+                                                    <Header openAddModal={this.openAddModal.bind(this)} />
 
                                                     <Card
                                                         name={'UserRolesList'}

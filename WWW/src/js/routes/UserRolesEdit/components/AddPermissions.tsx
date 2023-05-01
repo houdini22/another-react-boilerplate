@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Card, LoadingOverlay } from '../../../components'
-import { AddPermissionFormContainer } from '../../UserRoles/components/AddPermissionFormContainer'
+import { AddPermissionFormContainer } from '../../UserRoles/components/AddPermission/AddPermissionFormContainer'
 import { processAPIerrorResponseToFormErrors } from '../../../modules/http'
 import { SubmissionError } from 'redux-form'
 interface HeaderProps {

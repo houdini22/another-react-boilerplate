@@ -2,16 +2,26 @@ import * as React from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { EditForm as FormComponent } from './EditForm'
-import { reduxForm } from 'redux-form'
+import { reduxForm, SubmissionError } from 'redux-form'
+import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 
-const onChange = (values, dispatch, props) => {}
+const onSubmit = (values, _, { addRole, fetch, close }) => {
+    return addRole(values).then(
+        (data) => {
+            fetch().then(() => close())
+        },
+        (response) => {
+            throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
+        },
+    )
+}
 
 const EditFormContainer = compose(
     connect((state, props) => {
         return {}
     }),
     reduxForm({
-        onChange,
+        onSubmit,
         enableReinitialize: true,
         destroyOnUnmount: false,
         form: 'EditRoleForm',

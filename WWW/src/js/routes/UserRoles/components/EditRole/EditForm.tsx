@@ -2,7 +2,11 @@ import * as React from 'react'
 import { Field } from 'redux-form'
 import { Button, FormField } from '../../../../components'
 
-class EditForm extends React.Component<null, null> {
+class EditForm extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
     render() {
         const { handleSubmit } = this.props
 
