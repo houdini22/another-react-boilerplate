@@ -33,7 +33,7 @@ export class Permissions extends React.Component<HeaderProps, null> {
                                         navigate(`/users?permissions=${_id}`)
                                     }}
                                 >
-                                    <UserIcon /> Show Users
+                                    <UserIcon /> Show Users with Permission
                                 </Dropdown.Item>
                                 <Dropdown.Item
                                     color="info"
@@ -41,7 +41,7 @@ export class Permissions extends React.Component<HeaderProps, null> {
                                         navigate(`/roles?permissions=${_id}`)
                                     }}
                                 >
-                                    <RoleIcon /> Show Roles
+                                    <RoleIcon /> Show Roles with Permission
                                 </Dropdown.Item>
                                 <Dropdown.Item
                                     color="danger"
@@ -62,7 +62,7 @@ export class Permissions extends React.Component<HeaderProps, null> {
                                         })
                                     }}
                                 >
-                                    <DeleteIcon /> Remove from Role
+                                    <DeleteIcon /> Remove Permission from Role
                                 </Dropdown.Item>
                                 {is_deletable == 1 && (
                                     <Dropdown.Item

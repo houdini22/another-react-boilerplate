@@ -12,7 +12,8 @@ const onSubmit = (values, dispatch, props) => {
             fetch().then(() => {
                 addToastNotification({
                     type: 'success',
-                    title: 'File saved successfully',
+                    title: 'Save success.',
+                    text: 'File has been saved.',
                 })
             })
         },

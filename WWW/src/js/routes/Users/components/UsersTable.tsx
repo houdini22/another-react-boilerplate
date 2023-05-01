@@ -171,7 +171,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                                             }}
                                                                                         >
                                                                                             <DetailsIcon /> Show
-                                                                                            Permissions
+                                                                                            Permissions with Role
                                                                                         </Dropdown.Item>
                                                                                         <Dropdown.Item
                                                                                             color={'info'}
@@ -182,6 +182,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                                             }}
                                                                                         >
                                                                                             <DetailsIcon /> Show Users
+                                                                                            with Role
                                                                                         </Dropdown.Item>
                                                                                         <Dropdown.Item
                                                                                             color={'warning'}
@@ -221,7 +222,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                                                 })
                                                                                             }}
                                                                                         >
-                                                                                            <DeleteIcon /> Delete Role
+                                                                                            <DeleteIcon /> Remove Role
                                                                                             from User
                                                                                         </Dropdown.Item>
                                                                                         {_is_deletable == 1 && (
@@ -250,7 +251,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                                                     })
                                                                                                 }}
                                                                                             >
-                                                                                                <DeleteIcon /> Delete
+                                                                                                <DeleteIcon /> Remove
                                                                                                 Role
                                                                                             </Dropdown.Item>
                                                                                         )}
@@ -337,7 +338,8 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                                                 )
                                                                                             }}
                                                                                         >
-                                                                                            <UserIcon /> Show Users
+                                                                                            <UserIcon /> Show Users with
+                                                                                            Permission
                                                                                         </Dropdown.Item>
                                                                                         {model_type.match(/User/) && (
                                                                                             <Dropdown.Item
@@ -370,7 +372,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                                                     })
                                                                                                 }}
                                                                                             >
-                                                                                                <DeleteIcon /> Delete
+                                                                                                <DeleteIcon /> Remove
                                                                                                 Permission from User
                                                                                             </Dropdown.Item>
                                                                                         )}
@@ -401,7 +403,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                                                 }}
                                                                                             >
                                                                                                 <DeleteIcon /> Delete
-                                                                                                Permission Permanently
+                                                                                                Permission
                                                                                             </Dropdown.Item>
                                                                                         )}
                                                                                     </Dropdown.Menu>

@@ -3,12 +3,8 @@ import { Field } from 'redux-form'
 import { FormField, Progress } from '../../../components'
 
 class UploadFileForm extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
-        const { handleSubmit, submit, uploadFiles, uploadProgress, fetch } = this.props
+        const { handleSubmit, uploadFiles, uploadProgress, fetch, addToastNotification } = this.props
 
         return (
             <form onSubmit={handleSubmit} encType={'multipart/form-data'}>
@@ -20,6 +16,11 @@ class UploadFileForm extends React.Component {
                     onChange={(e) =>
                         uploadFiles(e).then(() => {
                             fetch()
+                            addToastNotification({
+                                type: 'success',
+                                title: 'Upload success.',
+                                text: 'Files has been saved.',
+                            })
                         })
                     }
                     multiple

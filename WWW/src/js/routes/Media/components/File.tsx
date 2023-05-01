@@ -43,6 +43,7 @@ export class FileView extends React.Component<FileProps, FileState> {
             file,
             editFile,
             isLoading,
+            addToastNotification,
         } = this.props
         const { confirmDeleteModalVisible, detailsModalVisible } = this.state
 
@@ -103,7 +104,14 @@ export class FileView extends React.Component<FileProps, FileState> {
                                     color={'danger'}
                                     block
                                     onClick={() => {
-                                        deleteFile({ id }).then(() => fetch())
+                                        deleteFile({ id }).then(() => {
+                                            fetch()
+                                            addToastNotification({
+                                                type: 'success',
+                                                title: 'Delete success.',
+                                                text: 'Files has been removed.',
+                                            })
+                                        })
                                     }}
                                 >
                                     OK

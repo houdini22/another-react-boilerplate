@@ -98,7 +98,7 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                                             navigate(`/roles?permissions=${id}`)
                                         }}
                                     >
-                                        <DetailsIcon /> Show Roles
+                                        <DetailsIcon /> Show Permission Roles
                                     </Dropdown.Item>
                                     {model_type.match(/User/) && (
                                         <Dropdown.Item
@@ -118,7 +118,7 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                                                 })
                                             }}
                                         >
-                                            <DeleteIcon /> Delete from User
+                                            <DeleteIcon /> Remove permission from User
                                         </Dropdown.Item>
                                     )}
                                     {is_deletable == 1 && (
@@ -139,7 +139,7 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                                                 })
                                             }}
                                         >
-                                            <DeleteIcon /> Delete Permission Permanently
+                                            <DeleteIcon /> Remove Permission
                                         </Dropdown.Item>
                                     )}
                                 </Dropdown.Menu>

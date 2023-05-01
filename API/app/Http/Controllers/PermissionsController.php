@@ -136,20 +136,45 @@ class PermissionsController extends Controller
             return $this->response401();
         }
 
-        $request->validate([
-            'name' => 'required|unique:permissions,name',
-        ]);
-
-        $permission = Permission::create(['name' => $request->post('name')]);
-
-        if ($request->post('role_id')) {
+        if ($request->post('role_id') && $request->post("permission") && $request->post("permission") !== "add") {
+            $permission = Permission::findById($request->post('permission'));
+            if (!$permission) {
+                return response()->json([
+                    'message' => 'Not found.',
+                ], 404);
+            }
             $role = Role::findById($request->post('role_id'));
+            if (!$role) {
+                return response()->json([
+                    'message' => 'Not found.',
+                ], 404);
+            }
             $role->givePermissionTo($permission);
+
+            return response()->json([
+                'permission' => $permission->toArray(),
+            ]);
+        } else {
+            $request->validate([
+                'name' => 'required|unique:permissions,name',
+            ]);
+            $permission = Permission::create(['name' => $request->post('name')]);
+            if ($request->post('role_id')) {
+                $role = Role::findById($request->post('role_id'));
+                if (!$role) {
+                    return response()->json([
+                        'message' => 'Not found.',
+                    ], 404);
+                }
+                $role->givePermissionTo($permission);
+
+                return response()->json([
+                    'permission' => $permission->toArray(),
+                ]);
+            }
         }
 
-        return response()->json([
-            'permission' => $permission->toArray(),
-        ]);
+
     }
 
     public function deleteDeleteRole(Request $request)

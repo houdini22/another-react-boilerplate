@@ -88,7 +88,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                                     )
                                                                                 }}
                                                                             >
-                                                                                <DetailsIcon /> Show Permissions
+                                                                                <DetailsIcon /> Show User Permissions
                                                                             </Dropdown.Item>
                                                                             <Dropdown.Item
                                                                                 color={'info'}
@@ -96,7 +96,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                                     navigate(`/roles?user=${name}`)
                                                                                 }}
                                                                             >
-                                                                                <DetailsIcon /> Show Roles
+                                                                                <DetailsIcon /> Show User Roles
                                                                             </Dropdown.Item>
                                                                             <Dropdown.Item
                                                                                 color={'info'}
@@ -104,7 +104,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                                     navigate(`/media?user=${name}`)
                                                                                 }}
                                                                             >
-                                                                                <DetailsIcon /> Show Media
+                                                                                <DetailsIcon /> Show User Media
                                                                             </Dropdown.Item>
                                                                             <Dropdown.Item
                                                                                 color={'warning'}
@@ -195,7 +195,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                                     navigate(`/users?roles=${_id}`)
                                                                                 }}
                                                                             >
-                                                                                <DetailsIcon /> Show Users
+                                                                                <DetailsIcon /> Show Users with Role
                                                                             </Dropdown.Item>
                                                                             <Dropdown.Item
                                                                                 color={'info'}
@@ -205,7 +205,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                                     )
                                                                                 }}
                                                                             >
-                                                                                <DetailsIcon /> Show Permissions
+                                                                                <DetailsIcon /> Show Role Permissions
                                                                             </Dropdown.Item>
                                                                             <Dropdown.Item
                                                                                 color={'warning'}
@@ -237,7 +237,8 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                                     })
                                                                                 }}
                                                                             >
-                                                                                <DeleteIcon /> Remove from Role
+                                                                                <DeleteIcon /> Remove Permission from
+                                                                                Role
                                                                             </Dropdown.Item>
                                                                             {!!_is_deletable && (
                                                                                 <Dropdown.Item

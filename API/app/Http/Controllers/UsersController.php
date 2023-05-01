@@ -59,10 +59,8 @@ class UsersController extends Controller
         }
 
         if (!empty($filters['permissions'])) {
-            $query = $query->whereHas('roles.permissions', function ($query) use ($filters) {
-                if (!empty($filters['permissions'])) {
-                    $query->whereIn('id', $filters['permissions']);
-                }
+            $query = $query->whereHas('permissions', function ($query) use ($filters) {
+                $query->whereIn('id', $filters['permissions']);
             });
         }
 

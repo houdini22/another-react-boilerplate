@@ -65,7 +65,7 @@ export class Filters extends React.Component<FiltersProps, null> {
                             type: 'text',
                             label: 'Username',
                             name: 'user',
-                            placeholder: 'username',
+                            placeholder: 'Username',
                         },
                         {
                             options: [

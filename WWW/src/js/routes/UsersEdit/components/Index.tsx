@@ -11,7 +11,6 @@ import AddRole from './AddRole/AddRole'
 import Roles from './Roles/Roles'
 import Permissions from './Permissions/Permissions'
 import AddPermission from './AddPermission/AddPermission'
-import Add from '../../UsersAdd/components/Add/Add'
 import { NotificationsManager } from '../../../containers/NotificationsManager'
 
 interface UsersViewState {}

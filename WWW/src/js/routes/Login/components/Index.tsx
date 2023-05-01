@@ -6,12 +6,6 @@ import classNames from 'classnames/bind'
 const cx = classNames.bind(styles)
 
 class IndexView extends React.Component<null, null> {
-    constructor(props) {
-        super(props)
-    }
-
-    componentDidMount() {}
-
     render() {
         return (
             <div className={cx('route--index')}>
