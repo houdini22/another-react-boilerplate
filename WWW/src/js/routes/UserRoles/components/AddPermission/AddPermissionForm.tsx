@@ -11,10 +11,6 @@ interface AddPermissionFormProps {
 }
 
 class AddPermissionForm extends React.Component<AddPermissionFormProps> {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         const { handleSubmit, permission, permissions, role, roles } = this.props
 
@@ -69,21 +65,33 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps> {
                                 })}
                             component={FormField}
                         />
-                        <Field name="name" label="Name" type="text" component={FormField} />
+                        <Field name="name" label="Name" type="text" component={FormField} autoFocus />
                         <Field
                             name="guard_name"
                             label="Guard"
+                            type="hidden"
+                            inputOnly
+                            value={"web"}
+                            component={FormField}
+                        />
+                    </>
+                )}
+                {permission !== "add" && (
+                    <>
+                        <Field
+                            name="role_id"
+                            label="Role"
                             type="select"
-                            options={[
-                                {
-                                    value: 'web',
-                                    label: 'web',
-                                },
-                                {
-                                    value: 'api',
-                                    label: 'api',
-                                },
-                            ]}
+                            placeholder={'--- choose ---'}
+                            options={roles
+                                ?.sort(({ name: labelA }, { name: labelB }) => labelA.localeCompare(labelB))
+                                .map(({ id, name, guard_name }) => {
+                                    return {
+                                        label: `${name} - ${guard_name}`,
+                                        value: id,
+                                        selected: id === role.id,
+                                    }
+                                })}
                             component={FormField}
                         />
                     </>

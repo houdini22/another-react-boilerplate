@@ -44,7 +44,7 @@ export class Permissions extends React.Component<AddRoleProps, null> {
         return permissionsFromRoles
     }
     render() {
-        const { setIsLoading, deletePermission, fetchOne, user, isLoading, navigate, deleteUserPermission } = this.props
+        const { setIsLoading, deletePermission, fetchOne, user, isLoading, navigate, deleteUserPermission, fetchPermissions } = this.props
 
         const permissionsFromRoles = this.getPermissionFromRoles()
 
@@ -74,7 +74,7 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                                                 setIsLoading(true)
 
                                                 return deleteUserPermission({ id }, user).then(() => {
-                                                    Promise.all([fetchOne(user['id'])]).then(() => {
+                                                    Promise.all([fetchOne(user['id']), fetchPermissions()]).then(() => {
                                                         setIsLoading(false)
                                                     })
                                                 })
@@ -90,7 +90,7 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                                                 setIsLoading(true)
 
                                                 return deletePermission(id).then(() => {
-                                                    Promise.all([fetchOne(user['id'])]).then(() => {
+                                                    Promise.all([fetchOne(user['id']), fetchPermissions()]).then(() => {
                                                         setIsLoading(false)
                                                     })
                                                 })

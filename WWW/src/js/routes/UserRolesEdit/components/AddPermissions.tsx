@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { Card, LoadingOverlay } from '../../../components'
 import { AddPermissionFormContainer } from '../../UserRoles/components/AddPermission/AddPermissionFormContainer'
-import { processAPIerrorResponseToFormErrors } from '../../../modules/http'
-import { SubmissionError } from 'redux-form'
+
 interface HeaderProps {
     role: Object
 }
@@ -14,37 +13,13 @@ export class AddPermissions extends React.Component<HeaderProps, null> {
         return (
             <Card header={<h1>Add Permissions</h1>}>
                 <AddPermissionFormContainer
-                    initialValues={{
-                        role_id: role.id,
-                    }}
                     role={role}
                     roles={roles}
                     permissions={permissions}
-                    onSubmit={(values) => {
-                        setIsLoading(true)
-
-                        return addPermission({ id: role.id }, { ...values, role_id: role.id }).then(
-                            () => {
-                                Promise.all([fetchPermissions(), fetchOne(role.id)]).then(() => {
-                                    setIsLoading(false)
-                                    /*addToastNotification({
-                                        type: 'success',
-                                        title: 'Add success.',
-                                        text: 'Permissions has been saved.',
-                                    })*/
-                                })
-                            },
-                            (response) => {
-                                /*addToastNotification({
-                                    title: 'Form Validation Error',
-                                    text: response.message,
-                                    type: 'danger',
-                                    href: '#',
-                                })*/
-                                throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
-                            },
-                        )
-                    }}
+                    setIsLoading={setIsLoading}
+                    addPermission={addPermission}
+                    fetchPermissions={fetchPermissions}
+                    fetchOne={fetchOne}
                 />
                 {isLoading && <LoadingOverlay />}
             </Card>

@@ -1,11 +1,11 @@
 import * as React from 'react'
-import { Button, Col, Dropdown, Label, Popover, Row, Table, Tooltip } from '../../../components'
-import { EditIcon } from '../../../components/icons'
-import { DeleteIcon } from '../../../components/icons'
-import { formatDateTime } from '../../../helpers/date-time'
-import { apiURL } from '../../../helpers/api'
-import { RouteManager } from '../../../containers/RouteManager'
-import { DetailsIcon, ShowIcon, RoleIcon, FileIcon, AvatarIcon } from '../../../components/icons'
+import {Button, Col, Dropdown, Label, Popover, Row, Table, Tooltip} from '../../../components'
+import {EditIcon} from '../../../components/icons'
+import {DeleteIcon} from '../../../components/icons'
+import {formatDateTime} from '../../../helpers/date-time'
+import {apiURL} from '../../../helpers/api'
+import {RouteManager} from '../../../containers/RouteManager'
+import {DetailsIcon, ShowIcon, RoleIcon, FileIcon, AvatarIcon} from '../../../components/icons'
 
 interface UsersTableProps {
     users: Array<any>
@@ -42,7 +42,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
         } = this.props
         return (
             <RouteManager>
-                {({ navigate }) => (
+                {({navigate}) => (
                     <Table.Container bordered striped>
                         <Table.THead>
                             <Table.Tr>
@@ -65,6 +65,33 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                         </Table.THead>
                         <Table.TBody>
                             {users.map((user) => {
+
+                                const permissionsFromRoles = {}
+
+                                user?.roles?.forEach(({permissions}) => {
+                                    permissions?.forEach(({name, ...rest}) => {
+                                        if (permissionsFromRoles[name]) {
+                                            if (!permissionsFromRoles[name].occurence) {
+                                                permissionsFromRoles[name].occurence = 1
+                                            }
+                                            permissionsFromRoles[name].occurence++
+                                        } else {
+                                            permissionsFromRoles[name] = {name, ...rest}
+                                        }
+                                    })
+                                })
+
+                                user?.permissions?.forEach(({id, guard_name, is_deletable, name, ...rest}) => {
+                                    if (permissionsFromRoles[name]) {
+                                        if (!permissionsFromRoles[name].occurence) {
+                                            permissionsFromRoles[name].occurence = 1
+                                        }
+                                        permissionsFromRoles[name].occurence++
+                                    } else {
+                                        permissionsFromRoles[name] = {name, id, guard_name, is_deletable, ...rest}
+                                    }
+                                })
+
                                 return (
                                     <Table.Tr key={user.id}>
                                         <Table.Td xs={1} md={1}>
@@ -73,7 +100,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                         <Table.Td xs={10} md={3}>
                                             <div>
                                                 {user.name}
-                                                <br />
+                                                <br/>
                                                 {user.email}
                                             </div>
                                         </Table.Td>
@@ -88,7 +115,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                         <Popover.Trigger>
                                                             <Button
                                                                 color={'info'}
-                                                                icon={<RoleIcon />}
+                                                                icon={<RoleIcon/>}
                                                                 onClick={() => navigate(`/roles?user=${user.name}`)}
                                                             >
                                                                 {user?.roles?.length || 0}
@@ -96,24 +123,24 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                         </Popover.Trigger>
                                                         <Popover.Content scrollY>
                                                             {user?.roles
-                                                                ?.sort(({ name: nameA }, { name: nameB }) =>
+                                                                ?.sort(({name: nameA}, {name: nameB}) =>
                                                                     nameA.localeCompare(nameB),
                                                                 )
                                                                 .map(
                                                                     ({
-                                                                        id: _id,
-                                                                        name,
-                                                                        guard_name,
-                                                                        is_deletable: _is_deletable,
-                                                                    }) => (
+                                                                         id: _id,
+                                                                         name,
+                                                                         guard_name,
+                                                                         is_deletable: _is_deletable,
+                                                                         pivot: {model_type = ''} = {}
+                                                                     }) => (
                                                                         <Dropdown.Container
-                                                                            size={'sm'}
                                                                             triggerSize={'lg'}
                                                                             key={_id}
                                                                         >
                                                                             <Dropdown.Trigger
                                                                                 size="lg"
-                                                                                componentProps={{ block: true }}
+                                                                                componentProps={{block: true}}
                                                                                 component={Label}
                                                                             >
                                                                                 {name} - {guard_name}
@@ -138,7 +165,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                                         })
                                                                                     }}
                                                                                 >
-                                                                                    <DeleteIcon /> Delete from User
+                                                                                    <DeleteIcon/> Delete from User
                                                                                 </Dropdown.Item>
                                                                                 {_is_deletable == 1 && (
                                                                                     <Dropdown.Item
@@ -157,7 +184,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                                             )
                                                                                         }}
                                                                                     >
-                                                                                        <DeleteIcon /> Delete Role
+                                                                                        <DeleteIcon/> Delete Role
                                                                                     </Dropdown.Item>
                                                                                 )}
                                                                             </Dropdown.Menu>
@@ -167,7 +194,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                         </Popover.Content>
                                                     </Popover.Container>
                                                 )}
-                                                {user?.permissions?.length > 0 && (
+                                                {Object.keys(permissionsFromRoles).length > 0 && (
                                                     <Popover.Container
                                                         trigger={'hover'}
                                                         placement={'left-center'}
@@ -176,59 +203,72 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                         <Popover.Trigger>
                                                             <Button
                                                                 color={'info'}
-                                                                icon={<RoleIcon />}
+                                                                icon={<RoleIcon/>}
                                                                 onClick={() =>
                                                                     navigate(`/permissions?user=${user.name}`)
                                                                 }
                                                             >
-                                                                {user?.permissions?.length || 0}
+                                                                {Object.keys(permissionsFromRoles).length || 0}
                                                             </Button>
                                                         </Popover.Trigger>
                                                         <Popover.Content scrollY>
-                                                            {user?.permissions
-                                                                ?.sort(({ name: nameA }, { name: nameB }) =>
+                                                            {Object.keys(permissionsFromRoles)
+                                                                ?.map((key) => permissionsFromRoles[key])
+                                                                .sort(({name: nameA}, {name: nameB}) =>
                                                                     nameA.localeCompare(nameB),
                                                                 )
                                                                 .map(
                                                                     ({
-                                                                        id: _id,
-                                                                        name,
-                                                                        guard_name,
-                                                                        is_deletable: _is_deletable,
-                                                                    }) => (
+                                                                         id: _id,
+                                                                         name,
+                                                                         guard_name,
+                                                                         is_deletable: _is_deletable,
+                                                                         pivot: {model_type = ''} = {}
+                                                                     }) => (
                                                                         <Dropdown.Container
                                                                             triggerSize={'lg'}
                                                                             key={_id}
                                                                         >
                                                                             <Dropdown.Trigger
                                                                                 size="lg"
-                                                                                componentProps={{ block: true }}
+                                                                                componentProps={{block: true}}
                                                                                 component={Label}
                                                                             >
                                                                                 {name} - {guard_name}
                                                                             </Dropdown.Trigger>
                                                                             <Dropdown.Menu>
                                                                                 <Dropdown.Item
-                                                                                    color="danger"
                                                                                     onClick={() => {
                                                                                         setIsLoading(true)
 
-                                                                                        return deleteUserPermission(
-                                                                                            {
-                                                                                                id: _id,
-                                                                                            },
-                                                                                            {
-                                                                                                id: user.id,
-                                                                                            },
-                                                                                        ).then(() => {
-                                                                                            fetch().then(() => {
-                                                                                                setIsLoading(false)
-                                                                                            })
-                                                                                        })
+                                                                                        return navigate(`/roles?permissions=${_id}`)
                                                                                     }}
                                                                                 >
-                                                                                    <DeleteIcon /> Delete from User
+                                                                                    <DeleteIcon/> Show Roles
                                                                                 </Dropdown.Item>
+                                                                                {model_type.match(/User/) && (
+                                                                                    <Dropdown.Item
+                                                                                        color="danger"
+                                                                                        onClick={() => {
+                                                                                            setIsLoading(true)
+
+                                                                                            return deleteUserPermission(
+                                                                                                {
+                                                                                                    id: _id,
+                                                                                                },
+                                                                                                {
+                                                                                                    id: user.id,
+                                                                                                },
+                                                                                            ).then(() => {
+                                                                                                fetch().then(() => {
+                                                                                                    setIsLoading(false)
+                                                                                                })
+                                                                                            })
+                                                                                        }}
+                                                                                    >
+                                                                                        <DeleteIcon/> Delete from User
+                                                                                    </Dropdown.Item>
+                                                                                )}
                                                                                 {_is_deletable == 1 && (
                                                                                     <Dropdown.Item
                                                                                         color="danger"
@@ -244,7 +284,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                                             })
                                                                                         }}
                                                                                     >
-                                                                                        <DeleteIcon /> Delete Permission
+                                                                                        <DeleteIcon/> Delete Permission
                                                                                         Permanently
                                                                                     </Dropdown.Item>
                                                                                 )}
@@ -258,7 +298,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                 {user.files_count > 0 && (
                                                     <Button
                                                         color={'info'}
-                                                        icon={<FileIcon />}
+                                                        icon={<FileIcon/>}
                                                         onClick={() => navigate(`/media?user=${user.name}`)}
                                                     >
                                                         {user.files_count}
@@ -267,7 +307,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                 {user?.avatar?.id != null && (
                                                     <Popover.Container trigger={'hover'} placement={'left-center'}>
                                                         <Popover.Trigger>
-                                                            <Button color={'info'} iconOnly icon={<AvatarIcon />} />
+                                                            <Button color={'info'} iconOnly icon={<AvatarIcon/>}/>
                                                         </Popover.Trigger>
                                                         <Popover.Content>
                                                             <a
@@ -278,7 +318,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                     src={apiURL(
                                                                         `files/preview/${user?.avatar?.id}?width=200&height=200`,
                                                                     )}
-                                                                    style={{ maxWidth: 200 }}
+                                                                    style={{maxWidth: 200}}
                                                                     alt={''}
                                                                 />
                                                             </a>
@@ -296,7 +336,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                             fetch()
                                                         })
                                                     }}
-                                                    style={{ cursor: 'pointer' }}
+                                                    style={{cursor: 'pointer'}}
                                                     block
                                                 >
                                                     Not Active
@@ -311,7 +351,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                         })
                                                     }}
                                                     block
-                                                    style={{ cursor: 'pointer' }}
+                                                    style={{cursor: 'pointer'}}
                                                 >
                                                     Active
                                                 </Label>
@@ -320,7 +360,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                         <Table.Td xs={6} md={2}>
                                             <div>
                                                 <Button
-                                                    icon={<EditIcon />}
+                                                    icon={<EditIcon/>}
                                                     iconOnly
                                                     color={'warning'}
                                                     onClick={() => {
@@ -329,7 +369,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                 />
                                                 {user.is_deletable == 1 && (
                                                     <Button
-                                                        icon={<DeleteIcon />}
+                                                        icon={<DeleteIcon/>}
                                                         iconOnly
                                                         color={'danger'}
                                                         onClick={() => {
@@ -343,7 +383,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                     trigger={'hover'}
                                                 >
                                                     <Popover.Trigger>
-                                                        <Button icon={<DetailsIcon />} iconOnly color={'info'} />
+                                                        <Button icon={<DetailsIcon/>} iconOnly color={'info'}/>
                                                     </Popover.Trigger>
                                                     <Popover.Content>
                                                         <Row>
@@ -385,7 +425,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                     <b>
                                         {(page - 1) * perPage + 1} - {Math.min(perPage * page, total)} / {total}
                                     </b>
-                                    <br />
+                                    <br/>
                                     Total pages: <b>{totalPages}</b>
                                 </Table.Td>
                             </Table.Tr>

@@ -96,8 +96,14 @@ class UsersController extends Controller
             ->with('permissions')
             ->with('roles.permissions')
             ->with('avatar')
-            ->withCount(['files', 'roles', 'roles'])
+            ->withCount(['files', 'roles', 'permissions'])
             ->find($id);
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'Not found.'
+            ], 404);
+        }
 
         return response()->json([
             'user' => $user->toArray(),

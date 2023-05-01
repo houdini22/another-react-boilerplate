@@ -20,7 +20,7 @@ export class UsersView extends React.Component<null, UsersViewState> {
             <RouteManager>
                 {({ navigate, query }) => (
                     <UserRolesManager>
-                        {({ roles, deletePermission, permissions, addUserPermission, deleteUserPermission }) => (
+                        {({ roles, deletePermission, permissions, addUserPermission, deleteUserPermission, fetchPermissions }) => (
                             <UsersManager id={query['id']}>
                                 {({
                                     user,
@@ -110,6 +110,7 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                         isLoading={isLoading}
                                                         navigate={navigate}
                                                         deleteUserPermission={deleteUserPermission}
+                                                        fetchPermissions={fetchPermissions}
                                                     />
                                                 </Col>
                                                 <Col xs={12} md={6}>

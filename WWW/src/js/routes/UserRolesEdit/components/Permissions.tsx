@@ -1,7 +1,5 @@
 import * as React from 'react'
 import { Card, Dropdown, Label, LoadingOverlay } from '../../../components'
-import { processAPIerrorResponseToFormErrors } from '../../../modules/http'
-import { SubmissionError } from 'redux-form'
 import { DeleteIcon } from '../../../components/icons'
 
 interface HeaderProps {

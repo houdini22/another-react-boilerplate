@@ -64,7 +64,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                         .map(({ id: _id, name }) => {
                                                             return (
                                                                 <div key={name}>
-                                                                    <Dropdown.Container size={'sm'} triggerSize={'lg'}>
+                                                                    <Dropdown.Container triggerSize={'lg'}>
                                                                         <Dropdown.Trigger
                                                                             size="lg"
                                                                             component={Label}
@@ -127,7 +127,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                         }) => {
                                                             return (
                                                                 <div key={name}>
-                                                                    <Dropdown.Container size={'sm'} triggerSize={'lg'}>
+                                                                    <Dropdown.Container triggerSize={'lg'}>
                                                                         <Dropdown.Trigger
                                                                             size="lg"
                                                                             component={Label}
@@ -136,6 +136,13 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                             {name} - {guard_name}
                                                                         </Dropdown.Trigger>
                                                                         <Dropdown.Menu>
+                                                                            <Dropdown.Item
+                                                                                onClick={() => {
+                                                                                    navigate(`/roles/edit?id=${_id}`)
+                                                                                }}
+                                                                            >
+                                                                                <DeleteIcon /> Edit Role
+                                                                            </Dropdown.Item>
                                                                             <Dropdown.Item
                                                                                 color="danger"
                                                                                 onClick={() => {

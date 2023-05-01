@@ -4,8 +4,6 @@ import { Badge, Button, Card, Dropdown, Label, LoadingOverlay, Modal, Section, T
 import { UserRolesManager } from '../../../UserRoles/containers/UserRolesManager'
 import { EditIcon } from '../../../../components/icons'
 import { EditFormContainer } from './EditFormContainer'
-import { SubmissionError } from 'redux-form'
-import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 import { NotificationsManager } from '../../../../containers/NotificationsManager'
 
 interface EditModalViewProps {

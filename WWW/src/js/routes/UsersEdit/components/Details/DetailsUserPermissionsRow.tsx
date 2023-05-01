@@ -1,9 +1,9 @@
 import * as React from 'react'
 import {Button, Col, Row} from '../../../../components'
-import {FileIcon} from '../../../../components/icons'
+import {RoleIcon} from '../../../../components/icons'
 import {RouteManager} from "../../../../containers/RouteManager";
 
-class DetailsUserFilesRow extends React.Component {
+class DetailsUserPermissionsRow extends React.Component {
     render() {
         const {user} = this.props
 
@@ -12,11 +12,11 @@ class DetailsUserFilesRow extends React.Component {
                 {({navigate}) => (
                     <Row>
                         <Col xs={4} style={{marginBottom: 10}}>
-                            Files
+                            Permissions
                         </Col>
                         <Col xs={8} style={{marginBottom: 10}}>
-                            <Button color={'info'} icon={<FileIcon/>} onClick={() => navigate(`/media?user=${user.name}`)}>
-                                {user.files_count}
+                            <Button color={'info'} icon={<RoleIcon/>} onClick={() => navigate(`/permissions?user=${user.name}`)}>
+                                {user.permissions_count}
                             </Button>
                         </Col>
                     </Row>
@@ -26,5 +26,5 @@ class DetailsUserFilesRow extends React.Component {
     }
 }
 
-export {DetailsUserFilesRow}
-export default {DetailsUserFilesRow}
+export {DetailsUserPermissionsRow}
+export default {DetailsUserPermissionsRow}

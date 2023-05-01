@@ -63,7 +63,7 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                         .map(({ id: _id, name }) => {
                                                             return (
                                                                 <div key={name}>
-                                                                    <Dropdown.Container size={'sm'} triggerSize={'lg'}>
+                                                                    <Dropdown.Container triggerSize={'lg'}>
                                                                         <Dropdown.Trigger
                                                                             size="lg"
                                                                             component={Label}
@@ -72,6 +72,13 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                                             {name}
                                                                         </Dropdown.Trigger>
                                                                         <Dropdown.Menu>
+                                                                            <Dropdown.Item
+                                                                                onClick={() => {
+                                                                                    navigate(`/users/edit?id=${_id}`)
+                                                                                }}
+                                                                            >
+                                                                                <DeleteIcon /> Edit User
+                                                                            </Dropdown.Item>
                                                                             <Dropdown.Item
                                                                                 color="danger"
                                                                                 onClick={() => {
@@ -126,7 +133,7 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                         }) => {
                                                             return (
                                                                 <div key={name}>
-                                                                    <Dropdown.Container size={'sm'} triggerSize={'lg'}>
+                                                                    <Dropdown.Container triggerSize={'lg'}>
                                                                         <Dropdown.Trigger
                                                                             size="lg"
                                                                             component={Label}
