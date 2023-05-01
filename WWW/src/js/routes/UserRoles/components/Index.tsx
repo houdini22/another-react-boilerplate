@@ -122,10 +122,16 @@ export class UsersView extends React.Component {
                                         permissions: [],
                                         has_permissions: 'yes_or_no',
                                         users: 'yes_or_no',
-                                        user,
+                                        user: '',
+                                        roles: [],
                                     }
+
                                     return (
-                                        <ListManager url={'/roles/list'} defaultFilters={defaultFilters}>
+                                        <ListManager
+                                            url={'/roles/list'}
+                                            defaultFilters={defaultFilters}
+                                            urlFilters={{ user }}
+                                        >
                                             {({
                                                 data,
                                                 isLoading,
@@ -250,7 +256,6 @@ export class UsersView extends React.Component {
                                                             permissions={permissions}
                                                             roles={roles}
                                                         />
-
                                                         {isLoading && <LoadingOverlay />}
                                                     </Card>
 

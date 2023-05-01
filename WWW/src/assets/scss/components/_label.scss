@@ -163,9 +163,14 @@
 
     &.component-label--arrow {
         cursor: pointer;
+        padding-right: 20px;
 
         svg {
             margin-left: 7px;
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
         }
     }
 }

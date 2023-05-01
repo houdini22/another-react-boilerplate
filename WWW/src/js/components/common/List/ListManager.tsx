@@ -21,6 +21,7 @@ interface ListManagerState {
     total: number
     perPage: number
     links: Array<Object>
+    urlFilters: {}
 }
 
 class ListManager extends React.Component<ListManagerProps, ListManagerState> {
@@ -38,14 +39,15 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
     }
 
     componentDidMount() {
-        const { defaultFilters = {} } = this.props
-        const promises = []
+        const { defaultFilters = {}, urlFilters = {} } = this.props
+        let newFilters = {}
 
-        Object.keys(defaultFilters).forEach((name) => {
-            promises.push(this.setFilter(name, defaultFilters[name]))
-        })
+        newFilters = {
+            ...defaultFilters,
+            ...urlFilters,
+        }
 
-        Promise.all(promises).then(() => {
+        this.setState({ filters: newFilters }, () => {
             this.fetch()
         })
     }

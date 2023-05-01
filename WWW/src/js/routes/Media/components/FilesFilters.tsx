@@ -34,6 +34,7 @@ export class FilesFiles extends React.Component<null, null> {
                         fetch={fetch}
                         label={'Username'}
                         name={'user'}
+                        placeholder={'Username'}
                     />
                     <Filter
                         filters={filters}

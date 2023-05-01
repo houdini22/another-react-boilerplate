@@ -31,12 +31,12 @@ class UsersController extends Controller
                     ->orWhere('name', 'like', "%{$filters['search']}%");
             })
             ->where(function ($query) use ($filters) {
-                if ($filters['status'] !== 'active_or_not_active') {
+                if ($filters['status'] !== 'yes_or_no') {
                     $query->where('status', $filters['status'] === 'active' ? 1 : 0);
                 }
             })
             ->where(function ($query) use ($filters) {
-                if ($filters['avatar'] !== 'has_or_has_not') {
+                if ($filters['avatar'] !== 'yes_or_no') {
                     if ($filters['avatar'] === 'has') {
                         $query->whereNotNull('avatar_id');
                     } else {

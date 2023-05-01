@@ -177,8 +177,7 @@
     &.component-popover--placement-right-top,
     &.component-popover--placement-right-center {
         & > .component-popover__content {
-            left: 100%;
-            padding-left: $COMPONENT_MARGIN_SINGLE !important;
+            left: 90%;
             top: 0;
         }
     }

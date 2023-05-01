@@ -189,7 +189,7 @@ export class DropdownTrigger extends React.Component<DropdownTriggerProps> {
             component: Component,
             children,
             transparent,
-            componentProps: { icon, iconOnly },
+            componentProps: { icon, iconOnly, block },
         } = this.props
 
         return (
@@ -236,6 +236,7 @@ export class DropdownTrigger extends React.Component<DropdownTriggerProps> {
                             disableContext
                             icon={icon}
                             iconOnly={iconOnly}
+                            block={block}
                         >
                             {children}
                         </Component>,

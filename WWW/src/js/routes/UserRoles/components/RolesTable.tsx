@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { Button, Dropdown, Label, Table } from '../../../components'
-import { EditIcon, DeleteIcon } from '../../../components/icons'
-import { TFoot } from '../../../components/ui/Table'
+import { EditIcon, DeleteIcon, ShowIcon } from '../../../components/icons'
 
 interface RolesTableProps {}
 
@@ -15,7 +14,6 @@ export class RolesTable extends React.Component<RolesTableProps> {
             deleteUserPermission,
             deletePermission,
             openDeleteModal,
-            openEditModal,
             page,
             perPage,
             total,
@@ -30,9 +28,9 @@ export class RolesTable extends React.Component<RolesTableProps> {
                         <Table.Th xs={1}>ID</Table.Th>
                         <Table.Th xs={2}>Name</Table.Th>
                         <Table.Th xs={1}>Users</Table.Th>
-                        <Table.Th xs={2}>Permissions Count</Table.Th>
-                        <Table.Th xs={3}>Permissions</Table.Th>
-                        <Table.Th xs={3}>Actions</Table.Th>
+                        <Table.Th xs={1}>Permissions</Table.Th>
+                        <Table.Th xs={3}>Permissions List</Table.Th>
+                        <Table.Th xs={4}>Actions</Table.Th>
                     </Table.Tr>
                 </Table.THead>
                 <Table.TBody>
@@ -41,8 +39,26 @@ export class RolesTable extends React.Component<RolesTableProps> {
                             <Table.Tr key={role.id}>
                                 <Table.Td xs={1}>{role.id}</Table.Td>
                                 <Table.Td xs={2}>{role.name}</Table.Td>
-                                <Table.Td xs={1}>{role.users_count}</Table.Td>
-                                <Table.Td xs={2}>{role.permissions_count}</Table.Td>
+                                <Table.Td xs={1}>
+                                    <div>
+                                        <span>{role.users_count}</span>
+                                        <Button
+                                            color={'info'}
+                                            iconOnly
+                                            icon={<ShowIcon />}
+                                            onClick={() => navigate(`/users?roles=${role.id}`)}
+                                        />
+                                    </div>
+                                </Table.Td>
+                                <Table.Td xs={1}>
+                                    <span>{role.permissions_count}</span>
+                                    <Button
+                                        color={'info'}
+                                        iconOnly
+                                        icon={<ShowIcon />}
+                                        onClick={() => navigate(`/permissions?roles=${role.id}`)}
+                                    />
+                                </Table.Td>
                                 <Table.Td xs={3}>
                                     <div>
                                         {role?.permissions?.map(
@@ -106,7 +122,7 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                         )}
                                     </div>
                                 </Table.Td>
-                                <Table.Td xs={3}>
+                                <Table.Td xs={4}>
                                     <div>
                                         <Button
                                             icon={<EditIcon />}

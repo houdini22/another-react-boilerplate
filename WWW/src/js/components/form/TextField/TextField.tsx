@@ -18,17 +18,20 @@ class TextField extends React.Component<TextFieldProps> {
     input: HTMLInputElement
 
     onChange(e) {
-        const { onChange = (e) => null, type } = this.props
+        const { onChange = (e) => null } = this.props
 
-        if (type === 'file') {
-            onChange(e)
-        } else {
-            onChange(e)
-        }
+        onChange(e)
     }
     render() {
-        const { error, loading, custom: { size, onChange, ...customProps } = {}, type, value, ...props } = this.props
-
+        const {
+            error,
+            loading,
+            custom: { size, onChange, ...customProps } = {},
+            type,
+            value,
+            defaultValue = '',
+            ...props
+        } = this.props
         return (
             <AppContext.Consumer>
                 {({ cardSize } = {}) => {
@@ -41,6 +44,8 @@ class TextField extends React.Component<TextFieldProps> {
                             {...customProps}
                             type={type}
                             value={type !== 'file' ? value : ''}
+                            defaultValue={defaultValue}
+                            key={defaultValue || ''}
                             onChange={this.onChange.bind(this)}
                         />
                     )

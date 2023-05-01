@@ -23,7 +23,7 @@ export class UsersView extends React.Component {
             <RouteManager>
                 {({ navigate, query: { user = '' } }) => {
                     const defaultFilters = {
-                        user,
+                        user: '',
                         items_per_page: 24,
                         order_by: 'id',
                         order_direction: 'asc',
@@ -54,7 +54,7 @@ export class UsersView extends React.Component {
                                 </PageHeader.Breadcrumbs>
                             </PageHeader.Container>
 
-                            <ListManager url={'/files/list'} defaultFilters={defaultFilters}>
+                            <ListManager url={'/files/list'} defaultFilters={defaultFilters} urlFilters={{ user }}>
                                 {({
                                     data,
                                     isLoading,

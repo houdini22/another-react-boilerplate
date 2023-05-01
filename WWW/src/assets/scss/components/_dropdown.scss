@@ -1,12 +1,12 @@
 @import '../variables';
 
 .component-dropdown {
-    display: inline-block;
+    display: inline;
     position: relative;
 
     & > .component-dropdown__trigger {
         position: relative;
-        display: inline-block;
+        display: inline;
     }
 
     & > .component-dropdown__dropdown-menu {

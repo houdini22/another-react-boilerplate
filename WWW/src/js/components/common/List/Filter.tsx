@@ -1,8 +1,7 @@
 import * as React from 'react'
 import styles from '../../../../assets/scss/components/_list_manager.scss'
 import classNames from 'classnames/bind'
-import { Button, FormField } from '../../../components'
-import { clearTimeout } from 'timers'
+import { Button, FormField, Col, Row } from '../../../components'
 
 const cx = classNames.bind(styles)
 
@@ -21,7 +20,7 @@ class Filter extends React.Component<FilterProps, null> {
         const { name, options, filters, setFilter, fetch } = this.props
 
         return (
-            <div>
+            <>
                 {options.map(({ label, value }) => {
                     return (
                         <Button
@@ -35,7 +34,7 @@ class Filter extends React.Component<FilterProps, null> {
                         </Button>
                     )
                 })}
-            </div>
+            </>
         )
     }
     renderOrderByColumn() {
@@ -111,7 +110,7 @@ class Filter extends React.Component<FilterProps, null> {
     renderMultiple() {
         const { options, filters, setFilter, name, fetch } = this.props
         return (
-            <div>
+            <>
                 {options.map(({ label, value }) => {
                     return (
                         <Button
@@ -134,24 +133,30 @@ class Filter extends React.Component<FilterProps, null> {
                         </Button>
                     )
                 })}
-            </div>
+            </>
         )
     }
     render() {
         const { type, name, placeholder } = this.props
         return (
             <div className={cx('filter')}>
-                <span>{this.renderFilterLabel()}:</span>
-                {type === 'search' && this.renderSearch()}
-                {type === 'radio' && this.renderRadio()}
-                {type === 'multiple' && this.renderMultiple()}
-                {type === 'text' && this.renderText({ name, placeholder })}
-                {type === 'order' && (
-                    <div>
-                        {this.renderOrderByColumn()}
-                        {this.renderOrderDirection()}
-                    </div>
-                )}
+                <Row>
+                    <Col xs={4}>
+                        <span>{this.renderFilterLabel()}:</span>
+                    </Col>
+                    <Col xs={8}>
+                        {type === 'search' && this.renderSearch()}
+                        {type === 'radio' && this.renderRadio()}
+                        {type === 'multiple' && this.renderMultiple()}
+                        {type === 'text' && this.renderText({ name, placeholder })}
+                        {type === 'order' && (
+                            <div>
+                                {this.renderOrderByColumn()}
+                                {this.renderOrderDirection()}
+                            </div>
+                        )}
+                    </Col>
+                </Row>
             </div>
         )
     }

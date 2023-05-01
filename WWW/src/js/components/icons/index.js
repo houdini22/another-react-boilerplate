@@ -10,6 +10,9 @@ import {
 } from 'react-icons/ai'
 import { CgDetailsMore as DetailsIcon } from 'react-icons/cg'
 import { AiFillEye as ShowIcon } from 'react-icons/ai'
+import { GrUserAdmin as RoleIcon } from 'react-icons/gr'
+import { BsFillFileEarmarkImageFill as FileIcon } from 'react-icons/bs'
+import { RxAvatar as AvatarIcon } from 'react-icons/rx'
 
 export {
     OrderingIcon,
@@ -23,4 +26,7 @@ export {
     PublishedIcon,
     DetailsIcon,
     ShowIcon,
+    RoleIcon,
+    FileIcon,
+    AvatarIcon,
 }

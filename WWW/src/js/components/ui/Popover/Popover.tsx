@@ -260,7 +260,7 @@ interface ContentProps {
 
 class Content extends React.Component<ContentProps> {
     render() {
-        const { children, className } = this.props
+        const { children, className, scrollY } = this.props
 
         return (
             <AppContext.Consumer>
@@ -270,6 +270,10 @@ class Content extends React.Component<ContentProps> {
                             className={cx('component-popover__content__outer', {
                                 [className]: className,
                             })}
+                            style={{
+                                overflowY: scrollY ? 'scroll' : 'hidden',
+                                overflowX: scrollY ? 'hidden' : 'hidden',
+                            }}
                         >
                             <div className={cx('component-popover__content__outer__inner')}>
                                 {_.isFunction(children) && children({ close, open, isOpen })}

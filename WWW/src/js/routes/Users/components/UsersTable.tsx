@@ -5,8 +5,7 @@ import { DeleteIcon } from '../../../components/icons'
 import { formatDateTime } from '../../../helpers/date-time'
 import { apiURL } from '../../../helpers/api'
 import { RouteManager } from '../../../containers/RouteManager'
-import { DetailsIcon, ShowIcon } from '../../../components/icons'
-import { Link } from 'react-router-dom'
+import { DetailsIcon, ShowIcon, RoleIcon, FileIcon, AvatarIcon } from '../../../components/icons'
 
 interface UsersTableProps {
     users: Array<any>
@@ -50,19 +49,16 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                 <Table.Th xs={1} md={1}>
                                     ID
                                 </Table.Th>
-                                <Table.Th xs={1} md={1}>
-                                    Avatar
-                                </Table.Th>
                                 <Table.Th xs={11} md={3}>
                                     Name & Email
                                 </Table.Th>
-                                <Table.Th xs={12} md={3}>
-                                    Roles
+                                <Table.Th xs={12} md={4}>
+                                    Resources
                                 </Table.Th>
-                                <Table.Th xs={6} md={1}>
+                                <Table.Th xs={6} md={2}>
                                     Status
                                 </Table.Th>
-                                <Table.Th xs={6} md={3}>
+                                <Table.Th xs={6} md={2}>
                                     Actions
                                 </Table.Th>
                             </Table.Tr>
@@ -74,25 +70,6 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                         <Table.Td xs={1} md={1}>
                                             {user.id}
                                         </Table.Td>
-                                        <Table.Td xs={1} md={1}>
-                                            {user?.avatar?.id != null && (
-                                                <Popover.Container trigger={'hover'} placement={'right-center'}>
-                                                    <Popover.Trigger>
-                                                        <Button color={'info'} iconOnly icon={<ShowIcon />} />
-                                                    </Popover.Trigger>
-                                                    <Popover.Content>
-                                                        <img
-                                                            src={apiURL(
-                                                                `files/preview/${user?.avatar?.id}?width=200&height=200`,
-                                                            )}
-                                                            style={{ maxWidth: 200 }}
-                                                            alt={''}
-                                                        />
-                                                    </Popover.Content>
-                                                </Popover.Container>
-                                            )}
-                                            {user?.avatar?.id == null && <>---</>}
-                                        </Table.Td>
                                         <Table.Td xs={10} md={3}>
                                             <div>
                                                 {user.name}
@@ -100,59 +77,129 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                 {user.email}
                                             </div>
                                         </Table.Td>
-                                        <Table.Td xs={12} md={3}>
+                                        <Table.Td xs={12} md={4} alignCenter>
                                             <div>
-                                                {user?.roles?.map(
-                                                    ({ id: _id, name, guard_name, is_deletable: _is_deletable }) => (
-                                                        <Dropdown.Container size={'sm'} triggerSize={'lg'} key={_id}>
-                                                            <Dropdown.Trigger size="lg" component={Label}>
-                                                                {name} - {guard_name}
-                                                            </Dropdown.Trigger>
-                                                            <Dropdown.Menu>
-                                                                <Dropdown.Item
-                                                                    color="danger"
-                                                                    onClick={() => {
-                                                                        setIsLoading(true)
+                                                {user?.roles?.length > 0 && (
+                                                    <Popover.Container
+                                                        trigger={'hover'}
+                                                        placement={'left-center'}
+                                                        pixelsWidth={300}
+                                                    >
+                                                        <Popover.Trigger>
+                                                            <Button
+                                                                color={'info'}
+                                                                icon={<RoleIcon />}
+                                                                onClick={() => navigate(`/roles?user=${user.name}`)}
+                                                            >
+                                                                {user?.roles?.length || 0}
+                                                            </Button>
+                                                        </Popover.Trigger>
+                                                        <Popover.Content scrollY>
+                                                            {user?.roles
+                                                                ?.sort(({ name: nameA }, { name: nameB }) =>
+                                                                    nameA.localeCompare(nameB),
+                                                                )
+                                                                .map(
+                                                                    ({
+                                                                        id: _id,
+                                                                        name,
+                                                                        guard_name,
+                                                                        is_deletable: _is_deletable,
+                                                                    }) => (
+                                                                        <Dropdown.Container
+                                                                            size={'sm'}
+                                                                            triggerSize={'lg'}
+                                                                            key={_id}
+                                                                        >
+                                                                            <Dropdown.Trigger
+                                                                                size="lg"
+                                                                                componentProps={{ block: true }}
+                                                                                component={Label}
+                                                                            >
+                                                                                {name} - {guard_name}
+                                                                            </Dropdown.Trigger>
+                                                                            <Dropdown.Menu>
+                                                                                <Dropdown.Item
+                                                                                    color="danger"
+                                                                                    onClick={() => {
+                                                                                        setIsLoading(true)
 
-                                                                        return deleteUserRole(
-                                                                            {
-                                                                                id: user.id,
-                                                                            },
-                                                                            {
-                                                                                id: _id,
-                                                                            },
-                                                                        ).then(() => {
-                                                                            fetch().then(() => {
-                                                                                setIsLoading(false)
-                                                                            })
-                                                                        })
-                                                                    }}
-                                                                >
-                                                                    <DeleteIcon /> Delete from User
-                                                                </Dropdown.Item>
-                                                                {_is_deletable == 1 && (
-                                                                    <Dropdown.Item
-                                                                        color="danger"
-                                                                        onClick={() => {
-                                                                            setIsLoading(true)
+                                                                                        return deleteUserRole(
+                                                                                            {
+                                                                                                id: user.id,
+                                                                                            },
+                                                                                            {
+                                                                                                id: _id,
+                                                                                            },
+                                                                                        ).then(() => {
+                                                                                            fetch().then(() => {
+                                                                                                setIsLoading(false)
+                                                                                            })
+                                                                                        })
+                                                                                    }}
+                                                                                >
+                                                                                    <DeleteIcon /> Delete from User
+                                                                                </Dropdown.Item>
+                                                                                {_is_deletable == 1 && (
+                                                                                    <Dropdown.Item
+                                                                                        color="danger"
+                                                                                        onClick={() => {
+                                                                                            setIsLoading(true)
 
-                                                                            return deleteRole(_id).then(() => {
-                                                                                fetch().then(() => {
-                                                                                    setIsLoading(false)
-                                                                                })
-                                                                            })
-                                                                        }}
-                                                                    >
-                                                                        <DeleteIcon /> Delete Role
-                                                                    </Dropdown.Item>
+                                                                                            return deleteRole(_id).then(
+                                                                                                () => {
+                                                                                                    fetch().then(() => {
+                                                                                                        setIsLoading(
+                                                                                                            false,
+                                                                                                        )
+                                                                                                    })
+                                                                                                },
+                                                                                            )
+                                                                                        }}
+                                                                                    >
+                                                                                        <DeleteIcon /> Delete Role
+                                                                                    </Dropdown.Item>
+                                                                                )}
+                                                                            </Dropdown.Menu>
+                                                                        </Dropdown.Container>
+                                                                    ),
                                                                 )}
-                                                            </Dropdown.Menu>
-                                                        </Dropdown.Container>
-                                                    ),
+                                                        </Popover.Content>
+                                                    </Popover.Container>
+                                                )}
+                                                {user.files_count > 0 && (
+                                                    <Button
+                                                        color={'info'}
+                                                        icon={<FileIcon />}
+                                                        onClick={() => navigate(`/media?user=${user.name}`)}
+                                                    >
+                                                        {user.files_count}
+                                                    </Button>
+                                                )}
+                                                {user?.avatar?.id != null && (
+                                                    <Popover.Container trigger={'hover'} placement={'left-center'}>
+                                                        <Popover.Trigger>
+                                                            <Button color={'info'} iconOnly icon={<AvatarIcon />} />
+                                                        </Popover.Trigger>
+                                                        <Popover.Content>
+                                                            <a
+                                                                href={apiURL(`files/preview/${user?.avatar?.id}`)}
+                                                                target={'_blank'}
+                                                            >
+                                                                <img
+                                                                    src={apiURL(
+                                                                        `files/preview/${user?.avatar?.id}?width=200&height=200`,
+                                                                    )}
+                                                                    style={{ maxWidth: 200 }}
+                                                                    alt={''}
+                                                                />
+                                                            </a>
+                                                        </Popover.Content>
+                                                    </Popover.Container>
                                                 )}
                                             </div>
                                         </Table.Td>
-                                        <Table.Td xs={6} md={1}>
+                                        <Table.Td xs={6} md={2}>
                                             {user.status === 0 && (
                                                 <Label
                                                     color={'danger'}
@@ -164,7 +211,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                     style={{ cursor: 'pointer' }}
                                                     block
                                                 >
-                                                    N/A
+                                                    Not Active
                                                 </Label>
                                             )}
                                             {user.status === 1 && (
@@ -178,11 +225,11 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                     block
                                                     style={{ cursor: 'pointer' }}
                                                 >
-                                                    A
+                                                    Active
                                                 </Label>
                                             )}
                                         </Table.Td>
-                                        <Table.Td xs={6} md={3}>
+                                        <Table.Td xs={6} md={2}>
                                             <div>
                                                 <Button
                                                     icon={<EditIcon />}
@@ -212,31 +259,26 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                     </Popover.Trigger>
                                                     <Popover.Content>
                                                         <Row>
-                                                            <Col xs={6}>Files:</Col>
-                                                            <Col xs={6}>
-                                                                {user.files_count}{' '}
-                                                                <Link to={`/media?user=${user.name}`}>Show</Link>
-                                                            </Col>
-                                                        </Row>
-                                                        <Row>
-                                                            <Col xs={6}>Roles:</Col>
-                                                            <Col xs={6}>
-                                                                {user.roles_count}{' '}
-                                                                <Link to={`/roles?user=${user.name}`}>Show</Link>
-                                                            </Col>
-                                                        </Row>
-                                                        <Row>
-                                                            <Col xs={6}>Permissions:</Col>
-                                                            <Col xs={6}>
-                                                                {user.permissions_count}{' '}
-                                                                <Link to={`/roles?user=${user.name}`}>Show</Link>
-                                                            </Col>
-                                                        </Row>
-                                                        <Row>
-                                                            <Col xs={6}>Email verified at:</Col>
-                                                            <Col xs={6}>
+                                                            <Col xs={5}>Email verified at:</Col>
+                                                            <Col xs={7}>
                                                                 {user.email_verified_at != null
                                                                     ? formatDateTime(user.email_verified_at)
+                                                                    : 'never'}
+                                                            </Col>
+                                                        </Row>
+                                                        <Row>
+                                                            <Col xs={5}>Created at:</Col>
+                                                            <Col xs={7}>
+                                                                {user.created_at != null
+                                                                    ? formatDateTime(user.created_at)
+                                                                    : 'never'}
+                                                            </Col>
+                                                        </Row>
+                                                        <Row>
+                                                            <Col xs={5}>Last edit:</Col>
+                                                            <Col xs={7}>
+                                                                {user.updated_at != null
+                                                                    ? formatDateTime(user.updated_at)
                                                                     : 'never'}
                                                             </Col>
                                                         </Row>

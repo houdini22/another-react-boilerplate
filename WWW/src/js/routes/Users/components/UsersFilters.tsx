@@ -20,7 +20,7 @@ export class Filters extends React.Component<FiltersProps, null> {
                     options={[
                         {
                             label: 'yes or no',
-                            value: 'has_or_has_not',
+                            value: 'yes_or_no',
                         },
                         {
                             label: 'yes',
@@ -64,7 +64,7 @@ export class Filters extends React.Component<FiltersProps, null> {
                     options={[
                         {
                             label: 'both',
-                            value: 'active_or_not_active',
+                            value: 'yes_or_no',
                         },
                         {
                             label: 'active',
