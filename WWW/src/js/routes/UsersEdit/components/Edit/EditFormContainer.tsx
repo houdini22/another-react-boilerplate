@@ -4,12 +4,24 @@ import { EditForm as FormComponent } from './EditForm'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 
-const onSubmit = (values, _, { editUser, user, fetchOne }) => {
+const onSubmit = (values, _, { editUser, user, fetchOne, addToastNotification }) => {
     return editUser({ ...user, ...values }).then(
         () => {
-            Promise.all([fetchOne(user['id'])]).then(() => {})
+            Promise.all([fetchOne(user['id'])]).then(() => {
+                addToastNotification({
+                    type: 'success',
+                    title: 'Save success.',
+                    text: 'User has been saved.',
+                })
+            })
         },
         (response) => {
+            addToastNotification({
+                title: 'Form Validation Error',
+                text: response.message,
+                type: 'danger',
+                href: '#',
+            })
             throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
         },
     )

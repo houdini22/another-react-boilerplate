@@ -55,6 +55,12 @@ export class AddPermissionModal extends React.Component<EditModalViewProps> {
                                                             })
                                                         },
                                                         (response) => {
+                                                            addToastNotification({
+                                                                title: 'Form Validation Error',
+                                                                text: response.message,
+                                                                type: 'danger',
+                                                                href: '#',
+                                                            })
                                                             throw new SubmissionError(
                                                                 processAPIerrorResponseToFormErrors(response),
                                                             )

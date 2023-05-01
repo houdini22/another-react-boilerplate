@@ -13,7 +13,7 @@ interface AddRoleProps {
 
 export class AddRole extends React.Component<AddRoleProps, null> {
     render() {
-        const { roles, setIsLoading, addUserRole, fetchOne, user, isLoading } = this.props
+        const { roles, setIsLoading, addUserRole, fetchOne, user, isLoading, addToastNotification } = this.props
         return (
             <Card header={<h1>Add Role</h1>}>
                 <AddRoleFormContainer
@@ -26,6 +26,11 @@ export class AddRole extends React.Component<AddRoleProps, null> {
                             addUserRole(user, { id: role }).then(() => {
                                 fetchOne(user['id']).then(() => {
                                     setIsLoading(false)
+                                    addToastNotification({
+                                        type: 'success',
+                                        title: 'Save success.',
+                                        text: 'Role has been saved.',
+                                    })
                                 })
                             })
                         }

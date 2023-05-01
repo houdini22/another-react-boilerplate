@@ -13,7 +13,7 @@ interface AddRoleProps {
 
 export class Roles extends React.Component<AddRoleProps, null> {
     render() {
-        const { setIsLoading, deleteUserRole, fetchOne, user, isLoading, navigate } = this.props
+        const { setIsLoading, deleteUserRole, fetchOne, user, isLoading, navigate, addToastNotification } = this.props
 
         return (
             <Card header={<h1>Roles</h1>}>
@@ -59,6 +59,11 @@ export class Roles extends React.Component<AddRoleProps, null> {
                                             }).then(() => {
                                                 Promise.all([fetchOne(user['id'])]).then(() => {
                                                     setIsLoading(false)
+                                                    addToastNotification({
+                                                        type: 'success',
+                                                        title: 'Remove success.',
+                                                        text: 'Role has been removed.',
+                                                    })
                                                 })
                                             })
                                         }}

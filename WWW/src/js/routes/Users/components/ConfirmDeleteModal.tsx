@@ -10,7 +10,7 @@ interface ConfirmDeleteModalProps {
 
 export class ConfirmDeleteModal extends React.Component<ConfirmDeleteModalProps, null> {
     render() {
-        const { visible, id, close, fetch, deleteUser } = this.props
+        const { visible, id, close, fetch, deleteUser, addToastNotification } = this.props
 
         return (
             <Modal.Container visible={visible} color={'danger'}>
@@ -32,7 +32,14 @@ export class ConfirmDeleteModal extends React.Component<ConfirmDeleteModalProps,
                                 color={'success'}
                                 onClick={() => {
                                     deleteUser(id).then(() => {
-                                        fetch().then(() => close())
+                                        fetch().then(() => {
+                                            close()
+                                            addToastNotification({
+                                                title: 'Delete success.',
+                                                text: 'User has been removed.',
+                                                type: 'success',
+                                            })
+                                        })
                                     })
                                 }}
                                 block

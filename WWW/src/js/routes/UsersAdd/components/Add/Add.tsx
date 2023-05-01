@@ -23,6 +23,7 @@ export class Add extends React.Component<EditProps, EditState> {
             permissions,
             addPermissionToNewUser,
             removePermissionFromNewUser,
+            addToastNotification,
         } = this.props
         return (
             <div>
@@ -36,6 +37,7 @@ export class Add extends React.Component<EditProps, EditState> {
                     permissions={permissions}
                     addPermissionToNewUser={addPermissionToNewUser}
                     removePermissionFromNewUser={removePermissionFromNewUser}
+                    addToastNotification={addToastNotification}
                 />
                 {isLoading && <LoadingOverlay />}
             </div>

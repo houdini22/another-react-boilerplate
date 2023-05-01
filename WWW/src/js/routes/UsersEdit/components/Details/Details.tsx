@@ -44,7 +44,16 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
 
     render() {
         const { modalVisible } = this.state
-        const { isLoading, user, setUploadProgress, setIsLoading, uploadProgress, sendAvatar, fetchOne } = this.props
+        const {
+            isLoading,
+            user,
+            setUploadProgress,
+            setIsLoading,
+            uploadProgress,
+            sendAvatar,
+            fetchOne,
+            addToastNotification,
+        } = this.props
         return (
             <Card header={<h1>Details</h1>}>
                 <Tabs.Container>
@@ -63,6 +72,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                                 isLoading={isLoading}
                                 visible={modalVisible}
                                 uploadProgress={uploadProgress}
+                                addToastNotification={addToastNotification}
                             />
                         </Tabs.Content>
                     </Tabs.Tab>

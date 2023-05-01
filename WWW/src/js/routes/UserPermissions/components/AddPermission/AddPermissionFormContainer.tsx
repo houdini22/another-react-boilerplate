@@ -7,9 +7,6 @@ import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 import { SubmissionError } from 'redux-form'
 
 const onSubmit = (values, _, { fetch, close, addPermission, addToastNotification }) => {
-    if (!values.role_id) {
-        return
-    }
     return addPermission({ id: values.role_id }, values).then(
         (data) => {
             fetch().then(() => {

@@ -13,7 +13,8 @@ interface AddRoleProps {
 
 export class AddPermission extends React.Component<AddRoleProps, null> {
     render() {
-        const { permissions, setIsLoading, addUserPermission, fetchOne, user, isLoading } = this.props
+        const { permissions, setIsLoading, addUserPermission, fetchOne, user, isLoading, addToastNotification } =
+            this.props
         return (
             <Card header={<h1>Add Permission</h1>}>
                 <AddPermissionFormContainer
@@ -22,6 +23,7 @@ export class AddPermission extends React.Component<AddRoleProps, null> {
                     setIsLoading={setIsLoading}
                     addUserPermission={addUserPermission}
                     fetchOne={fetchOne}
+                    addToastNotification={addToastNotification}
                 />
                 {isLoading && <LoadingOverlay />}
             </Card>

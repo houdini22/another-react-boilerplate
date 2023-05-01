@@ -16,6 +16,7 @@ class DetailsUserAvatarRow extends React.Component {
             isLoading,
             visible,
             uploadProgress,
+            addToastNotification,
         } = this.props
 
         return (
@@ -47,6 +48,7 @@ class DetailsUserAvatarRow extends React.Component {
                         isLoading={isLoading}
                         visible={visible}
                         uploadProgress={uploadProgress}
+                        addToastNotification={addToastNotification}
                     />
                 </Col>
             </Row>

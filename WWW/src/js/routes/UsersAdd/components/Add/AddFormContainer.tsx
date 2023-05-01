@@ -4,12 +4,27 @@ import { AddForm as FormComponent } from './AddForm'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 
-const onSubmit = ({ email, name, status, password, password_confirmation }, _, { addUser, navigate }) => {
+const onSubmit = (
+    { email, name, status, password, password_confirmation },
+    _,
+    { addUser, navigate, addToastNotification },
+) => {
     return addUser({ email, name, status, password, password_confirmation }).then(
         (user) => {
+            addToastNotification({
+                title: 'Save success.',
+                text: 'User has been saved.',
+                type: 'success',
+            })
             navigate(`/users/edit?id=${user.id}`)
         },
         (response) => {
+            addToastNotification({
+                title: 'Form Validation Error',
+                text: response.message,
+                type: 'danger',
+                href: '#',
+            })
             throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
         },
     )

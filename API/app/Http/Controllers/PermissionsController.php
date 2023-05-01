@@ -137,15 +137,18 @@ class PermissionsController extends Controller
         }
 
         $request->validate([
-            'name' => 'required|unique:roles,name',
+            'name' => 'required|unique:permissions,name',
         ]);
 
-        $role = new Role();
-        $role->fill($request->post());
-        $role->save();
+        $permission = Permission::create(['name' => $request->post('name')]);
+
+        if ($request->post('role_id')) {
+            $role = Role::findById($request->post('role_id'));
+            $role->givePermissionTo($permission);
+        }
 
         return response()->json([
-            'role' => $role->toArray(),
+            'permission' => $permission->toArray(),
         ]);
     }
 

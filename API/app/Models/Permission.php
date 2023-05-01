@@ -10,7 +10,7 @@ class Permission extends PermissionsBase
 {
     use HasFactory, Notifiable;
     protected $fillable = [
-        'name', 'guard_name'
+        'name', 'guard_name', 'role_id'
     ];
 
     protected $table = "permissions";

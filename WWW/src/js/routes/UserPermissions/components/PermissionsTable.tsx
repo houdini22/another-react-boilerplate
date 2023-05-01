@@ -239,7 +239,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                             >
                                                                                 <DeleteIcon /> Remove from Role
                                                                             </Dropdown.Item>
-                                                                            {_is_deletable == 1 && (
+                                                                            {!!_is_deletable && (
                                                                                 <Dropdown.Item
                                                                                     color="danger"
                                                                                     onClick={() => {

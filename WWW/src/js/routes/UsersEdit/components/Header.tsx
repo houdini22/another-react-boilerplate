@@ -18,6 +18,7 @@ export class Header extends React.Component<HeaderProps, null> {
             forceLogin,
             activateUser,
             deactivateUser,
+            addToastNotification,
         } = this.props
         return (
             <PageHeader.Container>
@@ -33,6 +34,11 @@ export class Header extends React.Component<HeaderProps, null> {
                             sendActivationEmail(user).then(() => {
                                 Promise.all([fetchOne(user['id'])]).then(() => {
                                     setIsLoading(false)
+                                    addToastNotification({
+                                        type: 'success',
+                                        title: 'Send success.',
+                                        text: 'Activation email has been sent.',
+                                    })
                                 })
                             })
                         }}
@@ -45,7 +51,13 @@ export class Header extends React.Component<HeaderProps, null> {
                         disabled={!user.last_active && !user.token}
                         onClick={() => {
                             forceLogin(user).then(() => {
-                                Promise.all([fetchOne(user['id'])]).then(() => {})
+                                Promise.all([fetchOne(user['id'])]).then(() => {
+                                    addToastNotification({
+                                        type: 'success',
+                                        title: 'Force login success.',
+                                        text: 'User was logged out.',
+                                    })
+                                })
                             })
                         }}
                     >
@@ -57,6 +69,11 @@ export class Header extends React.Component<HeaderProps, null> {
                             onClick={() => {
                                 activateUser(user).then(() => {
                                     fetchOne(user['id'])
+                                    addToastNotification({
+                                        type: 'success',
+                                        title: 'Activate success.',
+                                        text: 'User has now active account.',
+                                    })
                                 })
                             }}
                         >
@@ -69,6 +86,11 @@ export class Header extends React.Component<HeaderProps, null> {
                             onClick={() => {
                                 deactivateUser(user).then(() => {
                                     fetchOne(user['id'])
+                                    addToastNotification({
+                                        type: 'success',
+                                        title: 'Deactivate success.',
+                                        text: 'User has now not active account.',
+                                    })
                                 })
                             }}
                         >

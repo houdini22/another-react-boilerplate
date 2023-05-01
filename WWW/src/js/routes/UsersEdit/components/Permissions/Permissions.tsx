@@ -72,6 +72,7 @@ export class Permissions extends React.Component<AddRoleProps, null> {
             navigate,
             deleteUserPermission,
             fetchPermissions,
+            addToastNotification,
         } = this.props
 
         const permissionsFromRoles = this.getPermissionFromRoles()
@@ -108,6 +109,11 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                                                 return deleteUserPermission({ id }, user).then(() => {
                                                     Promise.all([fetchOne(user['id']), fetchPermissions()]).then(() => {
                                                         setIsLoading(false)
+                                                        addToastNotification({
+                                                            type: 'success',
+                                                            title: 'Remove success.',
+                                                            text: 'Permission has been removed from User.',
+                                                        })
                                                     })
                                                 })
                                             }}
@@ -124,6 +130,11 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                                                 return deletePermission(id).then(() => {
                                                     Promise.all([fetchOne(user['id']), fetchPermissions()]).then(() => {
                                                         setIsLoading(false)
+                                                        addToastNotification({
+                                                            type: 'success',
+                                                            title: 'Remove success.',
+                                                            text: 'Permission has been removed.',
+                                                        })
                                                     })
                                                 })
                                             }}

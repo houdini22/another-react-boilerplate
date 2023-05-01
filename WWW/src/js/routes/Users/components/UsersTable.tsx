@@ -47,6 +47,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
             totalPages,
             deleteUserPermission,
             deletePermission,
+            addToastNotification,
         } = this.props
         return (
             <RouteManager>
@@ -209,6 +210,13 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                                                         setIsLoading(
                                                                                                             false,
                                                                                                         )
+                                                                                                        addToastNotification(
+                                                                                                            {
+                                                                                                                title: 'Delete success.',
+                                                                                                                text: 'Role has been removed from user.',
+                                                                                                                type: 'success',
+                                                                                                            },
+                                                                                                        )
                                                                                                     })
                                                                                                 })
                                                                                             }}
@@ -229,6 +237,13 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                                                             () => {
                                                                                                                 setIsLoading(
                                                                                                                     false,
+                                                                                                                )
+                                                                                                                addToastNotification(
+                                                                                                                    {
+                                                                                                                        title: 'Delete success.',
+                                                                                                                        text: 'Role has been removed.',
+                                                                                                                        type: 'success',
+                                                                                                                    },
                                                                                                                 )
                                                                                                             },
                                                                                                         )
@@ -343,6 +358,13 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                                                                 setIsLoading(
                                                                                                                     false,
                                                                                                                 )
+                                                                                                                addToastNotification(
+                                                                                                                    {
+                                                                                                                        title: 'Delete success.',
+                                                                                                                        text: 'Permission has been removed from user.',
+                                                                                                                        type: 'success',
+                                                                                                                    },
+                                                                                                                )
                                                                                                             },
                                                                                                         )
                                                                                                     })
@@ -365,6 +387,13 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                                                             () => {
                                                                                                                 setIsLoading(
                                                                                                                     false,
+                                                                                                                )
+                                                                                                                addToastNotification(
+                                                                                                                    {
+                                                                                                                        title: 'Delete success.',
+                                                                                                                        text: 'Permission has been removed.',
+                                                                                                                        type: 'success',
+                                                                                                                    },
                                                                                                                 )
                                                                                                             },
                                                                                                         )

@@ -155,7 +155,7 @@ const addPermission = (role, params) => (dispatch) => {
         dispatch(setFetchError(null))
 
         return http
-            .post(`/roles/permissions/${role.id}/add`, params)
+            .post(`/permissions/add/`, params)
             .then(({ data }) => {
                 resolve()
             })
