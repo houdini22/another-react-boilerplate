@@ -1,38 +1,30 @@
 import * as React from 'react'
-import { PageContent } from '../../../layouts/PageLayout/components'
-import { RouteManager } from '../../../containers/RouteManager'
+import {PageContent} from '../../../layouts/PageLayout/components'
+import {RouteManager} from '../../../containers/RouteManager'
 import {
-    Alert,
     Button,
     Card,
     Col,
-    Dropdown,
-    Label,
     LoadingOverlay,
     Modal,
-    PageHeader,
     Row,
-    Table,
 } from '../../../components'
-import { UserRolesManager } from '../containers/UserRolesManager'
+import {UserRolesManager} from '../../UserRoles/containers/UserRolesManager'
 import EditModal from './EditRole/EditModal'
-import AddModal from './AddRole/AddModal'
-import { NotificationsManager } from '../../../containers/NotificationsManager'
+import {NotificationsManager} from '../../../containers/NotificationsManager'
 import AddPermissionModal from './AddPermission/AddPermissionModal'
-import { ListManager } from '../../../components/common/List/ListManager'
-import RolesTable from './RolesTable'
-import { Pagination } from '../../../components/common/List/Pagination'
-import RolesFilters from './RolesFilters'
-import { ifDeepDiff } from '../../../utils/javascript'
-import { FaHome as HomeIcon } from 'react-icons/fa'
+import {ListManager} from '../../../components/common/List/ListManager'
+import PermissionsTable from './PermissionsTable'
+import {Pagination} from '../../../components/common/List/Pagination'
+import RolesFilters from './PermissionsFilters'
+import {ifDeepDiff} from '../../../utils/javascript'
 import Header from './Header'
 
-export class UsersView extends React.Component {
+export class UsersPermissions extends React.Component {
     state = {
         confirmDeleteModalVisible: false,
         edit: false,
         addModalVisible: false,
-        addPermissionModalVisible: false,
     }
 
     closeAddModal() {
@@ -48,22 +40,9 @@ export class UsersView extends React.Component {
         })
     }
 
-    closePermissionsModal() {
-        return new Promise((resolve) => {
-            this.setState(
-                {
-                    addPermissionModalVisible: false,
-                },
-                () => {
-                    resolve()
-                },
-            )
-        })
-    }
-
     closeEditModal() {
         return new Promise((resolve) => {
-            this.setState({ edit: false }, () => {
+            this.setState({edit: false}, () => {
                 resolve()
             })
         })
@@ -81,12 +60,6 @@ export class UsersView extends React.Component {
         })
     }
 
-    openPermissionsModal() {
-        this.setState({
-            addPermissionModalVisible: true,
-        })
-    }
-
     openDeleteModal(roleId) {
         this.setState({
             confirmDeleteModalVisible: roleId,
@@ -100,67 +73,61 @@ export class UsersView extends React.Component {
     }
 
     render() {
-        const { confirmDeleteModalVisible, edit, addModalVisible, addPermissionModalVisible } = this.state
+        const {confirmDeleteModalVisible, edit, addModalVisible} = this.state
 
         return (
             <RouteManager>
-                {({ navigate, query: { user = '', permissions: permissionsFromUri = '' } }) => (
+                {({navigate, query: {user = '', roles: rolesFromUri}}) => (
                     <NotificationsManager>
-                        {({ addToastNotification }) => (
+                        {({addToastNotification}) => (
                             <UserRolesManager>
                                 {({
-                                    deleteRole,
-                                    setIsLoading,
-                                    deletePermission,
+                                      deleteRole,
+                                      setIsLoading,
+                                      deletePermission,
                                       deleteRolePermission,
                                       deleteUserRole,
-                                    permissions,
-                                    roles,
-                                }) => {
+                                      permissions,
+                                      roles,
+                                  }) => {
                                     const defaultFilters = {
                                         items_per_page: 15,
                                         order_by: 'id',
                                         order_direction: 'asc',
-                                        permissions: [],
-                                        has_permissions: 'yes_or_no',
-                                        users: 'yes_or_no',
-                                        user: '',
                                         roles: [],
+                                        has_roles: 'yes_or_no',
+                                        has_users: 'yes_or_no',
+                                        user: ''
                                     }
 
                                     return (
                                         <ListManager
-                                            url={'/roles/list'}
+                                            url={'/permissions/list'}
                                             defaultFilters={defaultFilters}
-                                            urlFilters={{ user, permissions: permissionsFromUri ? permissionsFromUri.split(',').map(n => Number(n)) : '' }}
+                                            urlFilters={{user, roles: rolesFromUri ? rolesFromUri.split(',').map(n => Number(n)) : ""}}
                                         >
                                             {({
-                                                data,
-                                                isLoading,
-                                                fetch,
-                                                links,
-                                                page,
-                                                setPage,
-                                                hasNextPage,
-                                                hasPrevPage,
-                                                totalPages,
-                                                filters,
-                                                setFilter,
-                                                perPage,
-                                                total,
-                                                resetFilters,
-                                                restoreFilters,
-                                                saveFilters,
-                                            }) => (
+                                                  data,
+                                                  isLoading,
+                                                  fetch,
+                                                  links,
+                                                  page,
+                                                  setPage,
+                                                  hasNextPage,
+                                                  hasPrevPage,
+                                                  totalPages,
+                                                  filters,
+                                                  setFilter,
+                                                  perPage,
+                                                  total,
+                                                  resetFilters,
+                                                  restoreFilters,
+                                                  saveFilters,
+                                              }) => (
                                                 <PageContent>
-                                                    <AddModal
+                                                    <AddPermissionModal
                                                         visible={addModalVisible}
                                                         close={() => this.closeAddModal()}
-                                                        fetch={fetch}
-                                                    />
-                                                    <AddPermissionModal
-                                                        visible={addPermissionModalVisible}
-                                                        close={() => this.closePermissionsModal()}
                                                         fetch={fetch}
                                                     />
                                                     <EditModal
@@ -215,44 +182,20 @@ export class UsersView extends React.Component {
                                                         </Modal.Footer>
                                                     </Modal.Container>
 
-                                                    <Header openAddModal={this.openAddModal.bind(this)} />
+                                                    <Header openAddModal={this.openAddModal.bind(this)}/>
 
-                                                    <Card
-                                                        name={'UserRolesList'}
-                                                        header={<h1>Filters</h1>}
-                                                        withMinimizeIcon
-                                                        headerActions={[
-                                                            <Button
-                                                                color={'secondary'}
-                                                                onClick={() => resetFilters()}
-                                                                disabled={!ifDeepDiff(defaultFilters, filters)}
-                                                            >
-                                                                Reset Filters
-                                                            </Button>,
-                                                            <Button
-                                                                color={'success'}
-                                                                onClick={() => restoreFilters('roles')}
-                                                            >
-                                                                Restore Filters
-                                                            </Button>,
-                                                            <Button
-                                                                color={'warning'}
-                                                                onClick={() => saveFilters('roles')}
-                                                                disabled={!ifDeepDiff(defaultFilters, filters)}
-                                                            >
-                                                                Save Filters
-                                                            </Button>,
-                                                        ]}
-                                                    >
-                                                        <RolesFilters
-                                                            filters={filters}
-                                                            setFilter={setFilter}
-                                                            fetch={fetch}
-                                                            permissions={permissions}
-                                                            roles={roles}
-                                                        />
-                                                        {isLoading && <LoadingOverlay />}
-                                                    </Card>
+
+                                                    <RolesFilters
+                                                        filters={filters}
+                                                        setFilter={setFilter}
+                                                        fetch={fetch}
+                                                        permissions={permissions}
+                                                        roles={roles}
+                                                        resetFilters={resetFilters}
+                                                        restoreFilters={restoreFilters}
+                                                        saveFilters={saveFilters}
+                                                        defaultFilters={defaultFilters}
+                                                    />
 
                                                     <Card>
                                                         <Pagination
@@ -264,9 +207,9 @@ export class UsersView extends React.Component {
                                                             hasPrevPage={hasPrevPage}
                                                             totalPages={totalPages}
                                                         />
-                                                        <RolesTable
+                                                        <PermissionsTable
                                                             setIsLoading={setIsLoading}
-                                                            roles={data}
+                                                            permissions={data}
                                                             deleteUserPermission={deleteRolePermission}
                                                             deleteUserRole={deleteUserRole}
                                                             fetch={fetch}
@@ -289,7 +232,7 @@ export class UsersView extends React.Component {
                                                             hasPrevPage={hasPrevPage}
                                                             totalPages={totalPages}
                                                         />
-                                                        {isLoading && <LoadingOverlay />}
+                                                        {isLoading && <LoadingOverlay/>}
                                                     </Card>
                                                 </PageContent>
                                             )}
@@ -305,4 +248,4 @@ export class UsersView extends React.Component {
     }
 }
 
-export default UsersView
+export default UsersPermissions

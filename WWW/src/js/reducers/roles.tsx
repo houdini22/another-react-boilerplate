@@ -187,7 +187,7 @@ const deleteRole =
         })
     }
 
-const deleteUserPermission =
+const deleteRolePermission =
     ({ id: role_id }, { id: permission_id }) =>
     (dispatch) => {
         return new Promise<void>((resolve, reject) => {
@@ -203,6 +203,23 @@ const deleteUserPermission =
                 })
         })
     }
+
+const deleteUserRole =
+    ({ id: role_id }, { id: user_id }) =>
+        (dispatch) => {
+            return new Promise<void>((resolve, reject) => {
+                dispatch(setFetchError(null))
+
+                http.delete(`/roles/permissions/delete_user_role/${role_id}/${user_id}`)
+                    .then(({ data: { user } }) => {
+                        resolve()
+                    })
+                    .catch((e) => {
+                        dispatch(setFetchError(e))
+                        reject(e)
+                    })
+            })
+        }
 
 const deletePermission =
     ({ id: permission_id }) =>
@@ -232,8 +249,9 @@ export const actions = {
     deleteRole,
     addPermission,
     fetchPermissions,
-    deleteUserPermission,
+    deleteRolePermission,
     deletePermission,
+    deleteUserRole
 }
 
 // ------------------------------------

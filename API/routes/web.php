@@ -54,9 +54,26 @@ Route::prefix('api/v1')->group(function () {
         Route::prefix('permissions')->group(function() {
             Route::get('list', '\App\Http\Controllers\RolesController@getPermissionList');
             Route::post('{role_id}/add', '\App\Http\Controllers\RolesController@postPermissionAdd');
-            Route::delete('delete/{role_id}/{permission_id}', '\App\Http\Controllers\RolesController@deleteDeleteUserPermission');
+            Route::delete('delete/{role_id}/{permission_id}', '\App\Http\Controllers\RolesController@deleteDeleteRolePermission');
+            Route::delete('delete_user_role/{role_id}/{permission_id}', '\App\Http\Controllers\RolesController@deleteDeleteUserRole');
             Route::delete('delete/{permission_id}', '\App\Http\Controllers\RolesController@deleteDeletePermission');
         });
+    });
+
+    Route::prefix('permissions')->group(function() {
+        Route::get('list', '\App\Http\Controllers\PermissionsController@getList');
+        /*Route::get('get/{id}', '\App\Http\Controllers\RolesController@getGet');
+        Route::delete('delete/{id}', '\App\Http\Controllers\RolesController@deleteDeleteRole');
+        Route::post('edit', '\App\Http\Controllers\RolesController@postEdit');
+        Route::post('add', '\App\Http\Controllers\RolesController@postAdd');
+
+        Route::prefix('permissions')->group(function() {
+            Route::get('list', '\App\Http\Controllers\RolesController@getPermissionList');
+            Route::post('{role_id}/add', '\App\Http\Controllers\RolesController@postPermissionAdd');
+            Route::delete('delete/{role_id}/{permission_id}', '\App\Http\Controllers\RolesController@deleteDeleteRolePermission');
+            Route::delete('delete_user_role/{role_id}/{permission_id}', '\App\Http\Controllers\RolesController@deleteDeleteUserRole');
+            Route::delete('delete/{permission_id}', '\App\Http\Controllers\RolesController@deleteDeletePermission');
+        });*/
     });
 
     Route::prefix('files')->group(function() {

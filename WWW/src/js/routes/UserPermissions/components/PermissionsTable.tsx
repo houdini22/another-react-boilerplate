@@ -4,11 +4,11 @@ import { EditIcon, DeleteIcon, UserIcon, RoleIcon } from '../../../components/ic
 
 interface RolesTableProps {}
 
-export class RolesTable extends React.Component<RolesTableProps> {
+export class PermissionsTable extends React.Component<RolesTableProps> {
     render() {
         const {
             setIsLoading,
-            roles,
+            permissions,
             fetch,
             addToastNotification,
             deleteRolePermission,
@@ -33,14 +33,14 @@ export class RolesTable extends React.Component<RolesTableProps> {
                     </Table.Tr>
                 </Table.THead>
                 <Table.TBody>
-                    {roles.map((role) => {
+                    {permissions.map((permission) => {
                         return (
-                            <Table.Tr key={role.id}>
-                                <Table.Td xs={1}>{role.id}</Table.Td>
-                                <Table.Td xs={3}>{role.name}</Table.Td>
+                            <Table.Tr key={permission.id}>
+                                <Table.Td xs={1}>{permission.id}</Table.Td>
+                                <Table.Td xs={3}>{permission.name}</Table.Td>
                                 <Table.Td xs={4}>
                                     <div>
-                                        {role.users_count > 0 && (
+                                        {permission.users_count > 0 && (
                                             <Popover.Container
                                                 trigger={'hover'}
                                                 pixelsWidth={300}
@@ -50,13 +50,13 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                     <Button
                                                         color={'info'}
                                                         icon={<UserIcon />}
-                                                        onClick={() => navigate(`/users?roles=${role.id}`)}
+                                                        onClick={() => navigate(`/users?roles=${permission.id}`)}
                                                     >
-                                                        {role.users_count}
+                                                        {permission.users_count}
                                                     </Button>
                                                 </Popover.Trigger>
                                                 <Popover.Content scrollY>
-                                                    {role?.users
+                                                    {permission?.users
                                                         ?.sort(({name: nameA}, {name: nameB}) => nameA.localeCompare(nameB))
                                                         .map(
                                                         ({
@@ -79,7 +79,7 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                                                 onClick={() => {
                                                                                     setIsLoading(true)
 
-                                                                                    return deleteUserRole(role, {
+                                                                                    return deleteUserRole(permission, {
                                                                                         id: _id,
                                                                                     }).then(() => {
                                                                                         fetch().then(() => {
@@ -104,7 +104,7 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                 </Popover.Content>
                                             </Popover.Container>
                                         )}
-                                        {role.permissions_count > 0 && (
+                                        {permission.roles_count > 0 && (
                                             <Popover.Container
                                                 trigger={'hover'}
                                                 pixelsWidth={300}
@@ -114,13 +114,13 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                     <Button
                                                         color={'info'}
                                                         icon={<RoleIcon />}
-                                                        onClick={() => navigate(`/permissions?roles=${role.id}`)}
+                                                        onClick={() => navigate(`/roles?permissions=${permission.id}`)}
                                                     >
-                                                        {role.permissions_count}
+                                                        {permission.roles_count}
                                                     </Button>
                                                 </Popover.Trigger>
                                                 <Popover.Content scrollY>
-                                                    {role?.permissions?.map(
+                                                    {permission?.roles?.map(
                                                         ({
                                                             id: _id,
                                                             name,
@@ -143,7 +143,7 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                                                 onClick={() => {
                                                                                     setIsLoading(true)
 
-                                                                                    return deleteRolePermission(role, {
+                                                                                    return deleteRolePermission(permission, {
                                                                                         id: _id,
                                                                                     }).then(() => {
                                                                                         fetch().then(() => {
@@ -199,14 +199,14 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                             icon={<EditIcon />}
                                             iconOnly
                                             color={'warning'}
-                                            onClick={() => navigate(`/roles/edit?id=${role.id}`)}
+                                            onClick={() => navigate(`/permissions/edit?id=${permission.id}`)}
                                         />
-                                        {role.is_deletable == 1 && (
+                                        {permission.is_deletable == 1 && (
                                             <Button
                                                 icon={<DeleteIcon />}
                                                 iconOnly
                                                 color={'danger'}
-                                                onClick={() => openDeleteModal(role.id)}
+                                                onClick={() => openDeleteModal(permission.id)}
                                             />
                                         )}
                                     </div>
@@ -232,4 +232,4 @@ export class RolesTable extends React.Component<RolesTableProps> {
     }
 }
 
-export default RolesTable
+export default PermissionsTable

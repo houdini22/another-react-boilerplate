@@ -17,7 +17,7 @@ class DetailsUserFilesRow extends React.Component {
                     {user.files_count > 0 && (
                         <>
                             <br />
-                            <Link to={`/media?filters[user]=${user.name}`}>Show</Link>
+                            <Link to={`/media?user=${user.name}`}>Show</Link>
                         </>
                     )}
                 </Col>

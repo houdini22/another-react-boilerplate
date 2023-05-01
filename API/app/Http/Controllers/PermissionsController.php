@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class RolesController extends Controller
+class PermissionsController extends Controller
 {
     public function getList(Request $request)
     {
@@ -19,7 +19,7 @@ class RolesController extends Controller
 
         $filters = $request->get('filters');
 
-        $query = Role::with('permissions')
+        $query = Permission::with('roles')
             ->with('users')
             ->where(function ($query) use ($filters) {
                 if (!empty($filters['search'])) {
@@ -28,29 +28,29 @@ class RolesController extends Controller
                 }
             })
             ->orderBy(empty($filters['order_by']) ? 'id' : $filters['order_by'], empty($filters['order_direction']) ? 'asc' : $filters['order_direction'])
-        ->withCount(['users', 'permissions']);
+            ->withCount(['users', 'roles']);
 
-        if (!empty($filters['permissions'])) {
-            $query = $query->whereHas('permissions', function ($query) use ($filters) {
-                if (!empty($filters['permissions'])) {
-                    $query->whereIn('id', $filters['permissions']);
+        if (!empty($filters['roles'])) {
+            $query = $query->whereHas('roles', function ($query) use ($filters) {
+                if (!empty($filters['roles'])) {
+                    $query->whereIn('id', $filters['roles']);
                 }
             });
         }
 
-        if (!empty($filters['users'])) {
-            if ($filters['users'] === 'yes') {
+        if (!empty($filters['has_users'])) {
+            if ($filters['has_users'] === 'yes') {
                 $query = $query->whereHas('users');
-            } else if ($filters['users'] === 'no') {
+            } else if ($filters['has_users'] === 'no') {
                 $query = $query->whereDoesntHave('users');
             }
         }
 
-        if (!empty($filters['has_permissions'])) {
-            if ($filters['has_permissions'] === 'yes') {
-                $query = $query->whereHas('permissions');
-            } else if ($filters['has_permissions'] === 'no') {
-                $query = $query->whereDoesntHave('permissions');
+        if (!empty($filters['has_roles'])) {
+            if ($filters['has_roles'] === 'yes') {
+                $query = $query->whereHas('roles');
+            } else if ($filters['has_roles'] === 'no') {
+                $query = $query->whereDoesntHave('roles');
             }
         }
 
@@ -62,10 +62,10 @@ class RolesController extends Controller
             });
         }
 
-        $roles = $query->paginate(empty($filters['items_per_page']) ? 10000 : $filters['items_per_page']);
+        $permissions = $query->paginate(empty($filters['items_per_page']) ? 10000 : $filters['items_per_page']);
 
         return response()->json([
-            'data' => $roles->toArray(),
+            'data' => $permissions->toArray(),
         ]);
     }
 
@@ -194,6 +194,7 @@ class RolesController extends Controller
             'permissions' => $permisions->toArray(),
         ]);
     }
+
     public function deleteDeleteUserRole(Request $request)
     {
         $user = User::getFromRequest($request);
