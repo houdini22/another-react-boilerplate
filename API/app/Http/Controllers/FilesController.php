@@ -39,7 +39,17 @@ class FilesController extends Controller
             return $this->response401();
         }
 
-        $files = File::orderBy('id', 'DESC')->get();
+        $filters = $request->get('filters');
+
+        $query = File::orderBy('id', 'DESC');
+
+        if (!empty($filters['user'])) {
+            $query = $query->whereHas('user', function($q) use ($filters) {
+                $q->where('name', $filters['user']);
+            });
+        }
+
+        $files = $query->get();
 
         return response()->json([
             'files' => $files->toArray(),
@@ -70,7 +80,7 @@ class FilesController extends Controller
 
         $files = $request->allFiles();
         foreach ($files as $f) {
-            $file = File::upload($f);
+            $file = File::upload($f, $user);
         }
 
         return response()->json([

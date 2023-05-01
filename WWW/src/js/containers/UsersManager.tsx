@@ -1,12 +1,14 @@
 import * as React from 'react'
-import { selectors as commonSelectors, actions as commonActions } from '../../../reducers/users'
+import { selectors as commonSelectors, actions as commonActions } from '../reducers/users'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { AuthManager } from '../../../containers/AuthManager'
+import { AuthManager } from './AuthManager'
 
 interface UsersManagerProps {
     children: any
+    fetch: Function
     fetchOne: Function
+    users: any
     user: any
     id?: number
     setIsLoading: Function
@@ -36,10 +38,12 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
     render() {
         const {
             children,
+            users,
             setIsLoading,
             user,
             editUser,
             addUser,
+            fetch,
             deleteUser,
             deleteUserRole,
             addUserRole,
@@ -55,10 +59,12 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             removeRoleFromNewUser,
         } = this.props
         const renderProps = {
+            users,
             setIsLoading,
             user,
             editUser,
             addUser,
+            fetch,
             deleteUser,
             deleteUserRole,
             addUserRole,
@@ -83,6 +89,7 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
 }
 
 const mapStateToProps = (state) => ({
+    users: commonSelectors['getUsers'](state),
     user: commonSelectors['getUser'](state),
     isLoading: commonSelectors['getIsLoading'](state),
     uploadProgress: commonSelectors['getUploadProgress'](state),
@@ -91,6 +98,7 @@ const mapStateToProps = (state) => ({
 const UsersManager = connect(mapStateToProps, (dispatch) => {
     return bindActionCreators(
         {
+            fetch: commonActions.fetch,
             fetchOne: commonActions.fetchOne,
             setIsLoading: commonActions.setIsLoading,
             editUser: commonActions.editUser,

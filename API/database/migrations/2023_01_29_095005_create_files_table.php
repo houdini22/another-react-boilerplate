@@ -29,6 +29,7 @@ class CreateFilesTable extends Migration
             $table->string('title', 255)->nullable()->default(null);
             $table->string('caption', 255)->nullable()->default(null);
             $table->string('description', 255)->nullable()->default(null);
+            $table->string('user_id')->nullable()->default(null);
             $table->timestamps();
         });
     }

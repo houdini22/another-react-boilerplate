@@ -14,7 +14,7 @@ import {
     Tabs,
     Typography,
 } from '../../../components'
-import { UsersManager } from '../containers/UsersManager'
+import { UsersManager } from '../../../containers/UsersManager'
 import { EditIcon } from '../../../components/icons'
 import { EditFormContainer } from './EditFormContainer'
 import { SubmissionError } from 'redux-form'

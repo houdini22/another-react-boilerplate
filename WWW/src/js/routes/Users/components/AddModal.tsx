@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { RouteManager } from '../../../containers/RouteManager'
 import { Alert, Button, Card, Dropdown, LoadingOverlay, Modal, PageHeader, Table } from '../../../components'
-import { UsersManager } from '../containers/UsersManager'
+import { UsersManager } from '../../../containers/UsersManager'
 import { AddIcon } from '../../../components/icons'
 import { EditFormContainer } from './EditFormContainer'
 import { processAPIerrorResponseToFormErrors } from '../../../modules/http'

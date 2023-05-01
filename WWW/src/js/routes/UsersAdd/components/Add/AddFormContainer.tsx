@@ -4,8 +4,8 @@ import { AddForm as FormComponent } from './AddForm'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 
-const onSubmit = (values, _, { addUser, user, navigate }) => {
-    return addUser({ ...user, ...values }).then(
+const onSubmit = ({ email, name, status, password, password_confirmation }, _, { addUser, user, navigate }) => {
+    return addUser({ email, name, status, password, password_confirmation }).then(
         (user) => {
             navigate(`/users/edit?id=${user.id}`)
         },
@@ -19,7 +19,7 @@ const AddFormContainer = compose(
     reduxForm({
         enableReinitialize: true,
         destroyOnUnmount: false,
-        form: 'EditUserForm',
+        form: 'AddUserForm',
         onSubmit,
     }),
 )(FormComponent)

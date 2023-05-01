@@ -10,7 +10,7 @@ interface FiltersProps {
 
 export class Filters extends React.Component<FiltersProps, null> {
     render() {
-        const { filters, setFilter, fetch } = this.props
+        const { filters, setFilter, fetch, roles, permissions } = this.props
 
         return (
             <FiltersContainer>
@@ -58,6 +58,34 @@ export class Filters extends React.Component<FiltersProps, null> {
                     setFilter={setFilter}
                     fetch={fetch}
                     label={'Active'}
+                />
+                <Filter
+                    filters={filters}
+                    type={'multiple'}
+                    name={'roles'}
+                    setFilter={setFilter}
+                    fetch={fetch}
+                    label={'Roles'}
+                    options={roles.map(({ id, name }) => {
+                        return {
+                            label: name,
+                            value: id,
+                        }
+                    })}
+                />
+                <Filter
+                    filters={filters}
+                    type={'multiple'}
+                    name={'permissions'}
+                    setFilter={setFilter}
+                    fetch={fetch}
+                    label={'Permissions'}
+                    options={permissions.map(({ id, name }) => {
+                        return {
+                            label: name,
+                            value: id,
+                        }
+                    })}
                 />
                 <Filter
                     filters={filters}

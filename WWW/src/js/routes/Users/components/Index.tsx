@@ -2,7 +2,7 @@ import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { RouteManager } from '../../../containers/RouteManager'
 import { Button, Card, LoadingOverlay, PageHeader } from '../../../components'
-import { UsersManager } from '../containers/UsersManager'
+import { UsersManager } from '../../../containers/UsersManager'
 import EditModal from './EditModal'
 import AddModal from './AddModal'
 import { UserRolesManager } from '../../UserRoles/containers/UserRolesManager'
@@ -54,12 +54,14 @@ export class UsersView extends React.Component<null, UsersViewState> {
             search: '',
             status: 'active_or_not_active',
             avatar: 'has_or_has_not',
+            roles: [],
+            permissions: [],
         }
         return (
             <RouteManager>
                 {({ navigate }) => (
                     <UserRolesManager>
-                        {({ deleteRole }) => (
+                        {({ roles, deleteRole, permissions }) => (
                             <ListManager url={'/users/list'} defaultFilters={defaultFilters}>
                                 {({
                                     fetch,
@@ -130,6 +132,8 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                             filters={filters}
                                                             setFilter={setFilter}
                                                             fetch={fetch}
+                                                            roles={roles}
+                                                            permissions={permissions}
                                                         />
                                                     </Card>
                                                     <Card>

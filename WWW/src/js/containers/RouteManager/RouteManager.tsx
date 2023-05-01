@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { withRouter } from '../../helpers/router'
 
-const parseQueryString = (queryString) => {
+export const parseQueryString = (queryString) => {
     const query = {}
     const pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&')
     for (let i = 0; i < pairs.length; i++) {

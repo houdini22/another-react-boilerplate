@@ -21,7 +21,7 @@ class UsersController extends Controller
 
         $filters = $request->get('filters');
 
-        $users = User::with('roles')
+        $query = User::with('roles')
             ->with('permissions')
             ->with('roles.permissions')
             ->with('avatar')
@@ -44,7 +44,25 @@ class UsersController extends Controller
                     }
                 }
             })
-            ->paginate($filters['items_per_page']);
+            ->withCount(['files']);
+
+        if (!empty($filters['roles'])) {
+            $query = $query->whereHas('roles', function ($query) use ($filters) {
+                if (!empty($filters['roles'])) {
+                    $query->whereIn('id', $filters['roles']);
+                }
+            });
+        }
+
+        if (!empty($filters['permissions'])) {
+            $query = $query->whereHas('roles.permissions', function ($query) use ($filters) {
+                if (!empty($filters['permissions'])) {
+                    $query->whereIn('id', $filters['permissions']);
+                }
+            });
+        }
+
+        $users = $query->paginate($filters['items_per_page']);
 
         return response()->json([
             'data' => $users->toArray(),
@@ -61,6 +79,7 @@ class UsersController extends Controller
         $user = User::with('roles')
             ->with('roles.permissions')
             ->with('avatar')
+            ->withCount(['files'])
             ->find($id);
 
         return response()->json([
@@ -261,7 +280,7 @@ class UsersController extends Controller
             $user->avatar()->delete();
         }
 
-        $file = File::upload($request->file('avatar'));
+        $file = File::upload($request->file('avatar'), $user);
 
         $user->avatar_id = $file->id;
         $user->save();

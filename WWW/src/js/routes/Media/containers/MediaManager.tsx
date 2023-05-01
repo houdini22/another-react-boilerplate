@@ -1,8 +1,10 @@
 import * as React from 'react'
 import { selectors as commonSelectors, actions as commonActions } from '../../../reducers/files'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { bindActionCreators, compose } from 'redux'
 import { AuthManager } from '../../../containers/AuthManager'
+import { withRouter } from '../../../helpers/router'
+import { parseQueryString } from '../../../containers/RouteManager/RouteManager'
 
 interface UsersManagerProps {
     children: any
@@ -18,8 +20,12 @@ interface UsersManagerProps {
 
 class MediaManagerBase extends React.Component<UsersManagerProps> {
     componentDidMount() {
-        const { fetch } = this.props
-        fetch()
+        const {
+            fetch,
+            location: { search },
+        } = this.props
+        const query = parseQueryString(search)
+        fetch(query)
     }
 
     render() {
@@ -50,18 +56,21 @@ const mapStateToProps = (state) => ({
     uploadProgress: commonSelectors['getUploadProgress'](state),
 })
 
-const MediaManager = connect(mapStateToProps, (dispatch) => {
-    return bindActionCreators(
-        {
-            fetch: commonActions.fetch,
-            setIsLoading: commonActions.setIsLoading,
-            deleteFile: commonActions.deleteFile,
-            uploadFiles: commonActions.uploadFiles,
-            editFile: commonActions.editFile,
-        },
-        dispatch,
-    )
-})(MediaManagerBase)
+const MediaManager = compose(
+    connect(mapStateToProps, (dispatch) => {
+        return bindActionCreators(
+            {
+                fetch: commonActions.fetch,
+                setIsLoading: commonActions.setIsLoading,
+                deleteFile: commonActions.deleteFile,
+                uploadFiles: commonActions.uploadFiles,
+                editFile: commonActions.editFile,
+            },
+            dispatch,
+        )
+    }),
+    withRouter,
+)(MediaManagerBase)
 
 export { MediaManager }
 export default { MediaManager }

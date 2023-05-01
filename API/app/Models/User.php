@@ -78,6 +78,10 @@ class User extends Authenticatable
         return $this->hasOne(File::class, 'id', 'avatar_id');
     }
 
+    public function files() {
+        return $this->hasMany(File::class, 'user_id', 'id');
+    }
+
     public function delete()
     {
         if ($this->avatar()) {

@@ -26,27 +26,31 @@ const setUploadProgress = (data) => (dispatch) => {
     dispatch({ type: SET_UPLOAD_PROGRESS, payload: data })
 }
 
-const fetch = () => (dispatch) => {
-    return new Promise<void>((resolve) => {
-        dispatch(setIsLoading(true))
-        dispatch(setIsLoaded(false))
-        dispatch(setFetchError(null))
-        dispatch(setFiles([]))
+const fetch =
+    (params = {}) =>
+    (dispatch) => {
+        return new Promise<void>((resolve) => {
+            dispatch(setIsLoading(true))
+            dispatch(setIsLoaded(false))
+            dispatch(setFetchError(null))
+            dispatch(setFiles([]))
 
-        http.get('/files/list')
-            .then(({ data: { files } }) => {
-                dispatch(setFiles(files))
-                dispatch(setIsLoading(false))
-                dispatch(setIsLoaded(true))
-                resolve()
+            http.get('/files/list', {
+                params,
             })
-            .catch((e) => {
-                dispatch(setIsLoading(false))
-                dispatch(setIsLoaded(false))
-                dispatch(setFetchError(e))
-            })
-    })
-}
+                .then(({ data: { files } }) => {
+                    dispatch(setFiles(files))
+                    dispatch(setIsLoading(false))
+                    dispatch(setIsLoaded(true))
+                    resolve()
+                })
+                .catch((e) => {
+                    dispatch(setIsLoading(false))
+                    dispatch(setIsLoaded(false))
+                    dispatch(setFetchError(e))
+                })
+        })
+    }
 
 const deleteFile =
     ({ id }) =>

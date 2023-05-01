@@ -3,7 +3,6 @@ import { http } from '../modules/http'
 const SET_IS_LOADING = 'users::set-is-loading'
 const SET_IS_LOADED = 'users::set-is-loaded'
 const SET_FETCH_ERROR = 'users::set-fetch-error'
-const SET_USERS = 'users::set-users'
 const SET_USER = 'users::set-user'
 const SET_UPLOAD_PROGRESS = 'users::set-upload-progress'
 const ADD_ROLE_TO_NEW_USER = 'users::add-role-to-new-user'
@@ -22,10 +21,6 @@ const setFetchError = (data) => (dispatch) => {
     dispatch({ type: SET_FETCH_ERROR, payload: data })
 }
 
-const setUsers = (data) => (dispatch) => {
-    dispatch({ type: SET_USERS, payload: data })
-}
-
 const setUser = (data) => (dispatch) => {
     dispatch({ type: SET_USER, payload: data })
 }
@@ -33,29 +28,6 @@ const setUser = (data) => (dispatch) => {
 const setUploadProgress = (data) => (dispatch) => {
     dispatch({ type: SET_UPLOAD_PROGRESS, payload: data })
 }
-
-const fetch = () => (dispatch) => {
-    return new Promise<void>((resolve) => {
-        dispatch(setIsLoading(true))
-        dispatch(setIsLoaded(false))
-        dispatch(setFetchError(null))
-        dispatch(setUsers([]))
-
-        http.get('/users/list')
-            .then(({ data: { users } }) => {
-                dispatch(setUsers(users))
-                dispatch(setIsLoading(false))
-                dispatch(setIsLoaded(true))
-                resolve()
-            })
-            .catch((e) => {
-                dispatch(setIsLoading(false))
-                dispatch(setIsLoaded(false))
-                dispatch(setFetchError(e))
-            })
-    })
-}
-
 const editUser = (params) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
         dispatch(setIsLoading(true))
@@ -301,7 +273,6 @@ export const actions = {
     setIsLoaded,
     setIsLoading,
     setFetchError,
-    setUsers,
     editUser,
     addUser,
     deleteUser,
@@ -337,12 +308,6 @@ const ACTION_HANDLERS = {
         return {
             ...state,
             fetchError: payload,
-        }
-    },
-    [SET_USERS]: (state, { payload }) => {
-        return {
-            ...state,
-            users: payload,
         }
     },
     [SET_USER]: (state, { payload }) => {
@@ -384,7 +349,6 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 
 const getInitialState = () => ({
-    users: [],
     user: {},
     isLoading: false,
     isLoaded: false,

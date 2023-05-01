@@ -103,6 +103,35 @@ class Filter extends React.Component<FilterProps, null> {
             />
         )
     }
+    renderMultiple() {
+        const { options, filters, setFilter, name, fetch } = this.props
+        return (
+            <div>
+                {options.map(({ label, value }) => {
+                    return (
+                        <Button
+                            key={value}
+                            color={filters[name].indexOf(value) === -1 ? 'secondary' : 'warning'}
+                            onClick={() => {
+                                if (filters[name].indexOf(value) === -1) {
+                                    setFilter(name, [...filters[name], value]).then(() => fetch())
+                                } else {
+                                    setFilter(
+                                        name,
+                                        filters[name].filter((v) => {
+                                            return v !== value
+                                        }),
+                                    ).then(() => fetch())
+                                }
+                            }}
+                        >
+                            {label}
+                        </Button>
+                    )
+                })}
+            </div>
+        )
+    }
     render() {
         const { type } = this.props
         return (
@@ -110,6 +139,7 @@ class Filter extends React.Component<FilterProps, null> {
                 <span>{this.renderFilterLabel()}:</span>
                 {type === 'search' && this.renderSearch()}
                 {type === 'radio' && this.renderRadio()}
+                {type === 'multiple' && this.renderMultiple()}
                 {type === 'order' && (
                     <div>
                         {this.renderOrderByColumn()}

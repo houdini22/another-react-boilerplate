@@ -25,7 +25,7 @@ class File extends Model
         'alt'
     ];
 
-    public static function upload(UploadedFile $file) {
+    public static function upload(UploadedFile $file, User $user) {
         $newFile = new File;
         $fileName = Str::random() . '_' . $file->getClientOriginalName();
         $filePath = $file->storeAs('/uploads/user_avatar/', $fileName, 'public');
@@ -38,6 +38,7 @@ class File extends Model
             'size' => filesize(storage_path('app/public/uploads/user_avatar/' . $fileName)),
             'title' => $file->getClientOriginalName(),
         ]);
+        $newFile->user_id = $user->id;
         $newFile->save();
 
         $newFile->save();
@@ -52,6 +53,10 @@ class File extends Model
         }
 
         return $newFile;
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function delete()

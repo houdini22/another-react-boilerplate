@@ -30,6 +30,7 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps> {
             fetch()
         } else {
             fetch()
+            fetchPermissions()
         }
     }
 

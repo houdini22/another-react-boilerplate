@@ -7,6 +7,7 @@ import { DetailsUserLastActiveRow } from './DetailsUserLastActiveRow'
 import { DetailsUserEmailVerifiedRow } from './DetailsUserEmailVerifiedRow'
 import { DetailsUserCreatedAtRow } from './DetailsUserCreatedAtRow'
 import { DetailsUserUpdatedAtRow } from './DetailsUserUpdatedAtRow'
+import { DetailsUserFilesRow } from './DetailsUserFilesRow'
 
 interface HeaderProps {
     user: Object
@@ -62,6 +63,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                 <DetailsUserUpdatedAtRow user={user} />
                 <DetailsUserLastActiveRow user={user} />
                 <DetailsUserEmailVerifiedRow user={user} />
+                <DetailsUserFilesRow user={user} />
                 {isLoading && <LoadingOverlay />}
             </Card>
         )
