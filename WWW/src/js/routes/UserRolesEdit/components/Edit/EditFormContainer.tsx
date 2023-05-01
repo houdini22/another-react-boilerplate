@@ -4,10 +4,10 @@ import { EditForm as FormComponent } from './EditForm'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 
-const onSubmit = (values, _, { editRole, role, fetchOne }) => {
-    return editRole({ ...role, ...values }).then(
-        () => {
-            Promise.all([fetchOne(role['id'])]).then(() => {})
+const onSubmit = (values, _, { save, close, fetch }) => {
+    return save({ ...values }).then(
+        (role) => {
+            fetch().then(() => close())
         },
         (response) => {
             throw new SubmissionError(processAPIerrorResponseToFormErrors(response))

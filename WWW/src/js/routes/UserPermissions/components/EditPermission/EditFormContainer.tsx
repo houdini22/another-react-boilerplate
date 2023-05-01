@@ -5,12 +5,24 @@ import { EditForm as FormComponent } from './EditForm'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 
-const onSubmit = (values, _, { addRole, fetch, close }) => {
-    return addRole(values).then(
-        (data) => {
-            fetch().then(() => close())
+const onSubmit = (values, _, { editPermission, addToastNotification, fetch, close }) => {
+    return editPermission(values).then(
+        () => {
+            fetch().then(() => {
+                close()
+            })
+            addToastNotification({
+                type: 'success',
+                title: 'Save success.',
+                text: 'Role has been saved.',
+            })
         },
         (response) => {
+            addToastNotification({
+                type: 'danger',
+                title: 'Save failed.',
+                text: response.message.message,
+            })
             throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
         },
     )
@@ -24,7 +36,7 @@ const EditFormContainer = compose(
         onSubmit,
         enableReinitialize: true,
         destroyOnUnmount: false,
-        form: 'EditRoleForm',
+        form: 'EditPermissionForm',
     }),
 )(FormComponent)
 

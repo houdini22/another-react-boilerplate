@@ -15,7 +15,6 @@ import {
     Table,
 } from '../../../components'
 import { UserRolesManager } from '../containers/UserRolesManager'
-import EditModal from './EditRole/EditModal'
 import AddModal from './AddRole/AddModal'
 import { NotificationsManager } from '../../../containers/NotificationsManager'
 import AddPermissionModal from './AddPermission/AddPermissionModal'
@@ -61,14 +60,6 @@ export class UsersView extends React.Component {
         })
     }
 
-    closeEditModal() {
-        return new Promise((resolve) => {
-            this.setState({ edit: false }, () => {
-                resolve()
-            })
-        })
-    }
-
     closeDeleteModal() {
         this.setState({
             confirmDeleteModalVisible: false,
@@ -78,12 +69,6 @@ export class UsersView extends React.Component {
     openAddModal() {
         this.setState({
             addModalVisible: true,
-        })
-    }
-
-    openPermissionsModal() {
-        this.setState({
-            addPermissionModalVisible: true,
         })
     }
 
@@ -112,8 +97,8 @@ export class UsersView extends React.Component {
                                     deleteRole,
                                     setIsLoading,
                                     deletePermission,
-                                      deleteRolePermission,
-                                      deleteUserRole,
+                                    deleteRolePermission,
+                                    deleteUserRole,
                                     permissions,
                                     roles,
                                 }) => {
@@ -132,7 +117,12 @@ export class UsersView extends React.Component {
                                         <ListManager
                                             url={'/roles/list'}
                                             defaultFilters={defaultFilters}
-                                            urlFilters={{ user, permissions: permissionsFromUri ? permissionsFromUri.split(',').map(n => Number(n)) : '' }}
+                                            urlFilters={{
+                                                user,
+                                                permissions: permissionsFromUri
+                                                    ? permissionsFromUri.split(',').map((n) => Number(n))
+                                                    : '',
+                                            }}
                                         >
                                             {({
                                                 data,
@@ -162,11 +152,6 @@ export class UsersView extends React.Component {
                                                         visible={addPermissionModalVisible}
                                                         close={() => this.closePermissionsModal()}
                                                         fetch={fetch}
-                                                    />
-                                                    <EditModal
-                                                        visible={typeof edit !== 'boolean'}
-                                                        id={edit}
-                                                        close={() => this.closeEditModal().then(() => fetch())}
                                                     />
                                                     <Modal.Container
                                                         visible={typeof confirmDeleteModalVisible !== 'boolean'}
@@ -267,7 +252,7 @@ export class UsersView extends React.Component {
                                                         <RolesTable
                                                             setIsLoading={setIsLoading}
                                                             roles={data}
-                                                            deleteUserPermission={deleteRolePermission}
+                                                            deleteRolePermission={deleteRolePermission}
                                                             deleteUserRole={deleteUserRole}
                                                             fetch={fetch}
                                                             addToastNotification={addToastNotification}

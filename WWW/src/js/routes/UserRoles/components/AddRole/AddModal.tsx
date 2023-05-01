@@ -3,7 +3,7 @@ import { RouteManager } from '../../../../containers/RouteManager'
 import { Button, LoadingOverlay, Modal } from '../../../../components'
 import { UserRolesManager } from '../../containers/UserRolesManager'
 import { AddIcon } from '../../../../components/icons'
-import { EditFormContainer } from '../EditRole/EditFormContainer'
+import { EditFormContainer } from '../../../UserRolesEdit/components/Edit/EditFormContainer'
 
 interface EditModalViewProps {
     visible: boolean
@@ -29,7 +29,7 @@ export class AddModalView extends React.Component<EditModalViewProps> {
                                             <EditFormContainer
                                                 initialValues={{}}
                                                 setIsLoading={setIsLoading}
-                                                addRole={addRole}
+                                                save={addRole}
                                                 fetch={fetch}
                                                 close={close}
                                             />

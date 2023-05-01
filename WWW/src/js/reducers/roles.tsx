@@ -6,6 +6,7 @@ const SET_FETCH_ERROR = 'roles::set-fetch-error'
 const SET_ROLES = 'roles::set-roles'
 const SET_ROLE = 'roles::set-role'
 const SET_PERMISSIONS = 'roles::set-permissions'
+const SET_PERMISSION = 'roles::SET_PERMISSION'
 
 const setIsLoading = (data) => (dispatch) => {
     dispatch({ type: SET_IS_LOADING, payload: data })
@@ -25,6 +26,10 @@ const setRoles = (data) => (dispatch) => {
 
 const setRole = (data) => (dispatch) => {
     dispatch({ type: SET_ROLE, payload: data })
+}
+
+const setPermission = (data) => (dispatch) => {
+    dispatch({ type: SET_PERMISSION, payload: data })
 }
 
 const setPermissions = (data) => (dispatch) => {
@@ -102,6 +107,27 @@ const editRole = (params) => (dispatch) => {
     })
 }
 
+const editPermission = (params) => (dispatch) => {
+    return new Promise<void>((resolve, reject) => {
+        dispatch(setIsLoading(true))
+        dispatch(setIsLoaded(false))
+        dispatch(setFetchError(null))
+
+        http.post('/permissions/edit', params)
+            .then(({ data: { permission } }) => {
+                dispatch(setIsLoading(false))
+                dispatch(setIsLoaded(true))
+                resolve(permission)
+            })
+            .catch((e) => {
+                dispatch(setIsLoading(false))
+                dispatch(setIsLoaded(false))
+                dispatch(setFetchError(e))
+                reject(e)
+            })
+    })
+}
+
 const addRole = (params) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
         dispatch(setIsLoading(true))
@@ -110,10 +136,10 @@ const addRole = (params) => (dispatch) => {
 
         return http
             .post('/roles/add', params)
-            .then(({ data }) => {
+            .then(({ data: { role } }) => {
                 dispatch(setIsLoading(false))
                 dispatch(setIsLoaded(true))
-                resolve()
+                resolve(role)
             })
             .catch((e) => {
                 dispatch(setIsLoading(false))
@@ -152,6 +178,29 @@ const fetchOne =
             http.get(`/roles/get/${id}`)
                 .then(({ data: { role } }) => {
                     dispatch(setRole(role))
+                    dispatch(setIsLoading(false))
+                    dispatch(setIsLoaded(true))
+                    resolve()
+                })
+                .catch((e) => {
+                    dispatch(setIsLoading(false))
+                    dispatch(setIsLoaded(false))
+                    dispatch(setFetchError(e))
+                })
+        })
+    }
+const fetchOnePermission =
+    (id = 0) =>
+    (dispatch) => {
+        return new Promise<void>((resolve) => {
+            dispatch(setPermission({}))
+            dispatch(setIsLoading(true))
+            dispatch(setIsLoaded(false))
+            dispatch(setFetchError(null))
+
+            http.get(`/permissions/get/${id}`)
+                .then(({ data: { permission } }) => {
+                    dispatch(setPermission(permission))
                     dispatch(setIsLoading(false))
                     dispatch(setIsLoaded(true))
                     resolve()
@@ -206,28 +255,11 @@ const deleteRolePermission =
 
 const deleteUserRole =
     ({ id: role_id }, { id: user_id }) =>
-        (dispatch) => {
-            return new Promise<void>((resolve, reject) => {
-                dispatch(setFetchError(null))
-
-                http.delete(`/roles/permissions/delete_user_role/${role_id}/${user_id}`)
-                    .then(({ data: { user } }) => {
-                        resolve()
-                    })
-                    .catch((e) => {
-                        dispatch(setFetchError(e))
-                        reject(e)
-                    })
-            })
-        }
-
-const deletePermission =
-    ({ id: permission_id }) =>
     (dispatch) => {
         return new Promise<void>((resolve, reject) => {
             dispatch(setFetchError(null))
 
-            http.delete(`/roles/permissions/delete/${permission_id}`)
+            http.delete(`/roles/permissions/delete_user_role/${role_id}/${user_id}`)
                 .then(({ data: { user } }) => {
                     resolve()
                 })
@@ -237,6 +269,21 @@ const deletePermission =
                 })
         })
     }
+
+const deletePermission = (permission_id) => (dispatch) => {
+    return new Promise<void>((resolve, reject) => {
+        dispatch(setFetchError(null))
+
+        http.delete(`/roles/permissions/delete/${permission_id}`)
+            .then(({ data: { user } }) => {
+                resolve()
+            })
+            .catch((e) => {
+                dispatch(setFetchError(e))
+                reject(e)
+            })
+    })
+}
 export const actions = {
     fetch,
     fetchOne,
@@ -251,7 +298,9 @@ export const actions = {
     fetchPermissions,
     deleteRolePermission,
     deletePermission,
-    deleteUserRole
+    deleteUserRole,
+    fetchOnePermission,
+    editPermission,
 }
 
 // ------------------------------------
@@ -294,6 +343,12 @@ const ACTION_HANDLERS = {
             permissions: payload,
         }
     },
+    [SET_PERMISSION]: (state, { payload }) => {
+        return {
+            ...state,
+            permission: payload,
+        }
+    },
 }
 
 // ------------------------------------
@@ -307,6 +362,7 @@ const getInitialState = () => ({
     isLoaded: false,
     fetchError: null,
     permissions: [],
+    permission: {},
 })
 
 export default function cmsPagesReducer(state = getInitialState(), action) {
@@ -323,6 +379,7 @@ const getIsLoading = (state) => getState(state)['isLoading']
 const getIsLoaded = (state) => getState(state)['isLoaded']
 const getFetchError = (state) => getState(state)['fetchError']
 const getPermissions = (state) => getState(state)['permissions']
+const getPermission = (state) => getState(state)['permission']
 export const selectors = {
     getState,
     getRoles,
@@ -331,4 +388,5 @@ export const selectors = {
     getFetchError,
     getRole,
     getPermissions,
+    getPermission,
 }

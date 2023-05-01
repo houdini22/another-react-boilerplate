@@ -4,8 +4,8 @@ interface ConfirmDeleteModalProps {
     visible: boolean
     id: number | boolean
     close?(): Function
-    fetch(): Function
-    deleteUser(): (id: number | boolean) => Promise<void>
+    fetch(): Promise<void>
+    deleteUser(id: number): Promise<void>
 }
 
 export class ConfirmDeleteModal extends React.Component<ConfirmDeleteModalProps, null> {

@@ -23,7 +23,7 @@ interface UserRolesManagerProps {
 
 class UserRolesManagerBase extends React.Component<UserRolesManagerProps> {
     componentDidMount() {
-        const { fetch, fetchOne, fetchPermissions, id } = this.props
+        const { fetch, fetchOne, fetchPermissions, id, permissionId, fetchOnePermission } = this.props
         if (id) {
             fetchOne(id)
             fetchPermissions()
@@ -31,6 +31,10 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps> {
         } else {
             fetch()
             fetchPermissions()
+        }
+
+        if (permissionId) {
+            fetchOnePermission(permissionId)
         }
     }
 
@@ -51,6 +55,9 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps> {
             deleteUserRole,
             permissions,
             fetchOne,
+            fetchOnePermission,
+            permission,
+            editPermission,
         } = this.props
         const renderProps = {
             roles,
@@ -67,6 +74,9 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps> {
             deleteUserRole,
             permissions,
             fetchOne,
+            fetchOnePermission,
+            permission,
+            editPermission,
         }
 
         return children(renderProps)
@@ -78,6 +88,7 @@ const mapStateToProps = (state) => ({
     role: commonSelectors['getRole'](state),
     isLoading: commonSelectors['getIsLoading'](state),
     permissions: commonSelectors['getPermissions'](state),
+    permission: commonSelectors['getPermission'](state),
 })
 
 const UserRolesManager = connect(mapStateToProps, (dispatch) => {
@@ -93,7 +104,9 @@ const UserRolesManager = connect(mapStateToProps, (dispatch) => {
             fetchPermissions: commonActions.fetchPermissions,
             deleteRolePermission: commonActions.deleteRolePermission,
             deletePermission: commonActions.deletePermission,
-            deleteUserRole: commonActions.deleteUserRole
+            deleteUserRole: commonActions.deleteUserRole,
+            fetchOnePermission: commonActions.fetchOnePermission,
+            editPermission: commonActions.editPermission,
         },
         dispatch,
     )

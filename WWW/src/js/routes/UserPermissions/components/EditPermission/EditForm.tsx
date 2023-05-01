@@ -3,32 +3,13 @@ import { Field } from 'redux-form'
 import { Button, FormField } from '../../../../components'
 
 class EditForm extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         const { handleSubmit } = this.props
 
         return (
             <form onSubmit={handleSubmit}>
                 <Field name="name" label="Name" type="text" component={FormField} />
-                <Field
-                    name="guard_name"
-                    label="Guard"
-                    type="select"
-                    options={[
-                        {
-                            value: 'web',
-                            label: 'web',
-                        },
-                        {
-                            value: 'api',
-                            label: 'api',
-                        },
-                    ]}
-                    component={FormField}
-                />
+                <Field name="guard_name" label="Guard" type="hidden" inputOnly component={FormField} />
                 <Button color="success" type="submit" block>
                     Save
                 </Button>

@@ -10,13 +10,13 @@ interface HeaderProps {
 
 export class Permissions extends React.Component<HeaderProps, null> {
     render() {
-        const { role, setIsLoading, fetchOne, isLoading, deletePermission, deleteUserPermission } = this.props
+        const { role, setIsLoading, fetch, isLoading, deletePermission, deleteRolePermission } = this.props
         return (
             <Card header={<h1>Permissions</h1>}>
                 {role?.permissions?.map(({ id: _id, name, guard_name, is_deletable }) => {
                     return (
-                        <Dropdown.Container size={'sm'} triggerSize={'lg'} key={_id}>
-                            <Dropdown.Trigger size="lg" component={Label}>
+                        <Dropdown.Container triggerSize={'lg'} key={_id}>
+                            <Dropdown.Trigger size="lg" component={Label} componentProps={{ block: true }}>
                                 {name} - {guard_name}
                             </Dropdown.Trigger>
                             <Dropdown.Menu>
@@ -25,7 +25,7 @@ export class Permissions extends React.Component<HeaderProps, null> {
                                     onClick={() => {
                                         setIsLoading(true)
 
-                                        return deleteUserPermission(role, {
+                                        return deleteRolePermission(role, {
                                             id: _id,
                                         }).then(() => {
                                             /*addToastNotification(
@@ -35,7 +35,7 @@ export class Permissions extends React.Component<HeaderProps, null> {
                                                         text: 'Permission has been removed.',
                                                     },
                                                 )*/
-                                            Promise.all([fetchOne(role.id)]).then(() => {
+                                            Promise.all([fetch()]).then(() => {
                                                 setIsLoading(false)
                                             })
                                         })
@@ -59,7 +59,7 @@ export class Permissions extends React.Component<HeaderProps, null> {
                                                             text: 'Permission has been deleted.',
                                                         },
                                                     )*/
-                                                Promise.all([fetchOne(role.id)]).then(() => {
+                                                Promise.all([fetch()]).then(() => {
                                                     setIsLoading(false)
                                                 })
                                             })

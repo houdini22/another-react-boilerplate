@@ -85,42 +85,19 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                             close={() => this.setUserToDelete(false)}
                                                         />
                                                         <Header navigate={navigate} />
-                                                        <Card
-                                                            name={'UsersList'}
-                                                            header={<h1>Filters</h1>}
-                                                            withMinimizeIcon
-                                                            headerActions={[
-                                                                <Button
-                                                                    color={'secondary'}
-                                                                    onClick={() => resetFilters()}
-                                                                    disabled={!ifDeepDiff(defaultFilters, filters)}
-                                                                >
-                                                                    Reset Filters
-                                                                </Button>,
-                                                                <Button
-                                                                    color={'success'}
-                                                                    onClick={() => restoreFilters('users')}
-                                                                >
-                                                                    Restore Filters
-                                                                </Button>,
-                                                                <Button
-                                                                    color={'warning'}
-                                                                    onClick={() => saveFilters('users')}
-                                                                    disabled={!ifDeepDiff(defaultFilters, filters)}
-                                                                >
-                                                                    Save Filters
-                                                                </Button>,
-                                                            ]}
-                                                        >
-                                                            <UsersFilters
-                                                                filters={filters}
-                                                                setFilter={setFilter}
-                                                                fetch={fetch}
-                                                                roles={roles}
-                                                                permissions={permissions}
-                                                            />
-                                                            {isLoading && <LoadingOverlay />}
-                                                        </Card>
+
+                                                        <UsersFilters
+                                                            filters={filters}
+                                                            setFilter={setFilter}
+                                                            fetch={fetch}
+                                                            roles={roles}
+                                                            permissions={permissions}
+                                                            resetFilters={resetFilters}
+                                                            defaultFilters={defaultFilters}
+                                                            restoreFilters={restoreFilters}
+                                                            saveFilters={saveFilters}
+                                                            isLoading={isLoading}
+                                                        />
                                                         <Card>
                                                             <Pagination
                                                                 links={links}

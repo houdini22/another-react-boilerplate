@@ -20,7 +20,7 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps> {
 
         return (
             <form onSubmit={handleSubmit}>
-                <Field
+                {/*<Field
                     name={'permission'}
                     label="Permission"
                     type="select"
@@ -42,7 +42,7 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps> {
                         }) || []),
                     ]}
                     component={FormField}
-                />
+                />*/}
                 <Field
                     type={'hidden'}
                     name={'role_id'}
@@ -51,43 +51,32 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps> {
                     inputOnly
                     style={{ display: 'none' }}
                 />
-                {permission === 'add' && (
-                    <>
-                        <Field
-                            name="role_id"
-                            label="Role"
-                            type="select"
-                            placeholder={'--- choose ---'}
-                            options={roles
-                                ?.sort(({ name: labelA }, { name: labelB }) => labelA.localeCompare(labelB))
-                                .map(({ id, name, guard_name }) => {
-                                    return {
-                                        label: `${name} - ${guard_name}`,
-                                        value: id,
-                                        selected: id === role.id,
-                                    }
-                                })}
-                            component={FormField}
-                        />
-                        <Field name="name" label="Name" type="text" component={FormField} />
-                        <Field
-                            name="guard_name"
-                            label="Guard"
-                            type="select"
-                            options={[
-                                {
-                                    value: 'web',
-                                    label: 'web',
-                                },
-                                {
-                                    value: 'api',
-                                    label: 'api',
-                                },
-                            ]}
-                            component={FormField}
-                        />
-                    </>
-                )}
+                <Field
+                    type={'hidden'}
+                    name={'permission'}
+                    value={'add'}
+                    component={FormField}
+                    inputOnly
+                    style={{ display: 'none' }}
+                />
+                <Field
+                    name="role_id"
+                    label="Role"
+                    type="select"
+                    placeholder={'--- choose ---'}
+                    options={roles
+                        ?.sort(({ name: labelA }, { name: labelB }) => labelA.localeCompare(labelB))
+                        .map(({ id, name, guard_name }) => {
+                            return {
+                                label: `${name} - ${guard_name}`,
+                                value: id,
+                                selected: id === role.id,
+                            }
+                        })}
+                    component={FormField}
+                />
+                <Field name="name" label="Name" type="text" component={FormField} />
+                <Field name="guard_name" label="Guard" type="hidden" inputOnly component={FormField} />
                 <Button color="success" type="submit" block>
                     Save
                 </Button>

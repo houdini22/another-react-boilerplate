@@ -32,7 +32,6 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
             deleteRole,
             activateUser,
             deactivateUser,
-            setUserToEdit,
             setUserToDelete,
             page,
             perPage,

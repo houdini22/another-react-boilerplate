@@ -14,6 +14,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
             deleteRolePermission,
             deleteUserRole,
             deletePermission,
+            openEditModal,
             openDeleteModal,
             page,
             perPage,
@@ -57,12 +58,10 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                 </Popover.Trigger>
                                                 <Popover.Content scrollY>
                                                     {permission?.users
-                                                        ?.sort(({name: nameA}, {name: nameB}) => nameA.localeCompare(nameB))
-                                                        .map(
-                                                        ({
-                                                             id: _id,
-                                                             name,
-                                                         }) => {
+                                                        ?.sort(({ name: nameA }, { name: nameB }) =>
+                                                            nameA.localeCompare(nameB),
+                                                        )
+                                                        .map(({ id: _id, name }) => {
                                                             return (
                                                                 <div key={name}>
                                                                     <Dropdown.Container size={'sm'} triggerSize={'lg'}>
@@ -99,8 +98,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                     </Dropdown.Container>
                                                                 </div>
                                                             )
-                                                        },
-                                                    )}
+                                                        })}
                                                 </Popover.Content>
                                             </Popover.Container>
                                         )}
@@ -143,9 +141,12 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                                 onClick={() => {
                                                                                     setIsLoading(true)
 
-                                                                                    return deleteRolePermission(permission, {
-                                                                                        id: _id,
-                                                                                    }).then(() => {
+                                                                                    return deleteRolePermission(
+                                                                                        permission,
+                                                                                        {
+                                                                                            id: _id,
+                                                                                        },
+                                                                                    ).then(() => {
                                                                                         fetch().then(() => {
                                                                                             setIsLoading(false)
                                                                                             addToastNotification({
@@ -199,7 +200,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                             icon={<EditIcon />}
                                             iconOnly
                                             color={'warning'}
-                                            onClick={() => navigate(`/permissions/edit?id=${permission.id}`)}
+                                            onClick={() => openEditModal(permission.id)}
                                         />
                                         {permission.is_deletable == 1 && (
                                             <Button

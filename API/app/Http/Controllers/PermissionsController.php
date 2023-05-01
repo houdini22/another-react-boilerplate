@@ -83,6 +83,20 @@ class PermissionsController extends Controller
         ]);
     }
 
+    public function getGetPermission(Request $request, $id)
+    {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $permission = Permission::with('roles')->with('users')->find($id);
+
+        return response()->json([
+            'permission' => $permission->toArray(),
+        ]);
+    }
+
     public function postEdit(Request $request)
     {
         $user = User::getFromRequest($request);
@@ -90,22 +104,20 @@ class PermissionsController extends Controller
             return $this->response401();
         }
 
-        $role = Role::find($request->post('id'));
-        if (!$role) {
+        $permission = Permission::find($request->post('id'));
+        if (!$permission) {
             return $this->response404();
         }
 
         $request->validate([
-            'name' => ['required', Rule::unique('users')->where(function ($query) use ($user) {
-                return $query->where('id', '<>', $user->id);
-            })],
+            'name' => ['required', 'unique:permissions,name'],
         ]);
 
-        $role->fill($request->post());
-        $role->save();
+        $permission->fill($request->post());
+        $permission->save();
 
         return response()->json([
-            'role' => $role->toArray(),
+            'permission' => $permission->toArray(),
         ]);
     }
 

@@ -1,23 +1,16 @@
 import * as React from 'react'
-import {PageContent} from '../../../layouts/PageLayout/components'
-import {RouteManager} from '../../../containers/RouteManager'
-import {
-    Button,
-    Card,
-    Col,
-    LoadingOverlay,
-    Modal,
-    Row,
-} from '../../../components'
-import {UserRolesManager} from '../../UserRoles/containers/UserRolesManager'
-import EditModal from './EditRole/EditModal'
-import {NotificationsManager} from '../../../containers/NotificationsManager'
+import { PageContent } from '../../../layouts/PageLayout/components'
+import { RouteManager } from '../../../containers/RouteManager'
+import { Button, Card, Col, LoadingOverlay, Modal, Row } from '../../../components'
+import { UserRolesManager } from '../../UserRoles/containers/UserRolesManager'
+import EditModal from './EditPermission/EditModal'
+import { NotificationsManager } from '../../../containers/NotificationsManager'
 import AddPermissionModal from './AddPermission/AddPermissionModal'
-import {ListManager} from '../../../components/common/List/ListManager'
+import { ListManager } from '../../../components/common/List/ListManager'
 import PermissionsTable from './PermissionsTable'
-import {Pagination} from '../../../components/common/List/Pagination'
+import { Pagination } from '../../../components/common/List/Pagination'
 import RolesFilters from './PermissionsFilters'
-import {ifDeepDiff} from '../../../utils/javascript'
+import { ifDeepDiff } from '../../../utils/javascript'
 import Header from './Header'
 
 export class UsersPermissions extends React.Component {
@@ -42,7 +35,7 @@ export class UsersPermissions extends React.Component {
 
     closeEditModal() {
         return new Promise((resolve) => {
-            this.setState({edit: false}, () => {
+            this.setState({ edit: false }, () => {
                 resolve()
             })
         })
@@ -60,36 +53,35 @@ export class UsersPermissions extends React.Component {
         })
     }
 
-    openDeleteModal(roleId) {
+    openDeleteModal(permissionsId) {
         this.setState({
-            confirmDeleteModalVisible: roleId,
+            confirmDeleteModalVisible: permissionsId,
         })
     }
 
-    openEditModal(roleId) {
+    openEditModal(permissionId) {
         this.setState({
-            edit: roleId,
+            edit: permissionId,
         })
     }
 
     render() {
-        const {confirmDeleteModalVisible, edit, addModalVisible} = this.state
+        const { confirmDeleteModalVisible, edit, addModalVisible } = this.state
 
         return (
             <RouteManager>
-                {({navigate, query: {user = '', roles: rolesFromUri}}) => (
+                {({ navigate, query: { user = '', roles: rolesFromUri } }) => (
                     <NotificationsManager>
-                        {({addToastNotification}) => (
+                        {({ addToastNotification }) => (
                             <UserRolesManager>
                                 {({
-                                      deleteRole,
-                                      setIsLoading,
-                                      deletePermission,
-                                      deleteRolePermission,
-                                      deleteUserRole,
-                                      permissions,
-                                      roles,
-                                  }) => {
+                                    setIsLoading,
+                                    deletePermission,
+                                    deleteRolePermission,
+                                    deleteUserRole,
+                                    permissions,
+                                    roles,
+                                }) => {
                                     const defaultFilters = {
                                         items_per_page: 15,
                                         order_by: 'id',
@@ -97,33 +89,38 @@ export class UsersPermissions extends React.Component {
                                         roles: [],
                                         has_roles: 'yes_or_no',
                                         has_users: 'yes_or_no',
-                                        user: ''
+                                        user: '',
                                     }
 
                                     return (
                                         <ListManager
                                             url={'/permissions/list'}
                                             defaultFilters={defaultFilters}
-                                            urlFilters={{user, roles: rolesFromUri ? rolesFromUri.split(',').map(n => Number(n)) : ""}}
+                                            urlFilters={{
+                                                user,
+                                                roles: rolesFromUri
+                                                    ? rolesFromUri.split(',').map((n) => Number(n))
+                                                    : '',
+                                            }}
                                         >
                                             {({
-                                                  data,
-                                                  isLoading,
-                                                  fetch,
-                                                  links,
-                                                  page,
-                                                  setPage,
-                                                  hasNextPage,
-                                                  hasPrevPage,
-                                                  totalPages,
-                                                  filters,
-                                                  setFilter,
-                                                  perPage,
-                                                  total,
-                                                  resetFilters,
-                                                  restoreFilters,
-                                                  saveFilters,
-                                              }) => (
+                                                data,
+                                                isLoading,
+                                                fetch,
+                                                links,
+                                                page,
+                                                setPage,
+                                                hasNextPage,
+                                                hasPrevPage,
+                                                totalPages,
+                                                filters,
+                                                setFilter,
+                                                perPage,
+                                                total,
+                                                resetFilters,
+                                                restoreFilters,
+                                                saveFilters,
+                                            }) => (
                                                 <PageContent>
                                                     <AddPermissionModal
                                                         visible={addModalVisible}
@@ -133,7 +130,8 @@ export class UsersPermissions extends React.Component {
                                                     <EditModal
                                                         visible={typeof edit !== 'boolean'}
                                                         id={edit}
-                                                        close={() => this.closeEditModal().then(() => fetch())}
+                                                        close={() => this.closeEditModal()}
+                                                        fetch={fetch}
                                                     />
                                                     <Modal.Container
                                                         visible={typeof confirmDeleteModalVisible !== 'boolean'}
@@ -160,18 +158,18 @@ export class UsersPermissions extends React.Component {
                                                                     <Button
                                                                         color={'success'}
                                                                         onClick={() => {
-                                                                            deleteRole(confirmDeleteModalVisible).then(
-                                                                                () => {
-                                                                                    fetch().then(() => {
-                                                                                        this.closeDeleteModal()
-                                                                                        addToastNotification({
-                                                                                            title: 'Delete success.',
-                                                                                            text: 'Role has been deleted.',
-                                                                                            type: 'success',
-                                                                                        })
+                                                                            deletePermission(
+                                                                                confirmDeleteModalVisible,
+                                                                            ).then(() => {
+                                                                                fetch().then(() => {
+                                                                                    this.closeDeleteModal()
+                                                                                    addToastNotification({
+                                                                                        title: 'Delete success.',
+                                                                                        text: 'Role has been deleted.',
+                                                                                        type: 'success',
                                                                                     })
-                                                                                },
-                                                                            )
+                                                                                })
+                                                                            })
                                                                         }}
                                                                         block
                                                                     >
@@ -182,8 +180,7 @@ export class UsersPermissions extends React.Component {
                                                         </Modal.Footer>
                                                     </Modal.Container>
 
-                                                    <Header openAddModal={this.openAddModal.bind(this)}/>
-
+                                                    <Header openAddModal={this.openAddModal.bind(this)} />
 
                                                     <RolesFilters
                                                         filters={filters}
@@ -232,7 +229,7 @@ export class UsersPermissions extends React.Component {
                                                             hasPrevPage={hasPrevPage}
                                                             totalPages={totalPages}
                                                         />
-                                                        {isLoading && <LoadingOverlay/>}
+                                                        {isLoading && <LoadingOverlay />}
                                                     </Card>
                                                 </PageContent>
                                             )}

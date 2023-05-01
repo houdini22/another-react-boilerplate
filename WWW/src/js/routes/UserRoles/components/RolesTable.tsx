@@ -57,12 +57,10 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                 </Popover.Trigger>
                                                 <Popover.Content scrollY>
                                                     {role?.users
-                                                        ?.sort(({name: nameA}, {name: nameB}) => nameA.localeCompare(nameB))
-                                                        .map(
-                                                        ({
-                                                             id: _id,
-                                                             name,
-                                                         }) => {
+                                                        ?.sort(({ name: nameA }, { name: nameB }) =>
+                                                            nameA.localeCompare(nameB),
+                                                        )
+                                                        .map(({ id: _id, name }) => {
                                                             return (
                                                                 <div key={name}>
                                                                     <Dropdown.Container size={'sm'} triggerSize={'lg'}>
@@ -99,8 +97,7 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                                     </Dropdown.Container>
                                                                 </div>
                                                             )
-                                                        },
-                                                    )}
+                                                        })}
                                                 </Popover.Content>
                                             </Popover.Container>
                                         )}

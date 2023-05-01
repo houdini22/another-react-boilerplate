@@ -27,7 +27,7 @@ export class UserRolesEdit extends React.Component<null, UsersViewState> {
                             setIsLoading,
                             addPermission,
                             fetchPermissions,
-                            deleteUserPermission,
+                            deleteRolePermission,
                         }) => (
                             <PageContent>
                                 <Header navigate={navigate} role={role} />
@@ -36,7 +36,7 @@ export class UserRolesEdit extends React.Component<null, UsersViewState> {
                                         <Edit
                                             editRole={editRole}
                                             role={role}
-                                            fetchOne={fetchOne}
+                                            fetchOne={() => fetchOne(role['id'])}
                                             isLoading={isLoading}
                                         />
                                     </Col>
@@ -54,10 +54,10 @@ export class UserRolesEdit extends React.Component<null, UsersViewState> {
                                         <Permissions
                                             role={role}
                                             setIsLoading={setIsLoading}
-                                            fetchOne={fetchOne}
+                                            fetch={() => fetchOne(role['id'])}
                                             isLoading={isLoading}
                                             deletePermission={deletePermission}
-                                            deleteUserPermission={deleteUserPermission}
+                                            deleteRolePermission={deleteRolePermission}
                                         />
                                     </Col>
                                 </Row>
