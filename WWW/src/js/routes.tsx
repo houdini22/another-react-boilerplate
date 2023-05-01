@@ -16,6 +16,7 @@ import { UserRolesView } from './routes/UserRoles'
 import { UsersAccountActivated } from './routes/UsersAccountActivated'
 import { MediaView } from './routes/Media'
 import { UsersEditView } from './routes/UsersEdit'
+import UsersAddView from './routes/UsersAdd/components/Index'
 const App = () => (
     <Router>
         <Routes>
@@ -75,6 +76,16 @@ const App = () => (
                     <PageLayout>
                         <UserIsAuthenticatedRoute>
                             <UsersEditView />
+                        </UserIsAuthenticatedRoute>
+                    </PageLayout>
+                }
+            />
+            <Route
+                path="/users/add"
+                element={
+                    <PageLayout>
+                        <UserIsAuthenticatedRoute>
+                            <UsersAddView />
                         </UserIsAuthenticatedRoute>
                     </PageLayout>
                 }

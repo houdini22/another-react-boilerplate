@@ -10,8 +10,19 @@ interface AddPermissionFormProps {
 }
 
 class AddRoleForm extends React.Component<AddPermissionFormProps> {
-    constructor(props) {
-        super(props)
+    isDisabled() {
+        const { roles, user } = this.props
+        return (
+            roles
+                ?.map(({ id, name, guard_name }) => {
+                    return {
+                        disabled: user?.roles?.find(({ id: _id }) => id === _id),
+                    }
+                })
+                .filter(({ disabled }) => {
+                    return !disabled
+                }).length === 0
+        )
     }
 
     render() {
@@ -38,7 +49,7 @@ class AddRoleForm extends React.Component<AddPermissionFormProps> {
                     ]}
                     component={FormField}
                 />
-                <Button color="success" type="submit" block>
+                <Button color="success" type="submit" block disabled={this.isDisabled()}>
                     Save
                 </Button>
             </form>

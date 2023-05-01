@@ -34,10 +34,22 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                     forceLogin,
                                     uploadProgress,
                                     setUploadProgress,
+                                    activateUser,
+                                    deactivateUser,
                                 }) => {
                                     return (
                                         <PageContent>
-                                            <Header user={user} navigate={navigate} />
+                                            <Header
+                                                forceLogin={forceLogin}
+                                                user={user}
+                                                navigate={navigate}
+                                                isLoading={isLoading}
+                                                setIsLoading={setIsLoading}
+                                                sendActivationEmail={sendActivationEmail}
+                                                fetchOne={fetchOne}
+                                                activateUser={activateUser}
+                                                deactivateUser={deactivateUser}
+                                            />
                                             <Row>
                                                 <Col xs={12} md={6}>
                                                     <Details

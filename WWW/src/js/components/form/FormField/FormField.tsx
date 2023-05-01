@@ -16,6 +16,7 @@ interface FormFieldProps {
     html?(): any
     inputOnly?: boolean
     withError?: boolean
+    inputContainerStyle?: Object
 }
 
 class FormField extends React.Component<FormFieldProps> {
@@ -31,6 +32,7 @@ class FormField extends React.Component<FormFieldProps> {
             inputOnly = false,
             withError = true,
             htmlAfter = '',
+            inputContainerStyle = {},
             ...custom
         } = this.props
 
@@ -79,6 +81,7 @@ class FormField extends React.Component<FormFieldProps> {
                         [`component-form-field--state-${validationState}`]: true,
                         [`component-form-field--type-${type}`]: type,
                     })}
+                    style={inputContainerStyle}
                 >
                     <div className={cx('component-form-field__input-container')}>
                         {inputComponent}

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Modal } from '../../../../components'
+import { Button, Modal } from '../../../../components'
 import { UploadAvatarFormContainer } from './UploadAvatarFormContainer'
 
 interface UploadAvatarModalProps {
@@ -21,7 +21,9 @@ export class UploadAvatarModal extends React.Component<UploadAvatarModalProps, U
             this.props
         return (
             <Modal.Container visible={visible} color={'primary'}>
-                <Modal.Header>Upload Avatar</Modal.Header>
+                <Modal.Header close={close} closeIcon>
+                    Upload Avatar
+                </Modal.Header>
                 <Modal.Body>
                     <UploadAvatarFormContainer
                         uploadProgress={uploadProgress}
@@ -38,6 +40,9 @@ export class UploadAvatarModal extends React.Component<UploadAvatarModalProps, U
                             }
                         }}
                     />
+                    <Button color={'secondary'} block onClick={() => close()}>
+                        Cancel
+                    </Button>
                 </Modal.Body>
             </Modal.Container>
         )

@@ -9,14 +9,72 @@ interface HeaderProps {
 
 export class Header extends React.Component<HeaderProps, null> {
     render() {
-        const { navigate, user } = this.props
+        const {
+            user,
+            isLoading,
+            setIsLoading,
+            sendActivationEmail,
+            fetchOne,
+            forceLogin,
+            activateUser,
+            deactivateUser,
+        } = this.props
         return (
             <PageHeader.Container>
                 <PageHeader.Title>Users - edit user</PageHeader.Title>
                 <PageHeader.Actions>
-                    <Button color={'success'} onClick={() => navigate('/users')}>
-                        Go Back
+                    <Button
+                        isLoading={isLoading}
+                        size={'xs'}
+                        color={'warning'}
+                        onClick={() => {
+                            setIsLoading(true)
+
+                            sendActivationEmail(user).then(() => {
+                                Promise.all([fetchOne(user['id'])]).then(() => {
+                                    setIsLoading(false)
+                                })
+                            })
+                        }}
+                    >
+                        Force Activation
                     </Button>
+                    <Button
+                        isLoading={isLoading}
+                        size={'xs'}
+                        disabled={!user.last_active && !user.token}
+                        onClick={() => {
+                            forceLogin(user).then(() => {
+                                Promise.all([fetchOne(user['id'])]).then(() => {})
+                            })
+                        }}
+                    >
+                        Force Login
+                    </Button>
+                    {user.status === 0 && (
+                        <Button
+                            color={'success'}
+                            onClick={() => {
+                                activateUser(user).then(() => {
+                                    fetchOne(user['id'])
+                                })
+                            }}
+                        >
+                            Activate
+                        </Button>
+                    )}
+                    {user.status !== 0 && (
+                        <Button
+                            color={'danger'}
+                            onClick={() => {
+                                deactivateUser(user).then(() => {
+                                    fetchOne(user['id'])
+                                })
+                            }}
+                        >
+                            Deactivate
+                        </Button>
+                    )}
                 </PageHeader.Actions>
                 <PageHeader.Breadcrumbs>
                     <PageHeader.BreadcrumbsItem href="/">

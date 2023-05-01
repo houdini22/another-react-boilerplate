@@ -21,6 +21,8 @@ interface UsersManagerProps {
     setUploadProgress: Function
     activateUser: Function
     deactivateUser: Function
+    addRoleToNewUser: Function
+    removeRoleFromNewUser: Function
 }
 
 class UsersManagerBase extends React.Component<UsersManagerProps, null> {
@@ -49,6 +51,8 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             setUploadProgress,
             activateUser,
             deactivateUser,
+            addRoleToNewUser,
+            removeRoleFromNewUser,
         } = this.props
         const renderProps = {
             setIsLoading,
@@ -66,6 +70,8 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             setUploadProgress,
             activateUser,
             deactivateUser,
+            addRoleToNewUser,
+            removeRoleFromNewUser,
         }
 
         return (
@@ -98,6 +104,8 @@ const UsersManager = connect(mapStateToProps, (dispatch) => {
             setUploadProgress: commonActions.setUploadProgress,
             activateUser: commonActions.activateUser,
             deactivateUser: commonActions.deactivateUser,
+            addRoleToNewUser: commonActions.addRoleToNewUser,
+            removeRoleFromNewUser: commonActions.removeRoleFromNewUser,
         },
         dispatch,
     )

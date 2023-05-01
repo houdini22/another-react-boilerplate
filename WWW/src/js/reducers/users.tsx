@@ -6,6 +6,9 @@ const SET_FETCH_ERROR = 'users::set-fetch-error'
 const SET_USERS = 'users::set-users'
 const SET_USER = 'users::set-user'
 const SET_UPLOAD_PROGRESS = 'users::set-upload-progress'
+const ADD_ROLE_TO_NEW_USER = 'users::add-role-to-new-user'
+const REMOVE_ROLE_FROM_NEW_USER = 'users::remove-role-from-new-user'
+const CLEAR_NEW_USER_ROLES = 'users::clear-new-user-roles'
 
 const setIsLoading = (data) => (dispatch) => {
     dispatch({ type: SET_IS_LOADING, payload: data })
@@ -74,7 +77,7 @@ const editUser = (params) => (dispatch) => {
     })
 }
 
-const addUser = (params) => (dispatch) => {
+const addUser = (params) => (dispatch, state) => {
     return new Promise<void>((resolve, reject) => {
         dispatch(setIsLoading(true))
         dispatch(setIsLoaded(false))
@@ -82,10 +85,23 @@ const addUser = (params) => (dispatch) => {
 
         return http
             .post('/users/add', params)
-            .then(({ data }) => {
-                dispatch(setIsLoading(false))
-                dispatch(setIsLoaded(true))
-                resolve()
+            .then(({ data: { user } }) => {
+                const {
+                    users: { newUserRoles },
+                } = state()
+                const promises = []
+
+                newUserRoles.forEach((id) => {
+                    promises.push(dispatch(addUserRole({ id: user.id }, { id })))
+                })
+
+                Promise.all(promises).then(() => {
+                    dispatch(setIsLoading(false))
+                    dispatch(setIsLoaded(true))
+                    dispatch(clearNewUserRoles())
+
+                    resolve(user)
+                })
             })
             .catch((e) => {
                 dispatch(setIsLoading(false))
@@ -270,6 +286,15 @@ const deactivateUser = (user) => (dispatch) => {
             })
     })
 }
+const addRoleToNewUser = (role) => (dispatch) => {
+    dispatch({ type: ADD_ROLE_TO_NEW_USER, payload: role })
+}
+const removeRoleFromNewUser = (role) => (dispatch) => {
+    dispatch({ type: REMOVE_ROLE_FROM_NEW_USER, payload: role })
+}
+const clearNewUserRoles = () => (dispatch) => {
+    dispatch({ type: CLEAR_NEW_USER_ROLES })
+}
 export const actions = {
     fetch,
     fetchOne,
@@ -288,6 +313,8 @@ export const actions = {
     setUploadProgress,
     activateUser,
     deactivateUser,
+    addRoleToNewUser,
+    removeRoleFromNewUser,
 }
 
 // ------------------------------------
@@ -330,6 +357,26 @@ const ACTION_HANDLERS = {
             uploadProgress: payload,
         }
     },
+    [ADD_ROLE_TO_NEW_USER]: (state, { payload }) => {
+        return {
+            ...state,
+            newUserRoles: [...state.newUserRoles, payload],
+        }
+    },
+    [REMOVE_ROLE_FROM_NEW_USER]: (state, { payload }) => {
+        return {
+            ...state,
+            newUserRoles: state.newUserRoles.filter((role) => {
+                return role !== payload
+            }),
+        }
+    },
+    [CLEAR_NEW_USER_ROLES]: (state) => {
+        return {
+            ...state,
+            newUserRoles: [],
+        }
+    },
 }
 
 // ------------------------------------
@@ -343,6 +390,7 @@ const getInitialState = () => ({
     isLoaded: false,
     fetchError: null,
     uploadProgress: -1,
+    newUserRoles: [],
 })
 
 export default function cmsPagesReducer(state = getInitialState(), action) {

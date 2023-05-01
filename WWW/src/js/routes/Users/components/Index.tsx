@@ -100,7 +100,7 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                         <PageHeader.Actions>
                                                             <Button
                                                                 color={'success'}
-                                                                onClick={() => this.setUserAdd(true)}
+                                                                onClick={() => navigate('/users/add')}
                                                             >
                                                                 Add
                                                             </Button>

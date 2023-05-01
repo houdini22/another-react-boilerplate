@@ -117,8 +117,8 @@ class UsersController extends Controller
         $request->validate([
             'email' => 'required|email|unique:users,email',
             'name' => 'required|unique:users,name|alpha_dash',
-            'password' => 'required|min:3|max:50|same:confirm_password',
-            'confirm_password' => 'required|min:3|max:50',
+            'password' => 'required|min:3|max:50|confirmed',
+            'password_confirmation' => 'required|min:3|max:50',
         ]);
 
         $user = new User();
