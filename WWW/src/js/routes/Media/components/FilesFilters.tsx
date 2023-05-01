@@ -29,6 +29,14 @@ export class FilesFiles extends React.Component<null, null> {
                     <Filter filters={filters} type={'search'} setFilter={setFilter} fetch={fetch} label={'Search'} />
                     <Filter
                         filters={filters}
+                        type={'text'}
+                        setFilter={setFilter}
+                        fetch={fetch}
+                        label={'Username'}
+                        name={'user'}
+                    />
+                    <Filter
+                        filters={filters}
                         options={[
                             {
                                 label: 'ID',
@@ -43,8 +51,12 @@ export class FilesFiles extends React.Component<null, null> {
                                 value: 'height',
                             },
                             {
-                                label: 'Width',
-                                value: 'width',
+                                label: 'Previews',
+                                value: 'preview_count',
+                            },
+                            {
+                                label: 'Downloads',
+                                value: 'download_count',
                             },
                         ]}
                         type={'order'}

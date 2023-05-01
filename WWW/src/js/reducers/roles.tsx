@@ -39,12 +39,18 @@ const fetch = () => (dispatch) => {
         dispatch(setRoles([]))
 
         http.get('/roles/list')
-            .then(({ data: { roles } }) => {
-                dispatch(setRoles(roles))
-                dispatch(setIsLoading(false))
-                dispatch(setIsLoaded(true))
-                resolve()
-            })
+            .then(
+                ({
+                    data: {
+                        data: { data },
+                    },
+                }) => {
+                    dispatch(setRoles(data))
+                    dispatch(setIsLoading(false))
+                    dispatch(setIsLoaded(true))
+                    resolve()
+                },
+            )
             .catch((e) => {
                 dispatch(setIsLoading(false))
                 dispatch(setIsLoaded(false))

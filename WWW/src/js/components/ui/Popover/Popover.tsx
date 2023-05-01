@@ -188,17 +188,15 @@ class Trigger extends React.Component<TriggerProps> {
     }
 
     handleOutsideHover(e) {
-        if (this.__reactstandin__isMounted) {
-            if (this.trigger === 'hover') {
-                if (e.target) {
-                    if (!this.contentElement.contains(e.target) && !this.triggerElement.contains(e.target)) {
-                        if (this.isOpen) {
-                            this.close()
-                        }
-                    } else {
-                        if (!this.isOpen) {
-                            this.open()
-                        }
+        if (this.trigger === 'hover') {
+            if (e.target) {
+                if (!this.contentElement.contains(e.target) && !this.triggerElement.contains(e.target)) {
+                    if (this.isOpen) {
+                        this.close()
+                    }
+                } else {
+                    if (!this.isOpen) {
+                        this.open()
                     }
                 }
             }
@@ -221,17 +219,28 @@ class Trigger extends React.Component<TriggerProps> {
                         <div
                             className={cx('component-popover__trigger')}
                             onClick={() => {
-                                if (!_.isFunction(children)) {
-                                    if (isOpen) {
-                                        close()
-                                    } else {
-                                        open()
+                                if (trigger === 'click') {
+                                    if (!_.isFunction(children)) {
+                                        if (isOpen) {
+                                            close()
+                                        } else {
+                                            open()
+                                        }
                                     }
                                 }
                             }}
                             ref={(e) => {
                                 this.triggerElement = e
                                 registerTriggerElement(e)
+                            }}
+                            onMouseOver={() => {
+                                if (trigger === 'hover') {
+                                    if (!_.isFunction(children)) {
+                                        if (!isOpen) {
+                                            open()
+                                        }
+                                    }
+                                }
                             }}
                         >
                             {_.isFunction(children) && children({ open, close, isOpen })}

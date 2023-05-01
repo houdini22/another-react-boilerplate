@@ -76,6 +76,7 @@ class Label extends React.Component<LabelProps> {
                         outline,
                         size = 'md',
                         arrow,
+                        style = {},
                         ...props
                     } = this.props
 
@@ -104,6 +105,7 @@ class Label extends React.Component<LabelProps> {
                             className={this.renderClassName(
                                 disableContext ? {} : { cardSize, dropdownSize, accordionSize },
                             )}
+                            style={style}
                             {...props}
                         >
                             {children}

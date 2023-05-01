@@ -10,32 +10,19 @@ interface FiltersProps {
 
 export class Filters extends React.Component<FiltersProps, null> {
     render() {
-        const { filters, setFilter, fetch, roles, permissions } = this.props
+        const { filters, setFilter, fetch, permissions } = this.props
 
         return (
             <FiltersContainer>
                 <Filter filters={filters} type={'search'} setFilter={setFilter} fetch={fetch} label={'Search'} />
                 <Filter
                     filters={filters}
-                    options={[
-                        {
-                            label: 'yes or no',
-                            value: 'has_or_has_not',
-                        },
-                        {
-                            label: 'yes',
-                            value: 'has',
-                        },
-                        {
-                            label: 'no',
-                            value: 'has_not',
-                        },
-                    ]}
-                    type={'radio'}
-                    name={'avatar'}
+                    type={'text'}
                     setFilter={setFilter}
                     fetch={fetch}
-                    label={'Has Avatar'}
+                    label={'User'}
+                    name={'user'}
+                    placeholder={'Username'}
                 />
                 <Filter
                     filters={filters}
@@ -54,46 +41,32 @@ export class Filters extends React.Component<FiltersProps, null> {
                         },
                     ]}
                     type={'radio'}
-                    name={'files'}
+                    name={'has_permissions'}
                     setFilter={setFilter}
                     fetch={fetch}
-                    label={'Has Files'}
+                    label={'Has Permissions'}
                 />
                 <Filter
                     filters={filters}
                     options={[
                         {
-                            label: 'both',
-                            value: 'active_or_not_active',
+                            label: 'yes or no',
+                            value: 'yes_or_no',
                         },
                         {
-                            label: 'active',
-                            value: 'active',
+                            label: 'yes',
+                            value: 'yes',
                         },
                         {
-                            label: 'not active',
-                            value: 'not_active',
+                            label: 'no',
+                            value: 'no',
                         },
                     ]}
                     type={'radio'}
-                    name={'status'}
+                    name={'users'}
                     setFilter={setFilter}
                     fetch={fetch}
-                    label={'Active'}
-                />
-                <Filter
-                    filters={filters}
-                    type={'multiple'}
-                    name={'roles'}
-                    setFilter={setFilter}
-                    fetch={fetch}
-                    label={'Roles'}
-                    options={roles.map(({ id, name }) => {
-                        return {
-                            label: name,
-                            value: id,
-                        }
-                    })}
+                    label={'Has Users'}
                 />
                 <Filter
                     filters={filters}
@@ -121,12 +94,12 @@ export class Filters extends React.Component<FiltersProps, null> {
                             value: 'name',
                         },
                         {
-                            label: 'Email',
-                            value: 'email',
+                            label: 'Users',
+                            value: 'users_count',
                         },
                         {
-                            label: 'Files Count',
-                            value: 'files_count',
+                            label: 'Permissions',
+                            value: 'permissions_count',
                         },
                     ]}
                     type={'order'}

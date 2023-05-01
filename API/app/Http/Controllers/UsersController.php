@@ -44,7 +44,7 @@ class UsersController extends Controller
                     }
                 }
             })
-            ->withCount(['files']);
+            ->withCount(['files', 'permissions', 'roles']);
 
         if (!empty($filters['roles'])) {
             $query = $query->whereHas('roles', function ($query) use ($filters) {

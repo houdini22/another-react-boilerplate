@@ -5,6 +5,8 @@ import { DeleteIcon } from '../../../components/icons'
 import { formatDateTime } from '../../../helpers/date-time'
 import { apiURL } from '../../../helpers/api'
 import { RouteManager } from '../../../containers/RouteManager'
+import { DetailsIcon, ShowIcon } from '../../../components/icons'
+import { Link } from 'react-router-dom'
 
 interface UsersTableProps {
     users: Array<any>
@@ -57,10 +59,10 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                 <Table.Th xs={12} md={3}>
                                     Roles
                                 </Table.Th>
-                                <Table.Th xs={6} md={2}>
+                                <Table.Th xs={6} md={1}>
                                     Status
                                 </Table.Th>
-                                <Table.Th xs={6} md={2}>
+                                <Table.Th xs={6} md={3}>
                                     Actions
                                 </Table.Th>
                             </Table.Tr>
@@ -76,15 +78,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                             {user?.avatar?.id != null && (
                                                 <Popover.Container trigger={'hover'} placement={'right-center'}>
                                                     <Popover.Trigger>
-                                                        <a
-                                                            href={'#'}
-                                                            onClick={(e) => {
-                                                                e.preventDefault()
-                                                                return false
-                                                            }}
-                                                        >
-                                                            Show
-                                                        </a>
+                                                        <Button color={'info'} iconOnly icon={<ShowIcon />} />
                                                     </Popover.Trigger>
                                                     <Popover.Content>
                                                         <img
@@ -158,54 +152,37 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                 )}
                                             </div>
                                         </Table.Td>
-                                        <Table.Td xs={6} md={2}>
-                                            <Tooltip
-                                                tooltip={
-                                                    <div>
-                                                        <Row>
-                                                            {user.status === 1 && (
-                                                                <>
-                                                                    <Col xs={6}>
-                                                                        <strong>Email verified at:</strong>
-                                                                    </Col>
-                                                                    <Col xs={6}>
-                                                                        {user.email_verified_at != null
-                                                                            ? formatDateTime(user.email_verified_at)
-                                                                            : 'never'}
-                                                                    </Col>
-                                                                </>
-                                                            )}
-                                                        </Row>
-                                                    </div>
-                                                }
-                                            >
-                                                {user.status === 0 && (
-                                                    <Label
-                                                        color={'danger'}
-                                                        onClick={() => {
-                                                            activateUser(user).then(() => {
-                                                                fetch()
-                                                            })
-                                                        }}
-                                                    >
-                                                        Not active
-                                                    </Label>
-                                                )}
-                                                {user.status === 1 && (
-                                                    <Label
-                                                        color={'success'}
-                                                        onClick={() => {
-                                                            deactivateUser(user).then(() => {
-                                                                fetch()
-                                                            })
-                                                        }}
-                                                    >
-                                                        Active
-                                                    </Label>
-                                                )}
-                                            </Tooltip>
+                                        <Table.Td xs={6} md={1}>
+                                            {user.status === 0 && (
+                                                <Label
+                                                    color={'danger'}
+                                                    onClick={() => {
+                                                        activateUser(user).then(() => {
+                                                            fetch()
+                                                        })
+                                                    }}
+                                                    style={{ cursor: 'pointer' }}
+                                                    block
+                                                >
+                                                    N/A
+                                                </Label>
+                                            )}
+                                            {user.status === 1 && (
+                                                <Label
+                                                    color={'success'}
+                                                    onClick={() => {
+                                                        deactivateUser(user).then(() => {
+                                                            fetch()
+                                                        })
+                                                    }}
+                                                    block
+                                                    style={{ cursor: 'pointer' }}
+                                                >
+                                                    A
+                                                </Label>
+                                            )}
                                         </Table.Td>
-                                        <Table.Td xs={6} md={2}>
+                                        <Table.Td xs={6} md={3}>
                                             <div>
                                                 <Button
                                                     icon={<EditIcon />}
@@ -225,6 +202,46 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                         }}
                                                     />
                                                 )}
+                                                <Popover.Container
+                                                    placement={'left-center'}
+                                                    pixelsWidth={300}
+                                                    trigger={'hover'}
+                                                >
+                                                    <Popover.Trigger>
+                                                        <Button icon={<DetailsIcon />} iconOnly color={'info'} />
+                                                    </Popover.Trigger>
+                                                    <Popover.Content>
+                                                        <Row>
+                                                            <Col xs={6}>Files:</Col>
+                                                            <Col xs={6}>
+                                                                {user.files_count}{' '}
+                                                                <Link to={`/media?user=${user.name}`}>Show</Link>
+                                                            </Col>
+                                                        </Row>
+                                                        <Row>
+                                                            <Col xs={6}>Roles:</Col>
+                                                            <Col xs={6}>
+                                                                {user.roles_count}{' '}
+                                                                <Link to={`/roles?user=${user.name}`}>Show</Link>
+                                                            </Col>
+                                                        </Row>
+                                                        <Row>
+                                                            <Col xs={6}>Permissions:</Col>
+                                                            <Col xs={6}>
+                                                                {user.permissions_count}{' '}
+                                                                <Link to={`/roles?user=${user.name}`}>Show</Link>
+                                                            </Col>
+                                                        </Row>
+                                                        <Row>
+                                                            <Col xs={6}>Email verified at:</Col>
+                                                            <Col xs={6}>
+                                                                {user.email_verified_at != null
+                                                                    ? formatDateTime(user.email_verified_at)
+                                                                    : 'never'}
+                                                            </Col>
+                                                        </Row>
+                                                    </Popover.Content>
+                                                </Popover.Container>
                                             </div>
                                         </Table.Td>
                                     </Table.Tr>

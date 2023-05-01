@@ -17,10 +17,54 @@ class RolesController extends Controller
             return $this->response401();
         }
 
-        $roles = Role::with('permissions')->orderBy('id', 'ASC')->get();
+        $filters = $request->get('filters');
+
+        $query = Role::with('permissions')
+            ->where(function ($query) use ($filters) {
+                if (!empty($filters['search'])) {
+                    $query->where('name', 'like', "%{$filters['search']}%")
+                        ->orWhere('guard_name', 'like', "%{$filters['search']}%");
+                }
+            })
+            ->orderBy(empty($filters['order_by']) ? 'id' : $filters['order_by'], empty($filters['order_direction']) ? 'asc' : $filters['order_direction'])
+        ->withCount(['users', 'permissions']);
+
+        if (!empty($filters['permissions'])) {
+            $query = $query->whereHas('permissions', function ($query) use ($filters) {
+                if (!empty($filters['permissions'])) {
+                    $query->whereIn('id', $filters['permissions']);
+                }
+            });
+        }
+
+        if (!empty($filters['users'])) {
+            if ($filters['users'] === 'yes') {
+                $query = $query->whereHas('users');
+            } else if ($filters['users'] === 'no') {
+                $query = $query->whereDoesntHave('users');
+            }
+        }
+
+        if (!empty($filters['has_permissions'])) {
+            if ($filters['has_permissions'] === 'yes') {
+                $query = $query->whereHas('permissions');
+            } else if ($filters['has_permissions'] === 'no') {
+                $query = $query->whereDoesntHave('permissions');
+            }
+        }
+
+        if (!empty($filters['user'])) {
+            $query = $query->whereHas('users', function ($query) use ($filters) {
+                if (!empty($filters['user'])) {
+                    $query->where('name', '=', $filters['user']);
+                }
+            });
+        }
+
+        $roles = $query->paginate(empty($filters['items_per_page']) ? 10000 : $filters['items_per_page']);
 
         return response()->json([
-            'roles' => $roles->toArray(),
+            'data' => $roles->toArray(),
         ]);
     }
 

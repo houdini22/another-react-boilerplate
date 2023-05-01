@@ -8,6 +8,8 @@ import {
     AiOutlineEyeInvisible as NotPublishedIcon,
     AiOutlineEye as PublishedIcon,
 } from 'react-icons/ai'
+import { CgDetailsMore as DetailsIcon } from 'react-icons/cg'
+import { AiFillEye as ShowIcon } from 'react-icons/ai'
 
 export {
     OrderingIcon,
@@ -19,4 +21,6 @@ export {
     LinkIcon,
     NotPublishedIcon,
     PublishedIcon,
+    DetailsIcon,
+    ShowIcon,
 }

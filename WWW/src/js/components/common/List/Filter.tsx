@@ -90,15 +90,20 @@ class Filter extends React.Component<FilterProps, null> {
         return label
     }
     renderSearch() {
+        return this.renderText({ name: 'search', placeholder: 'Search phrase' })
+    }
+    renderText({ name, placeholder }) {
+        const { filters } = this.props
         return (
             <FormField
                 type={'text'}
-                placeholder={'Search phrase'}
-                name={'search'}
+                placeholder={placeholder}
+                name={name}
                 inputOnly
+                defaultValue={filters[name]}
                 onBlur={({ target: { value } }) => {
                     const { setFilter, fetch } = this.props
-                    setFilter('search', value).then(() => fetch())
+                    setFilter(name, value).then(() => fetch())
                 }}
             />
         )
@@ -133,13 +138,14 @@ class Filter extends React.Component<FilterProps, null> {
         )
     }
     render() {
-        const { type } = this.props
+        const { type, name, placeholder } = this.props
         return (
             <div className={cx('filter')}>
                 <span>{this.renderFilterLabel()}:</span>
                 {type === 'search' && this.renderSearch()}
                 {type === 'radio' && this.renderRadio()}
                 {type === 'multiple' && this.renderMultiple()}
+                {type === 'text' && this.renderText({ name, placeholder })}
                 {type === 'order' && (
                     <div>
                         {this.renderOrderByColumn()}
