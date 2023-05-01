@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Card, LoadingOverlay } from '../../../../components'
 import { AddFormContainer } from './AddFormContainer'
+import Roles from '../Roles/Roles'
 interface EditProps {
     addUser: Function
     user: Object
@@ -12,18 +13,19 @@ interface EditState {}
 
 export class Add extends React.Component<EditProps, EditState> {
     render() {
-        const { addUser, user, fetchOne, isLoading, navigate } = this.props
+        const { addUser, fetchOne, isLoading, navigate, roles, addRoleToNewUser, removeRoleFromNewUser } = this.props
         return (
-            <Card header={<h1>Add User</h1>}>
+            <div>
                 <AddFormContainer
                     navigate={navigate}
-                    initialValues={user}
                     addUser={addUser}
-                    user={user}
                     fetchOne={fetchOne}
+                    roles={roles}
+                    addRoleToNewUser={addRoleToNewUser}
+                    removeRoleFromNewUser={removeRoleFromNewUser}
                 />
                 {isLoading && <LoadingOverlay />}
-            </Card>
+            </div>
         )
     }
 }

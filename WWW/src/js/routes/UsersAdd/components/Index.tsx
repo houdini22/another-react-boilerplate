@@ -32,7 +32,7 @@ export class UsersAddView extends React.Component<null, UsersViewState> {
                                         <PageContent>
                                             <Header />
                                             <Row>
-                                                <Col xs={6}>
+                                                <Col xs={12}>
                                                     <Add
                                                         addUser={addUser}
                                                         user={user}
@@ -41,13 +41,9 @@ export class UsersAddView extends React.Component<null, UsersViewState> {
                                                         setIsLoading={setIsLoading}
                                                         navigate={navigate}
                                                         addUserRole={addUserRole}
-                                                    />
-                                                </Col>
-                                                <Col xs={6}>
-                                                    <Roles
-                                                        roles={roles}
                                                         addRoleToNewUser={addRoleToNewUser}
                                                         removeRoleFromNewUser={removeRoleFromNewUser}
+                                                        roles={roles}
                                                     />
                                                 </Col>
                                             </Row>

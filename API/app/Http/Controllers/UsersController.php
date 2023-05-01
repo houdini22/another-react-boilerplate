@@ -62,6 +62,12 @@ class UsersController extends Controller
             });
         }
 
+        if ($filters['files'] === 'yes') {
+            $query = $query->whereHas('files');
+        } else if ($filters['files'] === 'no') {
+            $query = $query->whereDoesntHave('files');
+        }
+
         $users = $query->paginate($filters['items_per_page']);
 
         return response()->json([

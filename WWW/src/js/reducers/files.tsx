@@ -3,7 +3,6 @@ import { http } from '../modules/http'
 const SET_IS_LOADING = 'files::set-is-loading'
 const SET_IS_LOADED = 'files::set-is-loaded'
 const SET_FETCH_ERROR = 'files::set-fetch-error'
-const SET_FILES = 'files::set-files'
 const SET_UPLOAD_PROGRESS = 'files::set-upload-progress'
 
 const setIsLoading = (data) => (dispatch) => {
@@ -17,40 +16,9 @@ const setIsLoaded = (data) => (dispatch) => {
 const setFetchError = (data) => (dispatch) => {
     dispatch({ type: SET_FETCH_ERROR, payload: data })
 }
-
-const setFiles = (data) => (dispatch) => {
-    dispatch({ type: SET_FILES, payload: data })
-}
-
 const setUploadProgress = (data) => (dispatch) => {
     dispatch({ type: SET_UPLOAD_PROGRESS, payload: data })
 }
-
-const fetch =
-    (params = {}) =>
-    (dispatch) => {
-        return new Promise<void>((resolve) => {
-            dispatch(setIsLoading(true))
-            dispatch(setIsLoaded(false))
-            dispatch(setFetchError(null))
-            dispatch(setFiles([]))
-
-            http.get('/files/list', {
-                params,
-            })
-                .then(({ data: { files } }) => {
-                    dispatch(setFiles(files))
-                    dispatch(setIsLoading(false))
-                    dispatch(setIsLoaded(true))
-                    resolve()
-                })
-                .catch((e) => {
-                    dispatch(setIsLoading(false))
-                    dispatch(setIsLoaded(false))
-                    dispatch(setFetchError(e))
-                })
-        })
-    }
 
 const deleteFile =
     ({ id }) =>
@@ -131,7 +99,6 @@ const uploadFiles = (e) => (dispatch) => {
     })
 }
 export const actions = {
-    fetch,
     setIsLoaded,
     setIsLoading,
     setFetchError,
@@ -162,12 +129,6 @@ const ACTION_HANDLERS = {
             fetchError: payload,
         }
     },
-    [SET_FILES]: (state, { payload }) => {
-        return {
-            ...state,
-            files: payload,
-        }
-    },
     [SET_UPLOAD_PROGRESS]: (state, { payload }) => {
         return {
             ...state,
@@ -181,7 +142,6 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 
 const getInitialState = () => ({
-    files: [],
     isLoading: false,
     isLoaded: false,
     fetchError: null,
@@ -196,7 +156,6 @@ export default function filesReducer(state = getInitialState(), action) {
 // selectors
 
 const getState = (state) => state['files']
-const getFiles = (state) => getState(state)['files']
 const getIsLoading = (state) => getState(state)['isLoading']
 const getIsLoaded = (state) => getState(state)['isLoaded']
 const getFetchError = (state) => getState(state)['fetchError']
@@ -206,6 +165,5 @@ export const selectors = {
     getIsLoading,
     getIsLoaded,
     getFetchError,
-    getFiles,
     getUploadProgress,
 }

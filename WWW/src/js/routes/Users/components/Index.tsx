@@ -3,8 +3,6 @@ import { PageContent } from '../../../layouts/PageLayout/components'
 import { RouteManager } from '../../../containers/RouteManager'
 import { Button, Card, LoadingOverlay, PageHeader } from '../../../components'
 import { UsersManager } from '../../../containers/UsersManager'
-import EditModal from './EditModal'
-import AddModal from './AddModal'
 import { UserRolesManager } from '../../UserRoles/containers/UserRolesManager'
 import { ListManager } from '../../../components/common/List/ListManager'
 import ConfirmDeleteModal from './ConfirmDeleteModal'
@@ -56,6 +54,7 @@ export class UsersView extends React.Component<null, UsersViewState> {
             avatar: 'has_or_has_not',
             roles: [],
             permissions: [],
+            files: 'yes_or_no',
         }
         return (
             <RouteManager>
@@ -84,12 +83,6 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                         {({ deleteUser, deleteUserRole, activateUser, deactivateUser }) => {
                                             return (
                                                 <PageContent>
-                                                    <AddModal visible={addUser} close={() => this.setUserAdd(false)} />
-                                                    <EditModal
-                                                        visible={typeof editUserId !== 'boolean'}
-                                                        id={Number(editUserId)}
-                                                        close={() => this.setUserToEdit(false)}
-                                                    />
                                                     <ConfirmDeleteModal
                                                         visible={typeof deleteUserId !== 'boolean'}
                                                         deleteUser={deleteUser}

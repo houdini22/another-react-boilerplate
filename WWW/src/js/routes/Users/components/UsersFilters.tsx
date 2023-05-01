@@ -19,15 +19,15 @@ export class Filters extends React.Component<FiltersProps, null> {
                     filters={filters}
                     options={[
                         {
-                            label: 'Has or has not avatar',
+                            label: 'yes or no',
                             value: 'has_or_has_not',
                         },
                         {
-                            label: 'Has avatar',
+                            label: 'yes',
                             value: 'has',
                         },
                         {
-                            label: 'Has not avatar',
+                            label: 'no',
                             value: 'has_not',
                         },
                     ]}
@@ -35,21 +35,43 @@ export class Filters extends React.Component<FiltersProps, null> {
                     name={'avatar'}
                     setFilter={setFilter}
                     fetch={fetch}
-                    label={'Avatar'}
+                    label={'Has Avatar'}
                 />
                 <Filter
                     filters={filters}
                     options={[
                         {
-                            label: 'Active or Not Active',
+                            label: 'yes or no',
+                            value: 'yes_or_no',
+                        },
+                        {
+                            label: 'yes',
+                            value: 'yes',
+                        },
+                        {
+                            label: 'no',
+                            value: 'no',
+                        },
+                    ]}
+                    type={'radio'}
+                    name={'files'}
+                    setFilter={setFilter}
+                    fetch={fetch}
+                    label={'Has Files'}
+                />
+                <Filter
+                    filters={filters}
+                    options={[
+                        {
+                            label: 'both',
                             value: 'active_or_not_active',
                         },
                         {
-                            label: 'Active',
+                            label: 'active',
                             value: 'active',
                         },
                         {
-                            label: 'Not Active',
+                            label: 'not active',
                             value: 'not_active',
                         },
                     ]}
