@@ -41,7 +41,7 @@ class UsersController extends Controller
             })
             ->where(function ($query) use ($filters) {
                 if ($filters['avatar'] !== 'yes_or_no') {
-                    if ($filters['avatar'] === 'has') {
+                    if ($filters['avatar'] === 'yes') {
                         $query->whereNotNull('avatar_id');
                     } else {
                         $query->whereNull('avatar_id');

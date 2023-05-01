@@ -130,7 +130,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                                                 setIsLoading(false)
                                                                                                 addToastNotification({
                                                                                                     title: 'Delete success.',
-                                                                                                    text: 'Role has been deleted from User.',
+                                                                                                    text: 'Permission has been removed from User.',
                                                                                                     type: 'success',
                                                                                                 })
                                                                                             })
@@ -190,7 +190,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                                 <InfoIcon /> Role ID: {_id}
                                                                             </Dropdown.Item>
                                                                             <Dropdown.Item
-                                                                                color={'warning'}
+                                                                                color={'info'}
                                                                                 onClick={() => {
                                                                                     navigate(`/users?roles=${_id}`)
                                                                                 }}
@@ -198,7 +198,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                                 <DetailsIcon /> Show Users
                                                                             </Dropdown.Item>
                                                                             <Dropdown.Item
-                                                                                color={'warning'}
+                                                                                color={'info'}
                                                                                 onClick={() => {
                                                                                     navigate(
                                                                                         `/permissions?roles=${_id}`,
@@ -230,7 +230,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                                             setIsLoading(false)
                                                                                             addToastNotification({
                                                                                                 title: 'Delete success.',
-                                                                                                text: 'Permission has been deleted.',
+                                                                                                text: 'Permission has been removed from user.',
                                                                                                 type: 'success',
                                                                                             })
                                                                                         })
@@ -252,7 +252,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                                                 setIsLoading(false)
                                                                                                 addToastNotification({
                                                                                                     title: 'Delete success.',
-                                                                                                    text: 'Permission has been deleted.',
+                                                                                                    text: 'Permission has been removed.',
                                                                                                     type: 'success',
                                                                                                 })
                                                                                             })

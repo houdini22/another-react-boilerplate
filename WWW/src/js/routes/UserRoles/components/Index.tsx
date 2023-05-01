@@ -1,14 +1,7 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { RouteManager } from '../../../containers/RouteManager'
-import {
-    Button,
-    Card,
-    Col,
-    LoadingOverlay,
-    Modal,
-    Row,
-} from '../../../components'
+import { Button, Card, Col, LoadingOverlay, Modal, Row } from '../../../components'
 import { UserRolesManager } from '../containers/UserRolesManager'
 import AddModal from './AddRole/AddModal'
 import { NotificationsManager } from '../../../containers/NotificationsManager'
@@ -105,7 +98,7 @@ export class UsersView extends React.Component {
                                         users: 'yes_or_no',
                                         user: '',
                                         roles: [],
-                                        search: ''
+                                        search: '',
                                     }
 
                                     return (
@@ -142,6 +135,7 @@ export class UsersView extends React.Component {
                                                         visible={addModalVisible}
                                                         close={() => this.closeAddModal()}
                                                         fetch={fetch}
+                                                        addToastNotification={addToastNotification}
                                                     />
                                                     <AddPermissionModal
                                                         visible={addPermissionModalVisible}

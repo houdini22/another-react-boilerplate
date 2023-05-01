@@ -13,7 +13,7 @@ interface EditModalViewProps {
 
 export class AddPermissionModal extends React.Component<EditModalViewProps> {
     render() {
-        const { visible, close, fetch } = this.props
+        const { visible, close, fetch, addToastNotification } = this.props
 
         return (
             <RouteManager>
@@ -36,6 +36,7 @@ export class AddPermissionModal extends React.Component<EditModalViewProps> {
                                                 addPermission={addPermission}
                                                 fetch={fetch}
                                                 close={close}
+                                                addToastNotification={addToastNotification}
                                             />
                                         </Modal.Body>
                                     </>

@@ -19,9 +19,10 @@ const onSubmit = (values, _, { editPermission, addToastNotification, fetch, clos
         },
         (response) => {
             addToastNotification({
+                title: 'Form Validation Error',
+                text: response.message,
                 type: 'danger',
-                title: 'Save failed.',
-                text: response.message.message,
+                href: '#',
             })
             throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
         },

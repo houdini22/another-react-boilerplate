@@ -12,7 +12,7 @@ interface EditModalViewProps {
 
 export class AddModalView extends React.Component<EditModalViewProps> {
     render() {
-        const { visible, close, fetch } = this.props
+        const { visible, close, fetch, addToastNotification } = this.props
 
         return (
             <RouteManager>
@@ -32,6 +32,7 @@ export class AddModalView extends React.Component<EditModalViewProps> {
                                                 save={addRole}
                                                 fetch={fetch}
                                                 close={close}
+                                                addToastNotification={addToastNotification}
                                             />
                                         </Modal.Body>
                                         {isLoading && <LoadingOverlay />}

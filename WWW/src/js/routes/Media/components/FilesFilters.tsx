@@ -47,7 +47,7 @@ export class FilesFiles extends React.Component<null, null> {
                         {
                             type: 'search',
                             label: 'Search',
-                            name: 'search'
+                            name: 'search',
                         },
                         {
                             type: 'text',

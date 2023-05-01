@@ -8,7 +8,16 @@ interface HeaderProps {
 
 export class Permissions extends React.Component<HeaderProps, null> {
     render() {
-        const { role, setIsLoading, fetch, isLoading, deletePermission, deleteRolePermission, navigate } = this.props
+        const {
+            role,
+            setIsLoading,
+            fetch,
+            isLoading,
+            deletePermission,
+            deleteRolePermission,
+            navigate,
+            addToastNotification,
+        } = this.props
         return (
             <Card header={<h1>Permissions</h1>}>
                 {role?.permissions?.map(({ id: _id, name, guard_name, is_deletable }) => {
@@ -42,13 +51,11 @@ export class Permissions extends React.Component<HeaderProps, null> {
                                         return deleteRolePermission(role, {
                                             id: _id,
                                         }).then(() => {
-                                            /*addToastNotification(
-                                                    {
-                                                        type: 'success',
-                                                        title: 'Delete success.',
-                                                        text: 'Permission has been removed.',
-                                                    },
-                                                )*/
+                                            addToastNotification({
+                                                type: 'success',
+                                                title: 'Delete success.',
+                                                text: 'Permission has been removed from Role.',
+                                            })
                                             Promise.all([fetch()]).then(() => {
                                                 setIsLoading(false)
                                             })
@@ -64,13 +71,11 @@ export class Permissions extends React.Component<HeaderProps, null> {
                                             setIsLoading(true)
 
                                             return deletePermission(_id).then(() => {
-                                                /*addToastNotification(
-                                                        {
-                                                            type: 'success',
-                                                            title: 'Delete success.',
-                                                            text: 'Permission has been deleted.',
-                                                        },
-                                                    )*/
+                                                addToastNotification({
+                                                    type: 'success',
+                                                    title: 'Delete success.',
+                                                    text: 'Permission has been removed.',
+                                                })
                                                 Promise.all([fetch()]).then(() => {
                                                     setIsLoading(false)
                                                 })

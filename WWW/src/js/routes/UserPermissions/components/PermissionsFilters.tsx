@@ -3,7 +3,7 @@ import { Filters as FiltersContainer } from '../../../components/common/List/Fil
 import { Filter } from '../../../components/common/List/Filter'
 import { Button, LoadingOverlay, Card } from '../../../components'
 import { ifDeepDiff } from '../../../utils/javascript'
-import {FiltersFactory} from "../../../components/common/List/FiltersFactory";
+import { FiltersFactory } from '../../../components/common/List/FiltersFactory'
 
 interface FiltersProps {
     filters: Object
@@ -59,7 +59,7 @@ export class Filters extends React.Component<FiltersProps, null> {
                         {
                             type: 'search',
                             label: 'Search',
-                            name: 'search'
+                            name: 'search',
                         },
                         {
                             type: 'text',
@@ -84,7 +84,7 @@ export class Filters extends React.Component<FiltersProps, null> {
                             ],
                             type: 'radio',
                             name: 'has_roles',
-                            label: 'Has Roles'
+                            label: 'Has Roles',
                         },
                         {
                             options: [
@@ -114,7 +114,7 @@ export class Filters extends React.Component<FiltersProps, null> {
                             }),
                             name: 'roles',
                             label: 'Roles',
-                            type: 'multiple'
+                            type: 'multiple',
                         },
                         {
                             type: 'order',
@@ -135,7 +135,7 @@ export class Filters extends React.Component<FiltersProps, null> {
                                     label: 'Permissions',
                                     value: 'permissions_count',
                                 },
-                            ]
+                            ],
                         },
                         {
                             type: 'radio',
@@ -154,8 +154,8 @@ export class Filters extends React.Component<FiltersProps, null> {
                                     label: '100',
                                     value: 100,
                                 },
-                            ]
-                        }
+                            ],
+                        },
                     ]}
                 />
                 {isLoading && <LoadingOverlay />}

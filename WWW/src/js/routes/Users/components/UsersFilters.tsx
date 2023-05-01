@@ -3,7 +3,7 @@ import { Filters as FiltersContainer } from '../../../components/common/List/Fil
 import { Filter } from '../../../components/common/List/Filter'
 import { Button, LoadingOverlay, Card } from '../../../components'
 import { ifDeepDiff } from '../../../utils/javascript'
-import {FiltersFactory} from "../../../components/common/List/FiltersFactory";
+import { FiltersFactory } from '../../../components/common/List/FiltersFactory'
 
 interface FiltersProps {
     filters: Object
@@ -60,7 +60,7 @@ export class Filters extends React.Component<FiltersProps, null> {
                         {
                             type: 'search',
                             label: 'Search',
-                            name: 'search'
+                            name: 'search',
                         },
                         {
                             options: [
@@ -79,7 +79,7 @@ export class Filters extends React.Component<FiltersProps, null> {
                             ],
                             type: 'radio',
                             name: 'avatar',
-                            label: 'Has Avatar'
+                            label: 'Has Avatar',
                         },
                         {
                             options: [
@@ -99,7 +99,8 @@ export class Filters extends React.Component<FiltersProps, null> {
                             type: 'radio',
                             name: 'files',
                             label: 'Has Files',
-                        },{
+                        },
+                        {
                             options: [
                                 {
                                     label: 'yes or no',
@@ -154,7 +155,7 @@ export class Filters extends React.Component<FiltersProps, null> {
                             ],
                             name: 'status',
                             label: 'Active',
-                            type: 'radio'
+                            type: 'radio',
                         },
                         {
                             options: permissions.map(({ id, name }) => {
@@ -164,8 +165,8 @@ export class Filters extends React.Component<FiltersProps, null> {
                                 }
                             }),
                             name: 'permissions',
-                            label: "Permissions",
-                            type: "multiple"
+                            label: 'Permissions',
+                            type: 'multiple',
                         },
                         {
                             options: roles.map(({ id, name }) => {
@@ -175,8 +176,8 @@ export class Filters extends React.Component<FiltersProps, null> {
                                 }
                             }),
                             name: 'roles',
-                            label: "Roles",
-                            type: "multiple"
+                            label: 'Roles',
+                            type: 'multiple',
                         },
                         {
                             type: 'order',
@@ -197,7 +198,7 @@ export class Filters extends React.Component<FiltersProps, null> {
                                     label: 'Files Count',
                                     value: 'files_count',
                                 },
-                            ]
+                            ],
                         },
                         {
                             type: 'radio',
@@ -216,8 +217,8 @@ export class Filters extends React.Component<FiltersProps, null> {
                                     label: '100',
                                     value: 100,
                                 },
-                            ]
-                        }
+                            ],
+                        },
                     ]}
                 />
                 {isLoading && <LoadingOverlay />}

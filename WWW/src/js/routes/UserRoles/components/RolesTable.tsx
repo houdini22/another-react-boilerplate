@@ -125,7 +125,7 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                                                             setIsLoading(false)
                                                                                             addToastNotification({
                                                                                                 title: 'Delete success.',
-                                                                                                text: 'Role has been deleted from User.',
+                                                                                                text: 'Role has been removed from User.',
                                                                                                 type: 'success',
                                                                                             })
                                                                                         })
@@ -174,7 +174,6 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                             }) => {
                                                                 return (
                                                                     <div key={name}>
-
                                                                         <Dropdown.Container triggerSize={'lg'}>
                                                                             <Dropdown.Trigger
                                                                                 size="lg"
@@ -222,7 +221,7 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                                                                 setIsLoading(false)
                                                                                                 addToastNotification({
                                                                                                     title: 'Delete success.',
-                                                                                                    text: 'Permission has been deleted.',
+                                                                                                    text: 'Permission has been removed from Role.',
                                                                                                     type: 'success',
                                                                                                 })
                                                                                             })
@@ -237,15 +236,15 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                                                         onClick={() => {
                                                                                             setIsLoading(true)
 
-                                                                                            return deletePermission({
-                                                                                                id: _id,
-                                                                                            }).then(() => {
+                                                                                            return deletePermission(
+                                                                                                _id,
+                                                                                            ).then(() => {
                                                                                                 fetch().then(() => {
                                                                                                     setIsLoading(false)
                                                                                                     addToastNotification(
                                                                                                         {
                                                                                                             title: 'Delete success.',
-                                                                                                            text: 'Permission has been deleted.',
+                                                                                                            text: 'Permission has been removed.',
                                                                                                             type: 'success',
                                                                                                         },
                                                                                                     )

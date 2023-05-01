@@ -15,7 +15,7 @@ interface EditModalViewProps {
 
 export class AddPermissionModal extends React.Component<EditModalViewProps> {
     render() {
-        const { visible, id, close } = this.props
+        const { visible, id, addToastNotification } = this.props
 
         return (
             <RouteManager>
@@ -48,6 +48,11 @@ export class AddPermissionModal extends React.Component<EditModalViewProps> {
                                                     return addPermission({ id: values.role_id }, values).then(
                                                         (data) => {
                                                             fetch().then(() => close())
+                                                            addToastNotification({
+                                                                type: 'success',
+                                                                title: 'Save success.',
+                                                                text: 'Permission has been added.',
+                                                            })
                                                         },
                                                         (response) => {
                                                             throw new SubmissionError(

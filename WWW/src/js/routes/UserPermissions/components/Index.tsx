@@ -91,7 +91,7 @@ export class UsersPermissions extends React.Component {
                                         has_roles: 'yes_or_no',
                                         has_users: 'yes_or_no',
                                         user: '',
-                                        search: ''
+                                        search: '',
                                     }
 
                                     return (
@@ -128,6 +128,7 @@ export class UsersPermissions extends React.Component {
                                                         visible={addModalVisible}
                                                         close={() => this.closeAddModal()}
                                                         fetch={fetch}
+                                                        addToastNotification={addToastNotification}
                                                     />
                                                     <EditModal
                                                         visible={typeof edit !== 'boolean'}
@@ -167,7 +168,7 @@ export class UsersPermissions extends React.Component {
                                                                                     this.closeDeleteModal()
                                                                                     addToastNotification({
                                                                                         title: 'Delete success.',
-                                                                                        text: 'Role has been deleted.',
+                                                                                        text: 'Permission has been removed.',
                                                                                         type: 'success',
                                                                                     })
                                                                                 })

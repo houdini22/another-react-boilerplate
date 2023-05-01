@@ -6,27 +6,31 @@ import { reduxForm, formValueSelector } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 import { SubmissionError } from 'redux-form'
 
-const onSubmit = (values, _, { setIsLoading, addPermission, role, fetchPermissions, fetchOne }) => {
+const onSubmit = (
+    values,
+    _,
+    { setIsLoading, addPermission, role, fetchPermissions, fetchOne, addToastNotification },
+) => {
     setIsLoading(true)
 
     return addPermission({ id: role.id }, { ...values, role_id: role.id, guard_name: 'web' }).then(
         () => {
             Promise.all([fetchPermissions(), fetchOne(role.id)]).then(() => {
                 setIsLoading(false)
-                /*addToastNotification({
+                addToastNotification({
                     type: 'success',
-                    title: 'Add success.',
-                    text: 'Permissions has been saved.',
-                })*/
+                    title: 'Save success.',
+                    text: 'Role has been saved.',
+                })
             })
         },
         (response) => {
-            /*addToastNotification({
+            addToastNotification({
                 title: 'Form Validation Error',
                 text: response.message,
                 type: 'danger',
                 href: '#',
-            })*/
+            })
             throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
         },
     )
