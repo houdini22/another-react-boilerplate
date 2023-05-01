@@ -24,6 +24,7 @@ import RolesTable from './RolesTable'
 import { Pagination } from '../../../components/common/List/Pagination'
 import RolesFilters from './RolesFilters'
 import { ifDeepDiff } from '../../../utils/javascript'
+import { FaHome as HomeIcon } from 'react-icons/fa'
 
 export class UsersView extends React.Component {
     state = {
@@ -217,6 +218,17 @@ export class UsersView extends React.Component {
                                                                 Add Permission
                                                             </Button>
                                                         </PageHeader.Actions>
+                                                        <PageHeader.Breadcrumbs>
+                                                            <PageHeader.BreadcrumbsItem href="/">
+                                                                <HomeIcon /> Home
+                                                            </PageHeader.BreadcrumbsItem>
+                                                            <PageHeader.BreadcrumbsItem href="/users">
+                                                                Users
+                                                            </PageHeader.BreadcrumbsItem>
+                                                            <PageHeader.BreadcrumbsItem href="/roles">
+                                                                Roles
+                                                            </PageHeader.BreadcrumbsItem>
+                                                        </PageHeader.Breadcrumbs>
                                                     </PageHeader.Container>
 
                                                     <Card
@@ -265,6 +277,7 @@ export class UsersView extends React.Component {
                                                             perPage={perPage}
                                                             total={total}
                                                             totalPages={totalPages}
+                                                            navigate={navigate}
                                                         />
                                                         <Pagination
                                                             links={links}

@@ -20,6 +20,7 @@ export class RolesTable extends React.Component<RolesTableProps> {
             perPage,
             total,
             totalPages,
+            navigate,
         } = this.props
 
         return (
@@ -111,7 +112,7 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                             icon={<EditIcon />}
                                             iconOnly
                                             color={'warning'}
-                                            onClick={() => openEditModal(role.id)}
+                                            onClick={() => navigate(`/roles/edit?id=${role.id}`)}
                                         />
                                         {role.is_deletable == 1 && (
                                             <Button
