@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Button, Dropdown, Label, Popover, Table } from '../../../components'
+import { Button, Dropdown, Label, Popover, Table, Typography } from '../../../components'
 import { EditIcon, DeleteIcon, UserIcon, RoleIcon, InfoIcon, DetailsIcon } from '../../../components/icons'
 import { TableSummary } from '../../../components/common/List/TableSummary'
 
@@ -64,6 +64,9 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                         .map(({ id: _id, name }) => {
                                                             return (
                                                                 <div key={name}>
+                                                                    <Typography.Container>
+                                                                        <h4>Users</h4>
+                                                                    </Typography.Container>
                                                                     <Dropdown.Container triggerSize={'lg'}>
                                                                         <Dropdown.Trigger
                                                                             size="lg"
@@ -168,6 +171,9 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                             }) => {
                                                                 return (
                                                                     <div key={name}>
+                                                                        <Typography.Container>
+                                                                            <h4>Permissions</h4>
+                                                                        </Typography.Container>
                                                                         <Dropdown.Container triggerSize={'lg'}>
                                                                             <Dropdown.Trigger
                                                                                 size="lg"

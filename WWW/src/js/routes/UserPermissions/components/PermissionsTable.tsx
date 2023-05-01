@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Button, Dropdown, Label, Popover, Table } from '../../../components'
+import { Button, Dropdown, Label, Popover, Table, Typography } from '../../../components'
 import { EditIcon, DeleteIcon, UserIcon, RoleIcon, InfoIcon, DetailsIcon } from '../../../components/icons'
 import { TableSummary } from '../../../components/common/List/TableSummary'
 
@@ -13,7 +13,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
             fetch,
             addToastNotification,
             deleteRolePermission,
-            deleteUserRole,
+            deleteUserPermission,
             deletePermission,
             openEditModal,
             openDeleteModal,
@@ -65,6 +65,9 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                         .map(({ id: _id, name }) => {
                                                             return (
                                                                 <div key={name}>
+                                                                    <Typography.Container>
+                                                                        <h4>Users</h4>
+                                                                    </Typography.Container>
                                                                     <Dropdown.Container triggerSize={'lg'}>
                                                                         <Dropdown.Trigger
                                                                             size="lg"
@@ -111,27 +114,33 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                             >
                                                                                 <EditIcon /> Edit User
                                                                             </Dropdown.Item>
-                                                                            <Dropdown.Item
-                                                                                color="danger"
-                                                                                onClick={() => {
-                                                                                    setIsLoading(true)
+                                                                            {!!permission.is_deletable && (
+                                                                                <Dropdown.Item
+                                                                                    color="danger"
+                                                                                    onClick={() => {
+                                                                                        setIsLoading(true)
 
-                                                                                    return deleteUserRole(permission, {
-                                                                                        id: _id,
-                                                                                    }).then(() => {
-                                                                                        fetch().then(() => {
-                                                                                            setIsLoading(false)
-                                                                                            addToastNotification({
-                                                                                                title: 'Delete success.',
-                                                                                                text: 'Role has been deleted from User.',
-                                                                                                type: 'success',
+                                                                                        return deleteUserPermission(
+                                                                                            permission,
+                                                                                            {
+                                                                                                id: _id,
+                                                                                            },
+                                                                                        ).then(() => {
+                                                                                            fetch().then(() => {
+                                                                                                setIsLoading(false)
+                                                                                                addToastNotification({
+                                                                                                    title: 'Delete success.',
+                                                                                                    text: 'Role has been deleted from User.',
+                                                                                                    type: 'success',
+                                                                                                })
                                                                                             })
                                                                                         })
-                                                                                    })
-                                                                                }}
-                                                                            >
-                                                                                <DeleteIcon /> Remove from User
-                                                                            </Dropdown.Item>
+                                                                                    }}
+                                                                                >
+                                                                                    <DeleteIcon /> Remove Permission
+                                                                                    from User
+                                                                                </Dropdown.Item>
+                                                                            )}
                                                                         </Dropdown.Menu>
                                                                     </Dropdown.Container>
                                                                 </div>
@@ -165,6 +174,9 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                         }) => {
                                                             return (
                                                                 <div key={name}>
+                                                                    <Typography.Container>
+                                                                        <h4>Roles</h4>
+                                                                    </Typography.Container>
                                                                     <Dropdown.Container triggerSize={'lg'}>
                                                                         <Dropdown.Trigger
                                                                             size="lg"
@@ -209,10 +221,10 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                                     setIsLoading(true)
 
                                                                                     return deleteRolePermission(
-                                                                                        permission,
                                                                                         {
                                                                                             id: _id,
                                                                                         },
+                                                                                        permission,
                                                                                     ).then(() => {
                                                                                         fetch().then(() => {
                                                                                             setIsLoading(false)
@@ -233,9 +245,9 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                                     onClick={() => {
                                                                                         setIsLoading(true)
 
-                                                                                        return deletePermission({
-                                                                                            id: _id,
-                                                                                        }).then(() => {
+                                                                                        return deletePermission(
+                                                                                            permission.id,
+                                                                                        ).then(() => {
                                                                                             fetch().then(() => {
                                                                                                 setIsLoading(false)
                                                                                                 addToastNotification({

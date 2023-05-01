@@ -77,6 +77,7 @@ export class UsersPermissions extends React.Component {
                                 {({
                                     setIsLoading,
                                     deletePermission,
+                                    deleteUserPermission,
                                     deleteRolePermission,
                                     deleteUserRole,
                                     permissions,
@@ -207,8 +208,9 @@ export class UsersPermissions extends React.Component {
                                                         <PermissionsTable
                                                             setIsLoading={setIsLoading}
                                                             permissions={data}
-                                                            deleteUserPermission={deleteRolePermission}
+                                                            deleteUserPermission={deleteUserPermission}
                                                             deleteUserRole={deleteUserRole}
+                                                            deleteRolePermission={deleteRolePermission}
                                                             fetch={fetch}
                                                             addToastNotification={addToastNotification}
                                                             deletePermission={deletePermission}

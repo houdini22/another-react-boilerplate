@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Button, Col, Dropdown, Label, Popover, Row, Table } from '../../../components'
+import { Button, Col, Dropdown, Label, Popover, Row, Table, Typography } from '../../../components'
 import { formatDateTime } from '../../../helpers/date-time'
 import { apiURL } from '../../../helpers/api'
 import { RouteManager } from '../../../containers/RouteManager'
@@ -129,6 +129,9 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                             </Button>
                                                         </Popover.Trigger>
                                                         <Popover.Content scrollY>
+                                                            <Typography.Container>
+                                                                <h4>Roles</h4>
+                                                            </Typography.Container>
                                                             {user?.roles
                                                                 ?.sort(({ name: nameA }, { name: nameB }) =>
                                                                     nameA.localeCompare(nameB),
@@ -140,94 +143,107 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                         guard_name,
                                                                         is_deletable: _is_deletable,
                                                                         pivot: { model_type = '' } = {},
-                                                                    }) => (
-                                                                        <Dropdown.Container
-                                                                            triggerSize={'lg'}
-                                                                            key={_id}
-                                                                        >
-                                                                            <Dropdown.Trigger
-                                                                                size="lg"
-                                                                                componentProps={{ block: true }}
-                                                                                component={Label}
-                                                                            >
-                                                                                {name} - {guard_name}
-                                                                            </Dropdown.Trigger>
-                                                                            <Dropdown.Menu>
-                                                                                <Dropdown.Item type={'header'}>
-                                                                                    <InfoIcon /> Role ID: ${_id}
-                                                                                </Dropdown.Item>
-                                                                                <Dropdown.Item
-                                                                                    color={'info'}
-                                                                                    onClick={() => {
-                                                                                        navigate(
-                                                                                            `/permissions?roles=${_id}`,
-                                                                                        )
-                                                                                    }}
+                                                                    }) => {
+                                                                        return (
+                                                                            <div>
+                                                                                <Dropdown.Container
+                                                                                    triggerSize={'lg'}
+                                                                                    key={_id}
                                                                                 >
-                                                                                    <DetailsIcon /> Show Permissions
-                                                                                </Dropdown.Item>
-                                                                                <Dropdown.Item
-                                                                                    color={'info'}
-                                                                                    onClick={() => {
-                                                                                        navigate(`/users?roles=${_id}`)
-                                                                                    }}
-                                                                                >
-                                                                                    <DetailsIcon /> Show Users
-                                                                                </Dropdown.Item>
-                                                                                <Dropdown.Item
-                                                                                    color={'warning'}
-                                                                                    onClick={() => {
-                                                                                        navigate(
-                                                                                            `/roles/edit?id=${_id}`,
-                                                                                        )
-                                                                                    }}
-                                                                                >
-                                                                                    <EditIcon /> Edit Role
-                                                                                </Dropdown.Item>
-                                                                                <Dropdown.Item
-                                                                                    color="danger"
-                                                                                    onClick={() => {
-                                                                                        setIsLoading(true)
+                                                                                    <Dropdown.Trigger
+                                                                                        size="lg"
+                                                                                        componentProps={{ block: true }}
+                                                                                        component={Label}
+                                                                                    >
+                                                                                        {name} - {guard_name}
+                                                                                    </Dropdown.Trigger>
+                                                                                    <Dropdown.Menu>
+                                                                                        <Dropdown.Item type={'header'}>
+                                                                                            <InfoIcon /> Role ID: ${_id}
+                                                                                        </Dropdown.Item>
+                                                                                        <Dropdown.Item
+                                                                                            color={'info'}
+                                                                                            onClick={() => {
+                                                                                                navigate(
+                                                                                                    `/permissions?roles=${_id}`,
+                                                                                                )
+                                                                                            }}
+                                                                                        >
+                                                                                            <DetailsIcon /> Show
+                                                                                            Permissions
+                                                                                        </Dropdown.Item>
+                                                                                        <Dropdown.Item
+                                                                                            color={'info'}
+                                                                                            onClick={() => {
+                                                                                                navigate(
+                                                                                                    `/users?roles=${_id}`,
+                                                                                                )
+                                                                                            }}
+                                                                                        >
+                                                                                            <DetailsIcon /> Show Users
+                                                                                        </Dropdown.Item>
+                                                                                        <Dropdown.Item
+                                                                                            color={'warning'}
+                                                                                            onClick={() => {
+                                                                                                navigate(
+                                                                                                    `/roles/edit?id=${_id}`,
+                                                                                                )
+                                                                                            }}
+                                                                                        >
+                                                                                            <EditIcon /> Edit Role
+                                                                                        </Dropdown.Item>
+                                                                                        <Dropdown.Item
+                                                                                            color="danger"
+                                                                                            onClick={() => {
+                                                                                                setIsLoading(true)
 
-                                                                                        return deleteUserRole(
-                                                                                            {
-                                                                                                id: user.id,
-                                                                                            },
-                                                                                            {
-                                                                                                id: _id,
-                                                                                            },
-                                                                                        ).then(() => {
-                                                                                            fetch().then(() => {
-                                                                                                setIsLoading(false)
-                                                                                            })
-                                                                                        })
-                                                                                    }}
-                                                                                >
-                                                                                    <DeleteIcon /> Delete from User
-                                                                                </Dropdown.Item>
-                                                                                {_is_deletable == 1 && (
-                                                                                    <Dropdown.Item
-                                                                                        color="danger"
-                                                                                        onClick={() => {
-                                                                                            setIsLoading(true)
-
-                                                                                            return deleteRole(_id).then(
-                                                                                                () => {
+                                                                                                return deleteUserRole(
+                                                                                                    {
+                                                                                                        id: user.id,
+                                                                                                    },
+                                                                                                    {
+                                                                                                        id: _id,
+                                                                                                    },
+                                                                                                ).then(() => {
                                                                                                     fetch().then(() => {
                                                                                                         setIsLoading(
                                                                                                             false,
                                                                                                         )
                                                                                                     })
-                                                                                                },
-                                                                                            )
-                                                                                        }}
-                                                                                    >
-                                                                                        <DeleteIcon /> Delete Role
-                                                                                    </Dropdown.Item>
-                                                                                )}
-                                                                            </Dropdown.Menu>
-                                                                        </Dropdown.Container>
-                                                                    ),
+                                                                                                })
+                                                                                            }}
+                                                                                        >
+                                                                                            <DeleteIcon /> Delete Role
+                                                                                            from User
+                                                                                        </Dropdown.Item>
+                                                                                        {_is_deletable == 1 && (
+                                                                                            <Dropdown.Item
+                                                                                                color="danger"
+                                                                                                onClick={() => {
+                                                                                                    setIsLoading(true)
+
+                                                                                                    return deleteRole(
+                                                                                                        _id,
+                                                                                                    ).then(() => {
+                                                                                                        fetch().then(
+                                                                                                            () => {
+                                                                                                                setIsLoading(
+                                                                                                                    false,
+                                                                                                                )
+                                                                                                            },
+                                                                                                        )
+                                                                                                    })
+                                                                                                }}
+                                                                                            >
+                                                                                                <DeleteIcon /> Delete
+                                                                                                Role
+                                                                                            </Dropdown.Item>
+                                                                                        )}
+                                                                                    </Dropdown.Menu>
+                                                                                </Dropdown.Container>
+                                                                            </div>
+                                                                        )
+                                                                    },
                                                                 )}
                                                         </Popover.Content>
                                                     </Popover.Container>
@@ -250,6 +266,9 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                             </Button>
                                                         </Popover.Trigger>
                                                         <Popover.Content scrollY>
+                                                            <Typography.Container>
+                                                                <h4>Permissions</h4>
+                                                            </Typography.Container>
                                                             {Object.keys(permissionsFromRoles)
                                                                 ?.map((key) => permissionsFromRoles[key])
                                                                 .sort(({ name: nameA }, { name: nameB }) =>
@@ -262,91 +281,105 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                         guard_name,
                                                                         is_deletable: _is_deletable,
                                                                         pivot: { model_type = '' } = {},
-                                                                    }) => (
-                                                                        <Dropdown.Container
-                                                                            triggerSize={'lg'}
-                                                                            key={_id}
-                                                                        >
-                                                                            <Dropdown.Trigger
-                                                                                size="lg"
-                                                                                componentProps={{ block: true }}
-                                                                                component={Label}
-                                                                            >
-                                                                                {name} - {guard_name}
-                                                                            </Dropdown.Trigger>
-                                                                            <Dropdown.Menu>
-                                                                                <Dropdown.Item type={'header'}>
-                                                                                    <InfoIcon /> Permission ID: ${_id}
-                                                                                </Dropdown.Item>
-                                                                                <Dropdown.Item
-                                                                                    color={'info'}
-                                                                                    onClick={() => {
-                                                                                        setIsLoading(true)
-
-                                                                                        return navigate(
-                                                                                            `/roles?permissions=${_id}`,
-                                                                                        )
-                                                                                    }}
+                                                                    }) => {
+                                                                        return (
+                                                                            <div>
+                                                                                <Dropdown.Container
+                                                                                    triggerSize={'lg'}
+                                                                                    key={_id}
                                                                                 >
-                                                                                    <RoleIcon /> Show Roles
-                                                                                </Dropdown.Item>
-                                                                                <Dropdown.Item
-                                                                                    color={'info'}
-                                                                                    onClick={() => {
-                                                                                        setIsLoading(true)
-
-                                                                                        return navigate(
-                                                                                            `/users?permissions=${_id}`,
-                                                                                        )
-                                                                                    }}
-                                                                                >
-                                                                                    <UserIcon /> Show Users
-                                                                                </Dropdown.Item>
-                                                                                {model_type.match(/User/) && (
-                                                                                    <Dropdown.Item
-                                                                                        color="danger"
-                                                                                        onClick={() => {
-                                                                                            setIsLoading(true)
-
-                                                                                            return deleteUserPermission(
-                                                                                                {
-                                                                                                    id: _id,
-                                                                                                },
-                                                                                                {
-                                                                                                    id: user.id,
-                                                                                                },
-                                                                                            ).then(() => {
-                                                                                                fetch().then(() => {
-                                                                                                    setIsLoading(false)
-                                                                                                })
-                                                                                            })
-                                                                                        }}
+                                                                                    <Dropdown.Trigger
+                                                                                        size="lg"
+                                                                                        componentProps={{ block: true }}
+                                                                                        component={Label}
                                                                                     >
-                                                                                        <DeleteIcon /> Delete from User
-                                                                                    </Dropdown.Item>
-                                                                                )}
-                                                                                {_is_deletable == 1 && (
-                                                                                    <Dropdown.Item
-                                                                                        color="danger"
-                                                                                        onClick={() => {
-                                                                                            setIsLoading(true)
+                                                                                        {name} - {guard_name}
+                                                                                    </Dropdown.Trigger>
+                                                                                    <Dropdown.Menu>
+                                                                                        <Dropdown.Item type={'header'}>
+                                                                                            <InfoIcon /> Permission ID:
+                                                                                            ${_id}
+                                                                                        </Dropdown.Item>
+                                                                                        <Dropdown.Item
+                                                                                            color={'info'}
+                                                                                            onClick={() => {
+                                                                                                setIsLoading(true)
 
-                                                                                            return deletePermission(
-                                                                                                _id,
-                                                                                            ).then(() => {
-                                                                                                fetch().then(() => {
-                                                                                                    setIsLoading(false)
-                                                                                                })
-                                                                                            })
-                                                                                        }}
-                                                                                    >
-                                                                                        <DeleteIcon /> Delete Permission
-                                                                                        Permanently
-                                                                                    </Dropdown.Item>
-                                                                                )}
-                                                                            </Dropdown.Menu>
-                                                                        </Dropdown.Container>
-                                                                    ),
+                                                                                                return navigate(
+                                                                                                    `/roles?permissions=${_id}`,
+                                                                                                )
+                                                                                            }}
+                                                                                        >
+                                                                                            <RoleIcon /> Show Roles
+                                                                                        </Dropdown.Item>
+                                                                                        <Dropdown.Item
+                                                                                            color={'info'}
+                                                                                            onClick={() => {
+                                                                                                setIsLoading(true)
+
+                                                                                                return navigate(
+                                                                                                    `/users?permissions=${_id}`,
+                                                                                                )
+                                                                                            }}
+                                                                                        >
+                                                                                            <UserIcon /> Show Users
+                                                                                        </Dropdown.Item>
+                                                                                        {model_type.match(/User/) && (
+                                                                                            <Dropdown.Item
+                                                                                                color="danger"
+                                                                                                onClick={() => {
+                                                                                                    setIsLoading(true)
+
+                                                                                                    return deleteUserPermission(
+                                                                                                        {
+                                                                                                            id: _id,
+                                                                                                        },
+                                                                                                        {
+                                                                                                            id: user.id,
+                                                                                                        },
+                                                                                                    ).then(() => {
+                                                                                                        fetch().then(
+                                                                                                            () => {
+                                                                                                                setIsLoading(
+                                                                                                                    false,
+                                                                                                                )
+                                                                                                            },
+                                                                                                        )
+                                                                                                    })
+                                                                                                }}
+                                                                                            >
+                                                                                                <DeleteIcon /> Delete
+                                                                                                Permission from User
+                                                                                            </Dropdown.Item>
+                                                                                        )}
+                                                                                        {_is_deletable == 1 && (
+                                                                                            <Dropdown.Item
+                                                                                                color="danger"
+                                                                                                onClick={() => {
+                                                                                                    setIsLoading(true)
+
+                                                                                                    return deletePermission(
+                                                                                                        _id,
+                                                                                                    ).then(() => {
+                                                                                                        fetch().then(
+                                                                                                            () => {
+                                                                                                                setIsLoading(
+                                                                                                                    false,
+                                                                                                                )
+                                                                                                            },
+                                                                                                        )
+                                                                                                    })
+                                                                                                }}
+                                                                                            >
+                                                                                                <DeleteIcon /> Delete
+                                                                                                Permission Permanently
+                                                                                            </Dropdown.Item>
+                                                                                        )}
+                                                                                    </Dropdown.Menu>
+                                                                                </Dropdown.Container>
+                                                                            </div>
+                                                                        )
+                                                                    },
                                                                 )}
                                                         </Popover.Content>
                                                     </Popover.Container>
