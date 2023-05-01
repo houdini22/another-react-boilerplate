@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Card, Dropdown, Label, LoadingOverlay } from '../../../../components'
-import { DeleteIcon } from '../../../../components/icons'
+import { DeleteIcon, RoleIcon } from '../../../../components/icons'
 
 interface AddRoleProps {
     roles: any
@@ -11,19 +11,30 @@ interface AddRoleProps {
     isLoading: boolean
 }
 
-export class AddRole extends React.Component<AddRoleProps, null> {
+export class Roles extends React.Component<AddRoleProps, null> {
     render() {
-        const { setIsLoading, deleteUserRole, fetchOne, user, isLoading } = this.props
+        const { setIsLoading, deleteUserRole, fetchOne, user, isLoading, navigate } = this.props
+
         return (
             <Card header={<h1>Roles</h1>}>
-                {user?.roles?.map(({ id: _id, name, guard_name, is_deletable }) => {
-                    return (
-                        <Dropdown.Container size={'sm'} triggerSize={'lg'} key={_id}>
-                            <Dropdown.Trigger component={Label}>
-                                {name} - {guard_name}
-                            </Dropdown.Trigger>
-                            <Dropdown.Menu>
-                                {
+                {user?.roles
+                    ?.sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
+                    .map(({ id: _id, name, guard_name, is_deletable }) => {
+                        return (
+                            <Dropdown.Container triggerSize={'lg'} key={_id}>
+                                <Dropdown.Trigger component={Label} componentProps={{ block: true }}>
+                                    {name} - {guard_name}
+                                </Dropdown.Trigger>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item
+                                        onClick={() => {
+                                            setIsLoading(true)
+
+                                            navigate(`/permissions?roles=${_id}`)
+                                        }}
+                                    >
+                                        <RoleIcon /> Show Role permissions
+                                    </Dropdown.Item>
                                     <Dropdown.Item
                                         color="danger"
                                         onClick={() => {
@@ -38,17 +49,16 @@ export class AddRole extends React.Component<AddRoleProps, null> {
                                             })
                                         }}
                                     >
-                                        <DeleteIcon /> Delete from User
+                                        <DeleteIcon /> Remove Role from User
                                     </Dropdown.Item>
-                                }
-                            </Dropdown.Menu>
-                        </Dropdown.Container>
-                    )
-                })}
+                                </Dropdown.Menu>
+                            </Dropdown.Container>
+                        )
+                    })}
                 {isLoading && <LoadingOverlay />}
             </Card>
         )
     }
 }
 
-export default AddRole
+export default Roles

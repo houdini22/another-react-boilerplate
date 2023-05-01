@@ -10,6 +10,7 @@ import Edit from './Edit/Edit'
 import AddRole from './AddRole/AddRole'
 import Roles from './Roles/Roles'
 import Permissions from './Permissions/Permissions'
+import AddPermission from './AddPermission/AddPermission'
 
 interface UsersViewState {}
 
@@ -19,7 +20,7 @@ export class UsersView extends React.Component<null, UsersViewState> {
             <RouteManager>
                 {({ navigate, query }) => (
                     <UserRolesManager>
-                        {({ roles, deletePermission }) => (
+                        {({ roles, deletePermission, permissions, addUserPermission }) => (
                             <UsersManager id={query['id']}>
                                 {({
                                     user,
@@ -72,6 +73,22 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                         fetchOne={fetchOne}
                                                         isLoading={isLoading}
                                                     />
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col xs={12} md={6}>
+                                                    <Roles
+                                                        roles={roles}
+                                                        setIsLoading={setIsLoading}
+                                                        deleteUserRole={deleteUserRole}
+                                                        deletePermission={deletePermission}
+                                                        fetchOne={fetchOne}
+                                                        user={user}
+                                                        isLoading={isLoading}
+                                                        navigate={navigate}
+                                                    />
+                                                </Col>
+                                                <Col xs={12} md={6}>
                                                     <AddRole
                                                         roles={roles}
                                                         setIsLoading={setIsLoading}
@@ -84,18 +101,21 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                             </Row>
                                             <Row>
                                                 <Col xs={12} md={6}>
-                                                    <Roles
-                                                        roles={roles}
-                                                        setIsLoading={setIsLoading}
-                                                        deleteUserRole={deleteUserRole}
-                                                        fetchOne={fetchOne}
-                                                        user={user}
-                                                        isLoading={isLoading}
-                                                    />
                                                     <Permissions
                                                         roles={roles}
                                                         setIsLoading={setIsLoading}
                                                         deletePermission={deletePermission}
+                                                        fetchOne={fetchOne}
+                                                        user={user}
+                                                        isLoading={isLoading}
+                                                        navigate={navigate}
+                                                    />
+                                                </Col>
+                                                <Col xs={12} md={6}>
+                                                    <AddPermission
+                                                        permissions={permissions}
+                                                        setIsLoading={setIsLoading}
+                                                        addUserPermission={addUserPermission}
                                                         fetchOne={fetchOne}
                                                         user={user}
                                                         isLoading={isLoading}

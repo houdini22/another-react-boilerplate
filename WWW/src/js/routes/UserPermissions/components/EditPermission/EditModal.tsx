@@ -31,7 +31,7 @@ export class EditModal extends React.Component<EditModalViewProps> {
                                             <>
                                                 {isLoading && <LoadingOverlay />}
                                                 <Modal.Header close={close} closeIcon>
-                                                    <EditIcon /> Edit Role
+                                                    <EditIcon /> Edit Permission
                                                 </Modal.Header>
                                                 <Modal.Body>
                                                     <EditFormContainer

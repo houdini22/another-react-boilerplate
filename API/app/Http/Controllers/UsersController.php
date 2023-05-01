@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
@@ -22,7 +23,9 @@ class UsersController extends Controller
 
         $filters = $request->get('filters');
 
-        $query = User::with('roles')
+        $query = User::with(['roles' => function($query) {
+            $query->withCount('permissions');
+        }])
             ->with('permissions')
             ->with('roles.permissions')
             ->with('avatar')
@@ -90,9 +93,10 @@ class UsersController extends Controller
         }
 
         $user = User::with('roles')
+            ->with('permissions')
             ->with('roles.permissions')
             ->with('avatar')
-            ->withCount(['files'])
+            ->withCount(['files', 'roles', 'roles'])
             ->find($id);
 
         return response()->json([
@@ -119,12 +123,16 @@ class UsersController extends Controller
             'name' => ['required', Rule::unique('users')->where(function ($query) use ($user) {
                 return $query->where('id', '<>', $user->id);
             })],
-            'password' => ['required', 'confirmed', Password::min(8)
+            'password' => ['confirmed', Password::min(8)
                 ->mixedCase()
                 ->symbols()
                 ->numbers()
                 ->letters()],
-            'password_confirmation' => 'required'
+            'password_confirmation' => Password::min(8)
+                ->mixedCase()
+                ->symbols()
+                ->numbers()
+                ->letters()
         ]);
 
         $values = $request->post();

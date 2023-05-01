@@ -76,10 +76,16 @@ class PermissionsController extends Controller
             return $this->response401();
         }
 
-        $role = Role::with('permissions')->find($id);
+        $permission = Permission::with('users')->with('roles')->find($id);
+
+        if (!$permission) {
+            return response()->json([
+                'message' => 'Not Found'
+            ], 404);
+        }
 
         return response()->json([
-            'role' => $role->toArray(),
+            'permission' => $permission->toArray(),
         ]);
     }
 
@@ -263,6 +269,29 @@ class PermissionsController extends Controller
         }
 
         $permission->delete();
+
+        return response()->json([
+            'msg' => 'ok',
+        ]);
+    }
+
+    public function postAddPermissionToUser(Request $request) {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $permission = Permission::find($request->route('permission_id'));
+        if (!$permission) {
+            return $this->response404();
+        }
+
+        $u = User::find($request->route('user_id'));
+        if (!$u) {
+            return $this->response404();
+        }
+
+        $u->givePermissionTo($permission);
 
         return response()->json([
             'msg' => 'ok',

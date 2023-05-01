@@ -33,9 +33,6 @@ export class AddModalView extends React.Component<EditModalViewProps> {
                                                 fetch={fetch}
                                                 close={close}
                                             />
-                                            <Button color={'secondary'} block onClick={() => close()}>
-                                                Cancel
-                                            </Button>
                                         </Modal.Body>
                                         {isLoading && <LoadingOverlay />}
                                     </>
