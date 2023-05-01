@@ -7,6 +7,7 @@ import { Button } from '../Button'
 import { AppContext } from '../../../../index'
 import { LoadingOverlay } from '../LoadingOverlay'
 import styles from '../../../../assets/scss/components/_card.scss'
+import { LocalStorage } from '../../../modules/database'
 
 const cx = classNames.bind(styles)
 
@@ -26,6 +27,7 @@ interface CardProps {
     footerType?: string
     style?: object
     solidBackground?: boolean
+    name?: string
 }
 
 class Card extends React.Component<CardProps> {
@@ -40,12 +42,43 @@ class Card extends React.Component<CardProps> {
         this.maximize = this.maximize.bind(this)
     }
 
+    componentDidMount() {
+        const { name } = this.props
+
+        if (name) {
+            const save = LocalStorage.queryAll('CardMinimize', {
+                query: { name },
+            })[0]
+            if (save) {
+                this.setState({ minimized: save.minimized })
+            }
+        }
+    }
+
     close() {
         this.setState({ closed: true })
     }
 
     maximize() {
+        const { name } = this.props
+
         this.setState({ minimized: false })
+
+        if (name) {
+            LocalStorage.insertOrUpdate('CardMinimize', { name }, { name, minimized: false })
+            LocalStorage.commit()
+        }
+    }
+
+    minimize() {
+        const { name } = this.props
+
+        this.setState({ minimized: true })
+
+        if (name) {
+            LocalStorage.insertOrUpdate('CardMinimize', { name }, { name, minimized: true })
+            LocalStorage.commit()
+        }
     }
 
     renderButton(props = {}) {
@@ -110,9 +143,11 @@ class Card extends React.Component<CardProps> {
                                         href: '#',
                                         onClick: (e) => {
                                             e.preventDefault()
-                                            this.setState({
-                                                minimized: !minimized,
-                                            })
+                                            if (minimized) {
+                                                this.maximize()
+                                            } else {
+                                                this.minimize()
+                                            }
                                         },
                                         iconOnly: true,
                                         outline: true,

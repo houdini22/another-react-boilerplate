@@ -15,7 +15,6 @@ interface UsersTableProps {
     deleteRole: Function
     activateUser: Function
     deactivateUser: Function
-    setUserToEdit: Function
     setUserToDelete: Function
     page: number
     perPage: number

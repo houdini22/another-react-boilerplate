@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class UsersController extends Controller
 {
@@ -68,6 +69,12 @@ class UsersController extends Controller
             $query = $query->whereDoesntHave('files');
         }
 
+        if ($filters['has_roles'] === 'yes') {
+            $query = $query->whereHas('roles');
+        } else if ($filters['has_roles'] === 'no') {
+            $query = $query->whereDoesntHave('roles');
+        }
+
         $users = $query->paginate($filters['items_per_page']);
 
         return response()->json([
@@ -112,8 +119,12 @@ class UsersController extends Controller
             'name' => ['required', Rule::unique('users')->where(function ($query) use ($user) {
                 return $query->where('id', '<>', $user->id);
             })],
-            'password' => 'min:3|max:50|same:password_confirmation',
-            'password_confirmation' => 'min:3|max:50'
+            'password' => ['required', 'confirmed', Password::min(8)
+                ->mixedCase()
+                ->symbols()
+                ->numbers()
+                ->letters()],
+            'password_confirmation' => 'required'
         ]);
 
         $values = $request->post();
@@ -140,10 +151,14 @@ class UsersController extends Controller
         }
 
         $request->validate([
-            'email' => 'required|email|unique:users,email',
-            'name' => 'required|unique:users,name|alpha_dash',
-            'password' => 'required|min:3|max:50|confirmed',
-            'password_confirmation' => 'required|min:3|max:50',
+            'email' => ['required', 'email', 'unique:users,email'],
+            'name' => ['required', 'alpha_dash', 'unique:users,name'],
+            'password' => ['required', 'confirmed', Password::min(8)
+                ->mixedCase()
+                ->symbols()
+                ->numbers()
+                ->letters()],
+            'password_confirmation' => ['required'],
         ]);
 
         $user = new User();

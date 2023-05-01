@@ -10,10 +10,12 @@ const cx = classNames.bind(styles)
 
 export class FilesFiles extends React.Component<null, null> {
     render() {
-        const { filters, setFilter, fetch, resetFilters, defaultFilters } = this.props
+        const { filters, setFilter, fetch, resetFilters, defaultFilters, restoreFilters, saveFilters } = this.props
 
         return (
             <Card
+                name={'MediaList'}
+                withMinimizeIcon
                 header={<h1>Filters</h1>}
                 headerActions={[
                     <Button
@@ -22,6 +24,16 @@ export class FilesFiles extends React.Component<null, null> {
                         disabled={!ifDeepDiff(defaultFilters, filters)}
                     >
                         Reset Filters
+                    </Button>,
+                    <Button color={'success'} onClick={() => restoreFilters('media')}>
+                        Restore Filters
+                    </Button>,
+                    <Button
+                        color={'warning'}
+                        onClick={() => saveFilters('media')}
+                        disabled={!ifDeepDiff(defaultFilters, filters)}
+                    >
+                        Save Filters
                     </Button>,
                 ]}
             >

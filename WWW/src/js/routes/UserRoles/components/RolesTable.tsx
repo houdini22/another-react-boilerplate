@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Button, Dropdown, Label, Table } from '../../../components'
-import { EditIcon, DeleteIcon, ShowIcon } from '../../../components/icons'
+import { EditIcon, DeleteIcon, UserIcon, RoleIcon } from '../../../components/icons'
 
 interface RolesTableProps {}
 
@@ -27,8 +27,7 @@ export class RolesTable extends React.Component<RolesTableProps> {
                     <Table.Tr>
                         <Table.Th xs={1}>ID</Table.Th>
                         <Table.Th xs={2}>Name</Table.Th>
-                        <Table.Th xs={1}>Users</Table.Th>
-                        <Table.Th xs={1}>Permissions</Table.Th>
+                        <Table.Th xs={2}>Resources</Table.Th>
                         <Table.Th xs={3}>Permissions List</Table.Th>
                         <Table.Th xs={4}>Actions</Table.Th>
                     </Table.Tr>
@@ -39,25 +38,27 @@ export class RolesTable extends React.Component<RolesTableProps> {
                             <Table.Tr key={role.id}>
                                 <Table.Td xs={1}>{role.id}</Table.Td>
                                 <Table.Td xs={2}>{role.name}</Table.Td>
-                                <Table.Td xs={1}>
+                                <Table.Td xs={2}>
                                     <div>
-                                        <span>{role.users_count}</span>
-                                        <Button
-                                            color={'info'}
-                                            iconOnly
-                                            icon={<ShowIcon />}
-                                            onClick={() => navigate(`/users?roles=${role.id}`)}
-                                        />
+                                        {role.users_count > 0 && (
+                                            <Button
+                                                color={'info'}
+                                                icon={<UserIcon />}
+                                                onClick={() => navigate(`/users?roles=${role.id}`)}
+                                            >
+                                                {role.users_count}
+                                            </Button>
+                                        )}
+                                        {role.permissions_count > 0 && (
+                                            <Button
+                                                color={'info'}
+                                                icon={<RoleIcon />}
+                                                onClick={() => navigate(`/permissions?roles=${role.id}`)}
+                                            >
+                                                {role.permissions_count}
+                                            </Button>
+                                        )}
                                     </div>
-                                </Table.Td>
-                                <Table.Td xs={1}>
-                                    <span>{role.permissions_count}</span>
-                                    <Button
-                                        color={'info'}
-                                        iconOnly
-                                        icon={<ShowIcon />}
-                                        onClick={() => navigate(`/permissions?roles=${role.id}`)}
-                                    />
                                 </Table.Td>
                                 <Table.Td xs={3}>
                                     <div>

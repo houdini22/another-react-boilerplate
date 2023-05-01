@@ -70,6 +70,8 @@ export class UsersView extends React.Component {
                                     perPage,
                                     total,
                                     resetFilters,
+                                    restoreFilters,
+                                    saveFilters,
                                 }) => (
                                     <MediaManager>
                                         {({ deleteFile, uploadFiles, uploadProgress, editFile }) => {
@@ -96,6 +98,8 @@ export class UsersView extends React.Component {
                                                         fetch={fetch}
                                                         resetFilters={resetFilters}
                                                         defaultFilters={defaultFilters}
+                                                        restoreFilters={restoreFilters}
+                                                        saveFilters={saveFilters}
                                                     />
 
                                                     <Card>

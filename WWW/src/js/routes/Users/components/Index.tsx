@@ -10,26 +10,15 @@ import { Pagination } from '../../../components/common/List/Pagination'
 import UsersTable from './UsersTable'
 import UsersFilters from './UsersFilters'
 import { ifDeepDiff } from '../../../utils/javascript'
-import { FaHome as HomeIcon } from 'react-icons/fa'
 import Header from './Header'
 
 interface UsersViewState {
     deleteUserId: number | boolean
-    editUserId: number | boolean
-    addUser: number | boolean
 }
 
 export class UsersView extends React.Component<null, UsersViewState> {
     state: UsersViewState = {
         deleteUserId: false,
-        editUserId: false,
-        addUser: false,
-    }
-
-    setUserToEdit(id) {
-        this.setState({
-            editUserId: id,
-        })
     }
 
     setUserToDelete(id) {
@@ -38,14 +27,8 @@ export class UsersView extends React.Component<null, UsersViewState> {
         })
     }
 
-    setUserAdd(val) {
-        this.setState({
-            addUser: val,
-        })
-    }
-
     render() {
-        const { deleteUserId, editUserId, addUser } = this.state
+        const { deleteUserId } = this.state
         const defaultFilters = {
             order_by: 'id',
             order_direction: 'asc',
@@ -56,6 +39,7 @@ export class UsersView extends React.Component<null, UsersViewState> {
             roles: [],
             permissions: [],
             files: 'yes_or_no',
+            has_roles: 'yes_or_no',
         }
         return (
             <RouteManager>
@@ -86,6 +70,8 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                         resetFilters,
                                         links,
                                         setIsLoading,
+                                        saveFilters,
+                                        restoreFilters,
                                     }) => (
                                         <UsersManager>
                                             {({ deleteUser, deleteUserRole, activateUser, deactivateUser }) => {
@@ -100,7 +86,9 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                         />
                                                         <Header navigate={navigate} />
                                                         <Card
+                                                            name={'UsersList'}
                                                             header={<h1>Filters</h1>}
+                                                            withMinimizeIcon
                                                             headerActions={[
                                                                 <Button
                                                                     color={'secondary'}
@@ -108,6 +96,19 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                     disabled={!ifDeepDiff(defaultFilters, filters)}
                                                                 >
                                                                     Reset Filters
+                                                                </Button>,
+                                                                <Button
+                                                                    color={'success'}
+                                                                    onClick={() => restoreFilters('users')}
+                                                                >
+                                                                    Restore Filters
+                                                                </Button>,
+                                                                <Button
+                                                                    color={'warning'}
+                                                                    onClick={() => saveFilters('users')}
+                                                                    disabled={!ifDeepDiff(defaultFilters, filters)}
+                                                                >
+                                                                    Save Filters
                                                                 </Button>,
                                                             ]}
                                                         >
@@ -138,7 +139,6 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                 deleteRole={deleteRole}
                                                                 activateUser={activateUser}
                                                                 deactivateUser={deactivateUser}
-                                                                setUserToEdit={this.setUserToEdit.bind(this)}
                                                                 setUserToDelete={this.setUserToDelete.bind(this)}
                                                                 page={page}
                                                                 perPage={perPage}

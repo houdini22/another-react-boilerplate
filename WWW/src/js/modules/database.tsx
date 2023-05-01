@@ -9,6 +9,18 @@ if (LocalStorage.isNew()) {
             token: '',
         },
     ])
+    LocalStorage.createTableWithData('ListManagerFilters', [
+        {
+            name: '',
+            filters: {},
+        },
+    ])
+    LocalStorage.createTableWithData('CardMinimize', [
+        {
+            name: '',
+            minimized: false,
+        },
+    ])
     LocalStorage.commit()
 }
 

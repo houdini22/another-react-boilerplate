@@ -63,6 +63,28 @@ export class Filters extends React.Component<FiltersProps, null> {
                     filters={filters}
                     options={[
                         {
+                            label: 'yes or no',
+                            value: 'yes_or_no',
+                        },
+                        {
+                            label: 'yes',
+                            value: 'yes',
+                        },
+                        {
+                            label: 'no',
+                            value: 'no',
+                        },
+                    ]}
+                    type={'radio'}
+                    name={'has_roles'}
+                    setFilter={setFilter}
+                    fetch={fetch}
+                    label={'Has Roles'}
+                />
+                <Filter
+                    filters={filters}
+                    options={[
+                        {
                             label: 'both',
                             value: 'yes_or_no',
                         },

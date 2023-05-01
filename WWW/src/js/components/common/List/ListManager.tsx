@@ -2,6 +2,7 @@ import React from 'react'
 import { http } from '../../../modules/http'
 import styles from '../../../../assets/scss/components/_list_manager.scss'
 import classNames from 'classnames/bind'
+import { LocalStorage } from '../../../modules/database'
 
 const cx = classNames.bind(styles)
 
@@ -153,6 +154,23 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
         })
     }
 
+    saveFilters(name) {
+        const { filters } = this.state
+        LocalStorage.insertOrUpdate('ListManagerFilters', { name }, { name, filters })
+        LocalStorage.commit()
+    }
+
+    restoreFilters(name) {
+        const save = LocalStorage.queryAll('ListManagerFilters', {
+            query: { name },
+        })[0]
+        if (save) {
+            this.setState({ filters: save.filters }, () => {
+                this.fetch()
+            })
+        }
+    }
+
     render() {
         const { filters, data, total, hasPrevPage, hasNextPage, totalPages, page, isLoading, perPage, links } =
             this.state
@@ -179,6 +197,8 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
             resetFilters: this.resetFilters.bind(this),
             links,
             setIsLoading: this.setIsLoading.bind(this),
+            saveFilters: this.saveFilters.bind(this),
+            restoreFilters: this.restoreFilters.bind(this),
         }
 
         return <div className={cx('list-manager-container')}>{children(renderProps)}</div>

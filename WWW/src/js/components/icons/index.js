@@ -13,7 +13,8 @@ import { AiFillEye as ShowIcon } from 'react-icons/ai'
 import { GrUserAdmin as RoleIcon } from 'react-icons/gr'
 import { BsFillFileEarmarkImageFill as FileIcon } from 'react-icons/bs'
 import { RxAvatar as AvatarIcon } from 'react-icons/rx'
-
+import { FaHome as HomeIcon } from 'react-icons/fa'
+import { FaUser as UserIcon } from 'react-icons/fa'
 export {
     OrderingIcon,
     EditIcon,
@@ -29,4 +30,6 @@ export {
     RoleIcon,
     FileIcon,
     AvatarIcon,
+    HomeIcon,
+    UserIcon,
 }

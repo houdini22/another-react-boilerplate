@@ -21,19 +21,21 @@ class Filter extends React.Component<FilterProps, null> {
 
         return (
             <>
-                {options.map(({ label, value }) => {
-                    return (
-                        <Button
-                            key={`${name}${value}`}
-                            color={filters[name] === value ? 'warning' : 'secondary'}
-                            onClick={() => {
-                                setFilter(name, value).then(() => fetch())
-                            }}
-                        >
-                            {label}
-                        </Button>
-                    )
-                })}
+                {options
+                    .sort(({ label: labelA }, { label: labelB }) => labelA.localeCompare(labelB))
+                    .map(({ label, value }) => {
+                        return (
+                            <Button
+                                key={`${name}${value}`}
+                                color={filters[name] === value ? 'warning' : 'secondary'}
+                                onClick={() => {
+                                    setFilter(name, value).then(() => fetch())
+                                }}
+                            >
+                                {label}
+                            </Button>
+                        )
+                    })}
             </>
         )
     }
@@ -111,28 +113,30 @@ class Filter extends React.Component<FilterProps, null> {
         const { options, filters, setFilter, name, fetch } = this.props
         return (
             <>
-                {options.map(({ label, value }) => {
-                    return (
-                        <Button
-                            key={value}
-                            color={filters[name].indexOf(value) === -1 ? 'secondary' : 'warning'}
-                            onClick={() => {
-                                if (filters[name].indexOf(value) === -1) {
-                                    setFilter(name, [...filters[name], value]).then(() => fetch())
-                                } else {
-                                    setFilter(
-                                        name,
-                                        filters[name].filter((v) => {
-                                            return v !== value
-                                        }),
-                                    ).then(() => fetch())
-                                }
-                            }}
-                        >
-                            {label}
-                        </Button>
-                    )
-                })}
+                {options
+                    .sort(({ label: labelA }, { label: labelB }) => labelA.localeCompare(labelB))
+                    .map(({ label, value }) => {
+                        return (
+                            <Button
+                                key={value}
+                                color={filters[name].indexOf(value) === -1 ? 'secondary' : 'warning'}
+                                onClick={() => {
+                                    if (filters[name].indexOf(value) === -1) {
+                                        setFilter(name, [...filters[name], value]).then(() => fetch())
+                                    } else {
+                                        setFilter(
+                                            name,
+                                            filters[name].filter((v) => {
+                                                return v !== value
+                                            }),
+                                        ).then(() => fetch())
+                                    }
+                                }}
+                            >
+                                {label}
+                            </Button>
+                        )
+                    })}
             </>
         )
     }

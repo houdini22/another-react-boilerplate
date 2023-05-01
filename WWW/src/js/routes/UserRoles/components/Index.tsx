@@ -147,6 +147,8 @@ export class UsersView extends React.Component {
                                                 perPage,
                                                 total,
                                                 resetFilters,
+                                                restoreFilters,
+                                                saveFilters,
                                             }) => (
                                                 <PageContent>
                                                     <AddModal
@@ -238,7 +240,9 @@ export class UsersView extends React.Component {
                                                     </PageHeader.Container>
 
                                                     <Card
+                                                        name={'UserRolesList'}
                                                         header={<h1>Filters</h1>}
+                                                        withMinimizeIcon
                                                         headerActions={[
                                                             <Button
                                                                 color={'secondary'}
@@ -246,6 +250,19 @@ export class UsersView extends React.Component {
                                                                 disabled={!ifDeepDiff(defaultFilters, filters)}
                                                             >
                                                                 Reset Filters
+                                                            </Button>,
+                                                            <Button
+                                                                color={'success'}
+                                                                onClick={() => restoreFilters('roles')}
+                                                            >
+                                                                Restore Filters
+                                                            </Button>,
+                                                            <Button
+                                                                color={'warning'}
+                                                                onClick={() => saveFilters('roles')}
+                                                                disabled={!ifDeepDiff(defaultFilters, filters)}
+                                                            >
+                                                                Save Filters
                                                             </Button>,
                                                         ]}
                                                     >
