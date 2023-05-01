@@ -7,7 +7,7 @@ import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 const onSubmit = (values, _, { save, close, fetch }) => {
     return save({ ...values }).then(
         (role) => {
-            fetch().then(() => close())
+            fetch().then(() => {})
         },
         (response) => {
             throw new SubmissionError(processAPIerrorResponseToFormErrors(response))

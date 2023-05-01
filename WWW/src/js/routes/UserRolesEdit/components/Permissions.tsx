@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Card, Dropdown, Label, LoadingOverlay } from '../../../components'
-import { DeleteIcon } from '../../../components/icons'
+import { DeleteIcon, RoleIcon, UserIcon } from '../../../components/icons'
 
 interface HeaderProps {
     role: Object
@@ -8,7 +8,7 @@ interface HeaderProps {
 
 export class Permissions extends React.Component<HeaderProps, null> {
     render() {
-        const { role, setIsLoading, fetch, isLoading, deletePermission, deleteRolePermission } = this.props
+        const { role, setIsLoading, fetch, isLoading, deletePermission, deleteRolePermission, navigate } = this.props
         return (
             <Card header={<h1>Permissions</h1>}>
                 {role?.permissions?.map(({ id: _id, name, guard_name, is_deletable }) => {
@@ -18,6 +18,22 @@ export class Permissions extends React.Component<HeaderProps, null> {
                                 {name} - {guard_name}
                             </Dropdown.Trigger>
                             <Dropdown.Menu>
+                                <Dropdown.Item
+                                    color="info"
+                                    onClick={() => {
+                                        navigate(`/users?permissions=${_id}`)
+                                    }}
+                                >
+                                    <UserIcon /> Show Users
+                                </Dropdown.Item>
+                                <Dropdown.Item
+                                    color="info"
+                                    onClick={() => {
+                                        navigate(`/roles?permissions=${_id}`)
+                                    }}
+                                >
+                                    <RoleIcon /> Show Roles
+                                </Dropdown.Item>
                                 <Dropdown.Item
                                     color="danger"
                                     onClick={() => {

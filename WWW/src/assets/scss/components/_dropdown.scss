@@ -117,6 +117,20 @@
                     }
                 }
 
+                &.component-dropdown__dropdown-menu__items__item--color-info {
+                    & > a {
+                        color: $info_text_color;
+                        background: $info;
+                    }
+                }
+
+                &.component-dropdown__dropdown-menu__items__item--color-warning {
+                    & > a {
+                        color: $warning_text_color;
+                        background: $warning;
+                    }
+                }
+
                 &.component-dropdown__dropdown-menu__items__item--highlighted {
                     background-color: $default !important;
                     & > a:hover {

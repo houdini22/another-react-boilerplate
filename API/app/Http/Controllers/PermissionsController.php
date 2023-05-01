@@ -21,6 +21,8 @@ class PermissionsController extends Controller
 
         $query = Permission::with('roles')
             ->with('users')
+            ->with('users.roles')
+            ->with('users.roles.permissions')
             ->where(function ($query) use ($filters) {
                 if (!empty($filters['search'])) {
                     $query->where('name', 'like', "%{$filters['search']}%")

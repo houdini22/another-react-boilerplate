@@ -57,6 +57,8 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             deactivateUser,
             addRoleToNewUser,
             removeRoleFromNewUser,
+            addPermissionToNewUser,
+            removePermissionFromNewUser,
         } = this.props
         const renderProps = {
             users,
@@ -78,6 +80,8 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             deactivateUser,
             addRoleToNewUser,
             removeRoleFromNewUser,
+            addPermissionToNewUser,
+            removePermissionFromNewUser,
         }
 
         return (
@@ -114,6 +118,8 @@ const UsersManager = connect(mapStateToProps, (dispatch) => {
             deactivateUser: commonActions.deactivateUser,
             addRoleToNewUser: commonActions.addRoleToNewUser,
             removeRoleFromNewUser: commonActions.removeRoleFromNewUser,
+            addPermissionToNewUser: commonActions.addPermissionToNewUser,
+            removePermissionFromNewUser: commonActions.removePermissionFromNewUser,
         },
         dispatch,
     )

@@ -6,7 +6,6 @@ import { UsersManager } from '../../../containers/UsersManager'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import Header from './Header'
 import Add from './Add/Add'
-import Roles from './Roles/Roles'
 
 interface UsersViewState {}
 
@@ -16,7 +15,7 @@ export class UsersAddView extends React.Component<null, UsersViewState> {
             <RouteManager>
                 {({ navigate }) => (
                     <UserRolesManager>
-                        {({ roles, deletePermission }) => (
+                        {({ roles, permissions }) => (
                             <UsersManager>
                                 {({
                                     user,
@@ -27,6 +26,8 @@ export class UsersAddView extends React.Component<null, UsersViewState> {
                                     addUserRole,
                                     addRoleToNewUser,
                                     removeRoleFromNewUser,
+                                    addPermissionToNewUser,
+                                    removePermissionFromNewUser,
                                 }) => {
                                     return (
                                         <PageContent>
@@ -44,6 +45,9 @@ export class UsersAddView extends React.Component<null, UsersViewState> {
                                                         addRoleToNewUser={addRoleToNewUser}
                                                         removeRoleFromNewUser={removeRoleFromNewUser}
                                                         roles={roles}
+                                                        permissions={permissions}
+                                                        addPermissionToNewUser={addPermissionToNewUser}
+                                                        removePermissionFromNewUser={removePermissionFromNewUser}
                                                     />
                                                 </Col>
                                             </Row>

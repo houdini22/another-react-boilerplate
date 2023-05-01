@@ -71,12 +71,12 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps> {
                             label="Guard"
                             type="hidden"
                             inputOnly
-                            value={"web"}
+                            value={'web'}
                             component={FormField}
                         />
                     </>
                 )}
-                {permission !== "add" && (
+                {permission !== 'add' && (
                     <>
                         <Field
                             name="role_id"

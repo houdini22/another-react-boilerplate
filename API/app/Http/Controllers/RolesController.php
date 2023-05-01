@@ -96,8 +96,8 @@ class RolesController extends Controller
         }
 
         $request->validate([
-            'name' => ['required', Rule::unique('users')->where(function ($query) use ($user) {
-                return $query->where('id', '<>', $user->id);
+            'name' => ['required', Rule::unique('roles')->where(function ($query) use ($role) {
+                return $query->where('id', '<>', $role->id);
             })],
         ]);
 

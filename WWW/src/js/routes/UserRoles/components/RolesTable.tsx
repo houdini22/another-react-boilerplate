@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Button, Dropdown, Label, Popover, Table } from '../../../components'
-import { EditIcon, DeleteIcon, UserIcon, RoleIcon } from '../../../components/icons'
+import { EditIcon, DeleteIcon, UserIcon, RoleIcon, InfoIcon, DetailsIcon } from '../../../components/icons'
+import { TableSummary } from '../../../components/common/List/TableSummary'
 
 interface RolesTableProps {}
 
@@ -72,7 +73,37 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                                             {name}
                                                                         </Dropdown.Trigger>
                                                                         <Dropdown.Menu>
+                                                                            <Dropdown.Item type={'header'}>
+                                                                                <InfoIcon /> User ID: {_id}
+                                                                            </Dropdown.Item>
                                                                             <Dropdown.Item
+                                                                                color={'info'}
+                                                                                onClick={() => {
+                                                                                    navigate(
+                                                                                        `/permissions?user=${name}`,
+                                                                                    )
+                                                                                }}
+                                                                            >
+                                                                                <DetailsIcon /> Show Permissions
+                                                                            </Dropdown.Item>
+                                                                            <Dropdown.Item
+                                                                                color={'info'}
+                                                                                onClick={() => {
+                                                                                    navigate(`/roles?user=${name}`)
+                                                                                }}
+                                                                            >
+                                                                                <DetailsIcon /> Show Roles
+                                                                            </Dropdown.Item>
+                                                                            <Dropdown.Item
+                                                                                color={'info'}
+                                                                                onClick={() => {
+                                                                                    navigate(`/media?user=${name}`)
+                                                                                }}
+                                                                            >
+                                                                                <DetailsIcon /> Show Media
+                                                                            </Dropdown.Item>
+                                                                            <Dropdown.Item
+                                                                                color={'warning'}
                                                                                 onClick={() => {
                                                                                     navigate(`/users/edit?id=${_id}`)
                                                                                 }}
@@ -124,54 +155,62 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                     </Button>
                                                 </Popover.Trigger>
                                                 <Popover.Content scrollY>
-                                                    {role?.permissions?.map(
-                                                        ({
-                                                            id: _id,
-                                                            name,
-                                                            guard_name,
-                                                            is_deletable: _is_deletable,
-                                                        }) => {
-                                                            return (
-                                                                <div key={name}>
-                                                                    <Dropdown.Container triggerSize={'lg'}>
-                                                                        <Dropdown.Trigger
-                                                                            size="lg"
-                                                                            component={Label}
-                                                                            componentProps={{ block: true }}
-                                                                        >
-                                                                            {name} - {guard_name}
-                                                                        </Dropdown.Trigger>
-                                                                        <Dropdown.Menu>
-                                                                            <Dropdown.Item
-                                                                                color="danger"
-                                                                                onClick={() => {
-                                                                                    setIsLoading(true)
-
-                                                                                    return deleteRolePermission(role, {
-                                                                                        id: _id,
-                                                                                    }).then(() => {
-                                                                                        fetch().then(() => {
-                                                                                            setIsLoading(false)
-                                                                                            addToastNotification({
-                                                                                                title: 'Delete success.',
-                                                                                                text: 'Permission has been deleted.',
-                                                                                                type: 'success',
-                                                                                            })
-                                                                                        })
-                                                                                    })
-                                                                                }}
+                                                    {role?.permissions
+                                                        ?.sort(({ name: nameA }, { name: nameB }) =>
+                                                            nameA.localeCompare(nameB),
+                                                        )
+                                                        ?.map(
+                                                            ({
+                                                                id: _id,
+                                                                name,
+                                                                guard_name,
+                                                                is_deletable: _is_deletable,
+                                                            }) => {
+                                                                return (
+                                                                    <div key={name}>
+                                                                        <Dropdown.Container triggerSize={'lg'}>
+                                                                            <Dropdown.Trigger
+                                                                                size="lg"
+                                                                                component={Label}
+                                                                                componentProps={{ block: true }}
                                                                             >
-                                                                                <DeleteIcon /> Remove from Role
-                                                                            </Dropdown.Item>
-                                                                            {_is_deletable == 1 && (
+                                                                                {name} - {guard_name}
+                                                                            </Dropdown.Trigger>
+                                                                            <Dropdown.Menu>
+                                                                                <Dropdown.Item type={'header'}>
+                                                                                    <InfoIcon /> Permission ID: {_id}
+                                                                                </Dropdown.Item>
+                                                                                <Dropdown.Item
+                                                                                    color={'info'}
+                                                                                    onClick={() => {
+                                                                                        navigate(
+                                                                                            `/users?permissions=${_id}`,
+                                                                                        )
+                                                                                    }}
+                                                                                >
+                                                                                    <UserIcon /> Show Users
+                                                                                </Dropdown.Item>
+                                                                                <Dropdown.Item
+                                                                                    color={'info'}
+                                                                                    onClick={() => {
+                                                                                        navigate(
+                                                                                            `/roles?permissions=${_id}`,
+                                                                                        )
+                                                                                    }}
+                                                                                >
+                                                                                    <UserIcon /> Show Roles
+                                                                                </Dropdown.Item>
                                                                                 <Dropdown.Item
                                                                                     color="danger"
                                                                                     onClick={() => {
                                                                                         setIsLoading(true)
 
-                                                                                        return deletePermission({
-                                                                                            id: _id,
-                                                                                        }).then(() => {
+                                                                                        return deleteRolePermission(
+                                                                                            role,
+                                                                                            {
+                                                                                                id: _id,
+                                                                                            },
+                                                                                        ).then(() => {
                                                                                             fetch().then(() => {
                                                                                                 setIsLoading(false)
                                                                                                 addToastNotification({
@@ -183,15 +222,39 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                                                         })
                                                                                     }}
                                                                                 >
-                                                                                    <DeleteIcon /> Delete Permission
+                                                                                    <DeleteIcon /> Remove from Role
                                                                                 </Dropdown.Item>
-                                                                            )}
-                                                                        </Dropdown.Menu>
-                                                                    </Dropdown.Container>
-                                                                </div>
-                                                            )
-                                                        },
-                                                    )}
+                                                                                {_is_deletable == 1 && (
+                                                                                    <Dropdown.Item
+                                                                                        color="danger"
+                                                                                        onClick={() => {
+                                                                                            setIsLoading(true)
+
+                                                                                            return deletePermission({
+                                                                                                id: _id,
+                                                                                            }).then(() => {
+                                                                                                fetch().then(() => {
+                                                                                                    setIsLoading(false)
+                                                                                                    addToastNotification(
+                                                                                                        {
+                                                                                                            title: 'Delete success.',
+                                                                                                            text: 'Permission has been deleted.',
+                                                                                                            type: 'success',
+                                                                                                        },
+                                                                                                    )
+                                                                                                })
+                                                                                            })
+                                                                                        }}
+                                                                                    >
+                                                                                        <DeleteIcon /> Delete Permission
+                                                                                    </Dropdown.Item>
+                                                                                )}
+                                                                            </Dropdown.Menu>
+                                                                        </Dropdown.Container>
+                                                                    </div>
+                                                                )
+                                                            },
+                                                        )}
                                                 </Popover.Content>
                                             </Popover.Container>
                                         )}
@@ -219,18 +282,7 @@ export class RolesTable extends React.Component<RolesTableProps> {
                         )
                     })}
                 </Table.TBody>
-                <Table.TFoot alignRight>
-                    <Table.Tr>
-                        <Table.Td xs={12}>
-                            Records:{' '}
-                            <b>
-                                {(page - 1) * perPage + 1} - {Math.min(perPage * page, total)} / {total}
-                            </b>
-                            <br />
-                            Total pages: <b>{totalPages}</b>
-                        </Table.Td>
-                    </Table.Tr>
-                </Table.TFoot>
+                <TableSummary page={page} perPage={perPage} total={total} totalPages={totalPages} />
             </Table.Container>
         )
     }

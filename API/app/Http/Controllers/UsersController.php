@@ -78,6 +78,12 @@ class UsersController extends Controller
             $query = $query->whereDoesntHave('roles');
         }
 
+        if ($filters['has_permissions'] === 'yes') {
+            $query = $query->whereHas('permissions');
+        } else if ($filters['has_permissions'] === 'no') {
+            $query = $query->whereDoesntHave('permissions');
+        }
+
         $users = $query->paginate($filters['items_per_page']);
 
         return response()->json([

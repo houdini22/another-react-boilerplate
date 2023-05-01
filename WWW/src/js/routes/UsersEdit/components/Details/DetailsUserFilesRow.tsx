@@ -1,21 +1,25 @@
 import * as React from 'react'
-import {Button, Col, Row} from '../../../../components'
-import {FileIcon} from '../../../../components/icons'
-import {RouteManager} from "../../../../containers/RouteManager";
+import { Button, Col, Row } from '../../../../components'
+import { FileIcon } from '../../../../components/icons'
+import { RouteManager } from '../../../../containers/RouteManager'
 
 class DetailsUserFilesRow extends React.Component {
     render() {
-        const {user} = this.props
+        const { user } = this.props
 
         return (
             <RouteManager>
-                {({navigate}) => (
+                {({ navigate }) => (
                     <Row>
-                        <Col xs={4} style={{marginBottom: 10}}>
+                        <Col xs={4} style={{ marginBottom: 10 }}>
                             Files
                         </Col>
-                        <Col xs={8} style={{marginBottom: 10}}>
-                            <Button color={'info'} icon={<FileIcon/>} onClick={() => navigate(`/media?user=${user.name}`)}>
+                        <Col xs={8} style={{ marginBottom: 10 }}>
+                            <Button
+                                color={'info'}
+                                icon={<FileIcon />}
+                                onClick={() => navigate(`/media?user=${user.name}`)}
+                            >
                                 {user.files_count}
                             </Button>
                         </Col>
@@ -26,5 +30,5 @@ class DetailsUserFilesRow extends React.Component {
     }
 }
 
-export {DetailsUserFilesRow}
-export default {DetailsUserFilesRow}
+export { DetailsUserFilesRow }
+export default { DetailsUserFilesRow }

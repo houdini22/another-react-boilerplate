@@ -14,7 +14,7 @@ const onSubmit = (values, _, { editPermission, addToastNotification, fetch, clos
             addToastNotification({
                 type: 'success',
                 title: 'Save success.',
-                text: 'Role has been saved.',
+                text: 'Permission has been saved.',
             })
         },
         (response) => {

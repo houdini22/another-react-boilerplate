@@ -7,8 +7,8 @@ import { DetailsUserEmailVerifiedRow } from './DetailsUserEmailVerifiedRow'
 import { DetailsUserCreatedAtRow } from './DetailsUserCreatedAtRow'
 import { DetailsUserUpdatedAtRow } from './DetailsUserUpdatedAtRow'
 import { DetailsUserFilesRow } from './DetailsUserFilesRow'
-import {DetailsUserPermissionsRow} from "./DetailsUserPermissionsRow";
-import {DetailsUserRolesRow} from "./DetailsUserRolesRow";
+import { DetailsUserPermissionsRow } from './DetailsUserPermissionsRow'
+import { DetailsUserRolesRow } from './DetailsUserRolesRow'
 
 interface HeaderProps {
     user: Object

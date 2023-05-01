@@ -3,13 +3,13 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { AddPermissionForm as FormComponent } from './AddPermissionForm'
 import { reduxForm, formValueSelector } from 'redux-form'
-import {processAPIerrorResponseToFormErrors} from "../../../../modules/http";
+import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 import { SubmissionError } from 'redux-form'
 
-const onSubmit = (values, _, {setIsLoading, addPermission, role, fetchPermissions, fetchOne}) => {
+const onSubmit = (values, _, { setIsLoading, addPermission, role, fetchPermissions, fetchOne }) => {
     setIsLoading(true)
 
-    return addPermission({ id: role.id }, { ...values, role_id: role.id, guard_name: "web" }).then(
+    return addPermission({ id: role.id }, { ...values, role_id: role.id, guard_name: 'web' }).then(
         () => {
             Promise.all([fetchPermissions(), fetchOne(role.id)]).then(() => {
                 setIsLoading(false)
@@ -46,11 +46,11 @@ const AddPermissionFormContainer = compose(
         destroyOnUnmount: true,
         form: 'AddPermissionForm',
         initialValues: {
-            name: "",
-            guard_name: "web",
+            name: '',
+            guard_name: 'web',
             role_id: 0,
-            permission: "add"
-        }
+            permission: 'add',
+        },
     }),
 )(FormComponent)
 

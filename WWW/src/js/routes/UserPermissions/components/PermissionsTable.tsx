@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Button, Dropdown, Label, Popover, Table } from '../../../components'
-import { EditIcon, DeleteIcon, UserIcon, RoleIcon } from '../../../components/icons'
+import { EditIcon, DeleteIcon, UserIcon, RoleIcon, InfoIcon, DetailsIcon } from '../../../components/icons'
+import { TableSummary } from '../../../components/common/List/TableSummary'
 
 interface RolesTableProps {}
 
@@ -73,6 +74,43 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                             {name}
                                                                         </Dropdown.Trigger>
                                                                         <Dropdown.Menu>
+                                                                            <Dropdown.Item type={'header'}>
+                                                                                <InfoIcon /> User ID: {_id}
+                                                                            </Dropdown.Item>
+                                                                            <Dropdown.Item
+                                                                                color={'info'}
+                                                                                onClick={() => {
+                                                                                    navigate(
+                                                                                        `/permissions?user=${name}`,
+                                                                                    )
+                                                                                }}
+                                                                            >
+                                                                                <DetailsIcon /> Show Permissions
+                                                                            </Dropdown.Item>
+                                                                            <Dropdown.Item
+                                                                                color={'info'}
+                                                                                onClick={() => {
+                                                                                    navigate(`/roles?user=${name}`)
+                                                                                }}
+                                                                            >
+                                                                                <DetailsIcon /> Show Roles
+                                                                            </Dropdown.Item>
+                                                                            <Dropdown.Item
+                                                                                color={'info'}
+                                                                                onClick={() => {
+                                                                                    navigate(`/media?user=${name}`)
+                                                                                }}
+                                                                            >
+                                                                                <DetailsIcon /> Show Media
+                                                                            </Dropdown.Item>
+                                                                            <Dropdown.Item
+                                                                                color={'warning'}
+                                                                                onClick={() => {
+                                                                                    navigate(`/users/edit?id=${_id}`)
+                                                                                }}
+                                                                            >
+                                                                                <EditIcon /> Edit User
+                                                                            </Dropdown.Item>
                                                                             <Dropdown.Item
                                                                                 color="danger"
                                                                                 onClick={() => {
@@ -136,12 +174,34 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                                             {name} - {guard_name}
                                                                         </Dropdown.Trigger>
                                                                         <Dropdown.Menu>
+                                                                            <Dropdown.Item type={'header'}>
+                                                                                <InfoIcon /> Role ID: {_id}
+                                                                            </Dropdown.Item>
                                                                             <Dropdown.Item
+                                                                                color={'warning'}
+                                                                                onClick={() => {
+                                                                                    navigate(`/users?roles=${_id}`)
+                                                                                }}
+                                                                            >
+                                                                                <DetailsIcon /> Show Users
+                                                                            </Dropdown.Item>
+                                                                            <Dropdown.Item
+                                                                                color={'warning'}
+                                                                                onClick={() => {
+                                                                                    navigate(
+                                                                                        `/permissions?roles=${_id}`,
+                                                                                    )
+                                                                                }}
+                                                                            >
+                                                                                <DetailsIcon /> Show Permissions
+                                                                            </Dropdown.Item>
+                                                                            <Dropdown.Item
+                                                                                color={'warning'}
                                                                                 onClick={() => {
                                                                                     navigate(`/roles/edit?id=${_id}`)
                                                                                 }}
                                                                             >
-                                                                                <DeleteIcon /> Edit Role
+                                                                                <EditIcon /> Edit Role
                                                                             </Dropdown.Item>
                                                                             <Dropdown.Item
                                                                                 color="danger"
@@ -223,18 +283,7 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                         )
                     })}
                 </Table.TBody>
-                <Table.TFoot alignRight>
-                    <Table.Tr>
-                        <Table.Td xs={12}>
-                            Records:{' '}
-                            <b>
-                                {(page - 1) * perPage + 1} - {Math.min(perPage * page, total)} / {total}
-                            </b>
-                            <br />
-                            Total pages: <b>{totalPages}</b>
-                        </Table.Td>
-                    </Table.Tr>
-                </Table.TFoot>
+                <TableSummary page={page} perPage={perPage} total={total} totalPages={totalPages} />
             </Table.Container>
         )
     }

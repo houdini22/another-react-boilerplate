@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Card, Dropdown, Label, LoadingOverlay } from '../../../../components'
-import { DeleteIcon, RoleIcon } from '../../../../components/icons'
+import { DeleteIcon, InfoIcon, DetailsIcon, EditIcon } from '../../../../components/icons'
 
 interface AddRoleProps {
     roles: any
@@ -18,33 +18,61 @@ export class Permissions extends React.Component<AddRoleProps, null> {
         const permissionsFromRoles = {}
 
         user?.roles?.forEach(({ permissions }) => {
-            permissions?.forEach(({ name, ...rest }) => {
+            permissions?.forEach(({ name, pivot, ...rest }) => {
                 if (permissionsFromRoles[name]) {
                     if (!permissionsFromRoles[name].occurence) {
                         permissionsFromRoles[name].occurence = 1
                     }
                     permissionsFromRoles[name].occurence++
+
+                    if (pivot?.model_type) {
+                        permissionsFromRoles[name] = {
+                            name,
+                            pivot,
+                            ...rest,
+                            occurrence: permissionsFromRoles[name].occurence,
+                        }
+                        console.log(permissionsFromRoles[name])
+                    }
                 } else {
-                    permissionsFromRoles[name] = { name, ...rest }
+                    permissionsFromRoles[name] = { name, pivot, ...rest }
                 }
             })
         })
 
-        user?.permissions?.forEach(({ id, guard_name, is_deletable, name, ...rest }) => {
+        user?.permissions?.forEach(({ name, pivot, ...rest }) => {
             if (permissionsFromRoles[name]) {
                 if (!permissionsFromRoles[name].occurence) {
                     permissionsFromRoles[name].occurence = 1
                 }
                 permissionsFromRoles[name].occurence++
+
+                if (pivot?.model_type) {
+                    permissionsFromRoles[name] = {
+                        name,
+                        pivot,
+                        ...rest,
+                        occurrence: permissionsFromRoles[name].occurence,
+                    }
+                }
             } else {
-                permissionsFromRoles[name] = { name, id, guard_name, is_deletable, ...rest }
+                permissionsFromRoles[name] = { name, pivot, ...rest }
             }
         })
 
         return permissionsFromRoles
     }
     render() {
-        const { setIsLoading, deletePermission, fetchOne, user, isLoading, navigate, deleteUserPermission, fetchPermissions } = this.props
+        const {
+            setIsLoading,
+            deletePermission,
+            fetchOne,
+            user,
+            isLoading,
+            navigate,
+            deleteUserPermission,
+            fetchPermissions,
+        } = this.props
 
         const permissionsFromRoles = this.getPermissionFromRoles()
 
@@ -60,12 +88,16 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                                     {name} - {guard_name} {occurence > 0 && `(${occurence})`}
                                 </Dropdown.Trigger>
                                 <Dropdown.Menu>
+                                    <Dropdown.Item type={'header'}>
+                                        <InfoIcon /> Permission ID {id}
+                                    </Dropdown.Item>
                                     <Dropdown.Item
+                                        color={'info'}
                                         onClick={() => {
                                             navigate(`/roles?permissions=${id}`)
                                         }}
                                     >
-                                        <DeleteIcon /> Show Roles
+                                        <DetailsIcon /> Show Roles
                                     </Dropdown.Item>
                                     {model_type.match(/User/) && (
                                         <Dropdown.Item

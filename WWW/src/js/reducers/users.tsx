@@ -1,5 +1,8 @@
 import { http } from '../modules/http'
 
+import { actions as rolesActions } from './roles'
+const { addUserPermission } = rolesActions
+
 const SET_IS_LOADING = 'users::set-is-loading'
 const SET_IS_LOADED = 'users::set-is-loaded'
 const SET_FETCH_ERROR = 'users::set-fetch-error'
@@ -8,6 +11,9 @@ const SET_UPLOAD_PROGRESS = 'users::set-upload-progress'
 const ADD_ROLE_TO_NEW_USER = 'users::add-role-to-new-user'
 const REMOVE_ROLE_FROM_NEW_USER = 'users::remove-role-from-new-user'
 const CLEAR_NEW_USER_ROLES = 'users::clear-new-user-roles'
+const ADD_PERMISSION_TO_NEW_USER = 'users::add-permission-to-new-user'
+const REMOVE_PERMISSION_FROM_NEW_USER = 'users::add-permission-to-new-user'
+const CLEAR_NEW_USER_PERMISSIONS = 'users::clear-new-user-permissions'
 
 const setIsLoading = (data) => (dispatch) => {
     dispatch({ type: SET_IS_LOADING, payload: data })
@@ -59,18 +65,22 @@ const addUser = (params) => (dispatch, state) => {
             .post('/users/add', params)
             .then(({ data: { user } }) => {
                 const {
-                    users: { newUserRoles },
+                    users: { newUserRoles, newUserPermissions },
                 } = state()
                 const promises = []
 
                 newUserRoles.forEach((id) => {
                     promises.push(dispatch(addUserRole({ id: user.id }, { id })))
                 })
+                newUserPermissions.forEach((id) => {
+                    promises.push(dispatch(addUserPermission({ id: user.id }, { id })))
+                })
 
                 Promise.all(promises).then(() => {
                     dispatch(setIsLoading(false))
                     dispatch(setIsLoaded(true))
                     dispatch(clearNewUserRoles())
+                    dispatch(clearNewUserPermissions())
 
                     resolve(user)
                 })
@@ -264,8 +274,17 @@ const addRoleToNewUser = (role) => (dispatch) => {
 const removeRoleFromNewUser = (role) => (dispatch) => {
     dispatch({ type: REMOVE_ROLE_FROM_NEW_USER, payload: role })
 }
+const addPermissionToNewUser = (permission) => (dispatch) => {
+    dispatch({ type: ADD_PERMISSION_TO_NEW_USER, payload: permission })
+}
+const removePermissionFromNewUser = (permission) => (dispatch) => {
+    dispatch({ type: REMOVE_PERMISSION_FROM_NEW_USER, payload: permission })
+}
 const clearNewUserRoles = () => (dispatch) => {
     dispatch({ type: CLEAR_NEW_USER_ROLES })
+}
+const clearNewUserPermissions = () => (dispatch) => {
+    dispatch({ type: CLEAR_NEW_USER_PERMISSIONS })
 }
 export const actions = {
     fetch,
@@ -286,6 +305,8 @@ export const actions = {
     deactivateUser,
     addRoleToNewUser,
     removeRoleFromNewUser,
+    addPermissionToNewUser,
+    removePermissionFromNewUser,
 }
 
 // ------------------------------------
@@ -336,10 +357,30 @@ const ACTION_HANDLERS = {
             }),
         }
     },
+    [ADD_PERMISSION_TO_NEW_USER]: (state, { payload }) => {
+        return {
+            ...state,
+            newUserPermissions: [...state.newUserPermissions, payload],
+        }
+    },
+    [REMOVE_PERMISSION_FROM_NEW_USER]: (state, { payload }) => {
+        return {
+            ...state,
+            newUserPermissions: state.newUserPermissions.filter((role) => {
+                return role !== payload
+            }),
+        }
+    },
     [CLEAR_NEW_USER_ROLES]: (state) => {
         return {
             ...state,
             newUserRoles: [],
+        }
+    },
+    [CLEAR_NEW_USER_PERMISSIONS]: (state) => {
+        return {
+            ...state,
+            newUserPermissions: [],
         }
     },
 }
@@ -355,6 +396,7 @@ const getInitialState = () => ({
     fetchError: null,
     uploadProgress: -1,
     newUserRoles: [],
+    newUserPermissions: [],
 })
 
 export default function cmsPagesReducer(state = getInitialState(), action) {

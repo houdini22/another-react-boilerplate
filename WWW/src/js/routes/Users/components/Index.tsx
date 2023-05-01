@@ -40,10 +40,11 @@ export class UsersView extends React.Component<null, UsersViewState> {
             permissions: [],
             files: 'yes_or_no',
             has_roles: 'yes_or_no',
+            has_permissions: 'yes_or_no',
         }
         return (
             <RouteManager>
-                {({ navigate, query: { roles: rolesFromUri = '' } }) => (
+                {({ navigate, query: { roles: rolesFromUri = '', permissions: permissionsFromUri = '' } }) => (
                     <UserRolesManager>
                         {({ roles, deleteRole, permissions, deleteUserPermission, deletePermission }) => {
                             return (
@@ -52,6 +53,9 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                     defaultFilters={defaultFilters}
                                     urlFilters={{
                                         roles: rolesFromUri ? rolesFromUri.split(',').map((n) => Number(n)) : [],
+                                        permissions: permissionsFromUri
+                                            ? permissionsFromUri.split(',').map((n) => Number(n))
+                                            : [],
                                     }}
                                 >
                                     {({
@@ -85,7 +89,6 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                             close={() => this.setUserToDelete(false)}
                                                         />
                                                         <Header navigate={navigate} />
-
                                                         <UsersFilters
                                                             filters={filters}
                                                             setFilter={setFilter}

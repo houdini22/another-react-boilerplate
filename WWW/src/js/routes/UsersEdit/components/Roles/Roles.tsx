@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Card, Dropdown, Label, LoadingOverlay } from '../../../../components'
-import { DeleteIcon, RoleIcon } from '../../../../components/icons'
+import { DeleteIcon, DetailsIcon, InfoIcon, EditIcon } from '../../../../components/icons'
 
 interface AddRoleProps {
     roles: any
@@ -26,14 +26,28 @@ export class Roles extends React.Component<AddRoleProps, null> {
                                     {name} - {guard_name}
                                 </Dropdown.Trigger>
                                 <Dropdown.Menu>
+                                    <Dropdown.Item type="header">
+                                        <InfoIcon /> Role id {_id}
+                                    </Dropdown.Item>
                                     <Dropdown.Item
+                                        color={'info'}
                                         onClick={() => {
                                             setIsLoading(true)
 
                                             navigate(`/permissions?roles=${_id}`)
                                         }}
                                     >
-                                        <RoleIcon /> Show Role permissions
+                                        <DetailsIcon /> Show Role Permissions
+                                    </Dropdown.Item>
+                                    <Dropdown.Item
+                                        color={'warning'}
+                                        onClick={() => {
+                                            setIsLoading(true)
+
+                                            navigate(`/roles/edit?id=${_id}`)
+                                        }}
+                                    >
+                                        <EditIcon /> Edit Role
                                     </Dropdown.Item>
                                     <Dropdown.Item
                                         color="danger"
