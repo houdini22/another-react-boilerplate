@@ -270,6 +270,23 @@ const deleteUserRole =
         })
     }
 
+const deleteUserPermission =
+    ({ id: permission_id }, { id: user_id }) =>
+    (dispatch) => {
+        return new Promise<void>((resolve, reject) => {
+            dispatch(setFetchError(null))
+
+            http.post(`/permissions/delete_user_permission/${permission_id}/${user_id}`)
+                .then(({ data: { user } }) => {
+                    resolve()
+                })
+                .catch((e) => {
+                    dispatch(setFetchError(e))
+                    reject(e)
+                })
+        })
+    }
+
 const addUserPermission =
     ({ id: user_id }, { id: permission_id }) =>
     (dispatch) => {
@@ -319,6 +336,7 @@ export const actions = {
     fetchOnePermission,
     editPermission,
     addUserPermission,
+    deleteUserPermission,
 }
 
 // ------------------------------------

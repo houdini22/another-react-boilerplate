@@ -59,6 +59,7 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps> {
             permission,
             editPermission,
             addUserPermission,
+            deleteUserPermission,
         } = this.props
         const renderProps = {
             roles,
@@ -79,6 +80,7 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps> {
             permission,
             editPermission,
             addUserPermission,
+            deleteUserPermission,
         }
 
         return children(renderProps)
@@ -110,6 +112,7 @@ const UserRolesManager = connect(mapStateToProps, (dispatch) => {
             fetchOnePermission: commonActions.fetchOnePermission,
             editPermission: commonActions.editPermission,
             addUserPermission: commonActions.addUserPermission,
+            deleteUserPermission: commonActions.deleteUserPermission,
         },
         dispatch,
     )

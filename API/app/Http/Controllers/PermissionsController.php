@@ -297,4 +297,27 @@ class PermissionsController extends Controller
             'msg' => 'ok',
         ]);
     }
+
+    public function postDeleteUserPermission(Request $request) {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $permission = Permission::find($request->route('permission_id'));
+        if (!$permission) {
+            return $this->response404();
+        }
+
+        $u = User::find($request->route('user_id'));
+        if (!$u) {
+            return $this->response404();
+        }
+
+        $u->revokePermissionTo($permission);
+
+        return response()->json([
+            'msg' => 'ok',
+        ]);
+    }
 }

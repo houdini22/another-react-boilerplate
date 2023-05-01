@@ -20,6 +20,7 @@ const AddPermissionFormContainer = compose(
         enableReinitialize: true,
         destroyOnUnmount: true,
         form: 'AddPermissionForm',
+        onSubmit,
     }),
 )(FormComponent)
 

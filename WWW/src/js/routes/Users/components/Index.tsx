@@ -45,7 +45,7 @@ export class UsersView extends React.Component<null, UsersViewState> {
             <RouteManager>
                 {({ navigate, query: { roles: rolesFromUri = '' } }) => (
                     <UserRolesManager>
-                        {({ roles, deleteRole, permissions }) => {
+                        {({ roles, deleteRole, permissions, deleteUserPermission, deletePermission }) => {
                             return (
                                 <ListManager
                                     url={'/users/list'}
@@ -112,6 +112,8 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                 users={data}
                                                                 setIsLoading={setIsLoading}
                                                                 deleteUserRole={deleteUserRole}
+                                                                deleteUserPermission={deleteUserPermission}
+                                                                deletePermission={deletePermission}
                                                                 fetch={fetch}
                                                                 deleteRole={deleteRole}
                                                                 activateUser={activateUser}

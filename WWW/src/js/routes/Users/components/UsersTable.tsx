@@ -37,6 +37,8 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
             perPage,
             total,
             totalPages,
+            deleteUserPermission,
+            deletePermission,
         } = this.props
         return (
             <RouteManager>
@@ -156,6 +158,94 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                                         }}
                                                                                     >
                                                                                         <DeleteIcon /> Delete Role
+                                                                                    </Dropdown.Item>
+                                                                                )}
+                                                                            </Dropdown.Menu>
+                                                                        </Dropdown.Container>
+                                                                    ),
+                                                                )}
+                                                        </Popover.Content>
+                                                    </Popover.Container>
+                                                )}
+                                                {user?.permissions?.length > 0 && (
+                                                    <Popover.Container
+                                                        trigger={'hover'}
+                                                        placement={'left-center'}
+                                                        pixelsWidth={300}
+                                                    >
+                                                        <Popover.Trigger>
+                                                            <Button
+                                                                color={'info'}
+                                                                icon={<RoleIcon />}
+                                                                onClick={() =>
+                                                                    navigate(`/permissions?user=${user.name}`)
+                                                                }
+                                                            >
+                                                                {user?.permissions?.length || 0}
+                                                            </Button>
+                                                        </Popover.Trigger>
+                                                        <Popover.Content scrollY>
+                                                            {user?.permissions
+                                                                ?.sort(({ name: nameA }, { name: nameB }) =>
+                                                                    nameA.localeCompare(nameB),
+                                                                )
+                                                                .map(
+                                                                    ({
+                                                                        id: _id,
+                                                                        name,
+                                                                        guard_name,
+                                                                        is_deletable: _is_deletable,
+                                                                    }) => (
+                                                                        <Dropdown.Container
+                                                                            triggerSize={'lg'}
+                                                                            key={_id}
+                                                                        >
+                                                                            <Dropdown.Trigger
+                                                                                size="lg"
+                                                                                componentProps={{ block: true }}
+                                                                                component={Label}
+                                                                            >
+                                                                                {name} - {guard_name}
+                                                                            </Dropdown.Trigger>
+                                                                            <Dropdown.Menu>
+                                                                                <Dropdown.Item
+                                                                                    color="danger"
+                                                                                    onClick={() => {
+                                                                                        setIsLoading(true)
+
+                                                                                        return deleteUserPermission(
+                                                                                            {
+                                                                                                id: _id,
+                                                                                            },
+                                                                                            {
+                                                                                                id: user.id,
+                                                                                            },
+                                                                                        ).then(() => {
+                                                                                            fetch().then(() => {
+                                                                                                setIsLoading(false)
+                                                                                            })
+                                                                                        })
+                                                                                    }}
+                                                                                >
+                                                                                    <DeleteIcon /> Delete from User
+                                                                                </Dropdown.Item>
+                                                                                {_is_deletable == 1 && (
+                                                                                    <Dropdown.Item
+                                                                                        color="danger"
+                                                                                        onClick={() => {
+                                                                                            setIsLoading(true)
+
+                                                                                            return deletePermission(
+                                                                                                _id,
+                                                                                            ).then(() => {
+                                                                                                fetch().then(() => {
+                                                                                                    setIsLoading(false)
+                                                                                                })
+                                                                                            })
+                                                                                        }}
+                                                                                    >
+                                                                                        <DeleteIcon /> Delete Permission
+                                                                                        Permanently
                                                                                     </Dropdown.Item>
                                                                                 )}
                                                                             </Dropdown.Menu>

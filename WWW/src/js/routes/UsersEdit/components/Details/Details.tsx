@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { Card, Col, LoadingOverlay, Row } from '../../../../components'
-import { formatDateTime } from '../../../../helpers/date-time'
+import { Card, LoadingOverlay, Tabs } from '../../../../components'
 import { DetailsUserPrimaryInfoRow } from './DetailsUserPrimaryInfoRow'
 import { DetailsUserAvatarRow } from './DetailsUserAvatarRow'
 import { DetailsUserLastActiveRow } from './DetailsUserLastActiveRow'
@@ -46,24 +45,36 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
         const { isLoading, user, setUploadProgress, setIsLoading, uploadProgress, sendAvatar, fetchOne } = this.props
         return (
             <Card header={<h1>Details</h1>}>
-                <DetailsUserPrimaryInfoRow user={user} />
-                <DetailsUserAvatarRow
-                    user={user}
-                    openModal={this.openModal.bind(this)}
-                    closeModal={this.closeModal.bind(this)}
-                    setUploadProgress={setUploadProgress}
-                    setIsLoading={setIsLoading}
-                    sendAvatar={sendAvatar}
-                    fetchOne={fetchOne}
-                    isLoading={isLoading}
-                    visible={modalVisible}
-                    uploadProgress={uploadProgress}
-                />
-                <DetailsUserCreatedAtRow user={user} />
-                <DetailsUserUpdatedAtRow user={user} />
-                <DetailsUserLastActiveRow user={user} />
-                <DetailsUserEmailVerifiedRow user={user} />
-                <DetailsUserFilesRow user={user} />
+                <Tabs.Container>
+                    <Tabs.Tab name={'general_info'}>
+                        <Tabs.Trigger>General info</Tabs.Trigger>
+                        <Tabs.Content>
+                            <DetailsUserPrimaryInfoRow user={user} />
+                            <DetailsUserAvatarRow
+                                user={user}
+                                openModal={this.openModal.bind(this)}
+                                closeModal={this.closeModal.bind(this)}
+                                setUploadProgress={setUploadProgress}
+                                setIsLoading={setIsLoading}
+                                sendAvatar={sendAvatar}
+                                fetchOne={fetchOne}
+                                isLoading={isLoading}
+                                visible={modalVisible}
+                                uploadProgress={uploadProgress}
+                            />
+                        </Tabs.Content>
+                    </Tabs.Tab>
+                    <Tabs.Tab name={'details'}>
+                        <Tabs.Trigger>Details</Tabs.Trigger>
+                        <Tabs.Content>
+                            <DetailsUserCreatedAtRow user={user} />
+                            <DetailsUserUpdatedAtRow user={user} />
+                            <DetailsUserLastActiveRow user={user} />
+                            <DetailsUserEmailVerifiedRow user={user} />
+                            <DetailsUserFilesRow user={user} />
+                        </Tabs.Content>
+                    </Tabs.Tab>
+                </Tabs.Container>
                 {isLoading && <LoadingOverlay />}
             </Card>
         )

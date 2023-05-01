@@ -44,7 +44,7 @@ export class Permissions extends React.Component<AddRoleProps, null> {
         return permissionsFromRoles
     }
     render() {
-        const { setIsLoading, deletePermission, fetchOne, user, isLoading, navigate } = this.props
+        const { setIsLoading, deletePermission, fetchOne, user, isLoading, navigate, deleteUserPermission } = this.props
 
         const permissionsFromRoles = this.getPermissionFromRoles()
 
@@ -53,13 +53,36 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                 {Object.keys(permissionsFromRoles)
                     .map((key) => permissionsFromRoles[key])
                     .sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                    .map(({ id, name, guard_name, is_deletable, occurence }) => {
+                    .map(({ id, name, guard_name, is_deletable, occurence, pivot: { model_type = '' } = {} }) => {
                         return (
                             <Dropdown.Container triggerSize={'lg'} key={id}>
                                 <Dropdown.Trigger component={Label} componentProps={{ block: true }}>
                                     {name} - {guard_name} {occurence > 0 && `(${occurence})`}
                                 </Dropdown.Trigger>
                                 <Dropdown.Menu>
+                                    <Dropdown.Item
+                                        onClick={() => {
+                                            navigate(`/roles?permissions=${id}`)
+                                        }}
+                                    >
+                                        <DeleteIcon /> Show Roles
+                                    </Dropdown.Item>
+                                    {model_type.match(/User/) && (
+                                        <Dropdown.Item
+                                            color="danger"
+                                            onClick={() => {
+                                                setIsLoading(true)
+
+                                                return deleteUserPermission({ id }, user).then(() => {
+                                                    Promise.all([fetchOne(user['id'])]).then(() => {
+                                                        setIsLoading(false)
+                                                    })
+                                                })
+                                            }}
+                                        >
+                                            <DeleteIcon /> Delete from User
+                                        </Dropdown.Item>
+                                    )}
                                     {is_deletable == 1 && (
                                         <Dropdown.Item
                                             color="danger"
@@ -76,13 +99,6 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                                             <DeleteIcon /> Delete Permission Permanently
                                         </Dropdown.Item>
                                     )}
-                                    <Dropdown.Item
-                                        onClick={() => {
-                                            navigate(`/roles?permissions=${id}`)
-                                        }}
-                                    >
-                                        <DeleteIcon /> Show Roles
-                                    </Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown.Container>
                         )
