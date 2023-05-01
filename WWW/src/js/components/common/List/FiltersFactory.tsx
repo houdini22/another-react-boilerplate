@@ -14,7 +14,7 @@ interface FiltersFactoryProps {
 
 class FiltersFactory extends React.Component<FiltersFactoryProps, null> {
     renderBody(body) {
-        const { filters, setFilter, fetch } = this.props
+        const { filters, setFilter, fetch, defaultFilters } = this.props
 
         return body.map(({ type, label, name, placeholder, options }) => {
             return (
@@ -28,6 +28,7 @@ class FiltersFactory extends React.Component<FiltersFactoryProps, null> {
                     name={name}
                     placeholder={placeholder}
                     options={options}
+                    defaultFilters={defaultFilters}
                 />
             )
         })

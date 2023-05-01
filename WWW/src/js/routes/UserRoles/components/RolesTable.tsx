@@ -57,6 +57,9 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                     </Button>
                                                 </Popover.Trigger>
                                                 <Popover.Content scrollY>
+                                                    <Typography.Container>
+                                                        <h4>Users</h4>
+                                                    </Typography.Container>
                                                     {role?.users
                                                         ?.sort(({ name: nameA }, { name: nameB }) =>
                                                             nameA.localeCompare(nameB),
@@ -64,9 +67,6 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                         .map(({ id: _id, name }) => {
                                                             return (
                                                                 <div key={name}>
-                                                                    <Typography.Container>
-                                                                        <h4>Users</h4>
-                                                                    </Typography.Container>
                                                                     <Dropdown.Container triggerSize={'lg'}>
                                                                         <Dropdown.Trigger
                                                                             size="lg"
@@ -158,6 +158,9 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                     </Button>
                                                 </Popover.Trigger>
                                                 <Popover.Content scrollY>
+                                                    <Typography.Container>
+                                                        <h4>Permissions</h4>
+                                                    </Typography.Container>
                                                     {role?.permissions
                                                         ?.sort(({ name: nameA }, { name: nameB }) =>
                                                             nameA.localeCompare(nameB),
@@ -171,9 +174,7 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                             }) => {
                                                                 return (
                                                                     <div key={name}>
-                                                                        <Typography.Container>
-                                                                            <h4>Permissions</h4>
-                                                                        </Typography.Container>
+
                                                                         <Dropdown.Container triggerSize={'lg'}>
                                                                             <Dropdown.Trigger
                                                                                 size="lg"

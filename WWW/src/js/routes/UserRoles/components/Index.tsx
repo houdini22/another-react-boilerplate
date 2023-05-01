@@ -2,17 +2,12 @@ import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { RouteManager } from '../../../containers/RouteManager'
 import {
-    Alert,
     Button,
     Card,
     Col,
-    Dropdown,
-    Label,
     LoadingOverlay,
     Modal,
-    PageHeader,
     Row,
-    Table,
 } from '../../../components'
 import { UserRolesManager } from '../containers/UserRolesManager'
 import AddModal from './AddRole/AddModal'
@@ -23,7 +18,6 @@ import RolesTable from './RolesTable'
 import { Pagination } from '../../../components/common/List/Pagination'
 import RolesFilters from './RolesFilters'
 import { ifDeepDiff } from '../../../utils/javascript'
-import { FaHome as HomeIcon } from 'react-icons/fa'
 import Header from './Header'
 
 export class UsersView extends React.Component {
@@ -85,7 +79,7 @@ export class UsersView extends React.Component {
     }
 
     render() {
-        const { confirmDeleteModalVisible, edit, addModalVisible, addPermissionModalVisible } = this.state
+        const { confirmDeleteModalVisible, addModalVisible, addPermissionModalVisible } = this.state
 
         return (
             <RouteManager>
@@ -111,6 +105,7 @@ export class UsersView extends React.Component {
                                         users: 'yes_or_no',
                                         user: '',
                                         roles: [],
+                                        search: ''
                                     }
 
                                     return (
@@ -121,7 +116,7 @@ export class UsersView extends React.Component {
                                                 user,
                                                 permissions: permissionsFromUri
                                                     ? permissionsFromUri.split(',').map((n) => Number(n))
-                                                    : '',
+                                                    : [],
                                             }}
                                         >
                                             {({
@@ -235,6 +230,7 @@ export class UsersView extends React.Component {
                                                             fetch={fetch}
                                                             permissions={permissions}
                                                             roles={roles}
+                                                            defaultFilters={defaultFilters}
                                                         />
                                                         {isLoading && <LoadingOverlay />}
                                                     </Card>

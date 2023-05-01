@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styles from '../../../../assets/scss/components/_list_manager.scss'
 import classNames from 'classnames/bind'
-import { Button, FormField, Col, Row } from '../../../components'
+import { Button, FormField, Col, Row, Label } from '../../../components'
 
 const cx = classNames.bind(styles)
 
@@ -140,13 +140,33 @@ class Filter extends React.Component<FilterProps, null> {
             </>
         )
     }
+    getChanged(defaultFilters, filters, name, type) {
+        if (type === 'order' && (defaultFilters['order_by'] !== filters['order_by'] || defaultFilters['order_direction'] !== filters['order_direction'])) {
+            return true;
+        }
+
+        const defaultFilter = defaultFilters[name];
+        const filter = filters[name];
+
+        if (Array.isArray(defaultFilter) && Array.isArray(filter)) {
+            return defaultFilter.join("") !== filter.join("")
+        }
+
+        return defaultFilter !== filter
+    }
     render() {
-        const { type, name, placeholder } = this.props
+        const { type, name, placeholder, defaultFilters = {}, filters, } = this.props
+
+        const changed = this.getChanged(defaultFilters, filters, name, type);
+
         return (
             <div className={cx('filter')}>
-                <Row>
+                <Row >
                     <Col xs={4}>
-                        <span>{this.renderFilterLabel()}:</span>
+                        <span>
+                            {this.renderFilterLabel()}:
+                            {changed && <Label color={'info'}>Active</Label>}
+                        </span>
                     </Col>
                     <Col xs={8}>
                         {type === 'search' && this.renderSearch()}

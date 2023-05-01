@@ -3,6 +3,7 @@ import { Filters as FiltersContainer } from '../../../components/common/List/Fil
 import { Filter } from '../../../components/common/List/Filter'
 import { Button, LoadingOverlay, Card } from '../../../components'
 import { ifDeepDiff } from '../../../utils/javascript'
+import {FiltersFactory} from "../../../components/common/List/FiltersFactory";
 
 interface FiltersProps {
     filters: Object
@@ -49,122 +50,114 @@ export class Filters extends React.Component<FiltersProps, null> {
                     </Button>,
                 ]}
             >
-                <FiltersContainer>
-                    <Filter filters={filters} type={'search'} setFilter={setFilter} fetch={fetch} label={'Search'} />
-                    <Filter
-                        filters={filters}
-                        type={'text'}
-                        setFilter={setFilter}
-                        fetch={fetch}
-                        label={'User'}
-                        name={'user'}
-                        placeholder={'Username'}
-                    />
-                    <Filter
-                        filters={filters}
-                        options={[
-                            {
-                                label: 'yes or no',
-                                value: 'yes_or_no',
-                            },
-                            {
-                                label: 'yes',
-                                value: 'yes',
-                            },
-                            {
-                                label: 'no',
-                                value: 'no',
-                            },
-                        ]}
-                        type={'radio'}
-                        name={'has_roles'}
-                        setFilter={setFilter}
-                        fetch={fetch}
-                        label={'Has Roles'}
-                    />
-                    <Filter
-                        filters={filters}
-                        options={[
-                            {
-                                label: 'yes or no',
-                                value: 'yes_or_no',
-                            },
-                            {
-                                label: 'yes',
-                                value: 'yes',
-                            },
-                            {
-                                label: 'no',
-                                value: 'no',
-                            },
-                        ]}
-                        type={'radio'}
-                        name={'has_users'}
-                        setFilter={setFilter}
-                        fetch={fetch}
-                        label={'Has Users'}
-                    />
-                    <Filter
-                        filters={filters}
-                        type={'multiple'}
-                        name={'roles'}
-                        setFilter={setFilter}
-                        fetch={fetch}
-                        label={'Roles'}
-                        options={roles.map(({ id, name }) => {
-                            return {
-                                label: name,
-                                value: id,
-                            }
-                        })}
-                    />
-                    <Filter
-                        filters={filters}
-                        options={[
-                            {
-                                label: 'ID',
-                                value: 'id',
-                            },
-                            {
-                                label: 'Name',
-                                value: 'name',
-                            },
-                            {
-                                label: 'Users',
-                                value: 'users_count',
-                            },
-                            {
-                                label: 'Permissions',
-                                value: 'permissions_count',
-                            },
-                        ]}
-                        type={'order'}
-                        setFilter={setFilter}
-                        fetch={fetch}
-                    />
-                    <Filter
-                        filters={filters}
-                        options={[
-                            {
-                                label: '15',
-                                value: 15,
-                            },
-                            {
-                                label: '50',
-                                value: 50,
-                            },
-                            {
-                                label: '100',
-                                value: 100,
-                            },
-                        ]}
-                        type={'radio'}
-                        name={'items_per_page'}
-                        setFilter={setFilter}
-                        fetch={fetch}
-                        label={'Items per page'}
-                    />
-                </FiltersContainer>
+                <FiltersFactory
+                    filters={filters}
+                    setFilter={setFilter}
+                    defaultFilters={defaultFilters}
+                    fetch={fetch}
+                    body={[
+                        {
+                            type: 'search',
+                            label: 'Search',
+                            name: 'search'
+                        },
+                        {
+                            type: 'text',
+                            label: 'Username',
+                            name: 'user',
+                            placeholder: 'username',
+                        },
+                        {
+                            options: [
+                                {
+                                    label: 'yes or no',
+                                    value: 'yes_or_no',
+                                },
+                                {
+                                    label: 'yes',
+                                    value: 'yes',
+                                },
+                                {
+                                    label: 'no',
+                                    value: 'no',
+                                },
+                            ],
+                            type: 'radio',
+                            name: 'has_roles',
+                            label: 'Has Roles'
+                        },
+                        {
+                            options: [
+                                {
+                                    label: 'yes or no',
+                                    value: 'yes_or_no',
+                                },
+                                {
+                                    label: 'yes',
+                                    value: 'yes',
+                                },
+                                {
+                                    label: 'no',
+                                    value: 'no',
+                                },
+                            ],
+                            type: 'radio',
+                            name: 'has_users',
+                            label: 'Has Users',
+                        },
+                        {
+                            options: roles.map(({ id, name }) => {
+                                return {
+                                    label: name,
+                                    value: id,
+                                }
+                            }),
+                            name: 'roles',
+                            label: 'Roles',
+                            type: 'multiple'
+                        },
+                        {
+                            type: 'order',
+                            options: [
+                                {
+                                    label: 'ID',
+                                    value: 'id',
+                                },
+                                {
+                                    label: 'Name',
+                                    value: 'name',
+                                },
+                                {
+                                    label: 'Users',
+                                    value: 'users_count',
+                                },
+                                {
+                                    label: 'Permissions',
+                                    value: 'permissions_count',
+                                },
+                            ]
+                        },
+                        {
+                            type: 'radio',
+                            name: 'items_per_page',
+                            label: 'Items per page',
+                            options: [
+                                {
+                                    label: '15',
+                                    value: 15,
+                                },
+                                {
+                                    label: '50',
+                                    value: 50,
+                                },
+                                {
+                                    label: '100',
+                                    value: 100,
+                                },
+                            ]
+                        }
+                    ]}
+                />
                 {isLoading && <LoadingOverlay />}
             </Card>
         )

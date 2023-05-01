@@ -63,9 +63,7 @@ export class Permissions extends React.Component<HeaderProps, null> {
                                         onClick={() => {
                                             setIsLoading(true)
 
-                                            return deletePermission({
-                                                id: _id,
-                                            }).then(() => {
+                                            return deletePermission(_id).then(() => {
                                                 /*addToastNotification(
                                                         {
                                                             type: 'success',

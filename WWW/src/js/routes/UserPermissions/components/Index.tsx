@@ -91,6 +91,7 @@ export class UsersPermissions extends React.Component {
                                         has_roles: 'yes_or_no',
                                         has_users: 'yes_or_no',
                                         user: '',
+                                        search: ''
                                     }
 
                                     return (
@@ -101,7 +102,7 @@ export class UsersPermissions extends React.Component {
                                                 user,
                                                 roles: rolesFromUri
                                                     ? rolesFromUri.split(',').map((n) => Number(n))
-                                                    : '',
+                                                    : [],
                                             }}
                                         >
                                             {({

@@ -41,11 +41,13 @@ export class FilesFiles extends React.Component<null, null> {
                 <FiltersFactory
                     filters={filters}
                     setFilter={setFilter}
+                    defaultFilters={defaultFilters}
                     fetch={fetch}
                     body={[
                         {
                             type: 'search',
                             label: 'Search',
+                            name: 'search'
                         },
                         {
                             type: 'text',
