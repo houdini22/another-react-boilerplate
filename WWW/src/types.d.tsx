@@ -30,6 +30,7 @@ export interface Role {
     permissions: Array<Permission>
     is_deletable: boolean
     users_count: number
+    users: Array<User>
 }
 
 export interface Permission {

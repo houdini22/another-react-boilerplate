@@ -4,9 +4,13 @@ import { AddForm as FormComponent } from './AddForm'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 
-const onSubmit = (values, _, { save, setIsLoading, addToastNotification, reset }) => {
+const onSubmit = (
+    values,
+    _,
+    { save, setIsLoading, addToastNotification, reset, newRolePermissions, newRoleUsers, navigate },
+) => {
     setIsLoading(true)
-    return save({ ...values }).then(
+    return save({ ...values }, newRolePermissions, newRoleUsers).then(
         (role) => {
             setIsLoading(false)
             reset()
@@ -15,6 +19,7 @@ const onSubmit = (values, _, { save, setIsLoading, addToastNotification, reset }
                 title: 'Save success.',
                 text: 'Role has been saved.',
             })
+            navigate(`/roles/edit?id=${role.id}`)
         },
         (response) => {
             setIsLoading(false)

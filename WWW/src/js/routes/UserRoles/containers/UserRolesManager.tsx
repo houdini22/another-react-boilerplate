@@ -22,6 +22,10 @@ interface UserRolesManagerProps {
 }
 
 class UserRolesManagerBase extends React.Component<UserRolesManagerProps, null> {
+    state = {
+        newRolePermissions: [],
+        newRoleUsers: [],
+    }
     componentDidMount() {
         const { fetch, fetchOne, fetchPermissions, id, permissionId, fetchOnePermission } = this.props
         if (id) {
@@ -36,6 +40,44 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps, null> 
         if (permissionId) {
             fetchOnePermission(permissionId)
         }
+    }
+
+    addPermissionToNewRole(id) {
+        const { newRolePermissions } = this.state
+
+        const newPermissions = [...newRolePermissions]
+        newPermissions.push(id)
+
+        this.setState({ newRolePermissions: newPermissions })
+    }
+
+    removePermissionFromNewRole(id) {
+        const { newRolePermissions } = this.state
+
+        const newPermissions = [...newRolePermissions].filter(({ id: _id }) => {
+            return Number(id) !== Number(_id)
+        })
+
+        this.setState({ newRolePermissions: newPermissions })
+    }
+
+    addNewRoleToUser(id) {
+        const { newRoleUsers } = this.state
+
+        const newUsers = [...newRoleUsers]
+        newUsers.push(id)
+
+        this.setState({ newRoleUsers: newUsers })
+    }
+
+    removeNewRoleFromUser(id) {
+        const { newRoleUsers } = this.state
+
+        const newUsers = [...newRoleUsers].filter(({ id: _id }) => {
+            return Number(id) !== Number(_id)
+        })
+
+        this.setState({ newRoleUsers: newUsers })
     }
 
     render() {
@@ -61,7 +103,9 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps, null> 
             addUserPermission,
             deleteUserPermission,
             isLoading,
+            addUserRole,
         } = this.props
+        const { newRolePermissions, newRoleUsers } = this.state
         const renderProps = {
             roles,
             setIsLoading,
@@ -83,6 +127,13 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps, null> 
             addUserPermission,
             deleteUserPermission,
             isLoading,
+            newRolePermissions,
+            addPermissionToNewRole: this.addPermissionToNewRole.bind(this),
+            removePermissionFromNewRole: this.removePermissionFromNewRole.bind(this),
+            addNewRoleToUser: this.addNewRoleToUser.bind(this),
+            removeNewRoleFromUser: this.removeNewRoleFromUser.bind(this),
+            newRoleUsers,
+            addUserRole,
         }
 
         return children(renderProps)
@@ -115,6 +166,7 @@ const UserRolesManager = connect(mapStateToProps, (dispatch) => {
             editPermission: commonActions.editPermission,
             addUserPermission: commonActions.addUserPermission,
             deleteUserPermission: commonActions.deleteUserPermission,
+            addUserRole: commonActions.addUserRole,
         },
         dispatch,
     )

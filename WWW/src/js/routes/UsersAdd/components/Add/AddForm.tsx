@@ -53,14 +53,16 @@ class AddForm extends React.Component<null, null> {
                                     )}
                                     <Field
                                         name="_roles"
-                                        label="Roles"
+                                        label="Role"
                                         type="select"
                                         placeholder={`--- choose ---`}
-                                        options={roles.map(({ id, name }) => ({
-                                            label: name,
-                                            value: id,
-                                            disabled: !!newUserRoles.find(({ id: _id }) => id === _id),
-                                        }))}
+                                        options={roles
+                                            .sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
+                                            .map(({ id, name }) => ({
+                                                label: name,
+                                                value: id,
+                                                disabled: !!newUserRoles.find(({ id: _id }) => id === _id),
+                                            }))}
                                         onChange={(e, value) => {
                                             addRoleToNewUser(roles.find((role) => Number(role.id) === Number(value)))
                                         }}
@@ -89,14 +91,16 @@ class AddForm extends React.Component<null, null> {
                                     )}
                                     <Field
                                         name="_permissions"
-                                        label="Permissions"
+                                        label="Permission"
                                         type="select"
                                         placeholder={`--- choose ---`}
-                                        options={permissions.map(({ id, name }) => ({
-                                            label: name,
-                                            value: id,
-                                            disabled: !!newUserPermissions.find(({ id: _id }) => id === _id),
-                                        }))}
+                                        options={permissions
+                                            .sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
+                                            .map(({ id, name }) => ({
+                                                label: name,
+                                                value: id,
+                                                disabled: !!newUserPermissions.find(({ id: _id }) => id === _id),
+                                            }))}
                                         onChange={(e, value) => {
                                             addPermissionToNewUser(
                                                 permissions.find(

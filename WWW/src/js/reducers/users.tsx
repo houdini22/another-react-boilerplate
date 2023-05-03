@@ -7,6 +7,7 @@ const SET_IS_LOADING = 'users::set-is-loading'
 const SET_IS_LOADED = 'users::set-is-loaded'
 const SET_FETCH_ERROR = 'users::set-fetch-error'
 const SET_USER = 'users::set-user'
+const SET_USERS = 'users::set-users'
 const SET_UPLOAD_PROGRESS = 'users::set-upload-progress'
 
 const setIsLoading = (data) => (dispatch) => {
@@ -23,6 +24,10 @@ const setFetchError = (data) => (dispatch) => {
 
 const setUser = (data) => (dispatch) => {
     dispatch({ type: SET_USER, payload: data })
+}
+
+const setUsers = (data) => (dispatch) => {
+    dispatch({ type: SET_USERS, payload: data })
 }
 
 const setUploadProgress = (data) => (dispatch) => {
@@ -114,6 +119,31 @@ const fetchOne =
                 })
         })
     }
+
+const fetch = () => (dispatch) => {
+    return new Promise<void>((resolve) => {
+        dispatch(setUser({}))
+        dispatch(setIsLoaded(false))
+        dispatch(setFetchError(null))
+
+        http.get(`/users/list`)
+            .then(
+                ({
+                    data: {
+                        data: { data: users },
+                    },
+                }) => {
+                    dispatch(setUsers(users))
+                    dispatch(setIsLoaded(true))
+                    resolve()
+                },
+            )
+            .catch((e) => {
+                dispatch(setIsLoaded(false))
+                dispatch(setFetchError(e))
+            })
+    })
+}
 
 const deleteUser = (id) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
@@ -310,6 +340,12 @@ const ACTION_HANDLERS = {
             user: payload,
         }
     },
+    [SET_USERS]: (state, { payload }) => {
+        return {
+            ...state,
+            users: payload,
+        }
+    },
     [SET_UPLOAD_PROGRESS]: (state, { payload }) => {
         return {
             ...state,
@@ -330,6 +366,7 @@ const getInitialState = () => ({
     uploadProgress: -1,
     newUserRoles: [],
     newUserPermissions: [],
+    users: [],
 })
 
 export default function cmsPagesReducer(state = getInitialState(), action) {

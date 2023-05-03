@@ -28,7 +28,7 @@ class RolesController extends Controller
                 }
             })
             ->orderBy(empty($filters['order_by']) ? 'id' : $filters['order_by'], empty($filters['order_direction']) ? 'asc' : $filters['order_direction'])
-        ->withCount(['users', 'permissions']);
+            ->withCount(['users', 'permissions']);
 
         if (!empty($filters['permissions'])) {
             $query = $query->whereHas('permissions', function ($query) use ($filters) {
@@ -76,7 +76,9 @@ class RolesController extends Controller
             return $this->response401();
         }
 
-        $role = Role::with('permissions')->find($id);
+        $role = Role::with('permissions')
+            ->with('users')
+            ->find($id);
 
         return response()->json([
             'role' => $role->toArray(),
@@ -194,6 +196,7 @@ class RolesController extends Controller
             'permissions' => $permisions->toArray(),
         ]);
     }
+
     public function deleteDeleteUserRole(Request $request)
     {
         $user = User::getFromRequest($request);

@@ -116,7 +116,7 @@ const editPermission = (params) => (dispatch) => {
     })
 }
 
-const addRole = (params) => (dispatch) => {
+const addRole = (params, rolePermissions, roleUsers) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
         dispatch(setIsLoaded(false))
         dispatch(setFetchError(null))
@@ -125,7 +125,20 @@ const addRole = (params) => (dispatch) => {
             .post('/roles/add', params)
             .then(({ data: { role } }) => {
                 dispatch(setIsLoaded(true))
-                resolve(role)
+
+                const promises = []
+
+                rolePermissions.forEach((permission) => {
+                    promises.push(dispatch(addPermission({ permission: permission.id, role_id: role.id })))
+                })
+
+                roleUsers.forEach((user) => {
+                    promises.push(dispatch(addUserRole(user, role)))
+                })
+
+                Promise.all(promises).then(() => {
+                    resolve(role)
+                })
             })
             .catch((e) => {
                 dispatch(setIsLoaded(false))
@@ -263,6 +276,23 @@ const deleteUserPermission =
         })
     }
 
+const addUserRole =
+    ({ id: user_id }, { id: role_id = 0 } = {}) =>
+    (dispatch) => {
+        return new Promise<void>((resolve, reject) => {
+            dispatch(setFetchError(null))
+
+            http.post(`/users/roles/add/${user_id}/${role_id}`)
+                .then(({ data: { user } }) => {
+                    resolve()
+                })
+                .catch((e) => {
+                    dispatch(setFetchError(e))
+                    reject(e)
+                })
+        })
+    }
+
 const addUserPermission =
     ({ id: user_id }, { id: permission_id }) =>
     (dispatch) => {
@@ -313,6 +343,7 @@ export const actions = {
     editPermission,
     addUserPermission,
     deleteUserPermission,
+    addUserRole,
 }
 
 // ------------------------------------

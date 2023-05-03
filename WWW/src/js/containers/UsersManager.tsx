@@ -23,8 +23,6 @@ interface UsersManagerProps {
     setUploadProgress: Function
     activateUser: Function
     deactivateUser: Function
-    addRoleToNewUser: Function
-    removeRoleFromNewUser: Function
 }
 
 class UsersManagerBase extends React.Component<UsersManagerProps, null> {
@@ -33,9 +31,11 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
         newUserPermissions: [],
     }
     componentDidMount() {
-        const { fetchOne, id } = this.props
+        const { fetchOne, id, fetch } = this.props
         if (id) {
             fetchOne(id)
+        } else {
+            fetch()
         }
     }
 
@@ -97,8 +97,6 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             setUploadProgress,
             activateUser,
             deactivateUser,
-            addRoleToNewUser,
-            removeRoleFromNewUser,
             deleteAvatar,
         } = this.props
         const { newUserRoles, newUserPermissions } = this.state

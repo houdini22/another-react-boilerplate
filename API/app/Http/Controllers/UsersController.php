@@ -29,17 +29,29 @@ class UsersController extends Controller
             ->with('permissions')
             ->with('roles.permissions')
             ->with('avatar')
-            ->orderBy($filters['order_by'], $filters['order_direction'])
-            ->where(function ($query) use ($filters) {
+            ->withCount(['files', 'permissions', 'roles']);
+
+        if (!empty($filters['order_by']) && !empty($filters['order_direction'])) {
+            $query = $query->orderBy($filters['order_by'], $filters['order_direction']);
+        }
+
+        if (!empty($filters['search'])) {
+            $query = $query->where(function ($query) use ($filters) {
                 $query->where('email', 'like', "%{$filters['search']}%")
                     ->orWhere('name', 'like', "%{$filters['search']}%");
-            })
-            ->where(function ($query) use ($filters) {
+            });
+        }
+
+        if (!empty($filters['status'])) {
+            $query = $query->where(function ($query) use ($filters) {
                 if ($filters['status'] !== 'yes_or_no') {
                     $query->where('status', $filters['status'] === 'active' ? 1 : 0);
                 }
-            })
-            ->where(function ($query) use ($filters) {
+            });
+        }
+
+        if (!empty($filters['avatar'])) {
+            $query = $query->where(function ($query) use ($filters) {
                 if ($filters['avatar'] !== 'yes_or_no') {
                     if ($filters['avatar'] === 'yes') {
                         $query->whereNotNull('avatar_id');
@@ -47,8 +59,8 @@ class UsersController extends Controller
                         $query->whereNull('avatar_id');
                     }
                 }
-            })
-            ->withCount(['files', 'permissions', 'roles']);
+            });
+        }
 
         if (!empty($filters['roles'])) {
             $query = $query->whereHas('roles', function ($query) use ($filters) {
@@ -64,25 +76,35 @@ class UsersController extends Controller
             });
         }
 
-        if ($filters['files'] === 'yes') {
-            $query = $query->whereHas('files');
-        } else if ($filters['files'] === 'no') {
-            $query = $query->whereDoesntHave('files');
+        if (!empty($filters['files'])) {
+            if ($filters['files'] === 'yes') {
+                $query = $query->whereHas('files');
+            } else if ($filters['files'] === 'no') {
+                $query = $query->whereDoesntHave('files');
+            }
         }
 
-        if ($filters['has_roles'] === 'yes') {
-            $query = $query->whereHas('roles');
-        } else if ($filters['has_roles'] === 'no') {
-            $query = $query->whereDoesntHave('roles');
+        if (!empty($filters['has_roles'])) {
+            if ($filters['has_roles'] === 'yes') {
+                $query = $query->whereHas('roles');
+            } else if ($filters['has_roles'] === 'no') {
+                $query = $query->whereDoesntHave('roles');
+            }
         }
 
-        if ($filters['has_permissions'] === 'yes') {
-            $query = $query->whereHas('permissions');
-        } else if ($filters['has_permissions'] === 'no') {
-            $query = $query->whereDoesntHave('permissions');
+        if (!empty($filters['has_permissions'])) {
+            if ($filters['has_permissions'] === 'yes') {
+                $query = $query->whereHas('permissions');
+            } else if ($filters['has_permissions'] === 'no') {
+                $query = $query->whereDoesntHave('permissions');
+            }
         }
 
-        $users = $query->paginate($filters['items_per_page']);
+        if (!empty($filters['items_per_page'])) {
+            $users = $query->paginate($filters['items_per_page']);
+        } else {
+            $users = $query->paginate(10000);
+        }
 
         return response()->json([
             'data' => $users->toArray(),
