@@ -21,5 +21,4 @@ class SaveFiltersModal extends React.Component<SaveFiltersModalProps, null> {
     }
 }
 
-export default { SaveFiltersModal }
 export { SaveFiltersModal }

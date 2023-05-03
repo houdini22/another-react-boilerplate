@@ -49,4 +49,3 @@ const NavigationItems = ({ items }) => {
 }
 
 export { NavigationItems }
-export default { NavigationItems }

@@ -57,4 +57,3 @@ class SidebarTabIcon extends React.Component<SidebarTabIconProps, SidebarTabIcon
 }
 
 export { SidebarTabIcon }
-export default { SidebarTabIcon }

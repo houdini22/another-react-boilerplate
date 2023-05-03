@@ -75,4 +75,3 @@ const SidebarHeaderUser = connect(
 )(BaseSidebarHeaderUser)
 
 export { SidebarHeaderUser }
-export default { SidebarHeaderUser }

@@ -54,4 +54,3 @@ class TextField extends React.Component<TextFieldProps, null> {
 }
 
 export { TextField }
-export default { TextField }

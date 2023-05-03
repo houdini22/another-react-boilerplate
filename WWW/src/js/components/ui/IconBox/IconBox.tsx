@@ -26,4 +26,3 @@ class IconBox extends React.Component<IconBoxProps, null> {
 }
 
 export { IconBox }
-export default { IconBox }

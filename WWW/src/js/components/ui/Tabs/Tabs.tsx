@@ -226,9 +226,6 @@ export class Tab extends React.Component<TabProps, null> {
                         <AppContext.Provider
                             value={{
                                 tabName: name,
-                                activateTab: () => {
-                                    setActiveTab(name)
-                                },
                                 changeTab: (name) => {
                                     setActiveTab(name)
                                 },

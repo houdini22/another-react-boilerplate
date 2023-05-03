@@ -30,4 +30,3 @@ class ConnectionErrorModal extends React.Component<ConnectionErrorModalProps, nu
 }
 
 export { ConnectionErrorModal }
-export default { ConnectionErrorModal }

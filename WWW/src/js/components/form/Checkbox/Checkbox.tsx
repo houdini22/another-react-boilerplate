@@ -83,4 +83,3 @@ class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
 }
 
 export { Checkbox }
-export default { Checkbox }

@@ -20,4 +20,3 @@ const BlankPageLayoutContainer = connect(mapStateToProps, (dispatch) => {
 })(BlankPageLayout)
 
 export { BlankPageLayoutContainer }
-export default { BlankPageLayoutContainer }

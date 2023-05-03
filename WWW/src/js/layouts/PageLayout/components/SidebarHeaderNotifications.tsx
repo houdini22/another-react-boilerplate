@@ -162,4 +162,3 @@ const SidebarHeaderNotifications = connect(
 )(BaseSidebarHeaderNotifications)
 
 export { SidebarHeaderNotifications }
-export default { SidebarHeaderNotifications }

@@ -128,5 +128,4 @@ class FiltersCard extends React.Component<FilterProps, null> {
     }
 }
 
-export default { FiltersCard }
 export { FiltersCard }

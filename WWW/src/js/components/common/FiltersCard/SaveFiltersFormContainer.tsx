@@ -41,4 +41,3 @@ const SaveFiltersFormContainer = compose(
 )(FormComponent)
 
 export { SaveFiltersFormContainer }
-export default { SaveFiltersFormContainer }

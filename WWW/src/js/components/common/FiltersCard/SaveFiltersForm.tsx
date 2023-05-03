@@ -42,4 +42,3 @@ class SaveFiltersForm extends React.Component<null, null> {
 }
 
 export { SaveFiltersForm }
-export default { SaveFiltersForm }

@@ -15,4 +15,3 @@ class TextArea extends React.Component<TextAreaProps, null> {
 }
 
 export { TextArea }
-export default { TextArea }

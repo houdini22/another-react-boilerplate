@@ -35,5 +35,4 @@ class TableSummary extends React.Component<TableSummaryProps, null> {
     }
 }
 
-export default { TableSummary }
 export { TableSummary }

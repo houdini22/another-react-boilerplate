@@ -10,7 +10,7 @@ interface ProgressProps {
     progress: number
 }
 
-class Progress extends React.Component<ProgressProps> {
+class Progress extends React.Component<ProgressProps, null> {
     render() {
         const { size = 'md', color = 'default', progress = 0 } = this.props
 
@@ -28,4 +28,3 @@ class Progress extends React.Component<ProgressProps> {
 }
 
 export { Progress }
-export default { Progress }

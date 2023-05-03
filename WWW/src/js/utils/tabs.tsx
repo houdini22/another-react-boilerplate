@@ -33,21 +33,6 @@ const createPresentationTab = (options, presentation, code, { colSize = 12, copy
     )
 }
 
-const createSimplePresentation = (header, presentation, code, { colSize = 12, copy = true } = {}) => {
-    return (
-        <Col xs={colSize} className="presentation-tab-simple">
-            <div>
-                <h3>{header}</h3>
-            </div>
-            <div className="presentation-tab-simple__presentation">
-                <div>
-                    <div>{presentation}</div>
-                </div>
-            </div>
-        </Col>
-    )
-}
-
 const generateCode = (componentName, options, content = '') => {
     let result = `<${componentName}`
     Object.keys(options).forEach((key) => {

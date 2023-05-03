@@ -84,4 +84,3 @@ const SidebarHeader = connect(
 )(SidebarHeaderBase)
 
 export { SidebarHeader }
-export default { SidebarHeader }

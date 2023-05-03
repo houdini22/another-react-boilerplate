@@ -38,4 +38,3 @@ class ConnectionFetchErrorModal extends React.Component<ConnectionFetchErrorModa
 }
 
 export { ConnectionFetchErrorModal }
-export default { ConnectionFetchErrorModal }

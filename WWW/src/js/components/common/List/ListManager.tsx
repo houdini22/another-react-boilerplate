@@ -193,4 +193,3 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
 }
 
 export { ListManager }
-export default { ListManager }

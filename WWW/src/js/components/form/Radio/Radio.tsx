@@ -87,4 +87,3 @@ class Radio extends React.Component<RadioProps, RadioState> {
 }
 
 export { Radio }
-export default { Radio }

@@ -289,4 +289,3 @@ class Content extends React.Component<ContentProps, null> {
 }
 
 export { Container, Trigger, Content }
-export default { Container, Trigger, Content }

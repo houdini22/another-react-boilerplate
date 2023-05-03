@@ -8,7 +8,7 @@ interface NavigationHeaderProps {
     caption: any
 }
 
-class NavigationHeader extends React.Component<NavigationHeaderProps> {
+class NavigationHeader extends React.Component<NavigationHeaderProps, null> {
     render() {
         const { caption } = this.props
 
@@ -23,4 +23,3 @@ class NavigationHeader extends React.Component<NavigationHeaderProps> {
 }
 
 export { NavigationHeader }
-export default { NavigationHeader }

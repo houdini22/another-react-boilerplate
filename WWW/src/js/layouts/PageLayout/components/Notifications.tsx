@@ -99,4 +99,3 @@ const Notifications = connect(mapStateToProps, (dispatch) => {
     return bindActionCreators({}, dispatch)
 })(NotificationsBase)
 export { Notifications }
-export default { Notifications }

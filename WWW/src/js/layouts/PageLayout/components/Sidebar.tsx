@@ -76,4 +76,3 @@ const Sidebar = connect(
 )(SidebarBase)
 
 export { Sidebar }
-export default { Sidebar }

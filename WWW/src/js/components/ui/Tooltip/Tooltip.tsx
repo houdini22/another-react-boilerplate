@@ -218,4 +218,3 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
 }
 
 export { Tooltip }
-export default { Tooltip }

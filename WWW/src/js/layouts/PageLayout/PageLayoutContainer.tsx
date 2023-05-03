@@ -24,4 +24,3 @@ const PageLayoutContainer = connect(mapStateToProps, (dispatch) => {
 })(PageLayout)
 
 export { PageLayoutContainer }
-export default { PageLayoutContainer }

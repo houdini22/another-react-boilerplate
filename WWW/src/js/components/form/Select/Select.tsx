@@ -41,4 +41,3 @@ class Select extends React.Component<SelectProps, null> {
 }
 
 export { Select }
-export default { Select }

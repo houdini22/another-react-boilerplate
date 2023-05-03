@@ -46,4 +46,3 @@ class ExpandManager extends React.Component<ExpandManagerProps, null> {
 }
 
 export { ExpandManager }
-export default { ExpandManager }

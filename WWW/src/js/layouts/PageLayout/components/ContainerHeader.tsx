@@ -8,7 +8,7 @@ interface ContainerHeaderProps {
     children: any
 }
 
-class ContainerHeader extends React.Component<ContainerHeaderProps> {
+class ContainerHeader extends React.Component<ContainerHeaderProps, null> {
     render() {
         const { children } = this.props
 
@@ -17,4 +17,3 @@ class ContainerHeader extends React.Component<ContainerHeaderProps> {
 }
 
 export { ContainerHeader }
-export default { ContainerHeader }

@@ -85,7 +85,7 @@ interface AccordionItemProps {
     name: string
 }
 
-class Item extends React.Component<AccordionItemProps> {
+class Item extends React.Component<AccordionItemProps, null> {
     render() {
         const { children, name } = this.props
 
@@ -115,7 +115,7 @@ class Item extends React.Component<AccordionItemProps> {
     }
 }
 
-class ItemHeader extends React.Component {
+class ItemHeader extends React.Component<null, null> {
     render() {
         const { children } = this.props
 
@@ -158,7 +158,7 @@ class ItemHeader extends React.Component {
     }
 }
 
-class ItemContent extends React.Component {
+class ItemContent extends React.Component<null, null> {
     render() {
         const { children } = this.props
 
@@ -176,4 +176,3 @@ class ItemContent extends React.Component {
     }
 }
 export { Container, Item, ItemHeader, ItemContent }
-export default { Container, Item, ItemHeader, ItemContent }

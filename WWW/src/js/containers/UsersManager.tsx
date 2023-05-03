@@ -129,4 +129,3 @@ const UsersManager = connect(mapStateToProps, (dispatch) => {
 })(UsersManagerBase)
 
 export { UsersManager }
-export default { UsersManager }

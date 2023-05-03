@@ -37,4 +37,3 @@ class BlankPageLayout extends React.Component<BlankPageLayoutProps, null> {
 }
 
 export { BlankPageLayout }
-export default { BlankPageLayout }

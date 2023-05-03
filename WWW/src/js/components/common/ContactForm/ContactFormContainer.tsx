@@ -69,4 +69,3 @@ const ContactFormContainer = compose(
 )(ContactForm)
 
 export { ContactFormContainer }
-export default { ContactFormContainer }

@@ -1,4 +1,6 @@
-export const mergeUserPermissions = (user) => {
+import { User } from '../../types.d'
+
+export const mergeUserPermissions = (user: User) => {
     const permissions = {}
 
     user?.roles?.forEach((role) => {
@@ -22,7 +24,7 @@ export const mergeUserPermissions = (user) => {
     return permissions
 }
 
-export const userPermissionFromRoles = (user) => {
+export const userPermissionFromRoles = (user: User) => {
     const permissions = {}
 
     user?.roles?.forEach((role) => {

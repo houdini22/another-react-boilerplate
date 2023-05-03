@@ -38,4 +38,3 @@ const mapDispatchToProps = (dispatch) => {
 const AuthManager = connect(mapStateToProps, mapDispatchToProps)(AuthManagerBase)
 
 export { AuthManager }
-export default { AuthManager }

@@ -15,5 +15,4 @@ class Filters extends React.Component<FiltersProps, null> {
     }
 }
 
-export default { Filters }
 export { Filters }

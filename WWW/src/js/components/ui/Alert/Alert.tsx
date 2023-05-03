@@ -26,7 +26,13 @@ interface AlertProps {
     alignCenter?: boolean
 }
 
-class Alert extends React.Component<AlertProps> {
+interface AlertState {
+    animationStarted: boolean
+    remove: boolean
+    isLoading: boolean
+}
+
+class Alert extends React.Component<AlertProps, AlertState> {
     state = {
         animationStarted: false,
         remove: false,

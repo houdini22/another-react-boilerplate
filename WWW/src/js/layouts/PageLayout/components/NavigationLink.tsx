@@ -69,4 +69,3 @@ class NavigationLink extends React.Component<NavigationLinkProps, NavigationLink
 }
 
 export { NavigationLink }
-export default { NavigationLink }

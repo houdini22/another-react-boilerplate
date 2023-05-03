@@ -66,4 +66,3 @@ class ButtonGroup extends React.Component<ButtonGroupProps, null> {
 }
 
 export { ButtonGroup }
-export default { ButtonGroup }

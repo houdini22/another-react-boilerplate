@@ -39,5 +39,4 @@ class FiltersFactory extends React.Component<FiltersFactoryProps, null> {
     }
 }
 
-export default { FiltersFactory }
 export { FiltersFactory }

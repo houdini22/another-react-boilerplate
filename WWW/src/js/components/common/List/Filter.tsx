@@ -189,5 +189,4 @@ class Filter extends React.Component<FilterProps, null> {
     }
 }
 
-export default { Filter }
 export { Filter }
