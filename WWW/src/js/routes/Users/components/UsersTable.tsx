@@ -10,6 +10,7 @@ import RowActions from './UsersTable/RowActions'
 import { mergeUserPermissions } from '../../../helpers/permissions'
 import RowExpandRoles from './UsersTable/RowExpandRoles'
 import RowExpandPermissions from './UsersTable/RowExpandPermissions'
+import { ModalConfirm } from '../../../components/common/ModalConfirm'
 
 interface UsersTableProps {
     users: Array<any>
@@ -41,6 +42,10 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
             totalPages,
             deleteUserPermission,
             addToastNotification,
+            registerModal,
+            openModal,
+            closeModal,
+            deleteUser,
         } = this.props
         return (
             <RouteManager>
@@ -82,6 +87,9 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                         deleteUserRole={deleteUserRole}
                                                         navigate={navigate}
                                                         setIsLoading={setIsLoading}
+                                                        registerModal={registerModal}
+                                                        openModal={openModal}
+                                                        closeModal={closeModal}
                                                     />,
                                                 )
 
@@ -95,8 +103,36 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                         permissionsFromRoles={permissionsFromRoles}
                                                         deleteUserPermission={deleteUserPermission}
                                                         fetch={fetch}
+                                                        registerModal={registerModal}
+                                                        openModal={openModal}
+                                                        closeModal={closeModal}
                                                     />,
                                                 )
+
+                                                if (user.is_deletable) {
+                                                    registerModal(
+                                                        `user-${user.id}-delete`,
+                                                        <ModalConfirm
+                                                            onConfirm={() => {
+                                                                deleteUser(user.id).then(() => {
+                                                                    fetch().then(() => {
+                                                                        closeModal(`user-${user.id}-delete`)
+                                                                        addToastNotification({
+                                                                            title: 'Remove success.',
+                                                                            text: 'User has been removed.',
+                                                                            type: 'success',
+                                                                        })
+                                                                    })
+                                                                })
+                                                            }}
+                                                            onCancel={() => closeModal(`user-${user.id}-delete`)}
+                                                        >
+                                                            <p>
+                                                                Are you sure to delete user: <b>{user.name}</b>?
+                                                            </p>
+                                                        </ModalConfirm>,
+                                                    )
+                                                }
 
                                                 return (
                                                     <Table.Tr key={user.id}>
@@ -119,6 +155,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                 user={user}
                                                                 activateUser={activateUser}
                                                                 deactivateUser={deactivateUser}
+                                                                addToastNotification={addToastNotification}
                                                                 fetch={fetch}
                                                             />
                                                         </Table.Td>
@@ -127,6 +164,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                 user={user}
                                                                 setUserToDelete={setUserToDelete}
                                                                 navigate={navigate}
+                                                                openModal={openModal}
                                                             />
                                                         </Table.Td>
                                                     </Table.Tr>

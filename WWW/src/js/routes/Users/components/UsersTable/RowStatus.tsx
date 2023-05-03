@@ -22,7 +22,7 @@ interface FiltersProps {
 
 export class RowStatus extends React.Component<FiltersProps, null> {
     render() {
-        const { user, activateUser, deactivateUser, fetch } = this.props
+        const { user, activateUser, deactivateUser, fetch, addToastNotification } = this.props
 
         return (
             <>
@@ -31,7 +31,13 @@ export class RowStatus extends React.Component<FiltersProps, null> {
                         color={'danger'}
                         onClick={() => {
                             activateUser(user).then(() => {
-                                fetch()
+                                fetch().then(() => {
+                                    addToastNotification({
+                                        title: 'Activate success.',
+                                        text: 'User account has been activated.',
+                                        type: 'success',
+                                    })
+                                })
                             })
                         }}
                         style={{ cursor: 'pointer' }}
@@ -45,7 +51,13 @@ export class RowStatus extends React.Component<FiltersProps, null> {
                         color={'success'}
                         onClick={() => {
                             deactivateUser(user).then(() => {
-                                fetch()
+                                fetch().then(() => {
+                                    addToastNotification({
+                                        title: 'Deactivate success.',
+                                        text: 'User account has been deactivated.',
+                                        type: 'success',
+                                    })
+                                })
                             })
                         }}
                         block

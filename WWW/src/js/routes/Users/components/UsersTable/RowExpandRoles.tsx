@@ -1,6 +1,7 @@
 import * as React from 'react'
-import { Col, Dropdown, Label, Table, Row } from '../../../../components'
-import { DeleteIcon, DetailsIcon, EditIcon, InfoIcon } from '../../../../components/icons'
+import { Col, Dropdown, Label, Table, Row, Typography } from '../../../../components'
+import { DeleteIcon, DetailsIcon, EditIcon } from '../../../../components/icons'
+import { ModalConfirm } from '../../../../components/common/ModalConfirm'
 
 interface RowExpandRolesProps {
     user: Object
@@ -13,15 +14,63 @@ interface RowExpandRolesProps {
 
 export class RowExpandRoles extends React.Component<RowExpandRolesProps, null> {
     render() {
-        const { user, navigate, setIsLoading, deleteUserRole, addToastNotification, fetch } = this.props
+        const {
+            user,
+            navigate,
+            setIsLoading,
+            deleteUserRole,
+            addToastNotification,
+            fetch,
+            registerModal,
+            closeModal,
+            openModal,
+        } = this.props
 
         return (
             <Table.Tr key={`roles${user.id}`}>
                 <Table.Td xs={12}>
                     <Row>
+                        <Col xs={12}>
+                            <Typography.Container>
+                                <h3>Roles</h3>
+                            </Typography.Container>
+                        </Col>
                         {user?.roles
                             ?.sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                            .map(({ id: _id, name, guard_name, is_deletable: _is_deletable }) => {
+                            .map(({ id: _id, name, is_deletable: _is_deletable }) => {
+                                registerModal(
+                                    `user-remove-role-${_id}-delete`,
+                                    <ModalConfirm
+                                        onConfirm={() => {
+                                            setIsLoading(true)
+
+                                            deleteUserRole(
+                                                {
+                                                    id: user.id,
+                                                },
+                                                {
+                                                    id: _id,
+                                                },
+                                            ).then(() => {
+                                                fetch().then(() => {
+                                                    setIsLoading(false)
+                                                    addToastNotification({
+                                                        title: 'Remove success.',
+                                                        text: 'Role has been removed from user.',
+                                                        type: 'success',
+                                                    })
+                                                    closeModal(`user-remove-role-${_id}-delete`)
+                                                })
+                                            })
+                                        }}
+                                        onCancel={() => closeModal(`user-remove-role-${_id}-delete`)}
+                                    >
+                                        <p>
+                                            Are you sure to delete Role: <b>{name}</b> from User <b>{user.name}</b>?
+                                        </p>
+                                    </ModalConfirm>,
+                                )
+
                                 return (
                                     <Col xs={4} key={`${_id}`}>
                                         <Dropdown.Container triggerSize={'lg'} key={_id}>
@@ -60,25 +109,7 @@ export class RowExpandRoles extends React.Component<RowExpandRolesProps, null> {
                                                 <Dropdown.Item
                                                     color="danger"
                                                     onClick={() => {
-                                                        setIsLoading(true)
-
-                                                        return deleteUserRole(
-                                                            {
-                                                                id: user.id,
-                                                            },
-                                                            {
-                                                                id: _id,
-                                                            },
-                                                        ).then(() => {
-                                                            fetch().then(() => {
-                                                                setIsLoading(false)
-                                                                addToastNotification({
-                                                                    title: 'Delete success.',
-                                                                    text: 'Role has been removed from user.',
-                                                                    type: 'success',
-                                                                })
-                                                            })
-                                                        })
+                                                        openModal(`user-remove-role-${_id}-delete`)
                                                     }}
                                                 >
                                                     <DeleteIcon /> Remove Role from User

@@ -1,17 +1,6 @@
 import * as React from 'react'
 import { Button, Col, Dropdown, Label, Popover, Row, Typography } from '../../../../components'
-import {
-    AvatarIcon,
-    DeleteIcon,
-    DetailsIcon,
-    EditIcon,
-    FileIcon,
-    InfoIcon,
-    PermissionIcon,
-    RoleIcon,
-    UserIcon,
-} from '../../../../components/icons'
-import { apiURL } from '../../../../helpers/api'
+import { DeleteIcon, DetailsIcon, EditIcon } from '../../../../components/icons'
 import { formatDateTime } from '../../../../helpers/date-time'
 
 interface FiltersProps {
@@ -22,7 +11,7 @@ interface FiltersProps {
 
 export class RowActions extends React.Component<FiltersProps, null> {
     render() {
-        const { user, setUserToDelete, navigate } = this.props
+        const { user, navigate, openModal } = this.props
 
         return (
             <div>
@@ -40,7 +29,7 @@ export class RowActions extends React.Component<FiltersProps, null> {
                         iconOnly
                         color={'danger'}
                         onClick={() => {
-                            setUserToDelete(user.id)
+                            openModal(`user-${user.id}-delete`)
                         }}
                     />
                 )}

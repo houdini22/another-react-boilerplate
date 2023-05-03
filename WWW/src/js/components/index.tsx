@@ -53,7 +53,7 @@ import {
     ItemContent as ListItemContent,
 } from './ui/List'
 import { Tooltip } from './ui/Tooltip'
-import { ModalContainer, ModalBody, ModalFooter, ModalHeader } from './ui/Modal'
+import { ModalContainer, ModalBody, ModalFooter, ModalHeader, ModalManager } from './ui/Modal'
 
 const Tabs = {
     Container: TabContainer,
@@ -117,6 +117,7 @@ const Modal = {
     Body: ModalBody,
     Header: ModalHeader,
     Footer: ModalFooter,
+    Manager: ModalManager,
 }
 
 export {

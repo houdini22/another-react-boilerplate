@@ -1,16 +1,11 @@
 import * as React from 'react'
 import { RouteManager } from '../../../containers/RouteManager'
 import { UserRolesManager } from '../../UserRoles/containers/UserRolesManager'
-import { Card, Col, LoadingOverlay, Row } from '../../../components'
+import { Col, Row } from '../../../components'
 import { UsersManager } from '../../../containers/UsersManager'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import Header from './Header'
 import Add from './Add/Add'
-import { ListManager } from '../../../components/common/List/ListManager'
-import ConfirmDeleteModal from '../../Users/components/ConfirmDeleteModal'
-import UsersFilters from '../../Users/components/UsersFilters'
-import { Pagination } from '../../../components/common/List/Pagination'
-import UsersTable from '../../Users/components/UsersTable'
 import { NotificationsManager } from '../../../containers/NotificationsManager'
 
 interface UsersViewState {}
