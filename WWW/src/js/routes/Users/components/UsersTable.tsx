@@ -75,103 +75,101 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                 const permissionsFromRoles = mergeUserPermissions(user)
 
                                 return (
-                                    <>
-                                        <Table.ExpandManager>
-                                            {({ addExpand, expand }) => {
-                                                addExpand(
-                                                    'roles',
-                                                    <RowExpandRoles
-                                                        user={user}
-                                                        fetch={fetch}
-                                                        addToastNotification={addToastNotification}
-                                                        deleteUserRole={deleteUserRole}
-                                                        navigate={navigate}
-                                                        setIsLoading={setIsLoading}
-                                                        registerModal={registerModal}
-                                                        openModal={openModal}
-                                                        closeModal={closeModal}
-                                                    />,
-                                                )
+                                    <Table.ExpandManager key={user.id}>
+                                        {({ addExpand, expand }) => {
+                                            addExpand(
+                                                'roles',
+                                                <RowExpandRoles
+                                                    user={user}
+                                                    fetch={fetch}
+                                                    addToastNotification={addToastNotification}
+                                                    deleteUserRole={deleteUserRole}
+                                                    navigate={navigate}
+                                                    setIsLoading={setIsLoading}
+                                                    registerModal={registerModal}
+                                                    openModal={openModal}
+                                                    closeModal={closeModal}
+                                                />,
+                                            )
 
-                                                addExpand(
-                                                    'permissions',
-                                                    <RowExpandPermissions
-                                                        user={user}
-                                                        navigate={navigate}
-                                                        setIsLoading={setIsLoading}
-                                                        addToastNotification={addToastNotification}
-                                                        permissionsFromRoles={permissionsFromRoles}
-                                                        deleteUserPermission={deleteUserPermission}
-                                                        fetch={fetch}
-                                                        registerModal={registerModal}
-                                                        openModal={openModal}
-                                                        closeModal={closeModal}
-                                                    />,
-                                                )
+                                            addExpand(
+                                                'permissions',
+                                                <RowExpandPermissions
+                                                    user={user}
+                                                    navigate={navigate}
+                                                    setIsLoading={setIsLoading}
+                                                    addToastNotification={addToastNotification}
+                                                    permissionsFromRoles={permissionsFromRoles}
+                                                    deleteUserPermission={deleteUserPermission}
+                                                    fetch={fetch}
+                                                    registerModal={registerModal}
+                                                    openModal={openModal}
+                                                    closeModal={closeModal}
+                                                />,
+                                            )
 
-                                                if (user.is_deletable) {
-                                                    registerModal(
-                                                        `user-${user.id}-delete`,
-                                                        <ModalConfirm
-                                                            onConfirm={() => {
-                                                                deleteUser(user.id).then(() => {
-                                                                    fetch().then(() => {
-                                                                        closeModal(`user-${user.id}-delete`)
-                                                                        addToastNotification({
-                                                                            title: 'Remove success.',
-                                                                            text: 'User has been removed.',
-                                                                            type: 'success',
-                                                                        })
+                                            if (user.is_deletable) {
+                                                registerModal(
+                                                    `user-${user.id}-delete`,
+                                                    <ModalConfirm
+                                                        onConfirm={() => {
+                                                            deleteUser(user.id).then(() => {
+                                                                fetch().then(() => {
+                                                                    closeModal(`user-${user.id}-delete`)
+                                                                    addToastNotification({
+                                                                        title: 'Remove success.',
+                                                                        text: 'User has been removed.',
+                                                                        type: 'success',
                                                                     })
                                                                 })
-                                                            }}
-                                                            onCancel={() => closeModal(`user-${user.id}-delete`)}
-                                                        >
-                                                            <p>
-                                                                Are you sure to delete user: <b>{user.name}</b>?
-                                                            </p>
-                                                        </ModalConfirm>,
-                                                    )
-                                                }
-
-                                                return (
-                                                    <Table.Tr key={user.id}>
-                                                        <Table.Td xs={1} md={1}>
-                                                            <RowId user={user} />
-                                                        </Table.Td>
-                                                        <Table.Td xs={10} md={3}>
-                                                            <RowUsername user={user} />
-                                                        </Table.Td>
-                                                        <Table.Td xs={12} md={4} alignRight>
-                                                            <RowResources
-                                                                user={user}
-                                                                navigate={navigate}
-                                                                permissionsFromRoles={permissionsFromRoles}
-                                                                expand={expand}
-                                                            />
-                                                        </Table.Td>
-                                                        <Table.Td xs={6} md={2}>
-                                                            <RowStatus
-                                                                user={user}
-                                                                activateUser={activateUser}
-                                                                deactivateUser={deactivateUser}
-                                                                addToastNotification={addToastNotification}
-                                                                fetch={fetch}
-                                                            />
-                                                        </Table.Td>
-                                                        <Table.Td xs={6} md={2}>
-                                                            <RowActions
-                                                                user={user}
-                                                                setUserToDelete={setUserToDelete}
-                                                                navigate={navigate}
-                                                                openModal={openModal}
-                                                            />
-                                                        </Table.Td>
-                                                    </Table.Tr>
+                                                            })
+                                                        }}
+                                                        onCancel={() => closeModal(`user-${user.id}-delete`)}
+                                                    >
+                                                        <p>
+                                                            Are you sure to delete user: <b>{user.name}</b>?
+                                                        </p>
+                                                    </ModalConfirm>,
                                                 )
-                                            }}
-                                        </Table.ExpandManager>
-                                    </>
+                                            }
+
+                                            return (
+                                                <Table.Tr key={user.id}>
+                                                    <Table.Td xs={1} md={1}>
+                                                        <RowId user={user} />
+                                                    </Table.Td>
+                                                    <Table.Td xs={10} md={3}>
+                                                        <RowUsername user={user} />
+                                                    </Table.Td>
+                                                    <Table.Td xs={12} md={4} alignRight>
+                                                        <RowResources
+                                                            user={user}
+                                                            navigate={navigate}
+                                                            permissionsFromRoles={permissionsFromRoles}
+                                                            expand={expand}
+                                                        />
+                                                    </Table.Td>
+                                                    <Table.Td xs={6} md={2}>
+                                                        <RowStatus
+                                                            user={user}
+                                                            activateUser={activateUser}
+                                                            deactivateUser={deactivateUser}
+                                                            addToastNotification={addToastNotification}
+                                                            fetch={fetch}
+                                                        />
+                                                    </Table.Td>
+                                                    <Table.Td xs={6} md={2}>
+                                                        <RowActions
+                                                            user={user}
+                                                            setUserToDelete={setUserToDelete}
+                                                            navigate={navigate}
+                                                            openModal={openModal}
+                                                        />
+                                                    </Table.Td>
+                                                </Table.Tr>
+                                            )
+                                        }}
+                                    </Table.ExpandManager>
                                 )
                             })}
                         </Table.TBody>

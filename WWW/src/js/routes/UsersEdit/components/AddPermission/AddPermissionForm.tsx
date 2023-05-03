@@ -14,7 +14,7 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps> {
         const { permissions, user } = this.props
         return (
             permissions
-                ?.map(({ id, name, guard_name }) => {
+                ?.map(({ id }) => {
                     return {
                         disabled: user?.permissions?.find(({ id: _id }) => id === _id),
                     }
@@ -28,29 +28,13 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps> {
     render() {
         const { handleSubmit, permissions, user } = this.props
 
-        const permissionsFromRoles = {}
-
-        user?.roles?.forEach(({ permissions }) => {
-            permissions?.forEach(({ name, ...rest }) => {
-                if (permissionsFromRoles[name]) {
-                    if (!permissionsFromRoles[name].occurence) {
-                        permissionsFromRoles[name].occurence = 1
-                    }
-                    permissionsFromRoles[name].occurence++
-                } else {
-                    permissionsFromRoles[name] = { name, ...rest }
-                }
-            })
-        })
+        const perms = {}
 
         user?.permissions?.forEach(({ id, guard_name, is_deletable, name, ...rest }) => {
-            if (permissionsFromRoles[name]) {
-                if (!permissionsFromRoles[name].occurence) {
-                    permissionsFromRoles[name].occurence = 1
-                }
-                permissionsFromRoles[name].occurence++
+            if (perms[name]) {
+                perms[name].occurence++
             } else {
-                permissionsFromRoles[name] = { name, id, guard_name, is_deletable, ...rest }
+                perms[name] = { name, id, guard_name, is_deletable, ocurrence: 1, ...rest }
             }
         })
 
@@ -71,7 +55,7 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps> {
                                 return {
                                     value: id,
                                     label: `${name} - ${guard_name}`,
-                                    disabled: !!permissionsFromRoles[name],
+                                    disabled: !!perms[name],
                                 }
                             }) || []),
                     ]}

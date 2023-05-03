@@ -71,11 +71,12 @@ class FiltersCard extends React.Component<FilterProps, null> {
                                 >
                                     Reset Filters
                                 </Button>,
-                                <DropdownContainer>
+                                <DropdownContainer key={'restore-filters'}>
                                     <DropdownTrigger component={Button}>Restore Filters</DropdownTrigger>
                                     <DropdownMenu>
                                         {savedFilters.map(({ list_name, filters }) => (
                                             <DropdownItem
+                                                key={list_name}
                                                 onClick={() => {
                                                     setFilters(filters).then(() => {
                                                         fetch()

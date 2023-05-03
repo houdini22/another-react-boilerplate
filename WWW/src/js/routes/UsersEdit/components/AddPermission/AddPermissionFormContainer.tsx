@@ -2,7 +2,7 @@ import * as React from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { AddPermissionForm as FormComponent } from './AddPermissionForm'
-import { reduxForm, formValueSelector } from 'redux-form'
+import { reduxForm } from 'redux-form'
 
 const onSubmit = (
     { permission_id = 0 },
@@ -24,7 +24,7 @@ const onSubmit = (
 }
 
 const AddPermissionFormContainer = compose(
-    connect((state, props) => {}),
+    connect(),
     reduxForm({
         enableReinitialize: true,
         destroyOnUnmount: true,

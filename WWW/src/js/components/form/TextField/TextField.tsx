@@ -44,8 +44,8 @@ class TextField extends React.Component<TextFieldProps> {
                             {...customProps}
                             type={type}
                             value={type !== 'file' ? value : ''}
-                            defaultValue={defaultValue}
-                            key={defaultValue || ''}
+                            defaultValue={type !== 'file' ? defaultValue || '' : undefined}
+                            key={type !== 'file' ? defaultValue || '' : undefined}
                             onChange={this.onChange.bind(this)}
                         />
                     )

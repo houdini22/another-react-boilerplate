@@ -31,7 +31,7 @@ export class Roles extends React.Component<AddRoleProps, null> {
             <Card header={<h1>Roles</h1>}>
                 {user?.roles
                     ?.sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                    .map(({ id: _id, name, guard_name }) => {
+                    .map(({ id: _id, name }) => {
                         registerModal(
                             `user-delete-role-${_id}`,
                             <ModalConfirm
@@ -63,7 +63,7 @@ export class Roles extends React.Component<AddRoleProps, null> {
                         return (
                             <Dropdown.Container triggerSize={'lg'} key={_id}>
                                 <Dropdown.Trigger component={Label} componentProps={{ block: true }}>
-                                    {name} - {guard_name}
+                                    {name}
                                 </Dropdown.Trigger>
                                 <Dropdown.Menu>
                                     <Dropdown.Item type="header">
@@ -72,18 +72,22 @@ export class Roles extends React.Component<AddRoleProps, null> {
                                     <Dropdown.Item
                                         color={'info'}
                                         onClick={() => {
-                                            setIsLoading(true)
-
                                             navigate(`/permissions?roles=${_id}`)
                                         }}
                                     >
                                         <DetailsIcon /> Show Role Permissions
                                     </Dropdown.Item>
                                     <Dropdown.Item
+                                        color={'info'}
+                                        onClick={() => {
+                                            navigate(`/users?roles=${_id}`)
+                                        }}
+                                    >
+                                        <DetailsIcon /> Show Users with Role
+                                    </Dropdown.Item>
+                                    <Dropdown.Item
                                         color={'warning'}
                                         onClick={() => {
-                                            setIsLoading(true)
-
                                             navigate(`/roles/edit?id=${_id}`)
                                         }}
                                     >

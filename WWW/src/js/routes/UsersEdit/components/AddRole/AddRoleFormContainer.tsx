@@ -7,7 +7,7 @@ import { reduxForm, formValueSelector } from 'redux-form'
 const onChange = (values, dispatch, props) => {}
 
 const AddRoleFormContainer = compose(
-    connect((state, props) => {
+    connect((state) => {
         const selector = formValueSelector('AddRoleForm')
         const permission = selector(state, 'role')
         return {

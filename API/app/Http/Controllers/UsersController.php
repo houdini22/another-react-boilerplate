@@ -98,6 +98,7 @@ class UsersController extends Controller
 
         $user = User::with('roles')
             ->with('permissions')
+            ->with('roles')
             ->with('roles.permissions')
             ->with('avatar')
             ->withCount(['files', 'roles', 'permissions'])

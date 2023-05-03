@@ -21,6 +21,9 @@ class ModalManager extends React.Component<ModalManagerProps, null> {
         return null
     }
     openModal(name) {
+        if (!this.modals[name]) {
+            console.error(`Modal ${name} not registered.`)
+        }
         this.setState({ openedModal: name })
     }
     closeModal(name) {
