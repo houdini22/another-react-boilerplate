@@ -4,8 +4,6 @@ import { DeleteIcon, DetailsIcon, EditIcon, InfoIcon } from '../../../../compone
 import { ModalConfirm } from '../../../../components/common/ModalConfirm'
 
 interface RowExpandPermissionsProps {
-    user: Object
-    permissionsFromRoles: Object
     setIsLoading: Function
     navigate: Function
     deleteUserPermission: Function
@@ -23,7 +21,7 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                     <Row>
                         <Col xs={12}>
                             <Typography.Container>
-                                <h3>Users with Role</h3>
+                                <h3>Users with Permission</h3>
                             </Typography.Container>
                         </Col>
                         {permission?.users

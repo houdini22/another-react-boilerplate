@@ -18,7 +18,9 @@ import { MediaView } from './routes/Media'
 import { UsersEditView } from './routes/UsersEdit'
 import UsersAddView from './routes/UsersAdd/components/Index'
 import { UserRolesEdit } from './routes/UserRolesEdit'
-import { UsersPermissions } from './routes/UserPermissions'
+import { UsersPermissions } from './routes/UsersPermissions'
+import { UsersPermissionsEdit } from './routes/UsersPermissionsEdit'
+import { UsersPermissionsAdd } from './routes/UsersPermissionsAdd'
 
 const App = () => (
     <Router>
@@ -135,6 +137,26 @@ const App = () => (
                     <PageLayout>
                         <UserIsAuthenticatedRoute>
                             <UsersPermissions />
+                        </UserIsAuthenticatedRoute>
+                    </PageLayout>
+                }
+            />
+            <Route
+                path="/permissions/add"
+                element={
+                    <PageLayout>
+                        <UserIsAuthenticatedRoute>
+                            <UsersPermissionsAdd />
+                        </UserIsAuthenticatedRoute>
+                    </PageLayout>
+                }
+            />
+            <Route
+                path="/permissions/edit"
+                element={
+                    <PageLayout>
+                        <UserIsAuthenticatedRoute>
+                            <UsersPermissionsEdit />
                         </UserIsAuthenticatedRoute>
                     </PageLayout>
                 }

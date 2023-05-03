@@ -1,31 +1,30 @@
 import * as React from 'react'
-import { Button, PageHeader } from '../../../components'
+import { PageHeader } from '../../../components'
 import { HomeIcon } from '../../../components/icons'
 
-interface RolesTableProps {}
+interface HeaderProps {
+    permission: Object
+}
 
-export class Header extends React.Component<RolesTableProps> {
+export class Header extends React.Component<HeaderProps, null> {
     render() {
-        const { openModal } = this.props
-
+        const { permission } = this.props
         return (
             <PageHeader.Container>
-                <PageHeader.Title>Permissions</PageHeader.Title>
-                <PageHeader.Actions>
-                    <Button color={'success'} onClick={() => openModal('add-permission')}>
-                        Add
-                    </Button>
-                </PageHeader.Actions>
+                <PageHeader.Title>Edit Permission</PageHeader.Title>
                 <PageHeader.Breadcrumbs>
                     <PageHeader.BreadcrumbsItem href="/">
                         <HomeIcon /> Home
                     </PageHeader.BreadcrumbsItem>
                     <PageHeader.BreadcrumbsItem href="/users">Users</PageHeader.BreadcrumbsItem>
                     <PageHeader.BreadcrumbsItem href="/permissions">Permissions</PageHeader.BreadcrumbsItem>
+                    <PageHeader.BreadcrumbsItem href={`/permissions/edit?id=${permission['id']}`}>
+                        Edit Permission
+                    </PageHeader.BreadcrumbsItem>
                 </PageHeader.Breadcrumbs>
             </PageHeader.Container>
         )
     }
 }
 
-export default Header
+export default { Header }

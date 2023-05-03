@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Button, Table } from '../../../components'
+import { Button, Table, Tooltip } from '../../../components'
 import { EditIcon, DeleteIcon, UserIcon, RoleIcon } from '../../../components/icons'
 import { TableSummary } from '../../../components/common/List/TableSummary'
 import { ModalConfirm } from '../../../components/common/ModalConfirm'
@@ -8,7 +8,7 @@ import RowExpandRoles from './PermissionsTable/RowExpandRoles'
 
 interface RolesTableProps {}
 
-export class PermissionsTable extends React.Component<RolesTableProps> {
+export class PermissionsTable extends React.Component<null, null> {
     render() {
         const {
             setIsLoading,
@@ -18,7 +18,6 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
             deleteRolePermission,
             deleteUserPermission,
             deletePermission,
-            openEditModal,
             page,
             perPage,
             total,
@@ -99,23 +98,27 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                             <Table.Td xs={3}>{permission.name}</Table.Td>
                                             <Table.Td xs={4}>
                                                 <div>
-                                                    {permission.users_count > 0 && (
-                                                        <Button
-                                                            color={'info'}
-                                                            icon={<UserIcon />}
-                                                            onClick={() => expand('users')}
-                                                        >
-                                                            {permission.users_count}
-                                                        </Button>
-                                                    )}
                                                     {permission.roles_count > 0 && (
-                                                        <Button
-                                                            color={'info'}
-                                                            icon={<RoleIcon />}
-                                                            onClick={() => expand('roles')}
-                                                        >
-                                                            {permission.roles_count}
-                                                        </Button>
+                                                        <Tooltip tooltip={`Roles with permission`}>
+                                                            <Button
+                                                                color={'info'}
+                                                                icon={<RoleIcon />}
+                                                                onClick={() => expand('roles')}
+                                                            >
+                                                                {permission.roles_count}
+                                                            </Button>
+                                                        </Tooltip>
+                                                    )}
+                                                    {permission.users_count > 0 && (
+                                                        <Tooltip tooltip={`Users with permission`}>
+                                                            <Button
+                                                                color={'info'}
+                                                                icon={<UserIcon />}
+                                                                onClick={() => expand('users')}
+                                                            >
+                                                                {permission.users_count}
+                                                            </Button>
+                                                        </Tooltip>
                                                     )}
                                                 </div>
                                             </Table.Td>
@@ -125,7 +128,9 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                                                         icon={<EditIcon />}
                                                         iconOnly
                                                         color={'warning'}
-                                                        onClick={() => openEditModal(permission.id)}
+                                                        onClick={() =>
+                                                            navigate(`/permissions/edit?id=${permission.id}`)
+                                                        }
                                                     />
                                                     {permission.is_deletable == 1 && (
                                                         <Button

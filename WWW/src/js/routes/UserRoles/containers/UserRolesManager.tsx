@@ -60,6 +60,7 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps> {
             editPermission,
             addUserPermission,
             deleteUserPermission,
+            isLoading,
         } = this.props
         const renderProps = {
             roles,
@@ -81,6 +82,7 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps> {
             editPermission,
             addUserPermission,
             deleteUserPermission,
+            isLoading,
         }
 
         return children(renderProps)

@@ -4,7 +4,7 @@ import { EditForm as FormComponent } from './EditForm'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 
-const onSubmit = (values, _, { save, fetch, addToastNotification, close }) => {
+const onSubmit = (values, _, { save, fetch, addToastNotification }) => {
     return save({ ...values }).then(
         (role) => {
             fetch().then(() => {
@@ -13,7 +13,6 @@ const onSubmit = (values, _, { save, fetch, addToastNotification, close }) => {
                     title: 'Save success.',
                     text: 'Role has been saved.',
                 })
-                close()
             })
         },
         (response) => {

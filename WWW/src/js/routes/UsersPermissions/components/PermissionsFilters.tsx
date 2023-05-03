@@ -1,6 +1,4 @@
 import * as React from 'react'
-import { Filters as FiltersContainer } from '../../../components/common/List/Filters'
-import { Filter } from '../../../components/common/List/Filter'
 import { Button, LoadingOverlay, Card } from '../../../components'
 import { ifDeepDiff } from '../../../utils/javascript'
 import { FiltersFactory } from '../../../components/common/List/FiltersFactory'

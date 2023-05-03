@@ -199,6 +199,7 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
             setIsLoading: this.setIsLoading.bind(this),
             saveFilters: this.saveFilters.bind(this),
             restoreFilters: this.restoreFilters.bind(this),
+            defaultFilters,
         }
 
         return <div className={cx('list-manager-container')}>{children(renderProps)}</div>

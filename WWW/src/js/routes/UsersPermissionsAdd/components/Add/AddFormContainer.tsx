@@ -1,24 +1,26 @@
 import * as React from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { AddPermissionForm as FormComponent } from './AddPermissionForm'
+import { AddForm as FormComponent } from './AddForm'
 import { reduxForm, formValueSelector } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 import { SubmissionError } from 'redux-form'
 
-const onSubmit = (values, _, { fetch, close, addPermission, addToastNotification }) => {
-    return addPermission({ id: values.role_id }, values).then(
-        (data) => {
-            fetch().then(() => {
-                close()
-                addToastNotification({
-                    type: 'success',
-                    title: 'Save success.',
-                    text: 'Permission has been saved.',
-                })
+const onSubmit = (values, _, { setIsLoading, addPermission, addToastNotification, reset }) => {
+    setIsLoading(true)
+
+    return addPermission({ ...values, guard_name: 'web' }).then(
+        () => {
+            setIsLoading(false)
+            addToastNotification({
+                type: 'success',
+                title: 'Save success.',
+                text: 'Permission has been saved.',
             })
+            reset()
         },
         (response) => {
+            setIsLoading(false)
             addToastNotification({
                 title: 'Form Validation Error',
                 text: response.message,
@@ -30,7 +32,7 @@ const onSubmit = (values, _, { fetch, close, addPermission, addToastNotification
     )
 }
 
-const AddPermissionFormContainer = compose(
+const AddFormContainer = compose(
     connect((state, props) => {
         const selector = formValueSelector('AddPermissionForm')
         const permission = selector(state, 'permission')
@@ -47,10 +49,9 @@ const AddPermissionFormContainer = compose(
             name: '',
             guard_name: 'web',
             role_id: 0,
-            permission: 'add',
         },
     }),
 )(FormComponent)
 
-export { AddPermissionFormContainer }
-export default { AddPermissionFormContainer }
+export { AddFormContainer }
+export default { AddFormContainer }

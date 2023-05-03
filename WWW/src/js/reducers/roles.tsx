@@ -38,7 +38,6 @@ const setPermissions = (data) => (dispatch) => {
 
 const fetch = () => (dispatch) => {
     return new Promise<void>((resolve) => {
-        dispatch(setIsLoading(true))
         dispatch(setIsLoaded(false))
         dispatch(setFetchError(null))
         dispatch(setRoles([]))
@@ -51,13 +50,11 @@ const fetch = () => (dispatch) => {
                     },
                 }) => {
                     dispatch(setRoles(data))
-                    dispatch(setIsLoading(false))
                     dispatch(setIsLoaded(true))
                     resolve()
                 },
             )
             .catch((e) => {
-                dispatch(setIsLoading(false))
                 dispatch(setIsLoaded(false))
                 dispatch(setFetchError(e))
             })
@@ -66,7 +63,6 @@ const fetch = () => (dispatch) => {
 
 const fetchPermissions = () => (dispatch) => {
     return new Promise<void>((resolve) => {
-        dispatch(setIsLoading(true))
         dispatch(setIsLoaded(false))
         dispatch(setFetchError(null))
         dispatch(setPermissions([]))
@@ -74,12 +70,10 @@ const fetchPermissions = () => (dispatch) => {
         http.get('/roles/permissions/list')
             .then(({ data: { permissions } }) => {
                 dispatch(setPermissions(permissions))
-                dispatch(setIsLoading(false))
                 dispatch(setIsLoaded(true))
                 resolve()
             })
             .catch((e) => {
-                dispatch(setIsLoading(false))
                 dispatch(setIsLoaded(false))
                 dispatch(setFetchError(e))
             })
@@ -88,18 +82,15 @@ const fetchPermissions = () => (dispatch) => {
 
 const editRole = (params) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        dispatch(setIsLoading(true))
         dispatch(setIsLoaded(false))
         dispatch(setFetchError(null))
 
         http.post('/roles/edit', params)
             .then(({ data }) => {
-                dispatch(setIsLoading(false))
                 dispatch(setIsLoaded(true))
                 resolve()
             })
             .catch((e) => {
-                dispatch(setIsLoading(false))
                 dispatch(setIsLoaded(false))
                 dispatch(setFetchError(e))
                 reject(e)
@@ -109,18 +100,15 @@ const editRole = (params) => (dispatch) => {
 
 const editPermission = (params) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        dispatch(setIsLoading(true))
         dispatch(setIsLoaded(false))
         dispatch(setFetchError(null))
 
         http.post('/permissions/edit', params)
             .then(({ data: { permission } }) => {
-                dispatch(setIsLoading(false))
                 dispatch(setIsLoaded(true))
                 resolve(permission)
             })
             .catch((e) => {
-                dispatch(setIsLoading(false))
                 dispatch(setIsLoaded(false))
                 dispatch(setFetchError(e))
                 reject(e)
@@ -130,19 +118,16 @@ const editPermission = (params) => (dispatch) => {
 
 const addRole = (params) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        dispatch(setIsLoading(true))
         dispatch(setIsLoaded(false))
         dispatch(setFetchError(null))
 
         return http
             .post('/roles/add', params)
             .then(({ data: { role } }) => {
-                dispatch(setIsLoading(false))
                 dispatch(setIsLoaded(true))
                 resolve(role)
             })
             .catch((e) => {
-                dispatch(setIsLoading(false))
                 dispatch(setIsLoaded(false))
                 dispatch(setFetchError(e))
                 reject(e)
@@ -150,7 +135,7 @@ const addRole = (params) => (dispatch) => {
     })
 }
 
-const addPermission = (role, params) => (dispatch) => {
+const addPermission = (params) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
         dispatch(setFetchError(null))
 
@@ -171,19 +156,16 @@ const fetchOne =
     (dispatch) => {
         return new Promise<void>((resolve) => {
             dispatch(setRole({}))
-            dispatch(setIsLoading(true))
             dispatch(setIsLoaded(false))
             dispatch(setFetchError(null))
 
             http.get(`/roles/get/${id}`)
                 .then(({ data: { role } }) => {
                     dispatch(setRole(role))
-                    dispatch(setIsLoading(false))
                     dispatch(setIsLoaded(true))
                     resolve()
                 })
                 .catch((e) => {
-                    dispatch(setIsLoading(false))
                     dispatch(setIsLoaded(false))
                     dispatch(setFetchError(e))
                 })
@@ -194,19 +176,16 @@ const fetchOnePermission =
     (dispatch) => {
         return new Promise<void>((resolve) => {
             dispatch(setPermission({}))
-            dispatch(setIsLoading(true))
             dispatch(setIsLoaded(false))
             dispatch(setFetchError(null))
 
             http.get(`/permissions/get/${id}`)
                 .then(({ data: { permission } }) => {
                     dispatch(setPermission(permission))
-                    dispatch(setIsLoading(false))
                     dispatch(setIsLoaded(true))
                     resolve()
                 })
                 .catch((e) => {
-                    dispatch(setIsLoading(false))
                     dispatch(setIsLoaded(false))
                     dispatch(setFetchError(e))
                 })
@@ -217,18 +196,15 @@ const deleteRole =
     (id = 0) =>
     (dispatch) => {
         return new Promise<void>((resolve, reject) => {
-            dispatch(setIsLoading(true))
             dispatch(setIsLoaded(false))
             dispatch(setFetchError(null))
 
             http.delete(`/roles/delete/${id}`)
                 .then(({ data: { user } }) => {
-                    dispatch(setIsLoading(false))
                     dispatch(setIsLoaded(true))
                     resolve()
                 })
                 .catch((e) => {
-                    dispatch(setIsLoading(false))
                     dispatch(setIsLoaded(false))
                     dispatch(setFetchError(e))
                     reject(e)

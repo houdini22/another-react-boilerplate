@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Card, LoadingOverlay } from '../../../components'
-import { AddPermissionFormContainer } from '../../UserRoles/components/AddPermission/AddPermissionFormContainer'
+import { AddPermissionFormContainer } from './AddPermissions/AddPermissionFormContainer'
 
 interface HeaderProps {
     role: Object

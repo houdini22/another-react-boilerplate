@@ -71,26 +71,6 @@ class PermissionsController extends Controller
         ]);
     }
 
-    public function getGet(Request $request, $id)
-    {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
-
-        $permission = Permission::with('users')->with('roles')->find($id);
-
-        if (!$permission) {
-            return response()->json([
-                'message' => 'Not Found'
-            ], 404);
-        }
-
-        return response()->json([
-            'permission' => $permission->toArray(),
-        ]);
-    }
-
     public function getGetPermission(Request $request, $id)
     {
         $user = User::getFromRequest($request);

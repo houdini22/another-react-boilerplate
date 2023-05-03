@@ -15,7 +15,7 @@ export class RowExpandRoles extends React.Component<RowExpandRolesProps, null> {
                     <Row>
                         <Col xs={12}>
                             <Typography.Container>
-                                <h3>Roles</h3>
+                                <h3>Roles with Permission</h3>
                             </Typography.Container>
                         </Col>
                         {permission?.roles?.map(({ id: _id, name, guard_name, is_deletable: _is_deletable }) => {
@@ -67,6 +67,14 @@ export class RowExpandRoles extends React.Component<RowExpandRolesProps, null> {
                                                     <Dropdown.Menu>
                                                         <Dropdown.Item type={'header'}>
                                                             <InfoIcon /> Role ID: {_id}
+                                                        </Dropdown.Item>
+                                                        <Dropdown.Item
+                                                            color={'info'}
+                                                            onClick={() => {
+                                                                navigate(`/permissions?roles=${_id}`)
+                                                            }}
+                                                        >
+                                                            <DetailsIcon /> Show Permissions with Role
                                                         </Dropdown.Item>
                                                         <Dropdown.Item
                                                             color={'info'}

@@ -1,20 +1,20 @@
 import * as React from 'react'
 import { compose } from 'redux'
-import { connect } from 'react-redux'
 import { EditForm as FormComponent } from './EditForm'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 
-const onSubmit = (values, _, { editPermission, addToastNotification, fetch, close }) => {
-    return editPermission(values).then(
+const onSubmit = (values, _, { save, fetchOnePermission, addToastNotification, setIsLoading, permission }) => {
+    setIsLoading(true)
+    return save({ ...values }).then(
         () => {
-            fetch().then(() => {
-                close()
-            })
-            addToastNotification({
-                type: 'success',
-                title: 'Save success.',
-                text: 'Permission has been saved.',
+            fetchOnePermission(permission['id']).then(() => {
+                addToastNotification({
+                    type: 'success',
+                    title: 'Save success.',
+                    text: 'Permission has been saved.',
+                })
+                setIsLoading(false)
             })
         },
         (response) => {
@@ -24,20 +24,18 @@ const onSubmit = (values, _, { editPermission, addToastNotification, fetch, clos
                 type: 'danger',
                 href: '#',
             })
+            setIsLoading(false)
             throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
         },
     )
 }
 
 const EditFormContainer = compose(
-    connect((state, props) => {
-        return {}
-    }),
     reduxForm({
-        onSubmit,
         enableReinitialize: true,
         destroyOnUnmount: false,
         form: 'EditPermissionForm',
+        onSubmit,
     }),
 )(FormComponent)
 
