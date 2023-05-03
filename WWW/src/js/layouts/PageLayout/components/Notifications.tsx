@@ -18,7 +18,7 @@ interface NotificationsProps {
     toastNotifications: Array<ToastNotification>
 }
 
-class NotificationsBase extends React.Component<NotificationsProps> {
+class NotificationsBase extends React.Component<NotificationsProps, null> {
     getIcon(type) {
         switch (type) {
             case 'default':
@@ -50,7 +50,7 @@ class NotificationsBase extends React.Component<NotificationsProps> {
             <div className={cx('layout__notifications')}>
                 <div className={cx('layout__notifications__container')}>
                     <ul>
-                        {toastNotifications.map(({ id, type, text, title, href }) => {
+                        {toastNotifications.map(({ type, text, title, href }) => {
                             return (
                                 <li
                                     className={cx(

@@ -6,7 +6,7 @@ import { NavigationItems } from './NavigationItems'
 
 const cx = classNames.bind(styles)
 
-class Navigation extends React.Component {
+class Navigation extends React.Component<null, null> {
     render() {
         return (
             <div className={cx('layout__sidebar__content__navigation')}>

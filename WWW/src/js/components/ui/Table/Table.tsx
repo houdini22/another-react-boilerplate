@@ -14,7 +14,7 @@ interface TableProps {
     children: any
 }
 
-class Table extends React.Component<TableProps> {
+class Table extends React.Component<TableProps, null> {
     render() {
         const { children, bordered, striped, size = 'md', color } = this.props
 
@@ -33,7 +33,7 @@ class Table extends React.Component<TableProps> {
     }
 }
 
-class THead extends React.Component {
+class THead extends React.Component<null, null> {
     render() {
         const { children } = this.props
 
@@ -41,7 +41,7 @@ class THead extends React.Component {
     }
 }
 
-class TBody extends React.Component {
+class TBody extends React.Component<null, null> {
     render() {
         const { children } = this.props
 
@@ -49,7 +49,7 @@ class TBody extends React.Component {
     }
 }
 
-class TFoot extends React.Component {
+class TFoot extends React.Component<null, null> {
     render() {
         const { children, alignRight } = this.props
 
@@ -71,7 +71,7 @@ interface TrProps {
     onClick?: () => void
 }
 
-class Tr extends React.Component<TrProps> {
+class Tr extends React.Component<TrProps, null> {
     render() {
         const { children, color, onClick, ...props } = this.props
 
@@ -98,7 +98,7 @@ interface ThProps {
     alignCenter?: boolean
 }
 
-class Th extends React.Component<ThProps> {
+class Th extends React.Component<ThProps, null> {
     render() {
         const { children, xs, md, alignCenter } = this.props
 
@@ -126,7 +126,7 @@ interface TdProps {
     children: any
 }
 
-class Td extends React.Component<TdProps> {
+class Td extends React.Component<TdProps, null> {
     render() {
         const { children, xs, md, onClick, alignCenter, alignRight } = this.props
 

@@ -201,7 +201,7 @@ interface TabProps {
     setActiveTab?(): any
 }
 
-export class Tab extends React.Component<TabProps> {
+export class Tab extends React.Component<TabProps, null> {
     constructor(props) {
         super(props)
     }
@@ -255,7 +255,7 @@ interface TriggerProps {
     onClick?(): any
 }
 
-export class Trigger extends React.Component<TriggerProps> {
+export class Trigger extends React.Component<TriggerProps, null> {
     constructor(props) {
         super(props)
     }
@@ -264,7 +264,7 @@ export class Trigger extends React.Component<TriggerProps> {
         const { children, noTab, onClick, hidden } = this.props
         return (
             <AppContext.Consumer>
-                {({ tabName, activateTab, tabs = {}, activeTab, triggersElement } = {}) => {
+                {({ tabName, activateTab, activeTab, triggersElement } = {}) => {
                     return createPortal(
                         <li
                             className={cx('component-tabs__tabs__header__triggers__trigger')}
@@ -303,7 +303,7 @@ interface ContentProps {
     children?: any
 }
 
-export class Content extends React.Component<ContentProps> {
+export class Content extends React.Component<ContentProps, null> {
     constructor(props) {
         super(props)
     }
@@ -313,7 +313,7 @@ export class Content extends React.Component<ContentProps> {
 
         return (
             <AppContext.Consumer>
-                {({ contentElement, activeTab, tabName, changeTab, contentHeight } = {}) => {
+                {({ contentElement, activeTab, tabName, changeTab } = {}) => {
                     const Component = () => (
                         <div
                             className={cx({

@@ -19,7 +19,7 @@ interface ButtonGroupProps {
     size: string
 }
 
-class ButtonGroup extends React.Component<ButtonGroupProps> {
+class ButtonGroup extends React.Component<ButtonGroupProps, null> {
     constructor(props) {
         super(props)
     }

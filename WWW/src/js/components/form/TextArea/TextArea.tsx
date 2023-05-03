@@ -6,7 +6,7 @@ interface TextAreaProps {
     placeholder?: string
 }
 
-class TextArea extends React.Component<TextAreaProps> {
+class TextArea extends React.Component<TextAreaProps, null> {
     render() {
         const { error, loading, ...props } = this.props
 

@@ -9,7 +9,7 @@ interface LoadingOverlayProps {
     noBackground?: boolean
 }
 
-class LoadingOverlay extends React.Component<LoadingOverlayProps> {
+class LoadingOverlay extends React.Component<LoadingOverlayProps, null> {
     render() {
         const { size, noBackground } = this.props
 

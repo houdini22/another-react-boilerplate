@@ -30,7 +30,7 @@ interface CardProps {
     name?: string
 }
 
-class Card extends React.Component<CardProps> {
+class Card extends React.Component<CardProps, null> {
     state = {
         closed: false,
         minimized: false,

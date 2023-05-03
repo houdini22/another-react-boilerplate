@@ -121,7 +121,7 @@ interface TitleProps {
     children: any
 }
 
-export class Title extends React.Component<TitleProps> {
+export class Title extends React.Component<TitleProps, null> {
     render() {
         const { children } = this.props
 
@@ -133,7 +133,7 @@ interface BreadcrumbsProps {
     children: any
 }
 
-export class Breadcrumbs extends React.Component<BreadcrumbsProps> {
+export class Breadcrumbs extends React.Component<BreadcrumbsProps, null> {
     setBreadcrumbsExists = null
 
     componentWillUnmount() {
@@ -161,7 +161,7 @@ interface BreadcrumbsItemProps {
     href?: string
 }
 
-export class BreadcrumbsItem extends React.Component<BreadcrumbsItemProps> {
+export class BreadcrumbsItem extends React.Component<BreadcrumbsItemProps, null> {
     render() {
         const { children, href = '' } = this.props
 
@@ -191,7 +191,7 @@ interface ActionsProps {
     children: any
 }
 
-export class Actions extends React.Component<ActionsProps> {
+export class Actions extends React.Component<ActionsProps, null> {
     render() {
         const { children } = this.props
 

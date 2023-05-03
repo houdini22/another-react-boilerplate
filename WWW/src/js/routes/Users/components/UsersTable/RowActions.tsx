@@ -6,7 +6,6 @@ import { User } from '../../../../../types.d'
 
 interface FiltersProps {
     user: User
-    setUserToDelete: Function
     navigate: Function
 }
 

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { selectors as commonSelectors, actions as commonActions } from '../../reducers/notifications'
+import { actions as commonActions } from '../../reducers/notifications'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -8,7 +8,7 @@ interface NotificationsManagerProps {
     addToastNotification: Function
 }
 
-class NotificationsManagerBase extends React.Component<NotificationsManagerProps> {
+class NotificationsManagerBase extends React.Component<NotificationsManagerProps, null> {
     render() {
         const { children, addToastNotification } = this.props
         const renderProps = {
@@ -19,7 +19,7 @@ class NotificationsManagerBase extends React.Component<NotificationsManagerProps
     }
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = () => ({})
 
 const NotificationsManager = connect(mapStateToProps, (dispatch) => {
     return bindActionCreators(

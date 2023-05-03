@@ -16,7 +16,7 @@ interface LoginFormProps {
     type: string
 }
 
-export class ContactForm extends React.Component<LoginFormProps> {
+export class ContactForm extends React.Component<LoginFormProps, null> {
     constructor(props) {
         super(props)
     }

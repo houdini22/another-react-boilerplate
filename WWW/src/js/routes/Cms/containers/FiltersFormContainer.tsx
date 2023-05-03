@@ -14,7 +14,7 @@ class FiltersFormContainerBase extends React.Component<null, null> {
 
 const FiltersFormContainer = compose(
     connect(
-        ({ cmsPages: { currentId } }, props) => {
+        ({ cmsPages: { currentId } }) => {
             return {}
         },
         (dispatch) => {

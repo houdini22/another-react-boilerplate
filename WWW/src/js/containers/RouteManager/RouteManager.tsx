@@ -18,7 +18,7 @@ interface RouteManagerProps {
     params: object
 }
 
-class RouteManagerBase extends React.Component<RouteManagerProps> {
+class RouteManagerBase extends React.Component<RouteManagerProps, null> {
     render() {
         const { children, location, navigate, params } = this.props
         const query = parseQueryString(location['search'])

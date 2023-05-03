@@ -17,7 +17,7 @@ interface ModalContainerProps {
     visible?: boolean
 }
 
-class ModalContainer extends React.Component<ModalContainerProps> {
+class ModalContainer extends React.Component<ModalContainerProps, null> {
     render() {
         const { children, animation, color, size, placement, visible } = this.props
 
@@ -46,7 +46,7 @@ interface ModalBodyProps {
     close?(): any
 }
 
-class ModalBody extends React.Component<ModalBodyProps> {
+class ModalBody extends React.Component<ModalBodyProps, null> {
     render() {
         const { children, close } = this.props
 
@@ -65,7 +65,7 @@ interface ModalHeaderProps {
     close?(): any
 }
 
-class ModalHeader extends React.Component<ModalHeaderProps> {
+class ModalHeader extends React.Component<ModalHeaderProps, null> {
     render() {
         const { children, closeIcon, close } = this.props
 
@@ -93,7 +93,7 @@ interface ModalFooterProps {
     close?(): any
 }
 
-class ModalFooter extends React.Component<ModalFooterProps> {
+class ModalFooter extends React.Component<ModalFooterProps, null> {
     render() {
         const { children, close } = this.props
 

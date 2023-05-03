@@ -10,7 +10,7 @@ interface ContainerProps {
     separated: boolean
 }
 
-class Container extends React.Component<ContainerProps> {
+class Container extends React.Component<ContainerProps, null> {
     render() {
         const { children, color = 'default', size = 'md', separated } = this.props
 
@@ -28,7 +28,7 @@ class Container extends React.Component<ContainerProps> {
     }
 }
 
-class Item extends React.Component {
+class Item extends React.Component<null, null> {
     render() {
         const { children } = this.props
 
@@ -36,7 +36,7 @@ class Item extends React.Component {
     }
 }
 
-class ItemContent extends React.Component {
+class ItemContent extends React.Component<null, null> {
     render() {
         const { children } = this.props
 
@@ -50,9 +50,9 @@ interface ImageProps {
     url: string
 }
 
-class Image extends React.Component<ImageProps> {
+class Image extends React.Component<ImageProps, null> {
     render() {
-        const { children, url } = this.props
+        const { url } = this.props
 
         return (
             <div className={cx('component-list__item__image')}>

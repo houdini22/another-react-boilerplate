@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Field } from 'redux-form'
 import { FormField, Progress } from '../../../components'
 
-class UploadFileForm extends React.Component {
+class UploadFileForm extends React.Component<null, null> {
     render() {
         const { handleSubmit, uploadFiles, uploadProgress, fetch, addToastNotification } = this.props
 

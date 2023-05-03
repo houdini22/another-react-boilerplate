@@ -27,7 +27,11 @@ class ModalManager extends React.Component<ModalManagerProps, null> {
         this.setState({ openedModal: name })
     }
     closeModal(name) {
-        this.setState({ openedModal: '' })
+        const { openedModal } = this.state
+
+        if (openedModal === name) {
+            this.setState({ openedModal: '' })
+        }
     }
     render() {
         const { children } = this.props

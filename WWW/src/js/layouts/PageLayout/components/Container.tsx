@@ -15,7 +15,7 @@ interface ContainerProps {
     }
 }
 
-class ContainerBase extends React.Component<ContainerProps> {
+class ContainerBase extends React.Component<ContainerProps, null> {
     render() {
         const {
             children,

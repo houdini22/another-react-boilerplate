@@ -86,7 +86,7 @@ const editRole = (params) => (dispatch) => {
         dispatch(setFetchError(null))
 
         http.post('/roles/edit', params)
-            .then(({ data }) => {
+            .then(({}) => {
                 dispatch(setIsLoaded(true))
                 resolve()
             })
@@ -141,7 +141,7 @@ const addPermission = (params) => (dispatch) => {
 
         return http
             .post(`/permissions/add/`, params)
-            .then(({ data }) => {
+            .then(({}) => {
                 resolve()
             })
             .catch((e) => {
@@ -200,7 +200,7 @@ const deleteRole =
             dispatch(setFetchError(null))
 
             http.delete(`/roles/delete/${id}`)
-                .then(({ data: { user } }) => {
+                .then(() => {
                     dispatch(setIsLoaded(true))
                     resolve()
                 })
@@ -219,7 +219,7 @@ const deleteRolePermission =
             dispatch(setFetchError(null))
 
             http.delete(`/roles/permissions/delete/${role_id}/${permission_id}`)
-                .then(({ data: { user } }) => {
+                .then(() => {
                     resolve()
                 })
                 .catch((e) => {
@@ -236,7 +236,7 @@ const deleteUserRole =
             dispatch(setFetchError(null))
 
             http.delete(`/roles/permissions/delete_user_role/${user_id}/${role_id}`)
-                .then(({ data: { user } }) => {
+                .then(() => {
                     resolve()
                 })
                 .catch((e) => {
@@ -253,7 +253,7 @@ const deleteUserPermission =
             dispatch(setFetchError(null))
 
             http.post(`/permissions/delete_user_permission/${permission_id}/${user_id}`)
-                .then(({ data: { user } }) => {
+                .then(() => {
                     resolve()
                 })
                 .catch((e) => {
@@ -285,7 +285,7 @@ const deletePermission = (permission_id) => (dispatch) => {
         dispatch(setFetchError(null))
 
         http.delete(`/roles/permissions/delete/${permission_id}`)
-            .then(({ data: { user } }) => {
+            .then(() => {
                 resolve()
             })
             .catch((e) => {

@@ -89,7 +89,7 @@ const uploadFiles = (e) => (dispatch) => {
             },
             onUploadProgress,
         })
-            .then(({ data: { user } }) => {
+            .then(() => {
                 resolve()
             })
             .catch((e) => {

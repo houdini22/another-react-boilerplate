@@ -12,7 +12,7 @@ interface RowProps {
     onClick?: () => void
 }
 
-class Row extends React.Component<RowProps> {
+class Row extends React.Component<RowProps, null> {
     render() {
         const { children, builder, className, ...props } = this.props
 

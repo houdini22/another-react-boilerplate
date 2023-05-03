@@ -25,7 +25,7 @@ interface LabelProps {
     onClick?: Function
 }
 
-class Label extends React.Component<LabelProps> {
+class Label extends React.Component<LabelProps, null> {
     renderClassName({ cardSize, dropdownSize, accordionSize } = {}) {
         const {
             color = 'default',

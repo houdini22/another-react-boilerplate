@@ -2,7 +2,6 @@ import React from 'react'
 import { http } from '../../../modules/http'
 import styles from '../../../../assets/scss/components/_list_manager.scss'
 import classNames from 'classnames/bind'
-import { LocalStorage } from '../../../modules/database'
 
 const cx = classNames.bind(styles)
 
@@ -22,7 +21,6 @@ interface ListManagerState {
     total: number
     perPage: number
     links: Array<Object>
-    urlFilters: {}
 }
 
 class ListManager extends React.Component<ListManagerProps, ListManagerState> {
@@ -41,9 +39,7 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
 
     componentDidMount() {
         const { defaultFilters = {}, urlFilters = {} } = this.props
-        let newFilters = {}
-
-        newFilters = {
+        const newFilters = {
             ...defaultFilters,
             ...urlFilters,
         }

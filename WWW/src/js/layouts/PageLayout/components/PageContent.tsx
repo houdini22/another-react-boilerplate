@@ -9,7 +9,7 @@ interface PageContentProps {
     className?: string
 }
 
-class PageContent extends React.Component<PageContentProps> {
+class PageContent extends React.Component<PageContentProps, null> {
     componentDidMount() {
         window.scrollTo(0, 0)
     }

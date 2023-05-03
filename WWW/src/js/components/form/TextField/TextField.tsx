@@ -14,7 +14,7 @@ interface TextFieldProps {
     onChange?: Function
 }
 
-class TextField extends React.Component<TextFieldProps> {
+class TextField extends React.Component<TextFieldProps, null> {
     input: HTMLInputElement
 
     onChange(e) {
@@ -35,8 +35,6 @@ class TextField extends React.Component<TextFieldProps> {
         return (
             <AppContext.Consumer>
                 {({ cardSize } = {}) => {
-                    const size = cardSize || size
-
                     return (
                         <input
                             ref={(el) => (this.input = el)}

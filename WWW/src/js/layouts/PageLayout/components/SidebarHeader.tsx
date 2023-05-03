@@ -20,7 +20,7 @@ interface SidebarHeaderProps {
     setLayoutOption(name: string, value: boolean): any
 }
 
-class SidebarHeaderBase extends React.Component<SidebarHeaderProps> {
+class SidebarHeaderBase extends React.Component<SidebarHeaderProps, null> {
     render() {
         const {
             children,
@@ -37,10 +37,10 @@ class SidebarHeaderBase extends React.Component<SidebarHeaderProps> {
             >
                 <div
                     className={cx('layout__header__logo')}
-                    onMouseOver={(e) => {
+                    onMouseOver={() => {
                         setLayoutOption('sidebarExpanded', true)
                     }}
-                    onMouseOut={(e) => {
+                    onMouseOut={() => {
                         setLayoutOption('sidebarExpanded', false)
                     }}
                 >

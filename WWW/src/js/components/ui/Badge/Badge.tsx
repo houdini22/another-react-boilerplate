@@ -21,7 +21,7 @@ interface BadgeProps {
     right?: boolean
 }
 
-class Badge extends React.Component<BadgeProps> {
+class Badge extends React.Component<BadgeProps, null> {
     renderClassName({ cardSize, dropdownSize, accordionSize } = {}) {
         const { color = 'default', className, outline, href, size, arrow, rounded, roundless } = this.props
 

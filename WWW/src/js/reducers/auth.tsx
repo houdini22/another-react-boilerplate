@@ -28,7 +28,7 @@ const setLoginError = (value) => (dispatch) => {
 }
 
 const login = (email, password) => (dispatch) => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         dispatch(setIsLoading(true))
         dispatch(setLoginError(''))
 

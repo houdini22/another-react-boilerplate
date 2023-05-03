@@ -11,7 +11,12 @@ import { withRouter } from '../../../helpers/router'
 
 export const FORM_NAME = 'add-category-form-container'
 
-class AddCategoryFormContainerBase extends React.Component {
+interface AddCategoryFormContainerBaseState {
+    categories: Array<any>
+    indexDocuments: Array<any>
+}
+
+class AddCategoryFormContainerBase extends React.Component<null, AddCategoryFormContainerBaseState> {
     state = {
         categories: [],
         indexDocuments: [],

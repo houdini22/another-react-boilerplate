@@ -9,7 +9,7 @@ interface SectionProps {
     style?: object
 }
 
-class Section extends React.Component<SectionProps> {
+class Section extends React.Component<SectionProps, null> {
     render() {
         const { children, style } = this.props
 

@@ -54,7 +54,7 @@ class Button extends React.Component<ButtonProps, ButtonState> {
         }
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps, prevState) {
         if (prevState['isLoading'] === this.state['isLoading'] && this.props['isLoading'] !== prevProps['isLoading']) {
             this.setState({ isLoading: this.props['isLoading'] })
         }
@@ -155,7 +155,7 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                                     to={navigationHref}
                                     className={cx('component-button__navigation')}
                                     ref={(e) => (this.navigationRef = e)}
-                                    onClick={(e) => {
+                                    onClick={() => {
                                         onClickNavigation()
                                     }}
                                 >

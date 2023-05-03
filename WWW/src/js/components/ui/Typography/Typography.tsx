@@ -8,7 +8,7 @@ interface ContainerProps {
     children: any
 }
 
-class Container extends React.Component<ContainerProps> {
+class Container extends React.Component<ContainerProps, null> {
     render() {
         const { children } = this.props
 

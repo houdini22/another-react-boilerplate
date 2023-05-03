@@ -19,7 +19,7 @@ interface FormFieldProps {
     inputContainerStyle?: Object
 }
 
-class FormField extends React.Component<FormFieldProps> {
+class FormField extends React.Component<FormFieldProps, null> {
     render() {
         const {
             input = {},

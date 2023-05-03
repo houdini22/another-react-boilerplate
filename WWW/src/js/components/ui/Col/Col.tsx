@@ -15,7 +15,7 @@ interface ColProps {
     onClick?: () => void
 }
 
-class Col extends React.Component<ColProps> {
+class Col extends React.Component<ColProps, null> {
     render() {
         const { children, className, xs, sm, md, lg, ...props } = this.props
 

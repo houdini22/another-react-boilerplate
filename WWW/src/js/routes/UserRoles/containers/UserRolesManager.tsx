@@ -21,7 +21,7 @@ interface UserRolesManagerProps {
     permissions: any
 }
 
-class UserRolesManagerBase extends React.Component<UserRolesManagerProps> {
+class UserRolesManagerBase extends React.Component<UserRolesManagerProps, null> {
     componentDidMount() {
         const { fetch, fetchOne, fetchPermissions, id, permissionId, fetchOnePermission } = this.props
         if (id) {

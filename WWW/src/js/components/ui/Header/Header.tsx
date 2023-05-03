@@ -6,7 +6,7 @@ interface HeaderProps {
     isLoading: boolean
 }
 
-class Header extends React.Component<HeaderProps> {
+class Header extends React.Component<HeaderProps, null> {
     render() {
         const { children, isLoading } = this.props
 

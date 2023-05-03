@@ -146,7 +146,7 @@ interface DropdownTriggerProps {
     componentProps?: object
 }
 
-export class DropdownTrigger extends React.Component<DropdownTriggerProps> {
+export class DropdownTrigger extends React.Component<DropdownTriggerProps, null> {
     static defaultProps = {
         componentProps: {},
     }
@@ -197,7 +197,6 @@ export class DropdownTrigger extends React.Component<DropdownTriggerProps> {
                 {({
                     triggerElement,
                     itemsElement,
-                    dropdownSize,
                     dropdownTriggerSize,
                     dropdownTriggerColor,
                     dropdownIsOpen,
@@ -227,7 +226,7 @@ export class DropdownTrigger extends React.Component<DropdownTriggerProps> {
                                     }
                                 }
                             }}
-                            onMouseEnter={(e) => {
+                            onMouseEnter={() => {
                                 if (dropdownTrigger === 'hover') {
                                     dropdownOpen()
                                 }
@@ -248,7 +247,7 @@ export class DropdownTrigger extends React.Component<DropdownTriggerProps> {
     }
 }
 
-export class DropdownMenu extends React.Component {
+export class DropdownMenu extends React.Component<null, null> {
     render() {
         const { children } = this.props
 

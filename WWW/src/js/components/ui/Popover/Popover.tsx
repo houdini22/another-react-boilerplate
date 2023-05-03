@@ -160,7 +160,7 @@ interface TriggerProps {
     children: any
 }
 
-class Trigger extends React.Component<TriggerProps> {
+class Trigger extends React.Component<TriggerProps, null> {
     trigger = 'hover'
 
     contentElement = null
@@ -258,7 +258,7 @@ interface ContentProps {
     className?: string
 }
 
-class Content extends React.Component<ContentProps> {
+class Content extends React.Component<ContentProps, null> {
     render() {
         const { children, className, scrollY } = this.props
 

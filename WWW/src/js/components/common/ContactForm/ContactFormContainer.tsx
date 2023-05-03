@@ -37,7 +37,6 @@ const onSubmit = (values, dispatch, props) => {
         })
 }
 export const FORM_NAME = 'ContactForm'
-const selector = formValueSelector(FORM_NAME)
 
 const ContactFormContainer = compose(
     connect(

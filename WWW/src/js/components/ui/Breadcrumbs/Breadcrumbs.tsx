@@ -17,7 +17,7 @@ interface BreadcrumbsProps {
     links: Link
 }
 
-class Breadcrumbs extends React.Component<BreadcrumbsProps> {
+class Breadcrumbs extends React.Component<BreadcrumbsProps, null> {
     renderLinks(links) {
         return (
             <ul>

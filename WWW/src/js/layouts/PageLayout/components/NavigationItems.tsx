@@ -13,7 +13,7 @@ const NavigationItems = ({ items }) => {
         <RouteManager>
             {({ location: { pathname } }) => (
                 <AuthManager>
-                    {({ auth: { isLoggedIn, user }, logoff }) => (
+                    {({ auth: { isLoggedIn } }) => (
                         <ul className={cx('layout__sidebar__content__navigation__links__links')}>
                             {items.map((item) => {
                                 const { type, caption, href, icon, authorizationRequired, componentType, children } =

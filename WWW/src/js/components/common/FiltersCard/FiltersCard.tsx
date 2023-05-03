@@ -32,7 +32,6 @@ class FiltersCard extends React.Component<FilterProps, null> {
             resetFilters,
             defaultFilters = {},
             filters = {},
-            restoreFilters,
             setFilter,
             fetch,
             filtersToRender,
@@ -92,10 +91,7 @@ class FiltersCard extends React.Component<FilterProps, null> {
                                                     onClick={(e) => {
                                                         e.stopPropagation()
                                                         LocalStorage.deleteRows('ListManagerFilters', (row) => {
-                                                            if (row.name === name && row.list_name === list_name) {
-                                                                return true
-                                                            }
-                                                            return false
+                                                            return row.name === name && row.list_name === list_name
                                                         })
                                                         LocalStorage.commit()
 

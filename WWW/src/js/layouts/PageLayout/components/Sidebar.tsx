@@ -44,10 +44,10 @@ class SidebarBase extends React.Component<SidebarProps, SidebarState> {
                     'layout__sidebar--floating': floatingSidebar,
                     'layout__sidebar--expanded': sidebarExpanded,
                 })}
-                onMouseEnter={(e) => {
+                onMouseEnter={() => {
                     //setLayoutOption('sidebarExpanded', true)
                 }}
-                onMouseLeave={(e) => {
+                onMouseLeave={() => {
                     //setLayoutOption('sidebarExpanded', false)
                 }}
             >

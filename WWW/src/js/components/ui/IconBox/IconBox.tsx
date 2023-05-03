@@ -7,7 +7,7 @@ interface IconBoxProps {
     isLoading: boolean
 }
 
-class IconBox extends React.Component<IconBoxProps> {
+class IconBox extends React.Component<IconBoxProps, null> {
     render() {
         const { icon, children, isLoading } = this.props
 

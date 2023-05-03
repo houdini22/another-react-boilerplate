@@ -2,11 +2,7 @@ import * as React from 'react'
 import { Field } from 'redux-form'
 import { FormField, Progress } from '../../../../components'
 
-class UploadAvatarForm extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
+class UploadAvatarForm extends React.Component<null, null> {
     render() {
         const { handleSubmit, onChange, uploadProgress } = this.props
 

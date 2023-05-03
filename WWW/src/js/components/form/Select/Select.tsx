@@ -11,10 +11,10 @@ interface SelectProps {
     placeholder: boolean | string
     error: string
     loading: boolean
-    options: () => OptionsFields[] | OptionsFields[]
+    options: () => OptionsFields[]
 }
 
-class Select extends React.Component<SelectProps> {
+class Select extends React.Component<SelectProps, null> {
     renderPlaceholder() {
         const { placeholder } = this.props
         const caption = placeholder === true ? '--- choose ---' : placeholder

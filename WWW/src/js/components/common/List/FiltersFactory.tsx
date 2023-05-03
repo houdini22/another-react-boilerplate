@@ -34,7 +34,7 @@ class FiltersFactory extends React.Component<FiltersFactoryProps, null> {
         })
     }
     render() {
-        const { children, body = [] } = this.props
+        const { body = [] } = this.props
         return <div className={cx('filters')}>{this.renderBody(body)}</div>
     }
 }

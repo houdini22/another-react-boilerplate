@@ -9,7 +9,7 @@ interface AuthManagerProps {
     logoff(): any
 }
 
-class AuthManagerBase extends React.Component<AuthManagerProps> {
+class AuthManagerBase extends React.Component<AuthManagerProps, null> {
     render() {
         const { auth, children, logoff } = this.props
         const renderProps = {

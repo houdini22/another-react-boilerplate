@@ -2,9 +2,11 @@ import * as React from 'react'
 import { Button, PageHeader } from '../../../components'
 import { HomeIcon } from '../../../components/icons'
 
-interface RolesTableProps {}
+interface RolesTableProps {
+    navigate: Function
+}
 
-export class Header extends React.Component<null, null> {
+export class Header extends React.Component<RolesTableProps, null> {
     render() {
         const { navigate } = this.props
 
