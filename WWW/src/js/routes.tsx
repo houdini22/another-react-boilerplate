@@ -21,6 +21,7 @@ import { UserRolesEdit } from './routes/UserRolesEdit'
 import { UsersPermissions } from './routes/UsersPermissions'
 import { UsersPermissionsEdit } from './routes/UsersPermissionsEdit'
 import { UsersPermissionsAdd } from './routes/UsersPermissionsAdd'
+import { UserRolesAdd } from './routes/UserRolesAdd'
 
 const App = () => (
     <Router>
@@ -117,6 +118,16 @@ const App = () => (
                     <PageLayout>
                         <UserIsAuthenticatedRoute>
                             <UserRolesView />
+                        </UserIsAuthenticatedRoute>
+                    </PageLayout>
+                }
+            />
+            <Route
+                path="/roles/add"
+                element={
+                    <PageLayout>
+                        <UserIsAuthenticatedRoute>
+                            <UserRolesAdd />
                         </UserIsAuthenticatedRoute>
                     </PageLayout>
                 }

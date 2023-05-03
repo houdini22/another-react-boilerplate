@@ -1,14 +1,6 @@
 import * as React from 'react'
-import { Button, Dropdown, Label, Popover, Table, Tooltip, Typography } from '../../../components'
-import {
-    EditIcon,
-    DeleteIcon,
-    UserIcon,
-    InfoIcon,
-    DetailsIcon,
-    PermissionIcon,
-    RoleIcon,
-} from '../../../components/icons'
+import { Button, Table, Tooltip } from '../../../components'
+import { EditIcon, DeleteIcon, UserIcon, PermissionIcon } from '../../../components/icons'
 import { TableSummary } from '../../../components/common/List/TableSummary'
 import { ModalConfirm } from '../../../components/common/ModalConfirm'
 import RowExpandPermissions from './RolesTable/RowExpandPermissions'
@@ -16,7 +8,7 @@ import RowExpandUsers from './RolesTable/RowExpandUsers'
 
 interface RolesTableProps {}
 
-export class RolesTable extends React.Component<RolesTableProps> {
+export class RolesTable extends React.Component<RolesTableProps, null> {
     render() {
         const {
             setIsLoading,

@@ -1,15 +1,13 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { RouteManager } from '../../../containers/RouteManager'
-import { Button, Card, LoadingOverlay, Modal } from '../../../components'
+import { Card, LoadingOverlay, Modal } from '../../../components'
 import { UserRolesManager } from '../containers/UserRolesManager'
-import AddModal from './AddRole/AddModal'
 import { NotificationsManager } from '../../../containers/NotificationsManager'
 import { ListManager } from '../../../components/common/List/ListManager'
 import RolesTable from './RolesTable'
 import { Pagination } from '../../../components/common/List/Pagination'
 import RolesFilters from './RolesFilters'
-import { ifDeepDiff } from '../../../utils/javascript'
 import Header from './Header'
 
 export class UsersView extends React.Component {
@@ -30,7 +28,6 @@ export class UsersView extends React.Component {
                                             deleteUserRole,
                                             permissions,
                                             roles,
-                                            addRole,
                                         }) => {
                                             const defaultFilters = {
                                                 items_per_page: 15,
@@ -73,63 +70,22 @@ export class UsersView extends React.Component {
                                                         restoreFilters,
                                                         saveFilters,
                                                     }) => {
-                                                        registerModal(
-                                                            'add-role',
-                                                            <AddModal
-                                                                fetch={fetch}
-                                                                addToastNotification={addToastNotification}
-                                                                close={() => closeModal('add-role')}
-                                                                setIsLoading={setIsLoading}
-                                                                isLoading={isLoading}
-                                                                addRole={addRole}
-                                                            />,
-                                                        )
-
                                                         return (
                                                             <PageContent>
-                                                                <Header openModal={openModal} />
+                                                                <Header navigate={navigate} />
 
-                                                                <Card
-                                                                    name={'UserRolesList'}
-                                                                    header={<h1>Filters</h1>}
-                                                                    withMinimizeIcon
-                                                                    headerActions={[
-                                                                        <Button
-                                                                            color={'secondary'}
-                                                                            onClick={() => resetFilters()}
-                                                                            disabled={
-                                                                                !ifDeepDiff(defaultFilters, filters)
-                                                                            }
-                                                                        >
-                                                                            Reset Filters
-                                                                        </Button>,
-                                                                        <Button
-                                                                            color={'success'}
-                                                                            onClick={() => restoreFilters('roles')}
-                                                                        >
-                                                                            Restore Filters
-                                                                        </Button>,
-                                                                        <Button
-                                                                            color={'warning'}
-                                                                            onClick={() => saveFilters('roles')}
-                                                                            disabled={
-                                                                                !ifDeepDiff(defaultFilters, filters)
-                                                                            }
-                                                                        >
-                                                                            Save Filters
-                                                                        </Button>,
-                                                                    ]}
-                                                                >
-                                                                    <RolesFilters
-                                                                        filters={filters}
-                                                                        setFilter={setFilter}
-                                                                        fetch={fetch}
-                                                                        permissions={permissions}
-                                                                        roles={roles}
-                                                                        defaultFilters={defaultFilters}
-                                                                    />
-                                                                    {isLoading && <LoadingOverlay />}
-                                                                </Card>
+                                                                <RolesFilters
+                                                                    filters={filters}
+                                                                    setFilter={setFilter}
+                                                                    fetch={fetch}
+                                                                    permissions={permissions}
+                                                                    roles={roles}
+                                                                    defaultFilters={defaultFilters}
+                                                                    isLoading={isLoading}
+                                                                    saveFilters={saveFilters}
+                                                                    restoreFilters={restoreFilters}
+                                                                    resetFilters={resetFilters}
+                                                                />
 
                                                                 <Card>
                                                                     <Pagination

@@ -49,22 +49,6 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps> {
                 />
                 {permission === 'add' && (
                     <>
-                        <Field
-                            name="role_id"
-                            label="Role"
-                            type="select"
-                            placeholder={'--- choose ---'}
-                            options={roles
-                                ?.sort(({ name: labelA }, { name: labelB }) => labelA.localeCompare(labelB))
-                                .map(({ id, name, guard_name }) => {
-                                    return {
-                                        label: `${name} - ${guard_name}`,
-                                        value: id,
-                                        selected: id === role.id,
-                                    }
-                                })}
-                            component={FormField}
-                        />
                         <Field name="name" label="Name" type="text" component={FormField} autoFocus />
                         <Field
                             name="guard_name"
@@ -72,26 +56,6 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps> {
                             type="hidden"
                             inputOnly
                             value={'web'}
-                            component={FormField}
-                        />
-                    </>
-                )}
-                {permission !== 'add' && (
-                    <>
-                        <Field
-                            name="role_id"
-                            label="Role"
-                            type="select"
-                            placeholder={'--- choose ---'}
-                            options={roles
-                                ?.sort(({ name: labelA }, { name: labelB }) => labelA.localeCompare(labelB))
-                                .map(({ id, name, guard_name }) => {
-                                    return {
-                                        label: `${name} - ${guard_name}`,
-                                        value: id,
-                                        selected: id === role.id,
-                                    }
-                                })}
                             component={FormField}
                         />
                     </>

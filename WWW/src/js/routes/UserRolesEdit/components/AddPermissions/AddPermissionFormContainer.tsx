@@ -9,11 +9,11 @@ import { SubmissionError } from 'redux-form'
 const onSubmit = (
     values,
     _,
-    { setIsLoading, addPermission, role, fetchPermissions, fetchOne, addToastNotification },
+    { setIsLoading, addPermission, role, fetchPermissions, fetchOne, addToastNotification, reset },
 ) => {
     setIsLoading(true)
 
-    return addPermission({ id: role.id }, { ...values, role_id: role.id, guard_name: 'web' }).then(
+    return addPermission({ ...values, role_id: role.id, guard_name: 'web' }).then(
         () => {
             Promise.all([fetchPermissions(), fetchOne(role.id)]).then(() => {
                 setIsLoading(false)
@@ -22,9 +22,11 @@ const onSubmit = (
                     title: 'Save success.',
                     text: 'Role has been saved.',
                 })
+                reset()
             })
         },
         (response) => {
+            setIsLoading(false)
             addToastNotification({
                 title: 'Form Validation Error',
                 text: response.message,

@@ -2,6 +2,8 @@ import * as React from 'react'
 import { Filters as FiltersContainer } from '../../../components/common/List/Filters'
 import { Filter } from '../../../components/common/List/Filter'
 import { FiltersFactory } from '../../../components/common/List/FiltersFactory'
+import { Button, Card, LoadingOverlay } from '../../../components'
+import { ifDeepDiff } from '../../../utils/javascript'
 
 interface FiltersProps {
     filters: Object
@@ -11,117 +13,153 @@ interface FiltersProps {
 
 export class Filters extends React.Component<FiltersProps, null> {
     render() {
-        const { filters, setFilter, fetch, permissions, defaultFilters } = this.props
+        const {
+            filters,
+            setFilter,
+            fetch,
+            permissions,
+            defaultFilters,
+            isLoading,
+            saveFilters,
+            restoreFilters,
+            resetFilters,
+        } = this.props
 
         return (
-            <FiltersFactory
-                filters={filters}
-                setFilter={setFilter}
-                defaultFilters={defaultFilters}
-                fetch={fetch}
-                body={[
-                    {
-                        type: 'search',
-                        label: 'Search',
-                        name: 'search',
-                    },
-                    {
-                        type: 'text',
-                        label: 'Username',
-                        name: 'user',
-                        placeholder: 'Username',
-                    },
-                    {
-                        options: [
-                            {
-                                label: 'yes or no',
-                                value: 'yes_or_no',
-                            },
-                            {
-                                label: 'yes',
-                                value: 'yes',
-                            },
-                            {
-                                label: 'no',
-                                value: 'no',
-                            },
-                        ],
-                        type: 'radio',
-                        name: 'has_permissions',
-                        label: 'Has Permissions',
-                    },
-                    {
-                        options: [
-                            {
-                                label: 'yes or no',
-                                value: 'yes_or_no',
-                            },
-                            {
-                                label: 'yes',
-                                value: 'yes',
-                            },
-                            {
-                                label: 'no',
-                                value: 'no',
-                            },
-                        ],
-                        type: 'radio',
-                        name: 'users',
-                        label: 'Has Users',
-                    },
-                    {
-                        options: permissions.map(({ id, name }) => {
-                            return {
-                                label: name,
-                                value: id,
-                            }
-                        }),
-                        name: 'permissions',
-                        label: 'Permissions',
-                        type: 'multiple',
-                    },
-                    {
-                        type: 'order',
-                        options: [
-                            {
-                                label: 'ID',
-                                value: 'id',
-                            },
-                            {
-                                label: 'Name',
-                                value: 'name',
-                            },
-                            {
-                                label: 'Users',
-                                value: 'users_count',
-                            },
-                            {
-                                label: 'Permissions',
-                                value: 'permissions_count',
-                            },
-                        ],
-                    },
-                    {
-                        type: 'radio',
-                        name: 'items_per_page',
-                        label: 'Items per page',
-                        options: [
-                            {
-                                label: '15',
-                                value: 15,
-                            },
-                            {
-                                label: '50',
-                                value: 50,
-                            },
-                            {
-                                label: '100',
-                                value: 100,
-                            },
-                        ],
-                    },
+            <Card
+                name={'UserRolesList'}
+                header={<h1>Filters</h1>}
+                withMinimizeIcon
+                headerActions={[
+                    <Button
+                        color={'secondary'}
+                        onClick={() => resetFilters()}
+                        disabled={!ifDeepDiff(defaultFilters, filters)}
+                    >
+                        Reset Filters
+                    </Button>,
+                    <Button color={'success'} onClick={() => restoreFilters('roles')}>
+                        Restore Filters
+                    </Button>,
+                    <Button
+                        color={'warning'}
+                        onClick={() => saveFilters('roles')}
+                        disabled={!ifDeepDiff(defaultFilters, filters)}
+                    >
+                        Save Filters
+                    </Button>,
                 ]}
-            />
+            >
+                <FiltersFactory
+                    filters={filters}
+                    setFilter={setFilter}
+                    defaultFilters={defaultFilters}
+                    fetch={fetch}
+                    body={[
+                        {
+                            type: 'search',
+                            label: 'Search',
+                            name: 'search',
+                        },
+                        {
+                            type: 'text',
+                            label: 'Username',
+                            name: 'user',
+                            placeholder: 'Username',
+                        },
+                        {
+                            options: [
+                                {
+                                    label: 'yes or no',
+                                    value: 'yes_or_no',
+                                },
+                                {
+                                    label: 'yes',
+                                    value: 'yes',
+                                },
+                                {
+                                    label: 'no',
+                                    value: 'no',
+                                },
+                            ],
+                            type: 'radio',
+                            name: 'has_permissions',
+                            label: 'Has Permissions',
+                        },
+                        {
+                            options: [
+                                {
+                                    label: 'yes or no',
+                                    value: 'yes_or_no',
+                                },
+                                {
+                                    label: 'yes',
+                                    value: 'yes',
+                                },
+                                {
+                                    label: 'no',
+                                    value: 'no',
+                                },
+                            ],
+                            type: 'radio',
+                            name: 'users',
+                            label: 'Has Users',
+                        },
+                        {
+                            options: permissions.map(({ id, name }) => {
+                                return {
+                                    label: name,
+                                    value: id,
+                                }
+                            }),
+                            name: 'permissions',
+                            label: 'Permissions',
+                            type: 'multiple',
+                        },
+                        {
+                            type: 'order',
+                            options: [
+                                {
+                                    label: 'ID',
+                                    value: 'id',
+                                },
+                                {
+                                    label: 'Name',
+                                    value: 'name',
+                                },
+                                {
+                                    label: 'Users',
+                                    value: 'users_count',
+                                },
+                                {
+                                    label: 'Permissions',
+                                    value: 'permissions_count',
+                                },
+                            ],
+                        },
+                        {
+                            type: 'radio',
+                            name: 'items_per_page',
+                            label: 'Items per page',
+                            options: [
+                                {
+                                    label: '15',
+                                    value: 15,
+                                },
+                                {
+                                    label: '50',
+                                    value: 50,
+                                },
+                                {
+                                    label: '100',
+                                    value: 100,
+                                },
+                            ],
+                        },
+                    ]}
+                />
+                {isLoading && <LoadingOverlay />}
+            </Card>
         )
     }
 }

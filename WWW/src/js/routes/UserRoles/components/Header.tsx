@@ -4,15 +4,15 @@ import { HomeIcon } from '../../../components/icons'
 
 interface RolesTableProps {}
 
-export class Header extends React.Component<RolesTableProps> {
+export class Header extends React.Component<RolesTableProps, null> {
     render() {
-        const { openModal } = this.props
+        const { navigate } = this.props
 
         return (
             <PageHeader.Container>
                 <PageHeader.Title>Roles</PageHeader.Title>
                 <PageHeader.Actions>
-                    <Button color={'success'} onClick={() => openModal('add-role')}>
+                    <Button color={'success'} onClick={() => navigate('/roles/add')}>
                         Add
                     </Button>
                 </PageHeader.Actions>
