@@ -60,6 +60,7 @@ class NotificationsBase extends React.Component<NotificationsProps, null> {
                                             [cx(`layout__notifications__container__notification--color-${type}`)]: type,
                                         },
                                     )}
+                                    key={`${type}${text}${title}${href}`}
                                 >
                                     <Link to={href}>
                                         <span className={cx('layout__notifications__container__notification__icon')}>

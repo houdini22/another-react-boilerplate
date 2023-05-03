@@ -84,9 +84,7 @@ export class FileView extends React.Component<FileProps, FileState> {
                     ></Button>
                 </div>
                 <Modal.Container color={'danger'} visible={confirmDeleteModalVisible}>
-                    <Modal.Header>
-                        <h4>Confirm delete</h4>
-                    </Modal.Header>
+                    <Modal.Header>Confirm delete</Modal.Header>
                     <Modal.Body>Are you sure to delete this item?</Modal.Body>
                     <Modal.Footer>
                         <Row>
@@ -127,7 +125,7 @@ export class FileView extends React.Component<FileProps, FileState> {
                             this.setState({ detailsModalVisible: false })
                         }}
                     >
-                        <h4>{name} File details</h4>
+                        File details
                     </Modal.Header>
                     <Modal.Body>
                         <Row>

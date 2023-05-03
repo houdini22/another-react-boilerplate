@@ -26,7 +26,7 @@ class Filter extends React.Component<FilterProps, null> {
                     .map(({ label, value }) => {
                         return (
                             <Button
-                                key={`${name}${value}`}
+                                key={`${name}${value}${label}`}
                                 color={filters[name] === value ? 'warning' : 'secondary'}
                                 onClick={() => {
                                     setFilter(name, value).then(() => fetch())
@@ -118,7 +118,7 @@ class Filter extends React.Component<FilterProps, null> {
                     .map(({ label, value }) => {
                         return (
                             <Button
-                                key={value}
+                                key={`${value}${label}`}
                                 color={filters[name].indexOf(value) === -1 ? 'secondary' : 'warning'}
                                 onClick={() => {
                                     if (filters[name].indexOf(value) === -1) {
