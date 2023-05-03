@@ -55,7 +55,7 @@ Route::prefix('api/v1')->group(function () {
             Route::get('list', '\App\Http\Controllers\RolesController@getPermissionList');
             Route::post('{role_id}/add', '\App\Http\Controllers\RolesController@postPermissionAdd');
             Route::delete('delete/{role_id}/{permission_id}', '\App\Http\Controllers\RolesController@deleteDeleteRolePermission');
-            Route::delete('delete_user_role/{role_id}/{permission_id}', '\App\Http\Controllers\RolesController@deleteDeleteUserRole');
+            Route::delete('delete_user_role/{user_id}/{role_id}', '\App\Http\Controllers\RolesController@deleteDeleteUserRole');
             Route::delete('delete/{permission_id}', '\App\Http\Controllers\RolesController@deleteDeletePermission');
         });
     });

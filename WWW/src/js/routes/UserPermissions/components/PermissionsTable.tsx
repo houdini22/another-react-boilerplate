@@ -1,7 +1,10 @@
 import * as React from 'react'
-import { Button, Dropdown, Label, Popover, Table, Typography } from '../../../components'
-import { EditIcon, DeleteIcon, UserIcon, RoleIcon, InfoIcon, DetailsIcon } from '../../../components/icons'
+import { Button, Table } from '../../../components'
+import { EditIcon, DeleteIcon, UserIcon, RoleIcon } from '../../../components/icons'
 import { TableSummary } from '../../../components/common/List/TableSummary'
+import { ModalConfirm } from '../../../components/common/ModalConfirm'
+import RowExpandUsers from './PermissionsTable/RowExpandUsers'
+import RowExpandRoles from './PermissionsTable/RowExpandRoles'
 
 interface RolesTableProps {}
 
@@ -16,12 +19,14 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
             deleteUserPermission,
             deletePermission,
             openEditModal,
-            openDeleteModal,
             page,
             perPage,
             total,
             totalPages,
             navigate,
+            openModal,
+            registerModal,
+            closeModal,
         } = this.props
 
         return (
@@ -36,263 +41,108 @@ export class PermissionsTable extends React.Component<RolesTableProps> {
                 </Table.THead>
                 <Table.TBody>
                     {permissions.map((permission) => {
+                        if (permission.is_deletable) {
+                            registerModal(
+                                `user-permission-${permission.id}-delete`,
+                                <ModalConfirm
+                                    onConfirm={() => {
+                                        deletePermission(permission.id).then(() => {
+                                            fetch().then(() => {
+                                                closeModal(`user-permission-${permission.id}-delete`)
+                                                addToastNotification({
+                                                    title: 'Delete success.',
+                                                    text: 'Permission has been removed.',
+                                                    type: 'success',
+                                                })
+                                            })
+                                        })
+                                    }}
+                                    onCancel={() => closeModal(`user-permission-${permission.id}-delete`)}
+                                >
+                                    <p>
+                                        Are you sure to delete Permission: <b>{permission.name}</b>?
+                                    </p>
+                                </ModalConfirm>,
+                            )
+                        }
+
                         return (
-                            <Table.Tr key={permission.id}>
-                                <Table.Td xs={1}>{permission.id}</Table.Td>
-                                <Table.Td xs={3}>{permission.name}</Table.Td>
-                                <Table.Td xs={4}>
-                                    <div>
-                                        {permission.users_count > 0 && (
-                                            <Popover.Container
-                                                trigger={'hover'}
-                                                pixelsWidth={300}
-                                                placement={'left-center'}
-                                            >
-                                                <Popover.Trigger>
-                                                    <Button
-                                                        color={'info'}
-                                                        icon={<UserIcon />}
-                                                        onClick={() => navigate(`/users?roles=${permission.id}`)}
-                                                    >
-                                                        {permission.users_count}
-                                                    </Button>
-                                                </Popover.Trigger>
-                                                <Popover.Content scrollY>
-                                                    <Typography.Container>
-                                                        <h4>Users</h4>
-                                                    </Typography.Container>
-                                                    {permission?.users
-                                                        ?.sort(({ name: nameA }, { name: nameB }) =>
-                                                            nameA.localeCompare(nameB),
-                                                        )
-                                                        .map(({ id: _id, name }) => {
-                                                            return (
-                                                                <div key={name}>
-                                                                    <Dropdown.Container triggerSize={'lg'}>
-                                                                        <Dropdown.Trigger
-                                                                            size="lg"
-                                                                            component={Label}
-                                                                            componentProps={{ block: true }}
-                                                                        >
-                                                                            {name}
-                                                                        </Dropdown.Trigger>
-                                                                        <Dropdown.Menu>
-                                                                            <Dropdown.Item type={'header'}>
-                                                                                <InfoIcon /> User ID: {_id}
-                                                                            </Dropdown.Item>
-                                                                            <Dropdown.Item
-                                                                                color={'info'}
-                                                                                onClick={() => {
-                                                                                    navigate(
-                                                                                        `/permissions?user=${name}`,
-                                                                                    )
-                                                                                }}
-                                                                            >
-                                                                                <DetailsIcon /> Show User Permissions
-                                                                            </Dropdown.Item>
-                                                                            <Dropdown.Item
-                                                                                color={'info'}
-                                                                                onClick={() => {
-                                                                                    navigate(`/roles?user=${name}`)
-                                                                                }}
-                                                                            >
-                                                                                <DetailsIcon /> Show User Roles
-                                                                            </Dropdown.Item>
-                                                                            <Dropdown.Item
-                                                                                color={'info'}
-                                                                                onClick={() => {
-                                                                                    navigate(`/media?user=${name}`)
-                                                                                }}
-                                                                            >
-                                                                                <DetailsIcon /> Show User Media
-                                                                            </Dropdown.Item>
-                                                                            <Dropdown.Item
-                                                                                color={'warning'}
-                                                                                onClick={() => {
-                                                                                    navigate(`/users/edit?id=${_id}`)
-                                                                                }}
-                                                                            >
-                                                                                <EditIcon /> Edit User
-                                                                            </Dropdown.Item>
-                                                                            {!!permission.is_deletable && (
-                                                                                <Dropdown.Item
-                                                                                    color="danger"
-                                                                                    onClick={() => {
-                                                                                        setIsLoading(true)
+                            <Table.ExpandManager>
+                                {({ addExpand, expand }) => {
+                                    addExpand(
+                                        'roles',
+                                        <RowExpandRoles
+                                            navigate={navigate}
+                                            setIsLoading={setIsLoading}
+                                            addToastNotification={addToastNotification}
+                                            fetch={fetch}
+                                            permission={permission}
+                                            deleteRolePermission={deleteRolePermission}
+                                        />,
+                                    )
 
-                                                                                        return deleteUserPermission(
-                                                                                            permission,
-                                                                                            {
-                                                                                                id: _id,
-                                                                                            },
-                                                                                        ).then(() => {
-                                                                                            fetch().then(() => {
-                                                                                                setIsLoading(false)
-                                                                                                addToastNotification({
-                                                                                                    title: 'Delete success.',
-                                                                                                    text: 'Permission has been removed from User.',
-                                                                                                    type: 'success',
-                                                                                                })
-                                                                                            })
-                                                                                        })
-                                                                                    }}
-                                                                                >
-                                                                                    <DeleteIcon /> Remove Permission
-                                                                                    from User
-                                                                                </Dropdown.Item>
-                                                                            )}
-                                                                        </Dropdown.Menu>
-                                                                    </Dropdown.Container>
-                                                                </div>
-                                                            )
-                                                        })}
-                                                </Popover.Content>
-                                            </Popover.Container>
-                                        )}
-                                        {permission.roles_count > 0 && (
-                                            <Popover.Container
-                                                trigger={'hover'}
-                                                pixelsWidth={300}
-                                                placement={'left-center'}
-                                            >
-                                                <Popover.Trigger>
-                                                    <Button
-                                                        color={'info'}
-                                                        icon={<RoleIcon />}
-                                                        onClick={() => navigate(`/roles?permissions=${permission.id}`)}
-                                                    >
-                                                        {permission.roles_count}
-                                                    </Button>
-                                                </Popover.Trigger>
-                                                <Popover.Content scrollY>
-                                                    <Typography.Container>
-                                                        <h4>Roles</h4>
-                                                    </Typography.Container>
-                                                    {permission?.roles?.map(
-                                                        ({
-                                                            id: _id,
-                                                            name,
-                                                            guard_name,
-                                                            is_deletable: _is_deletable,
-                                                        }) => {
-                                                            return (
-                                                                <div key={name}>
-                                                                    <Dropdown.Container triggerSize={'lg'}>
-                                                                        <Dropdown.Trigger
-                                                                            size="lg"
-                                                                            component={Label}
-                                                                            componentProps={{ block: true }}
-                                                                        >
-                                                                            {name} - {guard_name}
-                                                                        </Dropdown.Trigger>
-                                                                        <Dropdown.Menu>
-                                                                            <Dropdown.Item type={'header'}>
-                                                                                <InfoIcon /> Role ID: {_id}
-                                                                            </Dropdown.Item>
-                                                                            <Dropdown.Item
-                                                                                color={'info'}
-                                                                                onClick={() => {
-                                                                                    navigate(`/users?roles=${_id}`)
-                                                                                }}
-                                                                            >
-                                                                                <DetailsIcon /> Show Users with Role
-                                                                            </Dropdown.Item>
-                                                                            <Dropdown.Item
-                                                                                color={'info'}
-                                                                                onClick={() => {
-                                                                                    navigate(
-                                                                                        `/permissions?roles=${_id}`,
-                                                                                    )
-                                                                                }}
-                                                                            >
-                                                                                <DetailsIcon /> Show Role Permissions
-                                                                            </Dropdown.Item>
-                                                                            <Dropdown.Item
-                                                                                color={'warning'}
-                                                                                onClick={() => {
-                                                                                    navigate(`/roles/edit?id=${_id}`)
-                                                                                }}
-                                                                            >
-                                                                                <EditIcon /> Edit Role
-                                                                            </Dropdown.Item>
-                                                                            <Dropdown.Item
-                                                                                color="danger"
-                                                                                onClick={() => {
-                                                                                    setIsLoading(true)
+                                    addExpand(
+                                        'users',
+                                        <RowExpandUsers
+                                            navigate={navigate}
+                                            setIsLoading={setIsLoading}
+                                            addToastNotification={addToastNotification}
+                                            fetch={fetch}
+                                            permission={permission}
+                                            deleteUserPermission={deleteUserPermission}
+                                        />,
+                                    )
 
-                                                                                    return deleteRolePermission(
-                                                                                        {
-                                                                                            id: _id,
-                                                                                        },
-                                                                                        permission,
-                                                                                    ).then(() => {
-                                                                                        fetch().then(() => {
-                                                                                            setIsLoading(false)
-                                                                                            addToastNotification({
-                                                                                                title: 'Delete success.',
-                                                                                                text: 'Permission has been removed from user.',
-                                                                                                type: 'success',
-                                                                                            })
-                                                                                        })
-                                                                                    })
-                                                                                }}
-                                                                            >
-                                                                                <DeleteIcon /> Remove Permission from
-                                                                                Role
-                                                                            </Dropdown.Item>
-                                                                            {!!_is_deletable && (
-                                                                                <Dropdown.Item
-                                                                                    color="danger"
-                                                                                    onClick={() => {
-                                                                                        setIsLoading(true)
-
-                                                                                        return deletePermission(
-                                                                                            permission.id,
-                                                                                        ).then(() => {
-                                                                                            fetch().then(() => {
-                                                                                                setIsLoading(false)
-                                                                                                addToastNotification({
-                                                                                                    title: 'Delete success.',
-                                                                                                    text: 'Permission has been removed.',
-                                                                                                    type: 'success',
-                                                                                                })
-                                                                                            })
-                                                                                        })
-                                                                                    }}
-                                                                                >
-                                                                                    <DeleteIcon /> Delete Permission
-                                                                                </Dropdown.Item>
-                                                                            )}
-                                                                        </Dropdown.Menu>
-                                                                    </Dropdown.Container>
-                                                                </div>
-                                                            )
-                                                        },
+                                    return (
+                                        <Table.Tr key={permission.id}>
+                                            <Table.Td xs={1}>{permission.id}</Table.Td>
+                                            <Table.Td xs={3}>{permission.name}</Table.Td>
+                                            <Table.Td xs={4}>
+                                                <div>
+                                                    {permission.users_count > 0 && (
+                                                        <Button
+                                                            color={'info'}
+                                                            icon={<UserIcon />}
+                                                            onClick={() => expand('users')}
+                                                        >
+                                                            {permission.users_count}
+                                                        </Button>
                                                     )}
-                                                </Popover.Content>
-                                            </Popover.Container>
-                                        )}
-                                    </div>
-                                </Table.Td>
-                                <Table.Td xs={4}>
-                                    <div>
-                                        <Button
-                                            icon={<EditIcon />}
-                                            iconOnly
-                                            color={'warning'}
-                                            onClick={() => openEditModal(permission.id)}
-                                        />
-                                        {permission.is_deletable == 1 && (
-                                            <Button
-                                                icon={<DeleteIcon />}
-                                                iconOnly
-                                                color={'danger'}
-                                                onClick={() => openDeleteModal(permission.id)}
-                                            />
-                                        )}
-                                    </div>
-                                </Table.Td>
-                            </Table.Tr>
+                                                    {permission.roles_count > 0 && (
+                                                        <Button
+                                                            color={'info'}
+                                                            icon={<RoleIcon />}
+                                                            onClick={() => expand('roles')}
+                                                        >
+                                                            {permission.roles_count}
+                                                        </Button>
+                                                    )}
+                                                </div>
+                                            </Table.Td>
+                                            <Table.Td xs={4}>
+                                                <div>
+                                                    <Button
+                                                        icon={<EditIcon />}
+                                                        iconOnly
+                                                        color={'warning'}
+                                                        onClick={() => openEditModal(permission.id)}
+                                                    />
+                                                    {permission.is_deletable == 1 && (
+                                                        <Button
+                                                            icon={<DeleteIcon />}
+                                                            iconOnly
+                                                            color={'danger'}
+                                                            onClick={() =>
+                                                                openModal(`user-permission-${permission.id}-delete`)
+                                                            }
+                                                        />
+                                                    )}
+                                                </div>
+                                            </Table.Td>
+                                        </Table.Tr>
+                                    )
+                                }}
+                            </Table.ExpandManager>
                         )
                     })}
                 </Table.TBody>

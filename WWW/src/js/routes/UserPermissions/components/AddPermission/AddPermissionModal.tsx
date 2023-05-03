@@ -13,39 +13,35 @@ interface EditModalViewProps {
 
 export class AddPermissionModal extends React.Component<EditModalViewProps> {
     render() {
-        const { visible, close, fetch, addToastNotification } = this.props
+        const { close, fetch, addToastNotification } = this.props
 
         return (
-            <RouteManager>
-                {({ navigate }) => (
-                    <Modal.Container color={'primary'} visible={visible}>
-                        <UserRolesManager>
-                            {({ isLoading, setIsLoading, addPermission, roles, role, permissions }) => {
-                                return (
-                                    <>
-                                        {isLoading && <LoadingOverlay />}
-                                        <Modal.Header close={close} closeIcon>
-                                            <AddIcon /> Add Permission
-                                        </Modal.Header>
-                                        <Modal.Body>
-                                            <AddPermissionFormContainer
-                                                roles={roles}
-                                                role={role}
-                                                permissions={permissions}
-                                                setIsLoading={setIsLoading}
-                                                addPermission={addPermission}
-                                                fetch={fetch}
-                                                close={close}
-                                                addToastNotification={addToastNotification}
-                                            />
-                                        </Modal.Body>
-                                    </>
-                                )
-                            }}
-                        </UserRolesManager>
-                    </Modal.Container>
-                )}
-            </RouteManager>
+            <Modal.Container color={'primary'} visible={true}>
+                <UserRolesManager>
+                    {({ isLoading, setIsLoading, addPermission, roles, role, permissions }) => {
+                        return (
+                            <>
+                                {isLoading && <LoadingOverlay />}
+                                <Modal.Header close={close} closeIcon>
+                                    <AddIcon /> Add Permission
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <AddPermissionFormContainer
+                                        roles={roles}
+                                        role={role}
+                                        permissions={permissions}
+                                        setIsLoading={setIsLoading}
+                                        addPermission={addPermission}
+                                        fetch={fetch}
+                                        close={close}
+                                        addToastNotification={addToastNotification}
+                                    />
+                                </Modal.Body>
+                            </>
+                        )
+                    }}
+                </UserRolesManager>
+            </Modal.Container>
         )
     }
 }

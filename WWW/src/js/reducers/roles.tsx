@@ -259,7 +259,7 @@ const deleteUserRole =
         return new Promise<void>((resolve, reject) => {
             dispatch(setFetchError(null))
 
-            http.delete(`/roles/permissions/delete_user_role/${role_id}/${user_id}`)
+            http.delete(`/roles/permissions/delete_user_role/${user_id}/${role_id}`)
                 .then(({ data: { user } }) => {
                     resolve()
                 })

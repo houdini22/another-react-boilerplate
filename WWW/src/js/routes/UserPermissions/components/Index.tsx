@@ -10,8 +10,8 @@ import { ListManager } from '../../../components/common/List/ListManager'
 import PermissionsTable from './PermissionsTable'
 import { Pagination } from '../../../components/common/List/Pagination'
 import RolesFilters from './PermissionsFilters'
-import { ifDeepDiff } from '../../../utils/javascript'
 import Header from './Header'
+import AddModal from '../../UserRoles/components/AddRole/AddModal'
 
 export class UsersPermissions extends React.Component {
     state = {
@@ -19,20 +19,6 @@ export class UsersPermissions extends React.Component {
         edit: false,
         addModalVisible: false,
     }
-
-    closeAddModal() {
-        return new Promise((resolve) => {
-            this.setState(
-                {
-                    addModalVisible: false,
-                },
-                () => {
-                    resolve()
-                },
-            )
-        })
-    }
-
     closeEditModal() {
         return new Promise((resolve) => {
             this.setState({ edit: false }, () => {
@@ -47,18 +33,6 @@ export class UsersPermissions extends React.Component {
         })
     }
 
-    openAddModal() {
-        this.setState({
-            addModalVisible: true,
-        })
-    }
-
-    openDeleteModal(permissionsId) {
-        this.setState({
-            confirmDeleteModalVisible: permissionsId,
-        })
-    }
-
     openEditModal(permissionId) {
         this.setState({
             edit: permissionId,
@@ -66,181 +40,146 @@ export class UsersPermissions extends React.Component {
     }
 
     render() {
-        const { confirmDeleteModalVisible, edit, addModalVisible } = this.state
+        const { edit } = this.state
 
         return (
             <RouteManager>
                 {({ navigate, query: { user = '', roles: rolesFromUri } }) => (
                     <NotificationsManager>
                         {({ addToastNotification }) => (
-                            <UserRolesManager>
-                                {({
-                                    setIsLoading,
-                                    deletePermission,
-                                    deleteUserPermission,
-                                    deleteRolePermission,
-                                    deleteUserRole,
-                                    permissions,
-                                    roles,
-                                }) => {
-                                    const defaultFilters = {
-                                        items_per_page: 15,
-                                        order_by: 'id',
-                                        order_direction: 'asc',
-                                        roles: [],
-                                        has_roles: 'yes_or_no',
-                                        has_users: 'yes_or_no',
-                                        user: '',
-                                        search: '',
-                                    }
+                            <Modal.Manager>
+                                {({ registerModal, closeModal, openModal }) => (
+                                    <UserRolesManager>
+                                        {({
+                                            setIsLoading,
+                                            deletePermission,
+                                            deleteUserPermission,
+                                            deleteRolePermission,
+                                            deleteUserRole,
+                                            permissions,
+                                            roles,
+                                        }) => {
+                                            const defaultFilters = {
+                                                items_per_page: 15,
+                                                order_by: 'id',
+                                                order_direction: 'asc',
+                                                roles: [],
+                                                has_roles: 'yes_or_no',
+                                                has_users: 'yes_or_no',
+                                                user: '',
+                                                search: '',
+                                            }
 
-                                    return (
-                                        <ListManager
-                                            url={'/permissions/list'}
-                                            defaultFilters={defaultFilters}
-                                            urlFilters={{
-                                                user,
-                                                roles: rolesFromUri
-                                                    ? rolesFromUri.split(',').map((n) => Number(n))
-                                                    : [],
-                                            }}
-                                        >
-                                            {({
-                                                data,
-                                                isLoading,
-                                                fetch,
-                                                links,
-                                                page,
-                                                setPage,
-                                                hasNextPage,
-                                                hasPrevPage,
-                                                totalPages,
-                                                filters,
-                                                setFilter,
-                                                perPage,
-                                                total,
-                                                resetFilters,
-                                                restoreFilters,
-                                                saveFilters,
-                                            }) => (
-                                                <PageContent>
-                                                    <AddPermissionModal
-                                                        visible={addModalVisible}
-                                                        close={() => this.closeAddModal()}
-                                                        fetch={fetch}
-                                                        addToastNotification={addToastNotification}
-                                                    />
-                                                    <EditModal
-                                                        visible={typeof edit !== 'boolean'}
-                                                        id={edit}
-                                                        close={() => this.closeEditModal()}
-                                                        fetch={fetch}
-                                                    />
-                                                    <Modal.Container
-                                                        visible={typeof confirmDeleteModalVisible !== 'boolean'}
-                                                        color={'danger'}
-                                                    >
-                                                        <Modal.Header closeIcon close={() => this.closeDeleteModal()}>
-                                                            Confirm Delete
-                                                        </Modal.Header>
-                                                        <Modal.Body>
-                                                            <p>Do you really want to delete this element?</p>
-                                                        </Modal.Body>
-                                                        <Modal.Footer>
-                                                            <Row>
-                                                                <Col xs={6}>
-                                                                    <Button
-                                                                        color={'secondary'}
-                                                                        onClick={() => this.closeDeleteModal()}
-                                                                        block
-                                                                    >
-                                                                        Cancel
-                                                                    </Button>
-                                                                </Col>
-                                                                <Col xs={6}>
-                                                                    <Button
-                                                                        color={'success'}
-                                                                        onClick={() => {
-                                                                            deletePermission(
-                                                                                confirmDeleteModalVisible,
-                                                                            ).then(() => {
-                                                                                fetch().then(() => {
-                                                                                    this.closeDeleteModal()
-                                                                                    addToastNotification({
-                                                                                        title: 'Delete success.',
-                                                                                        text: 'Permission has been removed.',
-                                                                                        type: 'success',
-                                                                                    })
-                                                                                })
-                                                                            })
-                                                                        }}
-                                                                        block
-                                                                    >
-                                                                        OK
-                                                                    </Button>
-                                                                </Col>
-                                                            </Row>
-                                                        </Modal.Footer>
-                                                    </Modal.Container>
+                                            return (
+                                                <ListManager
+                                                    url={'/permissions/list'}
+                                                    defaultFilters={defaultFilters}
+                                                    urlFilters={{
+                                                        user,
+                                                        roles: rolesFromUri
+                                                            ? rolesFromUri.split(',').map((n) => Number(n))
+                                                            : [],
+                                                    }}
+                                                >
+                                                    {({
+                                                        data,
+                                                        isLoading,
+                                                        fetch,
+                                                        links,
+                                                        page,
+                                                        setPage,
+                                                        hasNextPage,
+                                                        hasPrevPage,
+                                                        totalPages,
+                                                        filters,
+                                                        setFilter,
+                                                        perPage,
+                                                        total,
+                                                        resetFilters,
+                                                        restoreFilters,
+                                                        saveFilters,
+                                                    }) => {
+                                                        registerModal(
+                                                            'add-permission',
+                                                            <AddPermissionModal
+                                                                close={() => closeModal('add-permission')}
+                                                                fetch={fetch}
+                                                                addToastNotification={addToastNotification}
+                                                            />,
+                                                        )
 
-                                                    <Header openAddModal={this.openAddModal.bind(this)} />
+                                                        return (
+                                                            <PageContent>
+                                                                <EditModal
+                                                                    visible={typeof edit !== 'boolean'}
+                                                                    id={edit}
+                                                                    close={() => this.closeEditModal()}
+                                                                    fetch={fetch}
+                                                                />
 
-                                                    <RolesFilters
-                                                        filters={filters}
-                                                        setFilter={setFilter}
-                                                        fetch={fetch}
-                                                        permissions={permissions}
-                                                        roles={roles}
-                                                        resetFilters={resetFilters}
-                                                        restoreFilters={restoreFilters}
-                                                        saveFilters={saveFilters}
-                                                        defaultFilters={defaultFilters}
-                                                    />
+                                                                <Header openModal={openModal} />
 
-                                                    <Card>
-                                                        <Pagination
-                                                            links={links}
-                                                            page={page}
-                                                            fetch={fetch}
-                                                            setPage={setPage}
-                                                            hasNextPage={hasNextPage}
-                                                            hasPrevPage={hasPrevPage}
-                                                            totalPages={totalPages}
-                                                        />
-                                                        <PermissionsTable
-                                                            setIsLoading={setIsLoading}
-                                                            permissions={data}
-                                                            deleteUserPermission={deleteUserPermission}
-                                                            deleteUserRole={deleteUserRole}
-                                                            deleteRolePermission={deleteRolePermission}
-                                                            fetch={fetch}
-                                                            addToastNotification={addToastNotification}
-                                                            deletePermission={deletePermission}
-                                                            openDeleteModal={this.openDeleteModal.bind(this)}
-                                                            openEditModal={this.openEditModal.bind(this)}
-                                                            page={page}
-                                                            perPage={perPage}
-                                                            total={total}
-                                                            totalPages={totalPages}
-                                                            navigate={navigate}
-                                                        />
-                                                        <Pagination
-                                                            links={links}
-                                                            page={page}
-                                                            fetch={fetch}
-                                                            setPage={setPage}
-                                                            hasNextPage={hasNextPage}
-                                                            hasPrevPage={hasPrevPage}
-                                                            totalPages={totalPages}
-                                                        />
-                                                        {isLoading && <LoadingOverlay />}
-                                                    </Card>
-                                                </PageContent>
-                                            )}
-                                        </ListManager>
-                                    )
-                                }}
-                            </UserRolesManager>
+                                                                <RolesFilters
+                                                                    filters={filters}
+                                                                    setFilter={setFilter}
+                                                                    fetch={fetch}
+                                                                    permissions={permissions}
+                                                                    roles={roles}
+                                                                    resetFilters={resetFilters}
+                                                                    restoreFilters={restoreFilters}
+                                                                    saveFilters={saveFilters}
+                                                                    defaultFilters={defaultFilters}
+                                                                />
+
+                                                                <Card>
+                                                                    <Pagination
+                                                                        links={links}
+                                                                        page={page}
+                                                                        fetch={fetch}
+                                                                        setPage={setPage}
+                                                                        hasNextPage={hasNextPage}
+                                                                        hasPrevPage={hasPrevPage}
+                                                                        totalPages={totalPages}
+                                                                    />
+                                                                    <PermissionsTable
+                                                                        setIsLoading={setIsLoading}
+                                                                        permissions={data}
+                                                                        deleteUserPermission={deleteUserPermission}
+                                                                        deleteUserRole={deleteUserRole}
+                                                                        deleteRolePermission={deleteRolePermission}
+                                                                        fetch={fetch}
+                                                                        addToastNotification={addToastNotification}
+                                                                        deletePermission={deletePermission}
+                                                                        openEditModal={this.openEditModal.bind(this)}
+                                                                        page={page}
+                                                                        perPage={perPage}
+                                                                        total={total}
+                                                                        totalPages={totalPages}
+                                                                        navigate={navigate}
+                                                                        openModal={openModal}
+                                                                        registerModal={registerModal}
+                                                                        closeModal={closeModal}
+                                                                    />
+                                                                    <Pagination
+                                                                        links={links}
+                                                                        page={page}
+                                                                        fetch={fetch}
+                                                                        setPage={setPage}
+                                                                        hasNextPage={hasNextPage}
+                                                                        hasPrevPage={hasPrevPage}
+                                                                        totalPages={totalPages}
+                                                                    />
+                                                                    {isLoading && <LoadingOverlay />}
+                                                                </Card>
+                                                            </PageContent>
+                                                        )
+                                                    }}
+                                                </ListManager>
+                                            )
+                                        }}
+                                    </UserRolesManager>
+                                )}
+                            </Modal.Manager>
                         )}
                     </NotificationsManager>
                 )}

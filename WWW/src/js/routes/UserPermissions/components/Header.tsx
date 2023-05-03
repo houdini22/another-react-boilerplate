@@ -1,19 +1,19 @@
 import * as React from 'react'
 import { Button, PageHeader } from '../../../components'
-import { FaHome as HomeIcon } from 'react-icons/fa'
+import { HomeIcon } from '../../../components/icons'
 
 interface RolesTableProps {}
 
 export class Header extends React.Component<RolesTableProps> {
     render() {
-        const { openAddModal } = this.props
+        const { openModal } = this.props
 
         return (
             <PageHeader.Container>
                 <PageHeader.Title>Permissions</PageHeader.Title>
                 <PageHeader.Actions>
-                    <Button color={'success'} onClick={() => openAddModal()}>
-                        Add Permission
+                    <Button color={'success'} onClick={() => openModal('add-permission')}>
+                        Add
                     </Button>
                 </PageHeader.Actions>
                 <PageHeader.Breadcrumbs>

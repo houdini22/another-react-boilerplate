@@ -201,7 +201,12 @@ class RolesController extends Controller
             return $this->response401();
         }
 
-        $role = Role::find($request->segments()[5]);
+        $user = User::find($request->route('user_id'));
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $role = Role::find($request->route('role_id'));
         if (!$role) {
             return $this->response404();
         }
