@@ -28,11 +28,53 @@ interface UsersManagerProps {
 }
 
 class UsersManagerBase extends React.Component<UsersManagerProps, null> {
+    state = {
+        newUserRoles: [],
+        newUserPermissions: []
+    }
     componentDidMount() {
         const { fetchOne, id } = this.props
         if (id) {
             fetchOne(id)
         }
+    }
+
+    addPermissionToNewUser(id) {
+        const {newUserPermissions} = this.state;
+
+        const newPermissions = [...newUserPermissions];
+        newPermissions.push(id);
+
+        this.setState({newUserPermissions: newPermissions});
+    }
+
+    removePermissionFromNewUser(id) {
+        const {newUserPermissions} = this.state;
+
+        const newPermissions = [...newUserPermissions].filter(({id: _id}) => {
+            return Number(id) !== Number(_id);
+        });
+
+        this.setState({newUserPermissions: newPermissions});
+    }
+
+    addRoleToNewUser(id) {
+        const {newUserRoles} = this.state;
+
+        const newRoles = [...newUserRoles];
+        newRoles.push(id);
+
+        this.setState({newUserRoles: newRoles});
+    }
+
+    removeRoleFromNewUser(id) {
+        const {newUserRoles} = this.state;
+
+        const newRoles = [...newUserRoles].filter(({id: _id}) => {
+            return Number(id) !== Number(_id);
+        });
+
+        this.setState({newUserRoles: newRoles});
     }
 
     render() {
@@ -57,10 +99,9 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             deactivateUser,
             addRoleToNewUser,
             removeRoleFromNewUser,
-            addPermissionToNewUser,
-            removePermissionFromNewUser,
             deleteAvatar,
         } = this.props
+        const {newUserRoles, newUserPermissions} = this.state;
         const renderProps = {
             users,
             setIsLoading,
@@ -79,11 +120,13 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             setUploadProgress,
             activateUser,
             deactivateUser,
-            addRoleToNewUser,
-            removeRoleFromNewUser,
-            addPermissionToNewUser,
-            removePermissionFromNewUser,
+            addRoleToNewUser: this.addRoleToNewUser.bind(this),
+            removeRoleFromNewUser: this.removeRoleFromNewUser.bind(this),
+            addPermissionToNewUser: this.addPermissionToNewUser.bind(this),
+            removePermissionFromNewUser: this.removePermissionFromNewUser.bind(this),
             deleteAvatar,
+            newUserRoles,
+            newUserPermissions
         }
 
         return (
@@ -118,10 +161,6 @@ const UsersManager = connect(mapStateToProps, (dispatch) => {
             setUploadProgress: commonActions.setUploadProgress,
             activateUser: commonActions.activateUser,
             deactivateUser: commonActions.deactivateUser,
-            addRoleToNewUser: commonActions.addRoleToNewUser,
-            removeRoleFromNewUser: commonActions.removeRoleFromNewUser,
-            addPermissionToNewUser: commonActions.addPermissionToNewUser,
-            removePermissionFromNewUser: commonActions.removePermissionFromNewUser,
             deleteAvatar: commonActions.deleteAvatar,
         },
         dispatch,

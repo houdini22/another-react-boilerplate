@@ -1,8 +1,6 @@
 import * as React from 'react'
-import { Field } from 'redux-form'
-import { Button, Card, Col, FormField, Row } from '../../../../components'
-import Roles from '../Roles/Roles'
-import Permissions from '../Permissions/Permissions'
+import {Field} from 'redux-form'
+import {Alert, Button, Card, Col, FormField, Row, Section} from '../../../../components'
 
 class AddForm extends React.Component<null, null> {
     render() {
@@ -14,17 +12,19 @@ class AddForm extends React.Component<null, null> {
             permissions,
             addPermissionToNewUser,
             removePermissionFromNewUser,
+            newUserPermissions,
+            newUserRoles
         } = this.props
 
         return (
             <div>
                 <form onSubmit={handleSubmit}>
                     <Row>
-                        <Col xs={6}>
+                        <Col xs={12}>
                             <Card>
-                                <Field name="name" label="Name" type="text" component={FormField} autoFocus />
-                                <Field name="email" label="Email" type="text" component={FormField} />
-                                <Field name="password" label="Password" type="password" component={FormField} />
+                                <Field name="name" label="Name" type="text" component={FormField} autoFocus/>
+                                <Field name="email" label="Email" type="text" component={FormField}/>
+                                <Field name="password" label="Password" type="password" component={FormField}/>
                                 <Field
                                     name="password_confirmation"
                                     label="Confirm password"
@@ -47,24 +47,80 @@ class AddForm extends React.Component<null, null> {
                                     ]}
                                     component={FormField}
                                 />
+                                <Card header={<h1>Add Roles</h1>}>
+                                    {newUserRoles.length > 0 && (
+                                        <Alert color={'info'}>
+                                            Click added Role to remove.
+                                        </Alert>
+                                    )}
+                                    <Field
+                                        name="_roles"
+                                        label="Roles"
+                                        type="select"
+                                        placeholder={`--- choose ---`}
+                                        options={roles.map(({id, name}) => (
+                                            {
+                                                label: name,
+                                                value: id,
+                                                disabled: !!newUserRoles.find(({id: _id}) => (id === _id))
+                                            }
+                                        ))}
+                                        onChange={(e, value) => {
+                                            addRoleToNewUser(roles.find((role) => Number(role.id) === Number(value)));
+                                        }}
+                                        component={FormField}
+                                    />
+                                    <Section>
+                                        {newUserRoles.map(role => {
+                                            return (
+                                                <Button roundless color={'secondary'} block onClick={() => {
+                                                    removeRoleFromNewUser(role.id);
+                                                }}>
+                                                    {role.name}
+                                                </Button>
+                                            )
+                                        })}
+                                    </Section>
+                                </Card>
+                                <Card header={<h1>Add Permissions</h1>}>
+                                    {newUserPermissions.length > 0 && (
+                                        <Alert color={'info'}>
+                                            Click added Permission to remove.
+                                        </Alert>
+                                    )}
+                                    <Field
+                                        name="_permissions"
+                                        label="Permissions"
+                                        type="select"
+                                        placeholder={`--- choose ---`}
+                                        options={permissions.map(({id, name}) => (
+                                            {
+                                                label: name,
+                                                value: id,
+                                                disabled: !!newUserPermissions.find(({id: _id}) => (id === _id))
+                                            }
+                                        ))}
+                                        onChange={(e, value) => {
+                                            addPermissionToNewUser(permissions.find((permission) => Number(permission.id) === Number(value)));
+                                        }}
+                                        component={FormField}
+                                    />
+                                    <Section>
+                                        {newUserPermissions.map(permission => {
+                                            return (
+                                                <Button roundless color={'secondary'} block onClick={() => {
+                                                    removePermissionFromNewUser(permission.id);
+                                                }}>
+                                                    {permission.name}
+                                                </Button>
+                                            )
+                                        })}
+                                    </Section>
+                                </Card>
+                                <Button type={'submit'} color={'success'} block>
+                                    Save
+                                </Button>
                             </Card>
-                        </Col>
-                        <Col xs={6}>
-                            <Roles
-                                roles={roles}
-                                addRoleToNewUser={addRoleToNewUser}
-                                removeRoleFromNewUser={removeRoleFromNewUser}
-                            />
-                            <Permissions
-                                permissions={permissions}
-                                addPermissionToNewUser={addPermissionToNewUser}
-                                removePermissionFromNewUser={removePermissionFromNewUser}
-                            />
-                        </Col>
-                        <Col xs={12}>
-                            <Button color="success" type="submit" block>
-                                Save
-                            </Button>
                         </Col>
                     </Row>
                 </form>
@@ -73,5 +129,5 @@ class AddForm extends React.Component<null, null> {
     }
 }
 
-export { AddForm }
-export default { EditForm: AddForm }
+export {AddForm}
+export default {EditForm: AddForm}

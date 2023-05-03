@@ -8,12 +8,6 @@ const SET_IS_LOADED = 'users::set-is-loaded'
 const SET_FETCH_ERROR = 'users::set-fetch-error'
 const SET_USER = 'users::set-user'
 const SET_UPLOAD_PROGRESS = 'users::set-upload-progress'
-const ADD_ROLE_TO_NEW_USER = 'users::add-role-to-new-user'
-const REMOVE_ROLE_FROM_NEW_USER = 'users::remove-role-from-new-user'
-const CLEAR_NEW_USER_ROLES = 'users::clear-new-user-roles'
-const ADD_PERMISSION_TO_NEW_USER = 'users::add-permission-to-new-user'
-const REMOVE_PERMISSION_FROM_NEW_USER = 'users::add-permission-to-new-user'
-const CLEAR_NEW_USER_PERMISSIONS = 'users::clear-new-user-permissions'
 
 const setIsLoading = (data) => (dispatch) => {
     dispatch({ type: SET_IS_LOADING, payload: data })
@@ -36,18 +30,15 @@ const setUploadProgress = (data) => (dispatch) => {
 }
 const editUser = (params) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        dispatch(setIsLoading(true))
         dispatch(setIsLoaded(false))
         dispatch(setFetchError(null))
 
         http.put('/users/edit', params)
             .then(({ data }) => {
-                dispatch(setIsLoading(false))
                 dispatch(setIsLoaded(true))
                 resolve()
             })
             .catch((e) => {
-                dispatch(setIsLoading(false))
                 dispatch(setIsLoaded(false))
                 dispatch(setFetchError(e))
                 reject(e)
@@ -73,38 +64,29 @@ const deleteAvatar = (user) => (dispatch) => {
     })
 }
 
-const addUser = (params) => (dispatch, state) => {
+const addUser = (params, newUserRoles, newUserPermissions) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        dispatch(setIsLoading(true))
         dispatch(setIsLoaded(false))
         dispatch(setFetchError(null))
 
         return http
             .post('/users/add', params)
             .then(({ data: { user } }) => {
-                const {
-                    users: { newUserRoles, newUserPermissions },
-                } = state()
                 const promises = []
 
-                newUserRoles.forEach((id) => {
+                newUserRoles.forEach(({id}) => {
                     promises.push(dispatch(addUserRole({ id: user.id }, { id })))
                 })
-                newUserPermissions.forEach((id) => {
+                newUserPermissions.forEach(({id}) => {
                     promises.push(dispatch(addUserPermission({ id: user.id }, { id })))
                 })
 
                 Promise.all(promises).then(() => {
-                    dispatch(setIsLoading(false))
                     dispatch(setIsLoaded(true))
-                    dispatch(clearNewUserRoles())
-                    dispatch(clearNewUserPermissions())
-
                     resolve(user)
                 })
             })
             .catch((e) => {
-                dispatch(setIsLoading(false))
                 dispatch(setIsLoaded(false))
                 dispatch(setFetchError(e))
                 reject(e)
@@ -117,19 +99,16 @@ const fetchOne =
     (dispatch) => {
         return new Promise<void>((resolve) => {
             dispatch(setUser({}))
-            dispatch(setIsLoading(true))
             dispatch(setIsLoaded(false))
             dispatch(setFetchError(null))
 
             http.get(`/users/get/${id}`)
                 .then(({ data: { user } }) => {
                     dispatch(setUser(user))
-                    dispatch(setIsLoading(false))
                     dispatch(setIsLoaded(true))
                     resolve()
                 })
                 .catch((e) => {
-                    dispatch(setIsLoading(false))
                     dispatch(setIsLoaded(false))
                     dispatch(setFetchError(e))
                 })
@@ -138,18 +117,15 @@ const fetchOne =
 
 const deleteUser = (id) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        dispatch(setIsLoading(true))
         dispatch(setIsLoaded(false))
         dispatch(setFetchError(null))
 
         http.delete(`/users/delete/${id}`)
             .then(({ data: { user } }) => {
-                dispatch(setIsLoading(false))
                 dispatch(setIsLoaded(true))
                 resolve()
             })
             .catch((e) => {
-                dispatch(setIsLoading(false))
                 dispatch(setIsLoaded(false))
                 dispatch(setFetchError(e))
                 reject(e)
@@ -286,24 +262,6 @@ const deactivateUser = (user) => (dispatch) => {
             })
     })
 }
-const addRoleToNewUser = (role) => (dispatch) => {
-    dispatch({ type: ADD_ROLE_TO_NEW_USER, payload: role })
-}
-const removeRoleFromNewUser = (role) => (dispatch) => {
-    dispatch({ type: REMOVE_ROLE_FROM_NEW_USER, payload: role })
-}
-const addPermissionToNewUser = (permission) => (dispatch) => {
-    dispatch({ type: ADD_PERMISSION_TO_NEW_USER, payload: permission })
-}
-const removePermissionFromNewUser = (permission) => (dispatch) => {
-    dispatch({ type: REMOVE_PERMISSION_FROM_NEW_USER, payload: permission })
-}
-const clearNewUserRoles = () => (dispatch) => {
-    dispatch({ type: CLEAR_NEW_USER_ROLES })
-}
-const clearNewUserPermissions = () => (dispatch) => {
-    dispatch({ type: CLEAR_NEW_USER_PERMISSIONS })
-}
 export const actions = {
     fetch,
     fetchOne,
@@ -321,10 +279,6 @@ export const actions = {
     setUploadProgress,
     activateUser,
     deactivateUser,
-    addRoleToNewUser,
-    removeRoleFromNewUser,
-    addPermissionToNewUser,
-    removePermissionFromNewUser,
     deleteAvatar,
 }
 
@@ -360,46 +314,6 @@ const ACTION_HANDLERS = {
         return {
             ...state,
             uploadProgress: payload,
-        }
-    },
-    [ADD_ROLE_TO_NEW_USER]: (state, { payload }) => {
-        return {
-            ...state,
-            newUserRoles: [...state.newUserRoles, payload],
-        }
-    },
-    [REMOVE_ROLE_FROM_NEW_USER]: (state, { payload }) => {
-        return {
-            ...state,
-            newUserRoles: state.newUserRoles.filter((role) => {
-                return role !== payload
-            }),
-        }
-    },
-    [ADD_PERMISSION_TO_NEW_USER]: (state, { payload }) => {
-        return {
-            ...state,
-            newUserPermissions: [...state.newUserPermissions, payload],
-        }
-    },
-    [REMOVE_PERMISSION_FROM_NEW_USER]: (state, { payload }) => {
-        return {
-            ...state,
-            newUserPermissions: state.newUserPermissions.filter((role) => {
-                return role !== payload
-            }),
-        }
-    },
-    [CLEAR_NEW_USER_ROLES]: (state) => {
-        return {
-            ...state,
-            newUserRoles: [],
-        }
-    },
-    [CLEAR_NEW_USER_PERMISSIONS]: (state) => {
-        return {
-            ...state,
-            newUserPermissions: [],
         }
     },
 }

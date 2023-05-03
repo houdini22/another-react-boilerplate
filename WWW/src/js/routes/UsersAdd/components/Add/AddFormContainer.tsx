@@ -7,9 +7,9 @@ import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 const onSubmit = (
     { email, name, status, password, password_confirmation },
     _,
-    { addUser, navigate, addToastNotification },
+    { addUser, navigate, addToastNotification, newUserRoles, newUserPermissions },
 ) => {
-    return addUser({ email, name, status, password, password_confirmation }).then(
+    return addUser({ email, name, status, password, password_confirmation }, newUserRoles, newUserPermissions).then(
         (user) => {
             addToastNotification({
                 title: 'Save success.',

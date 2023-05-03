@@ -19,7 +19,7 @@ class FiltersFactory extends React.Component<FiltersFactoryProps, null> {
         return body.map(({ type, label, name, placeholder, options }) => {
             return (
                 <Filter
-                    key={name}
+                    key={`${name}${label}${type}${placeholder}`}
                     filters={filters}
                     type={type}
                     setFilter={setFilter}

@@ -32,6 +32,8 @@ export class UsersAddView extends React.Component<null, UsersViewState> {
                                                 removeRoleFromNewUser,
                                                 addPermissionToNewUser,
                                                 removePermissionFromNewUser,
+                                                newUserRoles,
+                                                newUserPermissions,
                                             }) => {
                                                 return (
                                                     <PageContent>
@@ -55,6 +57,8 @@ export class UsersAddView extends React.Component<null, UsersViewState> {
                                                                         removePermissionFromNewUser
                                                                     }
                                                                     addToastNotification={addToastNotification}
+                                                                    newUserRoles={newUserRoles}
+                                                                    newUserPermissions={newUserPermissions}
                                                                 />
                                                             </Col>
                                                         </Row>
