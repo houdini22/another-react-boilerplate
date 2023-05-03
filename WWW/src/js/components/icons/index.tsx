@@ -10,12 +10,14 @@ import {
 } from 'react-icons/ai'
 import { CgDetailsMore as DetailsIcon } from 'react-icons/cg'
 import { AiFillEye as ShowIcon } from 'react-icons/ai'
-import { GrUserAdmin as RoleIcon } from 'react-icons/gr'
+import { FaUsersCog as PermissionIcon } from 'react-icons/fa'
 import { BsFillFileEarmarkImageFill as FileIcon } from 'react-icons/bs'
 import { RxAvatar as AvatarIcon } from 'react-icons/rx'
 import { FaHome as HomeIcon } from 'react-icons/fa'
 import { FaUser as UserIcon } from 'react-icons/fa'
 import { FaInfo as InfoIcon } from 'react-icons/fa'
+import { FaUserCog as RoleIcon } from 'react-icons/fa'
+
 export {
     OrderingIcon,
     EditIcon,
@@ -34,4 +36,5 @@ export {
     HomeIcon,
     UserIcon,
     InfoIcon,
+    PermissionIcon
 }

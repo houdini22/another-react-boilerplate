@@ -1,6 +1,13 @@
 import * as React from 'react'
 import { Button, Dropdown, Label, Popover, Table, Typography } from '../../../components'
-import { EditIcon, DeleteIcon, UserIcon, RoleIcon, InfoIcon, DetailsIcon } from '../../../components/icons'
+import {
+    EditIcon,
+    DeleteIcon,
+    UserIcon,
+    InfoIcon,
+    DetailsIcon,
+    PermissionIcon
+} from '../../../components/icons'
 import { TableSummary } from '../../../components/common/List/TableSummary'
 
 interface RolesTableProps {}
@@ -41,107 +48,6 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                 <Table.Td xs={3}>{role.name}</Table.Td>
                                 <Table.Td xs={4}>
                                     <div>
-                                        {role.users_count > 0 && (
-                                            <Popover.Container
-                                                trigger={'hover'}
-                                                pixelsWidth={300}
-                                                placement={'left-center'}
-                                            >
-                                                <Popover.Trigger>
-                                                    <Button
-                                                        color={'info'}
-                                                        icon={<UserIcon />}
-                                                        onClick={() => navigate(`/users?roles=${role.id}`)}
-                                                    >
-                                                        {role.users_count}
-                                                    </Button>
-                                                </Popover.Trigger>
-                                                <Popover.Content scrollY>
-                                                    <Typography.Container>
-                                                        <h4>Users</h4>
-                                                    </Typography.Container>
-                                                    {role?.users
-                                                        ?.sort(({ name: nameA }, { name: nameB }) =>
-                                                            nameA.localeCompare(nameB),
-                                                        )
-                                                        .map(({ id: _id, name }) => {
-                                                            return (
-                                                                <div key={name}>
-                                                                    <Dropdown.Container triggerSize={'lg'}>
-                                                                        <Dropdown.Trigger
-                                                                            size="lg"
-                                                                            component={Label}
-                                                                            componentProps={{ block: true }}
-                                                                        >
-                                                                            {name}
-                                                                        </Dropdown.Trigger>
-                                                                        <Dropdown.Menu>
-                                                                            <Dropdown.Item type={'header'}>
-                                                                                <InfoIcon /> User ID: {_id}
-                                                                            </Dropdown.Item>
-                                                                            <Dropdown.Item
-                                                                                color={'info'}
-                                                                                onClick={() => {
-                                                                                    navigate(
-                                                                                        `/permissions?user=${name}`,
-                                                                                    )
-                                                                                }}
-                                                                            >
-                                                                                <DetailsIcon /> Show User Permissions
-                                                                            </Dropdown.Item>
-                                                                            <Dropdown.Item
-                                                                                color={'info'}
-                                                                                onClick={() => {
-                                                                                    navigate(`/roles?user=${name}`)
-                                                                                }}
-                                                                            >
-                                                                                <DetailsIcon /> Show User Roles
-                                                                            </Dropdown.Item>
-                                                                            <Dropdown.Item
-                                                                                color={'info'}
-                                                                                onClick={() => {
-                                                                                    navigate(`/media?user=${name}`)
-                                                                                }}
-                                                                            >
-                                                                                <DetailsIcon /> Show User Media
-                                                                            </Dropdown.Item>
-                                                                            <Dropdown.Item
-                                                                                color={'warning'}
-                                                                                onClick={() => {
-                                                                                    navigate(`/users/edit?id=${_id}`)
-                                                                                }}
-                                                                            >
-                                                                                <DeleteIcon /> Edit User
-                                                                            </Dropdown.Item>
-                                                                            <Dropdown.Item
-                                                                                color="danger"
-                                                                                onClick={() => {
-                                                                                    setIsLoading(true)
-
-                                                                                    return deleteUserRole(role, {
-                                                                                        id: _id,
-                                                                                    }).then(() => {
-                                                                                        fetch().then(() => {
-                                                                                            setIsLoading(false)
-                                                                                            addToastNotification({
-                                                                                                title: 'Delete success.',
-                                                                                                text: 'Role has been removed from User.',
-                                                                                                type: 'success',
-                                                                                            })
-                                                                                        })
-                                                                                    })
-                                                                                }}
-                                                                            >
-                                                                                <DeleteIcon /> Remove Role from User
-                                                                            </Dropdown.Item>
-                                                                        </Dropdown.Menu>
-                                                                    </Dropdown.Container>
-                                                                </div>
-                                                            )
-                                                        })}
-                                                </Popover.Content>
-                                            </Popover.Container>
-                                        )}
                                         {role.permissions_count > 0 && (
                                             <Popover.Container
                                                 trigger={'hover'}
@@ -151,7 +57,7 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                 <Popover.Trigger>
                                                     <Button
                                                         color={'info'}
-                                                        icon={<RoleIcon />}
+                                                        icon={<PermissionIcon />}
                                                         onClick={() => navigate(`/permissions?roles=${role.id}`)}
                                                     >
                                                         {role.permissions_count}
@@ -264,6 +170,107 @@ export class RolesTable extends React.Component<RolesTableProps> {
                                                                 )
                                                             },
                                                         )}
+                                                </Popover.Content>
+                                            </Popover.Container>
+                                        )}
+                                        {role.users_count > 0 && (
+                                            <Popover.Container
+                                                trigger={'hover'}
+                                                pixelsWidth={300}
+                                                placement={'left-center'}
+                                            >
+                                                <Popover.Trigger>
+                                                    <Button
+                                                        color={'info'}
+                                                        icon={<UserIcon />}
+                                                        onClick={() => navigate(`/users?roles=${role.id}`)}
+                                                    >
+                                                        {role.users_count}
+                                                    </Button>
+                                                </Popover.Trigger>
+                                                <Popover.Content scrollY>
+                                                    <Typography.Container>
+                                                        <h4>Users</h4>
+                                                    </Typography.Container>
+                                                    {role?.users
+                                                        ?.sort(({ name: nameA }, { name: nameB }) =>
+                                                            nameA.localeCompare(nameB),
+                                                        )
+                                                        .map(({ id: _id, name }) => {
+                                                            return (
+                                                                <div key={name}>
+                                                                    <Dropdown.Container triggerSize={'lg'}>
+                                                                        <Dropdown.Trigger
+                                                                            size="lg"
+                                                                            component={Label}
+                                                                            componentProps={{ block: true }}
+                                                                        >
+                                                                            {name}
+                                                                        </Dropdown.Trigger>
+                                                                        <Dropdown.Menu>
+                                                                            <Dropdown.Item type={'header'}>
+                                                                                <InfoIcon /> User ID: {_id}
+                                                                            </Dropdown.Item>
+                                                                            <Dropdown.Item
+                                                                                color={'info'}
+                                                                                onClick={() => {
+                                                                                    navigate(
+                                                                                        `/permissions?user=${name}`,
+                                                                                    )
+                                                                                }}
+                                                                            >
+                                                                                <DetailsIcon /> Show User Permissions
+                                                                            </Dropdown.Item>
+                                                                            <Dropdown.Item
+                                                                                color={'info'}
+                                                                                onClick={() => {
+                                                                                    navigate(`/roles?user=${name}`)
+                                                                                }}
+                                                                            >
+                                                                                <DetailsIcon /> Show User Roles
+                                                                            </Dropdown.Item>
+                                                                            <Dropdown.Item
+                                                                                color={'info'}
+                                                                                onClick={() => {
+                                                                                    navigate(`/media?user=${name}`)
+                                                                                }}
+                                                                            >
+                                                                                <DetailsIcon /> Show User Media
+                                                                            </Dropdown.Item>
+                                                                            <Dropdown.Item
+                                                                                color={'warning'}
+                                                                                onClick={() => {
+                                                                                    navigate(`/users/edit?id=${_id}`)
+                                                                                }}
+                                                                            >
+                                                                                <DeleteIcon /> Edit User
+                                                                            </Dropdown.Item>
+                                                                            <Dropdown.Item
+                                                                                color="danger"
+                                                                                onClick={() => {
+                                                                                    setIsLoading(true)
+
+                                                                                    return deleteUserRole(role, {
+                                                                                        id: _id,
+                                                                                    }).then(() => {
+                                                                                        fetch().then(() => {
+                                                                                            setIsLoading(false)
+                                                                                            addToastNotification({
+                                                                                                title: 'Delete success.',
+                                                                                                text: 'Role has been removed from User.',
+                                                                                                type: 'success',
+                                                                                            })
+                                                                                        })
+                                                                                    })
+                                                                                }}
+                                                                            >
+                                                                                <DeleteIcon /> Remove Role from User
+                                                                            </Dropdown.Item>
+                                                                        </Dropdown.Menu>
+                                                                    </Dropdown.Container>
+                                                                </div>
+                                                            )
+                                                        })}
                                                 </Popover.Content>
                                             </Popover.Container>
                                         )}

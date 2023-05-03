@@ -11,7 +11,7 @@ import {
     AvatarIcon,
     InfoIcon,
     EditIcon,
-    DeleteIcon,
+    DeleteIcon, PermissionIcon,
 } from '../../../components/icons'
 import { TableSummary } from '../../../components/common/List/TableSummary'
 
@@ -273,7 +273,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                         <Popover.Trigger>
                                                             <Button
                                                                 color={'info'}
-                                                                icon={<RoleIcon />}
+                                                                icon={<PermissionIcon />}
                                                                 onClick={() =>
                                                                     navigate(`/permissions?user=${user.name}`)
                                                                 }
@@ -326,7 +326,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                                                 )
                                                                                             }}
                                                                                         >
-                                                                                            <RoleIcon /> Show Roles
+                                                                                            <RoleIcon /> Show Roles with Permission
                                                                                         </Dropdown.Item>
                                                                                         <Dropdown.Item
                                                                                             color={'info'}
@@ -523,7 +523,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                             </Col>
                                                         </Row>
                                                         <Row>
-                                                            <Col xs={5}>Last edit:</Col>
+                                                            <Col xs={5}>Last active:</Col>
                                                             <Col xs={7}>
                                                                 {user.last_active != null
                                                                     ? formatDateTime(user.last_active)
