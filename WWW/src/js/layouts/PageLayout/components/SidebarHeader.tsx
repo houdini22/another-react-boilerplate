@@ -7,6 +7,7 @@ import { selectors as commonSelectors, actions as commonActions } from '../../..
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/layout/_layout.scss'
 import { SidebarHeaderNotifications } from './SidebarHeaderNotifications'
+import { SidebarHeaderUser } from './SidebarHeaderUser'
 
 const cx = classNames.bind(styles)
 
@@ -60,6 +61,7 @@ class SidebarHeaderBase extends React.Component<SidebarHeaderProps> {
                     <div className={cx('layout__header__bar__left')} />
                     <div className={cx('layout__header__bar__right')}>
                         <SidebarHeaderNotifications />
+                        <SidebarHeaderUser />
                     </div>
                 </div>
             </div>

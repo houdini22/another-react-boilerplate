@@ -31,6 +31,13 @@ class AuthController extends Controller
 
                 $user->save();
 
+                $avatar = $user->avatar()->first();
+                if ($avatar) {
+                    $avatar = $avatar->toArray();
+                } else {
+                    $avatar = null;
+                }
+
                 return response()->json([
                     'data' => [
                         'user' => [
@@ -38,7 +45,8 @@ class AuthController extends Controller
                             'email' => $user->email,
                             'token' => $user->token,
                             'roles' => $user->roles->pluck('name'),
-                            'permissions' => $user->getPermissionsViaRoles()->pluck('name')
+                            'permissions' => $user->getPermissionsViaRoles()->pluck('name'),
+                            'avatar' => $avatar,
                         ]
                     ]
                 ]);
@@ -71,6 +79,13 @@ class AuthController extends Controller
             $user->last_active = Carbon::now();
             $user->save();
 
+            $avatar = $user->avatar()->first();
+            if ($avatar) {
+                $avatar = $avatar->toArray();
+            } else {
+                $avatar = null;
+            }
+
             return response()->json([
                 'data' => [
                     'user' => [
@@ -78,7 +93,8 @@ class AuthController extends Controller
                         'email' => $user->email,
                         'token' => $user->token,
                         'roles' => $user->roles->pluck('name'),
-                        'permissions' => $user->getPermissionsViaRoles()->pluck('name')
+                        'permissions' => $user->getPermissionsViaRoles()->pluck('name'),
+                        'avatar' => $avatar,
                     ]
                 ]
             ]);
