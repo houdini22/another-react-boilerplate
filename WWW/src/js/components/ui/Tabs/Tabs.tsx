@@ -286,7 +286,7 @@ export class Trigger extends React.Component<TriggerProps> {
                                         _.get(activeTab, 'tabName') === tabName,
                                 })}
                             >
-                                <a href>
+                                <a>
                                     <span>{children}</span>
                                 </a>
                             </div>

@@ -20,7 +20,7 @@ export class RowExpandRoles extends React.Component<RowExpandRolesProps, null> {
                         </Col>
                         {permission?.roles?.map(({ id: _id, name, guard_name, is_deletable: _is_deletable }) => {
                             return (
-                                <Modal.Manager>
+                                <Modal.Manager key={_id}>
                                     {({ registerModal, closeModal, openModal }) => {
                                         registerModal(
                                             `role-permission-${permission.id}-delete`,

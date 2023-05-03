@@ -28,7 +28,7 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                             ?.sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
                             .map(({ id: _id, name }) => {
                                 return (
-                                    <Modal.Manager>
+                                    <Modal.Manager key={_id}>
                                         {({ openModal, registerModal, closeModal }) => {
                                             registerModal(
                                                 `role-delete-from-user-${permission.id}-delete`,

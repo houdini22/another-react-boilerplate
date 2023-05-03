@@ -66,7 +66,7 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                         }
 
                         return (
-                            <Table.ExpandManager>
+                            <Table.ExpandManager key={role.id}>
                                 {({ addExpand, expand }) => {
                                     addExpand(
                                         'permissions',

@@ -29,7 +29,7 @@ class TextField extends React.Component<TextFieldProps> {
             custom: { size, onChange, ...customProps } = {},
             type,
             value,
-            defaultValue = '',
+            defaultValue,
             ...props
         } = this.props
         return (
@@ -43,9 +43,9 @@ class TextField extends React.Component<TextFieldProps> {
                             {...props}
                             {...customProps}
                             type={type}
-                            value={type !== 'file' ? value : ''}
-                            defaultValue={type !== 'file' ? defaultValue || '' : undefined}
-                            key={type !== 'file' ? defaultValue || '' : undefined}
+                            value={type !== 'file' ? value : undefined}
+                            defaultValue={type !== 'file' ? defaultValue : undefined}
+                            key={type !== 'file' ? defaultValue : undefined}
                             onChange={this.onChange.bind(this)}
                         />
                     )
