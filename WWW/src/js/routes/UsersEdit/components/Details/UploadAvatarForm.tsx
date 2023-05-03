@@ -8,7 +8,7 @@ class UploadAvatarForm extends React.Component {
     }
 
     render() {
-        const { handleSubmit, submit, onChange, uploadProgress } = this.props
+        const { handleSubmit, onChange, uploadProgress } = this.props
 
         return (
             <form onSubmit={handleSubmit} encType={'multipart/form-data'}>

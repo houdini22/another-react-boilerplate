@@ -1,10 +1,7 @@
 import * as React from 'react'
 import { bindActionCreators, compose } from 'redux'
 import { connect } from 'react-redux'
-import { reduxForm, getFormValues as getFormValuesRedux, SubmissionError } from 'redux-form'
-import { getFormValues } from '../../../utils/forms/auto-save'
-import * as moment from 'moment'
-import { processAPIerrorResponseToFormErrors } from '../../../modules/http'
+import { reduxForm } from 'redux-form'
 import { FiltersForm } from '../components/FiltersForm'
 
 export const FORM_NAME = 'cms-pages-filters-form'
@@ -26,7 +23,7 @@ const FiltersFormContainer = compose(
     ),
     reduxForm({
         form: FORM_NAME,
-        onSubmit: (values, dispatch, { addLink }) => {},
+        onSubmit: () => {},
     }),
 )(FiltersFormContainerBase)
 

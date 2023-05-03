@@ -1,11 +1,7 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Row, Col, Section, Accordion, Badge, Label } from '../../../components'
-import {
-    createPresentationTab as _createPresentationTab,
-    createSimplePresentation,
-    generateCode,
-} from '../../../utils/tabs'
+import { createPresentationTab as _createPresentationTab, generateCode } from '../../../utils/tabs'
 import { AccordionFormContainer } from './AccordionFormContainer'
 import { ComponentsPageHeader } from '../../../components/common/ComponentsPageHeader'
 

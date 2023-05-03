@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Field } from 'redux-form'
-import { Button, FormField } from '../../../components'
+import { FormField } from '../../../components'
 
 class FiltersForm extends React.Component {
     render() {

@@ -1,8 +1,6 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
-import { Col, Row, Card, PageHeader, Alert, Button } from '../../../components'
-import { FaInfo as InfoIcon } from 'react-icons/fa'
-import config from '../../../config'
+import { Alert, Button } from '../../../components'
 import { RouteManager } from '../../../containers/RouteManager'
 
 export class IndexView extends React.Component {

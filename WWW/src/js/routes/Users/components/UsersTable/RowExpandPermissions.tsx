@@ -104,6 +104,14 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                                                 >
                                                     <UserIcon /> Show Users with Permission
                                                 </Dropdown.Item>
+                                                <Dropdown.Item
+                                                    color={'warning'}
+                                                    onClick={() => {
+                                                        navigate(`/permissions/edit?id=${_id}`)
+                                                    }}
+                                                >
+                                                    <UserIcon /> Edit Permission
+                                                </Dropdown.Item>
                                                 {model_type.match(/User/) && (
                                                     <Dropdown.Item
                                                         color="danger"

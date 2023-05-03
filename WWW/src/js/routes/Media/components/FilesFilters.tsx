@@ -1,8 +1,6 @@
 import * as React from 'react'
 import styles from '../../../../assets/scss/components/_file.scss'
 import classNames from 'classnames/bind'
-import { Filter } from '../../../components/common/List/Filter'
-import { Filters as FiltersContainer } from '../../../components/common/List/Filters'
 import { Button, Card } from '../../../components'
 import { ifDeepDiff } from '../../../utils/javascript'
 import { FiltersFactory } from '../../../components/common/List/FiltersFactory'

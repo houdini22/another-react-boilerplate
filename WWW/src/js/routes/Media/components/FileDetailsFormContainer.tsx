@@ -17,7 +17,7 @@ const onSubmit = (values, dispatch, props) => {
                 })
             })
         },
-        (e) => {
+        () => {
             addToastNotification({
                 type: 'danger',
                 title: 'Save error',
@@ -27,7 +27,7 @@ const onSubmit = (values, dispatch, props) => {
 }
 
 const FileDetailsFormContainer = compose(
-    connect((state, props) => {
+    connect(() => {
         return {}
     }),
     reduxForm({

@@ -14,13 +14,6 @@ interface AddRoleProps {
 }
 
 export class Permissions extends React.Component<AddRoleProps, null> {
-    getPermissionFromRoles() {
-        const { user } = this.props
-
-        const permissionsFromRoles = mergeUserPermissions(user)
-
-        return permissionsFromRoles
-    }
     render() {
         const {
             setIsLoading,
@@ -83,7 +76,7 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                             {Object.keys(allPermissions)
                                 .map((key) => allPermissions[key])
                                 .sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                                .map(({ id, name, occurence, pivot: { model_type = '' } = {} }) => {
+                                .map(({ id, name, occurence }) => {
                                     return (
                                         <Label key={id} block size={'lg'}>
                                             {name} {occurence > 1 && `(${occurence})`}
@@ -100,7 +93,7 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                             {Object.keys(permissionsFromRoles)
                                 .map((key) => permissionsFromRoles[key])
                                 .sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                                .map(({ id, name, occurence, pivot: { model_type = '' } = {} }) => {
+                                .map(({ id, name, occurence }) => {
                                     return (
                                         <Dropdown.Container triggerSize={'lg'} key={id}>
                                             <Dropdown.Trigger component={Label} componentProps={{ block: true }}>
@@ -147,7 +140,7 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                         <Tabs.Content>
                             {user?.permissions
                                 ?.sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                                .map(({ id, name, occurence, pivot: { model_type = '' } = {} }) => {
+                                .map(({ id, name, occurence }) => {
                                     return (
                                         <Dropdown.Container triggerSize={'lg'} key={id}>
                                             <Dropdown.Trigger component={Label} componentProps={{ block: true }}>

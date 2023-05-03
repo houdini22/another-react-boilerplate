@@ -39,7 +39,7 @@ const onSubmit = (
 }
 
 const AddPermissionFormContainer = compose(
-    connect((state, props) => {
+    connect((state) => {
         const selector = formValueSelector('AddPermissionForm')
         const permission = selector(state, 'permission')
         return {

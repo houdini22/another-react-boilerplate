@@ -1,17 +1,5 @@
 import * as React from 'react'
-import { Button, Dropdown, Label, Popover, Typography } from '../../../../components'
-import {
-    AvatarIcon,
-    DeleteIcon,
-    DetailsIcon,
-    EditIcon,
-    FileIcon,
-    InfoIcon,
-    PermissionIcon,
-    RoleIcon,
-    UserIcon,
-} from '../../../../components/icons'
-import { apiURL } from '../../../../helpers/api'
+import { Label } from '../../../../components'
 
 interface FiltersProps {
     user: Object

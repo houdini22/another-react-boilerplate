@@ -9,16 +9,8 @@ interface FiltersProps {
 
 export class Filters extends React.Component<FiltersProps, null> {
     render() {
-        const {
-            filters,
-            setFilter,
-            fetch,
-            permissions,
-            defaultFilters,
-            isLoading,
-            resetFilters,
-            setFilters = { setFilters },
-        } = this.props
+        const { filters, setFilter, fetch, permissions, defaultFilters, isLoading, resetFilters, setFilters } =
+            this.props
 
         return (
             <FiltersCard

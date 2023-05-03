@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { FormContainer } from '../containers/FormContainer'
-import { Row, Col, PageHeader, Card } from '../../../components'
+import { Row, Col, PageHeader } from '../../../components'
 
 class FormsView extends React.Component {
     render() {

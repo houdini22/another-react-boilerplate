@@ -4,18 +4,8 @@ import { connect } from 'react-redux'
 import { UploadAvatarForm as FormComponent } from './UploadAvatarForm'
 import { reduxForm } from 'redux-form'
 
-const onSubmit = (values, dispatch, props) => {
-    const { editUser, setIsLoading } = props
-
-    setIsLoading(true)
-
-    return editUser(values).then(() => {
-        setIsLoading(false)
-    })
-}
-
 const UploadAvatarFormContainer = compose(
-    connect((state, props) => {
+    connect(() => {
         return {}
     }),
     reduxForm({

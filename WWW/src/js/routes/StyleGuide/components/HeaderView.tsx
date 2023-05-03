@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
-import { Header, Row, Col, Section, Tabs, PageHeader, Breadcrumbs } from '../../../components'
+import { Header, Row, Col, Section, Tabs, PageHeader } from '../../../components'
 
 class HeaderView extends React.Component {
     render() {

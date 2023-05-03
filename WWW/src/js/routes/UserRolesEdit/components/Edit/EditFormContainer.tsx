@@ -6,7 +6,7 @@ import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 
 const onSubmit = (values, _, { save, fetch, addToastNotification }) => {
     return save({ ...values }).then(
-        (role) => {
+        () => {
             fetch().then(() => {
                 addToastNotification({
                     type: 'success',

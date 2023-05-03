@@ -12,7 +12,7 @@ interface AddPermissionFormProps {
 
 class AddPermissionForm extends React.Component<AddPermissionFormProps> {
     render() {
-        const { handleSubmit, permission, permissions, role, roles } = this.props
+        const { handleSubmit, permission, permissions, role } = this.props
 
         return (
             <form onSubmit={handleSubmit}>

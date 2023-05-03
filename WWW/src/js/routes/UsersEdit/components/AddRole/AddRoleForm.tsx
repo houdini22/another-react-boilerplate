@@ -14,7 +14,7 @@ class AddRoleForm extends React.Component<AddPermissionFormProps> {
         const { roles, user } = this.props
         return (
             roles
-                ?.map(({ id, name, guard_name }) => {
+                ?.map(({ id }) => {
                     return {
                         disabled: user?.roles?.find(({ id: _id }) => id === _id),
                     }

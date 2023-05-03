@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 import { AddRoleForm as FormComponent } from './AddRoleForm'
 import { reduxForm, formValueSelector } from 'redux-form'
 
-const onChange = (values, dispatch, props) => {}
-
 const AddRoleFormContainer = compose(
     connect((state) => {
         const selector = formValueSelector('AddRoleForm')
@@ -15,7 +13,6 @@ const AddRoleFormContainer = compose(
         }
     }),
     reduxForm({
-        onChange,
         enableReinitialize: true,
         destroyOnUnmount: true,
         form: 'AddRoleForm',

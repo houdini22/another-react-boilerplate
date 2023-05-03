@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { Card, LoadingOverlay } from '../../../../components'
 import { EditFormContainer } from './EditFormContainer'
-import { formatDateTime } from '../../../../helpers/date-time'
 interface EditProps {
     editUser: Function
     user: Object

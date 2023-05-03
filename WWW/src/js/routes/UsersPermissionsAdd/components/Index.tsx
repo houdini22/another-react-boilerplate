@@ -11,7 +11,7 @@ export class UserPermissionsAdd extends React.Component<null, null> {
     render() {
         return (
             <RouteManager>
-                {({ navigate, query }) => (
+                {({ navigate }) => (
                     <NotificationsManager>
                         {({ addToastNotification }) => {
                             return (

@@ -65,7 +65,6 @@ export class UsersPermissions extends React.Component {
                                                         total,
                                                         resetFilters,
                                                         restoreFilters,
-                                                        saveFilters,
                                                         defaultFilters,
                                                         setFilters,
                                                     }) => {
@@ -81,7 +80,6 @@ export class UsersPermissions extends React.Component {
                                                                     roles={roles}
                                                                     resetFilters={resetFilters}
                                                                     restoreFilters={restoreFilters}
-                                                                    saveFilters={saveFilters}
                                                                     defaultFilters={defaultFilters}
                                                                     setFilters={setFilters}
                                                                 />

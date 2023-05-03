@@ -84,7 +84,7 @@ class ModalView extends React.Component<any, ModalViewState> {
                                     />
                                 </Modal.Body>
                                 <Modal.Footer>
-                                    {({ close }) => {
+                                    {({}) => {
                                         return (
                                             <>
                                                 <Button

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Button, PageHeader } from '../../../components'
+import { PageHeader } from '../../../components'
 import { FaHome as HomeIcon } from 'react-icons/fa'
 
 interface HeaderProps {

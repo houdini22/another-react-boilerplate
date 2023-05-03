@@ -5,7 +5,7 @@ import { UploadFileForm as FormComponent } from './UploadFileForm'
 import { reduxForm } from 'redux-form'
 
 const UploadFileFormContainer = compose(
-    connect((state, props) => {
+    connect(() => {
         return {}
     }),
     reduxForm({

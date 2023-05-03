@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Field } from 'redux-form'
-import { Card, Col, FormField, Header, Row } from '../../../components'
+import { Card, Col, FormField, Row } from '../../../components'
 
 class Form extends React.Component {
     constructor(props) {

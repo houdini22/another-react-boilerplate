@@ -1,4 +1,4 @@
-import { reduxForm, formValueSelector } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { NotificationsForm } from './NotificationsForm'
 import { compose } from 'redux'
 import { actions } from '../../../reducers/notifications'

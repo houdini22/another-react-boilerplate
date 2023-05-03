@@ -10,8 +10,6 @@ import { Pagination } from '../../../components/common/List/Pagination'
 import FilesFilters from './FilesFilters'
 import { getReadableFileSizeString } from '../../../utils/javascript'
 import { FaHome as HomeIcon } from 'react-icons/fa'
-import { FileDetailsFormContainer } from './FileDetailsFormContainer'
-import { apiURL } from '../../../helpers/api'
 import { NotificationsManager } from '../../../containers/NotificationsManager'
 
 export class UsersView extends React.Component {
@@ -26,7 +24,7 @@ export class UsersView extends React.Component {
             <NotificationsManager>
                 {({ addToastNotification }) => (
                     <RouteManager>
-                        {({ navigate, query: { user = '' } }) => {
+                        {({ query: { user = '' } }) => {
                             const defaultFilters = {
                                 user: '',
                                 items_per_page: 24,

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Button, Col, Dropdown, Label, Popover, Row, Typography } from '../../../../components'
+import { Button, Col, Popover, Row } from '../../../../components'
 import { DeleteIcon, DetailsIcon, EditIcon } from '../../../../components/icons'
 import { formatDateTime } from '../../../../helpers/date-time'
 
