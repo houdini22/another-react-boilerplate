@@ -36,5 +36,5 @@ export {
     HomeIcon,
     UserIcon,
     InfoIcon,
-    PermissionIcon
+    PermissionIcon,
 }

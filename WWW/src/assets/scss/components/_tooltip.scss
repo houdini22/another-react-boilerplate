@@ -1,10 +1,10 @@
 @import '../variables';
 
 .component-tooltip {
-    display: inline-flex;
+    display: inline;
 
     .component-tooltip__element {
-        display: flex;
+        display: inline;
         flex-grow: 1;
         align-content: center;
         text-align: center;

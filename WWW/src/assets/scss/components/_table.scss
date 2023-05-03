@@ -125,15 +125,14 @@
                 &.component-table__tbody__td--align-center {
                     text-align: center;
                 }
+                &.component-table__tbody__td--align-right {
+                    text-align: right;
+                }
                 &.component-table__tbody__td--is-clickable {
                     &:hover {
                         background-color: $color10;
                         cursor: pointer;
                     }
-                }
-
-                & > div > * {
-                    margin-right: 5px;
                 }
             }
         }

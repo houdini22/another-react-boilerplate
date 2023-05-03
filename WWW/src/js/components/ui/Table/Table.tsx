@@ -128,12 +128,13 @@ interface TdProps {
 
 class Td extends React.Component<TdProps> {
     render() {
-        const { children, xs, md, onClick, alignCenter } = this.props
+        const { children, xs, md, onClick, alignCenter, alignRight } = this.props
 
         return (
             <Col
                 className={cx('component-table__tbody__td', {
                     'component-table__tbody__td--align-center': alignCenter,
+                    'component-table__tbody__td--align-right': alignRight,
                     'component-table__tbody__td--is-clickable': onClick,
                     [`component-table__tbody__td--xs-${xs}`]: xs,
                     [`component-table__tbody__td--md-${md}`]: md,

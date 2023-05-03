@@ -1,13 +1,6 @@
 import * as React from 'react'
 import { Button, Dropdown, Label, Popover, Table, Typography } from '../../../components'
-import {
-    EditIcon,
-    DeleteIcon,
-    UserIcon,
-    InfoIcon,
-    DetailsIcon,
-    PermissionIcon
-} from '../../../components/icons'
+import { EditIcon, DeleteIcon, UserIcon, InfoIcon, DetailsIcon, PermissionIcon } from '../../../components/icons'
 import { TableSummary } from '../../../components/common/List/TableSummary'
 
 interface RolesTableProps {}

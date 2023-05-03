@@ -49,7 +49,7 @@ export class UsersView extends React.Component<null, UsersViewState> {
                         {({ addToastNotification }) => {
                             return (
                                 <UserRolesManager>
-                                    {({ roles, deleteRole, permissions, deleteUserPermission, deletePermission }) => {
+                                    {({ roles, permissions, deleteUserPermission }) => {
                                         return (
                                             <ListManager
                                                 url={'/users/list'}
@@ -127,9 +127,7 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                             setIsLoading={setIsLoading}
                                                                             deleteUserRole={deleteUserRole}
                                                                             deleteUserPermission={deleteUserPermission}
-                                                                            deletePermission={deletePermission}
                                                                             fetch={fetch}
-                                                                            deleteRole={deleteRole}
                                                                             activateUser={activateUser}
                                                                             deactivateUser={deactivateUser}
                                                                             setUserToDelete={this.setUserToDelete.bind(

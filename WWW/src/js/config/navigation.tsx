@@ -2,7 +2,7 @@ import * as React from 'react'
 import { FaSitemap } from 'react-icons/fa'
 import { AiOutlineOrderedList, AiOutlineUserAdd } from 'react-icons/ai'
 import { Badge } from '../components'
-import {AddIcon, CategoryIcon, DocumentIcon, LinkIcon, PermissionIcon, RoleIcon, UserIcon} from '../components/icons'
+import { AddIcon, CategoryIcon, DocumentIcon, LinkIcon, PermissionIcon, RoleIcon, UserIcon } from '../components/icons'
 
 export const navigation = [
     {

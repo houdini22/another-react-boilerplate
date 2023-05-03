@@ -44,6 +44,7 @@ import {
     Td as TdComponent,
     Tr as TrComponent,
     TFoot as TFootComponent,
+    ExpandManager,
 } from './ui/Table'
 import {
     Container as ListContainer,
@@ -101,6 +102,7 @@ const Table = {
     Td: TdComponent,
     Tr: TrComponent,
     TFoot: TFootComponent,
+    ExpandManager,
 }
 
 const List = {
