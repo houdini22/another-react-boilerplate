@@ -5,10 +5,11 @@ import { TableSummary } from '../../../components/common/List/TableSummary'
 import { ModalConfirm } from '../../../components/common/ModalConfirm'
 import RowExpandUsers from './PermissionsTable/RowExpandUsers'
 import RowExpandRoles from './PermissionsTable/RowExpandRoles'
+import { Permission } from '../../../../types.d'
 
-interface RolesTableProps {}
+interface PermissionsTableProps {}
 
-export class PermissionsTable extends React.Component<null, null> {
+export class PermissionsTable extends React.Component<PermissionsTableProps, null> {
     render() {
         const {
             setIsLoading,
@@ -39,7 +40,7 @@ export class PermissionsTable extends React.Component<null, null> {
                     </Table.Tr>
                 </Table.THead>
                 <Table.TBody>
-                    {permissions.map((permission) => {
+                    {permissions.map((permission: Permission) => {
                         if (permission.is_deletable) {
                             registerModal(
                                 `user-permission-${permission.id}-delete`,

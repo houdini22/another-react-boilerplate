@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { FaFileImage as ImageIcon } from 'react-icons/fa'
 import { PageContent } from '../../../layouts/PageLayout/components'
-import { Header, Row, Col, Section, IconBox, Tabs, PageHeader, Breadcrumbs } from '../../../components'
+import { Header, Row, Col, Section, IconBox, Tabs, PageHeader } from '../../../components'
 
 class IconBoxView extends React.Component {
     render() {

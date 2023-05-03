@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { Button, Col, Row, Tooltip, Typography } from '../../../../components'
+import { Button, Col, Row, Tooltip } from '../../../../components'
 import { apiURL } from '../../../../helpers/api'
 import UploadAvatarModal from './UploadAvatarModal'
 
-class DetailsUserAvatarRow extends React.Component {
+class DetailsUserAvatarRow extends React.Component<null, null> {
     render() {
         const {
             user,
@@ -31,6 +31,7 @@ class DetailsUserAvatarRow extends React.Component {
                             <img
                                 src={apiURL(`files/preview/${user.avatar?.id}`)}
                                 style={{ maxWidth: '100%', marginBottom: 20 }}
+                                alt={''}
                             />
                         </Tooltip>
                     )}

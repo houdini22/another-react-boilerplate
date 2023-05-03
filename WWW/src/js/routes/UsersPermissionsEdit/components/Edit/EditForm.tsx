@@ -1,4 +1,5 @@
 import * as React from 'react'
+// noinspection TypeScriptCheckImport
 import { Field } from 'redux-form'
 import { Button, FormField } from '../../../../components'
 

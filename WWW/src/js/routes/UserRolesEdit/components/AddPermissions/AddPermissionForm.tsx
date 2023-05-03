@@ -1,16 +1,17 @@
 import * as React from 'react'
 import { Field } from 'redux-form'
 import { Button, FormField } from '../../../../components'
+import { Permission, Role } from '../../../../../types.d'
 
 interface AddPermissionFormProps {
     handleSubmit: Function
     permission: string
-    permissions: Array
+    permissions: Array<Permission>
     role: any
-    roles: Array
+    roles: Array<Role>
 }
 
-class AddPermissionForm extends React.Component<AddPermissionFormProps> {
+class AddPermissionForm extends React.Component<AddPermissionFormProps, null> {
     render() {
         const { handleSubmit, permission, permissions, role } = this.props
 

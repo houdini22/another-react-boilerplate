@@ -2,9 +2,10 @@ import * as React from 'react'
 import { Button, Col, Popover, Row } from '../../../../components'
 import { DeleteIcon, DetailsIcon, EditIcon } from '../../../../components/icons'
 import { formatDateTime } from '../../../../helpers/date-time'
+import { User } from '../../../../../types.d'
 
 interface FiltersProps {
-    user: Object
+    user: User
     setUserToDelete: Function
     navigate: Function
 }

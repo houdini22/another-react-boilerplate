@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { Button, PageHeader } from '../../../components'
 import { FaHome as HomeIcon } from 'react-icons/fa'
+import { User } from '../../../../types.d'
 
 interface HeaderProps {
-    user: Object
+    user: User
     navigate: Function
 }
 

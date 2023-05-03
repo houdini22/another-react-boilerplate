@@ -3,7 +3,7 @@ import { PageContent } from '../../../layouts/PageLayout/components'
 import { Alert, Button } from '../../../components'
 import { RouteManager } from '../../../containers/RouteManager'
 
-export class IndexView extends React.Component {
+export class IndexView extends React.Component<null, null> {
     render() {
         return (
             <PageContent>

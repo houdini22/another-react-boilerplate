@@ -15,7 +15,7 @@ interface UsersManagerProps {
     editFile: Function
 }
 
-class MediaManagerBase extends React.Component<UsersManagerProps> {
+class MediaManagerBase extends React.Component<UsersManagerProps, null> {
     componentDidMount() {
         /*const {
             fetch,

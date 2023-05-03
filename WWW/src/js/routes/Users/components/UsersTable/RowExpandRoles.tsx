@@ -2,9 +2,10 @@ import * as React from 'react'
 import { Col, Dropdown, Label, Table, Row, Typography } from '../../../../components'
 import { DeleteIcon, DetailsIcon, EditIcon } from '../../../../components/icons'
 import { ModalConfirm } from '../../../../components/common/ModalConfirm'
+import { User } from '../../../../../types.d'
 
 interface RowExpandRolesProps {
-    user: Object
+    user: User
     navigate: Function
     setIsLoading: Function
     deleteUserRole: Function

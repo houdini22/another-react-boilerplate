@@ -5,6 +5,7 @@ import { TableSummary } from '../../../components/common/List/TableSummary'
 import { ModalConfirm } from '../../../components/common/ModalConfirm'
 import RowExpandPermissions from './RolesTable/RowExpandPermissions'
 import RowExpandUsers from './RolesTable/RowExpandUsers'
+import { Role } from '../../../../types.d'
 
 interface RolesTableProps {}
 
@@ -39,7 +40,7 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                     </Table.Tr>
                 </Table.THead>
                 <Table.TBody>
-                    {roles.map((role) => {
+                    {roles.map((role: Role) => {
                         if (role.is_deletable) {
                             registerModal(
                                 `user-role-${role.id}-delete`,

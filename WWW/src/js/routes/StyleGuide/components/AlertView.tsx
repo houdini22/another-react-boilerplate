@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
-import { Row, Col, Section, Alert, Label, Tabs } from '../../../components'
+import { Row, Col, Section, Alert, Tabs } from '../../../components'
 import { createPresentationTab as _createPresentationTab, generateCode } from '../../../utils/tabs'
 import { FaGlobe as AlertIcon } from 'react-icons/fa'
 import { AlertFormContainer } from './AlertFormContainer'

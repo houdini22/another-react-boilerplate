@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Typography } from '../../../../components'
 
-class DetailsUserPrimaryInfoRow extends React.Component {
+class DetailsUserPrimaryInfoRow extends React.Component<null, null> {
     render() {
         const { user } = this.props
 

@@ -10,9 +10,10 @@ import { DetailsUserFilesRow } from './DetailsUserFilesRow'
 import { DetailsUserPermissionsRow } from './DetailsUserPermissionsRow'
 import { DetailsUserRolesRow } from './DetailsUserRolesRow'
 import { ModalConfirm } from '../../../../components/common/ModalConfirm'
+import { User } from '../../../../../types.d'
 
 interface HeaderProps {
-    user: Object
+    user: User
     navigate: Function
     setUploadProgress: Function
     setIsLoading: Function

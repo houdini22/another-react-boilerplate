@@ -10,7 +10,7 @@ import { Pagination } from '../../../components/common/List/Pagination'
 import RolesFilters from './PermissionsFilters'
 import Header from './Header'
 
-export class UsersPermissions extends React.Component {
+export class UsersPermissions extends React.Component<null, null> {
     render() {
         return (
             <RouteManager>

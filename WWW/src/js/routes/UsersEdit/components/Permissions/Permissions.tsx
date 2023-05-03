@@ -3,13 +3,14 @@ import { Badge, Card, Dropdown, Label, LoadingOverlay, Tabs } from '../../../../
 import { DeleteIcon, InfoIcon, DetailsIcon, EditIcon } from '../../../../components/icons'
 import { ModalConfirm } from '../../../../components/common/ModalConfirm'
 import { mergeUserPermissions, userPermissionFromRoles } from '../../../../helpers/permissions'
+import { User } from '../../../../../types.d'
 
 interface AddRoleProps {
     roles: any
     setIsLoading: Function
     deletePermission: Function
     fetchOne: Function
-    user: Object
+    user: User
     isLoading: boolean
 }
 

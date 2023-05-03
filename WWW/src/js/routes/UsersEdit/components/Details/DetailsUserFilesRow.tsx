@@ -2,8 +2,13 @@ import * as React from 'react'
 import { Button, Col, Row } from '../../../../components'
 import { FileIcon } from '../../../../components/icons'
 import { RouteManager } from '../../../../containers/RouteManager'
+import { User } from '../../../../../types.d'
 
-class DetailsUserFilesRow extends React.Component {
+interface DetailsUserFilesRowProps {
+    user: User
+}
+
+class DetailsUserFilesRow extends React.Component<DetailsUserFilesRowProps, null> {
     render() {
         const { user } = this.props
 

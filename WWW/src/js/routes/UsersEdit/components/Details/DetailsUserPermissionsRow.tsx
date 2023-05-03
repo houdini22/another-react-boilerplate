@@ -2,8 +2,13 @@ import * as React from 'react'
 import { Button, Col, Row } from '../../../../components'
 import { RoleIcon } from '../../../../components/icons'
 import { RouteManager } from '../../../../containers/RouteManager'
+import { User } from '../../../../../types.d'
 
-class DetailsUserPermissionsRow extends React.Component {
+interface DetailsUserPermissionsRowProps {
+    user: User
+}
+
+class DetailsUserPermissionsRow extends React.Component<DetailsUserPermissionsRowProps, null> {
     render() {
         const { user } = this.props
 

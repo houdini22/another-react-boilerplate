@@ -4,11 +4,8 @@ import { DeleteIcon, InfoIcon, UserIcon } from '../../../../components/icons'
 import { ModalConfirm } from '../../../../components/common/ModalConfirm'
 
 interface RowExpandPermissionsProps {
-    user: Object
-    permissionsFromRoles: Object
     setIsLoading: Function
     navigate: Function
-    deleteUserPermission: Function
     addToastNotification: Function
     fetch: Function
 }

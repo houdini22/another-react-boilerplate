@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { Card, Dropdown, Label, LoadingOverlay } from '../../../components'
 import { DeleteIcon, RoleIcon, UserIcon } from '../../../components/icons'
+import { Role } from '../../../../types.d'
 
 interface HeaderProps {
-    role: Object
+    role: Role
 }
 
 export class Permissions extends React.Component<HeaderProps, null> {

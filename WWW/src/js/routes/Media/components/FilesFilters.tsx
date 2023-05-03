@@ -1,9 +1,6 @@
 import * as React from 'react'
 import styles from '../../../../assets/scss/components/_file.scss'
 import classNames from 'classnames/bind'
-import { Button, Card } from '../../../components'
-import { ifDeepDiff } from '../../../utils/javascript'
-import { FiltersFactory } from '../../../components/common/List/FiltersFactory'
 import { FiltersCard } from '../../../components/common/FiltersCard'
 
 const cx = classNames.bind(styles)

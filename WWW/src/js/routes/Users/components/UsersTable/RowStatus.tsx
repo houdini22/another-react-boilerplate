@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { Label } from '../../../../components'
+import { User } from '../../../../../types.d'
 
 interface FiltersProps {
-    user: Object
+    user: User
     activateUser: Function
     deactivateUser: Function
     fetch: Function

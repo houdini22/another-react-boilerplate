@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
-import { Row, Col, Section, Card, Button, Badge, Label, TextField, Checkbox } from '../../../components'
+import { Row, Col, Section, Card, Badge, Label, TextField } from '../../../components'
 import { CardFormContainer } from './CardFormContainer'
 import { FaImage as CardIcon } from 'react-icons/fa'
 import { createPresentationTab as _createPresentationTab } from '../../../utils/tabs'

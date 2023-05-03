@@ -1,8 +1,13 @@
 import * as React from 'react'
 import { Col, Row } from '../../../../components'
 import { formatDateTime } from '../../../../helpers/date-time'
+import { User } from '../../../../../types.d'
 
-class DetailsUserUpdatedAtRow extends React.Component {
+interface DetailsUserUpdatedAtRowProps {
+    user: User
+}
+
+class DetailsUserUpdatedAtRow extends React.Component<DetailsUserUpdatedAtRowProps, null> {
     render() {
         const { user } = this.props
 

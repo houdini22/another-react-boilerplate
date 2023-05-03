@@ -19,7 +19,6 @@ interface UsersTableProps {
     fetch: Function
     activateUser: Function
     deactivateUser: Function
-    setUserToDelete: Function
     page: number
     perPage: number
     total: number
@@ -35,7 +34,6 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
             fetch,
             activateUser,
             deactivateUser,
-            setUserToDelete,
             page,
             perPage,
             total,
@@ -161,7 +159,6 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                     <Table.Td xs={6} md={2}>
                                                         <RowActions
                                                             user={user}
-                                                            setUserToDelete={setUserToDelete}
                                                             navigate={navigate}
                                                             openModal={openModal}
                                                         />

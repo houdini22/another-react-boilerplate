@@ -2,13 +2,14 @@ import * as React from 'react'
 import { Card, Dropdown, Label, LoadingOverlay } from '../../../../components'
 import { DeleteIcon, DetailsIcon, InfoIcon, EditIcon } from '../../../../components/icons'
 import { ModalConfirm } from '../../../../components/common/ModalConfirm'
+import { User } from '../../../../../types.d'
 
 interface AddRoleProps {
     roles: any
     setIsLoading: Function
     deleteUserRole: Function
     fetchOne: Function
-    user: Object
+    user: User
     isLoading: boolean
 }
 

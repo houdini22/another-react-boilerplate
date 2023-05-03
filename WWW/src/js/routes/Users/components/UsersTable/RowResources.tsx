@@ -2,9 +2,10 @@ import * as React from 'react'
 import { Button, Popover, Tooltip } from '../../../../components'
 import { AvatarIcon, FileIcon, PermissionIcon, RoleIcon } from '../../../../components/icons'
 import { apiURL } from '../../../../helpers/api'
+import { User } from '../../../../../types.d'
 
 interface FiltersProps {
-    user: Object
+    user: User
     navigate: Function
     expand: Function
 }

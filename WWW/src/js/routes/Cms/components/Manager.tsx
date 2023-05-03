@@ -2,12 +2,9 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { actions, selectors } from '../../../reducers/cms-pages'
 
-export class Manager extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            collection: [],
-        }
+export class Manager extends React.Component<null, null> {
+    state = {
+        collection: [],
     }
 
     componentDidMount() {

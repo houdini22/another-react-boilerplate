@@ -1,15 +1,16 @@
 import * as React from 'react'
 import { Field } from 'redux-form'
 import { Button, FormField } from '../../../../components'
+import { Role } from '../../../../../types.d'
 
 interface AddPermissionFormProps {
     handleSubmit: Function
     permission: string
-    roles: Array
+    roles: Array<Role>
     user: any
 }
 
-class AddPermissionForm extends React.Component<AddPermissionFormProps> {
+class AddPermissionForm extends React.Component<AddPermissionFormProps, null> {
     isDisabled() {
         const { permissions, user } = this.props
         return (

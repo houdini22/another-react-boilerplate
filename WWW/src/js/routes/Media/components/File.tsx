@@ -26,7 +26,7 @@ interface FileProps {
 
 interface FileState {
     confirmDeleteModalVisible: boolean
-    detailsModalVisible: boolean
+    detailsModalVisible: boolean | number
 }
 
 export class FileView extends React.Component<FileProps, FileState> {

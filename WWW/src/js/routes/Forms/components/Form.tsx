@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Field } from 'redux-form'
 import { Card, Col, FormField, Row } from '../../../components'
 
-class Form extends React.Component {
+class Form extends React.Component<null, null> {
     constructor(props) {
         super(props)
     }

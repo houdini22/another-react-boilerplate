@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Field } from 'redux-form'
 import { FormField } from '../../../components'
 
-class FiltersForm extends React.Component {
+class FiltersForm extends React.Component<null, null> {
     render() {
         const { handleSubmit } = this.props
 

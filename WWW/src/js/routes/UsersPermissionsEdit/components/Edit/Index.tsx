@@ -4,7 +4,7 @@ import { EditFormContainer } from './EditFormContainer'
 interface EditProps {
     editPermission: Function
     permission: Object
-    fetch: Function
+    fetchOnePermission: Function
     isLoading: boolean
     addToastNotification: Function
     setIsLoading: Function

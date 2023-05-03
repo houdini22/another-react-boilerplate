@@ -5,7 +5,7 @@ interface HeaderProps {
     title: String
 }
 
-export class Header extends React.Component<HeaderProps> {
+export class Header extends React.Component<HeaderProps, null> {
     render() {
         const { title } = this.props
         return (

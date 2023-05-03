@@ -18,7 +18,6 @@ import { ProgressView } from './components/ProgressView'
 import { TableView } from './components/TableView'
 import { ListView } from './components/ListView'
 import { ColumnView } from './components/ColumnView'
-import { PagesView } from '../Pages/components/Pages'
 import { NotificationsView } from './components/NotificationsView'
 import { TooltipView } from './components/TooltipView'
 
@@ -42,7 +41,6 @@ export {
     TableView,
     ListView,
     ColumnView,
-    PagesView,
     NotificationsView,
     TooltipView,
     ModalView,
@@ -68,7 +66,6 @@ export default {
     TableView,
     ListView,
     ColumnView,
-    PagesView,
     NotificationsView,
     TooltipView,
     ModalView,

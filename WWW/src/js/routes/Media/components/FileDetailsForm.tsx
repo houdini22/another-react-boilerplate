@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Field } from 'redux-form'
 import { Button, FormField, LoadingOverlay } from '../../../components'
 
-class FileDetailsForm extends React.Component {
+class FileDetailsForm extends React.Component<null, null> {
     constructor(props) {
         super(props)
     }

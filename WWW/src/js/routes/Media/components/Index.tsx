@@ -12,7 +12,11 @@ import { getReadableFileSizeString } from '../../../utils/javascript'
 import { FaHome as HomeIcon } from 'react-icons/fa'
 import { NotificationsManager } from '../../../containers/NotificationsManager'
 
-export class UsersView extends React.Component {
+interface UsersViewState {
+    addVisible: boolean
+}
+
+export class UsersView extends React.Component<null, UsersViewState> {
     state = {
         addVisible: false,
     }

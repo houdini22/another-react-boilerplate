@@ -14,7 +14,7 @@ interface FormComponentContainerProps {
 
 // here is Form container, it has redux-form props from `reduxForm` factory and it separates API class from
 // FormComponent presentation
-class FormComponentContainer extends React.Component<FormComponentContainerProps> {
+class FormComponentContainer extends React.Component<FormComponentContainerProps, null> {
     someMethod(prop) {
         // has redux-forms and own props
     }

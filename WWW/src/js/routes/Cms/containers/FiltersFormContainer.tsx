@@ -6,7 +6,7 @@ import { FiltersForm } from '../components/FiltersForm'
 
 export const FORM_NAME = 'cms-pages-filters-form'
 
-class FiltersFormContainerBase extends React.Component {
+class FiltersFormContainerBase extends React.Component<null, null> {
     render() {
         return <FiltersForm {...this.props} {...this.state} />
     }

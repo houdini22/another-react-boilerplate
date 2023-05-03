@@ -1,12 +1,9 @@
 import * as React from 'react'
 import { LocalStorage } from '../../../modules/database'
 
-export class Manager extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            collection: [],
-        }
+export class Manager extends React.Component<null, null> {
+    state = {
+        collection: [],
     }
 
     componentDidMount() {

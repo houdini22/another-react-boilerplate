@@ -1,7 +1,8 @@
 import * as React from 'react'
+import { User } from '../../../../../types.d'
 
 interface FiltersProps {
-    user: Object
+    user: User
 }
 
 export class RowId extends React.Component<FiltersProps, null> {
