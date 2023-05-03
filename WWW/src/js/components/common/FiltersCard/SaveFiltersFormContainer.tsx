@@ -6,8 +6,6 @@ import { reduxForm } from 'redux-form'
 import { LocalStorage } from '../../../modules/database'
 
 const onSubmit = (values, _, { closeModal, name, filters }) => {
-    console.log({ ...values, filters, name })
-
     const toSave = { ...values, filters, name }
 
     LocalStorage.insertOrUpdate('ListManagerFilters', { name, list_name: values.list_name }, toSave)

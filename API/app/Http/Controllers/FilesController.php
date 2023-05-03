@@ -58,6 +58,14 @@ class FilesController extends Controller
             });
         }
 
+        if (!empty($filters['has_user'])) {
+            if ($filters['has_user'] === 'yes') {
+                $query = $query->whereHas('user');
+            } else if ($filters['has_user'] === 'no') {
+                $query = $query->whereDoesntHave('user');
+            }
+        }
+
         $files = $query->paginate($filters['items_per_page']);
 
         return response()->json([
@@ -118,6 +126,23 @@ class FilesController extends Controller
 
         return response()->json([
             'msg' => 'ok',
+        ]);
+    }
+
+    public function getDownload(Request $request)
+    {
+        $file = File::find($request->route('id'));
+        if (!$file) {
+            return $this->response404();
+        }
+
+        $file->download_count += 1;
+        $file->save();
+
+        $filePath = storage_path('app/public' . $file->file_path);
+
+        return response()->download($filePath, $file->name, [
+            'Content-Type' => $file->mime,
         ]);
     }
 }

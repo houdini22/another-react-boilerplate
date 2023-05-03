@@ -4,106 +4,105 @@ import classNames from 'classnames/bind'
 import { Button, Card } from '../../../components'
 import { ifDeepDiff } from '../../../utils/javascript'
 import { FiltersFactory } from '../../../components/common/List/FiltersFactory'
+import { FiltersCard } from '../../../components/common/FiltersCard'
 
 const cx = classNames.bind(styles)
 
 export class FilesFiles extends React.Component<null, null> {
     render() {
-        const { filters, setFilter, fetch, resetFilters, defaultFilters, restoreFilters, saveFilters } = this.props
+        const { filters, setFilter, fetch, resetFilters, defaultFilters, setFilters, isLoading } = this.props
 
         return (
-            <Card
+            <FiltersCard
                 name={'MediaList'}
-                withMinimizeIcon
-                header={<h1>Filters</h1>}
-                headerActions={[
-                    <Button
-                        color={'secondary'}
-                        onClick={() => resetFilters()}
-                        disabled={!ifDeepDiff(defaultFilters, filters)}
-                    >
-                        Reset Filters
-                    </Button>,
-                    <Button color={'success'} onClick={() => restoreFilters('media')}>
-                        Restore Filters
-                    </Button>,
-                    <Button
-                        color={'warning'}
-                        onClick={() => saveFilters('media')}
-                        disabled={!ifDeepDiff(defaultFilters, filters)}
-                    >
-                        Save Filters
-                    </Button>,
+                filters={filters}
+                setFilter={setFilter}
+                setFilters={setFilters}
+                resetFilters={resetFilters}
+                fetch={fetch}
+                defaultFilters={defaultFilters}
+                isLoading={isLoading}
+                filtersToRender={[
+                    {
+                        type: 'search',
+                        label: 'Search',
+                        name: 'search',
+                    },
+                    {
+                        type: 'text',
+                        label: 'Username',
+                        name: 'user',
+                        placeholder: 'username',
+                    },
+                    {
+                        options: [
+                            {
+                                label: 'yes or no',
+                                value: 'yes_or_no',
+                            },
+                            {
+                                label: 'yes',
+                                value: 'yes',
+                            },
+                            {
+                                label: 'no',
+                                value: 'no',
+                            },
+                        ],
+                        type: 'radio',
+                        name: 'has_user',
+                        label: 'Has User',
+                    },
+                    {
+                        options: [
+                            {
+                                label: 'ID',
+                                value: 'id',
+                            },
+                            {
+                                label: 'File Size',
+                                value: 'size',
+                            },
+                            {
+                                label: 'Width',
+                                value: 'width',
+                            },
+                            {
+                                label: 'Height',
+                                value: 'height',
+                            },
+                            {
+                                label: 'Previews',
+                                value: 'preview_count',
+                            },
+                            {
+                                label: 'Downloads',
+                                value: 'download_count',
+                            },
+                        ],
+                        type: 'order',
+                    },
+                    {
+                        options: [
+                            {
+                                label: '24',
+                                value: 24,
+                            },
+                            {
+                                label: '48',
+                                value: 48,
+                            },
+                            {
+                                label: '96',
+                                value: 96,
+                            },
+                        ],
+                        type: 'radio',
+                        name: 'items_per_page',
+                        label: 'Items per page',
+                    },
                 ]}
-            >
-                <FiltersFactory
-                    filters={filters}
-                    setFilter={setFilter}
-                    defaultFilters={defaultFilters}
-                    fetch={fetch}
-                    body={[
-                        {
-                            type: 'search',
-                            label: 'Search',
-                            name: 'search',
-                        },
-                        {
-                            type: 'text',
-                            label: 'Username',
-                            name: 'user',
-                            placeholder: 'username',
-                        },
-                        {
-                            options: [
-                                {
-                                    label: 'ID',
-                                    value: 'id',
-                                },
-                                {
-                                    label: 'File Size',
-                                    value: 'size',
-                                },
-                                {
-                                    label: 'Width',
-                                    value: 'width',
-                                },
-                                {
-                                    label: 'Height',
-                                    value: 'height',
-                                },
-                                {
-                                    label: 'Previews',
-                                    value: 'preview_count',
-                                },
-                                {
-                                    label: 'Downloads',
-                                    value: 'download_count',
-                                },
-                            ],
-                            type: 'order',
-                        },
-                        {
-                            options: [
-                                {
-                                    label: '24',
-                                    value: 24,
-                                },
-                                {
-                                    label: '48',
-                                    value: 48,
-                                },
-                                {
-                                    label: '96',
-                                    value: 96,
-                                },
-                            ],
-                            type: 'radio',
-                            name: 'items_per_page',
-                            label: 'Items per page',
-                        },
-                    ]}
-                />
-            </Card>
+            />
         )
     }
 }

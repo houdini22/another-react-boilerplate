@@ -97,4 +97,5 @@ Route::get('/users/activate/{email_verified_token}', '\App\Http\Controllers\User
 
 Route::prefix('files')->group(function() {
     Route::get('preview/{file_id}', '\App\Http\Controllers\FilesController@getPreview');
+    Route::get('download/{id}', '\App\Http\Controllers\FilesController@getDownload');
 });

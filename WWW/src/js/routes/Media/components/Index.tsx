@@ -31,6 +31,7 @@ export class UsersView extends React.Component {
                                 order_by: 'id',
                                 order_direction: 'asc',
                                 search: '',
+                                has_user: 'yes_or_no',
                             }
 
                             return (
@@ -77,8 +78,7 @@ export class UsersView extends React.Component {
                                             perPage,
                                             total,
                                             resetFilters,
-                                            restoreFilters,
-                                            saveFilters,
+                                            setFilters,
                                         }) => (
                                             <MediaManager>
                                                 {({ deleteFile, uploadFiles, uploadProgress, editFile }) => {
@@ -106,8 +106,8 @@ export class UsersView extends React.Component {
                                                                 fetch={fetch}
                                                                 resetFilters={resetFilters}
                                                                 defaultFilters={defaultFilters}
-                                                                restoreFilters={restoreFilters}
-                                                                saveFilters={saveFilters}
+                                                                setFilters={setFilters}
+                                                                isLoading={isLoading}
                                                             />
 
                                                             <Card>

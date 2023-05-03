@@ -154,23 +154,6 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
         })
     }
 
-    saveFilters(name) {
-        const { filters } = this.state
-        LocalStorage.insertOrUpdate('ListManagerFilters', { name }, { name, filters })
-        LocalStorage.commit()
-    }
-
-    restoreFilters(name) {
-        const save = LocalStorage.queryAll('ListManagerFilters', {
-            query: { name },
-        })[0]
-        if (save) {
-            this.setState({ filters: save.filters }, () => {
-                this.fetch()
-            })
-        }
-    }
-
     setFilters(filters) {
         return new Promise((resolve) => {
             this.setState({ filters }, () => {
@@ -205,8 +188,6 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
             resetFilters: this.resetFilters.bind(this),
             links,
             setIsLoading: this.setIsLoading.bind(this),
-            saveFilters: this.saveFilters.bind(this),
-            restoreFilters: this.restoreFilters.bind(this),
             defaultFilters,
             setFilters: this.setFilters.bind(this),
         }
