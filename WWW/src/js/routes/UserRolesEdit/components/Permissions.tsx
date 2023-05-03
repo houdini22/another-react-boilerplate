@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Card, Dropdown, Label, LoadingOverlay } from '../../../components'
 import { DeleteIcon, RoleIcon, UserIcon } from '../../../components/icons'
 import { Role } from '../../../../types.d'
-import {ModalConfirm} from "../../../components/common/ModalConfirm";
+import { ModalConfirm } from '../../../components/common/ModalConfirm'
 
 interface HeaderProps {
     role: Role
@@ -19,35 +19,40 @@ export class Permissions extends React.Component<HeaderProps, null> {
             deleteRolePermission,
             navigate,
             addToastNotification,
-            openModal, registerModal, closeModal
+            openModal,
+            registerModal,
+            closeModal,
         } = this.props
         return (
             <Card header={<h1>Permissions</h1>}>
                 {role?.permissions?.map(({ id: _id, name, guard_name, is_deletable }) => {
+                    registerModal(
+                        `delete-permission-from-role-${_id}`,
+                        <ModalConfirm
+                            onConfirm={() => {
+                                setIsLoading(true)
 
-                    registerModal(`delete-permission-from-role-${_id}`, (
-                        <ModalConfirm onConfirm={() => {
-                            setIsLoading(true)
-
-                            return deleteRolePermission(role, {
-                                id: _id,
-                            }).then(() => {
-                                addToastNotification({
-                                    type: 'success',
-                                    title: 'Delete success.',
-                                    text: 'Permission has been removed from Role.',
+                                return deleteRolePermission(role, {
+                                    id: _id,
+                                }).then(() => {
+                                    addToastNotification({
+                                        type: 'success',
+                                        title: 'Delete success.',
+                                        text: 'Permission has been removed from Role.',
+                                    })
+                                    Promise.all([fetch()]).then(() => {
+                                        setIsLoading(false)
+                                    })
+                                    closeModal(`delete-permission-from-role-${_id}`)
                                 })
-                                Promise.all([fetch()]).then(() => {
-                                    setIsLoading(false)
-                                })
-                                closeModal(`delete-permission-from-role-${_id}`);
-                            })
-                        }} onCancel={() => {
-                            closeModal(`delete-permission-from-role-${_id}`);
-                        }}>
+                            }}
+                            onCancel={() => {
+                                closeModal(`delete-permission-from-role-${_id}`)
+                            }}
+                        >
                             Are you sure to delete Permission: <b>{name}</b> from Role: <b>{role.name}</b>?
-                        </ModalConfirm>
-                    ))
+                        </ModalConfirm>,
+                    )
 
                     return (
                         <Dropdown.Container triggerSize={'lg'} key={_id}>
@@ -82,7 +87,7 @@ export class Permissions extends React.Component<HeaderProps, null> {
                                 <Dropdown.Item
                                     color="danger"
                                     onClick={() => {
-                                        openModal(`delete-permission-from-role-${_id}`);
+                                        openModal(`delete-permission-from-role-${_id}`)
                                     }}
                                 >
                                     <DeleteIcon /> Remove Permission from Role

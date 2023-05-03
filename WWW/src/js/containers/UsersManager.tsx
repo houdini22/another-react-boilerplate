@@ -30,7 +30,7 @@ interface UsersManagerProps {
 class UsersManagerBase extends React.Component<UsersManagerProps, null> {
     state = {
         newUserRoles: [],
-        newUserPermissions: []
+        newUserPermissions: [],
     }
     componentDidMount() {
         const { fetchOne, id } = this.props
@@ -40,41 +40,41 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
     }
 
     addPermissionToNewUser(id) {
-        const {newUserPermissions} = this.state;
+        const { newUserPermissions } = this.state
 
-        const newPermissions = [...newUserPermissions];
-        newPermissions.push(id);
+        const newPermissions = [...newUserPermissions]
+        newPermissions.push(id)
 
-        this.setState({newUserPermissions: newPermissions});
+        this.setState({ newUserPermissions: newPermissions })
     }
 
     removePermissionFromNewUser(id) {
-        const {newUserPermissions} = this.state;
+        const { newUserPermissions } = this.state
 
-        const newPermissions = [...newUserPermissions].filter(({id: _id}) => {
-            return Number(id) !== Number(_id);
-        });
+        const newPermissions = [...newUserPermissions].filter(({ id: _id }) => {
+            return Number(id) !== Number(_id)
+        })
 
-        this.setState({newUserPermissions: newPermissions});
+        this.setState({ newUserPermissions: newPermissions })
     }
 
     addRoleToNewUser(id) {
-        const {newUserRoles} = this.state;
+        const { newUserRoles } = this.state
 
-        const newRoles = [...newUserRoles];
-        newRoles.push(id);
+        const newRoles = [...newUserRoles]
+        newRoles.push(id)
 
-        this.setState({newUserRoles: newRoles});
+        this.setState({ newUserRoles: newRoles })
     }
 
     removeRoleFromNewUser(id) {
-        const {newUserRoles} = this.state;
+        const { newUserRoles } = this.state
 
-        const newRoles = [...newUserRoles].filter(({id: _id}) => {
-            return Number(id) !== Number(_id);
-        });
+        const newRoles = [...newUserRoles].filter(({ id: _id }) => {
+            return Number(id) !== Number(_id)
+        })
 
-        this.setState({newUserRoles: newRoles});
+        this.setState({ newUserRoles: newRoles })
     }
 
     render() {
@@ -101,7 +101,7 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             removeRoleFromNewUser,
             deleteAvatar,
         } = this.props
-        const {newUserRoles, newUserPermissions} = this.state;
+        const { newUserRoles, newUserPermissions } = this.state
         const renderProps = {
             users,
             setIsLoading,
@@ -126,7 +126,7 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             removePermissionFromNewUser: this.removePermissionFromNewUser.bind(this),
             deleteAvatar,
             newUserRoles,
-            newUserPermissions
+            newUserPermissions,
         }
 
         return (

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { RouteManager } from '../../../containers/RouteManager'
 import { UserRolesManager } from '../../UserRoles/containers/UserRolesManager'
-import {Col, Modal, Row} from '../../../components'
+import { Col, Modal, Row } from '../../../components'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import Header from './Header'
 import Edit from './Edit/Edit'
@@ -20,22 +20,22 @@ export class UserRolesEdit extends React.Component<null, UsersViewState> {
                         {({ addToastNotification }) => {
                             return (
                                 <Modal.Manager>
-                                    {({openModal, registerModal, closeModal}) => (
+                                    {({ openModal, registerModal, closeModal }) => (
                                         <UserRolesManager id={query['id']}>
                                             {({
-                                                  roles,
-                                                  deletePermission,
-                                                  role,
-                                                  isLoading,
-                                                  editRole,
-                                                  fetchOne,
-                                                  permissions,
-                                                  setIsLoading,
-                                                  addPermission,
-                                                  fetchPermissions,
-                                                  deleteRolePermission,
-                                                  fetch,
-                                              }) => (
+                                                roles,
+                                                deletePermission,
+                                                role,
+                                                isLoading,
+                                                editRole,
+                                                fetchOne,
+                                                permissions,
+                                                setIsLoading,
+                                                addPermission,
+                                                fetchPermissions,
+                                                deleteRolePermission,
+                                                fetch,
+                                            }) => (
                                                 <PageContent>
                                                     <Header navigate={navigate} role={role} />
                                                     <Row>

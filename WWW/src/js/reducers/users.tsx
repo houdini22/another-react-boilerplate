@@ -74,10 +74,10 @@ const addUser = (params, newUserRoles, newUserPermissions) => (dispatch) => {
             .then(({ data: { user } }) => {
                 const promises = []
 
-                newUserRoles.forEach(({id}) => {
+                newUserRoles.forEach(({ id }) => {
                     promises.push(dispatch(addUserRole({ id: user.id }, { id })))
                 })
-                newUserPermissions.forEach(({id}) => {
+                newUserPermissions.forEach(({ id }) => {
                     promises.push(dispatch(addUserPermission({ id: user.id }, { id })))
                 })
 
