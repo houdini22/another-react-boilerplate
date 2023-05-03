@@ -9,6 +9,7 @@ import { DetailsUserUpdatedAtRow } from './DetailsUserUpdatedAtRow'
 import { DetailsUserFilesRow } from './DetailsUserFilesRow'
 import { DetailsUserPermissionsRow } from './DetailsUserPermissionsRow'
 import { DetailsUserRolesRow } from './DetailsUserRolesRow'
+import { ModalConfirm } from '../../../../components/common/ModalConfirm'
 
 interface HeaderProps {
     user: Object
@@ -25,7 +26,7 @@ interface HeaderState {
     modalVisible: boolean
 }
 
-export class Header extends React.Component<HeaderProps, HeaderState> {
+export class Details extends React.Component<HeaderProps, HeaderState> {
     state = {
         modalVisible: false,
     }
@@ -53,7 +54,35 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
             sendAvatar,
             fetchOne,
             addToastNotification,
+            deleteAvatar,
+            registerModal,
+            openModal,
+            closeModal,
         } = this.props
+
+        registerModal(
+            `user-avatar-delete`,
+            <ModalConfirm
+                onConfirm={() => {
+                    deleteAvatar(user).then(() => {
+                        fetchOne(user.id).then(() => {
+                            closeModal(`user-avatar-delete`)
+                            addToastNotification({
+                                title: 'Delete success.',
+                                text: 'User Avatar has been removed.',
+                                type: 'success',
+                            })
+                        })
+                    })
+                }}
+                onCancel={() => closeModal(`user-avatar-delete`)}
+            >
+                <p>
+                    Are you sure to delete Avatar of User: <b>{user.name}</b>?
+                </p>
+            </ModalConfirm>,
+        )
+
         return (
             <Card header={<h1>Details</h1>}>
                 <Tabs.Container>
@@ -73,6 +102,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                                 visible={modalVisible}
                                 uploadProgress={uploadProgress}
                                 addToastNotification={addToastNotification}
+                                openModalAvatar={() => openModal(`user-avatar-delete`)}
                             />
                         </Tabs.Content>
                     </Tabs.Tab>
@@ -95,4 +125,4 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
     }
 }
 
-export default Header
+export default Details

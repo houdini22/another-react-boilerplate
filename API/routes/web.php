@@ -36,6 +36,7 @@ Route::prefix('api/v1')->group(function () {
         Route::put('edit', '\App\Http\Controllers\UsersController@postEdit');
         Route::post('add', '\App\Http\Controllers\UsersController@postAdd');
         Route::post('change_avatar/{id}', '\App\Http\Controllers\UsersController@postChangeAvatar');
+        Route::post('delete_avatar', '\App\Http\Controllers\UsersController@postDeleteAvatar');
         Route::post('force_login/{id}', '\App\Http\Controllers\UsersController@postForceLogin');
 
         Route::prefix('roles')->group(function() {

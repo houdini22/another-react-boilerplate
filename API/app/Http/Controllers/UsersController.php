@@ -329,6 +329,30 @@ class UsersController extends Controller
         ]);
     }
 
+    public function postDeleteAvatar(Request $request)
+    {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $user = User::find($request->post('id'));
+        if (!$user) {
+            return $this->response404();
+        }
+
+        if ($user->avatar()->get()) {
+            $user->avatar()->delete();
+        }
+
+        $user->avatar_id = NULL;
+        $user->save();
+
+        return response()->json([
+            'msg' => 'ok',
+        ]);
+    }
+
     public function postForceLogin(Request $request)
     {
         $user = User::getFromRequest($request);

@@ -55,6 +55,24 @@ const editUser = (params) => (dispatch) => {
     })
 }
 
+const deleteAvatar = (user) => (dispatch) => {
+    return new Promise<void>((resolve, reject) => {
+        dispatch(setIsLoaded(false))
+        dispatch(setFetchError(null))
+
+        http.post(`/users/delete_avatar`, user)
+            .then(({ data }) => {
+                dispatch(setIsLoaded(true))
+                resolve()
+            })
+            .catch((e) => {
+                dispatch(setIsLoaded(false))
+                dispatch(setFetchError(e))
+                reject(e)
+            })
+    })
+}
+
 const addUser = (params) => (dispatch, state) => {
     return new Promise<void>((resolve, reject) => {
         dispatch(setIsLoading(true))
@@ -307,6 +325,7 @@ export const actions = {
     removeRoleFromNewUser,
     addPermissionToNewUser,
     removePermissionFromNewUser,
+    deleteAvatar,
 }
 
 // ------------------------------------

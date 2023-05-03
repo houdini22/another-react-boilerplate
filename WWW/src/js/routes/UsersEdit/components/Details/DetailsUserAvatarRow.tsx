@@ -17,6 +17,7 @@ class DetailsUserAvatarRow extends React.Component {
             visible,
             uploadProgress,
             addToastNotification,
+            openModalAvatar,
         } = this.props
 
         return (
@@ -32,6 +33,19 @@ class DetailsUserAvatarRow extends React.Component {
                                 style={{ maxWidth: '100%', marginBottom: 20 }}
                             />
                         </Tooltip>
+                    )}
+
+                    {user?.avatar?.id != null && (
+                        <Button
+                            color={'danger'}
+                            size={'xs'}
+                            onClick={() => {
+                                openModalAvatar()
+                            }}
+                            block
+                        >
+                            Delete Avatar
+                        </Button>
                     )}
 
                     <Button size={'xs'} onClick={() => openModal()} block>

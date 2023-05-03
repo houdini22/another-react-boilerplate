@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Card, Dropdown, Label, LoadingOverlay } from '../../../../components'
 import { DeleteIcon, InfoIcon, DetailsIcon, EditIcon } from '../../../../components/icons'
+import { ModalConfirm } from '../../../../components/common/ModalConfirm'
 
 interface AddRoleProps {
     roles: any
@@ -73,6 +74,9 @@ export class Permissions extends React.Component<AddRoleProps, null> {
             deleteUserPermission,
             fetchPermissions,
             addToastNotification,
+            openModal,
+            closeModal,
+            registerModal,
         } = this.props
 
         const permissionsFromRoles = this.getPermissionFromRoles()
@@ -83,6 +87,32 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                     .map((key) => permissionsFromRoles[key])
                     .sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
                     .map(({ id, name, guard_name, is_deletable, occurence, pivot: { model_type = '' } = {} }) => {
+                        registerModal(
+                            `user-delete-permission-${id}`,
+                            <ModalConfirm
+                                onConfirm={() => {
+                                    setIsLoading(true)
+
+                                    return deleteUserPermission({ id }, user).then(() => {
+                                        Promise.all([fetchOne(user['id']), fetchPermissions()]).then(() => {
+                                            setIsLoading(false)
+                                            addToastNotification({
+                                                type: 'success',
+                                                title: 'Remove success.',
+                                                text: 'Permission has been removed from User.',
+                                            })
+                                            closeModal(`user-delete-permission-${id}`)
+                                        })
+                                    })
+                                }}
+                                onCancel={() => closeModal(`user-delete-permission-${id}`)}
+                            >
+                                <p>
+                                    Are you sure to delete Permission: <b>{name}</b> from User: <b>{user.name}</b>?
+                                </p>
+                            </ModalConfirm>,
+                        )
+
                         return (
                             <Dropdown.Container triggerSize={'lg'} key={id}>
                                 <Dropdown.Trigger component={Label} componentProps={{ block: true }}>
@@ -104,42 +134,10 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                                         <Dropdown.Item
                                             color="danger"
                                             onClick={() => {
-                                                setIsLoading(true)
-
-                                                return deleteUserPermission({ id }, user).then(() => {
-                                                    Promise.all([fetchOne(user['id']), fetchPermissions()]).then(() => {
-                                                        setIsLoading(false)
-                                                        addToastNotification({
-                                                            type: 'success',
-                                                            title: 'Remove success.',
-                                                            text: 'Permission has been removed from User.',
-                                                        })
-                                                    })
-                                                })
+                                                openModal(`user-delete-permission-${id}`)
                                             }}
                                         >
                                             <DeleteIcon /> Remove permission from User
-                                        </Dropdown.Item>
-                                    )}
-                                    {is_deletable == 1 && (
-                                        <Dropdown.Item
-                                            color="danger"
-                                            onClick={() => {
-                                                setIsLoading(true)
-
-                                                return deletePermission(id).then(() => {
-                                                    Promise.all([fetchOne(user['id']), fetchPermissions()]).then(() => {
-                                                        setIsLoading(false)
-                                                        addToastNotification({
-                                                            type: 'success',
-                                                            title: 'Remove success.',
-                                                            text: 'Permission has been removed.',
-                                                        })
-                                                    })
-                                                })
-                                            }}
-                                        >
-                                            <DeleteIcon /> Remove Permission
                                         </Dropdown.Item>
                                     )}
                                 </Dropdown.Menu>

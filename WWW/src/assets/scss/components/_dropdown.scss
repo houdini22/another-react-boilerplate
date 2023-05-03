@@ -91,6 +91,19 @@
                         width: 100%;
                         height: 100%;
                         align-items: center;
+
+                        & > svg {
+                            margin-right: 12px;
+                            float: left;
+                            top: 0;
+                            font-size: 16px;
+                            vertical-align: middle;
+
+                            &.pull-right {
+                                margin-right: 0;
+                                margin-left: 12px;
+                            }
+                        }
                     }
                 }
 
@@ -165,19 +178,6 @@
                     ) {
                     a {
                         cursor: pointer;
-                    }
-                }
-
-                svg:not(.component-dropdown__dropdown-menu__items__item__sub-menu-icon) {
-                    margin-right: 12px;
-                    float: left;
-                    top: 0;
-                    font-size: 16px;
-                    vertical-align: middle;
-
-                    &.pull-right {
-                        margin-right: 0;
-                        margin-left: 12px;
                     }
                 }
 
