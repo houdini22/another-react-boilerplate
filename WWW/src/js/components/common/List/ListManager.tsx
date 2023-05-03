@@ -171,6 +171,14 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
         }
     }
 
+    setFilters(filters) {
+        return new Promise((resolve) => {
+            this.setState({ filters }, () => {
+                resolve()
+            })
+        })
+    }
+
     render() {
         const { filters, data, total, hasPrevPage, hasNextPage, totalPages, page, isLoading, perPage, links } =
             this.state
@@ -200,6 +208,7 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
             saveFilters: this.saveFilters.bind(this),
             restoreFilters: this.restoreFilters.bind(this),
             defaultFilters,
+            setFilters: this.setFilters.bind(this),
         }
 
         return <div className={cx('list-manager-container')}>{children(renderProps)}</div>

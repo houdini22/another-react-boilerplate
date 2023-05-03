@@ -16,7 +16,7 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
         const { permission, setIsLoading, navigate, addToastNotification, fetch, deleteUserPermission } = this.props
 
         return (
-            <Table.Tr key={`permissions${permission.id}`}>
+            <Table.Tr key={`users${permission.id}`}>
                 <Table.Td xs={12}>
                     <Row>
                         <Col xs={12}>

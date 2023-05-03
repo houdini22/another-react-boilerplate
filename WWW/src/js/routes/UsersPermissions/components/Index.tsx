@@ -67,6 +67,7 @@ export class UsersPermissions extends React.Component {
                                                         restoreFilters,
                                                         saveFilters,
                                                         defaultFilters,
+                                                        setFilters,
                                                     }) => {
                                                         return (
                                                             <PageContent>
@@ -82,6 +83,7 @@ export class UsersPermissions extends React.Component {
                                                                     restoreFilters={restoreFilters}
                                                                     saveFilters={saveFilters}
                                                                     defaultFilters={defaultFilters}
+                                                                    setFilters={setFilters}
                                                                 />
 
                                                                 <Card>

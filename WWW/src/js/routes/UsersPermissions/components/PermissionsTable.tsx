@@ -66,7 +66,7 @@ export class PermissionsTable extends React.Component<null, null> {
                         }
 
                         return (
-                            <Table.ExpandManager>
+                            <Table.ExpandManager key={`expand-manager-${permission.id}`}>
                                 {({ addExpand, expand }) => {
                                     addExpand(
                                         'roles',

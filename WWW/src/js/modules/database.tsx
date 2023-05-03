@@ -12,6 +12,7 @@ if (LocalStorage.isNew()) {
     LocalStorage.createTableWithData('ListManagerFilters', [
         {
             name: '',
+            list_name: '',
             filters: {},
         },
     ])

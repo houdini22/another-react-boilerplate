@@ -67,8 +67,7 @@ export class UsersView extends React.Component {
                                                         perPage,
                                                         total,
                                                         resetFilters,
-                                                        restoreFilters,
-                                                        saveFilters,
+                                                        setFilters,
                                                     }) => {
                                                         return (
                                                             <PageContent>
@@ -82,9 +81,8 @@ export class UsersView extends React.Component {
                                                                     roles={roles}
                                                                     defaultFilters={defaultFilters}
                                                                     isLoading={isLoading}
-                                                                    saveFilters={saveFilters}
-                                                                    restoreFilters={restoreFilters}
                                                                     resetFilters={resetFilters}
+                                                                    setFilters={setFilters}
                                                                 />
 
                                                                 <Card>

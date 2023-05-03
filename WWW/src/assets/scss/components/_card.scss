@@ -92,10 +92,10 @@
         }
 
         .component-card__content {
-            padding: #{$COMPONENT_PADDING / 2};
+            padding: #{$COMPONENT_PADDING};
         }
         .component-card__footer > div {
-            padding: #{$COMPONENT_PADDING / 2};
+            padding: #{$COMPONENT_PADDING};
         }
     }
 

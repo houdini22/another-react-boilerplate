@@ -68,8 +68,7 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                         resetFilters,
                                                         links,
                                                         setIsLoading,
-                                                        saveFilters,
-                                                        restoreFilters,
+                                                        setFilters,
                                                     }) => (
                                                         <UsersManager>
                                                             {({
@@ -89,9 +88,8 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                             permissions={permissions}
                                                                             resetFilters={resetFilters}
                                                                             defaultFilters={defaultFilters}
-                                                                            restoreFilters={restoreFilters}
-                                                                            saveFilters={saveFilters}
                                                                             isLoading={isLoading}
+                                                                            setFilters={setFilters}
                                                                         />
                                                                         <Card>
                                                                             <Pagination
