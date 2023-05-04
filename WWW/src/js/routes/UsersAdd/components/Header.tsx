@@ -14,7 +14,7 @@ export class Header extends React.Component<HeaderProps, null> {
                         <HomeIcon /> Home
                     </PageHeader.BreadcrumbsItem>
                     <PageHeader.BreadcrumbsItem href="/users">Users</PageHeader.BreadcrumbsItem>
-                    <PageHeader.BreadcrumbsItem href={`/users/add`}>Users - Add User</PageHeader.BreadcrumbsItem>
+                    <PageHeader.BreadcrumbsItem href={`/users/add`}>Add User</PageHeader.BreadcrumbsItem>
                 </PageHeader.Breadcrumbs>
             </PageHeader.Container>
         )
