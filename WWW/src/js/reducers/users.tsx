@@ -323,7 +323,7 @@ const addPermission =
                     }
 
                     Promise.all(promises).then(() => {
-                        resolve()
+                        resolve(permission)
                     })
                 })
                 .catch((e) => {

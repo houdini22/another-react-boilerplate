@@ -488,6 +488,12 @@
                                                 > .layout__header__bar__right__element--notifications__expanded__item__content__text {
                                                 line-height: 13px;
                                                 font-size: 13px;
+                                                p {
+                                                    margin-bottom: 5px;
+                                                }
+                                                p:last-child {
+                                                    margin-bottom: 0;
+                                                }
                                             }
                                         }
                                     }
@@ -527,8 +533,8 @@
                         .layout__header__bar__right__element--user__avatar {
                             margin-left: 15px;
                             img {
-                                max-height: calc(#{$HEADER_DESKTOP_HEIGHT} - 20px);
                                 max-width: 50px;
+                                max-height: 35px;
                                 border-radius: 1000px;
                             }
                         }

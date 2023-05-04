@@ -10,7 +10,7 @@ const onSubmit = (values, _, { setIsLoading, addPermission, addToastNotification
     setIsLoading(true)
 
     return addPermission({ ...values, guard_name: 'web' }, newPermissionUsers).then(
-        ({ permission }) => {
+        (permission) => {
             setIsLoading(false)
             addToastNotification({
                 type: 'success',

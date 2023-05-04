@@ -1,4 +1,5 @@
 import md5 from 'md5'
+import moment from 'moment'
 
 // ------------------------------------
 // Constants
@@ -28,6 +29,7 @@ const addToastNotification =
     ({ type, text, href, title }) =>
     (dispatch) => {
         const id = md5(`${type}${text}${href}${title}${Math.random()}`)
+        const date = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
 
         dispatch({
             type: ADD_TOAST_NOTIFICATION,
@@ -37,6 +39,7 @@ const addToastNotification =
                 href,
                 title,
                 id,
+                date,
             },
         })
         setTimeout(() => {
@@ -79,7 +82,7 @@ const ACTION_HANDLERS = {
             ],
         }
     },
-    [ADD_TOAST_NOTIFICATION]: (state, { payload: { type, text, href, title, id } }) => {
+    [ADD_TOAST_NOTIFICATION]: (state, { payload: { type, text, href, title, id, date } }) => {
         return {
             ...state,
             unread: state.unread + 1,
@@ -91,17 +94,19 @@ const ACTION_HANDLERS = {
                     href,
                     title,
                     id,
+                    date,
                 },
             ],
             toastNotificationsAll: [
-                ...state.toastNotificationsAll,
                 {
                     type,
                     text,
                     href,
                     title,
                     id,
+                    date,
                 },
+                ...state.toastNotificationsAll,
             ],
         }
     },
@@ -160,4 +165,5 @@ export interface ToastNotification {
     type: string
     text: string
     title: string
+    date: string
 }

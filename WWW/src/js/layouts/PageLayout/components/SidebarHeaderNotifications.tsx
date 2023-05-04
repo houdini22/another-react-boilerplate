@@ -96,7 +96,7 @@ class BaseSidebarHeaderNotifications extends React.Component<
                     <div className={cx('layout__header__bar__right__element--notifications__expanded')}>
                         <Scrollbars style={{ height: '400px' }}>
                             <ul>
-                                {notifications.map(({ type, text, href, title, id }) => {
+                                {notifications.map(({ type, text, href, title, id, date }) => {
                                     return (
                                         <li
                                             className={cx({
@@ -132,7 +132,10 @@ class BaseSidebarHeaderNotifications extends React.Component<
                                                             'layout__header__bar__right__element--notifications__expanded__item__content__text',
                                                         )}
                                                     >
-                                                        {text}
+                                                        <p>{text}</p>
+                                                        <p>
+                                                            <small>{date}</small>
+                                                        </p>
                                                     </span>
                                                 </span>
                                             </Link>
