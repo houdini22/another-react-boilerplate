@@ -234,6 +234,8 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             editRole,
             editPermission,
             fetchPermission,
+            deletePermission,
+            deleteRole,
         } = this.props
         const { newUserRoles, newUserPermissions, newRoleUsers, newPermissionUsers, newRolePermissions } = this.state
         const renderProps = {
@@ -285,6 +287,8 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             editRole,
             editPermission,
             fetchPermission,
+            deletePermission,
+            deleteRole,
         }
 
         return (

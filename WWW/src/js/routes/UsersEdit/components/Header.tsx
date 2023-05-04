@@ -23,7 +23,7 @@ export class Header extends React.Component<HeaderProps, null> {
         } = this.props
         return (
             <PageHeader.Container>
-                <PageHeader.Title>Users - edit user</PageHeader.Title>
+                <PageHeader.Title>Users - edit User</PageHeader.Title>
                 <PageHeader.Actions>
                     <Button
                         isLoading={isLoading}
@@ -77,6 +77,7 @@ export class Header extends React.Component<HeaderProps, null> {
                                     })
                                 })
                             }}
+                            isLoading={isLoading}
                         >
                             Activate
                         </Button>
@@ -94,6 +95,7 @@ export class Header extends React.Component<HeaderProps, null> {
                                     })
                                 })
                             }}
+                            isLoading={isLoading}
                         >
                             Deactivate
                         </Button>

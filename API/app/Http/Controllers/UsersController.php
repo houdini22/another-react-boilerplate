@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
-use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
@@ -23,7 +22,7 @@ class UsersController extends Controller
 
         $filters = $request->get('filters');
 
-        $query = User::with(['roles' => function($query) {
+        $query = User::with(['roles' => function ($query) {
             $query->withCount('permissions');
         }])
             ->with('permissions')
@@ -219,36 +218,12 @@ class UsersController extends Controller
             return $this->response401();
         }
 
-        $user = User::find($request->segments()[4]);
+        $user = User::find($request->route('id'));
         if (!$user) {
             return $this->response404();
         }
 
         $user->delete();
-
-        return response()->json([
-            'msg' => 'ok',
-        ]);
-    }
-
-    public function deleteDeleteUserRole(Request $request)
-    {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
-
-        $user = User::find($request->segments()[5]);
-        if (!$user) {
-            return $this->response404();
-        }
-
-        $role = Role::find($request->segments()[6]);
-        if (!$role) {
-            return $this->response404();
-        }
-
-        $user->removeRole($role);
 
         return response()->json([
             'msg' => 'ok',

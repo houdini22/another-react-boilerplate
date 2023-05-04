@@ -1,8 +1,6 @@
 import { http } from '../modules/http'
 
 const SET_IS_LOADING = 'users::set-is-loading'
-const SET_IS_LOADED = 'users::set-is-loaded'
-const SET_FETCH_ERROR = 'users::set-fetch-error'
 const SET_USER = 'users::set-user'
 const SET_USERS = 'users::set-users'
 const SET_UPLOAD_PROGRESS = 'users::set-upload-progress'
@@ -13,14 +11,6 @@ const SET_ROLE = 'users::set-role'
 
 const setIsLoading = (data) => (dispatch) => {
     dispatch({ type: SET_IS_LOADING, payload: data })
-}
-
-const setIsLoaded = (data) => (dispatch) => {
-    dispatch({ type: SET_IS_LOADED, payload: data })
-}
-
-const setFetchError = (data) => (dispatch) => {
-    dispatch({ type: SET_FETCH_ERROR, payload: data })
 }
 
 const setUser = (data) => (dispatch) => {
@@ -53,17 +43,11 @@ const setRole = (data) => (dispatch) => {
 
 const editUser = (params) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        dispatch(setIsLoaded(false))
-        dispatch(setFetchError(null))
-
         http.put('/users/edit', params)
             .then(({ data }) => {
-                dispatch(setIsLoaded(true))
                 resolve()
             })
             .catch((e) => {
-                dispatch(setIsLoaded(false))
-                dispatch(setFetchError(e))
                 reject(e)
             })
     })
@@ -71,17 +55,11 @@ const editUser = (params) => (dispatch) => {
 
 const deleteAvatar = (user) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        dispatch(setIsLoaded(false))
-        dispatch(setFetchError(null))
-
         http.post(`/users/delete_avatar`, user)
             .then(({ data }) => {
-                dispatch(setIsLoaded(true))
                 resolve()
             })
             .catch((e) => {
-                dispatch(setIsLoaded(false))
-                dispatch(setFetchError(e))
                 reject(e)
             })
     })
@@ -91,14 +69,11 @@ const addUserPermission =
     ({ id: user_id }, { id: permission_id }) =>
     (dispatch) => {
         return new Promise<void>((resolve, reject) => {
-            dispatch(setFetchError(null))
-
             http.post(`/permissions/add/${user_id}/${permission_id}`)
                 .then(() => {
                     resolve()
                 })
                 .catch((e) => {
-                    dispatch(setFetchError(e))
                     reject(e)
                 })
         })
@@ -106,9 +81,6 @@ const addUserPermission =
 
 const addUser = (params, newUserRoles, newUserPermissions) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        dispatch(setIsLoaded(false))
-        dispatch(setFetchError(null))
-
         return http
             .post('/users/add', params)
             .then(({ data: { user } }) => {
@@ -122,13 +94,10 @@ const addUser = (params, newUserRoles, newUserPermissions) => (dispatch) => {
                 })
 
                 Promise.all(promises).then(() => {
-                    dispatch(setIsLoaded(true))
                     resolve(user)
                 })
             })
             .catch((e) => {
-                dispatch(setIsLoaded(false))
-                dispatch(setFetchError(e))
                 reject(e)
             })
     })
@@ -138,27 +107,18 @@ const fetchOne =
     (id = 0) =>
     (dispatch) => {
         return new Promise<void>((resolve) => {
-            dispatch(setIsLoaded(false))
-            dispatch(setFetchError(null))
-
             http.get(`/users/get/${id}`)
                 .then(({ data: { user } }) => {
                     dispatch(setUser(user))
-                    dispatch(setIsLoaded(true))
                     resolve()
                 })
-                .catch((e) => {
-                    dispatch(setIsLoaded(false))
-                    dispatch(setFetchError(e))
-                })
+                .catch((e) => {})
         })
     }
 
 const fetch = () => (dispatch) => {
     return new Promise<void>((resolve) => {
         dispatch(setUser({}))
-        dispatch(setIsLoaded(false))
-        dispatch(setFetchError(null))
 
         http.get(`/users/list`)
             .then(
@@ -168,30 +128,20 @@ const fetch = () => (dispatch) => {
                     },
                 }) => {
                     dispatch(setUsers(users))
-                    dispatch(setIsLoaded(true))
                     resolve()
                 },
             )
-            .catch((e) => {
-                dispatch(setIsLoaded(false))
-                dispatch(setFetchError(e))
-            })
+            .catch((e) => {})
     })
 }
 
 const deleteUser = (id) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        dispatch(setIsLoaded(false))
-        dispatch(setFetchError(null))
-
         http.delete(`/users/delete/${id}`)
             .then(({ data: { user } }) => {
-                dispatch(setIsLoaded(true))
                 resolve()
             })
             .catch((e) => {
-                dispatch(setIsLoaded(false))
-                dispatch(setFetchError(e))
                 reject(e)
             })
     })
@@ -201,14 +151,11 @@ const deleteUserRole =
     ({ id: user_id }, { id: role_id }) =>
     (dispatch) => {
         return new Promise<void>((resolve, reject) => {
-            dispatch(setFetchError(null))
-
             http.delete(`/roles/permissions/delete_user_role/${user_id}/${role_id}`)
                 .then(({ data: { user } }) => {
                     resolve()
                 })
                 .catch((e) => {
-                    dispatch(setFetchError(e))
                     reject(e)
                 })
         })
@@ -218,14 +165,11 @@ const addUserRole =
     ({ id: user_id }, { id: role_id = 0 } = {}) =>
     (dispatch) => {
         return new Promise<void>((resolve, reject) => {
-            dispatch(setFetchError(null))
-
             http.post(`/users/roles/add/${user_id}/${role_id}`)
                 .then(({ data: { user } }) => {
                     resolve()
                 })
                 .catch((e) => {
-                    dispatch(setFetchError(e))
                     reject(e)
                 })
         })
@@ -235,8 +179,6 @@ const sendActivationEmail =
     ({ id }) =>
     (dispatch) => {
         return new Promise<void>((resolve, reject) => {
-            dispatch(setFetchError(null))
-
             http.post(`/users/send_activation_email`, {
                 id,
             })
@@ -244,7 +186,6 @@ const sendActivationEmail =
                     resolve()
                 })
                 .catch((e) => {
-                    dispatch(setFetchError(e))
                     reject(e)
                 })
         })
@@ -254,8 +195,6 @@ const sendAvatar =
     ({ id }, file) =>
     (dispatch) => {
         return new Promise<void>((resolve, reject) => {
-            dispatch(setFetchError(null))
-
             const formData = new FormData()
             formData.append('avatar', file)
 
@@ -277,7 +216,6 @@ const sendAvatar =
                     resolve()
                 })
                 .catch((e) => {
-                    dispatch(setFetchError(e))
                     reject(e)
                 })
         })
@@ -286,42 +224,33 @@ const forceLogin =
     ({ id }) =>
     (dispatch) => {
         return new Promise<void>((resolve, reject) => {
-            dispatch(setFetchError(null))
-
             http.post(`/users/force_login/${id}`)
                 .then(({ data: { user } }) => {
                     resolve()
                 })
                 .catch((e) => {
-                    dispatch(setFetchError(e))
                     reject(e)
                 })
         })
     }
 const activateUser = (user) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        dispatch(setFetchError(null))
-
         http.post(`/users/activate/${user.id}`, { user })
             .then(({ data: { user } }) => {
                 resolve()
             })
             .catch((e) => {
-                dispatch(setFetchError(e))
                 reject(e)
             })
     })
 }
 const deactivateUser = (user) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        dispatch(setFetchError(null))
-
         http.post(`/users/deactivate/${user.id}`, { user })
             .then(({ data: { user } }) => {
                 resolve()
             })
             .catch((e) => {
-                dispatch(setFetchError(e))
                 reject(e)
             })
     })
@@ -329,17 +258,11 @@ const deactivateUser = (user) => (dispatch) => {
 
 const editRole = (params) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        dispatch(setIsLoaded(false))
-        dispatch(setFetchError(null))
-
         http.post('/roles/edit', params)
             .then(({}) => {
-                dispatch(setIsLoaded(true))
                 resolve()
             })
             .catch((e) => {
-                dispatch(setIsLoaded(false))
-                dispatch(setFetchError(e))
                 reject(e)
             })
     })
@@ -347,14 +270,9 @@ const editRole = (params) => (dispatch) => {
 
 const addRole = (params, rolePermissions, roleUsers) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        dispatch(setIsLoaded(false))
-        dispatch(setFetchError(null))
-
         return http
             .post('/roles/add', params)
             .then(({ data: { role } }) => {
-                dispatch(setIsLoaded(true))
-
                 const promises = []
 
                 rolePermissions.forEach((permission) => {
@@ -370,8 +288,6 @@ const addRole = (params, rolePermissions, roleUsers) => (dispatch) => {
                 })
             })
             .catch((e) => {
-                dispatch(setIsLoaded(false))
-                dispatch(setFetchError(e))
                 reject(e)
             })
     })
@@ -381,17 +297,11 @@ const deleteRole =
     (id = 0) =>
     (dispatch) => {
         return new Promise<void>((resolve, reject) => {
-            dispatch(setIsLoaded(false))
-            dispatch(setFetchError(null))
-
             http.delete(`/roles/delete/${id}`)
                 .then(() => {
-                    dispatch(setIsLoaded(true))
                     resolve()
                 })
                 .catch((e) => {
-                    dispatch(setIsLoaded(false))
-                    dispatch(setFetchError(e))
                     reject(e)
                 })
         })
@@ -401,8 +311,6 @@ const addPermission =
     (params, newPermissionUsers = []) =>
     (dispatch) => {
         return new Promise<void>((resolve, reject) => {
-            dispatch(setFetchError(null))
-
             return http
                 .post(`/permissions/add/`, params)
                 .then(({ data: { permission } }) => {
@@ -419,7 +327,6 @@ const addPermission =
                     })
                 })
                 .catch((e) => {
-                    dispatch(setFetchError(e))
                     reject(e)
                 })
         })
@@ -427,20 +334,14 @@ const addPermission =
 
 const fetchPermissions = () => (dispatch) => {
     return new Promise<void>((resolve) => {
-        dispatch(setIsLoaded(false))
-        dispatch(setFetchError(null))
         dispatch(setPermissions([]))
 
         http.get('/roles/permissions/list')
             .then(({ data: { permissions } }) => {
                 dispatch(setPermissions(permissions))
-                dispatch(setIsLoaded(true))
                 resolve()
             })
-            .catch((e) => {
-                dispatch(setIsLoaded(false))
-                dispatch(setFetchError(e))
-            })
+            .catch((e) => {})
     })
 }
 
@@ -448,14 +349,11 @@ const deleteRolePermission =
     ({ id: role_id }, { id: permission_id }) =>
     (dispatch) => {
         return new Promise<void>((resolve, reject) => {
-            dispatch(setFetchError(null))
-
             http.delete(`/roles/permissions/delete/${role_id}/${permission_id}`)
                 .then(() => {
                     resolve()
                 })
                 .catch((e) => {
-                    dispatch(setFetchError(e))
                     reject(e)
                 })
         })
@@ -463,14 +361,11 @@ const deleteRolePermission =
 
 const deletePermission = (permission_id) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        dispatch(setFetchError(null))
-
         http.delete(`/roles/permissions/delete/${permission_id}`)
             .then(() => {
                 resolve()
             })
             .catch((e) => {
-                dispatch(setFetchError(e))
                 reject(e)
             })
     })
@@ -481,35 +376,23 @@ const fetchPermission =
     (dispatch) => {
         return new Promise<void>((resolve) => {
             dispatch(setPermission({}))
-            dispatch(setIsLoaded(false))
-            dispatch(setFetchError(null))
 
             http.get(`/permissions/get/${id}`)
                 .then(({ data: { permission } }) => {
                     dispatch(setPermission(permission))
-                    dispatch(setIsLoaded(true))
                     resolve()
                 })
-                .catch((e) => {
-                    dispatch(setIsLoaded(false))
-                    dispatch(setFetchError(e))
-                })
+                .catch((e) => {})
         })
     }
 
 const editPermission = (params) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        dispatch(setIsLoaded(false))
-        dispatch(setFetchError(null))
-
         http.post('/permissions/edit', params)
             .then(({ data: { permission } }) => {
-                dispatch(setIsLoaded(true))
                 resolve(permission)
             })
             .catch((e) => {
-                dispatch(setIsLoaded(false))
-                dispatch(setFetchError(e))
                 reject(e)
             })
     })
@@ -519,14 +402,11 @@ const deleteUserPermission =
     ({ id: permission_id }, { id: user_id }) =>
     (dispatch) => {
         return new Promise<void>((resolve, reject) => {
-            dispatch(setFetchError(null))
-
             http.post(`/permissions/delete_user_permission/${permission_id}/${user_id}`)
                 .then(() => {
                     resolve()
                 })
                 .catch((e) => {
-                    dispatch(setFetchError(e))
                     reject(e)
                 })
         })
@@ -534,8 +414,6 @@ const deleteUserPermission =
 
 const fetchRoles = () => (dispatch) => {
     return new Promise<void>((resolve) => {
-        dispatch(setIsLoaded(false))
-        dispatch(setFetchError(null))
         dispatch(setRoles([]))
 
         http.get('/roles/list')
@@ -546,14 +424,10 @@ const fetchRoles = () => (dispatch) => {
                     },
                 }) => {
                     dispatch(setRoles(data))
-                    dispatch(setIsLoaded(true))
                     resolve()
                 },
             )
-            .catch((e) => {
-                dispatch(setIsLoaded(false))
-                dispatch(setFetchError(e))
-            })
+            .catch((e) => {})
     })
 }
 
@@ -562,27 +436,19 @@ const fetchRole =
     (dispatch) => {
         return new Promise<void>((resolve) => {
             dispatch(setRole({}))
-            dispatch(setIsLoaded(false))
-            dispatch(setFetchError(null))
 
             http.get(`/roles/get/${id}`)
                 .then(({ data: { role } }) => {
                     dispatch(setRole(role))
-                    dispatch(setIsLoaded(true))
                     resolve()
                 })
-                .catch((e) => {
-                    dispatch(setIsLoaded(false))
-                    dispatch(setFetchError(e))
-                })
+                .catch((e) => {})
         })
     }
 export const actions = {
     fetch,
     fetchOne,
-    setIsLoaded,
     setIsLoading,
-    setFetchError,
     editUser,
     addUser,
     deleteUser,
@@ -618,18 +484,6 @@ const ACTION_HANDLERS = {
         return {
             ...state,
             isLoading: payload,
-        }
-    },
-    [SET_IS_LOADED]: (state, { payload }) => {
-        return {
-            ...state,
-            isLoaded: payload,
-        }
-    },
-    [SET_FETCH_ERROR]: (state, { payload }) => {
-        return {
-            ...state,
-            fetchError: payload,
         }
     },
     [SET_USER]: (state, { payload }) => {

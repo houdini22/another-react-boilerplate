@@ -14,7 +14,7 @@ const onSubmit = (values, dispatch, props) => {
             searchParams: { back },
         } = props
 
-        navigate(`${back}`)
+        navigate(`${back || '/'}`)
     })
 }
 export const FORM_NAME = 'LoginForm'

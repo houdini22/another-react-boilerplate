@@ -27,6 +27,9 @@ instance.interceptors.response.use(
         if (status === 500) {
             store.dispatch(setFetchError({ message, code, status, data, statusText }))
         }
+        if (status === 401) {
+            console.log('todo redirect to login')
+        }
         return Promise.reject({ message, status, code, data, statusText })
     },
 )

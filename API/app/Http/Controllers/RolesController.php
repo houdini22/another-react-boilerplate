@@ -138,7 +138,7 @@ class RolesController extends Controller
             return $this->response401();
         }
 
-        $role = Role::find($request->segments()[4]);
+        $role = Role::find($request->route('id'));
         if (!$role) {
             return $this->response404();
         }
@@ -147,39 +147,6 @@ class RolesController extends Controller
 
         return response()->json([
             'msg' => 'ok',
-        ]);
-    }
-
-    public function postPermissionAdd(Request $request)
-    {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
-
-        $request->validate([
-            'permission' => 'required',
-            'role_id' => 'required|exists:roles,id'
-        ]);
-
-        $role = Role::find($request->post('role_id'));
-
-        if ($request->post('permission') === 'add') {
-            $request->validate([
-                'name' => 'required|unique:permissions,name',
-                'guard_name' => 'required',
-            ]);
-            $permission = new Permission();
-            $permission->fill($request->post());
-            $permission->save();
-
-            $role->givePermissionTo($permission);
-        } else {
-            $permission = Permission::find($request->post('permission'));
-            $role->givePermissionTo($permission);
-        }
-        return response()->json([
-            'role' => $role->toArray(),
         ]);
     }
 
@@ -206,7 +173,7 @@ class RolesController extends Controller
 
         $user = User::find($request->route('user_id'));
         if (!$user) {
-            return $this->response401();
+            return $this->response404();
         }
 
         $role = Role::find($request->route('role_id'));
@@ -228,12 +195,12 @@ class RolesController extends Controller
             return $this->response401();
         }
 
-        $role = Role::find($request->segments()[5]);
+        $role = Role::find($request->route('role_id'));
         if (!$role) {
             return $this->response404();
         }
 
-        $permission = Permission::find($request->segments()[6]);
+        $permission = Permission::find($request->route('permission_id'));
         if (!$permission) {
             return $this->response404();
         }

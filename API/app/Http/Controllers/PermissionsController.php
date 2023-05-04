@@ -6,7 +6,6 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class PermissionsController extends Controller
 {
@@ -156,135 +155,8 @@ class PermissionsController extends Controller
 
     }
 
-    public function deleteDeleteRole(Request $request)
+    public function postAddPermissionToUser(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
-
-        $role = Role::find($request->segments()[4]);
-        if (!$role) {
-            return $this->response404();
-        }
-
-        $role->delete();
-
-        return response()->json([
-            'msg' => 'ok',
-        ]);
-    }
-
-    public function postPermissionAdd(Request $request)
-    {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
-
-        $request->validate([
-            'permission' => 'required',
-            'role_id' => 'required|exists:roles,id'
-        ]);
-
-        $role = Role::find($request->post('role_id'));
-
-        if ($request->post('permission') === 'add') {
-            $request->validate([
-                'name' => 'required|unique:permissions,name',
-                'guard_name' => 'required',
-            ]);
-            $permission = new Permission();
-            $permission->fill($request->post());
-            $permission->save();
-
-            $role->givePermissionTo($permission);
-        } else {
-            $permission = Permission::find($request->post('permission'));
-            $role->givePermissionTo($permission);
-        }
-        return response()->json([
-            'role' => $role->toArray(),
-        ]);
-    }
-
-    public function getPermissionList(Request $request)
-    {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
-
-        $permisions = Permission::orderBy('name', 'ASC')->get();
-
-        return response()->json([
-            'permissions' => $permisions->toArray(),
-        ]);
-    }
-
-    public function deleteDeleteUserRole(Request $request)
-    {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
-
-        $role = Role::find($request->segments()[5]);
-        if (!$role) {
-            return $this->response404();
-        }
-
-        $user->removeRole($role);
-
-        return response()->json([
-            'msg' => 'ok',
-        ]);
-    }
-
-    public function deleteDeleteRolePermission(Request $request)
-    {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
-
-        $role = Role::find($request->segments()[5]);
-        if (!$role) {
-            return $this->response404();
-        }
-
-        $permission = Permission::find($request->segments()[6]);
-        if (!$permission) {
-            return $this->response404();
-        }
-
-        $permission->removeRole($role);
-
-        return response()->json([
-            'msg' => 'ok',
-        ]);
-    }
-
-    public function deleteDeletePermission(Request $request)
-    {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
-
-        $permission = Permission::find($request->route('permission_id'));
-        if (!$permission) {
-            return $this->response404();
-        }
-
-        $permission->delete();
-
-        return response()->json([
-            'msg' => 'ok',
-        ]);
-    }
-
-    public function postAddPermissionToUser(Request $request) {
         $user = User::getFromRequest($request);
         if (!$user) {
             return $this->response401();
@@ -307,7 +179,8 @@ class PermissionsController extends Controller
         ]);
     }
 
-    public function postDeleteUserPermission(Request $request) {
+    public function postDeleteUserPermission(Request $request)
+    {
         $user = User::getFromRequest($request);
         if (!$user) {
             return $this->response401();
