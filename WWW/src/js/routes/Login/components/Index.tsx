@@ -9,7 +9,7 @@ class IndexView extends React.Component<null, null> {
     render() {
         return (
             <div className={cx('route--index')}>
-                <LoginFormContainer button />
+                <LoginFormContainer />
             </div>
         )
     }

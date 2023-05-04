@@ -14,7 +14,7 @@ class Controller extends BaseController
     public function response401()
     {
         return response()->json([
-            'message' => 'You should log in first.',
+            'message' => 'You have to be logged in.',
         ], 401);
     }
 

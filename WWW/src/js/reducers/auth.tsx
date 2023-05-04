@@ -8,6 +8,7 @@ export const LOGGED_IN = 'auth::logged_in'
 export const LOGGED_OFF = 'auth::logged_off'
 export const SET_LOGIN_ERROR = 'auth::set_login_error'
 export const SET_IS_LOADING = 'auth::set_is_loading'
+export const GENTLY_LOG_OFF = 'auth::gently-log-off'
 
 // ------------------------------------
 // Actions
@@ -25,6 +26,10 @@ const loggedOff = () => (dispatch) => {
 
 const setLoginError = (value) => (dispatch) => {
     dispatch({ type: SET_LOGIN_ERROR, payload: value })
+}
+
+const gentlyLogOff = () => (dispatch) => {
+    dispatch({ type: GENTLY_LOG_OFF })
 }
 
 const login = (email, password) => (dispatch) => {
@@ -110,6 +115,7 @@ export const actions = {
     logoff,
     loginWithToken,
     setIsLoading,
+    gentlyLogOff,
 }
 
 // ------------------------------------
@@ -141,6 +147,9 @@ const ACTION_HANDLERS = {
             ...state,
             loginError: payload,
         }
+    },
+    [GENTLY_LOG_OFF]: () => {
+        return getInitialState()
     },
 }
 

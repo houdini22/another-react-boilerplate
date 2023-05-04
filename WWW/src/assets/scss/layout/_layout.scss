@@ -7,6 +7,7 @@
 
     &.layout--blank-page {
         background-color: $SIDEBAR_BACKGROUND_COLOR;
+        min-height: 100vh;
     }
 
     .layout__content {

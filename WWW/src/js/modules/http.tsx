@@ -28,7 +28,9 @@ instance.interceptors.response.use(
             store.dispatch(setFetchError({ message, code, status, data, statusText }))
         }
         if (status === 401) {
-            console.log('todo redirect to login')
+            import('../reducers/auth').then((obj) => {
+                store.dispatch(obj.actions.gentlyLogOff())
+            })
         }
         return Promise.reject({ message, status, code, data, statusText })
     },

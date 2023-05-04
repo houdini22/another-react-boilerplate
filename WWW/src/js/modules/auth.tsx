@@ -30,12 +30,24 @@ class UserIsAuthenticatedRouteBase extends React.Component<UserIsAuthenticatedRo
             loginWithToken,
             location: { pathname },
         } = this.props
-        const { email, token } = LocalStorage.queryAll('LoginFormContainer', { query: { ID: 1 } })[0]
         if (!isLoggedIn) {
+            const { email, token } = LocalStorage.queryAll('LoginFormContainer', { query: { ID: 1 } })[0]
+
             loginWithToken(email, token).then(
                 () => null,
                 () => navigate(`/login?back=${pathname}`),
             )
+        }
+    }
+
+    componentDidUpdate(prevProps: Readonly<UserIsAuthenticatedRouteProps>, prevState: Readonly<null>, snapshot?: any) {
+        const {
+            isLoggedIn,
+            navigate,
+            location: { pathname, search },
+        } = this.props
+        if (!isLoggedIn && prevProps.isLoggedIn) {
+            navigate(`/login?back=${pathname}${encodeURIComponent(search)}&reason=401`)
         }
     }
 
