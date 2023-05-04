@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Button, PageHeader } from '../../../components'
 import { FaHome as HomeIcon } from 'react-icons/fa'
 import { User } from '../../../../types.d'
+import { ModalConfirm } from '../../../components/common/ModalConfirm'
 
 interface HeaderProps {
     user: User
@@ -20,29 +21,119 @@ export class Header extends React.Component<HeaderProps, null> {
             activateUser,
             deactivateUser,
             addToastNotification,
+            registerModal,
+            openModal,
+            closeModal,
         } = this.props
+
+        registerModal(
+            'user-send-activation-email',
+            <ModalConfirm
+                onConfirm={() => {
+                    setIsLoading(true)
+
+                    sendActivationEmail(user).then(() => {
+                        Promise.all([fetchOne(user['id'])]).then(() => {
+                            setIsLoading(false)
+                            addToastNotification({
+                                type: 'success',
+                                title: 'Send success.',
+                                text: `Activation email has been sent to User ID: ${user.id}.`,
+                                href: `/users/edit?id=${user.id}`,
+                            })
+                            closeModal('user-send-activation-email')
+                        })
+                    })
+                }}
+                onCancel={() => closeModal('user-send-activation-email')}
+            >
+                <p>Are you sure to force activation on this account?</p>
+            </ModalConfirm>,
+        )
+
+        registerModal(
+            'user-force-login',
+            <ModalConfirm
+                onConfirm={() => {
+                    setIsLoading(true)
+
+                    forceLogin(user).then(() => {
+                        Promise.all([fetchOne(user['id'])]).then(() => {
+                            addToastNotification({
+                                type: 'success',
+                                title: `Force login success.`,
+                                text: `User ID: ${user.id} was logged out.`,
+                                href: `/users/edit?id=${user.id}`,
+                            })
+                            setIsLoading(false)
+                            closeModal('user-force-login')
+                        })
+                    })
+                }}
+                onCancel={() => closeModal('user-force-login')}
+            >
+                <p>Are you sure to force login on this account?</p>
+            </ModalConfirm>,
+        )
+
+        registerModal(
+            'user-activate',
+            <ModalConfirm
+                onConfirm={() => {
+                    setIsLoading(true)
+
+                    activateUser(user).then(() => {
+                        fetchOne(user['id'])
+                        addToastNotification({
+                            type: 'success',
+                            title: 'Activate success.',
+                            text: `User ID: ${user.id} has now active account.`,
+                            href: `/users/edit?id=${user.id}`,
+                        })
+                        setIsLoading(false)
+                        closeModal('user-activate')
+                    })
+                }}
+                onCancel={() => closeModal('user-activate')}
+            >
+                <p>Are you sure to activate this account?</p>
+            </ModalConfirm>,
+        )
+
+        registerModal(
+            'user-deactivate',
+            <ModalConfirm
+                onConfirm={() => {
+                    setIsLoading(true)
+
+                    deactivateUser(user).then(() => {
+                        fetchOne(user['id'])
+                        addToastNotification({
+                            type: 'success',
+                            title: 'Deactivate success.',
+                            text: `User ID: ${user.id} has now not active account.`,
+                            href: `/users/edit?id=${user.id}`,
+                        })
+                        setIsLoading(false)
+                        closeModal('user-deactivate')
+                    })
+                }}
+                onCancel={() => closeModal('user-deactivate')}
+            >
+                <p>Are you sure to deactivate this account?</p>
+            </ModalConfirm>,
+        )
+
         return (
             <PageHeader.Container>
-                <PageHeader.Title>Users - edit User</PageHeader.Title>
+                <PageHeader.Title>Edit User</PageHeader.Title>
                 <PageHeader.Actions>
                     <Button
                         isLoading={isLoading}
                         size={'xs'}
                         color={'warning'}
                         onClick={() => {
-                            setIsLoading(true)
-
-                            sendActivationEmail(user).then(() => {
-                                Promise.all([fetchOne(user['id'])]).then(() => {
-                                    setIsLoading(false)
-                                    addToastNotification({
-                                        type: 'success',
-                                        title: 'Send success.',
-                                        text: `Activation email has been sent to User ID: ${user.id}.`,
-                                        href: `/users/edit?id=${user.id}`,
-                                    })
-                                })
-                            })
+                            openModal('user-send-activation-email')
                         }}
                     >
                         Force Activation
@@ -52,16 +143,7 @@ export class Header extends React.Component<HeaderProps, null> {
                         size={'xs'}
                         disabled={!user.last_active && !user.token}
                         onClick={() => {
-                            forceLogin(user).then(() => {
-                                Promise.all([fetchOne(user['id'])]).then(() => {
-                                    addToastNotification({
-                                        type: 'success',
-                                        title: `Force login success.`,
-                                        text: `User ID: ${user.id} was logged out.`,
-                                        href: `/users/edit?id=${user.id}`,
-                                    })
-                                })
-                            })
+                            openModal('user-force-login')
                         }}
                     >
                         Force Login
@@ -70,15 +152,7 @@ export class Header extends React.Component<HeaderProps, null> {
                         <Button
                             color={'success'}
                             onClick={() => {
-                                activateUser(user).then(() => {
-                                    fetchOne(user['id'])
-                                    addToastNotification({
-                                        type: 'success',
-                                        title: 'Activate success.',
-                                        text: `User ID: ${user.id} has now active account.`,
-                                        href: `/users/edit?id=${user.id}`,
-                                    })
-                                })
+                                openModal('user-activate')
                             }}
                             isLoading={isLoading}
                         >
@@ -89,15 +163,7 @@ export class Header extends React.Component<HeaderProps, null> {
                         <Button
                             color={'danger'}
                             onClick={() => {
-                                deactivateUser(user).then(() => {
-                                    fetchOne(user['id'])
-                                    addToastNotification({
-                                        type: 'success',
-                                        title: 'Deactivate success.',
-                                        text: `User ID: ${user.id} has now not active account.`,
-                                        href: `/users/edit?id=${user.id}`,
-                                    })
-                                })
+                                openModal('user-deactivate')
                             }}
                             isLoading={isLoading}
                         >
@@ -111,7 +177,7 @@ export class Header extends React.Component<HeaderProps, null> {
                     </PageHeader.BreadcrumbsItem>
                     <PageHeader.BreadcrumbsItem href="/users">Users</PageHeader.BreadcrumbsItem>
                     <PageHeader.BreadcrumbsItem href={`/users/edit?id=${user['id']}`}>
-                        Users - Edit User
+                        Edit User
                     </PageHeader.BreadcrumbsItem>
                 </PageHeader.Breadcrumbs>
             </PageHeader.Container>

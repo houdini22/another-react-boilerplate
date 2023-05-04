@@ -1,10 +1,5 @@
 declare module '*.scss'
 
-export interface Permission {
-    id: number
-    name: string
-}
-
 export interface User {
     id: number
     name: string
@@ -31,6 +26,7 @@ export interface Role {
     is_deletable: boolean
     users_count: number
     users: Array<User>
+    description: string
 }
 
 export interface Permission {
@@ -39,6 +35,7 @@ export interface Permission {
     roles_count: number
     users_count: number
     is_deletable: number
+    description: string
 }
 
 interface UserAvatar {

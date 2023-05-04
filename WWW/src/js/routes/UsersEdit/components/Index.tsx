@@ -61,6 +61,9 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                             activateUser={activateUser}
                                                             deactivateUser={deactivateUser}
                                                             addToastNotification={addToastNotification}
+                                                            registerModal={registerModal}
+                                                            openModal={openModal}
+                                                            closeModal={closeModal}
                                                         />
                                                         <Row>
                                                             <Col xs={12} md={6}>

@@ -17,6 +17,7 @@ import { FaHome as HomeIcon } from 'react-icons/fa'
 import { FaUser as UserIcon } from 'react-icons/fa'
 import { FaInfo as InfoIcon } from 'react-icons/fa'
 import { FaUserCog as RoleIcon } from 'react-icons/fa'
+import { MdHelpOutline as HelpIcon } from 'react-icons/md'
 
 export {
     OrderingIcon,
@@ -37,4 +38,5 @@ export {
     UserIcon,
     InfoIcon,
     PermissionIcon,
+    HelpIcon,
 }

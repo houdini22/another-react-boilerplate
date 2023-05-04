@@ -10,7 +10,7 @@ class Role extends RoleBase
 {
     use HasFactory, Notifiable;
     protected $fillable = [
-        'name', 'guard_name'
+        'name', 'description'
     ];
     protected $casts = [
         'is_deletable' => 'boolean',

@@ -42,6 +42,7 @@ export class UserPermissionsAdd extends React.Component<null, null> {
                                                             newPermissionUsers={newPermissionUsers}
                                                             addNewPermissionToUser={addNewPermissionToUser}
                                                             removeNewPermissionFromUser={removeNewPermissionFromUser}
+                                                            navigate={navigate}
                                                         />
                                                     </Col>
                                                 </Row>

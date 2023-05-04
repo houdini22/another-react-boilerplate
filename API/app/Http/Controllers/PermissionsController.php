@@ -6,6 +6,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PermissionsController extends Controller
 {
@@ -97,7 +98,10 @@ class PermissionsController extends Controller
         }
 
         $request->validate([
-            'name' => ['required', 'unique:permissions,name'],
+            'name' => ['required', Rule::unique('permissions')->where(function ($query) use ($permission) {
+                return $query->where('id', '<>', $permission->id);
+            })],
+            'description' => 'max:512'
         ]);
 
         $permission->fill($request->post());
@@ -135,9 +139,13 @@ class PermissionsController extends Controller
             ]);
         } else {
             $request->validate([
-                'name' => 'required|unique:permissions,name',
+                'name' => ['required'],
+                'description' => ['max:512']
             ]);
-            $permission = Permission::create(['name' => $request->post('name')]);
+            $permission = new Permission();
+            $permission->fill($request->post());
+            $permission->guard_name = 'web';
+            $permission->save();
             if ($request->post('role_id')) {
                 $role = Role::findById($request->post('role_id'));
                 if (!$role) {

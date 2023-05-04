@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Button, Table, Tooltip } from '../../../components'
-import { EditIcon, DeleteIcon, UserIcon, RoleIcon } from '../../../components/icons'
+import { EditIcon, DeleteIcon, UserIcon, RoleIcon, HelpIcon } from '../../../components/icons'
 import { TableSummary } from '../../../components/common/List/TableSummary'
 import { ModalConfirm } from '../../../components/common/ModalConfirm'
 import RowExpandUsers from './PermissionsTable/RowExpandUsers'
@@ -99,7 +99,22 @@ export class PermissionsTable extends React.Component<PermissionsTableProps, nul
                                     return (
                                         <Table.Tr key={permission.id}>
                                             <Table.Td xs={1}>{permission.id}</Table.Td>
-                                            <Table.Td xs={3}>{permission.name}</Table.Td>
+                                            <Table.Td xs={3}>
+                                                <div>
+                                                    {permission.name}{' '}
+                                                    {!!permission.description && (
+                                                        <Tooltip
+                                                            tooltip={
+                                                                <span style={{ maxWidth: 300, display: 'block' }}>
+                                                                    {permission.description}
+                                                                </span>
+                                                            }
+                                                        >
+                                                            <Button icon={<HelpIcon />} iconOnly color={'info'} />
+                                                        </Tooltip>
+                                                    )}
+                                                </div>
+                                            </Table.Td>
                                             <Table.Td xs={4} alignRight>
                                                 <div>
                                                     {permission.roles_count > 0 && (

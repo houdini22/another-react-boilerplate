@@ -45,7 +45,12 @@ class AuthController extends Controller
                             'email' => $user->email,
                             'token' => $user->token,
                             'roles' => $user->roles->pluck('name'),
-                            'permissions' => $user->getPermissionsViaRoles()->pluck('name'),
+                            'permissions' => array_unique(
+                                array_merge(
+                                    $user->getPermissionsViaRoles()->pluck('name')->toArray(),
+                                    collect($user->permissions->toArray())->pluck('name')->toArray()
+                                )
+                            ),
                             'avatar' => $avatar,
                         ]
                     ]

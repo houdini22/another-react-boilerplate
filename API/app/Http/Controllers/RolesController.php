@@ -101,6 +101,7 @@ class RolesController extends Controller
             'name' => ['required', Rule::unique('roles')->where(function ($query) use ($role) {
                 return $query->where('id', '<>', $role->id);
             })],
+            'description' => 'max:512'
         ]);
 
         $role->fill($request->post());
@@ -120,10 +121,12 @@ class RolesController extends Controller
 
         $request->validate([
             'name' => 'required|unique:roles,name',
+            'description' => 'max:512'
         ]);
 
         $role = new Role();
         $role->fill($request->post());
+        $role->guard_name = 'web';
         $role->save();
 
         return response()->json([

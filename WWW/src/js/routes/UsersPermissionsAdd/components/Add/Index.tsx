@@ -16,6 +16,7 @@ export class AddPermission extends React.Component<HeaderProps, null> {
             newPermissionUsers,
             removeNewPermissionFromUser,
             addNewPermissionToUser,
+            navigate,
         } = this.props
         return (
             <Card header={<h1>Add Permission</h1>}>
@@ -28,6 +29,7 @@ export class AddPermission extends React.Component<HeaderProps, null> {
                     newPermissionUsers={newPermissionUsers}
                     removeNewPermissionFromUser={removeNewPermissionFromUser}
                     addNewPermissionToUser={addNewPermissionToUser}
+                    navigate={navigate}
                 />
                 {isLoading && <LoadingOverlay />}
             </Card>

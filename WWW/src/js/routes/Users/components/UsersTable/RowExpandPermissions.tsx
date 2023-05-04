@@ -4,6 +4,7 @@ import { DeleteIcon, RoleIcon, UserIcon } from '../../../../components/icons'
 import { ModalConfirm } from '../../../../components/common/ModalConfirm'
 import { User } from '../../../../../types.d'
 import { sortPermissionsByNameAscending } from '../../../../helpers/permissions'
+import { EditPermission } from '../../../UsersPermissionsEdit/components/Edit/Index'
 
 interface RowExpandPermissionsProps {
     user: User
@@ -147,7 +148,7 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                                                     navigate(`/permissions/edit?id=${_id}`)
                                                 }}
                                             >
-                                                <UserIcon /> Edit Permission
+                                                <EditPermission /> Edit Permission
                                             </Dropdown.Item>
                                             <Dropdown.Item
                                                 color="danger"

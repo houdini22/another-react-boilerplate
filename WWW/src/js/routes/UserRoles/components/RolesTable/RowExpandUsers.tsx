@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Col, Row, Table, Label, Dropdown, Typography } from '../../../../components'
-import { DeleteIcon, DetailsIcon, InfoIcon } from '../../../../components/icons'
+import { DeleteIcon, DetailsIcon, EditIcon, InfoIcon } from '../../../../components/icons'
 import { ModalConfirm } from '../../../../components/common/ModalConfirm'
 import { sortUsersByNameAscending } from '../../../../helpers/users'
 
@@ -107,7 +107,7 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                                                     navigate(`/users/edit?id=${_id}`)
                                                 }}
                                             >
-                                                <DeleteIcon /> Edit User
+                                                <EditIcon /> Edit User
                                             </Dropdown.Item>
                                             <Dropdown.Item
                                                 color="danger"

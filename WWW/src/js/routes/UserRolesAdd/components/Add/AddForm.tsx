@@ -21,7 +21,7 @@ class AddForm extends React.Component<null, null> {
         return (
             <form onSubmit={handleSubmit}>
                 <Field name="name" label="Name" type="text" component={FormField} autoFocus />
-                <Field name="guard_name" label="Guard" type="hidden" inputOnly component={FormField} />
+                <Field name="description" label="Description" type="textarea" component={FormField} />
                 <Card header={<h1>Add Permissions</h1>}>
                     {newRolePermissions.length > 0 && <Alert color={'info'}>Click added Permission to remove.</Alert>}
                     <Field

@@ -32,7 +32,7 @@ class AddForm extends React.Component<null, null> {
                     component={FormField}
                 />
                 <Field name="name" label="Name" type="text" component={FormField} autoFocus />
-                <Field name="guard_name" label="Guard" type="hidden" inputOnly value={'web'} component={FormField} />
+                <Field name="description" label="Description" type="textarea" component={FormField} />
                 {!role_id && (
                     <Card header={<h1>Add to Users</h1>}>
                         {newPermissionUsers.length > 0 && <Alert color={'info'}>Click added User to remove.</Alert>}
