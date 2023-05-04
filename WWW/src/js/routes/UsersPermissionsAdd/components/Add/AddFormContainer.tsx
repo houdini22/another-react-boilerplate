@@ -48,7 +48,6 @@ const AddFormContainer = compose(
         initialValues: {
             name: '',
             guard_name: 'web',
-            role_id: undefined,
         },
     }),
 )(FormComponent)

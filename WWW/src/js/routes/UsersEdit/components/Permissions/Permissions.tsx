@@ -77,10 +77,10 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                             {Object.keys(allPermissions)
                                 .map((key) => allPermissions[key])
                                 .sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                                .map(({ id, name, occurence }) => {
+                                .map(({ id, name, occurrence }) => {
                                     return (
                                         <Label key={id} block size={'lg'}>
-                                            {name} {occurence > 1 && `(${occurence})`}
+                                            {name} {occurrence > 1 && `(${occurrence})`}
                                         </Label>
                                     )
                                 })}
@@ -94,11 +94,11 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                             {Object.keys(permissionsFromRoles)
                                 .map((key) => permissionsFromRoles[key])
                                 .sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                                .map(({ id, name, occurence }) => {
+                                .map(({ id, name, occurrence }) => {
                                     return (
                                         <Dropdown.Container triggerSize={'lg'} key={id}>
                                             <Dropdown.Trigger component={Label} componentProps={{ block: true }}>
-                                                {name} {occurence > 1 && `(${occurence})`}
+                                                {name} {occurrence > 1 && `(${occurrence})`}
                                             </Dropdown.Trigger>
                                             <Dropdown.Menu>
                                                 <Dropdown.Item type={'header'}>
@@ -141,11 +141,11 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                         <Tabs.Content>
                             {user?.permissions
                                 ?.sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                                .map(({ id, name, occurence }) => {
+                                .map(({ id, name, occurrence }) => {
                                     return (
                                         <Dropdown.Container triggerSize={'lg'} key={id}>
                                             <Dropdown.Trigger component={Label} componentProps={{ block: true }}>
-                                                {name} {occurence > 1 && `(${occurence})`}
+                                                {name} {occurrence > 1 && `(${occurrence})`}
                                             </Dropdown.Trigger>
                                             <Dropdown.Menu>
                                                 <Dropdown.Item type={'header'}>

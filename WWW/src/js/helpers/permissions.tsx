@@ -6,18 +6,18 @@ export const mergeUserPermissions = (user: User) => {
     user?.roles?.forEach((role) => {
         role?.permissions?.forEach(({ name, ...rest }) => {
             if (permissions[name]) {
-                permissions[name].occurence++
+                permissions[name].occurrence++
             } else {
-                permissions[name] = { name, ...rest, occurence: 1 }
+                permissions[name] = { name, ...rest, occurrence: 1 }
             }
         })
     })
 
-    user?.permissions?.forEach(({ id, guard_name, is_deletable, name, ...rest }) => {
+    user?.permissions?.forEach(({ name, ...rest }) => {
         if (permissions[name]) {
-            permissions[name].occurence++
+            permissions[name].occurrence++
         } else {
-            permissions[name] = { name, id, guard_name, is_deletable, occurence: 1, ...rest }
+            permissions[name] = { name, occurrence: 1, ...rest }
         }
     })
 
@@ -30,9 +30,9 @@ export const userPermissionFromRoles = (user: User) => {
     user?.roles?.forEach((role) => {
         role?.permissions?.forEach(({ name, ...rest }) => {
             if (permissions[name]) {
-                permissions[name].occurence++
+                permissions[name].occurrence++
             } else {
-                permissions[name] = { name, ...rest, occurence: 1 }
+                permissions[name] = { name, ...rest, occurrence: 1 }
             }
         })
     })

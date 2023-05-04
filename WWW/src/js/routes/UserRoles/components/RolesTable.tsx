@@ -46,6 +46,7 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                 `user-role-${role.id}-delete`,
                                 <ModalConfirm
                                     onConfirm={() => {
+                                        setIsLoading(true)
                                         deleteRole(role.id).then(() => {
                                             fetch().then(() => {
                                                 addToastNotification({
@@ -54,6 +55,7 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                                     type: 'success',
                                                 })
                                                 closeModal(`user-role-${role.id}-delete`)
+                                                setIsLoading(false)
                                             })
                                         })
                                     }}

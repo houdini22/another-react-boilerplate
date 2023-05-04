@@ -138,7 +138,6 @@ const fetchOne =
     (id = 0) =>
     (dispatch) => {
         return new Promise<void>((resolve) => {
-            dispatch(setUser({}))
             dispatch(setIsLoaded(false))
             dispatch(setFetchError(null))
 

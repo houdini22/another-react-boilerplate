@@ -7,7 +7,7 @@ import RowUsername from './UsersTable/RowUsername'
 import RowResources from './UsersTable/RowResources'
 import RowStatus from './UsersTable/RowStatus'
 import RowActions from './UsersTable/RowActions'
-import { mergeUserPermissions } from '../../../helpers/permissions'
+import { mergeUserPermissions, userPermissionFromRoles } from '../../../helpers/permissions'
 import RowExpandRoles from './UsersTable/RowExpandRoles'
 import RowExpandPermissions from './UsersTable/RowExpandPermissions'
 import { ModalConfirm } from '../../../components/common/ModalConfirm'
@@ -70,7 +70,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                         </Table.THead>
                         <Table.TBody>
                             {users.map((user) => {
-                                const permissionsFromRoles = mergeUserPermissions(user)
+                                const permissionsFromRoles = userPermissionFromRoles(user)
 
                                 return (
                                     <Table.ExpandManager key={user.id}>
@@ -111,6 +111,8 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                     `user-${user.id}-delete`,
                                                     <ModalConfirm
                                                         onConfirm={() => {
+                                                            setIsLoading(true)
+
                                                             deleteUser(user.id).then(() => {
                                                                 fetch().then(() => {
                                                                     closeModal(`user-${user.id}-delete`)
@@ -119,6 +121,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                         text: 'User has been removed.',
                                                                         type: 'success',
                                                                     })
+                                                                    setIsLoading(false)
                                                                 })
                                                             })
                                                         }}
@@ -154,6 +157,10 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                             deactivateUser={deactivateUser}
                                                             addToastNotification={addToastNotification}
                                                             fetch={fetch}
+                                                            registerModal={registerModal}
+                                                            openModal={openModal}
+                                                            closeModal={closeModal}
+                                                            setIsLoading={setIsLoading}
                                                         />
                                                     </Table.Td>
                                                     <Table.Td xs={6} md={2}>

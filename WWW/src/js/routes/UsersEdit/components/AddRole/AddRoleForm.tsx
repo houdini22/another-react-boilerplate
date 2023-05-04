@@ -42,10 +42,10 @@ class AddRoleForm extends React.Component<AddPermissionFormProps, null> {
                         },
                         ...(roles
                             ?.sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                            .map(({ id, name, guard_name }) => {
+                            .map(({ id, name }) => {
                                 return {
                                     value: id,
-                                    label: `${name} - ${guard_name}`,
+                                    label: `${name}`,
                                     disabled: user?.roles?.find(({ id: _id }) => id === _id),
                                 }
                             }) || []),

@@ -35,14 +35,70 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                     <Row>
                         <Col xs={12}>
                             <Typography.Container>
-                                <h3>Permissions</h3>
+                                <h3>Permissions From Roles</h3>
                             </Typography.Container>
                         </Col>
                         {Object.keys(permissionsFromRoles)
                             ?.map((key) => permissionsFromRoles[key])
                             .sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                            .map(({ id: _id, name, is_deletable: _is_deletable, pivot: { model_type = '' } = {} }) => {
-                                if (model_type.match(/User/)) {
+                            .map(
+                                (
+                                    { id: _id, name, is_deletable: _is_deletable, pivot: { model_type = '' } = {} },
+                                    occurrence,
+                                ) => {
+                                    return (
+                                        <Col xs={4} key={`${_id}`}>
+                                            <Dropdown.Container triggerSize={'lg'} key={_id}>
+                                                <Dropdown.Trigger
+                                                    size="lg"
+                                                    componentProps={{ block: true }}
+                                                    component={Label}
+                                                >
+                                                    {name} {occurrence > 1 && `(${occurrence})`}
+                                                </Dropdown.Trigger>
+                                                <Dropdown.Menu>
+                                                    <Dropdown.Item
+                                                        color={'info'}
+                                                        onClick={() => {
+                                                            navigate(`/roles?permissions=${_id}`)
+                                                        }}
+                                                    >
+                                                        <RoleIcon /> Show Roles with Permission
+                                                    </Dropdown.Item>
+                                                    <Dropdown.Item
+                                                        color={'info'}
+                                                        onClick={() => {
+                                                            navigate(`/users?permissions=${_id}`)
+                                                        }}
+                                                    >
+                                                        <UserIcon /> Show Users with Permission
+                                                    </Dropdown.Item>
+                                                    <Dropdown.Item
+                                                        color={'warning'}
+                                                        onClick={() => {
+                                                            navigate(`/permissions/edit?id=${_id}`)
+                                                        }}
+                                                    >
+                                                        <UserIcon /> Edit Permission
+                                                    </Dropdown.Item>
+                                                </Dropdown.Menu>
+                                            </Dropdown.Container>
+                                        </Col>
+                                    )
+                                },
+                            )}
+                        <Col xs={12}>
+                            <Typography.Container>
+                                <h3>Direct Permissions</h3>
+                            </Typography.Container>
+                        </Col>
+                        {user.permissions
+                            .sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
+                            .map(
+                                (
+                                    { id: _id, name, is_deletable: _is_deletable, pivot: { model_type = '' } = {} },
+                                    occurrence,
+                                ) => {
                                     registerModal(
                                         `user-remove-permission-${_id}-delete`,
                                         <ModalConfirm
@@ -76,44 +132,42 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                                             </p>
                                         </ModalConfirm>,
                                     )
-                                }
 
-                                return (
-                                    <Col xs={4} key={`${_id}`}>
-                                        <Dropdown.Container triggerSize={'lg'} key={_id}>
-                                            <Dropdown.Trigger
-                                                size="lg"
-                                                componentProps={{ block: true }}
-                                                component={Label}
-                                            >
-                                                {name}
-                                            </Dropdown.Trigger>
-                                            <Dropdown.Menu>
-                                                <Dropdown.Item
-                                                    color={'info'}
-                                                    onClick={() => {
-                                                        navigate(`/roles?permissions=${_id}`)
-                                                    }}
+                                    return (
+                                        <Col xs={4} key={`${_id}`}>
+                                            <Dropdown.Container triggerSize={'lg'} key={_id}>
+                                                <Dropdown.Trigger
+                                                    size="lg"
+                                                    componentProps={{ block: true }}
+                                                    component={Label}
                                                 >
-                                                    <RoleIcon /> Show Roles with Permission
-                                                </Dropdown.Item>
-                                                <Dropdown.Item
-                                                    color={'info'}
-                                                    onClick={() => {
-                                                        navigate(`/users?permissions=${_id}`)
-                                                    }}
-                                                >
-                                                    <UserIcon /> Show Users with Permission
-                                                </Dropdown.Item>
-                                                <Dropdown.Item
-                                                    color={'warning'}
-                                                    onClick={() => {
-                                                        navigate(`/permissions/edit?id=${_id}`)
-                                                    }}
-                                                >
-                                                    <UserIcon /> Edit Permission
-                                                </Dropdown.Item>
-                                                {model_type.match(/User/) && (
+                                                    {name} {occurrence > 1 && `(${occurrence})`}
+                                                </Dropdown.Trigger>
+                                                <Dropdown.Menu>
+                                                    <Dropdown.Item
+                                                        color={'info'}
+                                                        onClick={() => {
+                                                            navigate(`/roles?permissions=${_id}`)
+                                                        }}
+                                                    >
+                                                        <RoleIcon /> Show Roles with Permission
+                                                    </Dropdown.Item>
+                                                    <Dropdown.Item
+                                                        color={'info'}
+                                                        onClick={() => {
+                                                            navigate(`/users?permissions=${_id}`)
+                                                        }}
+                                                    >
+                                                        <UserIcon /> Show Users with Permission
+                                                    </Dropdown.Item>
+                                                    <Dropdown.Item
+                                                        color={'warning'}
+                                                        onClick={() => {
+                                                            navigate(`/permissions/edit?id=${_id}`)
+                                                        }}
+                                                    >
+                                                        <UserIcon /> Edit Permission
+                                                    </Dropdown.Item>
                                                     <Dropdown.Item
                                                         color="danger"
                                                         onClick={() => {
@@ -122,12 +176,12 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                                                     >
                                                         <DeleteIcon /> Remove Permission from User
                                                     </Dropdown.Item>
-                                                )}
-                                            </Dropdown.Menu>
-                                        </Dropdown.Container>
-                                    </Col>
-                                )
-                            })}
+                                                </Dropdown.Menu>
+                                            </Dropdown.Container>
+                                        </Col>
+                                    )
+                                },
+                            )}
                     </Row>
                 </Table.Td>
             </Table.Tr>

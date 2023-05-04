@@ -4,7 +4,7 @@ import { EditFormContainer } from './EditFormContainer'
 interface EditProps {
     editPermission: Function
     permission: Object
-    fetchOnePermission: Function
+    fetchPermission: Function
     isLoading: boolean
     addToastNotification: Function
     setIsLoading: Function
@@ -14,7 +14,7 @@ interface EditState {}
 
 export class EditPermission extends React.Component<EditProps, EditState> {
     render() {
-        const { editPermission, permission, fetchOnePermission, isLoading, addToastNotification, setIsLoading } =
+        const { editPermission, permission, fetchPermission, isLoading, addToastNotification, setIsLoading } =
             this.props
         return (
             <Card header={<h1>Edit</h1>}>
@@ -22,7 +22,7 @@ export class EditPermission extends React.Component<EditProps, EditState> {
                     initialValues={permission}
                     save={editPermission}
                     role={permission}
-                    fetchOnePermission={fetchOnePermission}
+                    fetchPermission={fetchPermission}
                     addToastNotification={addToastNotification}
                     setIsLoading={setIsLoading}
                     permission={permission}

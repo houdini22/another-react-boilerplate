@@ -25,7 +25,7 @@ export class Permissions extends React.Component<HeaderProps, null> {
         } = this.props
         return (
             <Card header={<h1>Permissions</h1>}>
-                {role?.permissions?.map(({ id: _id, name, guard_name, is_deletable }) => {
+                {role?.permissions?.map(({ id: _id, name }) => {
                     registerModal(
                         `delete-permission-from-role-${_id}`,
                         <ModalConfirm
@@ -57,7 +57,7 @@ export class Permissions extends React.Component<HeaderProps, null> {
                     return (
                         <Dropdown.Container triggerSize={'lg'} key={_id}>
                             <Dropdown.Trigger size="lg" component={Label} componentProps={{ block: true }}>
-                                {name} - {guard_name}
+                                {name}
                             </Dropdown.Trigger>
                             <Dropdown.Menu>
                                 <Dropdown.Item

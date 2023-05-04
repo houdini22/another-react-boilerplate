@@ -18,7 +18,7 @@ class Select extends React.Component<SelectProps, null> {
     renderPlaceholder() {
         const { placeholder } = this.props
         const caption = placeholder === true ? '--- choose ---' : placeholder
-        return <option value="">{caption}</option>
+        return <option>{caption}</option>
     }
 
     render() {
@@ -26,11 +26,11 @@ class Select extends React.Component<SelectProps, null> {
         const _options = _.isFunction(options) ? options() : options
 
         return (
-            <select {...props} defaultValue={defaultValue} key={defaultValue || ''}>
+            <select {...props} defaultValue={defaultValue || ''} key={defaultValue || ''}>
                 {placeholder && this.renderPlaceholder()}
-                {_options.map(({ label, value: _value, disabled, selected }) => {
+                {_options.map(({ label, value: _value, disabled }) => {
                     return (
-                        <option key={_value} value={_value} disabled={disabled} selected={selected || value === _value}>
+                        <option key={_value} value={_value} disabled={disabled}>
                             {label}
                         </option>
                     )

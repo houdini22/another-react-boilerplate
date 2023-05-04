@@ -89,6 +89,7 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                     fetchOne={fetchOne}
                                                                     isLoading={isLoading}
                                                                     addToastNotification={addToastNotification}
+                                                                    setIsLoading={setIsLoading}
                                                                 />
                                                             </Col>
                                                         </Row>

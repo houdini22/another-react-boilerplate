@@ -28,6 +28,7 @@ export class UsersPermissions extends React.Component<null, null> {
                                             deleteUserRole,
                                             permissions,
                                             roles,
+                                            isLoading,
                                         }) => {
                                             return (
                                                 <ListManager
@@ -51,7 +52,7 @@ export class UsersPermissions extends React.Component<null, null> {
                                                 >
                                                     {({
                                                         data,
-                                                        isLoading,
+                                                        isLoading: isLoading2,
                                                         fetch,
                                                         links,
                                                         page,
@@ -82,6 +83,8 @@ export class UsersPermissions extends React.Component<null, null> {
                                                                     restoreFilters={restoreFilters}
                                                                     defaultFilters={defaultFilters}
                                                                     setFilters={setFilters}
+                                                                    isLoading={isLoading || isLoading2}
+                                                                    setIsLoading={setIsLoading}
                                                                 />
 
                                                                 <Card>
@@ -121,7 +124,7 @@ export class UsersPermissions extends React.Component<null, null> {
                                                                         hasPrevPage={hasPrevPage}
                                                                         totalPages={totalPages}
                                                                     />
-                                                                    {isLoading && <LoadingOverlay />}
+                                                                    {(isLoading || isLoading2) && <LoadingOverlay />}
                                                                 </Card>
                                                             </PageContent>
                                                         )

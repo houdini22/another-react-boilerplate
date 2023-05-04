@@ -28,6 +28,7 @@ export class UsersView extends React.Component<null, null> {
                                             deleteUserRole,
                                             permissions,
                                             roles,
+                                            isLoading,
                                         }) => {
                                             const defaultFilters = {
                                                 items_per_page: 15,
@@ -54,7 +55,7 @@ export class UsersView extends React.Component<null, null> {
                                                 >
                                                     {({
                                                         data,
-                                                        isLoading,
+                                                        isLoading: isLoading2,
                                                         fetch,
                                                         links,
                                                         page,
@@ -80,9 +81,10 @@ export class UsersView extends React.Component<null, null> {
                                                                     permissions={permissions}
                                                                     roles={roles}
                                                                     defaultFilters={defaultFilters}
-                                                                    isLoading={isLoading}
+                                                                    isLoading={isLoading || isLoading2}
                                                                     resetFilters={resetFilters}
                                                                     setFilters={setFilters}
+                                                                    setIsLoading={setIsLoading}
                                                                 />
 
                                                                 <Card>
@@ -122,7 +124,7 @@ export class UsersView extends React.Component<null, null> {
                                                                         hasPrevPage={hasPrevPage}
                                                                         totalPages={totalPages}
                                                                     />
-                                                                    {isLoading && <LoadingOverlay />}
+                                                                    {(isLoading || isLoading2) && <LoadingOverlay />}
                                                                 </Card>
                                                             </PageContent>
                                                         )

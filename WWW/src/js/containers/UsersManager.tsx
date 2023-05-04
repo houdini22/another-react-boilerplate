@@ -3,15 +3,12 @@ import { selectors as usersSelectors, actions as usersActions } from '../reducer
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { AuthManager } from './AuthManager'
-import { selectors as commonSelectors } from '../reducers/roles'
+import { Permission, Role, User } from '../../types.d'
 
 interface UsersManagerProps {
     children: any
     fetch: Function
     fetchOne: Function
-    users: any
-    user: any
-    id?: number
     setIsLoading: Function
     editUser: Function
     addUser: Function
@@ -20,10 +17,32 @@ interface UsersManagerProps {
     addUserRole: Function
     sendActivationEmail: Function
     sendAvatar: Function
-    uploadProgress: number
+    forceLogin: Function
     setUploadProgress: Function
     activateUser: Function
     deactivateUser: Function
+    deleteAvatar: Function
+    fetchRole: Function
+    editRole: Function
+    addRole: Function
+    deleteRole: Function
+    addPermission: Function
+    fetchPermissions: Function
+    deleteRolePermission: Function
+    deletePermission: Function
+    fetchPermission: Function
+    editPermission: Function
+    addUserPermission: Function
+    deleteUserPermission: Function
+    fetchRoles: Function
+    users: Array<User>
+    user: User
+    isLoading: boolean
+    uploadProgress: number
+    roles: Array<Role>
+    role: Role
+    permissions: Array<Permissions>
+    permission: Permission
 }
 
 class UsersManagerBase extends React.Component<UsersManagerProps, null> {
@@ -49,30 +68,39 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             getPermissions,
             fetchPermission,
             getUsers,
+            setIsLoading,
         } = this.props
+        const promises = []
+
+        setIsLoading(true)
+
         if (id) {
-            fetchOne(id)
+            promises.push(fetchOne(id))
         }
 
         if (getUsers) {
-            fetch()
+            promises.push(fetch())
         }
 
         if (getRoles) {
-            fetchRoles()
+            promises.push(fetchRoles())
         }
 
         if (getPermissions) {
-            fetchPermissions()
+            promises.push(fetchPermissions())
         }
 
         if (roleId) {
-            fetchRole(roleId)
+            promises.push(fetchRole(roleId))
         }
 
         if (permissionId) {
-            fetchPermission(permissionId)
+            promises.push(fetchPermission(permissionId))
         }
+
+        Promise.all(promises).then(() => {
+            setIsLoading(false)
+        })
     }
 
     addPermissionToNewUser(id) {
@@ -202,6 +230,10 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             fetchRole,
             addPermission,
             addRole,
+            isLoading,
+            editRole,
+            editPermission,
+            fetchPermission,
         } = this.props
         const { newUserRoles, newUserPermissions, newRoleUsers, newPermissionUsers, newRolePermissions } = this.state
         const renderProps = {
@@ -249,6 +281,10 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             fetchRole,
             addPermission,
             addRole,
+            isLoading,
+            editRole,
+            editPermission,
+            fetchPermission,
         }
 
         return (

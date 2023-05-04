@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Card, Dropdown, Label, LoadingOverlay } from '../../../../components'
+import { Badge, Card, Dropdown, Label, LoadingOverlay } from '../../../../components'
 import { DeleteIcon, DetailsIcon, InfoIcon, EditIcon } from '../../../../components/icons'
 import { ModalConfirm } from '../../../../components/common/ModalConfirm'
 import { User } from '../../../../../types.d'
@@ -29,7 +29,13 @@ export class Roles extends React.Component<AddRoleProps, null> {
         } = this.props
 
         return (
-            <Card header={<h1>Roles</h1>}>
+            <Card
+                header={
+                    <h1>
+                        Roles <Badge color={'info'}>{user?.roles?.length || 0}</Badge>
+                    </h1>
+                }
+            >
                 {user?.roles
                     ?.sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
                     .map(({ id: _id, name }) => {

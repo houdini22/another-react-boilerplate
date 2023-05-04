@@ -10,7 +10,7 @@ interface EditState {}
 
 export class Edit extends React.Component<EditProps, EditState> {
     render() {
-        const { editRole, role, fetch, isLoading, addToastNotification } = this.props
+        const { editRole, role, fetch, isLoading, addToastNotification, setIsLoading } = this.props
         return (
             <Card header={<h1>Edit</h1>}>
                 <EditFormContainer
@@ -19,6 +19,7 @@ export class Edit extends React.Component<EditProps, EditState> {
                     role={role}
                     fetch={fetch}
                     addToastNotification={addToastNotification}
+                    setIsLoading={setIsLoading}
                 />
                 {isLoading && <LoadingOverlay />}
             </Card>

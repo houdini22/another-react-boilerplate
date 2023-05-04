@@ -65,14 +65,16 @@ export class Details extends React.Component<HeaderProps, HeaderState> {
             `user-avatar-delete`,
             <ModalConfirm
                 onConfirm={() => {
+                    setIsLoading(true)
                     deleteAvatar(user).then(() => {
                         fetchOne(user.id).then(() => {
-                            closeModal(`user-avatar-delete`)
                             addToastNotification({
                                 title: 'Delete success.',
                                 text: 'User Avatar has been removed.',
                                 type: 'success',
                             })
+                            setIsLoading(false)
+                            closeModal(`user-avatar-delete`)
                         })
                     })
                 }}

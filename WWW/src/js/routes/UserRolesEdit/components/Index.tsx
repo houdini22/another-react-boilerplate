@@ -51,6 +51,7 @@ export class UserRolesEdit extends React.Component<null, UsersViewState> {
                                                                 fetch={fetch}
                                                                 isLoading={isLoading}
                                                                 addToastNotification={addToastNotification}
+                                                                setIsLoading={setIsLoading}
                                                             />
                                                         </Col>
                                                     </Row>

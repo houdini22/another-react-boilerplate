@@ -4,11 +4,11 @@ import { EditForm as FormComponent } from './EditForm'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 
-const onSubmit = (values, _, { save, fetchOnePermission, addToastNotification, setIsLoading, permission }) => {
+const onSubmit = (values, _, { save, fetchPermission, addToastNotification, setIsLoading, permission }) => {
     setIsLoading(true)
     return save({ ...values }).then(
         () => {
-            fetchOnePermission(permission['id']).then(() => {
+            fetchPermission(permission['id']).then(() => {
                 addToastNotification({
                     type: 'success',
                     title: 'Save success.',

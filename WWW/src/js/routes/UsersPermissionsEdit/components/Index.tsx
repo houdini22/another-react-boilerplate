@@ -25,7 +25,7 @@ export class UserRolesEdit extends React.Component<null, null> {
                                                         <EditPermission
                                                             editPermission={editPermission}
                                                             permission={permission}
-                                                            fetchOnePermission={fetchPermission}
+                                                            fetchPermission={fetchPermission}
                                                             isLoading={isLoading}
                                                             addToastNotification={addToastNotification}
                                                             setIsLoading={setIsLoading}

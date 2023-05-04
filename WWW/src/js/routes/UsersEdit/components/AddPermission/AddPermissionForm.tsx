@@ -31,11 +31,11 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps, null> {
 
         const perms = {}
 
-        user?.permissions?.forEach(({ id, guard_name, is_deletable, name, ...rest }) => {
+        user?.permissions?.forEach(({ name, ...rest }) => {
             if (perms[name]) {
-                perms[name].occurence++
+                perms[name].occurrence++
             } else {
-                perms[name] = { name, id, guard_name, is_deletable, ocurrence: 1, ...rest }
+                perms[name] = { name, ocurrence: 1, ...rest }
             }
         })
 
@@ -52,10 +52,10 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps, null> {
                         },
                         ...(permissions
                             ?.sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                            .map(({ id, name, guard_name }) => {
+                            .map(({ id, name }) => {
                                 return {
                                     value: id,
-                                    label: `${name} - ${guard_name}`,
+                                    label: `${name}`,
                                     disabled: !!perms[name],
                                 }
                             }) || []),

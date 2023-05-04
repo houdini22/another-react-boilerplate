@@ -30,10 +30,10 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps, null> {
                             label: 'add new',
                             value: 'add',
                         },
-                        ...(permissions?.map(({ id, name, guard_name }) => {
+                        ...(permissions?.map(({ id, name }) => {
                             return {
                                 value: id,
-                                label: `${name} - ${guard_name}`,
+                                label: `${name}`,
                                 disabled: role?.permissions?.find(({ id: _id }) => id === _id),
                             }
                         }) || []),

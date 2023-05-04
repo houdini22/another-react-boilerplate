@@ -9,8 +9,18 @@ interface FiltersProps {
 
 export class Filters extends React.Component<FiltersProps, null> {
     render() {
-        const { filters, setFilter, fetch, roles, permissions, resetFilters, defaultFilters, isLoading, setFilters } =
-            this.props
+        const {
+            filters,
+            setFilter,
+            fetch,
+            roles,
+            permissions,
+            resetFilters,
+            defaultFilters,
+            isLoading,
+            setFilters,
+            setIsLoading,
+        } = this.props
 
         return (
             <FiltersCard
@@ -19,7 +29,10 @@ export class Filters extends React.Component<FiltersProps, null> {
                 setFilter={setFilter}
                 setFilters={setFilters}
                 resetFilters={resetFilters}
-                fetch={fetch}
+                fetch={() => {
+                    setIsLoading(true)
+                    fetch().then(() => setIsLoading(false))
+                }}
                 defaultFilters={defaultFilters}
                 isLoading={isLoading}
                 filtersToRender={[

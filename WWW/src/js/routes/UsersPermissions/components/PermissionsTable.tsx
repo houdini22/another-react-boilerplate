@@ -46,6 +46,7 @@ export class PermissionsTable extends React.Component<PermissionsTableProps, nul
                                 `user-permission-${permission.id}-delete`,
                                 <ModalConfirm
                                     onConfirm={() => {
+                                        setIsLoading(true)
                                         deletePermission(permission.id).then(() => {
                                             fetch().then(() => {
                                                 closeModal(`user-permission-${permission.id}-delete`)
@@ -54,6 +55,7 @@ export class PermissionsTable extends React.Component<PermissionsTableProps, nul
                                                     text: 'Permission has been removed.',
                                                     type: 'success',
                                                 })
+                                                setIsLoading(false)
                                             })
                                         })
                                     }}

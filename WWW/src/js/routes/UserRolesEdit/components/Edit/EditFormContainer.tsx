@@ -4,7 +4,9 @@ import { EditForm as FormComponent } from './EditForm'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 
-const onSubmit = (values, _, { save, fetch, addToastNotification }) => {
+const onSubmit = (values, _, { save, fetch, addToastNotification, setIsLoading }) => {
+    setIsLoading(true)
+
     return save({ ...values }).then(
         () => {
             fetch().then(() => {
@@ -13,6 +15,7 @@ const onSubmit = (values, _, { save, fetch, addToastNotification }) => {
                     title: 'Save success.',
                     text: 'Role has been saved.',
                 })
+                setIsLoading(false)
             })
         },
         (response) => {
@@ -22,6 +25,7 @@ const onSubmit = (values, _, { save, fetch, addToastNotification }) => {
                 type: 'danger',
                 href: '#',
             })
+            setIsLoading(false)
             throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
         },
     )

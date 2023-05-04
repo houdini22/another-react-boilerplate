@@ -35,7 +35,7 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                         </Col>
                         {role?.permissions
                             ?.sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                            ?.map(({ id: _id, name, guard_name, is_deletable: _is_deletable }) => {
+                            ?.map(({ id: _id, name, is_deletable: _is_deletable }) => {
                                 registerModal(
                                     `user-remove-role-permission-${_id}-delete`,
                                     <ModalConfirm
@@ -73,7 +73,7 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                                                 component={Label}
                                                 componentProps={{ block: true }}
                                             >
-                                                {name} - {guard_name}
+                                                {name}
                                             </Dropdown.Trigger>
                                             <Dropdown.Menu>
                                                 <Dropdown.Item type={'header'}>
