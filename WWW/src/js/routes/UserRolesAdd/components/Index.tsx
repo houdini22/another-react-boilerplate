@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { RouteManager } from '../../../containers/RouteManager'
-import { UserRolesManager } from '../../UserRoles/containers/UserRolesManager'
 import { Col, Row } from '../../../components'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import Header from './Header'
@@ -18,7 +17,7 @@ export class UserRolesEdit extends React.Component<null, UsersViewState> {
                     <NotificationsManager>
                         {({ addToastNotification }) => {
                             return (
-                                <UserRolesManager id={query['id']}>
+                                <UsersManager roleId={query['id']} getPermissions getUsers>
                                     {({
                                         role,
                                         isLoading,
@@ -31,37 +30,32 @@ export class UserRolesEdit extends React.Component<null, UsersViewState> {
                                         newRoleUsers,
                                         addNewRoleToUser,
                                         removeNewRoleFromUser,
+                                        users,
                                     }) => (
-                                        <UsersManager>
-                                            {({ users }) => (
-                                                <PageContent>
-                                                    <Header navigate={navigate} role={role} />
-                                                    <Row>
-                                                        <Col xs={12}>
-                                                            <AddRole
-                                                                addRole={addRole}
-                                                                isLoading={isLoading}
-                                                                addToastNotification={addToastNotification}
-                                                                setIsLoading={setIsLoading}
-                                                                permissions={permissions}
-                                                                newRolePermissions={newRolePermissions}
-                                                                addPermissionToNewRole={addPermissionToNewRole}
-                                                                removePermissionFromNewRole={
-                                                                    removePermissionFromNewRole
-                                                                }
-                                                                users={users}
-                                                                newRoleUsers={newRoleUsers}
-                                                                addNewRoleToUser={addNewRoleToUser}
-                                                                removeNewRoleFromUser={removeNewRoleFromUser}
-                                                                navigate={navigate}
-                                                            />
-                                                        </Col>
-                                                    </Row>
-                                                </PageContent>
-                                            )}
-                                        </UsersManager>
+                                        <PageContent>
+                                            <Header navigate={navigate} role={role} />
+                                            <Row>
+                                                <Col xs={12}>
+                                                    <AddRole
+                                                        addRole={addRole}
+                                                        isLoading={isLoading}
+                                                        addToastNotification={addToastNotification}
+                                                        setIsLoading={setIsLoading}
+                                                        permissions={permissions}
+                                                        newRolePermissions={newRolePermissions}
+                                                        addPermissionToNewRole={addPermissionToNewRole}
+                                                        removePermissionFromNewRole={removePermissionFromNewRole}
+                                                        users={users}
+                                                        newRoleUsers={newRoleUsers}
+                                                        addNewRoleToUser={addNewRoleToUser}
+                                                        removeNewRoleFromUser={removeNewRoleFromUser}
+                                                        navigate={navigate}
+                                                    />
+                                                </Col>
+                                            </Row>
+                                        </PageContent>
                                     )}
-                                </UserRolesManager>
+                                </UsersManager>
                             )
                         }}
                     </NotificationsManager>

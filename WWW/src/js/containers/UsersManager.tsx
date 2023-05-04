@@ -1,8 +1,9 @@
 import * as React from 'react'
-import { selectors as commonSelectors, actions as commonActions } from '../reducers/users'
+import { selectors as usersSelectors, actions as usersActions } from '../reducers/users'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { AuthManager } from './AuthManager'
+import { selectors as commonSelectors } from '../reducers/roles'
 
 interface UsersManagerProps {
     children: any
@@ -29,13 +30,48 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
     state = {
         newUserRoles: [],
         newUserPermissions: [],
+        newRolePermissions: [],
+        newRoleUsers: [],
+        newPermissionUsers: [],
     }
+
     componentDidMount() {
-        const { fetchOne, id, fetch } = this.props
+        const {
+            fetchOne,
+            id,
+            roleId,
+            permissionId,
+            fetch,
+            fetchRoles,
+            fetchRole,
+            fetchPermissions,
+            getRoles,
+            getPermissions,
+            fetchPermission,
+            getUsers,
+        } = this.props
         if (id) {
             fetchOne(id)
-        } else {
+        }
+
+        if (getUsers) {
             fetch()
+        }
+
+        if (getRoles) {
+            fetchRoles()
+        }
+
+        if (getPermissions) {
+            fetchPermissions()
+        }
+
+        if (roleId) {
+            fetchRole(roleId)
+        }
+
+        if (permissionId) {
+            fetchPermission(permissionId)
         }
     }
 
@@ -77,6 +113,63 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
         this.setState({ newUserRoles: newRoles })
     }
 
+    addPermissionToNewRole(id) {
+        const { newRolePermissions } = this.state
+
+        const newPermissions = [...newRolePermissions]
+        newPermissions.push(id)
+
+        this.setState({ newRolePermissions: newPermissions })
+    }
+
+    removePermissionFromNewRole(id) {
+        const { newRolePermissions } = this.state
+
+        const newPermissions = [...newRolePermissions].filter(({ id: _id }) => {
+            return Number(id) !== Number(_id)
+        })
+
+        this.setState({ newRolePermissions: newPermissions })
+    }
+
+    addNewRoleToUser(id) {
+        const { newRoleUsers } = this.state
+
+        const newUsers = [...newRoleUsers]
+        newUsers.push(id)
+
+        this.setState({ newRoleUsers: newUsers })
+    }
+
+    removeNewRoleFromUser(id) {
+        const { newRoleUsers } = this.state
+
+        const newUsers = [...newRoleUsers].filter(({ id: _id }) => {
+            return Number(id) !== Number(_id)
+        })
+
+        this.setState({ newRoleUsers: newUsers })
+    }
+
+    addNewPermissionToUser(id) {
+        const { newPermissionUsers } = this.state
+
+        const newUsers = [...newPermissionUsers]
+        newUsers.push(id)
+
+        this.setState({ newPermissionUsers: newUsers })
+    }
+
+    removeNewPermissionFromUser(id) {
+        const { newPermissionUsers } = this.state
+
+        const newUsers = [...newPermissionUsers].filter(({ id: _id }) => {
+            return Number(id) !== Number(_id)
+        })
+
+        this.setState({ newPermissionUsers: newUsers })
+    }
+
     render() {
         const {
             children,
@@ -98,8 +191,19 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             activateUser,
             deactivateUser,
             deleteAvatar,
+            role,
+            roles,
+            permissions,
+            permission,
+            deleteUserPermission,
+            fetchPermissions,
+            addUserPermission,
+            deleteRolePermission,
+            fetchRole,
+            addPermission,
+            addRole,
         } = this.props
-        const { newUserRoles, newUserPermissions } = this.state
+        const { newUserRoles, newUserPermissions, newRoleUsers, newPermissionUsers, newRolePermissions } = this.state
         const renderProps = {
             users,
             setIsLoading,
@@ -125,6 +229,26 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             deleteAvatar,
             newUserRoles,
             newUserPermissions,
+            role,
+            roles,
+            permissions,
+            permission,
+            addPermissionToNewRole: this.addPermissionToNewRole.bind(this),
+            removePermissionFromNewRole: this.removePermissionFromNewRole.bind(this),
+            addNewRoleToUser: this.addNewRoleToUser.bind(this),
+            removeNewRoleFromUser: this.removeNewRoleFromUser.bind(this),
+            addNewPermissionToUser: this.addNewPermissionToUser.bind(this),
+            removeNewPermissionFromUser: this.removeNewPermissionFromUser.bind(this),
+            newRoleUsers,
+            newPermissionUsers,
+            newRolePermissions,
+            deleteUserPermission,
+            fetchPermissions,
+            addUserPermission,
+            deleteRolePermission,
+            fetchRole,
+            addPermission,
+            addRole,
         }
 
         return (
@@ -136,30 +260,47 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
 }
 
 const mapStateToProps = (state) => ({
-    users: commonSelectors['getUsers'](state),
-    user: commonSelectors['getUser'](state),
-    isLoading: commonSelectors['getIsLoading'](state),
-    uploadProgress: commonSelectors['getUploadProgress'](state),
+    users: usersSelectors['getUsers'](state),
+    user: usersSelectors['getUser'](state),
+    isLoading: usersSelectors['getIsLoading'](state),
+    uploadProgress: usersSelectors['getUploadProgress'](state),
+    roles: usersSelectors['getRoles'](state),
+    role: usersSelectors['getRole'](state),
+    permissions: usersSelectors['getPermissions'](state),
+    permission: usersSelectors['getPermission'](state),
 })
 
 const UsersManager = connect(mapStateToProps, (dispatch) => {
     return bindActionCreators(
         {
-            fetch: commonActions.fetch,
-            fetchOne: commonActions.fetchOne,
-            setIsLoading: commonActions.setIsLoading,
-            editUser: commonActions.editUser,
-            addUser: commonActions.addUser,
-            deleteUser: commonActions.deleteUser,
-            deleteUserRole: commonActions.deleteUserRole,
-            addUserRole: commonActions.addUserRole,
-            sendActivationEmail: commonActions.sendActivationEmail,
-            sendAvatar: commonActions.sendAvatar,
-            forceLogin: commonActions.forceLogin,
-            setUploadProgress: commonActions.setUploadProgress,
-            activateUser: commonActions.activateUser,
-            deactivateUser: commonActions.deactivateUser,
-            deleteAvatar: commonActions.deleteAvatar,
+            fetch: usersActions.fetch,
+            fetchOne: usersActions.fetchOne,
+            setIsLoading: usersActions.setIsLoading,
+            editUser: usersActions.editUser,
+            addUser: usersActions.addUser,
+            deleteUser: usersActions.deleteUser,
+            deleteUserRole: usersActions.deleteUserRole,
+            addUserRole: usersActions.addUserRole,
+            sendActivationEmail: usersActions.sendActivationEmail,
+            sendAvatar: usersActions.sendAvatar,
+            forceLogin: usersActions.forceLogin,
+            setUploadProgress: usersActions.setUploadProgress,
+            activateUser: usersActions.activateUser,
+            deactivateUser: usersActions.deactivateUser,
+            deleteAvatar: usersActions.deleteAvatar,
+            fetchRole: usersActions.fetchRole,
+            editRole: usersActions.editRole,
+            addRole: usersActions.addRole,
+            deleteRole: usersActions.deleteRole,
+            addPermission: usersActions.addPermission,
+            fetchPermissions: usersActions.fetchPermissions,
+            deleteRolePermission: usersActions.deleteRolePermission,
+            deletePermission: usersActions.deletePermission,
+            fetchPermission: usersActions.fetchPermission,
+            editPermission: usersActions.editPermission,
+            addUserPermission: usersActions.addUserPermission,
+            deleteUserPermission: usersActions.deleteUserPermission,
+            fetchRoles: usersActions.fetchRoles,
         },
         dispatch,
     )

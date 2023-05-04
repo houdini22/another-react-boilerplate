@@ -10,7 +10,6 @@ export class AddPermissions extends React.Component<HeaderProps, null> {
     render() {
         const {
             role,
-            roles,
             permissions,
             setIsLoading,
             addPermission,
@@ -23,7 +22,6 @@ export class AddPermissions extends React.Component<HeaderProps, null> {
             <Card header={<h1>Add Permissions</h1>}>
                 <AddPermissionFormContainer
                     role={role}
-                    roles={roles}
                     permissions={permissions}
                     setIsLoading={setIsLoading}
                     addPermission={addPermission}

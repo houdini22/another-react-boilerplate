@@ -2,13 +2,13 @@ import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { RouteManager } from '../../../containers/RouteManager'
 import { Card, LoadingOverlay, Modal } from '../../../components'
-import { UserRolesManager } from '../containers/UserRolesManager'
 import { NotificationsManager } from '../../../containers/NotificationsManager'
 import { ListManager } from '../../../components/common/List/ListManager'
 import RolesTable from './RolesTable'
 import { Pagination } from '../../../components/common/List/Pagination'
 import RolesFilters from './RolesFilters'
 import Header from './Header'
+import { UsersManager } from '../../../containers/UsersManager'
 
 export class UsersView extends React.Component<null, null> {
     render() {
@@ -19,7 +19,7 @@ export class UsersView extends React.Component<null, null> {
                         {({ addToastNotification }) => (
                             <Modal.Manager>
                                 {({ openModal, registerModal, closeModal }) => (
-                                    <UserRolesManager>
+                                    <UsersManager getPermissions getRoles>
                                         {({
                                             deleteRole,
                                             setIsLoading,
@@ -130,7 +130,7 @@ export class UsersView extends React.Component<null, null> {
                                                 </ListManager>
                                             )
                                         }}
-                                    </UserRolesManager>
+                                    </UsersManager>
                                 )}
                             </Modal.Manager>
                         )}

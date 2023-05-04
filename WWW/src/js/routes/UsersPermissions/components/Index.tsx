@@ -2,13 +2,13 @@ import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { RouteManager } from '../../../containers/RouteManager'
 import { Card, LoadingOverlay, Modal } from '../../../components'
-import { UserRolesManager } from '../../UserRoles/containers/UserRolesManager'
 import { NotificationsManager } from '../../../containers/NotificationsManager'
 import { ListManager } from '../../../components/common/List/ListManager'
 import PermissionsTable from './PermissionsTable'
 import { Pagination } from '../../../components/common/List/Pagination'
 import RolesFilters from './PermissionsFilters'
 import Header from './Header'
+import { UsersManager } from '../../../containers/UsersManager'
 
 export class UsersPermissions extends React.Component<null, null> {
     render() {
@@ -19,7 +19,7 @@ export class UsersPermissions extends React.Component<null, null> {
                         {({ addToastNotification }) => (
                             <Modal.Manager>
                                 {({ registerModal, closeModal, openModal }) => (
-                                    <UserRolesManager>
+                                    <UsersManager getPermissions getRoles>
                                         {({
                                             setIsLoading,
                                             deletePermission,
@@ -129,7 +129,7 @@ export class UsersPermissions extends React.Component<null, null> {
                                                 </ListManager>
                                             )
                                         }}
-                                    </UserRolesManager>
+                                    </UsersManager>
                                 )}
                             </Modal.Manager>
                         )}

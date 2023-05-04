@@ -42,9 +42,12 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                                         onConfirm={() => {
                                             setIsLoading(true)
 
-                                            return deleteUserRole(role, {
-                                                id: _id,
-                                            }).then(() => {
+                                            return deleteUserRole(
+                                                {
+                                                    id: _id,
+                                                },
+                                                role,
+                                            ).then(() => {
                                                 fetch().then(() => {
                                                     setIsLoading(false)
                                                     addToastNotification({

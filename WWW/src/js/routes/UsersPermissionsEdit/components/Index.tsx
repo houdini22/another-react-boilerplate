@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { RouteManager } from '../../../containers/RouteManager'
-import { UserRolesManager } from '../../UserRoles/containers/UserRolesManager'
 import { Col, Row } from '../../../components'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Header } from './Header'
 import { EditPermission } from './Edit/Index'
 import { NotificationsManager } from '../../../containers/NotificationsManager'
+import { UsersManager } from '../../../containers/UsersManager'
 
 export class UserRolesEdit extends React.Component<null, null> {
     render() {
@@ -15,8 +15,8 @@ export class UserRolesEdit extends React.Component<null, null> {
                     <NotificationsManager>
                         {({ addToastNotification }) => {
                             return (
-                                <UserRolesManager permissionId={query['id']}>
-                                    {({ isLoading, setIsLoading, fetchOnePermission, editPermission, permission }) => {
+                                <UsersManager permissionId={query['id']}>
+                                    {({ isLoading, setIsLoading, fetchPermission, editPermission, permission }) => {
                                         return (
                                             <PageContent>
                                                 <Header navigate={navigate} permission={permission} />
@@ -25,7 +25,7 @@ export class UserRolesEdit extends React.Component<null, null> {
                                                         <EditPermission
                                                             editPermission={editPermission}
                                                             permission={permission}
-                                                            fetchOnePermission={fetchOnePermission}
+                                                            fetchOnePermission={fetchPermission}
                                                             isLoading={isLoading}
                                                             addToastNotification={addToastNotification}
                                                             setIsLoading={setIsLoading}
@@ -38,7 +38,7 @@ export class UserRolesEdit extends React.Component<null, null> {
                                             </PageContent>
                                         )
                                     }}
-                                </UserRolesManager>
+                                </UsersManager>
                             )
                         }}
                     </NotificationsManager>

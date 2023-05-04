@@ -31,9 +31,12 @@ export class Users extends React.Component<HeaderProps, null> {
                             onConfirm={() => {
                                 setIsLoading(true)
 
-                                return deleteUserRole(role, {
-                                    id: _id,
-                                }).then(() => {
+                                return deleteUserRole(
+                                    {
+                                        id: _id,
+                                    },
+                                    role,
+                                ).then(() => {
                                     addToastNotification({
                                         type: 'success',
                                         title: 'Delete success.',

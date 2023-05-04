@@ -3,7 +3,6 @@ import { PageContent } from '../../../layouts/PageLayout/components'
 import { RouteManager } from '../../../containers/RouteManager'
 import { Card, LoadingOverlay, Modal } from '../../../components'
 import { UsersManager } from '../../../containers/UsersManager'
-import { UserRolesManager } from '../../UserRoles/containers/UserRolesManager'
 import { ListManager } from '../../../components/common/List/ListManager'
 import { Pagination } from '../../../components/common/List/Pagination'
 import UsersTable from './UsersTable'
@@ -37,8 +36,16 @@ export class UsersView extends React.Component<null, UsersViewState> {
                         {({ addToastNotification }) => (
                             <Modal.Manager>
                                 {({ registerModal, closeModal, openModal }) => (
-                                    <UserRolesManager>
-                                        {({ roles, permissions, deleteUserPermission }) => {
+                                    <UsersManager getRoles getPermissions>
+                                        {({
+                                            roles,
+                                            permissions,
+                                            deleteUserPermission,
+                                            deleteUser,
+                                            deleteUserRole,
+                                            activateUser,
+                                            deactivateUser,
+                                        }) => {
                                             return (
                                                 <ListManager
                                                     url={'/users/list'}
@@ -70,79 +77,64 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                         setIsLoading,
                                                         setFilters,
                                                     }) => (
-                                                        <UsersManager>
-                                                            {({
-                                                                deleteUser,
-                                                                deleteUserRole,
-                                                                activateUser,
-                                                                deactivateUser,
-                                                            }) => {
-                                                                return (
-                                                                    <PageContent>
-                                                                        <Header navigate={navigate} />
-                                                                        <UsersFilters
-                                                                            filters={filters}
-                                                                            setFilter={setFilter}
-                                                                            fetch={fetch}
-                                                                            roles={roles}
-                                                                            permissions={permissions}
-                                                                            resetFilters={resetFilters}
-                                                                            defaultFilters={defaultFilters}
-                                                                            isLoading={isLoading}
-                                                                            setFilters={setFilters}
-                                                                        />
-                                                                        <Card>
-                                                                            <Pagination
-                                                                                links={links}
-                                                                                page={page}
-                                                                                fetch={fetch}
-                                                                                setPage={setPage}
-                                                                                hasNextPage={hasNextPage}
-                                                                                hasPrevPage={hasPrevPage}
-                                                                                totalPages={totalPages}
-                                                                            />
-                                                                            <UsersTable
-                                                                                users={data}
-                                                                                setIsLoading={setIsLoading}
-                                                                                deleteUserRole={deleteUserRole}
-                                                                                deleteUserPermission={
-                                                                                    deleteUserPermission
-                                                                                }
-                                                                                fetch={fetch}
-                                                                                activateUser={activateUser}
-                                                                                deactivateUser={deactivateUser}
-                                                                                page={page}
-                                                                                perPage={perPage}
-                                                                                total={total}
-                                                                                totalPages={totalPages}
-                                                                                addToastNotification={
-                                                                                    addToastNotification
-                                                                                }
-                                                                                registerModal={registerModal}
-                                                                                closeModal={closeModal}
-                                                                                openModal={openModal}
-                                                                                deleteUser={deleteUser}
-                                                                            />
-                                                                            <Pagination
-                                                                                links={links}
-                                                                                page={page}
-                                                                                fetch={fetch}
-                                                                                setPage={setPage}
-                                                                                hasNextPage={hasNextPage}
-                                                                                hasPrevPage={hasPrevPage}
-                                                                                totalPages={totalPages}
-                                                                            />
-                                                                            {isLoading && <LoadingOverlay />}
-                                                                        </Card>
-                                                                    </PageContent>
-                                                                )
-                                                            }}
-                                                        </UsersManager>
+                                                        <PageContent>
+                                                            <Header navigate={navigate} />
+                                                            <UsersFilters
+                                                                filters={filters}
+                                                                setFilter={setFilter}
+                                                                fetch={fetch}
+                                                                roles={roles}
+                                                                permissions={permissions}
+                                                                resetFilters={resetFilters}
+                                                                defaultFilters={defaultFilters}
+                                                                isLoading={isLoading}
+                                                                setFilters={setFilters}
+                                                            />
+                                                            <Card>
+                                                                <Pagination
+                                                                    links={links}
+                                                                    page={page}
+                                                                    fetch={fetch}
+                                                                    setPage={setPage}
+                                                                    hasNextPage={hasNextPage}
+                                                                    hasPrevPage={hasPrevPage}
+                                                                    totalPages={totalPages}
+                                                                />
+                                                                <UsersTable
+                                                                    users={data}
+                                                                    setIsLoading={setIsLoading}
+                                                                    deleteUserRole={deleteUserRole}
+                                                                    deleteUserPermission={deleteUserPermission}
+                                                                    fetch={fetch}
+                                                                    activateUser={activateUser}
+                                                                    deactivateUser={deactivateUser}
+                                                                    page={page}
+                                                                    perPage={perPage}
+                                                                    total={total}
+                                                                    totalPages={totalPages}
+                                                                    addToastNotification={addToastNotification}
+                                                                    registerModal={registerModal}
+                                                                    closeModal={closeModal}
+                                                                    openModal={openModal}
+                                                                    deleteUser={deleteUser}
+                                                                />
+                                                                <Pagination
+                                                                    links={links}
+                                                                    page={page}
+                                                                    fetch={fetch}
+                                                                    setPage={setPage}
+                                                                    hasNextPage={hasNextPage}
+                                                                    hasPrevPage={hasPrevPage}
+                                                                    totalPages={totalPages}
+                                                                />
+                                                                {isLoading && <LoadingOverlay />}
+                                                            </Card>
+                                                        </PageContent>
                                                     )}
                                                 </ListManager>
                                             )
                                         }}
-                                    </UserRolesManager>
+                                    </UsersManager>
                                 )}
                             </Modal.Manager>
                         )}

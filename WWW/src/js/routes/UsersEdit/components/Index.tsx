@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { RouteManager } from '../../../containers/RouteManager'
-import { UserRolesManager } from '../../UserRoles/containers/UserRolesManager'
 import { Col, Modal, Row } from '../../../components'
 import { UsersManager } from '../../../containers/UsersManager'
 import { PageContent } from '../../../layouts/PageLayout/components'
@@ -25,142 +24,137 @@ export class UsersView extends React.Component<null, UsersViewState> {
                             return (
                                 <Modal.Manager>
                                     {({ registerModal, openModal, closeModal }) => (
-                                        <UserRolesManager>
+                                        <UsersManager id={query['id']} getRoles getPermissions>
                                             {({
+                                                user,
+                                                isLoading,
+                                                setIsLoading,
+                                                editUser,
+                                                fetchOne,
+                                                addUserRole,
+                                                deleteUserRole,
+                                                sendActivationEmail,
+                                                sendAvatar,
+                                                forceLogin,
+                                                uploadProgress,
+                                                setUploadProgress,
+                                                activateUser,
+                                                deactivateUser,
+                                                deleteAvatar,
                                                 roles,
                                                 deletePermission,
                                                 permissions,
                                                 addUserPermission,
                                                 deleteUserPermission,
                                                 fetchPermissions,
-                                            }) => (
-                                                <UsersManager id={query['id']}>
-                                                    {({
-                                                        user,
-                                                        isLoading,
-                                                        setIsLoading,
-                                                        editUser,
-                                                        fetchOne,
-                                                        addUserRole,
-                                                        deleteUserRole,
-                                                        sendActivationEmail,
-                                                        sendAvatar,
-                                                        forceLogin,
-                                                        uploadProgress,
-                                                        setUploadProgress,
-                                                        activateUser,
-                                                        deactivateUser,
-                                                        deleteAvatar,
-                                                    }) => {
-                                                        return (
-                                                            <PageContent>
-                                                                <Header
-                                                                    forceLogin={forceLogin}
+                                            }) => {
+                                                return (
+                                                    <PageContent>
+                                                        <Header
+                                                            forceLogin={forceLogin}
+                                                            user={user}
+                                                            navigate={navigate}
+                                                            isLoading={isLoading}
+                                                            setIsLoading={setIsLoading}
+                                                            sendActivationEmail={sendActivationEmail}
+                                                            fetchOne={fetchOne}
+                                                            activateUser={activateUser}
+                                                            deactivateUser={deactivateUser}
+                                                            addToastNotification={addToastNotification}
+                                                        />
+                                                        <Row>
+                                                            <Col xs={12} md={6}>
+                                                                <Details
                                                                     user={user}
                                                                     navigate={navigate}
-                                                                    isLoading={isLoading}
+                                                                    setUploadProgress={setUploadProgress}
                                                                     setIsLoading={setIsLoading}
-                                                                    sendActivationEmail={sendActivationEmail}
+                                                                    uploadProgress={uploadProgress}
+                                                                    sendAvatar={sendAvatar}
                                                                     fetchOne={fetchOne}
-                                                                    activateUser={activateUser}
-                                                                    deactivateUser={deactivateUser}
+                                                                    forceLogin={forceLogin}
+                                                                    sendActivationEmail={sendActivationEmail}
+                                                                    isLoading={isLoading}
+                                                                    addToastNotification={addToastNotification}
+                                                                    deleteAvatar={deleteAvatar}
+                                                                    registerModal={registerModal}
+                                                                    openModal={openModal}
+                                                                    closeModal={closeModal}
+                                                                />
+                                                            </Col>
+                                                            <Col xs={12} md={6}>
+                                                                <Edit
+                                                                    editUser={editUser}
+                                                                    user={user}
+                                                                    fetchOne={fetchOne}
+                                                                    isLoading={isLoading}
                                                                     addToastNotification={addToastNotification}
                                                                 />
-                                                                <Row>
-                                                                    <Col xs={12} md={6}>
-                                                                        <Details
-                                                                            user={user}
-                                                                            navigate={navigate}
-                                                                            setUploadProgress={setUploadProgress}
-                                                                            setIsLoading={setIsLoading}
-                                                                            uploadProgress={uploadProgress}
-                                                                            sendAvatar={sendAvatar}
-                                                                            fetchOne={fetchOne}
-                                                                            forceLogin={forceLogin}
-                                                                            sendActivationEmail={sendActivationEmail}
-                                                                            isLoading={isLoading}
-                                                                            addToastNotification={addToastNotification}
-                                                                            deleteAvatar={deleteAvatar}
-                                                                            registerModal={registerModal}
-                                                                            openModal={openModal}
-                                                                            closeModal={closeModal}
-                                                                        />
-                                                                    </Col>
-                                                                    <Col xs={12} md={6}>
-                                                                        <Edit
-                                                                            editUser={editUser}
-                                                                            user={user}
-                                                                            fetchOne={fetchOne}
-                                                                            isLoading={isLoading}
-                                                                            addToastNotification={addToastNotification}
-                                                                        />
-                                                                    </Col>
-                                                                </Row>
-                                                                <Row>
-                                                                    <Col xs={12} md={6}>
-                                                                        <Roles
-                                                                            roles={roles}
-                                                                            setIsLoading={setIsLoading}
-                                                                            deleteUserRole={deleteUserRole}
-                                                                            deletePermission={deletePermission}
-                                                                            fetchOne={fetchOne}
-                                                                            user={user}
-                                                                            isLoading={isLoading}
-                                                                            navigate={navigate}
-                                                                            addToastNotification={addToastNotification}
-                                                                            openModal={openModal}
-                                                                            closeModal={closeModal}
-                                                                            registerModal={registerModal}
-                                                                        />
-                                                                    </Col>
-                                                                    <Col xs={12} md={6}>
-                                                                        <AddRole
-                                                                            roles={roles}
-                                                                            setIsLoading={setIsLoading}
-                                                                            addUserRole={addUserRole}
-                                                                            fetchOne={fetchOne}
-                                                                            user={user}
-                                                                            isLoading={isLoading}
-                                                                            addToastNotification={addToastNotification}
-                                                                        />
-                                                                    </Col>
-                                                                </Row>
-                                                                <Row>
-                                                                    <Col xs={12} md={6}>
-                                                                        <Permissions
-                                                                            roles={roles}
-                                                                            setIsLoading={setIsLoading}
-                                                                            deletePermission={deletePermission}
-                                                                            fetchOne={fetchOne}
-                                                                            user={user}
-                                                                            isLoading={isLoading}
-                                                                            navigate={navigate}
-                                                                            deleteUserPermission={deleteUserPermission}
-                                                                            fetchPermissions={fetchPermissions}
-                                                                            addToastNotification={addToastNotification}
-                                                                            openModal={openModal}
-                                                                            registerModal={registerModal}
-                                                                            closeModal={closeModal}
-                                                                        />
-                                                                    </Col>
-                                                                    <Col xs={12} md={6}>
-                                                                        <AddPermission
-                                                                            permissions={permissions}
-                                                                            setIsLoading={setIsLoading}
-                                                                            addUserPermission={addUserPermission}
-                                                                            fetchOne={fetchOne}
-                                                                            user={user}
-                                                                            isLoading={isLoading}
-                                                                            addToastNotification={addToastNotification}
-                                                                        />
-                                                                    </Col>
-                                                                </Row>
-                                                            </PageContent>
-                                                        )
-                                                    }}
-                                                </UsersManager>
-                                            )}
-                                        </UserRolesManager>
+                                                            </Col>
+                                                        </Row>
+                                                        <Row>
+                                                            <Col xs={12} md={6}>
+                                                                <Roles
+                                                                    roles={roles}
+                                                                    setIsLoading={setIsLoading}
+                                                                    deleteUserRole={deleteUserRole}
+                                                                    deletePermission={deletePermission}
+                                                                    fetchOne={fetchOne}
+                                                                    user={user}
+                                                                    isLoading={isLoading}
+                                                                    navigate={navigate}
+                                                                    addToastNotification={addToastNotification}
+                                                                    openModal={openModal}
+                                                                    closeModal={closeModal}
+                                                                    registerModal={registerModal}
+                                                                />
+                                                            </Col>
+                                                            <Col xs={12} md={6}>
+                                                                <AddRole
+                                                                    roles={roles}
+                                                                    setIsLoading={setIsLoading}
+                                                                    addUserRole={addUserRole}
+                                                                    fetchOne={fetchOne}
+                                                                    user={user}
+                                                                    isLoading={isLoading}
+                                                                    addToastNotification={addToastNotification}
+                                                                />
+                                                            </Col>
+                                                        </Row>
+                                                        <Row>
+                                                            <Col xs={12} md={6}>
+                                                                <Permissions
+                                                                    roles={roles}
+                                                                    setIsLoading={setIsLoading}
+                                                                    deletePermission={deletePermission}
+                                                                    fetchOne={fetchOne}
+                                                                    user={user}
+                                                                    isLoading={isLoading}
+                                                                    navigate={navigate}
+                                                                    deleteUserPermission={deleteUserPermission}
+                                                                    fetchPermissions={fetchPermissions}
+                                                                    addToastNotification={addToastNotification}
+                                                                    openModal={openModal}
+                                                                    registerModal={registerModal}
+                                                                    closeModal={closeModal}
+                                                                />
+                                                            </Col>
+                                                            <Col xs={12} md={6}>
+                                                                <AddPermission
+                                                                    permissions={permissions}
+                                                                    setIsLoading={setIsLoading}
+                                                                    addUserPermission={addUserPermission}
+                                                                    fetchOne={fetchOne}
+                                                                    user={user}
+                                                                    isLoading={isLoading}
+                                                                    addToastNotification={addToastNotification}
+                                                                />
+                                                            </Col>
+                                                        </Row>
+                                                    </PageContent>
+                                                )
+                                            }}
+                                        </UsersManager>
                                     )}
                                 </Modal.Manager>
                             )
