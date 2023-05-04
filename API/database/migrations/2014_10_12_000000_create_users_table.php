@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('last_active')->nullable();
             $table->boolean('is_deletable')->default(true);
             $table->integer('avatar_id')->nullable();
+            $table->boolean('is_super_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

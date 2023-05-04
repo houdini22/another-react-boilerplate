@@ -42,7 +42,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'is_deletable' => 'boolean'
+        'is_deletable' => 'boolean',
+        'is_super_admin' => 'boolean'
     ];
 
     public function generateToken()

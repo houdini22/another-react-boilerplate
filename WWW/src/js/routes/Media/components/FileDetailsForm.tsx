@@ -17,7 +17,8 @@ class FileDetailsForm extends React.Component<null, null> {
                 <Field name="title" label="Title" type="text" component={FormField} />
                 <Field name="caption" label="Caption" type="textarea" component={FormField} />
                 <Field name="description" label="Description" type="textarea" component={FormField} />
-                <Field name="url" label="File URL" type="text" component={FormField} disabled />
+                <Field name="download_url" label="Download URL" type="text" component={FormField} disabled />
+                <Field name="preview_url" label="Preview URL" type="text" component={FormField} disabled />
                 <Button block type={'submit'}>
                     Save
                 </Button>

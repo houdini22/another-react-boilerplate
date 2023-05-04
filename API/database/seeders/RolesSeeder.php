@@ -17,14 +17,14 @@ class RolesSeeder extends Seeder
     {
         Role::insert([
             [
-                'name' => 'super_admin',
+                'name' => 'Super Admin',
                 'guard_name' => 'web',
                 'is_deletable' => false,
             ],
         ]);
         Role::insert([
             [
-                'name' => 'admin',
+                'name' => 'Admin',
                 'guard_name' => 'web',
                 'is_deletable' => true,
             ],

@@ -38,17 +38,27 @@ class AuthController extends Controller
                     $avatar = null;
                 }
 
+                $additional = [];
+                if ($user->is_super_admin) {
+                    $additional[] = 'Super Admin';
+                }
+
                 return response()->json([
                     'data' => [
                         'user' => [
                             'name' => $user->name,
                             'email' => $user->email,
                             'token' => $user->token,
-                            'roles' => $user->roles->pluck('name'),
+                            'roles' => array_unique(
+                                array_merge(
+                                    $user->roles->pluck('name')->toArray(),
+                                    $additional
+                                )
+                            ),
                             'permissions' => array_unique(
                                 array_merge(
                                     $user->getPermissionsViaRoles()->pluck('name')->toArray(),
-                                    collect($user->permissions->toArray())->pluck('name')->toArray()
+                                    collect($user->permissions->toArray())->pluck('name')->toArray(),
                                 )
                             ),
                             'avatar' => $avatar,

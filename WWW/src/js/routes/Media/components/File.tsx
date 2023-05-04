@@ -143,7 +143,7 @@ export class FileView extends React.Component<FileProps, FileState> {
                                         <FileDetailsFormContainer
                                             file={file}
                                             isLoading={isLoading}
-                                            initialValues={{ ...file, url: apiURL(`files/download/${id}`) }}
+                                            initialValues={{ ...file, download_url: apiURL(`files/download/${id}`), preview_url: apiURL(`files/preview/${id}`) }}
                                             addToastNotification={addToastNotification}
                                             editFile={editFile}
                                             fetch={fetch}

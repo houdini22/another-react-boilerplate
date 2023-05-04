@@ -23,7 +23,8 @@ class SeedUsersTable extends Seeder
                 'password' => bcrypt('admin'),
                 'is_deletable' => false,
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
+                'updated_at' => Carbon::now(),
+                'is_super_admin' => true
             ],
         ]);
     }
