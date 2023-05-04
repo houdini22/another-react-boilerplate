@@ -50,7 +50,7 @@ class NotificationsBase extends React.Component<NotificationsProps, null> {
             <div className={cx('layout__notifications')}>
                 <div className={cx('layout__notifications__container')}>
                     <ul>
-                        {toastNotifications.map(({ type, text, title, href }) => {
+                        {toastNotifications.map(({ type, text, title, href, id }) => {
                             return (
                                 <li
                                     className={cx(
@@ -60,7 +60,7 @@ class NotificationsBase extends React.Component<NotificationsProps, null> {
                                             [cx(`layout__notifications__container__notification--color-${type}`)]: type,
                                         },
                                     )}
-                                    key={`${type}${text}${title}${href}`}
+                                    key={`${id}`}
                                 >
                                     <Link to={href}>
                                         <span className={cx('layout__notifications__container__notification__icon')}>

@@ -48,4 +48,4 @@ const generateCode = (componentName, options, content = '') => {
     return result
 }
 
-export { createPresentationTab, generateCode, createSimplePresentation }
+export { createPresentationTab, generateCode }

@@ -70,8 +70,9 @@ export class Details extends React.Component<HeaderProps, HeaderState> {
                         fetchOne(user.id).then(() => {
                             addToastNotification({
                                 title: 'Delete success.',
-                                text: 'User Avatar has been removed.',
+                                text: `User ID: ${user.id} Avatar has been removed.`,
                                 type: 'success',
+                                href: `/users/edit?id${user.id}`,
                             })
                             setIsLoading(false)
                             closeModal(`user-avatar-delete`)

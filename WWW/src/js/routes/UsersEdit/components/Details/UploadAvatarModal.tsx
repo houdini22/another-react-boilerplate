@@ -47,7 +47,8 @@ export class UploadAvatarModal extends React.Component<UploadAvatarModalProps, U
                                         addToastNotification({
                                             type: 'success',
                                             title: 'Save success.',
-                                            text: 'Avatar has been uploaded.',
+                                            text: `User ID: ${user.id} Avatar has been uploaded.`,
+                                            href: `/users/edit?id=${user.id}`,
                                         })
                                     })
                                 })

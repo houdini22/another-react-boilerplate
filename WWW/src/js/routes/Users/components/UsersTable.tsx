@@ -7,13 +7,14 @@ import RowUsername from './UsersTable/RowUsername'
 import RowResources from './UsersTable/RowResources'
 import RowStatus from './UsersTable/RowStatus'
 import RowActions from './UsersTable/RowActions'
-import { mergeUserPermissions, userPermissionFromRoles } from '../../../helpers/permissions'
+import { userPermissionFromRoles } from '../../../helpers/permissions'
 import RowExpandRoles from './UsersTable/RowExpandRoles'
 import RowExpandPermissions from './UsersTable/RowExpandPermissions'
 import { ModalConfirm } from '../../../components/common/ModalConfirm'
+import { User } from '../../../../types.d'
 
 interface UsersTableProps {
-    users: Array<any>
+    users: Array<User>
     setIsLoading: Function
     deleteUserRole: Function
     fetch: Function
@@ -22,7 +23,7 @@ interface UsersTableProps {
     page: number
     perPage: number
     total: number
-    totalPages
+    totalPages: number
 }
 
 export class UsersTable extends React.Component<UsersTableProps, null> {
@@ -118,8 +119,9 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                     closeModal(`user-${user.id}-delete`)
                                                                     addToastNotification({
                                                                         title: 'Remove success.',
-                                                                        text: 'User has been removed.',
+                                                                        text: `User ID: ${user.id} has been removed.`,
                                                                         type: 'success',
+                                                                        href: '/users',
                                                                     })
                                                                     setIsLoading(false)
                                                                 })

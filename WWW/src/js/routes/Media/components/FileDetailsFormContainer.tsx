@@ -13,14 +13,17 @@ const onSubmit = (values, dispatch, props) => {
                 addToastNotification({
                     type: 'success',
                     title: 'Save success.',
-                    text: 'File has been saved.',
+                    text: `File ID: ${file.id} has been saved.`,
+                    href: `/media`,
                 })
             })
         },
-        () => {
+        (response) => {
             addToastNotification({
+                title: 'Save error.',
+                text: response.message,
                 type: 'danger',
-                title: 'Save error',
+                href: `/media`,
             })
         },
     )

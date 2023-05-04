@@ -35,15 +35,16 @@ export class Permissions extends React.Component<HeaderProps, null> {
                                 return deleteRolePermission(role, {
                                     id: _id,
                                 }).then(() => {
-                                    addToastNotification({
-                                        type: 'success',
-                                        title: 'Delete success.',
-                                        text: 'Permission has been removed from Role.',
-                                    })
                                     Promise.all([fetch()]).then(() => {
                                         setIsLoading(false)
+                                        addToastNotification({
+                                            type: 'success',
+                                            title: 'Remove success.',
+                                            text: `Permission ID: ${_id} has been removed from Role ID: ${role.id}.`,
+                                            href: `/roles/edit?id=${role.id}}`,
+                                        })
+                                        closeModal(`delete-permission-from-role-${_id}`)
                                     })
-                                    closeModal(`delete-permission-from-role-${_id}`)
                                 })
                             }}
                             onCancel={() => {

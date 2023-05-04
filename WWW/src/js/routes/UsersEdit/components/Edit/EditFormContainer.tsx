@@ -12,7 +12,8 @@ const onSubmit = (values, _, { editUser, user, fetchOne, addToastNotification, s
                 addToastNotification({
                     type: 'success',
                     title: 'Save success.',
-                    text: 'User has been saved.',
+                    text: `User ID: ${user.id} has been saved.`,
+                    href: `/users/edit?id=${user['id']}`,
                 })
                 setIsLoading(false)
             })
@@ -22,7 +23,7 @@ const onSubmit = (values, _, { editUser, user, fetchOne, addToastNotification, s
                 title: 'Form Validation Error',
                 text: response.message,
                 type: 'danger',
-                href: '#',
+                href: `/users/edit?id=${user['id']}`,
             })
             setIsLoading(false)
             throw new SubmissionError(processAPIerrorResponseToFormErrors(response))

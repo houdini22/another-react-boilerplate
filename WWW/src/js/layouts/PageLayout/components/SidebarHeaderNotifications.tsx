@@ -96,7 +96,7 @@ class BaseSidebarHeaderNotifications extends React.Component<
                     <div className={cx('layout__header__bar__right__element--notifications__expanded')}>
                         <Scrollbars style={{ height: '400px' }}>
                             <ul>
-                                {notifications.map(({ type, text, href, title }) => {
+                                {notifications.map(({ type, text, href, title, id }) => {
                                     return (
                                         <li
                                             className={cx({
@@ -105,7 +105,7 @@ class BaseSidebarHeaderNotifications extends React.Component<
                                                 [`layout__header__bar__right__element--notifications__expanded__item--color-${type}`]:
                                                     true,
                                             })}
-                                            key={`${type}-${text}-${href}`}
+                                            key={`${id}`}
                                         >
                                             <Link to={href}>
                                                 <span
@@ -153,7 +153,7 @@ class BaseSidebarHeaderNotifications extends React.Component<
 
 const SidebarHeaderNotifications = connect(
     (state) => ({
-        notifications: notificationsSelectors.getNotifications(state),
+        notifications: notificationsSelectors.getAllToastNotifications(state),
         unread: notificationsSelectors.getUnreadNotifications(state),
     }),
     (dispatch) => {

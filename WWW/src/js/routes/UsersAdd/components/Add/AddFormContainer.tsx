@@ -13,8 +13,9 @@ const onSubmit = (
         (user) => {
             addToastNotification({
                 title: 'Save success.',
-                text: 'User has been saved.',
+                text: `User has been saved with ID: ${user.id}.`,
                 type: 'success',
+                href: '/users/add',
             })
             navigate(`/users/edit?id=${user.id}`)
         },
@@ -23,7 +24,7 @@ const onSubmit = (
                 title: 'Form Validation Error',
                 text: response.message,
                 type: 'danger',
-                href: '#',
+                href: '/users/add',
             })
             throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
         },

@@ -55,7 +55,8 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                                 addToastNotification({
                                     type: 'success',
                                     title: 'Remove success.',
-                                    text: 'Permission has been removed from User.',
+                                    text: `Permission ID: ${_id} has been removed from User ID: ${user.id}.`,
+                                    href: `/users/edit?id=${user['id']}`,
                                 })
                                 closeModal(`user-delete-permission-from-user-${_id}`)
                             })

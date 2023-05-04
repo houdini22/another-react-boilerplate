@@ -50,9 +50,10 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                         deleteRole(role.id).then(() => {
                                             fetch().then(() => {
                                                 addToastNotification({
-                                                    title: 'Delete success.',
-                                                    text: 'Role has been deleted.',
+                                                    title: 'Remove success.',
+                                                    text: `Role ID: ${role.id} has been removed.`,
                                                     type: 'success',
+                                                    href: '/riles',
                                                 })
                                                 closeModal(`user-role-${role.id}-delete`)
                                                 setIsLoading(false)
@@ -105,7 +106,7 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                         <Table.Tr key={role.id}>
                                             <Table.Td xs={1}>{role.id}</Table.Td>
                                             <Table.Td xs={3}>{role.name}</Table.Td>
-                                            <Table.Td xs={4}>
+                                            <Table.Td xs={4} alignRight>
                                                 <div>
                                                     {role?.permissions?.length > 0 && (
                                                         <Tooltip tooltip={`Role Permissions`}>

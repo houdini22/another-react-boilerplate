@@ -41,8 +41,8 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                                                         fetch().then(() => {
                                                             setIsLoading(false)
                                                             addToastNotification({
-                                                                title: 'Delete success.',
-                                                                text: 'Permission has been removed from User.',
+                                                                title: 'Remove success.',
+                                                                text: `Permission ID: ${permission.id} has been removed from User ID: ${_id}.`,
                                                                 type: 'success',
                                                             })
                                                             closeModal(`role-delete-from-user-${permission.id}-delete`)

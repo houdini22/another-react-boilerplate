@@ -38,7 +38,8 @@ export class Header extends React.Component<HeaderProps, null> {
                                     addToastNotification({
                                         type: 'success',
                                         title: 'Send success.',
-                                        text: 'Activation email has been sent.',
+                                        text: `Activation email has been sent to User ID: ${user.id}.`,
+                                        href: `/users/edit?id=${user.id}`,
                                     })
                                 })
                             })
@@ -55,8 +56,9 @@ export class Header extends React.Component<HeaderProps, null> {
                                 Promise.all([fetchOne(user['id'])]).then(() => {
                                     addToastNotification({
                                         type: 'success',
-                                        title: 'Force login success.',
-                                        text: 'User was logged out.',
+                                        title: `Force login success.`,
+                                        text: `User ID: ${user.id} was logged out.`,
+                                        href: `/users/edit?id=${user.id}`,
                                     })
                                 })
                             })
@@ -73,7 +75,8 @@ export class Header extends React.Component<HeaderProps, null> {
                                     addToastNotification({
                                         type: 'success',
                                         title: 'Activate success.',
-                                        text: 'User has now active account.',
+                                        text: `User ID: ${user.id} has now active account.`,
+                                        href: `/users/edit?id=${user.id}`,
                                     })
                                 })
                             }}
@@ -91,7 +94,8 @@ export class Header extends React.Component<HeaderProps, null> {
                                     addToastNotification({
                                         type: 'success',
                                         title: 'Deactivate success.',
-                                        text: 'User has now not active account.',
+                                        text: `User ID: ${user.id} has now not active account.`,
+                                        href: `/users/edit?id=${user.id}`,
                                     })
                                 })
                             }}

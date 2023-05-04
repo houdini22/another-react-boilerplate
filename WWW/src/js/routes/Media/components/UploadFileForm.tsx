@@ -19,7 +19,8 @@ class UploadFileForm extends React.Component<null, null> {
                             addToastNotification({
                                 type: 'success',
                                 title: 'Upload success.',
-                                text: 'Files has been saved.',
+                                text: 'Files has been uploaded.',
+                                href: '/media',
                             })
                         })
                     }

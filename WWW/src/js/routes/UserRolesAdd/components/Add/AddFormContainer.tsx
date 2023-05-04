@@ -17,9 +17,10 @@ const onSubmit = (
             addToastNotification({
                 type: 'success',
                 title: 'Save success.',
-                text: 'Role has been saved.',
+                text: `Role has been saved with ID: ${role.id}.`,
+                href: '/roles/add',
             })
-            navigate(`/roles/edit?id=${role.id}`)
+            navigate(`/roles/add`)
         },
         (response) => {
             setIsLoading(false)
@@ -27,7 +28,7 @@ const onSubmit = (
                 title: 'Form Validation Error',
                 text: response.message,
                 type: 'danger',
-                href: '#',
+                href: '/roles/add',
             })
             throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
         },

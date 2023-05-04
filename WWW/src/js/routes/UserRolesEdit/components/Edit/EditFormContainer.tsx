@@ -13,7 +13,8 @@ const onSubmit = (values, _, { save, fetch, addToastNotification, setIsLoading }
                 addToastNotification({
                     type: 'success',
                     title: 'Save success.',
-                    text: 'Role has been saved.',
+                    text: `Role ID: ${values.id} has been saved.`,
+                    href: `/roles/edit?id=${values.id}`,
                 })
                 setIsLoading(false)
             })
@@ -23,7 +24,7 @@ const onSubmit = (values, _, { save, fetch, addToastNotification, setIsLoading }
                 title: 'Form Validation Error',
                 text: response.message,
                 type: 'danger',
-                href: '#',
+                href: `/roles/edit?id=${values.id}`,
             })
             setIsLoading(false)
             throw new SubmissionError(processAPIerrorResponseToFormErrors(response))

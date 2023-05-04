@@ -11,13 +11,14 @@ const onSubmit = (
 ) => {
     setIsLoading(true)
 
-    addUserPermission(user, { id: permission_id }).then(() => {
+    addUserPermission(user, { id: permission_id }).then((permission) => {
         fetchOne(user['id']).then(() => {
             setIsLoading(false)
             addToastNotification({
                 type: 'success',
                 title: 'Save success.',
-                text: 'Permission has been saved.',
+                text: `Permission ID: ${permission_id} has been added to User ID: ${user.id}.`,
+                href: `/users/edit?id=${user.id}`,
             })
         })
     })

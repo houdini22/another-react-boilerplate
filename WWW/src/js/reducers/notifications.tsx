@@ -93,6 +93,16 @@ const ACTION_HANDLERS = {
                     id,
                 },
             ],
+            toastNotificationsAll: [
+                ...state.toastNotificationsAll,
+                {
+                    type,
+                    text,
+                    href,
+                    title,
+                    id,
+                },
+            ],
         }
     },
     [REMOVE_TOAST_NOTIFICATION]: (state, { payload: { id: _id } }) => {
@@ -121,6 +131,7 @@ const getInitialState = () => ({
     notifications: [],
     unread: 0,
     toastNotifications: [],
+    toastNotificationsAll: [],
 })
 
 export default function notificationReducer(state = getInitialState(), action) {
@@ -132,6 +143,7 @@ export default function notificationReducer(state = getInitialState(), action) {
 
 const getState = (state) => state['notifications']
 const getNotifications = (state) => getState(state)['notifications'].reverse()
+const getAllToastNotifications = (state) => getState(state)['toastNotificationsAll']
 const getUnreadNotifications = (state) => getState(state)['unread']
 const getToastNotifications = (state) => getState(state)['toastNotifications']
 export const selectors = {
@@ -139,6 +151,7 @@ export const selectors = {
     getNotifications,
     getUnreadNotifications,
     getToastNotifications,
+    getAllToastNotifications,
 }
 
 export interface ToastNotification {

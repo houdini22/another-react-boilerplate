@@ -12,7 +12,8 @@ const onSubmit = (values, _, { save, fetchPermission, addToastNotification, setI
                 addToastNotification({
                     type: 'success',
                     title: 'Save success.',
-                    text: 'Permission has been saved.',
+                    text: `Permission ID: ${permission.id} has been saved.`,
+                    href: `/permissions/edit?id=${permission.id}`,
                 })
                 setIsLoading(false)
             })
@@ -22,7 +23,7 @@ const onSubmit = (values, _, { save, fetchPermission, addToastNotification, setI
                 title: 'Form Validation Error',
                 text: response.message,
                 type: 'danger',
-                href: '#',
+                href: `/permissions/edit?id=${permission.id}`,
             })
             setIsLoading(false)
             throw new SubmissionError(processAPIerrorResponseToFormErrors(response))

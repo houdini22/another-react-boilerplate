@@ -57,8 +57,9 @@ export class RowExpandRoles extends React.Component<RowExpandRolesProps, null> {
                                                     setIsLoading(false)
                                                     addToastNotification({
                                                         title: 'Remove success.',
-                                                        text: 'Role has been removed from user.',
+                                                        text: `Role ID: ${_id} has been removed from User ID: ${user.id}.`,
                                                         type: 'success',
+                                                        href: '/users',
                                                     })
                                                     closeModal(`user-remove-role-${_id}-delete`)
                                                 })

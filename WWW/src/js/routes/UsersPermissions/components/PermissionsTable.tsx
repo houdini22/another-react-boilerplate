@@ -51,9 +51,10 @@ export class PermissionsTable extends React.Component<PermissionsTableProps, nul
                                             fetch().then(() => {
                                                 closeModal(`user-permission-${permission.id}-delete`)
                                                 addToastNotification({
-                                                    title: 'Delete success.',
-                                                    text: 'Permission has been removed.',
+                                                    title: 'Remove success.',
+                                                    text: `Permission ID: ${permission.id} has been removed.`,
                                                     type: 'success',
+                                                    href: `/permissions`,
                                                 })
                                                 setIsLoading(false)
                                             })
@@ -99,7 +100,7 @@ export class PermissionsTable extends React.Component<PermissionsTableProps, nul
                                         <Table.Tr key={permission.id}>
                                             <Table.Td xs={1}>{permission.id}</Table.Td>
                                             <Table.Td xs={3}>{permission.name}</Table.Td>
-                                            <Table.Td xs={4}>
+                                            <Table.Td xs={4} alignRight>
                                                 <div>
                                                     {permission.roles_count > 0 && (
                                                         <Tooltip tooltip={`Roles with permission`}>

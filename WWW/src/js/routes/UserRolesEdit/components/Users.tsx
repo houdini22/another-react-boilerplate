@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Card, Dropdown, Label, LoadingOverlay } from '../../../components'
-import { DeleteIcon, RoleIcon, UserIcon } from '../../../components/icons'
+import { DeleteIcon, RoleIcon } from '../../../components/icons'
 import { Role } from '../../../../types.d'
 import { ModalConfirm } from '../../../components/common/ModalConfirm'
 
@@ -37,13 +37,14 @@ export class Users extends React.Component<HeaderProps, null> {
                                     },
                                     role,
                                 ).then(() => {
-                                    addToastNotification({
-                                        type: 'success',
-                                        title: 'Delete success.',
-                                        text: 'Permission has been removed from Role.',
-                                    })
                                     Promise.all([fetch()]).then(() => {
                                         setIsLoading(false)
+                                        addToastNotification({
+                                            type: 'success',
+                                            title: 'Remove success.',
+                                            text: `Role ID: ${role.id} has been removed from User ID: ${_id}.`,
+                                            href: `/roles/edit?id=${role.id}}`,
+                                        })
                                         closeModal(`delete-role-from-user-${_id}`)
                                     })
                                 })

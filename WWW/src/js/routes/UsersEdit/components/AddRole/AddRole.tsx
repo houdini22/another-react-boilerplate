@@ -29,7 +29,8 @@ export class AddRole extends React.Component<AddRoleProps, null> {
                                     addToastNotification({
                                         type: 'success',
                                         title: 'Save success.',
-                                        text: 'Role has been saved.',
+                                        text: `Role ID: ${role} has been added to User ID: ${user?.id}.`,
+                                        href: `/users/edit?id=${user?.id}`,
                                     })
                                 })
                             })

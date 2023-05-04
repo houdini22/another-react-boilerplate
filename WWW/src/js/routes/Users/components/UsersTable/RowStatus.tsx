@@ -33,8 +33,9 @@ export class RowStatus extends React.Component<FiltersProps, null> {
                         fetch().then(() => {
                             addToastNotification({
                                 title: 'Activate success.',
-                                text: 'User account has been activated.',
+                                text: `User ID: ${user.id} account has been activated.`,
                                 type: 'success',
+                                href: '/users',
                             })
                             closeModal(`user-activate-${user.id}`)
                             setIsLoading(false)
@@ -60,8 +61,9 @@ export class RowStatus extends React.Component<FiltersProps, null> {
                         fetch().then(() => {
                             addToastNotification({
                                 title: 'Deactivate success.',
-                                text: 'User account has been deactivated.',
+                                text: `User ID: ${user.id} account has been deactivated.`,
                                 type: 'success',
+                                href: '/users',
                             })
                             closeModal(`user-deactivate-${user.id}`)
                             setIsLoading(false)

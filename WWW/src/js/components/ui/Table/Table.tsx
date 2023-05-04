@@ -122,6 +122,7 @@ interface TdProps {
     xs?: number
     md?: number
     alignCenter?: boolean
+    alignRight?: boolean
     onClick?: () => void
     children: any
 }

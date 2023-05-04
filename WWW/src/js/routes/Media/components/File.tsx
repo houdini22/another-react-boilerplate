@@ -106,8 +106,9 @@ export class FileView extends React.Component<FileProps, FileState> {
                                             fetch()
                                             addToastNotification({
                                                 type: 'success',
-                                                title: 'Delete success.',
-                                                text: 'Files has been removed.',
+                                                title: 'Remove success.',
+                                                text: `File ID: ${id} has been removed.`,
+                                                href: '/media',
                                             })
                                         })
                                     }}

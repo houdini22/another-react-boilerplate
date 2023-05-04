@@ -52,7 +52,8 @@ export class Roles extends React.Component<AddRoleProps, null> {
                                         addToastNotification({
                                             type: 'success',
                                             title: 'Remove success.',
-                                            text: 'Role has been removed.',
+                                            text: `Role ID: ${_id} has been removed from User ID: ${user.id}.`,
+                                            href: `/users/edit?id=${user['id']}`,
                                         })
                                         closeModal(`user-delete-role-${_id}`)
                                     })

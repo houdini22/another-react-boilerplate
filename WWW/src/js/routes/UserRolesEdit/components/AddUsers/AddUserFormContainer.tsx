@@ -13,7 +13,8 @@ const onSubmit = ({ user_id }, _, { setIsLoading, addUserRole, role, fetch, addT
             addToastNotification({
                 type: 'success',
                 title: 'Save success.',
-                text: 'Role has been saved.',
+                text: `Role ID: ${role.id} has been added to User ID: ${user_id}.`,
+                href: `/roles/edit?id=${role}`,
             })
             reset()
         })
