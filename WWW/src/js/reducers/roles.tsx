@@ -148,21 +148,33 @@ const addRole = (params, rolePermissions, roleUsers) => (dispatch) => {
     })
 }
 
-const addPermission = (params) => (dispatch) => {
-    return new Promise<void>((resolve, reject) => {
-        dispatch(setFetchError(null))
+const addPermission =
+    (params, newPermissionUsers = []) =>
+    (dispatch) => {
+        return new Promise<void>((resolve, reject) => {
+            dispatch(setFetchError(null))
 
-        return http
-            .post(`/permissions/add/`, params)
-            .then(({}) => {
-                resolve()
-            })
-            .catch((e) => {
-                dispatch(setFetchError(e))
-                reject(e)
-            })
-    })
-}
+            return http
+                .post(`/permissions/add/`, params)
+                .then(({ data: { permission } }) => {
+                    const promises = []
+
+                    if (!params.role_id) {
+                        newPermissionUsers.forEach((user) => {
+                            promises.push(dispatch(addUserPermission(user, permission)))
+                        })
+                    }
+
+                    Promise.all(promises).then(() => {
+                        resolve()
+                    })
+                })
+                .catch((e) => {
+                    dispatch(setFetchError(e))
+                    reject(e)
+                })
+        })
+    }
 
 const fetchOne =
     (id = 0) =>

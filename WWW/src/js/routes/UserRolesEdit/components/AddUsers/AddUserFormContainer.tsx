@@ -21,7 +21,7 @@ const onSubmit = ({ user_id }, _, { setIsLoading, addUserRole, role, fetch, addT
 }
 
 const AddUserFormContainer = compose(
-    connect(() => {}),
+    connect(),
     reduxForm({
         onSubmit,
         enableReinitialize: true,

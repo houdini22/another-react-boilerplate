@@ -147,11 +147,10 @@ class PermissionsController extends Controller
                     ], 404);
                 }
                 $role->givePermissionTo($permission);
-
-                return response()->json([
-                    'permission' => $permission->toArray(),
-                ]);
             }
+            return response()->json([
+                'permission' => $permission->toArray(),
+            ]);
         }
 
 

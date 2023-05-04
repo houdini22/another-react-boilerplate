@@ -6,7 +6,17 @@ interface HeaderProps {}
 
 export class AddPermission extends React.Component<HeaderProps, null> {
     render() {
-        const { roles, setIsLoading, addPermission, isLoading, addToastNotification } = this.props
+        const {
+            roles,
+            setIsLoading,
+            addPermission,
+            isLoading,
+            addToastNotification,
+            users,
+            newPermissionUsers,
+            removeNewPermissionFromUser,
+            addNewPermissionToUser,
+        } = this.props
         return (
             <Card header={<h1>Add Permission</h1>}>
                 <AddFormContainer
@@ -14,6 +24,10 @@ export class AddPermission extends React.Component<HeaderProps, null> {
                     setIsLoading={setIsLoading}
                     addPermission={addPermission}
                     addToastNotification={addToastNotification}
+                    users={users}
+                    newPermissionUsers={newPermissionUsers}
+                    removeNewPermissionFromUser={removeNewPermissionFromUser}
+                    addNewPermissionToUser={addNewPermissionToUser}
                 />
                 {isLoading && <LoadingOverlay />}
             </Card>

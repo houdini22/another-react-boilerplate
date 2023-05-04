@@ -25,6 +25,7 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps, null> 
     state = {
         newRolePermissions: [],
         newRoleUsers: [],
+        newPermissionUsers: [],
     }
     componentDidMount() {
         const { fetch, fetchOne, fetchPermissions, id, permissionId, fetchOnePermission } = this.props
@@ -80,6 +81,25 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps, null> 
         this.setState({ newRoleUsers: newUsers })
     }
 
+    addNewPermissionToUser(id) {
+        const { newPermissionUsers } = this.state
+
+        const newUsers = [...newPermissionUsers]
+        newUsers.push(id)
+
+        this.setState({ newPermissionUsers: newUsers })
+    }
+
+    removeNewPermissionFromUser(id) {
+        const { newPermissionUsers } = this.state
+
+        const newUsers = [...newPermissionUsers].filter(({ id: _id }) => {
+            return Number(id) !== Number(_id)
+        })
+
+        this.setState({ newPermissionUsers: newUsers })
+    }
+
     render() {
         const {
             children,
@@ -105,7 +125,7 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps, null> 
             isLoading,
             addUserRole,
         } = this.props
-        const { newRolePermissions, newRoleUsers } = this.state
+        const { newRolePermissions, newRoleUsers, newPermissionUsers } = this.state
         const renderProps = {
             roles,
             setIsLoading,
@@ -132,8 +152,11 @@ class UserRolesManagerBase extends React.Component<UserRolesManagerProps, null> 
             removePermissionFromNewRole: this.removePermissionFromNewRole.bind(this),
             addNewRoleToUser: this.addNewRoleToUser.bind(this),
             removeNewRoleFromUser: this.removeNewRoleFromUser.bind(this),
+            addNewPermissionToUser: this.addNewPermissionToUser.bind(this),
+            removeNewPermissionFromUser: this.removeNewPermissionFromUser.bind(this),
             newRoleUsers,
             addUserRole,
+            newPermissionUsers,
         }
 
         return children(renderProps)

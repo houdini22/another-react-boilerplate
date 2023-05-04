@@ -6,6 +6,7 @@ import { PageContent } from '../../../layouts/PageLayout/components'
 import Header from './Header'
 import { AddPermission } from './Add/Index'
 import { NotificationsManager } from '../../../containers/NotificationsManager'
+import { UsersManager } from '../../../containers/UsersManager'
 
 export class UserPermissionsAdd extends React.Component<null, null> {
     render() {
@@ -16,25 +17,41 @@ export class UserPermissionsAdd extends React.Component<null, null> {
                         {({ addToastNotification }) => {
                             return (
                                 <UserRolesManager>
-                                    {({ roles, isLoading, setIsLoading, addPermission, permission }) => {
+                                    {({
+                                        roles,
+                                        isLoading,
+                                        setIsLoading,
+                                        addPermission,
+                                        permission,
+                                        newPermissionUsers,
+                                        addNewPermissionToUser,
+                                        removeNewPermissionFromUser,
+                                    }) => {
                                         return (
-                                            <PageContent>
-                                                <Header navigate={navigate} permission={permission} />
-                                                <Row>
-                                                    <Col xs={12} md={6}>
-                                                        <AddPermission
-                                                            addPermission={addPermission}
-                                                            isLoading={isLoading}
-                                                            addToastNotification={addToastNotification}
-                                                            setIsLoading={setIsLoading}
-                                                            roles={roles}
-                                                        />
-                                                    </Col>
-                                                    <Col xs={12} md={6}>
-                                                        {' '}
-                                                    </Col>
-                                                </Row>
-                                            </PageContent>
+                                            <UsersManager>
+                                                {({ users }) => (
+                                                    <PageContent>
+                                                        <Header navigate={navigate} permission={permission} />
+                                                        <Row>
+                                                            <Col xs={12}>
+                                                                <AddPermission
+                                                                    addPermission={addPermission}
+                                                                    isLoading={isLoading}
+                                                                    addToastNotification={addToastNotification}
+                                                                    setIsLoading={setIsLoading}
+                                                                    roles={roles}
+                                                                    users={users}
+                                                                    newPermissionUsers={newPermissionUsers}
+                                                                    addNewPermissionToUser={addNewPermissionToUser}
+                                                                    removeNewPermissionFromUser={
+                                                                        removeNewPermissionFromUser
+                                                                    }
+                                                                />
+                                                            </Col>
+                                                        </Row>
+                                                    </PageContent>
+                                                )}
+                                            </UsersManager>
                                         )
                                     }}
                                 </UserRolesManager>
