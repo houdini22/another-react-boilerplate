@@ -4,11 +4,7 @@ import { connect } from 'react-redux'
 import { AddPermissionForm as FormComponent } from './AddPermissionForm'
 import { reduxForm } from 'redux-form'
 
-const onSubmit = (
-    { permission_id = 0 },
-    _,
-    { setIsLoading, addUserPermission, fetchOne, user, addToastNotification },
-) => {
+const onSubmit = ({ permission_id }, _, { setIsLoading, addUserPermission, fetchOne, user, addToastNotification }) => {
     setIsLoading(true)
 
     addUserPermission(user, { id: permission_id }).then((permission) => {
@@ -24,13 +20,27 @@ const onSubmit = (
     })
 }
 
+const validate = (values) => {
+    const errors = {}
+
+    if (!values.permission_id) {
+        errors['permission_id'] = 'Required.'
+    }
+
+    return errors
+}
+
 const AddPermissionFormContainer = compose(
     connect(),
     reduxForm({
         enableReinitialize: true,
         destroyOnUnmount: true,
         form: 'AddPermissionForm',
+        initialValues: {
+            permission_id: '',
+        },
         onSubmit,
+        validate,
     }),
 )(FormComponent)
 

@@ -36,7 +36,7 @@ export class UploadAvatarModal extends React.Component<UploadAvatarModalProps, U
                 <Modal.Body>
                     <UploadAvatarFormContainer
                         uploadProgress={uploadProgress}
-                        onChange={(e) => {
+                        onChangeFile={(e) => {
                             setIsLoading(true)
                             setUploadProgress(-1)
                             if (_.get(e?.target?.files, 0)) {

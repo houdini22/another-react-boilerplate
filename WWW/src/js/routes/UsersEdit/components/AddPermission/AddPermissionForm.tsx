@@ -46,11 +46,8 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps, null> {
                     name="permission_id"
                     label="Permission"
                     type="select"
+                    placeholder={'--- choose ---'}
                     options={[
-                        {
-                            label: '--- choose ---',
-                            value: null,
-                        },
                         ...(sortPermissionsByNameAscending(permissions).map(({ id, name }) => {
                             return {
                                 value: id,

@@ -47,7 +47,9 @@ class AddForm extends React.Component<null, null> {
                                 disabled: !!newPermissionUsers.find(({ id: _id }) => id === _id),
                             }))}
                             onChange={(e, value) => {
-                                addNewPermissionToUser(users.find((user) => Number(user.id) === Number(value)))
+                                if (value) {
+                                    addNewPermissionToUser(users.find((user) => Number(user.id) === Number(value)))
+                                }
                             }}
                             component={FormField}
                         />

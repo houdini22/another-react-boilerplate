@@ -16,8 +16,16 @@ const NavigationItems = ({ items }) => {
                     {({ auth: { isLoggedIn } }) => (
                         <ul className={cx('layout__sidebar__content__navigation__links__links')}>
                             {items.map((item) => {
-                                const { type, caption, href, icon, authorizationRequired, componentType, children } =
-                                    item
+                                const {
+                                    type,
+                                    caption,
+                                    href,
+                                    icon,
+                                    authorizationRequired,
+                                    componentType,
+                                    children,
+                                    urlActive = [],
+                                } = item
 
                                 if (!isLoggedIn && authorizationRequired) {
                                     return null
@@ -31,7 +39,10 @@ const NavigationItems = ({ items }) => {
                                             href={href}
                                             icon={icon}
                                             key={`${type}-${caption}-${href}`}
-                                            active={pathname === href}
+                                            active={
+                                                urlActive.map((regexp) => regexp.test(pathname)).filter((v) => !!v)
+                                                    .length > 0
+                                            }
                                             componentType={componentType}
                                             nested={children}
                                         >

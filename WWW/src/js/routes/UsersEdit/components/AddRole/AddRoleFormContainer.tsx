@@ -4,6 +4,16 @@ import { connect } from 'react-redux'
 import { AddRoleForm as FormComponent } from './AddRoleForm'
 import { reduxForm, formValueSelector } from 'redux-form'
 
+const validate = (values) => {
+    const errors = {}
+
+    if (!values.role) {
+        errors['role'] = 'Required.'
+    }
+
+    return errors
+}
+
 const AddRoleFormContainer = compose(
     connect((state) => {
         const selector = formValueSelector('AddRoleForm')
@@ -16,6 +26,10 @@ const AddRoleFormContainer = compose(
         enableReinitialize: true,
         destroyOnUnmount: true,
         form: 'AddRoleForm',
+        initialValues: {
+            role: '',
+        },
+        validate,
     }),
 )(FormComponent)
 

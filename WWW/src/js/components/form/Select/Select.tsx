@@ -18,7 +18,7 @@ class Select extends React.Component<SelectProps, null> {
     renderPlaceholder() {
         const { placeholder } = this.props
         const caption = placeholder === true ? '--- choose ---' : placeholder
-        return <option>{caption}</option>
+        return <option value="">{caption}</option>
     }
 
     render() {

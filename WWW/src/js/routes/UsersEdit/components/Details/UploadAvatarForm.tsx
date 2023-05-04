@@ -4,7 +4,7 @@ import { FormField, Progress } from '../../../../components'
 
 class UploadAvatarForm extends React.Component<null, null> {
     render() {
-        const { handleSubmit, onChange, uploadProgress } = this.props
+        const { handleSubmit, onChangeFile, uploadProgress } = this.props
 
         return (
             <form onSubmit={handleSubmit} encType={'multipart/form-data'}>
@@ -14,7 +14,7 @@ class UploadAvatarForm extends React.Component<null, null> {
                     label="File"
                     type="file"
                     component={FormField}
-                    onChange={(e) => onChange(e)}
+                    onChange={(e) => onChangeFile(e)}
                     accept={'image/png,image/gif,image/jpg'}
                 />
             </form>

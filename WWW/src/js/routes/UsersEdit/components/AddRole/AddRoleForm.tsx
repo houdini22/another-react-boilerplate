@@ -36,11 +36,8 @@ class AddRoleForm extends React.Component<AddPermissionFormProps, null> {
                     name="role"
                     label="Role"
                     type="select"
+                    placeholder={'--- choose ---'}
                     options={[
-                        {
-                            label: '--- choose ---',
-                            value: null,
-                        },
                         ...(sortRolesByNameAscending(roles).map(({ id, name }) => {
                             return {
                                 value: id,

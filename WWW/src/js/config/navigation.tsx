@@ -20,14 +20,7 @@ export const navigation = [
     },
     {
         type: 'link',
-        caption: (
-            <span>
-                CMS{' '}
-                <Badge color="success" size="sm">
-                    new
-                </Badge>
-            </span>
-        ),
+        caption: 'CMS',
         href: '/cms/pages',
         icon: <FaSitemap />,
         children: [
@@ -70,6 +63,7 @@ export const navigation = [
         caption: <span>Media</span>,
         href: '/media',
         icon: <FileIcon />,
+        urlActive: [/^\/media$/],
     },
     {
         type: 'header',
@@ -80,17 +74,20 @@ export const navigation = [
         href: '/users',
         caption: 'Users',
         icon: <UserIcon />,
+        urlActive: [/^\/users$/, /^\/users\/add$/, /^\/users\/edit$/],
     },
     {
         type: 'link',
         href: '/roles',
         caption: 'Roles',
         icon: <RoleIcon />,
+        urlActive: [/^\/roles$/, /^\/roles\/add$/, /^\/roles\/edit$/],
     },
     {
         type: 'link',
         href: '/permissions',
         caption: 'Permissions',
         icon: <PermissionIcon />,
+        urlActive: [/^\/permissions$/, /^\/permissions\/add$/, /^\/permissions\/edit$/],
     },
 ]

@@ -35,9 +35,11 @@ class AddForm extends React.Component<null, null> {
                             disabled: !!newRolePermissions.find(({ id: _id }) => id === _id),
                         }))}
                         onChange={(e, value) => {
-                            addPermissionToNewRole(
-                                permissions.find((permission) => Number(permission.id) === Number(value)),
-                            )
+                            if (value) {
+                                addPermissionToNewRole(
+                                    permissions.find((permission) => Number(permission.id) === Number(value)),
+                                )
+                            }
                         }}
                         component={FormField}
                     />
@@ -72,7 +74,9 @@ class AddForm extends React.Component<null, null> {
                             disabled: !!newRoleUsers.find(({ id: _id }) => id === _id),
                         }))}
                         onChange={(e, value) => {
-                            addNewRoleToUser(users.find((user) => Number(user.id) === Number(value)))
+                            if (value) {
+                                addNewRoleToUser(users.find((user) => Number(user.id) === Number(value)))
+                            }
                         }}
                         component={FormField}
                     />
