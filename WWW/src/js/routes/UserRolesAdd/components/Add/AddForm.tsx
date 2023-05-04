@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { Field } from 'redux-form'
 import { Alert, Button, Card, FormField, Section } from '../../../../components'
+import { sortPermissionsByNameAscending } from '../../../../helpers/permissions'
+import { sortUsersByNameAscending } from '../../../../helpers/users'
 
 class AddForm extends React.Component<null, null> {
     render() {
@@ -27,13 +29,11 @@ class AddForm extends React.Component<null, null> {
                         label="Permission"
                         type="select"
                         placeholder={`--- choose ---`}
-                        options={permissions
-                            .sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                            .map(({ id, name }) => ({
-                                label: name,
-                                value: id,
-                                disabled: !!newRolePermissions.find(({ id: _id }) => id === _id),
-                            }))}
+                        options={sortPermissionsByNameAscending(permissions).map(({ id, name }) => ({
+                            label: name,
+                            value: id,
+                            disabled: !!newRolePermissions.find(({ id: _id }) => id === _id),
+                        }))}
                         onChange={(e, value) => {
                             addPermissionToNewRole(
                                 permissions.find((permission) => Number(permission.id) === Number(value)),
@@ -66,13 +66,11 @@ class AddForm extends React.Component<null, null> {
                         label="User"
                         type="select"
                         placeholder={`--- choose ---`}
-                        options={users
-                            .sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                            .map(({ id, name }) => ({
-                                label: name,
-                                value: id,
-                                disabled: !!newRoleUsers.find(({ id: _id }) => id === _id),
-                            }))}
+                        options={sortUsersByNameAscending(users).map(({ id, name }) => ({
+                            label: name,
+                            value: id,
+                            disabled: !!newRoleUsers.find(({ id: _id }) => id === _id),
+                        }))}
                         onChange={(e, value) => {
                             addNewRoleToUser(users.find((user) => Number(user.id) === Number(value)))
                         }}

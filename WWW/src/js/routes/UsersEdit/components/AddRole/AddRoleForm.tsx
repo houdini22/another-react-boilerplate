@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Field } from 'redux-form'
 import { Button, FormField } from '../../../../components'
 import { Role } from '../../../../../types.d'
+import { sortRolesByNameAscending } from '../../../../helpers/roles'
 
 interface AddPermissionFormProps {
     handleSubmit: Function
@@ -40,15 +41,13 @@ class AddRoleForm extends React.Component<AddPermissionFormProps, null> {
                             label: '--- choose ---',
                             value: null,
                         },
-                        ...(roles
-                            ?.sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                            .map(({ id, name }) => {
-                                return {
-                                    value: id,
-                                    label: `${name}`,
-                                    disabled: user?.roles?.find(({ id: _id }) => id === _id),
-                                }
-                            }) || []),
+                        ...(sortRolesByNameAscending(roles).map(({ id, name }) => {
+                            return {
+                                value: id,
+                                label: `${name}`,
+                                disabled: user?.roles?.find(({ id: _id }) => id === _id),
+                            }
+                        }) || []),
                     ]}
                     component={FormField}
                 />

@@ -2,7 +2,11 @@ import * as React from 'react'
 import { Badge, Card, Dropdown, Label, LoadingOverlay, Tabs } from '../../../../components'
 import { DeleteIcon, InfoIcon, DetailsIcon, EditIcon } from '../../../../components/icons'
 import { ModalConfirm } from '../../../../components/common/ModalConfirm'
-import { mergeUserPermissions, userPermissionFromRoles } from '../../../../helpers/permissions'
+import {
+    mergeUserPermissions,
+    sortPermissionsByNameAscending,
+    userPermissionFromRoles,
+} from '../../../../helpers/permissions'
 import { User } from '../../../../../types.d'
 
 interface AddRoleProps {
@@ -66,6 +70,10 @@ export class Permissions extends React.Component<AddRoleProps, null> {
             )
         })
 
+        const _allPermissions = Object.keys(allPermissions).map((key) => allPermissions[key])
+
+        const _permissionsFromRoles = Object.keys(permissionsFromRoles).map((key) => permissionsFromRoles[key])
+
         return (
             <Card header={<h1>Permissions</h1>}>
                 <Tabs.Container>
@@ -74,16 +82,13 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                             All Permissions <Badge color={'info'}>{Object.keys(allPermissions).length}</Badge>
                         </Tabs.Trigger>
                         <Tabs.Content>
-                            {Object.keys(allPermissions)
-                                .map((key) => allPermissions[key])
-                                .sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                                .map(({ id, name, occurrence }) => {
-                                    return (
-                                        <Label key={id} block size={'lg'}>
-                                            {name} {occurrence > 1 && `(${occurrence})`}
-                                        </Label>
-                                    )
-                                })}
+                            {sortPermissionsByNameAscending(_allPermissions).map(({ id, name, occurrence }) => {
+                                return (
+                                    <Label key={id} block size={'lg'}>
+                                        {name} {occurrence > 1 && `(${occurrence})`}
+                                    </Label>
+                                )
+                            })}
                         </Tabs.Content>
                     </Tabs.Tab>
                     <Tabs.Tab name={'from_roles'}>
@@ -91,47 +96,44 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                             From Roles <Badge color={'info'}>{Object.keys(permissionsFromRoles).length}</Badge>
                         </Tabs.Trigger>
                         <Tabs.Content>
-                            {Object.keys(permissionsFromRoles)
-                                .map((key) => permissionsFromRoles[key])
-                                .sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                                .map(({ id, name, occurrence }) => {
-                                    return (
-                                        <Dropdown.Container triggerSize={'lg'} key={id}>
-                                            <Dropdown.Trigger component={Label} componentProps={{ block: true }}>
-                                                {name} {occurrence > 1 && `(${occurrence})`}
-                                            </Dropdown.Trigger>
-                                            <Dropdown.Menu>
-                                                <Dropdown.Item type={'header'}>
-                                                    <InfoIcon /> Permission ID {id}
-                                                </Dropdown.Item>
-                                                <Dropdown.Item
-                                                    color={'info'}
-                                                    onClick={() => {
-                                                        navigate(`/roles?permissions=${id}`)
-                                                    }}
-                                                >
-                                                    <DetailsIcon /> Show Roles with Permission
-                                                </Dropdown.Item>
-                                                <Dropdown.Item
-                                                    color={'info'}
-                                                    onClick={() => {
-                                                        navigate(`/users?permissions=${id}`)
-                                                    }}
-                                                >
-                                                    <DetailsIcon /> Show Users with Permission
-                                                </Dropdown.Item>
-                                                <Dropdown.Item
-                                                    color={'warning'}
-                                                    onClick={() => {
-                                                        navigate(`/permissions/edit?id=${id}`)
-                                                    }}
-                                                >
-                                                    <DetailsIcon /> Edit Permission
-                                                </Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown.Container>
-                                    )
-                                })}
+                            {sortPermissionsByNameAscending(_permissionsFromRoles).map(({ id, name, occurrence }) => {
+                                return (
+                                    <Dropdown.Container triggerSize={'lg'} key={id}>
+                                        <Dropdown.Trigger component={Label} componentProps={{ block: true }}>
+                                            {name} {occurrence > 1 && `(${occurrence})`}
+                                        </Dropdown.Trigger>
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item type={'header'}>
+                                                <InfoIcon /> Permission ID {id}
+                                            </Dropdown.Item>
+                                            <Dropdown.Item
+                                                color={'info'}
+                                                onClick={() => {
+                                                    navigate(`/roles?permissions=${id}`)
+                                                }}
+                                            >
+                                                <DetailsIcon /> Show Roles with Permission
+                                            </Dropdown.Item>
+                                            <Dropdown.Item
+                                                color={'info'}
+                                                onClick={() => {
+                                                    navigate(`/users?permissions=${id}`)
+                                                }}
+                                            >
+                                                <DetailsIcon /> Show Users with Permission
+                                            </Dropdown.Item>
+                                            <Dropdown.Item
+                                                color={'warning'}
+                                                onClick={() => {
+                                                    navigate(`/permissions/edit?id=${id}`)
+                                                }}
+                                            >
+                                                <DetailsIcon /> Edit Permission
+                                            </Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown.Container>
+                                )
+                            })}
                         </Tabs.Content>
                     </Tabs.Tab>
                     <Tabs.Tab name={'direct_permissions'}>
@@ -139,54 +141,52 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                             Direct Permissions <Badge color={'info'}>{user?.permissions?.length || 0}</Badge>
                         </Tabs.Trigger>
                         <Tabs.Content>
-                            {user?.permissions
-                                ?.sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                                .map(({ id, name, occurrence }) => {
-                                    return (
-                                        <Dropdown.Container triggerSize={'lg'} key={id}>
-                                            <Dropdown.Trigger component={Label} componentProps={{ block: true }}>
-                                                {name} {occurrence > 1 && `(${occurrence})`}
-                                            </Dropdown.Trigger>
-                                            <Dropdown.Menu>
-                                                <Dropdown.Item type={'header'}>
-                                                    <InfoIcon /> Permission ID {id}
-                                                </Dropdown.Item>
-                                                <Dropdown.Item
-                                                    color={'info'}
-                                                    onClick={() => {
-                                                        navigate(`/roles?permissions=${id}`)
-                                                    }}
-                                                >
-                                                    <DetailsIcon /> Show Roles with Permission
-                                                </Dropdown.Item>
-                                                <Dropdown.Item
-                                                    color={'info'}
-                                                    onClick={() => {
-                                                        navigate(`/users?permissions=${id}`)
-                                                    }}
-                                                >
-                                                    <DetailsIcon /> Show Users with Permission
-                                                </Dropdown.Item>
-                                                <Dropdown.Item
-                                                    color={'warning'}
-                                                    onClick={() => {
-                                                        navigate(`/permissions/edit?id=${id}`)
-                                                    }}
-                                                >
-                                                    <EditIcon /> Edit Permission
-                                                </Dropdown.Item>
-                                                <Dropdown.Item
-                                                    color={'danger'}
-                                                    onClick={() => {
-                                                        openModal(`user-delete-permission-from-user-${id}`)
-                                                    }}
-                                                >
-                                                    <DeleteIcon /> Delete Permission from User
-                                                </Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown.Container>
-                                    )
-                                })}
+                            {sortPermissionsByNameAscending(user?.permissions).map(({ id, name, occurrence }) => {
+                                return (
+                                    <Dropdown.Container triggerSize={'lg'} key={id}>
+                                        <Dropdown.Trigger component={Label} componentProps={{ block: true }}>
+                                            {name} {occurrence > 1 && `(${occurrence})`}
+                                        </Dropdown.Trigger>
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item type={'header'}>
+                                                <InfoIcon /> Permission ID {id}
+                                            </Dropdown.Item>
+                                            <Dropdown.Item
+                                                color={'info'}
+                                                onClick={() => {
+                                                    navigate(`/roles?permissions=${id}`)
+                                                }}
+                                            >
+                                                <DetailsIcon /> Show Roles with Permission
+                                            </Dropdown.Item>
+                                            <Dropdown.Item
+                                                color={'info'}
+                                                onClick={() => {
+                                                    navigate(`/users?permissions=${id}`)
+                                                }}
+                                            >
+                                                <DetailsIcon /> Show Users with Permission
+                                            </Dropdown.Item>
+                                            <Dropdown.Item
+                                                color={'warning'}
+                                                onClick={() => {
+                                                    navigate(`/permissions/edit?id=${id}`)
+                                                }}
+                                            >
+                                                <EditIcon /> Edit Permission
+                                            </Dropdown.Item>
+                                            <Dropdown.Item
+                                                color={'danger'}
+                                                onClick={() => {
+                                                    openModal(`user-delete-permission-from-user-${id}`)
+                                                }}
+                                            >
+                                                <DeleteIcon /> Delete Permission from User
+                                            </Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown.Container>
+                                )
+                            })}
                         </Tabs.Content>
                     </Tabs.Tab>
                 </Tabs.Container>

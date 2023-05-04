@@ -3,6 +3,7 @@ import { Badge, Card, Dropdown, Label, LoadingOverlay } from '../../../../compon
 import { DeleteIcon, DetailsIcon, InfoIcon, EditIcon } from '../../../../components/icons'
 import { ModalConfirm } from '../../../../components/common/ModalConfirm'
 import { User } from '../../../../../types.d'
+import { sortRolesByNameAscending } from '../../../../helpers/roles'
 
 interface AddRoleProps {
     roles: any
@@ -36,82 +37,80 @@ export class Roles extends React.Component<AddRoleProps, null> {
                     </h1>
                 }
             >
-                {user?.roles
-                    ?.sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                    .map(({ id: _id, name }) => {
-                        registerModal(
-                            `user-delete-role-${_id}`,
-                            <ModalConfirm
-                                onConfirm={() => {
-                                    setIsLoading(true)
+                {sortRolesByNameAscending(user?.roles).map(({ id: _id, name }) => {
+                    registerModal(
+                        `user-delete-role-${_id}`,
+                        <ModalConfirm
+                            onConfirm={() => {
+                                setIsLoading(true)
 
-                                    return deleteUserRole(user, {
-                                        id: _id,
-                                    }).then(() => {
-                                        Promise.all([fetchOne(user['id'])]).then(() => {
-                                            setIsLoading(false)
-                                            addToastNotification({
-                                                type: 'success',
-                                                title: 'Remove success.',
-                                                text: 'Role has been removed.',
-                                            })
-                                            closeModal(`user-delete-role-${_id}`)
+                                return deleteUserRole(user, {
+                                    id: _id,
+                                }).then(() => {
+                                    Promise.all([fetchOne(user['id'])]).then(() => {
+                                        setIsLoading(false)
+                                        addToastNotification({
+                                            type: 'success',
+                                            title: 'Remove success.',
+                                            text: 'Role has been removed.',
                                         })
+                                        closeModal(`user-delete-role-${_id}`)
                                     })
-                                }}
-                                onCancel={() => closeModal(`user-delete-role-${_id}`)}
-                            >
-                                <p>
-                                    Are you sure to delete Role: <b>{name}</b> from User: <b>{user.name}</b>?
-                                </p>
-                            </ModalConfirm>,
-                        )
+                                })
+                            }}
+                            onCancel={() => closeModal(`user-delete-role-${_id}`)}
+                        >
+                            <p>
+                                Are you sure to delete Role: <b>{name}</b> from User: <b>{user.name}</b>?
+                            </p>
+                        </ModalConfirm>,
+                    )
 
-                        return (
-                            <Dropdown.Container triggerSize={'lg'} key={_id}>
-                                <Dropdown.Trigger component={Label} componentProps={{ block: true }}>
-                                    {name}
-                                </Dropdown.Trigger>
-                                <Dropdown.Menu>
-                                    <Dropdown.Item type="header">
-                                        <InfoIcon /> Role id {_id}
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        color={'info'}
-                                        onClick={() => {
-                                            navigate(`/permissions?roles=${_id}`)
-                                        }}
-                                    >
-                                        <DetailsIcon /> Show Role Permissions
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        color={'info'}
-                                        onClick={() => {
-                                            navigate(`/users?roles=${_id}`)
-                                        }}
-                                    >
-                                        <DetailsIcon /> Show Users with Role
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        color={'warning'}
-                                        onClick={() => {
-                                            navigate(`/roles/edit?id=${_id}`)
-                                        }}
-                                    >
-                                        <EditIcon /> Edit Role
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        color="danger"
-                                        onClick={() => {
-                                            openModal(`user-delete-role-${_id}`)
-                                        }}
-                                    >
-                                        <DeleteIcon /> Remove Role from User
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown.Container>
-                        )
-                    })}
+                    return (
+                        <Dropdown.Container triggerSize={'lg'} key={_id}>
+                            <Dropdown.Trigger component={Label} componentProps={{ block: true }}>
+                                {name}
+                            </Dropdown.Trigger>
+                            <Dropdown.Menu>
+                                <Dropdown.Item type="header">
+                                    <InfoIcon /> Role id {_id}
+                                </Dropdown.Item>
+                                <Dropdown.Item
+                                    color={'info'}
+                                    onClick={() => {
+                                        navigate(`/permissions?roles=${_id}`)
+                                    }}
+                                >
+                                    <DetailsIcon /> Show Role Permissions
+                                </Dropdown.Item>
+                                <Dropdown.Item
+                                    color={'info'}
+                                    onClick={() => {
+                                        navigate(`/users?roles=${_id}`)
+                                    }}
+                                >
+                                    <DetailsIcon /> Show Users with Role
+                                </Dropdown.Item>
+                                <Dropdown.Item
+                                    color={'warning'}
+                                    onClick={() => {
+                                        navigate(`/roles/edit?id=${_id}`)
+                                    }}
+                                >
+                                    <EditIcon /> Edit Role
+                                </Dropdown.Item>
+                                <Dropdown.Item
+                                    color="danger"
+                                    onClick={() => {
+                                        openModal(`user-delete-role-${_id}`)
+                                    }}
+                                >
+                                    <DeleteIcon /> Remove Role from User
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown.Container>
+                    )
+                })}
                 {isLoading && <LoadingOverlay />}
             </Card>
         )

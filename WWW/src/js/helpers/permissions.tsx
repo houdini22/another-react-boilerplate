@@ -39,3 +39,7 @@ export const userPermissionFromRoles = (user: User) => {
 
     return permissions
 }
+
+export const sortPermissionsByNameAscending = (permissions = []) => {
+    return permissions.sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
+}

@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Col, Row, Table, Label, Dropdown, Typography } from '../../../../components'
 import { DeleteIcon, InfoIcon, UserIcon } from '../../../../components/icons'
 import { ModalConfirm } from '../../../../components/common/ModalConfirm'
+import { sortPermissionsByNameAscending } from '../../../../helpers/permissions'
 
 interface RowExpandPermissionsProps {
     setIsLoading: Function
@@ -33,9 +34,8 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                                 <h3>Permissions</h3>
                             </Typography.Container>
                         </Col>
-                        {role?.permissions
-                            ?.sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                            ?.map(({ id: _id, name, is_deletable: _is_deletable }) => {
+                        {sortPermissionsByNameAscending(role?.permissions).map(
+                            ({ id: _id, name, is_deletable: _is_deletable }) => {
                                 registerModal(
                                     `user-remove-role-permission-${_id}-delete`,
                                     <ModalConfirm
@@ -107,7 +107,8 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                                         </Dropdown.Container>
                                     </Col>
                                 )
-                            })}
+                            },
+                        )}
                     </Row>
                 </Table.Td>
             </Table.Tr>

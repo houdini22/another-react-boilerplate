@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Field } from 'redux-form'
 import { Button, FormField } from '../../../../components'
 import { Permission, Role } from '../../../../../types.d'
+import { sortUsersByNameAscending } from '../../../../helpers/users'
 
 interface AddUsersFormProps {
     handleSubmit: Function
@@ -22,13 +23,11 @@ class AddUserForm extends React.Component<AddUsersFormProps, null> {
                     label="User"
                     type="select"
                     placeholder={`--- choose ---`}
-                    options={users
-                        .sort(({ name: nameA }, { name: nameB }) => nameA.localeCompare(nameB))
-                        .map(({ id, name }) => ({
-                            label: name,
-                            value: id,
-                            disabled: !!role?.users?.find(({ id: _id }) => id === _id),
-                        }))}
+                    options={sortUsersByNameAscending(users).map(({ id, name }) => ({
+                        label: name,
+                        value: id,
+                        disabled: !!role?.users?.find(({ id: _id }) => id === _id),
+                    }))}
                     component={FormField}
                 />
                 <Button color="success" type="submit" block>
