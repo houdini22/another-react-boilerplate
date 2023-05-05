@@ -5,7 +5,15 @@ import { generateUrl } from '../../../../helpers/cms'
 
 class AddDocumentForm extends React.Component {
     render() {
-        const { handleSubmit, categories, currentNode, change } = this.props
+        const {
+            handleSubmit,
+            categories,
+            currentNode,
+            change,
+            initialValues: {
+                tree: { id },
+            },
+        } = this.props
 
         console.log(this.props)
 
@@ -35,7 +43,12 @@ class AddDocumentForm extends React.Component {
                                                     onChange={(e, value) => {
                                                         change(
                                                             'document.document_url',
-                                                            generateUrl(currentNode.category.category_url, value),
+                                                            generateUrl(
+                                                                id
+                                                                    ? currentNode.parent.category.category_url
+                                                                    : currentNode.category.category_url,
+                                                                value,
+                                                            ),
                                                         )
                                                     }}
                                                 />

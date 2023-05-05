@@ -5,7 +5,16 @@ import { generateUrl } from '../../../../helpers/cms'
 
 class AddCategoryForm extends React.Component {
     render() {
-        const { handleSubmit, categories, indexDocuments, change, currentNode } = this.props
+        const {
+            handleSubmit,
+            categories,
+            indexDocuments,
+            change,
+            currentNode,
+            initialValues: {
+                tree: { id },
+            },
+        } = this.props
 
         console.log(this.props)
 
@@ -21,6 +30,13 @@ class AddCategoryForm extends React.Component {
                                         {({ changeTab }) => (
                                             <>
                                                 <Field
+                                                    name="tree.id"
+                                                    type="hidden"
+                                                    component={FormField}
+                                                    inputOnly
+                                                    style={{ display: 'none' }}
+                                                />
+                                                <Field
                                                     name="parent_id"
                                                     label="Parent Category"
                                                     type="select"
@@ -35,7 +51,12 @@ class AddCategoryForm extends React.Component {
                                                     onChange={(e, value) => {
                                                         change(
                                                             'category.category_url',
-                                                            generateUrl(currentNode.category.category_url, value),
+                                                            generateUrl(
+                                                                id
+                                                                    ? currentNode.parent.category.category_url
+                                                                    : currentNode.category.category_url,
+                                                                value,
+                                                            ),
                                                         )
                                                     }}
                                                 />

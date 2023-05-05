@@ -14,9 +14,7 @@ export class AddDocumentView extends React.Component {
                 {({ navigate, query: { parent_id } }) => (
                     <PageContent>
                         <Manager currentId={parent_id}>
-                            {({ nodes, currentNode, isLoading, isLoaded, currentNodeParents }) => {
-                                console.log(nodes, currentNode, isLoaded, isLoading)
-
+                            {({ nodes, currentNode, isLoading, isLoaded, currentNodeParents, addDocument }) => {
                                 return (
                                     <div>
                                         <Header currentNodeParents={currentNodeParents} currentNode={currentNode} />
@@ -42,6 +40,7 @@ export class AddDocumentView extends React.Component {
                                                         generateUrl(currentNode?.category?.category_url) || '/',
                                                 },
                                             }}
+                                            save={addDocument}
                                         />
                                     </div>
                                 )

@@ -46,10 +46,10 @@ const AddDocumentFormContainer = compose(
     }),
     reduxForm({
         form: FORM_NAME,
-        onSubmit: (values, dispatch, { addDocument, navigate }) => {
-            return addDocument(values).then(
-                () => {
-                    navigate('/cms/pages')
+        onSubmit: (values, dispatch, { save, navigate }) => {
+            return save(values).then(
+                ({ data }) => {
+                    navigate(`/cms/pages?parent_id=${data.parent_id}`)
                 },
                 (response) => {
                     throw new SubmissionError(processAPIerrorResponseToFormErrors(response))

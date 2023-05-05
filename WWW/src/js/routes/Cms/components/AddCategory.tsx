@@ -14,7 +14,15 @@ export class AddCategoryView extends React.Component {
                 {({ navigate, query: { parent_id } }) => (
                     <PageContent>
                         <Manager currentId={parent_id}>
-                            {({ nodes, currentNode, isLoading, isLoaded, fetchError, currentNodeParents }) => {
+                            {({
+                                nodes,
+                                currentNode,
+                                isLoading,
+                                isLoaded,
+                                fetchError,
+                                currentNodeParents,
+                                addCategory,
+                            }) => {
                                 console.log(
                                     nodes,
                                     currentNode,
@@ -48,6 +56,7 @@ export class AddCategoryView extends React.Component {
                                                 },
                                                 parent_id: currentNode.id,
                                             }}
+                                            save={addCategory}
                                         />
                                     </>
                                 )

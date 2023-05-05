@@ -22,8 +22,11 @@ export class Header extends React.Component<HeaderProps, null> {
                             {category_name}
                         </PageHeader.BreadcrumbsItem>
                     ))}
-                    <PageHeader.BreadcrumbsItem href={`/cms/pages/edit_link?parent_id=${currentNode.id}`}>
-                        Add Link
+                    <PageHeader.BreadcrumbsItem href={`/cms/pages?parent_id=${currentNode.id}`}>
+                        {currentNode?.category?.category_name}
+                    </PageHeader.BreadcrumbsItem>
+                    <PageHeader.BreadcrumbsItem href={`/cms/pages/add_category?parent_id=${currentNode.id}`}>
+                        Add Document
                     </PageHeader.BreadcrumbsItem>
                 </PageHeader.Breadcrumbs>
             </PageHeader.Container>

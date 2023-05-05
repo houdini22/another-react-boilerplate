@@ -23,7 +23,7 @@ export class Header extends React.Component<HeaderProps, null> {
                         </PageHeader.BreadcrumbsItem>
                     ))}
                     <PageHeader.BreadcrumbsItem href={`/cms/pages/edit_link?parent_id=${currentNode.id}`}>
-                        Add Link
+                        Edit Link
                     </PageHeader.BreadcrumbsItem>
                 </PageHeader.Breadcrumbs>
             </PageHeader.Container>

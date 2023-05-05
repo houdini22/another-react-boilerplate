@@ -13,7 +13,7 @@ export class AddLinkView extends React.Component {
                 {({ navigate, query: { parent_id } }) => (
                     <PageContent>
                         <Manager currentId={parent_id}>
-                            {({ nodes, currentNode, isLoading, isLoaded, fetchError, currentNodeParents }) => {
+                            {({ nodes, currentNode, isLoading, isLoaded, fetchError, currentNodeParents, addLink }) => {
                                 console.log(nodes, currentNode, isLoaded, isLoading, fetchError)
 
                                 return (
@@ -40,6 +40,7 @@ export class AddLinkView extends React.Component {
                                                     link_target: '_self',
                                                 },
                                             }}
+                                            save={addLink}
                                         />
                                     </div>
                                 )

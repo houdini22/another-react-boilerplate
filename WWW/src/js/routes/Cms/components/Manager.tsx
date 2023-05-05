@@ -26,6 +26,12 @@ export class Manager extends React.Component<null, null> {
             unpublish,
             deleteNode,
             currentNodeParents,
+            editCategory,
+            addCategory,
+            addDocument,
+            editDocument,
+            addLink,
+            editLink,
         } = this.props
 
         const renderProps = {
@@ -40,6 +46,12 @@ export class Manager extends React.Component<null, null> {
             unpublish,
             deleteNode,
             currentNodeParents,
+            editCategory,
+            addCategory,
+            addDocument,
+            editDocument,
+            addLink,
+            editLink,
         }
 
         return children(renderProps)
@@ -62,6 +74,12 @@ const mapDispatchToProps = (dispatch) => {
         publish: (id) => dispatch(actions.publish(id)),
         unpublish: (id) => dispatch(actions.unpublish(id)),
         deleteNode: (node) => dispatch(actions.deleteNode(node)),
+        addCategory: (values) => dispatch(actions.addCategory(values)),
+        editCategory: (values) => dispatch(actions.editCategory(values)),
+        addDocument: (values) => dispatch(actions.addDocument(values)),
+        editDocument: (values) => dispatch(actions.editDocument(values)),
+        addLink: (values) => dispatch(actions.addLink(values)),
+        editLink: (values) => dispatch(actions.editLink(values)),
     }
 }
 

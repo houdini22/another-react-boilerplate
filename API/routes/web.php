@@ -23,6 +23,9 @@ Route::prefix('api/v1')->group(function () {
         Route::delete('pages/deleteNode', '\App\Http\Controllers\CmsPagesController@deleteDeleteNode');
         Route::post('pages/addDocument', '\App\Http\Controllers\CmsPagesController@postAddDocument');
         Route::post('pages/addLink', '\App\Http\Controllers\CmsPagesController@postAddLink');
+        Route::post('pages/editLink', '\App\Http\Controllers\CmsPagesController@postEditLink');
+        Route::post('pages/editCategory', '\App\Http\Controllers\CmsPagesController@postEditCategory');
+        Route::post('pages/editDocument', '\App\Http\Controllers\CmsPagesController@postEditDocument');
     });
 
     Route::prefix('users')->group(function () {

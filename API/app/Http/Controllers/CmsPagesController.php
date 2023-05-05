@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class CmsPagesController extends Controller
 {
@@ -32,9 +33,13 @@ class CmsPagesController extends Controller
             $parents = $parents->toArray();
         }
 
+        $currentNodeData = $currentNode->toArray();
+        $currentNodeParent = $currentNode->parent()->first();
+        $currentNodeData['parent'] = $currentNodeParent ? $currentNodeParent->toArray() : null;
+
         return response()->json([
             'nodes' => $nodes->toArray(),
-            'currentNode' => $currentNode->toArray(),
+            'currentNode' => $currentNodeData,
             'parents' => $parents ? $parents : []
         ]);
     }
@@ -110,6 +115,11 @@ class CmsPagesController extends Controller
 
     public function postAddCategory(Request $request)
     {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
         $values = $request->post();
 
         $validator = Validator::make($values, [
@@ -151,10 +161,149 @@ class CmsPagesController extends Controller
 
         return response()->json([
             'message' => 'ok',
-            'tree' => Tree::find($tree->id)->toArray(),
+            'data' => [
+                'data' => $tree->toArray()
+            ],
         ]);
     }
 
+    public function postEditCategory(Request $request)
+    {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $tree = Tree::with('category')->where('id', '=', Arr::get($request->post(), 'tree.id'))->first();
+        if (!$tree) {
+            return $this->response404('NOT_FOUND', [
+                'id' => Arr::get('tree.id', $request->post())
+            ]);
+        }
+
+        $values = $request->post();
+
+        $validator = Validator::make($values, [
+            'category.category_name' => ['required', 'max:256'],
+            'category.category_url' => ['required', 'max:256', 'unique:categories,category_url,'.$tree->category->id],
+            'parent_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->messages(),
+            ], 422);
+        }
+
+
+        $tree->fill(Arr::get($values, 'tree'));
+        $tree->save();
+
+        $tree->category->fill(Arr::get($values, 'category'));
+        $tree->category->save();
+
+        if (Arr::get($values, 'parent_id') != $tree->parent_id) {
+            $tree->appendToNode(Tree::find(Arr::get($values, 'parent_id')))->save();
+        }
+
+        return response()->json([
+            'message' => 'ok',
+            'data' => [
+                'data' => $tree->toArray()
+            ],
+        ]);
+    }
+    public function postEditDocument(Request $request)
+    {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $tree = Tree::with('document')->where('id', '=', Arr::get($request->post(), 'tree.id'))->first();
+        if (!$tree) {
+            return $this->response404('NOT_FOUND', [
+                'id' => Arr::get('tree.id', $request->post())
+            ]);
+        }
+
+        $values = $request->post();
+
+        $validator = Validator::make($values, [
+            'document.document_name' => ['required', 'max:256'],
+            'document.document_url' => ['required', 'max:256', 'unique:documents,id,'.$tree->document->id],
+            'parent_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->messages(),
+            ], 422);
+        }
+
+
+        $tree->fill(Arr::get($values, 'tree'));
+        $tree->save();
+
+        $tree->document->fill(Arr::get($values, 'document'));
+        $tree->document->save();
+
+        if (Arr::get($values, 'parent_id') != $tree->parent_id) {
+            $tree->appendToNode(Tree::find(Arr::get($values, 'parent_id')))->save();
+        }
+
+        return response()->json([
+            'message' => 'ok',
+            'data' => [
+                'data' => $tree->toArray()
+            ],
+        ]);
+    }
+    public function postEditLink(Request $request)
+    {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $tree = Tree::with('link')->where('id', '=', Arr::get($request->post(), 'tree.id'))->first();
+        if (!$tree) {
+            return $this->response404('NOT_FOUND', [
+                'id' => Arr::get('tree.id', $request->post())
+            ]);
+        }
+
+        $values = $request->post();
+
+        $validator = Validator::make($values, [
+            'link.link_name' => ['required', 'max:256'],
+            'link.link_url' => ['required', 'url'],
+            'parent_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->messages(),
+            ], 422);
+        }
+
+        $tree->fill(Arr::get($values, 'tree'));
+        $tree->save();
+
+        $tree->link->fill(Arr::get($values, 'link'));
+        $tree->link->save();
+
+        if (Arr::get($values, 'parent_id') != $tree->parent_id) {
+            $tree->appendToNode(Tree::find(Arr::get($values, 'parent_id')))->save();
+        }
+
+        return response()->json([
+            'message' => 'ok',
+            'data' => [
+                'data' => $tree->toArray()
+            ],
+        ]);
+    }
     public function postPublish(Request $request)
     {
         $tree = Tree::find($request->post('id'));
@@ -201,7 +350,7 @@ class CmsPagesController extends Controller
         $values = $request->post();
 
         $validator = Validator::make($values, [
-            'document.document_name' => 'required|max:256|unique:documents,document_name',
+            'document.document_name' => 'required|max:256',
             'document.document_url' => 'required|max:256|unique:documents,document_url'
         ]);
 
@@ -229,7 +378,9 @@ class CmsPagesController extends Controller
 
         return response()->json([
             'message' => 'ok',
-            'tree' => Tree::find($tree->id)->toArray(),
+            'data' => [
+                'data' => $tree->toArray()
+            ],
         ]);
     }
 

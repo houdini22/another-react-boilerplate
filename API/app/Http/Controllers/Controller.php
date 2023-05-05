@@ -18,10 +18,11 @@ class Controller extends BaseController
         ], 401);
     }
 
-    public function response404()
+    public function response404($message = 'NOT_FOUND', $data = [])
     {
         return response()->json([
-            'message' => 'NOT_FOUND',
+            'message' => $message,
+            'data' => $data,
         ], 404);
     }
 }

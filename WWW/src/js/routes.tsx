@@ -23,6 +23,9 @@ import { UsersPermissionsEdit } from './routes/UsersPermissionsEdit'
 import { UsersPermissionsAdd } from './routes/UsersPermissionsAdd'
 import { UserRolesAdd } from './routes/UserRolesAdd'
 import { WebsocketsManager } from './containers/WebsocketsManager'
+import { EditCategoryView } from './routes/Cms/components/EditCategory'
+import EditDocumentView from './routes/Cms/components/EditDocument'
+import EditLinkView from './routes/Cms/components/EditLink'
 
 const App = () => (
     <Router>
@@ -50,6 +53,16 @@ const App = () => (
                         }
                     />
                     <Route
+                        path="/cms/pages/edit_category"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute>
+                                    <EditCategoryView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
                         path="/cms/pages/add_link"
                         element={
                             <PageLayout>
@@ -60,11 +73,31 @@ const App = () => (
                         }
                     />
                     <Route
+                        path="/cms/pages/edit_link"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute>
+                                    <EditLinkView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
                         path="/cms/pages/add_document"
                         element={
                             <PageLayout>
                                 <UserIsAuthenticatedRoute>
                                     <AddDocumentView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/cms/pages/edit_document"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute>
+                                    <EditDocumentView />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
                         }

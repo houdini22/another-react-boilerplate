@@ -161,7 +161,9 @@ export class CmsPagesView extends React.Component {
                                                                 xs={12}
                                                                 alignCenter
                                                                 onClick={() => {
-                                                                    setCurrentId(currentNode.parent_id)
+                                                                    navigate(
+                                                                        `/cms/pages?parent_id=${currentNode.parent_id}`,
+                                                                    )
                                                                 }}
                                                             >
                                                                 <Button block color={'primary'}>
@@ -386,9 +388,19 @@ export class CmsPagesView extends React.Component {
                                                                                 iconOnly
                                                                                 onClick={(e) => {
                                                                                     e.stopPropagation()
-                                                                                    navigate(
-                                                                                        `/cms/pages/edit_category?id=${node.id}`,
-                                                                                    )
+                                                                                    if (node.category_id) {
+                                                                                        navigate(
+                                                                                            `/cms/pages/edit_category?id=${node.id}`,
+                                                                                        )
+                                                                                    } else if (node.document_id) {
+                                                                                        navigate(
+                                                                                            `/cms/pages/edit_document?id=${node.id}`,
+                                                                                        )
+                                                                                    } else if (node.link_id) {
+                                                                                        navigate(
+                                                                                            `/cms/pages/edit_link?id=${node.id}`,
+                                                                                        )
+                                                                                    }
                                                                                 }}
                                                                             />
                                                                         )}

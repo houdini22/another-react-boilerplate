@@ -84,9 +84,24 @@ const addCategory = (values) => (dispatch, getState) => {
     return new Promise<void>((resolve, reject) => {
         return http
             .post('/cms/pages/addCategory', values)
-            .then(() => {
+            .then(({ data: { data } }) => {
                 return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
-                    resolve()
+                    resolve(data)
+                })
+            })
+            .catch((e) => {
+                reject(e)
+            })
+    })
+}
+
+const editCategory = (values) => (dispatch, getState) => {
+    return new Promise<void>((resolve, reject) => {
+        return http
+            .post('/cms/pages/editCategory', values)
+            .then(({ data: { data } }) => {
+                return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                    resolve(data)
                 })
             })
             .catch((e) => {
@@ -99,9 +114,22 @@ const addDocument = (values) => (dispatch, getState) => {
     return new Promise<void>((resolve, reject) => {
         return http
             .post('/cms/pages/addDocument', values)
-            .then(() => {
+            .then(({ data: { data } }) => {
                 return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
-                    resolve()
+                    resolve(data)
+                })
+            })
+            .catch((e) => reject(e))
+    })
+}
+
+const editDocument = (values) => (dispatch, getState) => {
+    return new Promise<void>((resolve, reject) => {
+        return http
+            .post('/cms/pages/editDocument', values)
+            .then(({ data: { data } }) => {
+                return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                    resolve(data)
                 })
             })
             .catch((e) => reject(e))
@@ -112,9 +140,24 @@ const addLink = (values) => (dispatch, getState) => {
     return new Promise<void>((resolve, reject) => {
         return http
             .post('/cms/pages/addLink', values)
-            .then(() => {
+            .then(({ data: { data } }) => {
                 return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
-                    resolve()
+                    resolve(data)
+                })
+            })
+            .catch((e) => {
+                reject(e)
+            })
+    })
+}
+
+const editLink = (values) => (dispatch, getState) => {
+    return new Promise<void>((resolve, reject) => {
+        return http
+            .post('/cms/pages/editLink', values)
+            .then(({ data: { data } }) => {
+                return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                    resolve(data)
                 })
             })
             .catch((e) => {
@@ -157,6 +200,9 @@ export const actions = {
     unpublish,
     deleteNode,
     addLink,
+    editCategory,
+    editDocument,
+    editLink,
 }
 
 // ------------------------------------
