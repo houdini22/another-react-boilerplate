@@ -1,15 +1,21 @@
 import * as React from 'react'
 import { Field } from 'redux-form'
-import { Button, Card, Col, FormField, Row, Tabs } from '../../../components'
+import { Button, Card, Col, FormField, Row, Tabs } from '../../../../components'
 
-class AddDocumentForm extends React.Component {
+class AddLinkForm extends React.Component {
     render() {
         const { handleSubmit, categories } = this.props
+
+        const linkTargets = [
+            { label: '_self', value: '_self' },
+            { label: '_blank', value: '_blank' },
+            { label: '_top', value: '_top' },
+        ]
 
         return (
             <Row>
                 <Col xs={12}>
-                    <Card header={<h1>Form</h1>}>
+                    <Card header={<h1>Add Link</h1>} color={'primary'}>
                         <form onSubmit={handleSubmit}>
                             <Tabs.Container>
                                 <Tabs.Tab name="main">
@@ -25,8 +31,8 @@ class AddDocumentForm extends React.Component {
                                                     options={categories}
                                                 />
                                                 <Field
-                                                    name="document.document_name"
-                                                    label="Document Name"
+                                                    name="link.link_name"
+                                                    label="Link Name"
                                                     type="text"
                                                     component={FormField}
                                                 />
@@ -49,55 +55,30 @@ class AddDocumentForm extends React.Component {
                                                     component={FormField}
                                                 />
                                                 <Field
-                                                    name="document.document_url"
+                                                    name="link.link_url"
                                                     label="URL"
                                                     type="text"
                                                     component={FormField}
                                                 />
-                                            </>
-                                        )}
-                                    </Tabs.Content>
-                                </Tabs.Tab>
-                                <Tabs.Tab name="meta">
-                                    <Tabs.Trigger>Meta</Tabs.Trigger>
-                                    <Tabs.Content>
-                                        {({ changeTab }) => (
-                                            <>
                                                 <Field
-                                                    name="document.document_meta_title"
-                                                    label="Title"
-                                                    type="text"
+                                                    name="link.link_target"
+                                                    label="Target"
+                                                    type="select"
+                                                    placeholder={'--- choose ---'}
                                                     component={FormField}
+                                                    options={linkTargets}
                                                 />
-                                                <Field
-                                                    name="document.document_meta_keywords"
-                                                    label="Keywords"
-                                                    type="text"
-                                                    component={FormField}
-                                                />
-                                                <Field
-                                                    name="document.document_meta_description"
-                                                    label="Description"
-                                                    type="text"
-                                                    component={FormField}
-                                                />
-                                                <Field
-                                                    name="document.document_meta_robots"
-                                                    label="Robots"
-                                                    type="text"
-                                                    component={FormField}
-                                                />
+
+                                                <div>
+                                                    <Button color="success" type="submit">
+                                                        Save
+                                                    </Button>
+                                                </div>
                                             </>
                                         )}
                                     </Tabs.Content>
                                 </Tabs.Tab>
                             </Tabs.Container>
-
-                            <div>
-                                <Button color="success" type="submit">
-                                    Save
-                                </Button>
-                            </div>
                         </form>
                     </Card>
                 </Col>
@@ -106,5 +87,5 @@ class AddDocumentForm extends React.Component {
     }
 }
 
-export { AddDocumentForm }
-export default { AddDocumentForm }
+export { AddLinkForm }
+export default { AddLinkForm }

@@ -8,8 +8,8 @@ export class Manager extends React.Component<null, null> {
     }
 
     componentDidMount() {
-        const { setCurrentId } = this.props
-        setCurrentId(1)
+        const { setCurrentId, currentId = 1 } = this.props
+        setCurrentId(currentId)
     }
 
     render() {
@@ -25,6 +25,7 @@ export class Manager extends React.Component<null, null> {
             publish,
             unpublish,
             deleteNode,
+            currentNodeParents,
         } = this.props
 
         const renderProps = {
@@ -38,6 +39,7 @@ export class Manager extends React.Component<null, null> {
             publish,
             unpublish,
             deleteNode,
+            currentNodeParents,
         }
 
         return children(renderProps)
@@ -50,6 +52,7 @@ const mapStateToProps = (state) => ({
     fetchError: selectors.getFetchError(state),
     nodes: selectors.getNodes(state),
     currentNode: selectors.getCurrentNode(state),
+    currentNodeParents: selectors.getCurrentNodeParents(state),
 })
 
 const mapDispatchToProps = (dispatch) => {

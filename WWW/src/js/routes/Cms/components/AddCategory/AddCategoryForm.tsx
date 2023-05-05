@@ -1,15 +1,18 @@
 import * as React from 'react'
 import { Field } from 'redux-form'
-import { Button, Card, Col, FormField, Row, Tabs } from '../../../components'
+import { Button, Card, Col, FormField, Row, Tabs } from '../../../../components'
+import { generateUrl } from '../../../../helpers/cms'
 
 class AddCategoryForm extends React.Component {
     render() {
-        const { handleSubmit, categories, indexDocuments } = this.props
+        const { handleSubmit, categories, indexDocuments, change, currentNode } = this.props
+
+        console.log(this.props)
 
         return (
             <Row>
                 <Col xs={12}>
-                    <Card header={<h1>Form</h1>}>
+                    <Card header={<h1>Add Category</h1>} color={'primary'}>
                         <form onSubmit={handleSubmit}>
                             <Tabs.Container>
                                 <Tabs.Tab name="main">
@@ -29,6 +32,12 @@ class AddCategoryForm extends React.Component {
                                                     label="Category Name"
                                                     type="text"
                                                     component={FormField}
+                                                    onChange={(e, value) => {
+                                                        change(
+                                                            'category.category_url',
+                                                            generateUrl(currentNode.category.category_url, value),
+                                                        )
+                                                    }}
                                                 />
                                                 <Field
                                                     name="category.index_document_id"

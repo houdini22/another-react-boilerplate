@@ -1,15 +1,13 @@
 import * as React from 'react'
 import { bindActionCreators, compose } from 'redux'
 import { connect } from 'react-redux'
-import { AddCategoryForm } from '../components/AddCategoryForm'
+import { AddCategoryForm } from '../components/AddCategory/AddCategoryForm'
 import { reduxForm, SubmissionError } from 'redux-form'
-import * as moment from 'moment'
-import { formatDateTimeAPI } from '../../../helpers/date-time'
 import { actions } from '../../../reducers/cms-pages'
 import { processAPIerrorResponseToFormErrors } from '../../../modules/http'
 import { withRouter } from '../../../helpers/router'
 
-export const FORM_NAME = 'add-category-form-container'
+export const FORM_NAME = 'add-category-form'
 
 interface AddCategoryFormContainerBaseState {
     categories: Array<any>
@@ -31,7 +29,13 @@ class AddCategoryFormContainerBase extends React.Component<null, AddCategoryForm
 
         return fetchParentCategorySelectOptions().then((options) => {
             this.setState({
-                categories: options,
+                categories: [
+                    {
+                        label: 'This category',
+                        value: 'new',
+                    },
+                    ...options,
+                ],
             })
         })
     }
@@ -54,23 +58,8 @@ class AddCategoryFormContainerBase extends React.Component<null, AddCategoryForm
 const AddCategoryFormContainer = compose(
     withRouter,
     connect(
-        ({ cmsPages: { currentId } }, props) => {
-            return {
-                initialValues: {
-                    category: {
-                        category_name: null,
-                        category_url: null,
-                        index_document_id: null,
-                        menu_category_id: null,
-                    },
-                    parent_id: currentId,
-                    tree: {
-                        tree_is_published: true,
-                        tree_published_from: formatDateTimeAPI(moment()),
-                        tree_published_to: formatDateTimeAPI(moment(new Date(2099, 12)).format('YYYY')),
-                    },
-                },
-            }
+        (state) => {
+            return {}
         },
         (dispatch) => {
             return bindActionCreators(
@@ -86,20 +75,17 @@ const AddCategoryFormContainer = compose(
     reduxForm({
         form: FORM_NAME,
         onSubmit: (values, dispatch, { addCategory, navigate }) => {
-            return addCategory(values)
-                .then(() => {
+            return addCategory(values).then(
+                () => {
                     navigate('/cms/pages')
-                })
-                .catch(
-                    ({
-                        response: {
-                            data: { errors },
-                        },
-                    }) => {
-                        throw new SubmissionError(processAPIerrorResponseToFormErrors(errors))
-                    },
-                )
+                },
+                (response) => {
+                    throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
+                },
+            )
         },
+        enableReinitialize: true,
+        destroyOnUnmount: false,
     }),
 )(AddCategoryFormContainerBase)
 

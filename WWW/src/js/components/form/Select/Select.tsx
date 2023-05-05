@@ -26,7 +26,7 @@ class Select extends React.Component<SelectProps, null> {
         const _options = _.isFunction(options) ? options() : options
 
         return (
-            <select {...props} defaultValue={defaultValue || ''} key={defaultValue || ''}>
+            <select {...props} defaultValue={defaultValue || ''} key={defaultValue || ''} value={value || ''}>
                 {placeholder && this.renderPlaceholder()}
                 {_options.map(({ label, value: _value, disabled }) => {
                     return (

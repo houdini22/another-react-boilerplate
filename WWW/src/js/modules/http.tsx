@@ -2,6 +2,7 @@ import axios from 'axios'
 import { actions as commonActions } from '../reducers/common'
 import { store } from '../../index'
 import config from '../config'
+import _ from 'lodash'
 
 const { setConnectionErrorModalVisible, setFetchError } = commonActions
 
@@ -45,7 +46,7 @@ const processAPIerrorResponseToFormErrors = (response) => {
     const res = {}
 
     Object.keys(errors).forEach((key) => {
-        res[key] = errors[key].join('\n')
+        _.set(res, key, errors[key].join('\n'))
     })
 
     return res

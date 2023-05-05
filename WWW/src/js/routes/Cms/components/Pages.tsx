@@ -2,7 +2,7 @@ import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import Manager from './Manager'
 import { RouteManager } from '../../../containers/RouteManager'
-import Header from './Header'
+import Header from './Pages/Header'
 import { Alert, Button, Card, Dropdown, LoadingOverlay, Modal, Tooltip } from '../../../components'
 import { Table } from '../../../components'
 import { formatDateTime } from '../../../helpers/date-time'
@@ -35,25 +35,27 @@ export class CmsPagesView extends React.Component {
 
         return (
             <RouteManager>
-                {({ navigate }) => (
-                    <PageContent>
-                        <Header title="CMS Pages" />
-                        <Manager>
-                            {({
-                                nodes,
-                                currentNode,
-                                isLoading,
-                                isLoaded,
-                                fetchError,
-                                setCurrentId,
-                                publish,
-                                unpublish,
-                                deleteNode,
-                            }) => {
-                                console.log(nodes, currentNode, isLoaded, isLoading, fetchError)
+                {({ navigate, query: { parent_id } }) => (
+                    <Manager currentId={parent_id}>
+                        {({
+                            nodes,
+                            currentNode,
+                            isLoading,
+                            isLoaded,
+                            fetchError,
+                            setCurrentId,
+                            publish,
+                            unpublish,
+                            deleteNode,
+                            currentNodeParents,
+                        }) => {
+                            console.log(nodes, currentNode, isLoaded, isLoading, fetchError, currentNodeParents)
 
-                                return (
-                                    <>
+                            return (
+                                <>
+                                    <PageContent>
+                                        <Header currentNodeParents={currentNodeParents} currentNode={currentNode} />
+
                                         <Modal.Container visible={confirmDeleteVisible} color={'danger'}>
                                             <Modal.Header
                                                 closeIcon
@@ -98,7 +100,7 @@ export class CmsPagesView extends React.Component {
                                         </Card>
                                         <Card
                                             color={'primary'}
-                                            header={<h1>Pages</h1>}
+                                            header={<h1>Pages - {currentNode?.category?.category_name}</h1>}
                                             headerActions={[
                                                 <Dropdown.Container triggerColor={'success'} placement={'right'}>
                                                     <Dropdown.Trigger
@@ -112,21 +114,27 @@ export class CmsPagesView extends React.Component {
                                                     <Dropdown.Menu>
                                                         <Dropdown.Item
                                                             onClick={() => {
-                                                                navigate('/cms/pages/add_category')
+                                                                navigate(
+                                                                    `/cms/pages/add_category?parent_id=${currentNode.id}`,
+                                                                )
                                                             }}
                                                         >
                                                             Category
                                                         </Dropdown.Item>
                                                         <Dropdown.Item
                                                             onClick={() => {
-                                                                navigate('/cms/pages/add_document')
+                                                                navigate(
+                                                                    `/cms/pages/add_document?parent_id=${currentNode.id}`,
+                                                                )
                                                             }}
                                                         >
                                                             Document
                                                         </Dropdown.Item>
                                                         <Dropdown.Item
                                                             onClick={() => {
-                                                                navigate('/cms/pages/add_link')
+                                                                navigate(
+                                                                    `/cms/pages/add_link?parent_id=${currentNode.id}`,
+                                                                )
                                                             }}
                                                         >
                                                             Link
@@ -199,19 +207,19 @@ export class CmsPagesView extends React.Component {
                                                                 </Table.Td>
                                                                 <Table.Td xs={3}>
                                                                     {node.tree_object_type === 'category' &&
-                                                                        node.category.category_name}
+                                                                        node?.category?.category_name}
                                                                     {node.tree_object_type === 'document' &&
-                                                                        node.document.document_name}
+                                                                        node?.document?.document_name}
                                                                     {node.tree_object_type === 'link' &&
-                                                                        node.link.link_name}
+                                                                        node?.link?.link_name}
                                                                 </Table.Td>
                                                                 <Table.Td xs={3}>
                                                                     {node.tree_object_type === 'category' &&
-                                                                        (node.category.category_url || '---')}
+                                                                        (node?.category?.category_url || '---')}
                                                                     {node.tree_object_type === 'document' &&
-                                                                        node.document.document_url}
+                                                                        node?.document?.document_url}
                                                                     {node.tree_object_type === 'link' &&
-                                                                        node.link.link_url}
+                                                                        node?.link?.link_url}
                                                                 </Table.Td>
                                                                 <Table.Td xs={1}>
                                                                     {!node.tree_is_published && (
@@ -340,7 +348,7 @@ export class CmsPagesView extends React.Component {
                                                                                         <Dropdown.Item
                                                                                             onClick={() => {
                                                                                                 navigate(
-                                                                                                    '/cms/pages/add_category',
+                                                                                                    `/cms/pages/add_category?parent_id=${node.id}`,
                                                                                                 )
                                                                                             }}
                                                                                         >
@@ -349,7 +357,7 @@ export class CmsPagesView extends React.Component {
                                                                                         <Dropdown.Item
                                                                                             onClick={() => {
                                                                                                 navigate(
-                                                                                                    '/cms/pages/add_document',
+                                                                                                    `/cms/pages/add_document?parent_id=${node.id}`,
                                                                                                 )
                                                                                             }}
                                                                                         >
@@ -358,7 +366,7 @@ export class CmsPagesView extends React.Component {
                                                                                         <Dropdown.Item
                                                                                             onClick={() => {
                                                                                                 navigate(
-                                                                                                    '/cms/pages/add_link',
+                                                                                                    `/cms/pages/add_link?parent_id=${node.id}`,
                                                                                                 )
                                                                                             }}
                                                                                         >
@@ -372,6 +380,12 @@ export class CmsPagesView extends React.Component {
                                                                                 color="warning"
                                                                                 icon={<EditIcon />}
                                                                                 iconOnly
+                                                                                onClick={(e) => {
+                                                                                    e.stopPropagation()
+                                                                                    navigate(
+                                                                                        `/cms/pages/edit_category?id=${node.id}`,
+                                                                                    )
+                                                                                }}
                                                                             />
                                                                         )}
                                                                         {!!node.tree_is_deletable && (
@@ -397,11 +411,11 @@ export class CmsPagesView extends React.Component {
                                             </Table.Container>
                                             {isLoading && <LoadingOverlay />}
                                         </Card>
-                                    </>
-                                )
-                            }}
-                        </Manager>
-                    </PageContent>
+                                    </PageContent>
+                                </>
+                            )
+                        }}
+                    </Manager>
                 )}
             </RouteManager>
         )

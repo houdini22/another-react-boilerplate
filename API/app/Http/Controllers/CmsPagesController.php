@@ -22,13 +22,20 @@ class CmsPagesController extends Controller
 
         $currentNode = Tree::where('id', '=', $request->get('parent_id'))
             ->where('copy_of_id', null)
+            ->with('category')
             ->withDepth()
             ->first();
         $nodes = $currentNode->children()->get();
 
+        $parents = $currentNode->ancestors()->with('category')->get();
+        if ($parents) {
+            $parents = $parents->toArray();
+        }
+
         return response()->json([
             'nodes' => $nodes->toArray(),
             'currentNode' => $currentNode->toArray(),
+            'parents' => $parents ? $parents : []
         ]);
     }
 
@@ -48,14 +55,14 @@ class CmsPagesController extends Controller
 
         $options = [];
 
-        $traverse = function ($tree, $prefix = '-') use (&$traverse, &$options) {
+        $traverse = function ($tree, $prefix = ' - ') use (&$traverse, &$options) {
             foreach ($tree as $t) {
                 $options[] = [
                     'label' => $prefix . ' ' . $t->category->category_name,
                     'value' => $t->id,
                 ];
 
-                $traverse($t->children, $prefix . '-');
+                $traverse($t->children, $prefix . ' - ');
             }
         };
 
@@ -83,14 +90,14 @@ class CmsPagesController extends Controller
         $options = [
         ];
 
-        $traverse = function ($tree, $prefix = '-') use (&$traverse, &$options) {
+        $traverse = function ($tree, $prefix = ' - ') use (&$traverse, &$options) {
             foreach ($tree as $t) {
                 $options[] = [
                     'label' => $prefix . ' ' . $t->document->document_name,
                     'value' => $t->id,
                 ];
 
-                $traverse($t->children, $prefix . '-');
+                $traverse($t->children, $prefix . ' - ');
             }
         };
 
@@ -106,8 +113,8 @@ class CmsPagesController extends Controller
         $values = $request->post();
 
         $validator = Validator::make($values, [
-            'category.category_name' => 'required|max:256',
-            'category.category_url' => 'required|max:256'
+            'category.category_name' => ['required', 'max:256'],
+            'category.category_url' => ['required', 'max:256', 'unique:categories,category_url'],
         ]);
 
         if ($validator->fails()) {
@@ -125,9 +132,19 @@ class CmsPagesController extends Controller
             'tree_object_type' => 'category',
         ]);
 
+        $menuCategoryIdThis = Arr::get($values, 'category.menu_category_id') === 'new';
+        if ($menuCategoryIdThis) {
+            unset($values['category']['menu_category_id']);
+        }
+
         $category = new Category(Arr::get($values, 'category'));
         $category->tree_id = $tree->id;
         $category->save();
+
+        if ($menuCategoryIdThis) {
+            $category->menu_category_id = $category->id;
+            $category->save();
+        }
 
         $tree->category_id = $category->id;
         $tree->save();
@@ -184,8 +201,8 @@ class CmsPagesController extends Controller
         $values = $request->post();
 
         $validator = Validator::make($values, [
-            'document.document_name' => 'required|max:256',
-            'document.document_url' => 'required|max:256'
+            'document.document_name' => 'required|max:256|unique:documents,document_name',
+            'document.document_url' => 'required|max:256|unique:documents,document_url'
         ]);
 
         if ($validator->fails()) {
@@ -222,7 +239,7 @@ class CmsPagesController extends Controller
 
         $validator = Validator::make($values, [
             'link.link_name' => 'required|max:256',
-            'link.link_url' => 'required|max:256'
+            'link.link_url' => 'required|max:256|url'
         ]);
 
         if ($validator->fails()) {
