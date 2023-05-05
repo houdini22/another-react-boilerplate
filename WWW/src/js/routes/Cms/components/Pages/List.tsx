@@ -32,6 +32,7 @@ export class List extends React.Component<null, null> {
             registerModal,
             openModal,
             closeModal,
+            canByPermission,
         } = this.props
 
         return (
@@ -39,39 +40,47 @@ export class List extends React.Component<null, null> {
                 color={'primary'}
                 header={<h1>Pages - {currentNode?.category?.category_name}</h1>}
                 headerActions={[
-                    <Dropdown.Container triggerColor={'success'} placement={'right'} key={'add'}>
-                        <Dropdown.Trigger
-                            component={Button}
-                            componentProps={{
-                                icon: <AddIcon />,
-                                iconOnly: true,
-                            }}
-                        />
-                        <Dropdown.Menu>
-                            <Dropdown.Item
-                                onClick={() => {
-                                    navigate(`/cms/pages/add_category?parent_id=${currentNode.id}`)
+                    canByPermission(['cms.add_link', 'cms.add_document', 'cms.add_category']) ? (
+                        <Dropdown.Container triggerColor={'success'} placement={'right'} key={'add'}>
+                            <Dropdown.Trigger
+                                component={Button}
+                                componentProps={{
+                                    icon: <AddIcon />,
+                                    iconOnly: true,
                                 }}
-                            >
-                                Category
-                            </Dropdown.Item>
-                            <Dropdown.Item
-                                onClick={() => {
-                                    navigate(`/cms/pages/add_document?parent_id=${currentNode.id}`)
-                                }}
-                            >
-                                Document
-                            </Dropdown.Item>
-                            <Dropdown.Item
-                                onClick={() => {
-                                    navigate(`/cms/pages/add_link?parent_id=${currentNode.id}`)
-                                }}
-                            >
-                                Link
-                            </Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown.Container>,
-                    currentNode.depth > 0 ? (
+                            />
+                            <Dropdown.Menu>
+                                {canByPermission('cms.add_category') && (
+                                    <Dropdown.Item
+                                        onClick={() => {
+                                            navigate(`/cms/pages/add_category?parent_id=${currentNode.id}`)
+                                        }}
+                                    >
+                                        Category
+                                    </Dropdown.Item>
+                                )}
+                                {canByPermission('cms.add_document') && (
+                                    <Dropdown.Item
+                                        onClick={() => {
+                                            navigate(`/cms/pages/add_document?parent_id=${currentNode.id}`)
+                                        }}
+                                    >
+                                        Document
+                                    </Dropdown.Item>
+                                )}
+                                {canByPermission('cms.add_link') && (
+                                    <Dropdown.Item
+                                        onClick={() => {
+                                            navigate(`/cms/pages/add_link?parent_id=${currentNode.id}`)
+                                        }}
+                                    >
+                                        Link
+                                    </Dropdown.Item>
+                                )}
+                            </Dropdown.Menu>
+                        </Dropdown.Container>
+                    ) : undefined,
+                    currentNode.depth > 0 && canByPermission(`cms.edit_category`) ? (
                         <Button
                             icon={<EditIcon />}
                             iconOnly
@@ -229,7 +238,8 @@ export class List extends React.Component<null, null> {
                                             {!!(
                                                 node.tree_class !== 'system_page' &&
                                                 node.tree_is_editable &&
-                                                !node.tree_is_published
+                                                !node.tree_is_published &&
+                                                canByPermission(`cms.publish`)
                                             ) && (
                                                 <Tooltip tooltip={'Publish'}>
                                                     <Button
@@ -249,7 +259,8 @@ export class List extends React.Component<null, null> {
                                             {!!(
                                                 node.tree_class !== 'system_page' &&
                                                 node.tree_is_editable &&
-                                                !!node.tree_is_published
+                                                !!node.tree_is_published &&
+                                                canByPermission(`cms.unpublish`)
                                             ) && (
                                                 <Tooltip tooltip={'Unpublish'}>
                                                     <Button
@@ -267,64 +278,76 @@ export class List extends React.Component<null, null> {
                                                 </Tooltip>
                                             )}
 
-                                            {!!node.tree_is_editable && node.tree_object_type === 'category' && (
-                                                <Dropdown.Container triggerColor={'success'} placement={'right'}>
-                                                    <Dropdown.Trigger
-                                                        component={Button}
-                                                        componentProps={{
-                                                            icon: <AddIcon />,
-                                                            iconOnly: true,
+                                            {!!node.tree_is_editable &&
+                                                node.tree_object_type === 'category' &&
+                                                canByPermission([
+                                                    'cms.add_link',
+                                                    'cms.add_document',
+                                                    'cms.add_category',
+                                                ]) && (
+                                                    <Dropdown.Container triggerColor={'success'} placement={'right'}>
+                                                        <Dropdown.Trigger
+                                                            component={Button}
+                                                            componentProps={{
+                                                                icon: <AddIcon />,
+                                                                iconOnly: true,
+                                                            }}
+                                                        />
+                                                        <Dropdown.Menu>
+                                                            <Dropdown.Item
+                                                                onClick={() => {
+                                                                    navigate(
+                                                                        `/cms/pages/add_category?parent_id=${node.id}`,
+                                                                    )
+                                                                }}
+                                                            >
+                                                                Category
+                                                            </Dropdown.Item>
+                                                            <Dropdown.Item
+                                                                onClick={() => {
+                                                                    navigate(
+                                                                        `/cms/pages/add_document?parent_id=${node.id}`,
+                                                                    )
+                                                                }}
+                                                            >
+                                                                Document
+                                                            </Dropdown.Item>
+                                                            <Dropdown.Item
+                                                                onClick={() => {
+                                                                    navigate(`/cms/pages/add_link?parent_id=${node.id}`)
+                                                                }}
+                                                            >
+                                                                Link
+                                                            </Dropdown.Item>
+                                                        </Dropdown.Menu>
+                                                    </Dropdown.Container>
+                                                )}
+                                            {!!node.tree_is_editable &&
+                                                canByPermission(`cms.edit_${node.tree_object_type}`) && (
+                                                    <Button
+                                                        color="warning"
+                                                        icon={<EditIcon />}
+                                                        iconOnly
+                                                        onClick={(e) => {
+                                                            e.stopPropagation()
+                                                            navigate(
+                                                                `/cms/pages/edit_${node.tree_object_type}?id=${node.id}`,
+                                                            )
                                                         }}
                                                     />
-                                                    <Dropdown.Menu>
-                                                        <Dropdown.Item
-                                                            onClick={() => {
-                                                                navigate(`/cms/pages/add_category?parent_id=${node.id}`)
-                                                            }}
-                                                        >
-                                                            Category
-                                                        </Dropdown.Item>
-                                                        <Dropdown.Item
-                                                            onClick={() => {
-                                                                navigate(`/cms/pages/add_document?parent_id=${node.id}`)
-                                                            }}
-                                                        >
-                                                            Document
-                                                        </Dropdown.Item>
-                                                        <Dropdown.Item
-                                                            onClick={() => {
-                                                                navigate(`/cms/pages/add_link?parent_id=${node.id}`)
-                                                            }}
-                                                        >
-                                                            Link
-                                                        </Dropdown.Item>
-                                                    </Dropdown.Menu>
-                                                </Dropdown.Container>
-                                            )}
-                                            {!!node.tree_is_editable && (
-                                                <Button
-                                                    color="warning"
-                                                    icon={<EditIcon />}
-                                                    iconOnly
-                                                    onClick={(e) => {
-                                                        e.stopPropagation()
-                                                        navigate(
-                                                            `/cms/pages/edit_${node.tree_object_type}?id=${node.id}`,
-                                                        )
-                                                    }}
-                                                />
-                                            )}
-                                            {!!node.tree_is_deletable && (
-                                                <Button
-                                                    color="danger"
-                                                    icon={<DeleteIcon />}
-                                                    iconOnly
-                                                    onClick={(e) => {
-                                                        e.stopPropagation()
-                                                        openModal(`tree-delete-${node.id}`)
-                                                    }}
-                                                />
-                                            )}
+                                                )}
+                                            {!!node.tree_is_deletable &&
+                                                canByPermission(`cms.delete_${node.tree_object_type}`) && (
+                                                    <Button
+                                                        color="danger"
+                                                        icon={<DeleteIcon />}
+                                                        iconOnly
+                                                        onClick={(e) => {
+                                                            e.stopPropagation()
+                                                            openModal(`tree-delete-${node.id}`)
+                                                        }}
+                                                    />
+                                                )}
                                         </div>
                                     </Table.Td>
                                 </Table.Tr>

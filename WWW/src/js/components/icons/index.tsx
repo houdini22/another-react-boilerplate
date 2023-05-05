@@ -21,6 +21,7 @@ import { MdHelpOutline as HelpIcon } from 'react-icons/md'
 import { AiFillEye as PublishIcon } from 'react-icons/ai'
 import { AiFillEyeInvisible as UnpublishIcon } from 'react-icons/ai'
 import { AiOutlineWarning as WarningIcon } from 'react-icons/ai'
+import { MdDesktopAccessDisabled as AccessDisabledIcon } from 'react-icons/md'
 
 export {
     OrderingIcon,
@@ -45,4 +46,5 @@ export {
     PublishIcon,
     UnpublishIcon,
     WarningIcon,
+    AccessDisabledIcon,
 }

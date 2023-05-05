@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { withRouter } from '../helpers/router'
 import { LocalStorage } from './database'
 import createReactClass from 'create-react-class'
+import { AuthorizationManager } from '../containers/AuthorizationManager'
+import Page401 from '../components/common/Page401/Index'
 
 const { getIsLoggedIn } = selectors
 
@@ -20,6 +22,7 @@ interface UserIsAuthenticatedRouteProps {
     }
     loginWithToken: Function
     navigate: Function
+    permission?: string
 }
 
 class UserIsAuthenticatedRouteBase extends React.Component<UserIsAuthenticatedRouteProps, null> {
@@ -63,15 +66,28 @@ class UserIsAuthenticatedRouteBase extends React.Component<UserIsAuthenticatedRo
     }
 
     render() {
-        const { children, isLoggedIn } = this.props
+        const { children, isLoggedIn, permission } = this.props
+
+        if (!isLoggedIn) {
+            return null
+        }
+
         const Component = createReactClass({
-            render: function () {
-                if (isLoggedIn) {
-                    return <>{children}</>
-                }
-                return null
+            render: () => {
+                return (
+                    <AuthorizationManager>
+                        {({ canByPermission }) => (
+                            <>
+                                {!!permission && canByPermission(permission) && children}
+                                {!!permission && !canByPermission(permission) && <Page401 />}
+                                {!permission && children}
+                            </>
+                        )}
+                    </AuthorizationManager>
+                )
             },
         })
+
         return <Component />
     }
 }

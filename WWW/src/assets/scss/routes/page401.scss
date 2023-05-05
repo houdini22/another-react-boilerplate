@@ -1,0 +1,14 @@
+@import '../_variables.scss';
+
+.route--page-401 {
+    height: 100vh;
+    display: flex;
+    align-content: center;
+    align-items: center;
+
+    .row {
+        width: 100%;
+        transform: translateY(-50%);
+        padding-top: 50%;
+    }
+}

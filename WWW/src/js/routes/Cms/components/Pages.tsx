@@ -10,6 +10,7 @@ import { FiltersFormContainer } from '../containers/FiltersFormContainer'
 
 import List from './Pages/List'
 import { ModalManager } from '../../../components/ui/Modal'
+import { AuthorizationManager } from '../../../containers/AuthorizationManager'
 
 const cx = classNames.bind(styles)
 
@@ -18,51 +19,59 @@ export class CmsPagesView extends React.Component<null, null> {
         return (
             <RouteManager>
                 {({ navigate, query: { parent_id } }) => (
-                    <ModalManager>
-                        {({ registerModal, openModal, closeModal }) => (
-                            <Manager currentId={parent_id}>
-                                {({
-                                    nodes,
-                                    currentNode,
-                                    isLoading,
-                                    publish,
-                                    unpublish,
-                                    deleteNode,
-                                    currentNodeParents,
-                                    setIsLoading,
-                                }) => {
-                                    return (
-                                        <PageContent>
-                                            <div className={cx('route--cms')}>
-                                                <Header
-                                                    currentNodeParents={currentNodeParents}
-                                                    currentNode={currentNode}
-                                                />
+                    <AuthorizationManager>
+                        {({ canByPermission }) => (
+                            <ModalManager>
+                                {({ registerModal, openModal, closeModal }) => (
+                                    <Manager currentId={parent_id}>
+                                        {({
+                                            nodes,
+                                            currentNode,
+                                            isLoading,
+                                            publish,
+                                            unpublish,
+                                            deleteNode,
+                                            currentNodeParents,
+                                            setIsLoading,
+                                        }) => {
+                                            return (
+                                                <PageContent>
+                                                    <div className={cx('route--cms')}>
+                                                        <Header
+                                                            currentNodeParents={currentNodeParents}
+                                                            currentNode={currentNode}
+                                                        />
 
-                                                <Card header={<h1>Filters</h1>} withMinimizeIcon>
-                                                    <FiltersFormContainer />
-                                                    {isLoading && <LoadingOverlay />}
-                                                </Card>
-                                                <List
-                                                    nodes={nodes}
-                                                    isLoading={isLoading}
-                                                    currentNode={currentNode}
-                                                    setIsLoading={setIsLoading}
-                                                    publish={publish}
-                                                    unpublish={unpublish}
-                                                    deleteNode={deleteNode}
-                                                    navigate={navigate}
-                                                    registerModal={registerModal}
-                                                    openModal={openModal}
-                                                    closeModal={closeModal}
-                                                />
-                                            </div>
-                                        </PageContent>
-                                    )
-                                }}
-                            </Manager>
+                                                        <Card header={<h1>Filters</h1>} withMinimizeIcon>
+                                                            <FiltersFormContainer />
+                                                            {isLoading && <LoadingOverlay />}
+                                                        </Card>
+
+                                                        {canByPermission('cms.list') && (
+                                                            <List
+                                                                nodes={nodes}
+                                                                isLoading={isLoading}
+                                                                currentNode={currentNode}
+                                                                setIsLoading={setIsLoading}
+                                                                publish={publish}
+                                                                unpublish={unpublish}
+                                                                deleteNode={deleteNode}
+                                                                navigate={navigate}
+                                                                registerModal={registerModal}
+                                                                openModal={openModal}
+                                                                closeModal={closeModal}
+                                                                canByPermission={canByPermission}
+                                                            />
+                                                        )}
+                                                    </div>
+                                                </PageContent>
+                                            )
+                                        }}
+                                    </Manager>
+                                )}
+                            </ModalManager>
                         )}
-                    </ModalManager>
+                    </AuthorizationManager>
                 )}
             </RouteManager>
         )

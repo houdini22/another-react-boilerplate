@@ -20,11 +20,22 @@ class AuthorizationManagerBase extends React.Component<AuthorizationManagerProps
     hasPermission(permission) {
         const { user } = this.props
 
-        if (user.roles.includes('Super Admin')) {
+        if (user?.roles?.includes('Super Admin')) {
             //return true;
         }
 
-        return user.permissions.includes(permission)
+        if (Array.isArray(permission)) {
+            const hasPermission =
+                permission
+                    .map((p) => {
+                        return user.roles.includes(p)
+                    })
+                    .filter((p) => !p).length > 0
+
+            return hasPermission
+        }
+
+        return user?.permissions?.includes(permission)
     }
     render() {
         const { children } = this.props

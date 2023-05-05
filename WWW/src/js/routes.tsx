@@ -36,7 +36,7 @@ const App = () => (
                         path="/cms/pages"
                         element={
                             <PageLayout>
-                                <UserIsAuthenticatedRoute>
+                                <UserIsAuthenticatedRoute permission={'cms.list'}>
                                     <CmsPagesView />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
@@ -46,7 +46,7 @@ const App = () => (
                         path="/cms/pages/add_category"
                         element={
                             <PageLayout>
-                                <UserIsAuthenticatedRoute>
+                                <UserIsAuthenticatedRoute permission={'cms.add_category'}>
                                     <AddCategoryView />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
@@ -56,7 +56,7 @@ const App = () => (
                         path="/cms/pages/edit_category"
                         element={
                             <PageLayout>
-                                <UserIsAuthenticatedRoute>
+                                <UserIsAuthenticatedRoute permission={'cms.edit_category'}>
                                     <EditCategoryView />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
@@ -66,7 +66,7 @@ const App = () => (
                         path="/cms/pages/add_link"
                         element={
                             <PageLayout>
-                                <UserIsAuthenticatedRoute>
+                                <UserIsAuthenticatedRoute permission={'cms.add_link'}>
                                     <AddLinkView />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
@@ -76,7 +76,7 @@ const App = () => (
                         path="/cms/pages/edit_link"
                         element={
                             <PageLayout>
-                                <UserIsAuthenticatedRoute>
+                                <UserIsAuthenticatedRoute permission={'cms.edit_link'}>
                                     <EditLinkView />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
@@ -86,7 +86,7 @@ const App = () => (
                         path="/cms/pages/add_document"
                         element={
                             <PageLayout>
-                                <UserIsAuthenticatedRoute>
+                                <UserIsAuthenticatedRoute permission={'cms.add_document'}>
                                     <AddDocumentView />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
@@ -96,7 +96,7 @@ const App = () => (
                         path="/cms/pages/edit_document"
                         element={
                             <PageLayout>
-                                <UserIsAuthenticatedRoute>
+                                <UserIsAuthenticatedRoute permission={'cms.edit_document'}>
                                     <EditDocumentView />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
@@ -106,7 +106,7 @@ const App = () => (
                         path="/users"
                         element={
                             <PageLayout>
-                                <UserIsAuthenticatedRoute>
+                                <UserIsAuthenticatedRoute permission={'users.list'}>
                                     <UsersView />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
@@ -116,7 +116,7 @@ const App = () => (
                         path="/users/edit"
                         element={
                             <PageLayout>
-                                <UserIsAuthenticatedRoute>
+                                <UserIsAuthenticatedRoute permission={'users.edit'}>
                                     <UsersEditView />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
@@ -126,7 +126,7 @@ const App = () => (
                         path="/users/add"
                         element={
                             <PageLayout>
-                                <UserIsAuthenticatedRoute>
+                                <UserIsAuthenticatedRoute permission={'users.add'}>
                                     <UsersAddView />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
@@ -152,7 +152,7 @@ const App = () => (
                         path="/roles"
                         element={
                             <PageLayout>
-                                <UserIsAuthenticatedRoute>
+                                <UserIsAuthenticatedRoute permission={'roles.list'}>
                                     <UserRolesView />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
@@ -162,7 +162,7 @@ const App = () => (
                         path="/roles/add"
                         element={
                             <PageLayout>
-                                <UserIsAuthenticatedRoute>
+                                <UserIsAuthenticatedRoute permission={'roles.add'}>
                                     <UserRolesAdd />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
@@ -172,7 +172,7 @@ const App = () => (
                         path="/roles/edit"
                         element={
                             <PageLayout>
-                                <UserIsAuthenticatedRoute>
+                                <UserIsAuthenticatedRoute permission={'roles.edit'}>
                                     <UserRolesEdit />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
@@ -182,7 +182,7 @@ const App = () => (
                         path="/permissions"
                         element={
                             <PageLayout>
-                                <UserIsAuthenticatedRoute>
+                                <UserIsAuthenticatedRoute permission={'permissions.list'}>
                                     <UsersPermissions />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
@@ -192,7 +192,7 @@ const App = () => (
                         path="/permissions/add"
                         element={
                             <PageLayout>
-                                <UserIsAuthenticatedRoute>
+                                <UserIsAuthenticatedRoute permission={'permissions.add'}>
                                     <UsersPermissionsAdd />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
@@ -202,7 +202,7 @@ const App = () => (
                         path="/permissions/edit"
                         element={
                             <PageLayout>
-                                <UserIsAuthenticatedRoute>
+                                <UserIsAuthenticatedRoute permission={'permissions.edit'}>
                                     <UsersPermissionsEdit />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
@@ -212,7 +212,7 @@ const App = () => (
                         path="/media"
                         element={
                             <PageLayout>
-                                <UserIsAuthenticatedRoute>
+                                <UserIsAuthenticatedRoute permission={'media.list'}>
                                     <MediaView />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
