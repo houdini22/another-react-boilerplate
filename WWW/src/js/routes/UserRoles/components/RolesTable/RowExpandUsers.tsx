@@ -23,6 +23,7 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
             openModal,
             registerModal,
             closeModal,
+            canByPermission,
         } = this.props
 
         return (
@@ -109,14 +110,16 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                                             >
                                                 <EditIcon /> Edit User
                                             </Dropdown.Item>
-                                            <Dropdown.Item
-                                                color="danger"
-                                                onClick={() => {
-                                                    openModal(`user-remove-role-from-user-${_id}-delete`)
-                                                }}
-                                            >
-                                                <DeleteIcon /> Remove Role from User
-                                            </Dropdown.Item>
+                                            {canByPermission('users.remove_permission') && (
+                                                <Dropdown.Item
+                                                    color="danger"
+                                                    onClick={() => {
+                                                        openModal(`user-remove-role-from-user-${_id}-delete`)
+                                                    }}
+                                                >
+                                                    <DeleteIcon /> Remove Role from User
+                                                </Dropdown.Item>
+                                            )}
                                         </Dropdown.Menu>
                                     </Dropdown.Container>
                                 </Col>

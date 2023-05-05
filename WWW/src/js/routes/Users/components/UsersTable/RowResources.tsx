@@ -12,11 +12,11 @@ interface FiltersProps {
 
 export class RowResources extends React.Component<FiltersProps, null> {
     render() {
-        const { user, permissionsFromRoles, navigate, expand } = this.props
+        const { user, permissionsFromRoles, navigate, expand, canByPermissions } = this.props
 
         return (
             <div>
-                {user?.roles?.length > 0 && (
+                {user?.roles?.length > 0 && canByPermissions('users.list_roles') && (
                     <Tooltip tooltip={`User Roles`}>
                         <Button
                             color={'info'}
@@ -29,7 +29,7 @@ export class RowResources extends React.Component<FiltersProps, null> {
                         </Button>
                     </Tooltip>
                 )}
-                {Object.keys(permissionsFromRoles).length > 0 && (
+                {Object.keys(permissionsFromRoles).length > 0 && canByPermissions('users.list_permissions') && (
                     <Tooltip tooltip={`User Permissions`}>
                         <Button
                             color={'info'}
@@ -42,7 +42,7 @@ export class RowResources extends React.Component<FiltersProps, null> {
                         </Button>
                     </Tooltip>
                 )}
-                {user.files_count > 0 && (
+                {user.files_count > 0 && canByPermissions('users.list_files') && (
                     <Button color={'info'} icon={<FileIcon />} onClick={() => navigate(`/media?user=${user.name}`)}>
                         {user.files_count}
                     </Button>

@@ -37,8 +37,8 @@ class UserIsAuthenticatedRouteBase extends React.Component<UserIsAuthenticatedRo
             loginWithToken(email, token).then(
                 () => {},
                 () => {
-                        navigate(`/login?back=${pathname}${encodeURIComponent(search)}`)
-                }
+                    navigate(`/login?back=${pathname}${encodeURIComponent(search)}`)
+                },
             )
         }
     }
@@ -57,7 +57,7 @@ class UserIsAuthenticatedRouteBase extends React.Component<UserIsAuthenticatedRo
                 () => {},
                 () => {
                     navigate(`/login?back=${pathname}${encodeURIComponent(search)}&reason=401`)
-                }
+                },
             )
         }
     }
@@ -69,7 +69,7 @@ class UserIsAuthenticatedRouteBase extends React.Component<UserIsAuthenticatedRo
                 if (isLoggedIn) {
                     return <>{children}</>
                 }
-                return null;
+                return null
             },
         })
         return <Component />

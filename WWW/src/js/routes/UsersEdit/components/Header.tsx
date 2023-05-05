@@ -24,6 +24,7 @@ export class Header extends React.Component<HeaderProps, null> {
             registerModal,
             openModal,
             closeModal,
+            canByPermission,
         } = this.props
 
         registerModal(
@@ -128,27 +129,32 @@ export class Header extends React.Component<HeaderProps, null> {
             <PageHeader.Container>
                 <PageHeader.Title>Edit User</PageHeader.Title>
                 <PageHeader.Actions>
-                    <Button
-                        isLoading={isLoading}
-                        size={'xs'}
-                        color={'warning'}
-                        onClick={() => {
-                            openModal('user-send-activation-email')
-                        }}
-                    >
-                        Force Activation
-                    </Button>
-                    <Button
-                        isLoading={isLoading}
-                        size={'xs'}
-                        disabled={!user.last_active && !user.token}
-                        onClick={() => {
-                            openModal('user-force-login')
-                        }}
-                    >
-                        Force Login
-                    </Button>
-                    {user.status === 0 && (
+                    {canByPermission('users.force_activation') && (
+                        <Button
+                            isLoading={isLoading}
+                            size={'xs'}
+                            color={'warning'}
+                            onClick={() => {
+                                openModal('user-send-activation-email')
+                            }}
+                        >
+                            Force Activation
+                        </Button>
+                    )}
+                    {canByPermission('users.force_login') && (
+                        <Button
+                            isLoading={isLoading}
+                            size={'xs'}
+                            disabled={!user.last_active && !user.token}
+                            onClick={() => {
+                                openModal('user-force-login')
+                            }}
+                        >
+                            Force Login
+                        </Button>
+                    )}
+
+                    {user.status === 0 && canByPermission('users.change_status') && (
                         <Button
                             color={'success'}
                             onClick={() => {
@@ -159,7 +165,7 @@ export class Header extends React.Component<HeaderProps, null> {
                             Activate
                         </Button>
                     )}
-                    {user.status !== 0 && (
+                    {user.status !== 0 && canByPermission('users.change_status') && (
                         <Button
                             color={'danger'}
                             onClick={() => {

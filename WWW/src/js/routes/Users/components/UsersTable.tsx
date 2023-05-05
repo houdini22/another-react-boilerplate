@@ -45,6 +45,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
             openModal,
             closeModal,
             deleteUser,
+            canByPermissions,
         } = this.props
         return (
             <RouteManager>
@@ -150,6 +151,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                             navigate={navigate}
                                                             permissionsFromRoles={permissionsFromRoles}
                                                             expand={expand}
+                                                            canByPermissions={canByPermissions}
                                                         />
                                                     </Table.Td>
                                                     <Table.Td xs={6} md={2}>
@@ -163,6 +165,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                             openModal={openModal}
                                                             closeModal={closeModal}
                                                             setIsLoading={setIsLoading}
+                                                            canByPermission={canByPermissions}
                                                         />
                                                     </Table.Td>
                                                     <Table.Td xs={6} md={2}>
@@ -170,6 +173,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                             user={user}
                                                             navigate={navigate}
                                                             openModal={openModal}
+                                                            canByPermissions={canByPermissions}
                                                         />
                                                     </Table.Td>
                                                 </Table.Tr>

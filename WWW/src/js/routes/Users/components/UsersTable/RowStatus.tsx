@@ -22,6 +22,7 @@ export class RowStatus extends React.Component<FiltersProps, null> {
             openModal,
             closeModal,
             setIsLoading,
+            canByPermission,
         } = this.props
 
         registerModal(
@@ -87,7 +88,9 @@ export class RowStatus extends React.Component<FiltersProps, null> {
                         <Label
                             color={'danger'}
                             onClick={() => {
-                                openModal(`user-activate-${user.id}`)
+                                if (canByPermission('users.change_status')) {
+                                    openModal(`user-activate-${user.id}`)
+                                }
                             }}
                             style={{ cursor: 'pointer' }}
                             block
@@ -101,7 +104,9 @@ export class RowStatus extends React.Component<FiltersProps, null> {
                         <Label
                             color={'success'}
                             onClick={() => {
-                                openModal(`user-deactivate-${user.id}`)
+                                if (canByPermission('users.change_status')) {
+                                    openModal(`user-deactivate-${user.id}`)
+                                }
                             }}
                             block
                             style={{ cursor: 'pointer' }}

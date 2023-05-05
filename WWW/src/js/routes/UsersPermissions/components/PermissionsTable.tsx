@@ -27,6 +27,7 @@ export class PermissionsTable extends React.Component<PermissionsTableProps, nul
             openModal,
             registerModal,
             closeModal,
+            canByPermission,
         } = this.props
 
         return (
@@ -117,50 +118,55 @@ export class PermissionsTable extends React.Component<PermissionsTableProps, nul
                                             </Table.Td>
                                             <Table.Td xs={5} alignRight>
                                                 <div>
-                                                    {permission.roles_count > 0 && (
-                                                        <Tooltip tooltip={`Roles with permission`}>
-                                                            <Button
-                                                                color={'info'}
-                                                                icon={<RoleIcon />}
-                                                                onClick={() => expand('roles')}
-                                                            >
-                                                                {permission.roles_count}
-                                                            </Button>
-                                                        </Tooltip>
-                                                    )}
-                                                    {permission.users_count > 0 && (
-                                                        <Tooltip tooltip={`Users with permission`}>
-                                                            <Button
-                                                                color={'info'}
-                                                                icon={<UserIcon />}
-                                                                onClick={() => expand('users')}
-                                                            >
-                                                                {permission.users_count}
-                                                            </Button>
-                                                        </Tooltip>
-                                                    )}
+                                                    {permission.roles_count > 0 &&
+                                                        canByPermission('roles.list_permissions') && (
+                                                            <Tooltip tooltip={`Roles with Permission`}>
+                                                                <Button
+                                                                    color={'info'}
+                                                                    icon={<RoleIcon />}
+                                                                    onClick={() => expand('roles')}
+                                                                >
+                                                                    {permission.roles_count}
+                                                                </Button>
+                                                            </Tooltip>
+                                                        )}
+                                                    {permission.users_count > 0 &&
+                                                        canByPermission('users.list_permissions') && (
+                                                            <Tooltip tooltip={`Users with Permission`}>
+                                                                <Button
+                                                                    color={'info'}
+                                                                    icon={<UserIcon />}
+                                                                    onClick={() => expand('users')}
+                                                                >
+                                                                    {permission.users_count}
+                                                                </Button>
+                                                            </Tooltip>
+                                                        )}
                                                 </div>
                                             </Table.Td>
                                             <Table.Td xs={2}>
                                                 <div>
-                                                    <Button
-                                                        icon={<EditIcon />}
-                                                        iconOnly
-                                                        color={'warning'}
-                                                        onClick={() =>
-                                                            navigate(`/permissions/edit?id=${permission.id}`)
-                                                        }
-                                                    />
-                                                    {permission.is_deletable == 1 && (
+                                                    {canByPermission('permissions.edit') && (
                                                         <Button
-                                                            icon={<DeleteIcon />}
+                                                            icon={<EditIcon />}
                                                             iconOnly
-                                                            color={'danger'}
+                                                            color={'warning'}
                                                             onClick={() =>
-                                                                openModal(`user-permission-${permission.id}-delete`)
+                                                                navigate(`/permissions/edit?id=${permission.id}`)
                                                             }
                                                         />
                                                     )}
+                                                    {permission.is_deletable == 1 &&
+                                                        canByPermission('permissions.delete') && (
+                                                            <Button
+                                                                icon={<DeleteIcon />}
+                                                                iconOnly
+                                                                color={'danger'}
+                                                                onClick={() =>
+                                                                    openModal(`user-permission-${permission.id}-delete`)
+                                                                }
+                                                            />
+                                                        )}
                                                 </div>
                                             </Table.Td>
                                         </Table.Tr>

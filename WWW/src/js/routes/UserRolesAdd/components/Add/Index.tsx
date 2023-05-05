@@ -24,6 +24,7 @@ export class AddRole extends React.Component<EditProps, EditState> {
             navigate,
             addPermission,
             fetchPermissions,
+            canByPermission,
         } = this.props
         return (
             <Card header={<h1>Add Role</h1>} color={'primary'}>
@@ -43,6 +44,7 @@ export class AddRole extends React.Component<EditProps, EditState> {
                     addPermission={addPermission}
                     isLoading={isLoading}
                     fetchPermissions={fetchPermissions}
+                    canByPermission={canByPermission}
                 />
                 {isLoading && <LoadingOverlay />}
             </Card>

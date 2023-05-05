@@ -10,6 +10,7 @@ import RolesFilters from './PermissionsFilters'
 import Header from './Header'
 import { UsersManager } from '../../../containers/UsersManager'
 import { TitleManager } from '../../../containers/TitleManager'
+import { AuthorizationManager } from '../../../containers/AuthorizationManager'
 
 export class UsersPermissions extends React.Component<null, null> {
     render() {
@@ -18,140 +19,200 @@ export class UsersPermissions extends React.Component<null, null> {
                 {({ navigate, query: { user = '', roles: rolesFromUri } }) => (
                     <NotificationsManager>
                         {({ addToastNotification }) => (
-                            <Modal.Manager>
-                                {({ registerModal, closeModal, openModal }) => (
-                                    <TitleManager>
-                                        {({ setTitleSegments }) => {
-                                            setTitleSegments(['Users', 'Permissions'])
+                            <AuthorizationManager>
+                                {({ canByPermission }) => (
+                                    <Modal.Manager>
+                                        {({ registerModal, closeModal, openModal }) => (
+                                            <TitleManager>
+                                                {({ setTitleSegments }) => {
+                                                    setTitleSegments(['Users', 'Permissions'])
 
-                                            return (
-                                                <UsersManager getPermissions getRoles>
-                                                    {({
-                                                        setIsLoading,
-                                                        deletePermission,
-                                                        deleteUserPermission,
-                                                        deleteRolePermission,
-                                                        deleteUserRole,
-                                                        permissions,
-                                                        roles,
-                                                        isLoading,
-                                                    }) => {
-                                                        return (
-                                                            <ListManager
-                                                                url={'/permissions/list'}
-                                                                defaultFilters={{
-                                                                    items_per_page: 15,
-                                                                    order_by: 'id',
-                                                                    order_direction: 'asc',
-                                                                    roles: [],
-                                                                    has_roles: 'yes_or_no',
-                                                                    has_users: 'yes_or_no',
-                                                                    user: '',
-                                                                    search: '',
-                                                                }}
-                                                                urlFilters={{
-                                                                    user,
-                                                                    roles: rolesFromUri
-                                                                        ? rolesFromUri.split(',').map((n) => Number(n))
-                                                                        : [],
-                                                                }}
-                                                            >
-                                                                {({
-                                                                    data,
-                                                                    isLoading: isLoading2,
-                                                                    fetch,
-                                                                    links,
-                                                                    page,
-                                                                    setPage,
-                                                                    hasNextPage,
-                                                                    hasPrevPage,
-                                                                    totalPages,
-                                                                    filters,
-                                                                    setFilter,
-                                                                    perPage,
-                                                                    total,
-                                                                    resetFilters,
-                                                                    restoreFilters,
-                                                                    defaultFilters,
-                                                                    setFilters,
-                                                                }) => {
-                                                                    return (
-                                                                        <PageContent>
-                                                                            <Header navigate={navigate} />
+                                                    return (
+                                                        <UsersManager getPermissions getRoles>
+                                                            {({
+                                                                setIsLoading,
+                                                                deletePermission,
+                                                                deleteUserPermission,
+                                                                deleteRolePermission,
+                                                                deleteUserRole,
+                                                                permissions,
+                                                                roles,
+                                                                isLoading,
+                                                            }) => {
+                                                                return (
+                                                                    <ListManager
+                                                                        url={'/permissions/list'}
+                                                                        defaultFilters={{
+                                                                            items_per_page: 15,
+                                                                            order_by: 'id',
+                                                                            order_direction: 'asc',
+                                                                            roles: [],
+                                                                            has_roles: 'yes_or_no',
+                                                                            has_users: 'yes_or_no',
+                                                                            user: '',
+                                                                            search: '',
+                                                                        }}
+                                                                        urlFilters={{
+                                                                            user,
+                                                                            roles: rolesFromUri
+                                                                                ? rolesFromUri
+                                                                                      .split(',')
+                                                                                      .map((n) => Number(n))
+                                                                                : [],
+                                                                        }}
+                                                                    >
+                                                                        {({
+                                                                            data,
+                                                                            isLoading: isLoading2,
+                                                                            fetch,
+                                                                            links,
+                                                                            page,
+                                                                            setPage,
+                                                                            hasNextPage,
+                                                                            hasPrevPage,
+                                                                            totalPages,
+                                                                            filters,
+                                                                            setFilter,
+                                                                            perPage,
+                                                                            total,
+                                                                            resetFilters,
+                                                                            restoreFilters,
+                                                                            defaultFilters,
+                                                                            setFilters,
+                                                                        }) => {
+                                                                            return (
+                                                                                <PageContent>
+                                                                                    <Header
+                                                                                        navigate={navigate}
+                                                                                        canByPermission={
+                                                                                            canByPermission
+                                                                                        }
+                                                                                    />
 
-                                                                            <RolesFilters
-                                                                                filters={filters}
-                                                                                setFilter={setFilter}
-                                                                                fetch={fetch}
-                                                                                permissions={permissions}
-                                                                                roles={roles}
-                                                                                resetFilters={resetFilters}
-                                                                                restoreFilters={restoreFilters}
-                                                                                defaultFilters={defaultFilters}
-                                                                                setFilters={setFilters}
-                                                                                isLoading={isLoading || isLoading2}
-                                                                                setIsLoading={setIsLoading}
-                                                                            />
+                                                                                    {canByPermission(
+                                                                                        'permissions.list',
+                                                                                    ) && (
+                                                                                        <>
+                                                                                            <RolesFilters
+                                                                                                filters={filters}
+                                                                                                setFilter={setFilter}
+                                                                                                fetch={fetch}
+                                                                                                permissions={
+                                                                                                    permissions
+                                                                                                }
+                                                                                                roles={roles}
+                                                                                                resetFilters={
+                                                                                                    resetFilters
+                                                                                                }
+                                                                                                restoreFilters={
+                                                                                                    restoreFilters
+                                                                                                }
+                                                                                                defaultFilters={
+                                                                                                    defaultFilters
+                                                                                                }
+                                                                                                setFilters={setFilters}
+                                                                                                isLoading={
+                                                                                                    isLoading ||
+                                                                                                    isLoading2
+                                                                                                }
+                                                                                                setIsLoading={
+                                                                                                    setIsLoading
+                                                                                                }
+                                                                                            />
 
-                                                                            <Card>
-                                                                                <Pagination
-                                                                                    links={links}
-                                                                                    page={page}
-                                                                                    fetch={fetch}
-                                                                                    setPage={setPage}
-                                                                                    hasNextPage={hasNextPage}
-                                                                                    hasPrevPage={hasPrevPage}
-                                                                                    totalPages={totalPages}
-                                                                                />
-                                                                                <PermissionsTable
-                                                                                    setIsLoading={setIsLoading}
-                                                                                    permissions={data}
-                                                                                    deleteUserPermission={
-                                                                                        deleteUserPermission
-                                                                                    }
-                                                                                    deleteUserRole={deleteUserRole}
-                                                                                    deleteRolePermission={
-                                                                                        deleteRolePermission
-                                                                                    }
-                                                                                    fetch={fetch}
-                                                                                    addToastNotification={
-                                                                                        addToastNotification
-                                                                                    }
-                                                                                    deletePermission={deletePermission}
-                                                                                    page={page}
-                                                                                    perPage={perPage}
-                                                                                    total={total}
-                                                                                    totalPages={totalPages}
-                                                                                    navigate={navigate}
-                                                                                    openModal={openModal}
-                                                                                    registerModal={registerModal}
-                                                                                    closeModal={closeModal}
-                                                                                />
-                                                                                <Pagination
-                                                                                    links={links}
-                                                                                    page={page}
-                                                                                    fetch={fetch}
-                                                                                    setPage={setPage}
-                                                                                    hasNextPage={hasNextPage}
-                                                                                    hasPrevPage={hasPrevPage}
-                                                                                    totalPages={totalPages}
-                                                                                />
-                                                                                {(isLoading || isLoading2) && (
-                                                                                    <LoadingOverlay />
-                                                                                )}
-                                                                            </Card>
-                                                                        </PageContent>
-                                                                    )
-                                                                }}
-                                                            </ListManager>
-                                                        )
-                                                    }}
-                                                </UsersManager>
-                                            )
-                                        }}
-                                    </TitleManager>
+                                                                                            <Card>
+                                                                                                <Pagination
+                                                                                                    links={links}
+                                                                                                    page={page}
+                                                                                                    fetch={fetch}
+                                                                                                    setPage={setPage}
+                                                                                                    hasNextPage={
+                                                                                                        hasNextPage
+                                                                                                    }
+                                                                                                    hasPrevPage={
+                                                                                                        hasPrevPage
+                                                                                                    }
+                                                                                                    totalPages={
+                                                                                                        totalPages
+                                                                                                    }
+                                                                                                />
+                                                                                                <PermissionsTable
+                                                                                                    setIsLoading={
+                                                                                                        setIsLoading
+                                                                                                    }
+                                                                                                    permissions={data}
+                                                                                                    deleteUserPermission={
+                                                                                                        deleteUserPermission
+                                                                                                    }
+                                                                                                    deleteUserRole={
+                                                                                                        deleteUserRole
+                                                                                                    }
+                                                                                                    deleteRolePermission={
+                                                                                                        deleteRolePermission
+                                                                                                    }
+                                                                                                    fetch={fetch}
+                                                                                                    addToastNotification={
+                                                                                                        addToastNotification
+                                                                                                    }
+                                                                                                    deletePermission={
+                                                                                                        deletePermission
+                                                                                                    }
+                                                                                                    page={page}
+                                                                                                    perPage={perPage}
+                                                                                                    total={total}
+                                                                                                    totalPages={
+                                                                                                        totalPages
+                                                                                                    }
+                                                                                                    navigate={navigate}
+                                                                                                    openModal={
+                                                                                                        openModal
+                                                                                                    }
+                                                                                                    registerModal={
+                                                                                                        registerModal
+                                                                                                    }
+                                                                                                    closeModal={
+                                                                                                        closeModal
+                                                                                                    }
+                                                                                                    canByPermission={
+                                                                                                        canByPermission
+                                                                                                    }
+                                                                                                />
+                                                                                                <Pagination
+                                                                                                    links={links}
+                                                                                                    page={page}
+                                                                                                    fetch={fetch}
+                                                                                                    setPage={setPage}
+                                                                                                    hasNextPage={
+                                                                                                        hasNextPage
+                                                                                                    }
+                                                                                                    hasPrevPage={
+                                                                                                        hasPrevPage
+                                                                                                    }
+                                                                                                    totalPages={
+                                                                                                        totalPages
+                                                                                                    }
+                                                                                                />
+                                                                                                {(isLoading ||
+                                                                                                    isLoading2) && (
+                                                                                                    <LoadingOverlay />
+                                                                                                )}
+                                                                                            </Card>
+                                                                                        </>
+                                                                                    )}
+                                                                                </PageContent>
+                                                                            )
+                                                                        }}
+                                                                    </ListManager>
+                                                                )
+                                                            }}
+                                                        </UsersManager>
+                                                    )
+                                                }}
+                                            </TitleManager>
+                                        )}
+                                    </Modal.Manager>
                                 )}
-                            </Modal.Manager>
+                            </AuthorizationManager>
                         )}
                     </NotificationsManager>
                 )}

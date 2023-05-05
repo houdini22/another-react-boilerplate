@@ -8,15 +8,17 @@ interface FiltersProps {
 
 export class Header extends React.Component<FiltersProps, null> {
     render() {
-        const { navigate } = this.props
+        const { navigate, canByPermission } = this.props
 
         return (
             <PageHeader.Container>
                 <PageHeader.Title>Users</PageHeader.Title>
                 <PageHeader.Actions>
-                    <Button color={'success'} onClick={() => navigate('/users/add')}>
-                        Add
-                    </Button>
+                    {canByPermission('users.add') && (
+                        <Button color={'success'} onClick={() => navigate('/users/add')}>
+                            Add
+                        </Button>
+                    )}
                 </PageHeader.Actions>
                 <PageHeader.Breadcrumbs>
                     <PageHeader.BreadcrumbsItem href="/">

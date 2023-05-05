@@ -23,6 +23,7 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
             registerModal,
             closeModal,
             openModal,
+            canByPermission,
         } = this.props
 
         return (
@@ -96,14 +97,16 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                                                 >
                                                     <UserIcon /> Show Roles with Permission
                                                 </Dropdown.Item>
-                                                <Dropdown.Item
-                                                    color="danger"
-                                                    onClick={() => {
-                                                        openModal(`user-remove-role-permission-${_id}-delete`)
-                                                    }}
-                                                >
-                                                    <DeleteIcon /> Remove Permission from Role
-                                                </Dropdown.Item>
+                                                {canByPermission('roles.remove_permission') && (
+                                                    <Dropdown.Item
+                                                        color="danger"
+                                                        onClick={() => {
+                                                            openModal(`user-remove-role-permission-${_id}-delete`)
+                                                        }}
+                                                    >
+                                                        <DeleteIcon /> Remove Permission from Role
+                                                    </Dropdown.Item>
+                                                )}
                                             </Dropdown.Menu>
                                         </Dropdown.Container>
                                     </Col>

@@ -25,6 +25,7 @@ class AddForm extends React.Component<null, null> {
             addToastNotification,
             fetchPermissions,
             noAddToUsers,
+            canByPermission,
         } = this.props
 
         return (
@@ -36,7 +37,7 @@ class AddForm extends React.Component<null, null> {
                             <Field name="description" label="Description" type="textarea" component={FormField} />
                         </Card>
 
-                        {!noAddToUsers && (
+                        {!noAddToUsers && canByPermission('users.add_permission') && (
                             <Card header={<h1>Add to Users</h1>}>
                                 {newRoleUsers.length > 0 && <Alert color={'info'}>Click added User to remove.</Alert>}
                                 <Field
@@ -76,47 +77,51 @@ class AddForm extends React.Component<null, null> {
                             </Card>
                         )}
 
-                        <Card header={<h1>Associate Permissions</h1>}>
-                            {newRolePermissions.length > 0 && (
-                                <Alert color={'info'}>Click added Permission to remove.</Alert>
-                            )}
-                            <Field
-                                name="_permissions"
-                                label="Permission"
-                                type="select"
-                                placeholder={`--- choose ---`}
-                                options={sortPermissionsByNameAscending(permissions).map(({ id, name }) => ({
-                                    label: name,
-                                    value: id,
-                                    disabled: !!newRolePermissions.find(({ id: _id }) => id === _id),
-                                }))}
-                                onChange={(e, value) => {
-                                    if (value) {
-                                        addPermissionToNewRole(
-                                            permissions.find((permission) => Number(permission.id) === Number(value)),
+                        {canByPermission('roles.add_permission') && (
+                            <Card header={<h1>Associate Permissions</h1>}>
+                                {newRolePermissions.length > 0 && (
+                                    <Alert color={'info'}>Click added Permission to remove.</Alert>
+                                )}
+                                <Field
+                                    name="_permissions"
+                                    label="Permission"
+                                    type="select"
+                                    placeholder={`--- choose ---`}
+                                    options={sortPermissionsByNameAscending(permissions).map(({ id, name }) => ({
+                                        label: name,
+                                        value: id,
+                                        disabled: !!newRolePermissions.find(({ id: _id }) => id === _id),
+                                    }))}
+                                    onChange={(e, value) => {
+                                        if (value) {
+                                            addPermissionToNewRole(
+                                                permissions.find(
+                                                    (permission) => Number(permission.id) === Number(value),
+                                                ),
+                                            )
+                                        }
+                                    }}
+                                    component={FormField}
+                                />
+                                <Section>
+                                    {newRolePermissions.map((permission) => {
+                                        return (
+                                            <Button
+                                                key={permission.id}
+                                                roundless
+                                                color={'secondary'}
+                                                block
+                                                onClick={() => {
+                                                    removePermissionFromNewRole(permission.id)
+                                                }}
+                                            >
+                                                {permission.name}
+                                            </Button>
                                         )
-                                    }
-                                }}
-                                component={FormField}
-                            />
-                            <Section>
-                                {newRolePermissions.map((permission) => {
-                                    return (
-                                        <Button
-                                            key={permission.id}
-                                            roundless
-                                            color={'secondary'}
-                                            block
-                                            onClick={() => {
-                                                removePermissionFromNewRole(permission.id)
-                                            }}
-                                        >
-                                            {permission.name}
-                                        </Button>
-                                    )
-                                })}
-                            </Section>
-                        </Card>
+                                    })}
+                                </Section>
+                            </Card>
+                        )}
 
                         <Button color="success" type="submit" block style={{ marginBottom: 30 }}>
                             Save
@@ -125,27 +130,29 @@ class AddForm extends React.Component<null, null> {
                 </Col>
 
                 <Col xs={6}>
-                    <AddPermission
-                        addPermission={(values) => {
-                            return new Promise((resolve, reject) => {
-                                return addPermission(values)
-                                    .then((permission) => {
-                                        fetchPermissions().then(() => {
-                                            addPermissionToNewRole(permission)
-                                            resolve(permission)
+                    {canByPermission('permissions.add') && (
+                        <AddPermission
+                            addPermission={(values) => {
+                                return new Promise((resolve, reject) => {
+                                    return addPermission(values)
+                                        .then((permission) => {
+                                            fetchPermissions().then(() => {
+                                                addPermissionToNewRole(permission)
+                                                resolve(permission)
+                                            })
                                         })
-                                    })
-                                    .catch((e) => {
-                                        reject(e)
-                                    })
-                            })
-                        }}
-                        isLoading={isLoading}
-                        setIsLoading={setIsLoading}
-                        addToastNotification={addToastNotification}
-                        noAddToUsers
-                        noRoleId
-                    />
+                                        .catch((e) => {
+                                            reject(e)
+                                        })
+                                })
+                            }}
+                            isLoading={isLoading}
+                            setIsLoading={setIsLoading}
+                            addToastNotification={addToastNotification}
+                            noAddToUsers
+                            noRoleId
+                        />
+                    )}
                 </Col>
             </Row>
         )

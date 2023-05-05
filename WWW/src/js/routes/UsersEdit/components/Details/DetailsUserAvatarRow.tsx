@@ -18,6 +18,7 @@ class DetailsUserAvatarRow extends React.Component<null, null> {
             uploadProgress,
             addToastNotification,
             openModalAvatar,
+            canByPermission,
         } = this.props
 
         return (
@@ -36,35 +37,39 @@ class DetailsUserAvatarRow extends React.Component<null, null> {
                         </Tooltip>
                     )}
 
-                    {user?.avatar?.id != null && (
-                        <Button
-                            color={'danger'}
-                            size={'xs'}
-                            onClick={() => {
-                                openModalAvatar()
-                            }}
-                            block
-                        >
-                            Delete Avatar
-                        </Button>
+                    {canByPermission('users.change_avatar') && (
+                        <>
+                            {user?.avatar?.id != null && (
+                                <Button
+                                    color={'danger'}
+                                    size={'xs'}
+                                    onClick={() => {
+                                        openModalAvatar()
+                                    }}
+                                    block
+                                >
+                                    Delete Avatar
+                                </Button>
+                            )}
+
+                            <Button size={'xs'} onClick={() => openModal()} block>
+                                Upload Avatar
+                            </Button>
+
+                            <UploadAvatarModal
+                                close={() => closeModal()}
+                                user={user}
+                                setUploadProgress={setUploadProgress}
+                                setIsLoading={setIsLoading}
+                                sendAvatar={sendAvatar}
+                                fetchOne={fetchOne}
+                                isLoading={isLoading}
+                                visible={visible}
+                                uploadProgress={uploadProgress}
+                                addToastNotification={addToastNotification}
+                            />
+                        </>
                     )}
-
-                    <Button size={'xs'} onClick={() => openModal()} block>
-                        Upload Avatar
-                    </Button>
-
-                    <UploadAvatarModal
-                        close={() => closeModal()}
-                        user={user}
-                        setUploadProgress={setUploadProgress}
-                        setIsLoading={setIsLoading}
-                        sendAvatar={sendAvatar}
-                        fetchOne={fetchOne}
-                        isLoading={isLoading}
-                        visible={visible}
-                        uploadProgress={uploadProgress}
-                        addToastNotification={addToastNotification}
-                    />
                 </Col>
             </Row>
         )

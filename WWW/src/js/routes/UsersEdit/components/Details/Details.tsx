@@ -59,6 +59,7 @@ export class Details extends React.Component<HeaderProps, HeaderState> {
             registerModal,
             openModal,
             closeModal,
+            canByPermission,
         } = this.props
 
         registerModal(
@@ -107,6 +108,7 @@ export class Details extends React.Component<HeaderProps, HeaderState> {
                                 uploadProgress={uploadProgress}
                                 addToastNotification={addToastNotification}
                                 openModalAvatar={() => openModal(`user-avatar-delete`)}
+                                canByPermission={canByPermission}
                             />
                         </Tabs.Content>
                     </Tabs.Tab>

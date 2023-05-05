@@ -76,11 +76,11 @@ const login = (email, password) => (dispatch) => {
 
 const loginWithToken = (email, token) => (dispatch, state) => {
     return new Promise((resolve, reject) => {
-        if(state()['auth']['loginWithTokenRequestInProgress']) {
-            return;
+        if (state()['auth']['loginWithTokenRequestInProgress']) {
+            return
         }
 
-        dispatch(setLoginWithTokenRequestInProgress(true));
+        dispatch(setLoginWithTokenRequestInProgress(true))
         dispatch(setLoginError(''))
 
         http.post('/auth/login_with_token', {
@@ -99,12 +99,12 @@ const loginWithToken = (email, token) => (dispatch, state) => {
                 LocalStorage.commit()
 
                 resolve(response.data.data.user)
-                dispatch(setLoginWithTokenRequestInProgress(true));
+                dispatch(setLoginWithTokenRequestInProgress(true))
             })
             .catch(({ data: { message = '' } = {} }) => {
                 dispatch(setLoginError(message))
                 reject()
-                dispatch(setLoginWithTokenRequestInProgress(false));
+                dispatch(setLoginWithTokenRequestInProgress(false))
             })
     })
 }
@@ -163,12 +163,12 @@ const ACTION_HANDLERS = {
     [GENTLY_LOG_OFF]: () => {
         return getInitialState()
     },
-    [SET_LOGIN_WITH_TOKEN_REQUEST_IN_PROGRESS]: (state, {payload}) => {
+    [SET_LOGIN_WITH_TOKEN_REQUEST_IN_PROGRESS]: (state, { payload }) => {
         return {
             ...state,
             loginWithTokenRequestInProgress: payload,
         }
-    }
+    },
 }
 
 // ------------------------------------

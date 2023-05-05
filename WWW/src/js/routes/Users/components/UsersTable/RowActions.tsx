@@ -11,19 +11,21 @@ interface FiltersProps {
 
 export class RowActions extends React.Component<FiltersProps, null> {
     render() {
-        const { user, navigate, openModal } = this.props
+        const { user, navigate, openModal, canByPermissions } = this.props
 
         return (
             <div>
-                <Button
-                    icon={<EditIcon />}
-                    iconOnly
-                    color={'warning'}
-                    onClick={() => {
-                        navigate(`/users/edit?id=${user.id}`)
-                    }}
-                />
-                {user.is_deletable == 1 && (
+                {canByPermissions('users.edit') && (
+                    <Button
+                        icon={<EditIcon />}
+                        iconOnly
+                        color={'warning'}
+                        onClick={() => {
+                            navigate(`/users/edit?id=${user.id}`)
+                        }}
+                    />
+                )}
+                {user.is_deletable == 1 && canByPermissions('users.delete') && (
                     <Button
                         icon={<DeleteIcon />}
                         iconOnly

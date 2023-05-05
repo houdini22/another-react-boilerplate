@@ -6,15 +6,17 @@ interface RolesTableProps {}
 
 export class Header extends React.Component<RolesTableProps, null> {
     render() {
-        const { navigate } = this.props
+        const { navigate, canByPermission } = this.props
 
         return (
             <PageHeader.Container>
                 <PageHeader.Title>Roles</PageHeader.Title>
                 <PageHeader.Actions>
-                    <Button color={'success'} onClick={() => navigate('/roles/add')}>
-                        Add
-                    </Button>
+                    {canByPermission('roles.add') && (
+                        <Button color={'success'} onClick={() => navigate('/roles/add')}>
+                            Add
+                        </Button>
+                    )}
                 </PageHeader.Actions>
                 <PageHeader.Breadcrumbs>
                     <PageHeader.BreadcrumbsItem href="/">

@@ -15,15 +15,6 @@ class PermissionsSeeder extends Seeder
      */
     public function run()
     {
-        Permission::insert([[
-            'name' => 'can_everything',
-            'guard_name' => 'web',
-            'is_deletable' => false,
-        ]]);
 
-        $permission = Permission::find(1);
-        $role = Role::find(1);
-
-        $role->givePermissionTo($permission);
     }
 }
