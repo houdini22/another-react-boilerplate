@@ -160,6 +160,10 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
         this.setState({ newRolePermissions: newPermissions })
     }
 
+    clearPermissionsFromNewRole() {
+        this.setState({ newRolePermissions: [] })
+    }
+
     addNewRoleToUser(id) {
         const { newRoleUsers } = this.state
 
@@ -291,6 +295,7 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             deletePermission,
             deleteRole,
             fetchRoles,
+            clearPermissionsFromNewRole: this.clearPermissionsFromNewRole.bind(this),
         }
 
         return (

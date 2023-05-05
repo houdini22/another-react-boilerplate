@@ -37,6 +37,7 @@ export class Add extends React.Component<EditProps, EditState> {
             addPermission,
             fetchPermissions,
             fetchRoles,
+            clearPermissionsFromNewRole,
         } = this.props
         return (
             <div>
@@ -65,6 +66,7 @@ export class Add extends React.Component<EditProps, EditState> {
                     addPermission={addPermission}
                     fetchPermissions={fetchPermissions}
                     fetchRoles={fetchRoles}
+                    clearPermissionsFromNewRole={clearPermissionsFromNewRole}
                 />
                 {isLoading && <LoadingOverlay />}
             </div>

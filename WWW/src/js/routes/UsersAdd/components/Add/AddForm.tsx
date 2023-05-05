@@ -31,6 +31,7 @@ class AddForm extends React.Component<null, null> {
             isLoading,
             fetchPermissions,
             fetchRoles,
+            clearPermissionsFromNewRole,
         } = this.props
 
         return (
@@ -183,6 +184,7 @@ class AddForm extends React.Component<null, null> {
                                     return addRole(values, newRolePermissions, [])
                                         .then((role) => {
                                             fetchRoles().then(() => {
+                                                clearPermissionsFromNewRole()
                                                 addRoleToNewUser(role)
                                                 resolve(role)
                                             })

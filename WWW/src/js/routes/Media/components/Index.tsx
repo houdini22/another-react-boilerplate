@@ -11,6 +11,7 @@ import FilesFilters from './FilesFilters'
 import { getReadableFileSizeString } from '../../../utils/javascript'
 import { FaHome as HomeIcon } from 'react-icons/fa'
 import { NotificationsManager } from '../../../containers/NotificationsManager'
+import { TitleManager } from '../../../containers/TitleManager'
 
 interface UsersViewState {
     addVisible: boolean
@@ -39,137 +40,164 @@ export class UsersView extends React.Component<null, UsersViewState> {
                             }
 
                             return (
-                                <PageContent>
-                                    <PageHeader.Container>
-                                        <PageHeader.Title>Media</PageHeader.Title>
-                                        <PageHeader.Actions>
-                                            <Button
-                                                color={'success'}
-                                                onClick={() => {
-                                                    this.setState({
-                                                        addVisible: !addVisible,
-                                                    })
-                                                }}
-                                            >
-                                                Add
-                                            </Button>
-                                        </PageHeader.Actions>
-                                        <PageHeader.Breadcrumbs>
-                                            <PageHeader.BreadcrumbsItem href="/">
-                                                <HomeIcon /> Home
-                                            </PageHeader.BreadcrumbsItem>
-                                            <PageHeader.BreadcrumbsItem href="/media">Media</PageHeader.BreadcrumbsItem>
-                                        </PageHeader.Breadcrumbs>
-                                    </PageHeader.Container>
+                                <TitleManager>
+                                    {({ setTitleSegments }) => {
+                                        setTitleSegments(['Media'])
 
-                                    <ListManager
-                                        url={'/files/list'}
-                                        defaultFilters={defaultFilters}
-                                        urlFilters={{ user }}
-                                    >
-                                        {({
-                                            data,
-                                            isLoading,
-                                            fetch,
-                                            links,
-                                            page,
-                                            setPage,
-                                            hasNextPage,
-                                            hasPrevPage,
-                                            totalPages,
-                                            filters,
-                                            setFilter,
-                                            perPage,
-                                            total,
-                                            resetFilters,
-                                            setFilters,
-                                        }) => (
-                                            <MediaManager>
-                                                {({ deleteFile, uploadFiles, uploadProgress, editFile }) => {
-                                                    let totalSize = 0
-                                                    data.forEach(({ size }) => {
-                                                        totalSize += size
-                                                    })
+                                        return (
+                                            <PageContent>
+                                                <PageHeader.Container>
+                                                    <PageHeader.Title>Media</PageHeader.Title>
+                                                    <PageHeader.Actions>
+                                                        <Button
+                                                            color={'success'}
+                                                            onClick={() => {
+                                                                this.setState({
+                                                                    addVisible: !addVisible,
+                                                                })
+                                                            }}
+                                                        >
+                                                            Add
+                                                        </Button>
+                                                    </PageHeader.Actions>
+                                                    <PageHeader.Breadcrumbs>
+                                                        <PageHeader.BreadcrumbsItem href="/">
+                                                            <HomeIcon /> Home
+                                                        </PageHeader.BreadcrumbsItem>
+                                                        <PageHeader.BreadcrumbsItem href="/media">
+                                                            Media
+                                                        </PageHeader.BreadcrumbsItem>
+                                                    </PageHeader.Breadcrumbs>
+                                                </PageHeader.Container>
 
-                                                    return (
-                                                        <>
-                                                            {addVisible && (
-                                                                <Card header={<h1>Add files</h1>}>
-                                                                    <UploadFileFormContainer
-                                                                        uploadFiles={uploadFiles}
-                                                                        uploadProgress={uploadProgress}
-                                                                        fetch={fetch}
-                                                                        addToastNotification={addToastNotification}
-                                                                    />
-                                                                </Card>
-                                                            )}
+                                                <ListManager
+                                                    url={'/files/list'}
+                                                    defaultFilters={defaultFilters}
+                                                    urlFilters={{ user }}
+                                                >
+                                                    {({
+                                                        data,
+                                                        isLoading,
+                                                        fetch,
+                                                        links,
+                                                        page,
+                                                        setPage,
+                                                        hasNextPage,
+                                                        hasPrevPage,
+                                                        totalPages,
+                                                        filters,
+                                                        setFilter,
+                                                        perPage,
+                                                        total,
+                                                        resetFilters,
+                                                        setFilters,
+                                                    }) => (
+                                                        <MediaManager>
+                                                            {({
+                                                                deleteFile,
+                                                                uploadFiles,
+                                                                uploadProgress,
+                                                                editFile,
+                                                            }) => {
+                                                                let totalSize = 0
+                                                                data.forEach(({ size }) => {
+                                                                    totalSize += size
+                                                                })
 
-                                                            <FilesFilters
-                                                                filters={filters}
-                                                                setFilter={setFilter}
-                                                                fetch={fetch}
-                                                                resetFilters={resetFilters}
-                                                                defaultFilters={defaultFilters}
-                                                                setFilters={setFilters}
-                                                                isLoading={isLoading}
-                                                            />
+                                                                return (
+                                                                    <>
+                                                                        {addVisible && (
+                                                                            <Card header={<h1>Add files</h1>}>
+                                                                                <UploadFileFormContainer
+                                                                                    uploadFiles={uploadFiles}
+                                                                                    uploadProgress={uploadProgress}
+                                                                                    fetch={fetch}
+                                                                                    addToastNotification={
+                                                                                        addToastNotification
+                                                                                    }
+                                                                                />
+                                                                            </Card>
+                                                                        )}
 
-                                                            <Card>
-                                                                <Pagination
-                                                                    links={links}
-                                                                    page={page}
-                                                                    fetch={fetch}
-                                                                    setPage={setPage}
-                                                                    hasNextPage={hasNextPage}
-                                                                    hasPrevPage={hasPrevPage}
-                                                                    totalPages={totalPages}
-                                                                />
-                                                                <Row>
-                                                                    {data?.map((file) => (
-                                                                        <Col xs={2} sm={2} md={2} key={file.id}>
-                                                                            <File
-                                                                                file={file}
-                                                                                deleteFile={deleteFile}
+                                                                        <FilesFilters
+                                                                            filters={filters}
+                                                                            setFilter={setFilter}
+                                                                            fetch={fetch}
+                                                                            resetFilters={resetFilters}
+                                                                            defaultFilters={defaultFilters}
+                                                                            setFilters={setFilters}
+                                                                            isLoading={isLoading}
+                                                                        />
+
+                                                                        <Card>
+                                                                            <Pagination
+                                                                                links={links}
+                                                                                page={page}
                                                                                 fetch={fetch}
-                                                                                editFile={editFile}
-                                                                                isLoading={isLoading}
-                                                                                addToastNotification={
-                                                                                    addToastNotification
-                                                                                }
+                                                                                setPage={setPage}
+                                                                                hasNextPage={hasNextPage}
+                                                                                hasPrevPage={hasPrevPage}
+                                                                                totalPages={totalPages}
                                                                             />
-                                                                        </Col>
-                                                                    ))}
-                                                                </Row>
-                                                                <Pagination
-                                                                    links={links}
-                                                                    page={page}
-                                                                    fetch={fetch}
-                                                                    setPage={setPage}
-                                                                    hasNextPage={hasNextPage}
-                                                                    hasPrevPage={hasPrevPage}
-                                                                    totalPages={totalPages}
-                                                                />
-                                                                <div style={{ textAlign: 'right' }}>
-                                                                    Records:{' '}
-                                                                    <b>
-                                                                        {(page - 1) * perPage + 1} -{' '}
-                                                                        {Math.min(perPage * page, total)} / {total}
-                                                                    </b>
-                                                                    <br />
-                                                                    Total pages: <b>{totalPages}</b>
-                                                                    <br />
-                                                                    Total size:{' '}
-                                                                    <b>{getReadableFileSizeString(totalSize)}</b>
-                                                                </div>
-                                                                {isLoading && <LoadingOverlay />}
-                                                            </Card>
-                                                        </>
-                                                    )
-                                                }}
-                                            </MediaManager>
-                                        )}
-                                    </ListManager>
-                                </PageContent>
+                                                                            <Row>
+                                                                                {data?.map((file) => (
+                                                                                    <Col
+                                                                                        xs={2}
+                                                                                        sm={2}
+                                                                                        md={2}
+                                                                                        key={file.id}
+                                                                                    >
+                                                                                        <File
+                                                                                            file={file}
+                                                                                            deleteFile={deleteFile}
+                                                                                            fetch={fetch}
+                                                                                            editFile={editFile}
+                                                                                            isLoading={isLoading}
+                                                                                            addToastNotification={
+                                                                                                addToastNotification
+                                                                                            }
+                                                                                        />
+                                                                                    </Col>
+                                                                                ))}
+                                                                            </Row>
+                                                                            <Pagination
+                                                                                links={links}
+                                                                                page={page}
+                                                                                fetch={fetch}
+                                                                                setPage={setPage}
+                                                                                hasNextPage={hasNextPage}
+                                                                                hasPrevPage={hasPrevPage}
+                                                                                totalPages={totalPages}
+                                                                            />
+                                                                            <div style={{ textAlign: 'right' }}>
+                                                                                Records:{' '}
+                                                                                <b>
+                                                                                    {(page - 1) * perPage + 1} -{' '}
+                                                                                    {Math.min(perPage * page, total)} /{' '}
+                                                                                    {total}
+                                                                                </b>
+                                                                                <br />
+                                                                                Total pages: <b>{totalPages}</b>
+                                                                                <br />
+                                                                                Total size:{' '}
+                                                                                <b>
+                                                                                    {getReadableFileSizeString(
+                                                                                        totalSize,
+                                                                                    )}
+                                                                                </b>
+                                                                            </div>
+                                                                            {isLoading && <LoadingOverlay />}
+                                                                        </Card>
+                                                                    </>
+                                                                )
+                                                            }}
+                                                        </MediaManager>
+                                                    )}
+                                                </ListManager>
+                                            </PageContent>
+                                        )
+                                    }}
+                                </TitleManager>
                             )
                         }}
                     </RouteManager>

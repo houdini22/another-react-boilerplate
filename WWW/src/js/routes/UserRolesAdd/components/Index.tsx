@@ -6,6 +6,7 @@ import Header from './Header'
 import { AddRole } from './Add/Index'
 import { NotificationsManager } from '../../../containers/NotificationsManager'
 import { UsersManager } from '../../../containers/UsersManager'
+import { TitleManager } from '../../../containers/TitleManager'
 
 interface UsersViewState {}
 
@@ -17,49 +18,59 @@ export class UserRolesEdit extends React.Component<null, UsersViewState> {
                     <NotificationsManager>
                         {({ addToastNotification }) => {
                             return (
-                                <UsersManager roleId={query['id']} getPermissions getUsers>
-                                    {({
-                                        role,
-                                        isLoading,
-                                        addRole,
-                                        setIsLoading,
-                                        permissions,
-                                        newRolePermissions,
-                                        addPermissionToNewRole,
-                                        removePermissionFromNewRole,
-                                        newRoleUsers,
-                                        addNewRoleToUser,
-                                        removeNewRoleFromUser,
-                                        users,
-                                        addPermission,
-                                        fetchPermissions,
-                                    }) => (
-                                        <PageContent>
-                                            <Header navigate={navigate} role={role} />
-                                            <Row>
-                                                <Col xs={12}>
-                                                    <AddRole
-                                                        addRole={addRole}
-                                                        isLoading={isLoading}
-                                                        addToastNotification={addToastNotification}
-                                                        setIsLoading={setIsLoading}
-                                                        permissions={permissions}
-                                                        newRolePermissions={newRolePermissions}
-                                                        addPermissionToNewRole={addPermissionToNewRole}
-                                                        removePermissionFromNewRole={removePermissionFromNewRole}
-                                                        users={users}
-                                                        newRoleUsers={newRoleUsers}
-                                                        addNewRoleToUser={addNewRoleToUser}
-                                                        removeNewRoleFromUser={removeNewRoleFromUser}
-                                                        navigate={navigate}
-                                                        addPermission={addPermission}
-                                                        fetchPermissions={fetchPermissions}
-                                                    />
-                                                </Col>
-                                            </Row>
-                                        </PageContent>
-                                    )}
-                                </UsersManager>
+                                <TitleManager>
+                                    {({ setTitleSegments }) => {
+                                        setTitleSegments(['Users', 'Roles', 'Add'])
+
+                                        return (
+                                            <UsersManager roleId={query['id']} getPermissions getUsers>
+                                                {({
+                                                    role,
+                                                    isLoading,
+                                                    addRole,
+                                                    setIsLoading,
+                                                    permissions,
+                                                    newRolePermissions,
+                                                    addPermissionToNewRole,
+                                                    removePermissionFromNewRole,
+                                                    newRoleUsers,
+                                                    addNewRoleToUser,
+                                                    removeNewRoleFromUser,
+                                                    users,
+                                                    addPermission,
+                                                    fetchPermissions,
+                                                }) => (
+                                                    <PageContent>
+                                                        <Header navigate={navigate} role={role} />
+                                                        <Row>
+                                                            <Col xs={12}>
+                                                                <AddRole
+                                                                    addRole={addRole}
+                                                                    isLoading={isLoading}
+                                                                    addToastNotification={addToastNotification}
+                                                                    setIsLoading={setIsLoading}
+                                                                    permissions={permissions}
+                                                                    newRolePermissions={newRolePermissions}
+                                                                    addPermissionToNewRole={addPermissionToNewRole}
+                                                                    removePermissionFromNewRole={
+                                                                        removePermissionFromNewRole
+                                                                    }
+                                                                    users={users}
+                                                                    newRoleUsers={newRoleUsers}
+                                                                    addNewRoleToUser={addNewRoleToUser}
+                                                                    removeNewRoleFromUser={removeNewRoleFromUser}
+                                                                    navigate={navigate}
+                                                                    addPermission={addPermission}
+                                                                    fetchPermissions={fetchPermissions}
+                                                                />
+                                                            </Col>
+                                                        </Row>
+                                                    </PageContent>
+                                                )}
+                                            </UsersManager>
+                                        )
+                                    }}
+                                </TitleManager>
                             )
                         }}
                     </NotificationsManager>
