@@ -3,7 +3,6 @@ import { LoadingOverlay } from '../../../../components'
 import { AddFormContainer } from './AddFormContainer'
 interface EditProps {
     addUser: Function
-    user: Object
     fetchOne: Function
     isLoading: boolean
 }
@@ -26,6 +25,18 @@ export class Add extends React.Component<EditProps, EditState> {
             addToastNotification,
             newUserRoles,
             newUserPermissions,
+            setIsLoading,
+            addRole,
+            newRolePermissions,
+            addPermissionToNewRole,
+            removePermissionFromNewRole,
+            users,
+            newRoleUsers,
+            addNewRoleToUser,
+            removeNewRoleFromUser,
+            addPermission,
+            fetchPermissions,
+            fetchRoles,
         } = this.props
         return (
             <div>
@@ -42,6 +53,18 @@ export class Add extends React.Component<EditProps, EditState> {
                     addToastNotification={addToastNotification}
                     newUserRoles={newUserRoles}
                     newUserPermissions={newUserPermissions}
+                    setIsLoading={setIsLoading}
+                    addRole={addRole}
+                    newRolePermissions={newRolePermissions}
+                    addPermissionToNewRole={addPermissionToNewRole}
+                    removePermissionFromNewRole={removePermissionFromNewRole}
+                    users={users}
+                    newRoleUsers={newRoleUsers}
+                    addNewRoleToUser={addNewRoleToUser}
+                    removeNewRoleFromUser={removeNewRoleFromUser}
+                    addPermission={addPermission}
+                    fetchPermissions={fetchPermissions}
+                    fetchRoles={fetchRoles}
                 />
                 {isLoading && <LoadingOverlay />}
             </div>

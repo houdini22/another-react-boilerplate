@@ -21,7 +21,7 @@ export class AddPermission extends React.Component<HeaderProps, null> {
             noRoleId,
         } = this.props
         return (
-            <Card header={<h1>Add Permission</h1>}>
+            <Card header={<h1>Add Permission</h1>} color="primary">
                 <AddFormContainer
                     roles={roles}
                     setIsLoading={setIsLoading}

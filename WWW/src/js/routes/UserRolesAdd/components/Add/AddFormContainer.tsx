@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 const onSubmit = (
     values,
     _,
-    { save, setIsLoading, addToastNotification, reset, newRolePermissions, newRoleUsers, navigate },
+    { save, setIsLoading, addToastNotification, reset, newRolePermissions = [], newRoleUsers = [], navigate },
 ) => {
     setIsLoading(true)
     return save({ ...values }, newRolePermissions, newRoleUsers).then(
@@ -21,7 +21,9 @@ const onSubmit = (
                 text: `Role has been saved with ID: ${role.id}.`,
                 href: '/roles/add',
             })
-            navigate(`/roles/add`)
+            if (navigate) {
+                navigate(`/roles/add`)
+            }
         },
         (response) => {
             setIsLoading(false)

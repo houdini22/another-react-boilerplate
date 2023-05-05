@@ -17,7 +17,7 @@ export class UsersAddView extends React.Component<null, UsersViewState> {
                     <NotificationsManager>
                         {({ addToastNotification }) => {
                             return (
-                                <UsersManager getRoles getPermissions>
+                                <UsersManager getRoles getPermissions getUsers>
                                     {({
                                         isLoading,
                                         setIsLoading,
@@ -32,6 +32,17 @@ export class UsersAddView extends React.Component<null, UsersViewState> {
                                         newUserPermissions,
                                         roles,
                                         permissions,
+                                        addRole,
+                                        newRolePermissions,
+                                        addPermissionToNewRole,
+                                        removePermissionFromNewRole,
+                                        users,
+                                        newRoleUsers,
+                                        addNewRoleToUser,
+                                        removeNewRoleFromUser,
+                                        addPermission,
+                                        fetchPermissions,
+                                        fetchRoles,
                                     }) => {
                                         return (
                                             <PageContent>
@@ -54,6 +65,17 @@ export class UsersAddView extends React.Component<null, UsersViewState> {
                                                             addToastNotification={addToastNotification}
                                                             newUserRoles={newUserRoles}
                                                             newUserPermissions={newUserPermissions}
+                                                            addRole={addRole}
+                                                            newRolePermissions={newRolePermissions}
+                                                            addPermissionToNewRole={addPermissionToNewRole}
+                                                            removePermissionFromNewRole={removePermissionFromNewRole}
+                                                            users={users}
+                                                            newRoleUsers={newRoleUsers}
+                                                            addNewRoleToUser={addNewRoleToUser}
+                                                            removeNewRoleFromUser={removeNewRoleFromUser}
+                                                            addPermission={addPermission}
+                                                            fetchPermissions={fetchPermissions}
+                                                            fetchRoles={fetchRoles}
                                                         />
                                                     </Col>
                                                 </Row>

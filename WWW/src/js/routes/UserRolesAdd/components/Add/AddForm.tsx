@@ -24,52 +24,57 @@ class AddForm extends React.Component<null, null> {
             isLoading,
             addToastNotification,
             fetchPermissions,
+            noAddToUsers,
         } = this.props
 
         return (
             <Row>
                 <Col xs={6}>
                     <form onSubmit={handleSubmit}>
-                        <Field name="name" label="Name" type="text" component={FormField} autoFocus />
-                        <Field name="description" label="Description" type="textarea" component={FormField} />
-
-                        <Card header={<h1>Add to Users</h1>}>
-                            {newRoleUsers.length > 0 && <Alert color={'info'}>Click added User to remove.</Alert>}
-                            <Field
-                                name="_users"
-                                label="User"
-                                type="select"
-                                placeholder={`--- choose ---`}
-                                options={sortUsersByNameAscending(users).map(({ id, name }) => ({
-                                    label: name,
-                                    value: id,
-                                    disabled: !!newRoleUsers.find(({ id: _id }) => id === _id),
-                                }))}
-                                onChange={(e, value) => {
-                                    if (value) {
-                                        addNewRoleToUser(users.find((user) => Number(user.id) === Number(value)))
-                                    }
-                                }}
-                                component={FormField}
-                            />
-                            <Section>
-                                {newRoleUsers.map((user) => {
-                                    return (
-                                        <Button
-                                            key={user.id}
-                                            roundless
-                                            color={'secondary'}
-                                            block
-                                            onClick={() => {
-                                                removeNewRoleFromUser(user.id)
-                                            }}
-                                        >
-                                            {user.name}
-                                        </Button>
-                                    )
-                                })}
-                            </Section>
+                        <Card header={<h1>Role</h1>} color={'primary'}>
+                            <Field name="name" label="Name" type="text" component={FormField} autoFocus />
+                            <Field name="description" label="Description" type="textarea" component={FormField} />
                         </Card>
+
+                        {!noAddToUsers && (
+                            <Card header={<h1>Add to Users</h1>}>
+                                {newRoleUsers.length > 0 && <Alert color={'info'}>Click added User to remove.</Alert>}
+                                <Field
+                                    name="_users"
+                                    label="User"
+                                    type="select"
+                                    placeholder={`--- choose ---`}
+                                    options={sortUsersByNameAscending(users).map(({ id, name }) => ({
+                                        label: name,
+                                        value: id,
+                                        disabled: !!newRoleUsers.find(({ id: _id }) => id === _id),
+                                    }))}
+                                    onChange={(e, value) => {
+                                        if (value) {
+                                            addNewRoleToUser(users.find((user) => Number(user.id) === Number(value)))
+                                        }
+                                    }}
+                                    component={FormField}
+                                />
+                                <Section>
+                                    {newRoleUsers.map((user) => {
+                                        return (
+                                            <Button
+                                                key={user.id}
+                                                roundless
+                                                color={'secondary'}
+                                                block
+                                                onClick={() => {
+                                                    removeNewRoleFromUser(user.id)
+                                                }}
+                                            >
+                                                {user.name}
+                                            </Button>
+                                        )
+                                    })}
+                                </Section>
+                            </Card>
+                        )}
 
                         <Card header={<h1>Associate Permissions</h1>}>
                             {newRolePermissions.length > 0 && (
@@ -130,7 +135,9 @@ class AddForm extends React.Component<null, null> {
                                             resolve(permission)
                                         })
                                     })
-                                    .catch((e) => reject(e))
+                                    .catch((e) => {
+                                        reject(e)
+                                    })
                             })
                         }}
                         isLoading={isLoading}

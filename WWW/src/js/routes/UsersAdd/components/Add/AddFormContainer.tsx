@@ -3,6 +3,7 @@ import { compose } from 'redux'
 import { AddForm as FormComponent } from './AddForm'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
+import { connect } from 'react-redux'
 
 const onSubmit = (
     { email, name, status, password, password_confirmation },
@@ -44,6 +45,11 @@ const AddFormContainer = compose(
             email: '',
             status: 0,
         },
+    }),
+    connect((state, { setIsLoading }) => {
+        return {
+            setIsLoading,
+        }
     }),
 )(FormComponent)
 

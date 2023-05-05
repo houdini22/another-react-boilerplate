@@ -26,7 +26,7 @@ class PermissionsController extends Controller
             ->where(function ($query) use ($filters) {
                 if (!empty($filters['search'])) {
                     $query->where('name', 'like', "%{$filters['search']}%")
-                        ->orWhere('guard_name', 'like', "%{$filters['search']}%");
+                        ->orWhere('description', 'like', "%{$filters['search']}%");
                 }
             })
             ->orderBy(empty($filters['order_by']) ? 'id' : $filters['order_by'], empty($filters['order_direction']) ? 'asc' : $filters['order_direction'])
