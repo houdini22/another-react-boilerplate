@@ -59,6 +59,12 @@ class AddCategoryForm extends React.Component {
                                                     }}
                                                 />
                                                 <Field
+                                                    name="tree.tree_display_name"
+                                                    label="Display Name"
+                                                    type="text"
+                                                    component={FormField}
+                                                />
+                                                <Field
                                                     name="category.index_document_id"
                                                     label="Index Document"
                                                     type="select"

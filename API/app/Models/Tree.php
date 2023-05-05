@@ -30,7 +30,8 @@ class Tree extends Model
         'tree_alias',
         'tree_object_type',
         'tree_class',
-        'parent_id'
+        'parent_id',
+        'tree_display_name',
     ];
 
     public function category()

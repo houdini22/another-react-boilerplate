@@ -7,10 +7,32 @@ import { NavigationItems } from './NavigationItems'
 const cx = classNames.bind(styles)
 
 class Navigation extends React.Component<null, null> {
+    state = {
+        nested: [],
+    }
+
+    setNested(itemId, parentId) {
+        const { nested } = this.state
+
+        if (!nested.includes(parentId)) {
+            this.setState({
+                nested: [itemId],
+            })
+        } else {
+            this.setState({
+                nested: [...nested, itemId],
+            })
+        }
+    }
     render() {
+        const { nested } = this.state
         return (
             <div className={cx('layout__sidebar__content__navigation')}>
-                <NavigationItems items={navigation}></NavigationItems>
+                <NavigationItems
+                    items={navigation}
+                    setNested={this.setNested.bind(this)}
+                    nestedIds={nested}
+                ></NavigationItems>
             </div>
         )
     }

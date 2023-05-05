@@ -9,7 +9,7 @@ import { AuthorizationManager } from '../../../containers/AuthorizationManager'
 
 const cx = classNames.bind(styles)
 
-const NavigationItems = ({ items }) => {
+const NavigationItems = ({ items, setNested, nestedIds }) => {
     return (
         <RouteManager>
             {({ location: { pathname } }) => (
@@ -57,6 +57,9 @@ const NavigationItems = ({ items }) => {
                                                     }
                                                     componentType={componentType}
                                                     nested={children}
+                                                    setNested={setNested}
+                                                    nestedId={`${type}-${caption}-${href}`}
+                                                    nestedIds={nestedIds}
                                                 >
                                                     <span>{caption}</span>
                                                 </NavigationLink>

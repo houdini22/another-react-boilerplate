@@ -37,6 +37,12 @@ class AddLinkForm extends React.Component {
                                                     component={FormField}
                                                 />
                                                 <Field
+                                                    name="tree.tree_display_name"
+                                                    label="Display Name"
+                                                    type="text"
+                                                    component={FormField}
+                                                />
+                                                <Field
                                                     name="tree.tree_is_published"
                                                     label="Is published?"
                                                     type="checkbox"

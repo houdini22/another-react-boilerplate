@@ -2,7 +2,7 @@ import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import Manager from './Manager'
 import { RouteManager } from '../../../containers/RouteManager'
-import Header from './Pages/Header'
+import Header from './Header'
 import { Button, Card, LoadingOverlay, Modal } from '../../../components'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/routes/cms.scss'
@@ -40,6 +40,8 @@ export class CmsPagesView extends React.Component<null, null> {
                                                         <Header
                                                             currentNodeParents={currentNodeParents}
                                                             currentNode={currentNode}
+                                                            title={'CMS - Pages'}
+                                                            canByPermission={canByPermission}
                                                         />
 
                                                         <Card header={<h1>Filters</h1>} withMinimizeIcon>

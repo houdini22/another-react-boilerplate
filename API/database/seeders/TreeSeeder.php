@@ -26,6 +26,7 @@ class TreeSeeder extends Seeder
             'tree_is_deletable' => false,
             'tree_alias' => 'root',
             'tree_is_published' => true,
+            'tree_display_name' => 'root'
         ]);
         $rootTree->save();
 
@@ -55,6 +56,7 @@ class TreeSeeder extends Seeder
             'tree_menu_is_visible' => false,
             'tree_alias' => 'system_category',
             'tree_object_type' => 'category',
+            'tree_display_name' => 'system'
         ]);
 
         $systemCategory = Category::create([
@@ -85,7 +87,8 @@ class TreeSeeder extends Seeder
             'tree_menu_is_visible' => false,
             'tree_alias' => 'page_404',
             'tree_object_type' => 'document',
-            'tree_class' => 'system_page'
+            'tree_class' => 'system_page',
+            'tree_display_name' => '404'
         ]);
 
         $page404Document = Document::create([
@@ -114,11 +117,12 @@ class TreeSeeder extends Seeder
             'tree_url_is_editable' => true,
             'tree_menu_is_visible' => true,
             'tree_object_type' => 'category',
+            'tree_display_name' => 'Sample Category'
         ]);
 
         $sampleCategory = Category::create([
             'tree_id' => $sampleTree->id,
-            'category_name' => 'Sample category',
+            'category_name' => 'Sample Category',
             'category_url' => '/sample-category'
         ]);
         $sampleCategory->save();
@@ -143,6 +147,7 @@ class TreeSeeder extends Seeder
             'tree_url_is_editable' => true,
             'tree_menu_is_visible' => true,
             'tree_object_type' => 'category',
+            'tree_display_name' => 'Sample subcategory'
         ]);
 
         $sampleCategory2 = Category::create([
@@ -172,6 +177,7 @@ class TreeSeeder extends Seeder
             'tree_url_is_editable' => true,
             'tree_menu_is_visible' => true,
             'tree_object_type' => 'document',
+            'tree_display_name' => 'Sample document'
         ]);
 
         $samplePageDocument = Document::create([
@@ -201,6 +207,7 @@ class TreeSeeder extends Seeder
             'tree_url_is_editable' => true,
             'tree_menu_is_visible' => true,
             'tree_object_type' => 'link',
+            'tree_display_name' => 'Google link'
         ]);
 
         $sampleLink = Link::create([

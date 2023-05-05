@@ -14,5 +14,6 @@ class Role extends RoleBase
     ];
     protected $casts = [
         'is_deletable' => 'boolean',
+        'is_name_editable' => 'boolean',
     ];
 }

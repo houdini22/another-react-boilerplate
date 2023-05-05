@@ -22,15 +22,10 @@ interface NavigationLinkState {
 }
 
 class NavigationLink extends React.Component<NavigationLinkProps, NavigationLinkState> {
-    state = {
-        expanded: false,
-    }
-
     render() {
-        const { children, href, icon, active, nested } = this.props
-        const { expanded } = this.state
+        const { children, href, icon, active, nested, setNested, nestedIds, nestedId } = this.props
 
-        const isExpanded = expanded || active
+        const isExpanded = nestedIds.includes(nestedId) || active
 
         const content = (
             <div>
@@ -55,15 +50,15 @@ class NavigationLink extends React.Component<NavigationLinkProps, NavigationLink
                     <a
                         onClick={() => {
                             if (!_.isEmpty(nested)) {
-                                this.setState({
-                                    expanded: !expanded,
-                                })
+                                setNested(nestedId)
                             }
                         }}
                     >
                         {content}
                     </a>
-                    {!_.isEmpty(nested) && isExpanded && <NavigationItems items={nested} />}
+                    {!_.isEmpty(nested) && isExpanded && (
+                        <NavigationItems items={nested} setNested={setNested} nestedIds={nestedIds} />
+                    )}
                 </li>
             )
         }
@@ -78,15 +73,15 @@ class NavigationLink extends React.Component<NavigationLinkProps, NavigationLink
                     to={href}
                     onClick={() => {
                         if (!_.isEmpty(nested)) {
-                            this.setState({
-                                expanded: !expanded,
-                            })
+                            setNested(nestedId)
                         }
                     }}
                 >
                     {content}
                 </Link>
-                {!_.isEmpty(nested) && isExpanded && <NavigationItems items={nested} />}
+                {!_.isEmpty(nested) && isExpanded && (
+                    <NavigationItems items={nested} setNested={setNested} nestedIds={nestedIds} />
+                )}
             </li>
         )
     }

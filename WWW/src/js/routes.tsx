@@ -26,6 +26,7 @@ import { WebsocketsManager } from './containers/WebsocketsManager'
 import { EditCategoryView } from './routes/Cms/components/EditCategory'
 import EditDocumentView from './routes/Cms/components/EditDocument'
 import EditLinkView from './routes/Cms/components/EditLink'
+import { LogsView } from './routes/Logs'
 
 const App = () => (
     <Router>
@@ -128,6 +129,16 @@ const App = () => (
                             <PageLayout>
                                 <UserIsAuthenticatedRoute permission={'users.add'}>
                                     <UsersAddView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/users/logs"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'logs.list'}>
+                                    <LogsView />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
                         }

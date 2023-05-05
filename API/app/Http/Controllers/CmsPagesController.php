@@ -132,6 +132,7 @@ class CmsPagesController extends Controller
             'tree.tree_is_published' => ['required'],
             'tree.tree_published_from' => ['required'],
             'tree.tree_published_to' => ['required'],
+            'tree.tree_display_name' => ['required', 'max:64'],
         ]);
 
         if ($validator->fails()) {
@@ -147,6 +148,7 @@ class CmsPagesController extends Controller
             'tree_published_from' => Arr::get($values, 'tree.tree_published_from'),
             'tree_published_to' => Arr::get($values, 'tree.tree_published_to'),
             'tree_object_type' => 'category',
+            'tree_display_name' => Arr::get($values, 'tree.tree_display_name'),
         ]);
 
         $menuCategoryIdThis = Arr::get($values, 'category.menu_category_id') === 'new';
@@ -201,6 +203,7 @@ class CmsPagesController extends Controller
             'tree.tree_is_published' => ['required'],
             'tree.tree_published_from' => ['required'],
             'tree.tree_published_to' => ['required'],
+            'tree.tree_display_name' => ['required', 'max:64'],
         ]);
 
         if ($validator->fails()) {
@@ -254,6 +257,7 @@ class CmsPagesController extends Controller
             'tree.tree_is_published' => ['required'],
             'tree.tree_published_from' => ['required'],
             'tree.tree_published_to' => ['required'],
+            'tree.tree_display_name' => ['required', 'max:64'],
         ]);
 
         if ($validator->fails()) {
@@ -303,6 +307,7 @@ class CmsPagesController extends Controller
             'tree.tree_is_published' => ['required'],
             'tree.tree_published_from' => ['required'],
             'tree.tree_published_to' => ['required'],
+            'tree.tree_display_name' => ['required', 'max:64'],
         ]);
 
         if ($validator->fails()) {
@@ -384,6 +389,7 @@ class CmsPagesController extends Controller
             'tree.tree_is_published' => ['required'],
             'tree.tree_published_from' => ['required'],
             'tree.tree_published_to' => ['required'],
+            'tree.tree_display_name' => ['required', 'max:64'],
         ]);
 
         if ($validator->fails()) {
@@ -399,6 +405,7 @@ class CmsPagesController extends Controller
             'tree_published_from' => Arr::get($values, 'tree.tree_published_from'),
             'tree_published_to' => Arr::get($values, 'tree.tree_published_to'),
             'tree_object_type' => 'document',
+            'tree_display_name' => Arr::get($values, 'tree.tree_display_name'),
         ]);
 
         $document = new Document(Arr::get($values, 'document'));
@@ -422,7 +429,8 @@ class CmsPagesController extends Controller
 
         $validator = Validator::make($values, [
             'link.link_name' => 'required|max:256',
-            'link.link_url' => 'required|max:256|url'
+            'link.link_url' => 'required|max:256|url',
+            'tree.tree_display_name' => ['required', 'max:64'],
         ]);
 
         if ($validator->fails()) {
@@ -438,9 +446,7 @@ class CmsPagesController extends Controller
             'tree_published_from' => Arr::get($values, 'tree.tree_published_from'),
             'tree_published_to' => Arr::get($values, 'tree.tree_published_to'),
             'tree_object_type' => 'link',
-            'tree.tree_is_published' => ['required'],
-            'tree.tree_published_from' => ['required'],
-            'tree.tree_published_to' => ['required'],
+            'tree_display_name' => Arr::get($values, 'tree.tree_display_name'),
         ]);
 
         $link = new Link(Arr::get($values, 'link'));

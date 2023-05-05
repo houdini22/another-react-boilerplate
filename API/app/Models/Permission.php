@@ -13,5 +13,10 @@ class Permission extends PermissionsBase
         'name', 'description'
     ];
 
+    protected $casts = [
+        'is_deletable' => 'boolean',
+        'is_name_editable' => 'boolean',
+    ];
+
     protected $table = "permissions";
 }

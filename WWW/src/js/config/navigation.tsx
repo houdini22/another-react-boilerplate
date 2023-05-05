@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { FaSitemap } from 'react-icons/fa'
 import { AiOutlineOrderedList } from 'react-icons/ai'
-import { Badge } from '../components'
 import {
     AddIcon,
     CategoryIcon,
     DocumentIcon,
     FileIcon,
     LinkIcon,
+    LogsIcon,
     PermissionIcon,
     RoleIcon,
     UserIcon,
@@ -101,6 +101,14 @@ export const navigation = [
                 icon: <AddIcon />,
                 urlActive: [/\/users\/add/],
                 permission: 'users.add',
+            },
+            {
+                type: 'link',
+                href: '/users/logs',
+                caption: 'Logs',
+                icon: <LogsIcon />,
+                urlActive: [/\/users\/logs/],
+                permission: 'logs.list',
             },
         ],
     },
