@@ -14,7 +14,7 @@ export class EditDocumentView extends React.Component {
                 {({ navigate, query: { id } }) => (
                     <PageContent>
                         <Manager currentId={id}>
-                            {({ currentNode, isLoading, currentNodeParents, editDocument }) => {
+                            {({ currentNode, isLoading, setIsLoading, currentNodeParents, editDocument }) => {
                                 return (
                                     <div>
                                         <Header currentNodeParents={currentNodeParents} currentNode={currentNode} />
@@ -32,6 +32,8 @@ export class EditDocumentView extends React.Component {
                                                 parent_id: currentNode.parent_id,
                                             }}
                                             save={editDocument}
+                                            setIsLoading={setIsLoading}
+                                            isLoading={isLoading}
                                         />
                                     </div>
                                 )

@@ -59,4 +59,8 @@
     .text-success {
         color: $success;
     }
+
+    & > p:last-child {
+        margin-bottom: 0;
+    }
 }

@@ -22,6 +22,7 @@ class AddCategoryFormContainerBase extends React.Component<null, AddCategoryForm
 
     componentDidMount() {
         this.fetchParentCategorySelectOptions()
+        this.fetchIndexDocumentsSelectOptions()
     }
 
     fetchParentCategorySelectOptions() {
@@ -30,6 +31,16 @@ class AddCategoryFormContainerBase extends React.Component<null, AddCategoryForm
         return fetchParentCategorySelectOptions().then((options) => {
             this.setState({
                 categories: [...options],
+            })
+        })
+    }
+
+    fetchIndexDocumentsSelectOptions() {
+        const { fetchIndexDocumentsSelectOptions } = this.props
+
+        return fetchIndexDocumentsSelectOptions().then((options) => {
+            this.setState({
+                indexDocuments: [...options],
             })
         })
     }
@@ -68,12 +79,15 @@ const AddCategoryFormContainer = compose(
     ),
     reduxForm({
         form: FORM_NAME,
-        onSubmit: (values, dispatch, { save, navigate }) => {
+        onSubmit: (values, dispatch, { save, navigate, setIsLoading }) => {
+            setIsLoading(true)
             return save(values).then(
                 ({ data }) => {
+                    setIsLoading(false)
                     navigate(`/cms/pages?parent_id=${data.parent_id}`)
                 },
                 (response) => {
+                    setIsLoading(false)
                     throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
                 },
             )

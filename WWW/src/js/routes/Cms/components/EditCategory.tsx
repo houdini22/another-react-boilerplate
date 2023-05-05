@@ -14,7 +14,7 @@ export class EditCategoryView extends React.Component {
                 {({ navigate, query: { id } }) => (
                     <PageContent>
                         <Manager currentId={id}>
-                            {({ currentNode, currentNodeParents, editCategory }) => {
+                            {({ currentNode, currentNodeParents, editCategory, setIsLoading, isLoading }) => {
                                 return (
                                     <>
                                         <Header currentNodeParents={currentNodeParents} currentNode={currentNode} />
@@ -31,6 +31,8 @@ export class EditCategoryView extends React.Component {
                                                 parent_id: currentNode.parent_id,
                                             }}
                                             save={editCategory}
+                                            setIsLoading={setIsLoading}
+                                            isLoading={isLoading}
                                         />
                                     </>
                                 )

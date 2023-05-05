@@ -12,15 +12,7 @@ export class EditLinkView extends React.Component {
                 {({ navigate, query: { id } }) => (
                     <PageContent>
                         <Manager currentId={id}>
-                            {({
-                                nodes,
-                                currentNode,
-                                isLoading,
-                                isLoaded,
-                                fetchError,
-                                currentNodeParents,
-                                editLink,
-                            }) => {
+                            {({ setIsLoading, currentNode, isLoading, currentNodeParents, editLink }) => {
                                 return (
                                     <div>
                                         <Header currentNodeParents={currentNodeParents} currentNode={currentNode} />
@@ -38,6 +30,8 @@ export class EditLinkView extends React.Component {
                                                 parent_id: currentNode.parent_id,
                                             }}
                                             save={editLink}
+                                            setIsLoading={setIsLoading}
+                                            isLoading={isLoading}
                                         />
                                     </div>
                                 )

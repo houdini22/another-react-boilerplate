@@ -78,7 +78,7 @@ class CmsPagesController extends Controller
         ]);
     }
 
-    public function getIndexDocumentsSelectOptions(Request $request)
+    public function getFetchIndexDocumentsSelectOptions(Request $request)
     {
         $user = User::getFromRequest($request);
         if (!$user) {
@@ -125,6 +125,13 @@ class CmsPagesController extends Controller
         $validator = Validator::make($values, [
             'category.category_name' => ['required', 'max:256'],
             'category.category_url' => ['required', 'max:256', 'unique:categories,category_url'],
+            'category.category_meta_title' => 'max:256',
+            'category.category_meta_keywords'=> 'max:512',
+            'category.category_meta_robots'=> 'max:64',
+            'category.category_meta_description'=> 'max:512',
+            'tree.tree_is_published' => ['required'],
+            'tree.tree_published_from' => ['required'],
+            'tree.tree_published_to' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -186,7 +193,14 @@ class CmsPagesController extends Controller
         $validator = Validator::make($values, [
             'category.category_name' => ['required', 'max:256'],
             'category.category_url' => ['required', 'max:256', 'unique:categories,category_url,'.$tree->category->id],
-            'parent_id' => 'required'
+            'category.category_meta_title' => 'max:256',
+            'category.category_meta_keywords'=> 'max:512',
+            'category.category_meta_robots'=> 'max:64',
+            'category.category_meta_description'=> 'max:512',
+            'parent_id' => 'required',
+            'tree.tree_is_published' => ['required'],
+            'tree.tree_published_from' => ['required'],
+            'tree.tree_published_to' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -232,7 +246,14 @@ class CmsPagesController extends Controller
         $validator = Validator::make($values, [
             'document.document_name' => ['required', 'max:256'],
             'document.document_url' => ['required', 'max:256', 'unique:documents,id,'.$tree->document->id],
-            'parent_id' => 'required'
+            'parent_id' => 'required',
+            'document.document_meta_title' => 'max:256',
+            'document.document_meta_keywords'=> 'max:512',
+            'document.document_meta_robots'=> 'max:64',
+            'document.document_meta_description'=> 'max:512',
+            'tree.tree_is_published' => ['required'],
+            'tree.tree_published_from' => ['required'],
+            'tree.tree_published_to' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -278,7 +299,10 @@ class CmsPagesController extends Controller
         $validator = Validator::make($values, [
             'link.link_name' => ['required', 'max:256'],
             'link.link_url' => ['required', 'url'],
-            'parent_id' => 'required'
+            'parent_id' => 'required',
+            'tree.tree_is_published' => ['required'],
+            'tree.tree_published_from' => ['required'],
+            'tree.tree_published_to' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -351,7 +375,15 @@ class CmsPagesController extends Controller
 
         $validator = Validator::make($values, [
             'document.document_name' => 'required|max:256',
-            'document.document_url' => 'required|max:256|unique:documents,document_url'
+            'document.document_url' => 'required|max:256|unique:documents,document_url',
+            'document.document_meta_title' => 'max:256',
+            'document.document_meta_keywords'=> 'max:512',
+            'document.document_meta_robots'=> 'max:64',
+            'document.document_meta_description'=> 'max:512',
+            'parent_id' => 'required',
+            'tree.tree_is_published' => ['required'],
+            'tree.tree_published_from' => ['required'],
+            'tree.tree_published_to' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -406,6 +438,9 @@ class CmsPagesController extends Controller
             'tree_published_from' => Arr::get($values, 'tree.tree_published_from'),
             'tree_published_to' => Arr::get($values, 'tree.tree_published_to'),
             'tree_object_type' => 'link',
+            'tree.tree_is_published' => ['required'],
+            'tree.tree_published_from' => ['required'],
+            'tree.tree_published_to' => ['required'],
         ]);
 
         $link = new Link(Arr::get($values, 'link'));
@@ -417,7 +452,9 @@ class CmsPagesController extends Controller
 
         return response()->json([
             'message' => 'ok',
-            'tree' => Tree::find($tree->id)->toArray(),
+            'data' => [
+                'data' => $tree->toArray()
+            ],
         ]);
     }
 }

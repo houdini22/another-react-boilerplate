@@ -16,8 +16,6 @@ class AddCategoryForm extends React.Component {
             },
         } = this.props
 
-        console.log(this.props)
-
         return (
             <Row>
                 <Col xs={12}>

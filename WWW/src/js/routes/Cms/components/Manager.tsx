@@ -17,7 +17,6 @@ export class Manager extends React.Component<null, null> {
             children,
             nodes,
             isLoading,
-            isLoaded,
             fetchError,
             currentNode,
             setCurrentId,
@@ -37,7 +36,6 @@ export class Manager extends React.Component<null, null> {
         const renderProps = {
             nodes,
             isLoading,
-            isLoaded,
             fetchError,
             currentNode,
             setCurrentId,
@@ -60,7 +58,6 @@ export class Manager extends React.Component<null, null> {
 
 const mapStateToProps = (state) => ({
     isLoading: selectors.getIsLoading(state),
-    isLoaded: selectors.getIsLoaded(state),
     fetchError: selectors.getFetchError(state),
     nodes: selectors.getNodes(state),
     currentNode: selectors.getCurrentNode(state),

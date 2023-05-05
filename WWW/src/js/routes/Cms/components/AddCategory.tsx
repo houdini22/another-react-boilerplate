@@ -14,24 +14,7 @@ export class AddCategoryView extends React.Component {
                 {({ navigate, query: { parent_id } }) => (
                     <PageContent>
                         <Manager currentId={parent_id}>
-                            {({
-                                nodes,
-                                currentNode,
-                                isLoading,
-                                isLoaded,
-                                fetchError,
-                                currentNodeParents,
-                                addCategory,
-                            }) => {
-                                console.log(
-                                    nodes,
-                                    currentNode,
-                                    isLoaded,
-                                    isLoading,
-                                    fetchError,
-                                    currentNode?.category?.category_url,
-                                )
-
+                            {({ currentNode, isLoading, setIsLoading, currentNodeParents, addCategory }) => {
                                 return (
                                     <>
                                         <Header currentNodeParents={currentNodeParents} currentNode={currentNode} />
@@ -57,6 +40,8 @@ export class AddCategoryView extends React.Component {
                                                 parent_id: currentNode.id,
                                             }}
                                             save={addCategory}
+                                            setIsLoading={setIsLoading}
+                                            isLoading={isLoading}
                                         />
                                     </>
                                 )

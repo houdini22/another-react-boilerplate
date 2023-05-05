@@ -34,10 +34,10 @@ class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
         this.setState({ checked })
     }
 
-    handleClick() {
+    handleClick(e) {
         const { checked } = this.state
         const { onChange, disabled } = this.props
-        jQuery(this.el).trigger('click')
+        this.el.click()
         if (_.isFunction(onChange) && !disabled) {
             onChange(this.el.checked)
         }

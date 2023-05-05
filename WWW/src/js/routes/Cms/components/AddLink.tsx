@@ -13,9 +13,7 @@ export class AddLinkView extends React.Component {
                 {({ navigate, query: { parent_id } }) => (
                     <PageContent>
                         <Manager currentId={parent_id}>
-                            {({ nodes, currentNode, isLoading, isLoaded, fetchError, currentNodeParents, addLink }) => {
-                                console.log(nodes, currentNode, isLoaded, isLoading, fetchError)
-
+                            {({ setIsLoading, currentNode, isLoading, currentNodeParents, addLink }) => {
                                 return (
                                     <div>
                                         <Header currentNodeParents={currentNodeParents} currentNode={currentNode} />
@@ -41,6 +39,8 @@ export class AddLinkView extends React.Component {
                                                 },
                                             }}
                                             save={addLink}
+                                            setIsLoading={setIsLoading}
+                                            isLoading={isLoading}
                                         />
                                     </div>
                                 )

@@ -1,7 +1,6 @@
 import { http } from '../modules/http'
 
 const SET_IS_LOADING = 'cms-pages::set-is-loading'
-const SET_IS_LOADED = 'cms-pages::set-is-loaded'
 const SET_FETCH_ERROR = 'cms-pages::set-fetch-error'
 const SET_CURRENT_ID = 'cms-pages::set-current-id'
 const SET_NODES = 'cms-pages::set-nodes'
@@ -10,10 +9,6 @@ const SET_CURRENT_NODE_PARENTS = 'cms-pages::set-current-node-parents'
 
 const setIsLoading = (data) => (dispatch) => {
     dispatch({ type: SET_IS_LOADING, payload: data })
-}
-
-const setIsLoaded = (data) => (dispatch) => {
-    dispatch({ type: SET_IS_LOADED, payload: data })
 }
 
 const setNodes = (data) => (dispatch) => {
@@ -37,8 +32,6 @@ const fetch =
     (parent_id = 0) =>
     (dispatch) => {
         return new Promise<void>((resolve) => {
-            dispatch(setIsLoading(true))
-            dispatch(setIsLoaded(false))
             setNodes([])
 
             http.get('/cms/pages', {
@@ -50,13 +43,9 @@ const fetch =
                     dispatch(setNodes(nodes))
                     dispatch(setCurrentNode(currentNode))
                     dispatch(setCurrentNodeParents(parents))
-                    dispatch(setIsLoading(false))
-                    dispatch(setIsLoaded(true))
                     resolve()
                 })
-                .catch((e) => {
-                    dispatch(setIsLoaded(false))
-                })
+                .catch((e) => {})
         })
     }
 
@@ -188,7 +177,6 @@ const deleteNode =
 
 export const actions = {
     fetch,
-    setIsLoaded,
     setIsLoading,
     setCurrentId,
     setCurrentNode,
@@ -213,12 +201,6 @@ const ACTION_HANDLERS = {
         return {
             ...state,
             isLoading: payload,
-        }
-    },
-    [SET_IS_LOADED]: (state, { payload }) => {
-        return {
-            ...state,
-            isLoaded: payload,
         }
     },
     [SET_FETCH_ERROR]: (state, { payload }) => {
@@ -260,8 +242,6 @@ const ACTION_HANDLERS = {
 const getInitialState = () => ({
     nodes: [],
     isLoading: false,
-    isLoaded: false,
-    fetchError: null,
     currentId: undefined,
     currentNode: {},
     currentNodeParents: [],
@@ -277,7 +257,6 @@ export default function cmsPagesReducer(state = getInitialState(), action) {
 const getState = (state) => state['cmsPages']
 const getNodes = (state) => getState(state)['nodes']
 const getIsLoading = (state) => getState(state)['isLoading']
-const getIsLoaded = (state) => getState(state)['isLoaded']
 const getFetchError = (state) => getState(state)['fetchError']
 const getCurrentId = (state) => getState(state)['currentId']
 const getCurrentNode = (state) => getState(state)['currentNode']
@@ -287,7 +266,6 @@ export const selectors = {
     getState,
     getNodes,
     getIsLoading,
-    getIsLoaded,
     getFetchError,
     getCurrentId,
     getCurrentNode,

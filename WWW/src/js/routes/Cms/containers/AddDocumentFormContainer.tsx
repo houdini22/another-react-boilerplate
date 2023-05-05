@@ -46,12 +46,14 @@ const AddDocumentFormContainer = compose(
     }),
     reduxForm({
         form: FORM_NAME,
-        onSubmit: (values, dispatch, { save, navigate }) => {
+        onSubmit: (values, dispatch, { save, navigate, setIsLoading }) => {
             return save(values).then(
                 ({ data }) => {
+                    setIsLoading(false)
                     navigate(`/cms/pages?parent_id=${data.parent_id}`)
                 },
                 (response) => {
+                    setIsLoading(false)
                     throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
                 },
             )
