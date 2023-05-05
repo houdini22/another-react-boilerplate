@@ -7,6 +7,7 @@ import { AddPermission } from './Add/Index'
 import { NotificationsManager } from '../../../containers/NotificationsManager'
 import { UsersManager } from '../../../containers/UsersManager'
 import { TitleManager } from '../../../containers/TitleManager'
+import { AuthorizationManager } from '../../../containers/AuthorizationManager'
 
 export class UserPermissionsAdd extends React.Component<null, null> {
     render() {
@@ -16,51 +17,63 @@ export class UserPermissionsAdd extends React.Component<null, null> {
                     <NotificationsManager>
                         {({ addToastNotification }) => {
                             return (
-                                <TitleManager>
-                                    {({ setTitleSegments }) => {
-                                        setTitleSegments(['Users', 'Permissions', 'Add'])
+                                <AuthorizationManager>
+                                    {({ canByPermission }) => (
+                                        <TitleManager>
+                                            {({ setTitleSegments }) => {
+                                                setTitleSegments(['Users', 'Permissions', 'Add'])
 
-                                        return (
-                                            <UsersManager getRoles permissionId={query['id']} getUsers>
-                                                {({
-                                                    roles,
-                                                    isLoading,
-                                                    setIsLoading,
-                                                    addPermission,
-                                                    permission,
-                                                    newPermissionUsers,
-                                                    addNewPermissionToUser,
-                                                    removeNewPermissionFromUser,
-                                                    users,
-                                                }) => {
-                                                    return (
-                                                        <PageContent>
-                                                            <Header navigate={navigate} permission={permission} />
-                                                            <Row>
-                                                                <Col xs={12}>
-                                                                    <AddPermission
-                                                                        addPermission={addPermission}
-                                                                        isLoading={isLoading}
-                                                                        addToastNotification={addToastNotification}
-                                                                        setIsLoading={setIsLoading}
-                                                                        roles={roles}
-                                                                        users={users}
-                                                                        newPermissionUsers={newPermissionUsers}
-                                                                        addNewPermissionToUser={addNewPermissionToUser}
-                                                                        removeNewPermissionFromUser={
-                                                                            removeNewPermissionFromUser
-                                                                        }
+                                                return (
+                                                    <UsersManager getRoles permissionId={query['id']} getUsers>
+                                                        {({
+                                                            roles,
+                                                            isLoading,
+                                                            setIsLoading,
+                                                            addPermission,
+                                                            permission,
+                                                            newPermissionUsers,
+                                                            addNewPermissionToUser,
+                                                            removeNewPermissionFromUser,
+                                                            users,
+                                                        }) => {
+                                                            return (
+                                                                <PageContent>
+                                                                    <Header
                                                                         navigate={navigate}
+                                                                        permission={permission}
                                                                     />
-                                                                </Col>
-                                                            </Row>
-                                                        </PageContent>
-                                                    )
-                                                }}
-                                            </UsersManager>
-                                        )
-                                    }}
-                                </TitleManager>
+                                                                    <Row>
+                                                                        <Col xs={12}>
+                                                                            <AddPermission
+                                                                                addPermission={addPermission}
+                                                                                isLoading={isLoading}
+                                                                                addToastNotification={
+                                                                                    addToastNotification
+                                                                                }
+                                                                                setIsLoading={setIsLoading}
+                                                                                roles={roles}
+                                                                                users={users}
+                                                                                newPermissionUsers={newPermissionUsers}
+                                                                                addNewPermissionToUser={
+                                                                                    addNewPermissionToUser
+                                                                                }
+                                                                                removeNewPermissionFromUser={
+                                                                                    removeNewPermissionFromUser
+                                                                                }
+                                                                                navigate={navigate}
+                                                                                canByPermission={canByPermission}
+                                                                            />
+                                                                        </Col>
+                                                                    </Row>
+                                                                </PageContent>
+                                                            )
+                                                        }}
+                                                    </UsersManager>
+                                                )
+                                            }}
+                                        </TitleManager>
+                                    )}
+                                </AuthorizationManager>
                             )
                         }}
                     </NotificationsManager>

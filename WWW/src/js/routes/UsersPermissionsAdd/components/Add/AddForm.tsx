@@ -16,6 +16,7 @@ class AddForm extends React.Component<null, null> {
             role_id,
             noAddToUsers,
             noRoleId,
+            canByPermission,
         } = this.props
 
         return (
@@ -37,7 +38,7 @@ class AddForm extends React.Component<null, null> {
                 )}
                 <Field name="name" label="Name" type="text" component={FormField} autoFocus />
                 <Field name="description" label="Description" type="textarea" component={FormField} />
-                {!role_id && !noAddToUsers && (
+                {!role_id && !noAddToUsers && canByPermission('users.add_permission') && (
                     <Card header={<h1>Add to Users</h1>}>
                         {newPermissionUsers.length > 0 && <Alert color={'info'}>Click added User to remove.</Alert>}
                         <Field

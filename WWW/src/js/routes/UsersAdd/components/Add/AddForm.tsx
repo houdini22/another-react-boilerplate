@@ -32,6 +32,7 @@ class AddForm extends React.Component<null, null> {
             fetchPermissions,
             fetchRoles,
             clearPermissionsFromNewRole,
+            canByPermission,
         } = this.props
 
         return (
@@ -69,90 +70,98 @@ class AddForm extends React.Component<null, null> {
                                             component={FormField}
                                         />
                                     </Card>
-                                    <Card header={<h1>Associate Roles</h1>} size={'md'}>
-                                        {newUserRoles.length > 0 && (
-                                            <Alert color={'info'}>Click added Role to remove.</Alert>
-                                        )}
-                                        <Field
-                                            name="_roles"
-                                            label="Role"
-                                            type="select"
-                                            placeholder={`--- choose ---`}
-                                            options={sortRolesByNameAscending(roles).map(({ id, name }) => ({
-                                                label: name,
-                                                value: id,
-                                                disabled: !!newUserRoles.find(({ id: _id }) => id === _id),
-                                            }))}
-                                            onChange={(e, value) => {
-                                                if (value) {
-                                                    addRoleToNewUser(
-                                                        roles.find((role) => Number(role.id) === Number(value)),
-                                                    )
-                                                }
-                                            }}
-                                            component={FormField}
-                                        />
-                                        <Section>
-                                            {newUserRoles.map((role) => {
-                                                return (
-                                                    <Button
-                                                        roundless
-                                                        color={'secondary'}
-                                                        block
-                                                        onClick={() => {
-                                                            removeRoleFromNewUser(role.id)
-                                                        }}
-                                                    >
-                                                        {role.name}
-                                                    </Button>
-                                                )
-                                            })}
-                                        </Section>
-                                    </Card>
-                                    <Card header={<h1>Associate Permissions</h1>} size={'md'}>
-                                        {newUserPermissions.length > 0 && (
-                                            <Alert color={'info'}>Click added Permission to remove.</Alert>
-                                        )}
-                                        <Field
-                                            name="_permissions"
-                                            label="Permission"
-                                            type="select"
-                                            placeholder={`--- choose ---`}
-                                            options={sortPermissionsByNameAscending(permissions).map(
-                                                ({ id, name }) => ({
+                                    {canByPermission('users.add_role') && (
+                                        <Card header={<h1>Associate Roles</h1>} size={'md'}>
+                                            {newUserRoles.length > 0 && (
+                                                <Alert color={'info'}>Click added Role to remove.</Alert>
+                                            )}
+                                            <Field
+                                                name="_roles"
+                                                label="Role"
+                                                type="select"
+                                                placeholder={`--- choose ---`}
+                                                options={sortRolesByNameAscending(roles).map(({ id, name }) => ({
                                                     label: name,
                                                     value: id,
-                                                    disabled: !!newUserPermissions.find(({ id: _id }) => id === _id),
-                                                }),
-                                            )}
-                                            onChange={(e, value) => {
-                                                if (value) {
-                                                    addPermissionToNewUser(
-                                                        permissions.find(
-                                                            (permission) => Number(permission.id) === Number(value),
-                                                        ),
+                                                    disabled: !!newUserRoles.find(({ id: _id }) => id === _id),
+                                                }))}
+                                                onChange={(e, value) => {
+                                                    if (value) {
+                                                        addRoleToNewUser(
+                                                            roles.find((role) => Number(role.id) === Number(value)),
+                                                        )
+                                                    }
+                                                }}
+                                                component={FormField}
+                                            />
+                                            <Section>
+                                                {newUserRoles.map((role) => {
+                                                    return (
+                                                        <Button
+                                                            roundless
+                                                            color={'secondary'}
+                                                            block
+                                                            onClick={() => {
+                                                                removeRoleFromNewUser(role.id)
+                                                            }}
+                                                        >
+                                                            {role.name}
+                                                        </Button>
                                                     )
-                                                }
-                                            }}
-                                            component={FormField}
-                                        />
-                                        <Section>
-                                            {newUserPermissions.map((permission) => {
-                                                return (
-                                                    <Button
-                                                        roundless
-                                                        color={'secondary'}
-                                                        block
-                                                        onClick={() => {
-                                                            removePermissionFromNewUser(permission.id)
-                                                        }}
-                                                    >
-                                                        {permission.name}
-                                                    </Button>
-                                                )
-                                            })}
-                                        </Section>
-                                    </Card>
+                                                })}
+                                            </Section>
+                                        </Card>
+                                    )}
+
+                                    {canByPermission('users.add_permission') && (
+                                        <Card header={<h1>Associate Permissions</h1>} size={'md'}>
+                                            {newUserPermissions.length > 0 && (
+                                                <Alert color={'info'}>Click added Permission to remove.</Alert>
+                                            )}
+                                            <Field
+                                                name="_permissions"
+                                                label="Permission"
+                                                type="select"
+                                                placeholder={`--- choose ---`}
+                                                options={sortPermissionsByNameAscending(permissions).map(
+                                                    ({ id, name }) => ({
+                                                        label: name,
+                                                        value: id,
+                                                        disabled: !!newUserPermissions.find(
+                                                            ({ id: _id }) => id === _id,
+                                                        ),
+                                                    }),
+                                                )}
+                                                onChange={(e, value) => {
+                                                    if (value) {
+                                                        addPermissionToNewUser(
+                                                            permissions.find(
+                                                                (permission) => Number(permission.id) === Number(value),
+                                                            ),
+                                                        )
+                                                    }
+                                                }}
+                                                component={FormField}
+                                            />
+                                            <Section>
+                                                {newUserPermissions.map((permission) => {
+                                                    return (
+                                                        <Button
+                                                            roundless
+                                                            color={'secondary'}
+                                                            block
+                                                            onClick={() => {
+                                                                removePermissionFromNewUser(permission.id)
+                                                            }}
+                                                        >
+                                                            {permission.name}
+                                                        </Button>
+                                                    )
+                                                })}
+                                            </Section>
+                                        </Card>
+                                    )}
+
                                     <Button type={'submit'} color={'success'} block>
                                         Save
                                     </Button>
@@ -161,40 +170,43 @@ class AddForm extends React.Component<null, null> {
                         </form>
                     </Tabs.Content>
                 </Tabs.Tab>
-                <Tabs.Tab name={'roles'}>
-                    <Tabs.Trigger>Add Role</Tabs.Trigger>
-                    <Tabs.Content>
-                        <AddFormContainer
-                            setIsLoading={setIsLoading}
-                            addToastNotification={addToastNotification}
-                            permissions={permissions}
-                            newRolePermissions={newRolePermissions}
-                            addPermissionToNewRole={addPermissionToNewRole}
-                            removePermissionFromNewRole={removePermissionFromNewRole}
-                            users={users}
-                            newRoleUsers={newRoleUsers}
-                            addNewRoleToUser={addNewRoleToUser}
-                            removeNewRoleFromUser={removeNewRoleFromUser}
-                            addPermission={addPermission}
-                            isLoading={isLoading}
-                            fetchPermissions={fetchPermissions}
-                            noAddToUsers
-                            save={(values) => {
-                                return new Promise((resolve, reject) => {
-                                    return addRole(values, newRolePermissions, [])
-                                        .then((role) => {
-                                            fetchRoles().then(() => {
-                                                clearPermissionsFromNewRole()
-                                                addRoleToNewUser(role)
-                                                resolve(role)
+                {canByPermission('roles.add') && (
+                    <Tabs.Tab name={'roles'}>
+                        <Tabs.Trigger>Add Role</Tabs.Trigger>
+                        <Tabs.Content>
+                            <AddFormContainer
+                                setIsLoading={setIsLoading}
+                                addToastNotification={addToastNotification}
+                                permissions={permissions}
+                                newRolePermissions={newRolePermissions}
+                                addPermissionToNewRole={addPermissionToNewRole}
+                                removePermissionFromNewRole={removePermissionFromNewRole}
+                                users={users}
+                                newRoleUsers={newRoleUsers}
+                                addNewRoleToUser={addNewRoleToUser}
+                                removeNewRoleFromUser={removeNewRoleFromUser}
+                                addPermission={addPermission}
+                                isLoading={isLoading}
+                                fetchPermissions={fetchPermissions}
+                                noAddToUsers
+                                save={(values) => {
+                                    return new Promise((resolve, reject) => {
+                                        return addRole(values, newRolePermissions, [])
+                                            .then((role) => {
+                                                fetchRoles().then(() => {
+                                                    clearPermissionsFromNewRole()
+                                                    addRoleToNewUser(role)
+                                                    resolve(role)
+                                                })
                                             })
-                                        })
-                                        .catch((e) => reject(e))
-                                })
-                            }}
-                        />
-                    </Tabs.Content>
-                </Tabs.Tab>
+                                            .catch((e) => reject(e))
+                                    })
+                                }}
+                                canByPermission={canByPermission}
+                            />
+                        </Tabs.Content>
+                    </Tabs.Tab>
+                )}
             </Tabs.Container>
         )
     }

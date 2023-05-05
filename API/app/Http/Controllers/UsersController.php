@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserDataChanged;
+use App\Events\UserForceLogout;
 use App\Models\File;
 use App\Models\Role;
 use App\Models\User;
@@ -178,6 +180,8 @@ class UsersController extends Controller
 
         $user->save();
 
+        broadcast(new UserDataChanged($user));
+
         return response()->json([
             'user' => $user->toArray(),
         ]);
@@ -322,6 +326,8 @@ class UsersController extends Controller
         $user->avatar_id = $file->id;
         $user->save();
 
+        broadcast(new UserDataChanged($user));
+
         return response()->json([
             'msg' => 'ok',
         ]);
@@ -346,6 +352,8 @@ class UsersController extends Controller
         $user->avatar_id = NULL;
         $user->save();
 
+        broadcast(new UserDataChanged($user));
+
         return response()->json([
             'msg' => 'ok',
         ]);
@@ -363,8 +371,12 @@ class UsersController extends Controller
             return $this->response404();
         }
 
+        $token = $user->token;
+
         $user->token = NULL;
         $user->save();
+
+        broadcast(new UserForceLogout($user, $token));
 
         return response()->json([
             'msg' => 'ok',

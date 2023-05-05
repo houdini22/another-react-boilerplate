@@ -10,6 +10,7 @@ export const SET_LOGIN_ERROR = 'auth::set_login_error'
 export const SET_IS_LOADING = 'auth::set_is_loading'
 export const GENTLY_LOG_OFF = 'auth::gently-log-off'
 export const SET_LOGIN_WITH_TOKEN_REQUEST_IN_PROGRESS = 'auth::set-login-with-token-request-in-progress'
+export const SET_USER_DATA = 'auth::set-user-data'
 
 // ------------------------------------
 // Actions
@@ -19,6 +20,9 @@ const setIsLoading = (isLoading) => (dispatch) => {
 }
 const loggedIn = (data) => (dispatch) => {
     dispatch({ type: LOGGED_IN, payload: data })
+}
+const setUserData = (data) => (dispatch) => {
+    dispatch({ type: SET_USER_DATA, payload: data })
 }
 
 const loggedOff = () => (dispatch) => {
@@ -128,6 +132,7 @@ export const actions = {
     loginWithToken,
     setIsLoading,
     gentlyLogOff,
+    setUserData,
 }
 
 // ------------------------------------
@@ -167,6 +172,12 @@ const ACTION_HANDLERS = {
         return {
             ...state,
             loginWithTokenRequestInProgress: payload,
+        }
+    },
+    [SET_USER_DATA]: (state, { payload }) => {
+        return {
+            ...state,
+            user: payload,
         }
     },
 }
