@@ -114,7 +114,7 @@
                         }
 
                         &.layout__sidebar__content__navigation__links__link--active {
-                            a {
+                            & > a {
                                 font-weight: bold;
                                 color: #fff;
 
@@ -355,7 +355,7 @@
 
                         & > .layout__header__bar__right__element--notifications__button {
                             cursor: pointer;
-                            width: 45px;
+                            width: 60px;
                             text-align: center;
                             position: relative;
                             font-size: 30px;

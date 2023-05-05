@@ -22,16 +22,51 @@ interface NavigationLinkState {
 }
 
 class NavigationLink extends React.Component<NavigationLinkProps, NavigationLinkState> {
-    constructor(props) {
-        super(props)
-        this.state = {
-            expanded: false,
-        }
+    state = {
+        expanded: false,
     }
 
     render() {
         const { children, href, icon, active, nested } = this.props
         const { expanded } = this.state
+
+        const isExpanded = expanded || active
+
+        const content = (
+            <div>
+                <span className={cx('layout__sidebar__content__navigation__links__link__icon')}>{icon}</span>
+                <span className={cx('layout__sidebar__content__navigation__links__link__caption')}>{children}</span>
+                {!_.isEmpty(nested) && (
+                    <span className={cx('layout__sidebar__content__navigation__links__link__nested')}>
+                        {!isExpanded && <AiOutlineRight />}
+                        {!!isExpanded && <AiOutlineDown />}
+                    </span>
+                )}
+            </div>
+        )
+
+        if (!href) {
+            return (
+                <li
+                    className={cx('layout__sidebar__content__navigation__links__link', {
+                        'layout__sidebar__content__navigation__links__link--active': active,
+                    })}
+                >
+                    <a
+                        onClick={() => {
+                            if (!_.isEmpty(nested)) {
+                                this.setState({
+                                    expanded: !expanded,
+                                })
+                            }
+                        }}
+                    >
+                        {content}
+                    </a>
+                    {!_.isEmpty(nested) && isExpanded && <NavigationItems items={nested} />}
+                </li>
+            )
+        }
 
         return (
             <li
@@ -49,20 +84,9 @@ class NavigationLink extends React.Component<NavigationLinkProps, NavigationLink
                         }
                     }}
                 >
-                    <div>
-                        <span className={cx('layout__sidebar__content__navigation__links__link__icon')}>{icon}</span>
-                        <span className={cx('layout__sidebar__content__navigation__links__link__caption')}>
-                            {children}
-                        </span>
-                        {!_.isEmpty(nested) && (
-                            <span className={cx('layout__sidebar__content__navigation__links__link__nested')}>
-                                {!expanded && <AiOutlineRight />}
-                                {!!expanded && <AiOutlineDown />}
-                            </span>
-                        )}
-                    </div>
+                    {content}
                 </Link>
-                {!_.isEmpty(nested) && expanded && <NavigationItems items={nested} />}
+                {!_.isEmpty(nested) && isExpanded && <NavigationItems items={nested} />}
             </li>
         )
     }

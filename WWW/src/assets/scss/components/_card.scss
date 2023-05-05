@@ -31,7 +31,6 @@
 
     &.component-card--size-lg {
         .component-card__header {
-            font-size: 1.3em;
             height: 55px;
             line-height: 55px;
 
@@ -42,7 +41,7 @@
             h5,
             h6 {
                 line-height: 1.4em;
-                font-size: 1.3em;
+                font-size: 1.5em;
                 padding-left: $COMPONENT_PADDING_SINGLE;
                 padding-right: $COMPONENT_PADDING_SINGLE;
             }
@@ -67,7 +66,6 @@
 
     &.component-card--size-md {
         & > .component-card__header {
-            font-size: 1.2em;
             height: 45px;
             line-height: 45px;
 
@@ -78,7 +76,7 @@
             h5,
             h6 {
                 line-height: 1.4em;
-                font-size: 1.2em;
+                font-size: 1.4em;
                 padding-left: #{$COMPONENT_PADDING_SINGLE / 2};
                 padding-right: #{$COMPONENT_PADDING_SINGLE / 2};
             }
@@ -101,7 +99,6 @@
 
     &.component-card--size-sm {
         & > .component-card__header {
-            font-size: 1.1em;
             height: 35px;
             line-height: 35px;
 
@@ -112,7 +109,7 @@
             h5,
             h6 {
                 line-height: 1.1em;
-                font-size: 1.1em;
+                font-size: 1.2em;
                 padding-left: #{$COMPONENT_PADDING_SINGLE / 3};
                 padding-right: #{$COMPONENT_PADDING_SINGLE / 3};
             }
@@ -140,11 +137,6 @@
         & > .component-card__header {
             background: $default;
             color: $default_text_color;
-            .component-card__header__actions {
-                svg {
-                    color: $default_text_color_DARKEN_X3;
-                }
-            }
         }
         &.component-card--solid-background {
             .component-card__content {
@@ -158,11 +150,6 @@
         & > .component-card__header {
             background: $primary;
             color: $primary_text_color;
-            .component-card__header__actions {
-                svg {
-                    color: $primary_text_color_DARKEN_X3;
-                }
-            }
         }
         & > &.component-card--solid-background {
             .component-card__content {
@@ -176,11 +163,6 @@
         & > .component-card__header {
             background: $secondary;
             color: $secondary_text_color;
-            .component-card__header__actions {
-                svg {
-                    color: $secondary_text_color_DARKEN_X3;
-                }
-            }
         }
         &.component-card--solid-background {
             & > .component-card__content {
@@ -194,11 +176,6 @@
         & > .component-card__header {
             background: $info;
             color: $info_text_color;
-            & > .component-card__header__actions {
-                svg {
-                    color: $info_text_color_DARKEN_X3;
-                }
-            }
         }
         &.component-card--solid-background {
             & > .component-card__content {
@@ -212,11 +189,6 @@
         & > .component-card__header {
             background: $warning;
             color: $warning_text_color;
-            & > .component-card__header__actions {
-                svg {
-                    color: $warning_text_color_DARKEN_X3;
-                }
-            }
         }
         &.component-card--solid-background {
             & > .component-card__content {
@@ -230,11 +202,6 @@
         & > .component-card__header {
             background: $success;
             color: $success_text_color;
-            & > .component-card__header__actions {
-                svg {
-                    color: $success_text_color_DARKEN_X3;
-                }
-            }
         }
         &.component-card--solid-background {
             & > .component-card__content {
@@ -248,11 +215,6 @@
         & > .component-card__header {
             background: $danger;
             color: $danger_text_color;
-            & > .component-card__header__actions {
-                svg {
-                    color: $danger_text_color_DARKEN_X3;
-                }
-            }
         }
         &.component-card--solid-background {
             & > .component-card__content {
@@ -296,8 +258,6 @@
             align-items: center;
 
             & > * {
-                margin-left: 5px;
-                margin-right: 5px;
                 flex: none;
 
                 &.form-control:not(.checkbox) {

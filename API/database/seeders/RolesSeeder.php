@@ -170,7 +170,7 @@ class RolesSeeder extends Seeder
                         'is_deletable' => false,
                     ],
                     [
-                        'name' => 'user.remove_permission',
+                        'name' => 'users.remove_permission',
                         'guard_name' => 'web',
                         'is_deletable' => false,
                     ],

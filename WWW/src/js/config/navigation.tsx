@@ -23,36 +23,41 @@ export const navigation = [
         caption: 'CMS',
         href: '/cms/pages',
         icon: <FaSitemap />,
+        urlActive: [/\/cms\/pages/],
         children: [
             {
                 type: 'link',
                 href: '/cms/pages',
                 caption: 'Pages',
                 icon: <AiOutlineOrderedList />,
+                urlActive: [/^\/cms\/pages$/],
             },
             {
                 type: 'link',
-                href: '/cms/pages',
                 caption: 'Add',
                 icon: <AddIcon />,
+                urlActive: [/\/cms\/pages\/add_category/, /\/cms\/pages\/add_document/, /\/cms\/pages\/add_link/],
                 children: [
                     {
                         type: 'link',
                         href: '/cms/pages/add_category',
                         caption: 'Category',
                         icon: <CategoryIcon />,
+                        urlActive: [/\/cms\/pages\/add_category/],
                     },
                     {
                         type: 'link',
                         href: '/cms/pages/add_document',
                         caption: 'Document',
                         icon: <DocumentIcon />,
+                        urlActive: [/\/cms\/pages\/add_document/],
                     },
                     {
                         type: 'link',
                         href: '/cms/pages/add_link',
                         caption: 'Link',
                         icon: <LinkIcon />,
+                        urlActive: [/\/cms\/pages\/add_link/],
                     },
                 ],
             },
@@ -67,7 +72,7 @@ export const navigation = [
     },
     {
         type: 'header',
-        caption: 'Users',
+        caption: 'Accounts',
     },
     {
         type: 'link',

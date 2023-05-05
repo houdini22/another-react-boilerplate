@@ -81,7 +81,7 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                         })}
                         <Col xs={12}>
                             <Typography.Container>
-                                <h3>Permissions from User</h3>
+                                <h3>User Permissions</h3>
                             </Typography.Container>
                         </Col>
                         {sortPermissionsByNameAscending(user?.permissions).map(({ id: _id, name, occurrence }) => {

@@ -64,14 +64,14 @@ class FiltersCard extends React.Component<FilterProps, null> {
                             headerActions={[
                                 <Button
                                     key={'reset-filters'}
-                                    color={'secondary'}
+                                    color={'primary'}
                                     onClick={() => resetFilters()}
                                     disabled={!ifDeepDiff(defaultFilters, filters)}
                                 >
-                                    Reset Filters
+                                    Reset
                                 </Button>,
                                 <DropdownContainer key={'restore-filters'} placement={'right'}>
-                                    <DropdownTrigger component={Button}>Restore Filters</DropdownTrigger>
+                                    <DropdownTrigger component={Button}>Restore</DropdownTrigger>
                                     <DropdownMenu>
                                         {savedFilters.map(({ list_name, filters }) => (
                                             <DropdownItem
@@ -104,11 +104,11 @@ class FiltersCard extends React.Component<FilterProps, null> {
                                 </DropdownContainer>,
                                 <Button
                                     key={'save-filters'}
-                                    color={'warning'}
+                                    color={'success'}
                                     onClick={() => openModal('save-filters')}
                                     disabled={!ifDeepDiff(defaultFilters, filters)}
                                 >
-                                    Save Filters
+                                    Save
                                 </Button>,
                             ]}
                         >
