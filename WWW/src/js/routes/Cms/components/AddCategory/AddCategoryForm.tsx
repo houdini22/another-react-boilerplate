@@ -52,7 +52,13 @@ class AddCategoryForm extends React.Component {
                                                     label="Display menu from"
                                                     type="select"
                                                     component={FormField}
-                                                    options={categories}
+                                                    options={[
+                                                        {
+                                                            label: 'This category',
+                                                            value: 'new',
+                                                        },
+                                                        ...categories,
+                                                    ]}
                                                     placeholder={'Do not display menu'}
                                                 />
                                                 <Field
@@ -79,17 +85,45 @@ class AddCategoryForm extends React.Component {
                                                     type="text"
                                                     component={FormField}
                                                 />
-
-                                                <div>
-                                                    <Button color="success" type="submit">
-                                                        Save
-                                                    </Button>
-                                                </div>
                                             </>
                                         )}
                                     </Tabs.Content>
                                 </Tabs.Tab>
+                                <Tabs.Tab name="meta">
+                                    <Tabs.Trigger>Meta</Tabs.Trigger>
+                                    <Tabs.Content>
+                                        <Field
+                                            name="category.category_meta_title"
+                                            label="Title"
+                                            type="text"
+                                            component={FormField}
+                                        />
+                                        <Field
+                                            name="category.category_meta_description"
+                                            label="Description"
+                                            type="textarea"
+                                            component={FormField}
+                                        />
+                                        <Field
+                                            name="category.category_meta_keywords"
+                                            label="Keywords"
+                                            type="textarea"
+                                            component={FormField}
+                                        />
+                                        <Field
+                                            name="category.category_meta_robots"
+                                            label="Robots"
+                                            type="text"
+                                            component={FormField}
+                                        />
+                                    </Tabs.Content>
+                                </Tabs.Tab>
                             </Tabs.Container>
+                            <div>
+                                <Button color="success" type="submit" block>
+                                    Save
+                                </Button>
+                            </div>
                         </form>
                     </Card>
                 </Col>

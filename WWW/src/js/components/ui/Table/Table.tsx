@@ -129,7 +129,7 @@ interface TdProps {
 
 class Td extends React.Component<TdProps, null> {
     render() {
-        const { children, xs, md, onClick, alignCenter, alignRight } = this.props
+        const { children, xs, md, onClick, alignCenter, alignRight, className } = this.props
 
         return (
             <Col
@@ -139,6 +139,7 @@ class Td extends React.Component<TdProps, null> {
                     'component-table__tbody__td--is-clickable': onClick,
                     [`component-table__tbody__td--xs-${xs}`]: xs,
                     [`component-table__tbody__td--md-${md}`]: md,
+                    [className]: className,
                 })}
                 xs={xs}
                 md={md}

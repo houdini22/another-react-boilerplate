@@ -29,13 +29,7 @@ class AddCategoryFormContainerBase extends React.Component<null, AddCategoryForm
 
         return fetchParentCategorySelectOptions().then((options) => {
             this.setState({
-                categories: [
-                    {
-                        label: 'This category',
-                        value: 'new',
-                    },
-                    ...options,
-                ],
+                categories: [...options],
             })
         })
     }

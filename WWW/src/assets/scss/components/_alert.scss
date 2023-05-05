@@ -5,13 +5,15 @@
     margin-bottom: 1em;
     border: 1px solid transparent;
     border-radius: 0;
-    display: block;
+    display: flex;
     width: 100%;
     text-align: left;
+    min-height: 5em;
 
     &.component-alert--align-center {
-        & > .component-alert__content {
+        & > .component-alert__content--outer {
             text-align: center;
+            justify-content: center;
         }
     }
 
@@ -25,7 +27,7 @@
                 color: $default_DARKEN_X2;
             }
         }
-        & > .component-alert__content {
+        & > .component-alert__content--outer {
             & > div:nth-child(2) {
                 padding-top: 0.5em;
                 margin-top: 0.5em;
@@ -40,7 +42,7 @@
                 color: $primary_DARKEN_X2;
             }
         }
-        & > .component-alert__content {
+        & > .component-alert__content--outer {
             & > div:nth-child(2) {
                 padding-top: 0.5em;
                 margin-top: 0.5em;
@@ -55,7 +57,7 @@
                 color: $secondary_DARKEN_X2;
             }
         }
-        & > .component-alert__content {
+        & > .component-alert__content--outer {
             & > div:nth-child(2) {
                 padding-top: 0.5em;
                 margin-top: 0.5em;
@@ -70,7 +72,7 @@
                 color: $success_DARKEN_X2;
             }
         }
-        & > .component-alert__content {
+        & > .component-alert__content--outer {
             & > div:nth-child(2) {
                 padding-top: 0.5em;
                 margin-top: 0.5em;
@@ -85,7 +87,7 @@
                 color: $danger_DARKEN_X2;
             }
         }
-        & > .component-alert__content {
+        & > .component-alert__content--outer {
             & > div:nth-child(2) {
                 padding-top: 0.5em;
                 margin-top: 0.5em;
@@ -100,7 +102,7 @@
                 color: $warning_DARKEN_X2;
             }
         }
-        & > .component-alert__content {
+        & > .component-alert__content--outer {
             & > div:nth-child(2) {
                 padding-top: 0.5em;
                 margin-top: 0.5em;
@@ -115,7 +117,7 @@
                 color: $info_DARKEN_X2;
             }
         }
-        & > .component-alert__content {
+        & > .component-alert__content--outer {
             & > div:nth-child(2) {
                 padding-top: 0.5em;
                 margin-top: 0.5em;
@@ -169,7 +171,7 @@
     &.component-alert--color-default.component-alert--outline {
         border-color: $default;
         color: $default_text_color;
-        & > .component-alert__content {
+        & > .component-alert__content--outer {
             & > div:nth-child(2) {
                 padding-top: 0.5em;
                 margin-top: 0.5em;
@@ -181,7 +183,7 @@
     &.component-alert--color-primary.component-alert--outline {
         border-color: $primary;
         color: $primary;
-        & > .component-alert__content {
+        & > .component-alert__content--outer {
             & > div:nth-child(2) {
                 padding-top: 0.5em;
                 margin-top: 0.5em;
@@ -193,7 +195,7 @@
     &.component-alert--color-secondary.component-alert--outline {
         border-color: $secondary;
         color: $secondary;
-        & > .component-alert__content {
+        & > .component-alert__content--outer {
             & > div:nth-child(2) {
                 padding-top: 0.5em;
                 margin-top: 0.5em;
@@ -205,7 +207,7 @@
     &.component-alert--color-success.component-alert--outline {
         border-color: $success;
         color: $success;
-        & > .component-alert__content {
+        & > .component-alert__content--outer {
             & > div:nth-child(2) {
                 padding-top: 0.5em;
                 margin-top: 0.5em;
@@ -217,7 +219,7 @@
     &.component-alert--color-danger.component-alert--outline {
         border-color: $danger;
         color: $danger;
-        & > .component-alert__content {
+        & > .component-alert__content--outer {
             & > div:nth-child(2) {
                 padding-top: 0.5em;
                 margin-top: 0.5em;
@@ -229,7 +231,7 @@
     &.component-alert--color-warning.component-alert--outline {
         border-color: $warning;
         color: $warning;
-        & > .component-alert__content {
+        & > .component-alert__content--outer {
             & > div:nth-child(2) {
                 padding-top: 0.5em;
                 margin-top: 0.5em;
@@ -241,7 +243,7 @@
     &.component-alert--color-info.component-alert--outline {
         border-color: $info;
         color: $info;
-        & > .component-alert__content {
+        & > .component-alert__content--outer {
             & > div:nth-child(2) {
                 padding-top: 0.5em;
                 margin-top: 0.5em;
@@ -950,7 +952,11 @@
         }
     }
 
-    & > .component-alert__content {
+    & > .component-alert__content--outer {
+        align-content: center;
+        align-items: center;
+        display: flex;
+        width: 100%;
         & > :last-child {
             margin-bottom: 0;
         }

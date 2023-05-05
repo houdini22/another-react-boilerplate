@@ -18,6 +18,10 @@ class CreateCategoriesTable extends Migration
             $table->unsignedBigInteger('tree_id');
             $table->string('category_name', 256)->default('');
             $table->string('category_url', 256)->default(null)->nullable();
+            $table->string('category_meta_title', 256)->nullable()->default(null);
+            $table->string('category_meta_keywords', 512)->nullable()->default(null);
+            $table->string('category_meta_robots', 64)->nullable()->default(null);
+            $table->string('category_meta_description', 512)->nullable()->default(null);
             $table->unsignedBigInteger('index_document_id')->default(null)->nullable();
             $table->unsignedBigInteger('menu_category_id')->default(null)->nullable();
 

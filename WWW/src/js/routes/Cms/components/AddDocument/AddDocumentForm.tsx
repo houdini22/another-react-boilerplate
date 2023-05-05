@@ -79,15 +79,15 @@ class AddDocumentForm extends React.Component {
                                                     component={FormField}
                                                 />
                                                 <Field
-                                                    name="document.document_meta_keywords"
-                                                    label="Keywords"
-                                                    type="text"
+                                                    name="document.document_meta_description"
+                                                    label="Description"
+                                                    type="textarea"
                                                     component={FormField}
                                                 />
                                                 <Field
-                                                    name="document.document_meta_description"
-                                                    label="Description"
-                                                    type="text"
+                                                    name="document.document_meta_keywords"
+                                                    label="Keywords"
+                                                    type="textarea"
                                                     component={FormField}
                                                 />
                                                 <Field
@@ -103,7 +103,7 @@ class AddDocumentForm extends React.Component {
                             </Tabs.Container>
 
                             <div>
-                                <Button color="success" type="submit">
+                                <Button color="success" type="submit" block>
                                     Save
                                 </Button>
                             </div>

@@ -20,6 +20,7 @@ import { FaUserCog as RoleIcon } from 'react-icons/fa'
 import { MdHelpOutline as HelpIcon } from 'react-icons/md'
 import { AiFillEye as PublishIcon } from 'react-icons/ai'
 import { AiFillEyeInvisible as UnpublishIcon } from 'react-icons/ai'
+import { AiOutlineWarning as WarningIcon } from 'react-icons/ai'
 
 export {
     OrderingIcon,
@@ -43,4 +44,5 @@ export {
     HelpIcon,
     PublishIcon,
     UnpublishIcon,
+    WarningIcon,
 }

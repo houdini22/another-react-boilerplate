@@ -5,7 +5,6 @@ import { RouteManager } from '../../../containers/RouteManager'
 import { Header } from './AddLink/Header'
 import { AddLinkFormContainer } from '../containers/AddLinkFormContainer'
 import { formattedCurrentDate, formattedDateTime } from '../../../helpers/date-time'
-import { generateUrl } from '../../../helpers/cms'
 
 export class AddLinkView extends React.Component {
     render() {

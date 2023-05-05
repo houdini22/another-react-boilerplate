@@ -70,7 +70,7 @@ class AddLinkForm extends React.Component {
                                                 />
 
                                                 <div>
-                                                    <Button color="success" type="submit">
+                                                    <Button color="success" type="submit" block>
                                                         Save
                                                     </Button>
                                                 </div>

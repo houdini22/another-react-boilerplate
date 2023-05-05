@@ -7,8 +7,7 @@ import { Alert, Button, Card, Dropdown, LoadingOverlay, Modal, Tooltip } from '.
 import { Table } from '../../../components'
 import { formatDateTime } from '../../../helpers/date-time'
 import classNames from 'classnames/bind'
-import styles from '../../../../assets/scss/components/_typography.scss'
-import { Typography } from '../../../components'
+import styles from '../../../../assets/scss/routes/cms.scss'
 import { FiltersFormContainer } from '../containers/FiltersFormContainer'
 import {
     OrderingIcon,
@@ -20,6 +19,7 @@ import {
     LinkIcon,
     UnpublishIcon,
     PublishIcon,
+    WarningIcon,
 } from '../../../components/icons'
 
 const cx = classNames.bind(styles)
@@ -52,8 +52,8 @@ export class CmsPagesView extends React.Component {
                             console.log(nodes, currentNode, isLoaded, isLoading, fetchError, currentNodeParents)
 
                             return (
-                                <>
-                                    <PageContent>
+                                <PageContent>
+                                    <div className={cx('route--cms')}>
                                         <Header currentNodeParents={currentNodeParents} currentNode={currentNode} />
 
                                         <Modal.Container visible={confirmDeleteVisible} color={'danger'}>
@@ -173,7 +173,7 @@ export class CmsPagesView extends React.Component {
                                                     {!nodes.length && (
                                                         <Table.Tr>
                                                             <Table.Td xs={12} alignCenter>
-                                                                <Alert color="info" alignCenter>
+                                                                <Alert color="warning" alignCenter>
                                                                     No results
                                                                 </Alert>
                                                             </Table.Td>
@@ -185,7 +185,9 @@ export class CmsPagesView extends React.Component {
                                                                 onClick={
                                                                     node.tree_object_type === 'category'
                                                                         ? () => {
-                                                                              setCurrentId(node.id)
+                                                                              navigate(
+                                                                                  `/cms/pages?parent_id=${node.id}`,
+                                                                              )
                                                                           }
                                                                         : null
                                                                 }
@@ -196,7 +198,11 @@ export class CmsPagesView extends React.Component {
                                                                 }
                                                                 key={node.id}
                                                             >
-                                                                <Table.Td xs={1} alignCenter>
+                                                                <Table.Td
+                                                                    xs={1}
+                                                                    alignCenter
+                                                                    className={cx('tree-type-icon')}
+                                                                >
                                                                     {node.tree_object_type === 'category' && (
                                                                         <CategoryIcon />
                                                                     )}
@@ -246,11 +252,9 @@ export class CmsPagesView extends React.Component {
                                                                             }
                                                                             placement={'top'}
                                                                         >
-                                                                            <Typography.Container>
-                                                                                <UnpublishIcon
-                                                                                    className={cx('text-danger')}
-                                                                                />
-                                                                            </Typography.Container>
+                                                                            <UnpublishIcon
+                                                                                className={cx('text-danger')}
+                                                                            />
                                                                         </Tooltip>
                                                                     )}
                                                                     {!!node.tree_is_published && (
@@ -411,8 +415,8 @@ export class CmsPagesView extends React.Component {
                                             </Table.Container>
                                             {isLoading && <LoadingOverlay />}
                                         </Card>
-                                    </PageContent>
-                                </>
+                                    </div>
+                                </PageContent>
                             )
                         }}
                     </Manager>
