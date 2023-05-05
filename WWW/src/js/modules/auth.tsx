@@ -28,14 +28,17 @@ class UserIsAuthenticatedRouteBase extends React.Component<UserIsAuthenticatedRo
             isLoggedIn,
             navigate,
             loginWithToken,
-            location: { pathname },
+            location: { pathname, search },
         } = this.props
+
         if (!isLoggedIn) {
             const { email, token } = LocalStorage.queryAll('LoginFormContainer', { query: { ID: 1 } })[0]
 
             loginWithToken(email, token).then(
-                () => null,
-                () => navigate(`/login?back=${pathname}`),
+                () => {},
+                () => {
+                        navigate(`/login?back=${pathname}${encodeURIComponent(search)}`)
+                }
             )
         }
     }
@@ -44,18 +47,29 @@ class UserIsAuthenticatedRouteBase extends React.Component<UserIsAuthenticatedRo
         const {
             isLoggedIn,
             navigate,
+            loginWithToken,
             location: { pathname, search },
         } = this.props
         if (!isLoggedIn && prevProps.isLoggedIn) {
-            navigate(`/login?back=${pathname}${encodeURIComponent(search)}&reason=401`)
+            const { email, token } = LocalStorage.queryAll('LoginFormContainer', { query: { ID: 1 } })[0]
+
+            loginWithToken(email, token).then(
+                () => {},
+                () => {
+                    navigate(`/login?back=${pathname}${encodeURIComponent(search)}&reason=401`)
+                }
+            )
         }
     }
 
     render() {
-        const { children } = this.props
+        const { children, isLoggedIn } = this.props
         const Component = createReactClass({
             render: function () {
-                return <>{children}</>
+                if (isLoggedIn) {
+                    return <>{children}</>
+                }
+                return null;
             },
         })
         return <Component />

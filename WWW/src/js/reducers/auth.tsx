@@ -9,6 +9,7 @@ export const LOGGED_OFF = 'auth::logged_off'
 export const SET_LOGIN_ERROR = 'auth::set_login_error'
 export const SET_IS_LOADING = 'auth::set_is_loading'
 export const GENTLY_LOG_OFF = 'auth::gently-log-off'
+export const SET_LOGIN_WITH_TOKEN_REQUEST_IN_PROGRESS = 'auth::set-login-with-token-request-in-progress'
 
 // ------------------------------------
 // Actions
@@ -26,6 +27,10 @@ const loggedOff = () => (dispatch) => {
 
 const setLoginError = (value) => (dispatch) => {
     dispatch({ type: SET_LOGIN_ERROR, payload: value })
+}
+
+const setLoginWithTokenRequestInProgress = (value) => (dispatch) => {
+    dispatch({ type: SET_LOGIN_WITH_TOKEN_REQUEST_IN_PROGRESS, payload: value })
 }
 
 const gentlyLogOff = () => (dispatch) => {
@@ -69,8 +74,13 @@ const login = (email, password) => (dispatch) => {
     })
 }
 
-const loginWithToken = (email, token) => (dispatch) => {
+const loginWithToken = (email, token) => (dispatch, state) => {
     return new Promise((resolve, reject) => {
+        if(state()['auth']['loginWithTokenRequestInProgress']) {
+            return;
+        }
+
+        dispatch(setLoginWithTokenRequestInProgress(true));
         dispatch(setLoginError(''))
 
         http.post('/auth/login_with_token', {
@@ -89,10 +99,12 @@ const loginWithToken = (email, token) => (dispatch) => {
                 LocalStorage.commit()
 
                 resolve(response.data.data.user)
+                dispatch(setLoginWithTokenRequestInProgress(true));
             })
             .catch(({ data: { message = '' } = {} }) => {
                 dispatch(setLoginError(message))
                 reject()
+                dispatch(setLoginWithTokenRequestInProgress(false));
             })
     })
 }
@@ -151,6 +163,12 @@ const ACTION_HANDLERS = {
     [GENTLY_LOG_OFF]: () => {
         return getInitialState()
     },
+    [SET_LOGIN_WITH_TOKEN_REQUEST_IN_PROGRESS]: (state, {payload}) => {
+        return {
+            ...state,
+            loginWithTokenRequestInProgress: payload,
+        }
+    }
 }
 
 // ------------------------------------
@@ -162,6 +180,7 @@ const getInitialState = () => ({
     user: {},
     loginError: '',
     isLoading: false,
+    loginWithTokenRequestInProgress: false,
 })
 
 export default function userReducer(state = getInitialState(), action) {
