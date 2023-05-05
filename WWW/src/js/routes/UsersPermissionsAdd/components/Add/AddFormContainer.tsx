@@ -6,10 +6,14 @@ import { reduxForm, formValueSelector } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 import { SubmissionError } from 'redux-form'
 
-const onSubmit = (values, _, { setIsLoading, addPermission, addToastNotification, navigate, newPermissionUsers }) => {
+const onSubmit = (
+    values,
+    _,
+    { setIsLoading, addPermission, addToastNotification, navigate, newPermissionUsers = [], reset },
+) => {
     setIsLoading(true)
 
-    return addPermission({ ...values, guard_name: 'web' }, newPermissionUsers).then(
+    return addPermission({ ...values }, newPermissionUsers).then(
         (permission) => {
             setIsLoading(false)
             addToastNotification({
@@ -18,7 +22,10 @@ const onSubmit = (values, _, { setIsLoading, addPermission, addToastNotification
                 text: `Permission has been saved with ID: ${permission?.id}.`,
                 href: '/permissions/add',
             })
-            navigate('/permissions/add')
+            if (navigate) {
+                navigate('/permissions/add')
+            }
+            reset()
         },
         (response) => {
             setIsLoading(false)

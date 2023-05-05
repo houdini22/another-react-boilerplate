@@ -22,9 +22,11 @@ export class AddRole extends React.Component<EditProps, EditState> {
             addNewRoleToUser,
             removeNewRoleFromUser,
             navigate,
+            addPermission,
+            fetchPermissions,
         } = this.props
         return (
-            <Card header={<h1>Add Role</h1>}>
+            <Card header={<h1>Add Role</h1>} color={'primary'}>
                 <AddFormContainer
                     setIsLoading={setIsLoading}
                     save={addRole}
@@ -38,6 +40,9 @@ export class AddRole extends React.Component<EditProps, EditState> {
                     addNewRoleToUser={addNewRoleToUser}
                     removeNewRoleFromUser={removeNewRoleFromUser}
                     navigate={navigate}
+                    addPermission={addPermission}
+                    isLoading={isLoading}
+                    fetchPermissions={fetchPermissions}
                 />
                 {isLoading && <LoadingOverlay />}
             </Card>

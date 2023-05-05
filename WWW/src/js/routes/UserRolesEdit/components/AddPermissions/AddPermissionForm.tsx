@@ -22,11 +22,8 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps, null> {
                     name={'permission'}
                     label="Permission"
                     type="select"
+                    placeholder={'--- choose ---'}
                     options={[
-                        {
-                            label: '--- choose ---',
-                            value: null,
-                        },
                         {
                             label: 'add new',
                             value: 'add',
@@ -53,12 +50,11 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps, null> {
                     <>
                         <Field name="name" label="Name" type="text" component={FormField} autoFocus />
                         <Field
-                            name="guard_name"
-                            label="Guard"
-                            type="hidden"
-                            inputOnly
-                            value={'web'}
+                            type={'textarea'}
+                            name={'description'}
                             component={FormField}
+                            label={'Description'}
+                            placeholder={'Description'}
                         />
                     </>
                 )}

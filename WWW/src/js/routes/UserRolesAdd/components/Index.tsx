@@ -31,6 +31,8 @@ export class UserRolesEdit extends React.Component<null, UsersViewState> {
                                         addNewRoleToUser,
                                         removeNewRoleFromUser,
                                         users,
+                                        addPermission,
+                                        fetchPermissions,
                                     }) => (
                                         <PageContent>
                                             <Header navigate={navigate} role={role} />
@@ -50,6 +52,8 @@ export class UserRolesEdit extends React.Component<null, UsersViewState> {
                                                         addNewRoleToUser={addNewRoleToUser}
                                                         removeNewRoleFromUser={removeNewRoleFromUser}
                                                         navigate={navigate}
+                                                        addPermission={addPermission}
+                                                        fetchPermissions={fetchPermissions}
                                                     />
                                                 </Col>
                                             </Row>

@@ -139,7 +139,7 @@ class PermissionsController extends Controller
             ]);
         } else {
             $request->validate([
-                'name' => ['required'],
+                'name' => ['required', 'unique:permissions,name'],
                 'description' => ['max:512']
             ]);
             $permission = new Permission();

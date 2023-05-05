@@ -6,6 +6,16 @@ import { reduxForm, formValueSelector } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 import { SubmissionError } from 'redux-form'
 
+const validate = (values) => {
+    const errors = {}
+
+    if (!values.permission) {
+        errors['permission'] = 'Required.'
+    }
+
+    return errors
+}
+
 const onSubmit = (
     values,
     _,
@@ -49,12 +59,12 @@ const AddPermissionFormContainer = compose(
     }),
     reduxForm({
         onSubmit,
+        validate,
         enableReinitialize: true,
         destroyOnUnmount: true,
         form: 'AddPermissionForm',
         initialValues: {
             name: '',
-            guard_name: 'web',
             role_id: 0,
             permission: 'add',
         },

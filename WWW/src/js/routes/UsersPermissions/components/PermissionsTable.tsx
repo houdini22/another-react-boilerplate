@@ -99,7 +99,7 @@ export class PermissionsTable extends React.Component<PermissionsTableProps, nul
                                     return (
                                         <Table.Tr key={permission.id}>
                                             <Table.Td xs={1}>{permission.id}</Table.Td>
-                                            <Table.Td xs={3}>
+                                            <Table.Td xs={4}>
                                                 <div>
                                                     {permission.name}{' '}
                                                     {!!permission.description && (
@@ -115,7 +115,7 @@ export class PermissionsTable extends React.Component<PermissionsTableProps, nul
                                                     )}
                                                 </div>
                                             </Table.Td>
-                                            <Table.Td xs={4} alignRight>
+                                            <Table.Td xs={5} alignRight>
                                                 <div>
                                                     {permission.roles_count > 0 && (
                                                         <Tooltip tooltip={`Roles with permission`}>
@@ -141,7 +141,7 @@ export class PermissionsTable extends React.Component<PermissionsTableProps, nul
                                                     )}
                                                 </div>
                                             </Table.Td>
-                                            <Table.Td xs={4}>
+                                            <Table.Td xs={2}>
                                                 <div>
                                                     <Button
                                                         icon={<EditIcon />}

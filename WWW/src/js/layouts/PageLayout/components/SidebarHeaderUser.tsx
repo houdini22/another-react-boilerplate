@@ -32,7 +32,7 @@ class BaseSidebarHeaderUser extends React.Component<BaseSidebarHeaderUserProps, 
                             'layout__header__bar__right__element--user',
                         )}
                     >
-                        <Dropdown.Container>
+                        <Dropdown.Container placement={'right'}>
                             <Dropdown.Trigger component={Button}>
                                 <span className={'layout__header__bar__right__element--user__user-name'}>
                                     {user.name}

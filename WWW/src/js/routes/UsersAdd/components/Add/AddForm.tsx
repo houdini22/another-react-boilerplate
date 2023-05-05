@@ -64,7 +64,11 @@ class AddForm extends React.Component<null, null> {
                                             disabled: !!newUserRoles.find(({ id: _id }) => id === _id),
                                         }))}
                                         onChange={(e, value) => {
-                                            addRoleToNewUser(roles.find((role) => Number(role.id) === Number(value)))
+                                            if (value) {
+                                                addRoleToNewUser(
+                                                    roles.find((role) => Number(role.id) === Number(value)),
+                                                )
+                                            }
                                         }}
                                         component={FormField}
                                     />
@@ -100,11 +104,13 @@ class AddForm extends React.Component<null, null> {
                                             disabled: !!newUserPermissions.find(({ id: _id }) => id === _id),
                                         }))}
                                         onChange={(e, value) => {
-                                            addPermissionToNewUser(
-                                                permissions.find(
-                                                    (permission) => Number(permission.id) === Number(value),
-                                                ),
-                                            )
+                                            if (value) {
+                                                addPermissionToNewUser(
+                                                    permissions.find(
+                                                        (permission) => Number(permission.id) === Number(value),
+                                                    ),
+                                                )
+                                            }
                                         }}
                                         component={FormField}
                                     />

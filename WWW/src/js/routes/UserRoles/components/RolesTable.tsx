@@ -105,7 +105,7 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                     return (
                                         <Table.Tr key={role.id}>
                                             <Table.Td xs={1}>{role.id}</Table.Td>
-                                            <Table.Td xs={3}>
+                                            <Table.Td xs={4}>
                                                 <div>
                                                     {role.name}{' '}
                                                     {!!role.description && (
@@ -121,7 +121,7 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                                     )}
                                                 </div>
                                             </Table.Td>
-                                            <Table.Td xs={4} alignRight>
+                                            <Table.Td xs={5} alignRight>
                                                 <div>
                                                     {role?.permissions?.length > 0 && (
                                                         <Tooltip tooltip={`Role Permissions`}>
@@ -150,7 +150,7 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                                     )}
                                                 </div>
                                             </Table.Td>
-                                            <Table.Td xs={4}>
+                                            <Table.Td xs={2}>
                                                 <div>
                                                     <Button
                                                         icon={<EditIcon />}
