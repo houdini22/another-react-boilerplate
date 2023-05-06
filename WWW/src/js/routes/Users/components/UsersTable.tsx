@@ -46,6 +46,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
             closeModal,
             deleteUser,
             canByPermissions,
+            deleteAvatar,
         } = this.props
         return (
             <RouteManager>
@@ -152,6 +153,9 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                             permissionsFromRoles={permissionsFromRoles}
                                                             expand={expand}
                                                             canByPermissions={canByPermissions}
+                                                            deleteAvatar={deleteAvatar}
+                                                            setIsLoading={setIsLoading}
+                                                            fetch={fetch}
                                                         />
                                                     </Table.Td>
                                                     <Table.Td xs={6} md={2}>

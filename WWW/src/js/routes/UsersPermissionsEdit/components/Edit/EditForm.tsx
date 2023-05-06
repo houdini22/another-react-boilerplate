@@ -5,10 +5,7 @@ import { Button, FormField } from '../../../../components'
 
 class EditForm extends React.Component<null, null> {
     render() {
-        const {
-            handleSubmit,
-            initialValues: { is_name_editable },
-        } = this.props
+        const { handleSubmit, initialValues: { is_name_editable } = {} } = this.props
         return (
             <form onSubmit={handleSubmit}>
                 <Field

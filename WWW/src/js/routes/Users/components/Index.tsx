@@ -55,6 +55,7 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                 activateUser,
                                                                 deactivateUser,
                                                                 isLoading,
+                                                                deleteAvatar,
                                                             }) => {
                                                                 return (
                                                                     <ListManager
@@ -181,6 +182,9 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                                                     }
                                                                                                     canByPermissions={
                                                                                                         canByPermission
+                                                                                                    }
+                                                                                                    deleteAvatar={
+                                                                                                        deleteAvatar
                                                                                                     }
                                                                                                 />
                                                                                                 <Pagination

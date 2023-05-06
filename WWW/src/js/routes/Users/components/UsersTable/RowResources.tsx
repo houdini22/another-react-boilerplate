@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Button, Popover, Tooltip } from '../../../../components'
+import { Button, Dropdown, Popover, Tooltip } from '../../../../components'
 import { AvatarIcon, FileIcon, PermissionIcon, RoleIcon } from '../../../../components/icons'
 import { apiURL } from '../../../../helpers/api'
 import { User } from '../../../../../types.d'
@@ -12,7 +12,8 @@ interface FiltersProps {
 
 export class RowResources extends React.Component<FiltersProps, null> {
     render() {
-        const { user, permissionsFromRoles, navigate, expand, canByPermissions } = this.props
+        const { user, permissionsFromRoles, navigate, expand, canByPermissions, deleteAvatar, setIsLoading, fetch } =
+            this.props
 
         return (
             <div>
@@ -49,8 +50,27 @@ export class RowResources extends React.Component<FiltersProps, null> {
                 )}
                 {user?.avatar?.id != null && (
                     <Popover.Container trigger={'hover'} placement={'left-center'}>
-                        <Popover.Trigger>
-                            <Button color={'info'} iconOnly icon={<AvatarIcon />} />
+                        <Popover.Trigger color={'info'}>
+                            <Dropdown.Container>
+                                <Dropdown.Trigger
+                                    component={Button}
+                                    componentProps={{ iconOnly: true, icon: <AvatarIcon /> }}
+                                ></Dropdown.Trigger>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item
+                                        onClick={() => {
+                                            setIsLoading(true)
+                                            deleteAvatar(user).then(() => {
+                                                fetch().then(() => {
+                                                    setIsLoading(false)
+                                                })
+                                            })
+                                        }}
+                                    >
+                                        Delete Avatar
+                                    </Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown.Container>
                         </Popover.Trigger>
                         <Popover.Content>
                             <a href={apiURL(`files/preview/${user?.avatar?.id}`)} target={'_blank'}>

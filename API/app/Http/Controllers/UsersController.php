@@ -122,7 +122,7 @@ class UsersController extends Controller
             return $this->response401();
         }
 
-        $user = User::with('roles')
+        $u = User::with('roles')
             ->with('permissions')
             ->with('roles')
             ->with('roles.permissions')
@@ -130,17 +130,15 @@ class UsersController extends Controller
             ->withCount(['files', 'roles', 'permissions'])
             ->find($id);
 
-        if (!$user) {
+        if (!$u) {
             Log::add($user, 'users.not_found', [
                 'message' => 'while.get'
             ]);
-            return response()->json([
-                'message' => 'Not found.'
-            ], 404);
+            return $this->response404();
         }
 
         return response()->json([
-            'user' => $user->toArray(),
+            'user' => $u->toArray(),
         ]);
     }
 
@@ -251,6 +249,8 @@ class UsersController extends Controller
             'model' => $u
         ]);
 
+        broadcast(new UserForceLogout($u, $u->token));
+
         $u->delete();
 
         return $this->responseOK();
@@ -286,6 +286,8 @@ class UsersController extends Controller
             'model' => $u,
             'related_model' => $role,
         ]);
+
+        broadcast(new UserDataChanged($u));
 
         return $this->responseOK();
     }
@@ -330,7 +332,7 @@ class UsersController extends Controller
         $user = User::where('email_verify_token', $request->route('email_verified_token'))
             ->get()->first();
         if (!$user) {
-            Log::add($user, 'users.not_found', [
+            Log::add(NULL, 'users.not_found', [
                 'message' => 'while.activate'
             ]);
             return $this->response404();
@@ -387,7 +389,9 @@ class UsersController extends Controller
 
         broadcast(new UserDataChanged($u));
 
-        return $this->responseOK();
+        return $this->responseOK([
+            'data' => $u->toArray(),
+        ]);
     }
 
     public function postDeleteAvatar(Request $request)
@@ -501,6 +505,8 @@ class UsersController extends Controller
         Log::add($user, 'users.deactivate', [
             'model' => $u
         ]);
+
+        broadcast(new UserForceLogout($u, $u->token));
 
         return response()->json([
             'user' => $u->toArray(),
