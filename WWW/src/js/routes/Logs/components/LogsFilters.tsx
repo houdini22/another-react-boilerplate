@@ -76,13 +76,13 @@ export class Filters extends React.Component<FiltersProps, null> {
                         type: 'select',
                         options: [
                             ...(logsData?.users
-                                ?.map(({ count, user, user_id }) => {
-                                    if (user === null && user_id === 0) {
+                                ?.map(({ count, name, user_id }) => {
+                                    if (!name && user_id === 0) {
                                         return {
                                             value: 'none',
-                                            label: `NONE (${count})`,
+                                            label: `GUEST (${count})`,
                                         }
-                                    } else if (user === null) {
+                                    } else if (!name) {
                                         return {
                                             value: user_id,
                                             label: `_USER ID: ${user_id} (${count})`,
@@ -90,7 +90,7 @@ export class Filters extends React.Component<FiltersProps, null> {
                                     }
                                     return {
                                         value: user_id,
-                                        label: `${user.name} (${count})`,
+                                        label: `${name} (${count})`,
                                     }
                                 })
                                 .sort(({ label: labelA }, { label: labelB }) => labelA.localeCompare(labelB)) || []),
@@ -138,6 +138,29 @@ export class Filters extends React.Component<FiltersProps, null> {
                         name: 'type',
                         label: 'Type',
                     },
+                    {
+                        type: 'select',
+                        options: [
+                            ...(logsData?.related_models?.map(
+                                ({ count, related_model_class_name, related_model_id }) => {
+                                    if (related_model_class_name === null) {
+                                        return {
+                                            value: 'none',
+                                            label: `NONE (${count})`,
+                                        }
+                                    } else {
+                                        return {
+                                            value: related_model_class_name,
+                                            label: `${related_model_class_name} ID:${related_model_id} (${count})`,
+                                        }
+                                    }
+                                },
+                            ) || []),
+                        ],
+                        name: 'related_model_name',
+                        label: 'RelatedModel',
+                    },
+
                     {
                         type: 'order',
                         options: [

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Field } from 'redux-form'
-import { Badge, Button, Card, Col, FormField, Row, Tabs } from '../../../../components'
+import { Badge, Button, Card, Col, FormField, LoadingOverlay, Row, Tabs } from '../../../../components'
 import { generateUrl, isPublished } from '../../../../helpers/cms'
 
 class AddCategoryForm extends React.Component {
@@ -15,6 +15,7 @@ class AddCategoryForm extends React.Component {
                 tree: { id },
             },
             formValues: { tree: formValues },
+            isLoading,
         } = this.props
 
         return (
@@ -174,6 +175,7 @@ class AddCategoryForm extends React.Component {
                                 </Button>
                             </div>
                         </form>
+                        {isLoading && <LoadingOverlay />}
                     </Card>
                 </Col>
             </Row>

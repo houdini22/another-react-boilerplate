@@ -35,6 +35,14 @@ class AuthorizationManagerBase extends React.Component<AuthorizationManagerProps
             return hasPermission
         }
 
+        if (!Array.isArray(user?.permissions)) {
+            return Object.keys(user?.permissions || {})
+                .map((key) => {
+                    return user?.permissions[key]
+                })
+                .includes(permission)
+        }
+
         return user?.permissions?.includes(permission)
     }
     render() {

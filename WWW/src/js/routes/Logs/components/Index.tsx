@@ -26,44 +26,44 @@ export class LogsView extends React.Component<null, null> {
                                             <TitleManager>
                                                 {({ setTitleSegments }) => {
                                                     setTitleSegments(['Users', 'Logs'])
-
                                                     return (
-                                                        <UsersManager getLogsData>
-                                                            {({ setIsLoading, isLoading, logsData }) => {
+                                                        <ListManager
+                                                            url={'/logs/list'}
+                                                            defaultFilters={{
+                                                                user: '',
+                                                                items_per_page: 20,
+                                                                order_by: 'id',
+                                                                order_direction: 'desc',
+                                                                model_name: '',
+                                                                type: '',
+                                                                related_modal_name: '',
+                                                            }}
+                                                            urlFilters={{
+                                                                user,
+                                                            }}
+                                                        >
+                                                            {({
+                                                                data,
+                                                                isLoading: isLoading2,
+                                                                fetch,
+                                                                links,
+                                                                page,
+                                                                setPage,
+                                                                hasNextPage,
+                                                                hasPrevPage,
+                                                                totalPages,
+                                                                filters,
+                                                                setFilter,
+                                                                perPage,
+                                                                total,
+                                                                resetFilters,
+                                                                restoreFilters,
+                                                                defaultFilters,
+                                                                setFilters,
+                                                            }) => {
                                                                 return (
-                                                                    <ListManager
-                                                                        url={'/logs/list'}
-                                                                        defaultFilters={{
-                                                                            user: '',
-                                                                            items_per_page: 20,
-                                                                            order_by: 'id',
-                                                                            order_direction: 'desc',
-                                                                            model_name: '',
-                                                                            type: '',
-                                                                        }}
-                                                                        urlFilters={{
-                                                                            user,
-                                                                        }}
-                                                                    >
-                                                                        {({
-                                                                            data,
-                                                                            isLoading: isLoading2,
-                                                                            fetch,
-                                                                            links,
-                                                                            page,
-                                                                            setPage,
-                                                                            hasNextPage,
-                                                                            hasPrevPage,
-                                                                            totalPages,
-                                                                            filters,
-                                                                            setFilter,
-                                                                            perPage,
-                                                                            total,
-                                                                            resetFilters,
-                                                                            restoreFilters,
-                                                                            defaultFilters,
-                                                                            setFilters,
-                                                                        }) => {
+                                                                    <UsersManager getLogsData logsDataFilters={filters}>
+                                                                        {({ setIsLoading, isLoading, logsData }) => {
                                                                             return (
                                                                                 <PageContent>
                                                                                     <Header
@@ -169,10 +169,10 @@ export class LogsView extends React.Component<null, null> {
                                                                                 </PageContent>
                                                                             )
                                                                         }}
-                                                                    </ListManager>
+                                                                    </UsersManager>
                                                                 )
                                                             }}
-                                                        </UsersManager>
+                                                        </ListManager>
                                                     )
                                                 }}
                                             </TitleManager>

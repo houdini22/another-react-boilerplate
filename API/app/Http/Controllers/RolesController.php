@@ -63,7 +63,9 @@ class RolesController extends Controller
 
         $roles = $query->paginate(empty($filters['items_per_page']) ? 10000 : $filters['items_per_page']);
 
-        Log::add($user, 'roles.list', []);
+        Log::add($user, 'roles.list', [
+            'request' => $request
+        ]);
 
         return response()->json([
             'data' => $roles->toArray(),
@@ -81,6 +83,7 @@ class RolesController extends Controller
         if (!$role) {
             Log::add($user, 'roles.not_found', [
                 'message' => 'while.get',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -102,7 +105,8 @@ class RolesController extends Controller
         $role = Role::find($request->post('id'));
         if (!$role) {
             Log::add($user, 'roles.not_found', [
-                'message' => 'while.edit'
+                'message' => 'while.edit',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -123,7 +127,8 @@ class RolesController extends Controller
         $role->save();
 
         Log::add($user, 'roles.edit', [
-            'model' => $role
+            'model' => $role,
+            'request' => $request
         ]);
 
         return response()->json([
@@ -146,7 +151,8 @@ class RolesController extends Controller
         $role->save();
 
         Log::add($user, 'roles.add', [
-            'model' => $role
+            'model' => $role,
+            'request' => $request
         ]);
 
         return response()->json([
@@ -161,7 +167,8 @@ class RolesController extends Controller
         if (!$role) {
             Log::add($user, 'roles.not_found', [
                 'model' => $role,
-                'message' => 'while.delete'
+                'message' => 'while.delete',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -172,7 +179,8 @@ class RolesController extends Controller
         }
 
         Log::add($user, 'roles.delete', [
-            'model' => $role
+            'model' => $role,
+            'request' => $request
         ]);
 
         $role->delete();
@@ -200,7 +208,8 @@ class RolesController extends Controller
         $u = User::find($request->route('user_id'));
         if (!$u) {
             Log::add($user, 'users.not_found', [
-                'message' => 'while.users_remove_role'
+                'message' => 'while.users_remove_role',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -215,6 +224,7 @@ class RolesController extends Controller
             Log::add($user, 'roles.not_found', [
                 'message' => 'while.users_remove_role',
                 'model' => $u,
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -228,7 +238,8 @@ class RolesController extends Controller
 
         Log::add($user, 'users.remove_role', [
             'model' => $u,
-            'related_model' => $role
+            'related_model' => $role,
+            'request' => $request
         ]);
 
         return response()->json([
@@ -244,6 +255,7 @@ class RolesController extends Controller
         if (!$role) {
             Log::add($user, 'roles.not_found', [
                 'message' => 'while.roles_remove_permission',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -258,6 +270,7 @@ class RolesController extends Controller
             Log::add($user, 'permissions.not_found', [
                 'message' => 'while.roles_remove_permission',
                 'model' => $role,
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -271,7 +284,8 @@ class RolesController extends Controller
 
         Log::add($user, 'roles.remove_permission', [
             'model' => $role,
-            'related_model' => $permission
+            'related_model' => $permission,
+            'request' => $request
         ]);
 
         return response()->json([
@@ -287,6 +301,7 @@ class RolesController extends Controller
         if (!$permission) {
             Log::add($user, 'permissions.not_found', [
                 'message' => 'while.delete',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -297,7 +312,8 @@ class RolesController extends Controller
         }
 
         Log::add($user, 'permissions.delete', [
-            'model' => $permission
+            'model' => $permission,
+            'request' => $request
         ]);
 
         $permission->delete();

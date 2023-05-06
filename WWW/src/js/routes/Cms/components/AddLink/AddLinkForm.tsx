@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Field } from 'redux-form'
-import { Badge, Button, Card, Col, FormField, Row, Tabs } from '../../../../components'
+import { Badge, Button, Card, Col, FormField, LoadingOverlay, Row, Tabs } from '../../../../components'
 import { isPublished } from '../../../../helpers/cms'
 
 class AddLinkForm extends React.Component {
@@ -9,6 +9,7 @@ class AddLinkForm extends React.Component {
             handleSubmit,
             categories,
             formValues: { tree: formValues },
+            isLoading,
         } = this.props
 
         const linkTargets = [
@@ -111,6 +112,7 @@ class AddLinkForm extends React.Component {
                                 </Tabs.Tab>
                             </Tabs.Container>
                         </form>
+                        {isLoading && <LoadingOverlay />}
                     </Card>
                 </Col>
             </Row>

@@ -21,7 +21,9 @@ class CreateLogsTable extends Migration
             $table->string('related_model_class_name', 128)->nullable()->default(NULL);
             $table->integer('related_model_id')->nullable()->default(NULL);
             $table->string('type', 64);
+            $table->string('ip_address', 64);
             $table->string('message', 64)->nullable()->default(NULL);
+            $table->json('payload')->nullable()->default(NULL);
             $table->text('fields_affected')->nullable()->default(NULL);
             $table->timestamps();
 

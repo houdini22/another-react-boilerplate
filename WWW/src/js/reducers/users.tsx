@@ -110,18 +110,20 @@ const addUser = (params, newUserRoles, newUserPermissions) => (dispatch) => {
 const fetchOne =
     (id = 0) =>
     (dispatch) => {
-        return new Promise<void>((resolve) => {
+        return new Promise<void>((resolve, reject) => {
             http.get(`/users/get/${id}`)
                 .then(({ data: { user } }) => {
                     dispatch(setUser(user))
                     resolve()
                 })
-                .catch((e) => {})
+                .catch((e) => {
+                    reject()
+                })
         })
     }
 
 const fetch = () => (dispatch) => {
-    return new Promise<void>((resolve) => {
+    return new Promise<void>((resolve, reject) => {
         dispatch(setUser({}))
 
         http.get(`/users/list`)
@@ -135,7 +137,9 @@ const fetch = () => (dispatch) => {
                     resolve()
                 },
             )
-            .catch((e) => {})
+            .catch((e) => {
+                reject()
+            })
     })
 }
 
@@ -337,7 +341,7 @@ const addPermission =
     }
 
 const fetchPermissions = () => (dispatch) => {
-    return new Promise<void>((resolve) => {
+    return new Promise<void>((resolve, reject) => {
         dispatch(setPermissions([]))
 
         http.get('/roles/permissions/list')
@@ -345,7 +349,9 @@ const fetchPermissions = () => (dispatch) => {
                 dispatch(setPermissions(permissions))
                 resolve()
             })
-            .catch((e) => {})
+            .catch((e) => {
+                reject()
+            })
     })
 }
 
@@ -378,7 +384,7 @@ const deletePermission = (permission_id) => (dispatch) => {
 const fetchPermission =
     (id = 0) =>
     (dispatch) => {
-        return new Promise<void>((resolve) => {
+        return new Promise<void>((resolve, reject) => {
             dispatch(setPermission({}))
 
             http.get(`/permissions/get/${id}`)
@@ -386,7 +392,9 @@ const fetchPermission =
                     dispatch(setPermission(permission))
                     resolve()
                 })
-                .catch((e) => {})
+                .catch((e) => {
+                    reject()
+                })
         })
     }
 
@@ -417,7 +425,7 @@ const deleteUserPermission =
     }
 
 const fetchRoles = () => (dispatch) => {
-    return new Promise<void>((resolve) => {
+    return new Promise<void>((resolve, reject) => {
         dispatch(setRoles([]))
 
         http.get('/roles/list')
@@ -431,13 +439,19 @@ const fetchRoles = () => (dispatch) => {
                     resolve()
                 },
             )
-            .catch((e) => {})
+            .catch((e) => {
+                reject()
+            })
     })
 }
 
-const fetchLogsData = () => (dispatch) => {
-    return new Promise<void>((resolve) => {
-        http.get('/logs/data')
+const fetchLogsData = (filters) => (dispatch) => {
+    return new Promise<void>((resolve, reject) => {
+        http.get('/logs/data', {
+            params: {
+                filters,
+            },
+        })
             .then(
                 ({
                     data: {
@@ -450,14 +464,16 @@ const fetchLogsData = () => (dispatch) => {
                     resolve()
                 },
             )
-            .catch((e) => {})
+            .catch((e) => {
+                reject()
+            })
     })
 }
 
 const fetchRole =
     (id = 0) =>
     (dispatch) => {
-        return new Promise<void>((resolve) => {
+        return new Promise<void>((resolve, reject) => {
             dispatch(setRole({}))
 
             http.get(`/roles/get/${id}`)
@@ -465,7 +481,9 @@ const fetchRole =
                     dispatch(setRole(role))
                     resolve()
                 })
-                .catch((e) => {})
+                .catch((e) => {
+                    reject()
+                })
         })
     }
 export const actions = {

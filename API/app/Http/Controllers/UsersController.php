@@ -106,7 +106,9 @@ class UsersController extends Controller
             $users = $query->paginate(10000);
         }
 
-        Log::add($user, 'users.list', []);
+        Log::add($user, 'users.list', [
+            'request' => $request
+        ]);
 
         return response()->json([
             'data' => $users->toArray(),
@@ -127,7 +129,8 @@ class UsersController extends Controller
 
         if (!$u) {
             Log::add($user, 'users.not_found', [
-                'message' => 'while.get'
+                'message' => 'while.get',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -149,7 +152,8 @@ class UsersController extends Controller
         $u = User::find($request->post('id'));
         if (!$u) {
             Log::add(NULL, 'users.not_found', [
-                'message' => 'while.edit'
+                'message' => 'while.edit',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -190,7 +194,8 @@ class UsersController extends Controller
         $u->save();
 
         Log::add($user, 'users.edit', [
-            'model' => $u
+            'model' => $u,
+            'request' => $request
         ]);
 
         broadcast(new UserDataChanged($u));
@@ -221,7 +226,8 @@ class UsersController extends Controller
         $u->save();
 
         Log::add($user, 'users.add', [
-            'model' => $u
+            'model' => $u,
+            'request' => $request
         ]);
 
         return response()->json([
@@ -236,7 +242,8 @@ class UsersController extends Controller
         $u = User::find($request->route('id'));
         if (!$u) {
             Log::add($user, 'users.not_found', [
-                'message' => 'while.delete'
+                'message' => 'while.delete',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -247,7 +254,8 @@ class UsersController extends Controller
         }
 
         Log::add($user, 'users.delete', [
-            'model' => $u
+            'model' => $u,
+            'request' => $request
         ]);
 
         broadcast(new UserForceLogout($u, $u->token));
@@ -264,7 +272,8 @@ class UsersController extends Controller
         $u = User::find($request->route('user_id'));
         if (!$u) {
             Log::add(NULL, 'users.not_found', [
-                'message' => 'while.add_to_user'
+                'message' => 'while.add_to_user',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -278,7 +287,8 @@ class UsersController extends Controller
         if (!$role) {
             Log::add($user, 'roles.not_found', [
                 'model' => $u,
-                'message' => 'while.add_to_user'
+                'message' => 'while.add_to_user',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -293,6 +303,7 @@ class UsersController extends Controller
         Log::add($user, 'users.add_role', [
             'model' => $u,
             'related_model' => $role,
+            'request' => $request
         ]);
 
         broadcast(new UserDataChanged($u));
@@ -307,7 +318,8 @@ class UsersController extends Controller
         $u = User::find($request->post('id'));
         if (!$u) {
             Log::add($user, 'users.not_found', [
-                'message' => 'while.send_activation_email'
+                'message' => 'while.send_activation_email',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -329,7 +341,8 @@ class UsersController extends Controller
         });
 
         Log::add($user, 'users.send_activation_email', [
-            'model' => $u
+            'model' => $u,
+            'request' => $request
         ]);
 
         return response()->json([
@@ -345,7 +358,8 @@ class UsersController extends Controller
 
         if (!$user) {
             Log::add(NULL, 'users.not_found', [
-                'message' => 'while.activate'
+                'message' => 'while.activate',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -360,7 +374,8 @@ class UsersController extends Controller
         $user->save();
 
         Log::add(NULL, 'users.activate', [
-            'model' => $user
+            'model' => $user,
+            'request' => $request
         ]);
 
         return redirect('/#/users/account_activated');
@@ -373,7 +388,8 @@ class UsersController extends Controller
         $u = User::find($request->route('id'));
         if (!$u) {
             Log::add($user, 'users.not_found', [
-                'message' => 'while.change_avatar'
+                'message' => 'while.change_avatar',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -392,6 +408,7 @@ class UsersController extends Controller
                 'model' => $u,
                 'message' => 'while.change_avatar',
                 'related_model' => $u->avatar()->first(),
+                'request' => $request
             ]);
             $u->avatar()->delete();
         }
@@ -404,6 +421,7 @@ class UsersController extends Controller
         Log::add($user, 'users.change_avatar', [
             'model' => $u,
             'related_model' => $file,
+            'request' => $request
         ]);
 
         broadcast(new UserDataChanged($u));
@@ -420,7 +438,8 @@ class UsersController extends Controller
         $u = User::find($request->post('id'));
         if (!$u) {
             Log::add($user, 'users.not_found', [
-                'message' => 'while.delete_avatar'
+                'message' => 'while.delete_avatar',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -434,7 +453,8 @@ class UsersController extends Controller
             Log::add($user, 'users.remove_avatar', [
                 'model' => $u,
                 'message' => 'while.delete_avatar',
-                'related_model' => $u->avatar()->first()
+                'related_model' => $u->avatar()->first(),
+                'request' => $request
             ]);
             $u->avatar()->delete();
         }
@@ -457,6 +477,7 @@ class UsersController extends Controller
         if (!$u) {
             Log::add($user, 'users.not_found', [
                 'message' => 'while.force_login',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -472,7 +493,8 @@ class UsersController extends Controller
         $u->save();
 
         Log::add($user, 'users.force_login', [
-            'model' => $u
+            'model' => $u,
+            'request' => $request
         ]);
 
         broadcast(new UserForceLogout($u, $token));
@@ -488,6 +510,7 @@ class UsersController extends Controller
         if (!$u) {
             Log::add($user, 'users.not_found', [
                 'message' => 'while.activate',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -501,7 +524,8 @@ class UsersController extends Controller
         $u->save();
 
         Log::add($user, 'users.activate', [
-            'model' => $u
+            'model' => $u,
+            'request' => $request
         ]);
 
         return response()->json([
@@ -517,6 +541,7 @@ class UsersController extends Controller
         if (!$u) {
             Log::add($user, 'users.not_found', [
                 'message' => 'while.deactivate',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -530,7 +555,8 @@ class UsersController extends Controller
         $u->save();
 
         Log::add($user, 'users.deactivate', [
-            'model' => $u
+            'model' => $u,
+            'request' => $request
         ]);
 
         broadcast(new UserForceLogout($u, $u->token));

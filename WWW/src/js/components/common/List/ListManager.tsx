@@ -137,6 +137,11 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
                             },
                         )
                     },
+                    () => {
+                        this.setIsLoading(false).then(() => {
+                            resolve()
+                        })
+                    },
                 )
             })
         })

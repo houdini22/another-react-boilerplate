@@ -62,8 +62,8 @@ class Filter extends React.Component<FilterProps, null> {
             <FormField
                 type={'select'}
                 name={name}
-                placeholder={'--- choose ---'}
                 options={options}
+                placeholder={' --- choose --- '}
                 inputOnly
                 defaultValue={filters[name]}
                 onChange={({ target: { value } }) => {

@@ -48,18 +48,30 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                 <ModalConfirm
                                     onConfirm={() => {
                                         setIsLoading(true)
-                                        deleteRole(role.id).then(() => {
-                                            fetch().then(() => {
-                                                addToastNotification({
-                                                    title: 'Remove success.',
-                                                    text: `Role ID: ${role.id} has been removed.`,
-                                                    type: 'success',
-                                                    href: '/roles',
-                                                })
+                                        deleteRole(role.id).then(
+                                            () => {
+                                                fetch().then(
+                                                    () => {
+                                                        addToastNotification({
+                                                            title: 'Remove success.',
+                                                            text: `Role ID: ${role.id} has been removed.`,
+                                                            type: 'success',
+                                                            href: '/roles',
+                                                        })
+                                                        closeModal(`user-role-${role.id}-delete`)
+                                                        setIsLoading(false)
+                                                    },
+                                                    () => {
+                                                        closeModal(`user-role-${role.id}-delete`)
+                                                        setIsLoading(false)
+                                                    },
+                                                )
+                                            },
+                                            () => {
                                                 closeModal(`user-role-${role.id}-delete`)
                                                 setIsLoading(false)
-                                            })
-                                        })
+                                            },
+                                        )
                                     }}
                                     onCancel={() => closeModal(`user-role-${role.id}-delete`)}
                                 >

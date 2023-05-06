@@ -26,7 +26,12 @@ export class Manager extends React.Component<null, null> {
 
         Promise.all([setCurrentId(id), setFilters(newFilters)]).then(() => {
             setIsLoading(true)
-            fetch().then(() => setIsLoading(false))
+            fetch().then(
+                () => setIsLoading(false),
+                () => {
+                    setIsLoading(false)
+                },
+            )
         })
     }
 

@@ -134,16 +134,22 @@ class AddForm extends React.Component<null, null> {
                         <AddPermission
                             addPermission={(values) => {
                                 return new Promise((resolve, reject) => {
-                                    return addPermission(values)
-                                        .then((permission) => {
-                                            fetchPermissions().then(() => {
-                                                addPermissionToNewRole(permission)
-                                                resolve(permission)
-                                            })
-                                        })
-                                        .catch((e) => {
-                                            reject(e)
-                                        })
+                                    return addPermission(values).then(
+                                        (permission) => {
+                                            fetchPermissions().then(
+                                                () => {
+                                                    addPermissionToNewRole(permission)
+                                                    resolve(permission)
+                                                },
+                                                () => {
+                                                    reject()
+                                                },
+                                            )
+                                        },
+                                        () => {
+                                            reject()
+                                        },
+                                    )
                                 })
                             }}
                             isLoading={isLoading}

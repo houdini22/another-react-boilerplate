@@ -19,7 +19,8 @@ class AuthController extends Controller
             $user = Auth::user();
             if ($user->status === User::$STATUS_NOT_ACTIVE) {
                 Log::add($user, 'auth.login_failed', [
-                    'message' => 'user_not_active'
+                    'message' => 'user_not_active',
+                    'request' => $request
                 ]);
                 return response()->json([
                     'message' => 'ERR_STATUS_NOT_ACTIVE'
@@ -51,6 +52,7 @@ class AuthController extends Controller
 
                 Log::add($user, 'auth.login_success', [
                     'model' => $user,
+                    'request' => $request
                 ]);
 
                 return $this->responseOK([
@@ -60,7 +62,8 @@ class AuthController extends Controller
         }
 
         Log::add(NULL, 'auth.login_failed', [
-            'message' => 'wrong_credentials'
+            'message' => 'wrong_credentials',
+            'request' => $request
         ]);
 
         return response()->json([
@@ -74,7 +77,8 @@ class AuthController extends Controller
 
         if (!Arr::get($credentials, 'email') || !Arr::get($credentials, 'token')) {
             Log::add(NULL, 'auth.login_with_token_failed', [
-                'message' => 'empty_token_or_email'
+                'message' => 'empty_token_or_email',
+                'request' => $request
             ]);
             return $this->response404([
                 'message' => 'empty_token_or_email'
@@ -85,7 +89,8 @@ class AuthController extends Controller
 
         if (!$user) {
             Log::add(NULL, 'auth.login_with_token_failed', [
-                'message' => 'user_not_found'
+                'message' => 'user_not_found',
+                'request' => $request
             ]);
             return $this->response404([
                 'message' => 'user_not_found'
@@ -95,7 +100,8 @@ class AuthController extends Controller
         if ($user->status === User::$STATUS_NOT_ACTIVE) {
             Log::add($user, 'auth.login_with_token_failed', [
                 'model' => $user,
-                'message' => 'account_not_active'
+                'message' => 'account_not_active',
+                'request' => $request
             ]);
             return response()->json([
                 'message' => 'ERR_STATUS_NOT_ACTIVE'
@@ -117,6 +123,7 @@ class AuthController extends Controller
 
             Log::add($user, 'auth.login_with_token', [
                 'model' => $user,
+                'request' => $request
             ]);
 
             return $this->responseOK([
@@ -125,7 +132,8 @@ class AuthController extends Controller
         } else {
             Log::add($user, 'auth.login_with_token_failed', [
                 'model' => $user,
-                'message' => 'email_not_verified'
+                'message' => 'email_not_verified',
+                'request' => $request
             ]);
         }
 
@@ -142,7 +150,8 @@ class AuthController extends Controller
         $user->save();
 
         Log::add($user, 'auth.logout', [
-            'model' => $user
+            'model' => $user,
+            'request' => $request
         ]);
 
         return response()->json([

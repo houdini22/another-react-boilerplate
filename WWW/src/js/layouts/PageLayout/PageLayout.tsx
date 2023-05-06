@@ -9,6 +9,7 @@ import { Notifications } from './components/Notifications'
 import { RouteManager } from '../../containers/RouteManager'
 import { ConnectionErrorModal } from './components/ConnectionErrorModal'
 import { ConnectionFetchErrorModal } from './components/ConnectionFetchErrorModal'
+import { ConnectionFetchError404 } from './components/ConnectionFetchError404'
 
 const cx = classNames.bind(styles)
 
@@ -25,6 +26,7 @@ interface PageLayoutProps {
         status: number | null
         code: string
     }
+    error404: {}
 }
 
 class PageLayout extends React.Component<PageLayoutProps, null> {
@@ -40,6 +42,8 @@ class PageLayout extends React.Component<PageLayoutProps, null> {
             },
             setConnectionErrorModalVisible,
             setFetchError,
+            error404,
+            set404error,
         } = this.props
 
         return (
@@ -87,6 +91,11 @@ class PageLayout extends React.Component<PageLayoutProps, null> {
                                     visible={connectionErrorStatusText === 'Internal Server Error'}
                                     message={connectionFetchErrorMessage}
                                     close={() => setFetchError({})}
+                                />
+                                <ConnectionFetchError404
+                                    data={error404}
+                                    visible={Object.keys(error404).length > 0}
+                                    close={() => set404error({})}
                                 />
                             </div>
                         )}

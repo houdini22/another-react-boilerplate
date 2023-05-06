@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { AuthManager } from './AuthManager'
 import { Permission, Role, User } from '../../types.d'
+import { deepDiff, ifDeepDiff } from '../utils/javascript'
 
 interface UsersManagerProps {
     children: any
@@ -71,6 +72,7 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             setIsLoading,
             getLogsData,
             fetchLogsData,
+            logsDataFilters,
         } = this.props
         const promises = []
 
@@ -101,12 +103,25 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
         }
 
         if (getLogsData) {
-            promises.push(fetchLogsData())
+            promises.push(fetchLogsData(logsDataFilters))
         }
 
-        Promise.all(promises).then(() => {
-            setIsLoading(false)
-        })
+        Promise.all(promises).then(
+            () => {
+                setIsLoading(false)
+            },
+            () => {
+                setIsLoading(false)
+            },
+        )
+    }
+
+    componentDidUpdate(prevProps: Readonly<UsersManagerProps>, prevState: Readonly<null>, snapshot?: any) {
+        const { logsDataFilters, fetchLogsData } = this.props
+
+        if (ifDeepDiff(logsDataFilters, prevProps.logsDataFilters)) {
+            fetchLogsData(logsDataFilters)
+        }
     }
 
     addPermissionToNewUser(id) {

@@ -142,12 +142,18 @@ export class List extends React.Component<null, null> {
                                 <ModalConfirm
                                     onConfirm={() => {
                                         setIsLoading(true)
-                                        deleteNode(node).then(() => {
-                                            fetch().then(() => {
+                                        deleteNode(node).then(
+                                            () => {
+                                                fetch().then(() => {
+                                                    setIsLoading(false)
+                                                    closeModal(`tree-delete-${node.id}`)
+                                                })
+                                            },
+                                            () => {
                                                 setIsLoading(false)
                                                 closeModal(`tree-delete-${node.id}`)
-                                            })
-                                        })
+                                            },
+                                        )
                                     }}
                                     onCancel={() => {
                                         closeModal(`tree-delete-${node.id}`)

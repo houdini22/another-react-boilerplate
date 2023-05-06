@@ -116,18 +116,30 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                         onConfirm={() => {
                                                             setIsLoading(true)
 
-                                                            deleteUser(user.id).then(() => {
-                                                                fetch().then(() => {
+                                                            deleteUser(user.id).then(
+                                                                () => {
+                                                                    fetch().then(
+                                                                        () => {
+                                                                            closeModal(`user-${user.id}-delete`)
+                                                                            addToastNotification({
+                                                                                title: 'Remove success.',
+                                                                                text: `User ID: ${user.id} has been removed.`,
+                                                                                type: 'success',
+                                                                                href: '/users',
+                                                                            })
+                                                                            setIsLoading(false)
+                                                                        },
+                                                                        () => {
+                                                                            closeModal(`user-${user.id}-delete`)
+                                                                            setIsLoading(false)
+                                                                        },
+                                                                    )
+                                                                },
+                                                                () => {
                                                                     closeModal(`user-${user.id}-delete`)
-                                                                    addToastNotification({
-                                                                        title: 'Remove success.',
-                                                                        text: `User ID: ${user.id} has been removed.`,
-                                                                        type: 'success',
-                                                                        href: '/users',
-                                                                    })
                                                                     setIsLoading(false)
-                                                                })
-                                                            })
+                                                                },
+                                                            )
                                                         }}
                                                         onCancel={() => closeModal(`user-${user.id}-delete`)}
                                                     >

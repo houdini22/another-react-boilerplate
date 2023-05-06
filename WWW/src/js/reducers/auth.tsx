@@ -124,12 +124,16 @@ const loginWithToken = (email, token) => (dispatch, state) => {
 }
 
 const logoff = () => (dispatch) => {
-    return new Promise((resolve) => {
-        http.post('/auth/logout').then(() => {
-            dispatch(loggedOff())
-            setAuthToken('')
-            resolve(true)
-        })
+    return new Promise((resolve, reject) => {
+        http.post('/auth/logout')
+            .then(() => {
+                dispatch(loggedOff())
+                setAuthToken('')
+                resolve(true)
+            })
+            .catch(() => {
+                reject()
+            })
     })
 }
 

@@ -194,6 +194,7 @@ class CmsPagesController extends Controller
 
             if (!$currentNode) {
                 Log::add($user, 'cms.node_not_found', [
+                    'request' => $request
                 ]);
                 return $this->response404([
                     'data' => [
@@ -281,7 +282,9 @@ class CmsPagesController extends Controller
         $currentNodeParent = $currentNode->parent()->first();
         $currentNodeData['parent'] = $currentNodeParent ? $currentNodeParent->toArray() : null;
 
-        Log::add($user, 'cms.list', []);
+        Log::add($user, 'cms.list', [
+            'request' => $request
+        ]);
 
         return $this->responseOK([
             'nodes' => $nodes->toArray(),
@@ -392,7 +395,8 @@ class CmsPagesController extends Controller
         $tree->save();
 
         Log::add($user, 'cms.add_category', [
-            'model' => $category
+            'model' => $category,
+            'request' => $request
         ]);
 
         return $this->responseOK([
@@ -407,7 +411,8 @@ class CmsPagesController extends Controller
         $tree = Tree::with('category')->where('id', '=', Arr::get($request->post(), 'tree.id'))->first();
         if (!$tree) {
             Log::add($user, 'cms.category_not_found', [
-                'message' => 'while_edit_category'
+                'message' => 'while_edit_category',
+                'request' => $request
             ]);
             return $this->response404([
                 'id' => Arr::get('tree.id', $request->post())
@@ -448,7 +453,8 @@ class CmsPagesController extends Controller
         }
 
         Log::add($user, 'cms.edit_category', [
-            'model' => $tree->category
+            'model' => $tree->category,
+            'request' => $request
         ]);
 
         return $this->responseOK([
@@ -463,7 +469,8 @@ class CmsPagesController extends Controller
         $tree = Tree::with('document')->where('id', '=', Arr::get($request->post(), 'tree.id'))->first();
         if (!$tree) {
             Log::add($user, 'cms.document_not_found', [
-                'message' => 'while_edit_document'
+                'message' => 'while_edit_document',
+                'request' => $request
             ]);
             return $this->response404([
                 'id' => Arr::get('tree.id', $request->post())
@@ -504,7 +511,8 @@ class CmsPagesController extends Controller
         }
 
         Log::add($user, 'cms.edit_document', [
-            'model' => $tree->document
+            'model' => $tree->document,
+            'request' => $request
         ]);
 
         return $this->responseOK([
@@ -519,7 +527,8 @@ class CmsPagesController extends Controller
         $tree = Tree::with('link')->where('id', '=', Arr::get($request->post(), 'tree.id'))->first();
         if (!$tree) {
             Log::add($user, 'cms.link_not_found', [
-                'message' => 'while_edit_link'
+                'message' => 'while_edit_link',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -558,7 +567,8 @@ class CmsPagesController extends Controller
         }
 
         Log::add($user, 'cms.edit_link', [
-            'model' => $tree->link
+            'model' => $tree->link,
+            'request' => $request
         ]);
 
         return $this->responseOK([
@@ -577,7 +587,8 @@ class CmsPagesController extends Controller
 
         if (!$tree) {
             Log::add($user, 'cms.node_not_found', [
-                'message' => 'while_publish'
+                'message' => 'while_publish',
+                'request' => $request
             ]);
         }
 
@@ -606,7 +617,8 @@ class CmsPagesController extends Controller
         $tree->save();
 
         Log::add($user, 'cms.publish', [
-            'model' => $tree->{$tree->tree_document_type}
+            'model' => $tree->{$tree->tree_object_type},
+            'request' => $request
         ]);
 
         return $this->responseOK([
@@ -625,7 +637,8 @@ class CmsPagesController extends Controller
 
         if (!$tree) {
             Log::add($user, 'cms.node_not_found', [
-                'message' => 'while_unpublish'
+                'message' => 'while_unpublish',
+                'request' => $request
             ]);
         }
 
@@ -633,7 +646,8 @@ class CmsPagesController extends Controller
         $tree->save();
 
         Log::add($user, 'cms.unpublish', [
-            'model' => $tree->{$tree->tree_document_type}
+            'model' => $tree->{$tree->tree_object_type},
+            'request' => $request
         ]);
 
         return $this->responseOK([
@@ -652,7 +666,8 @@ class CmsPagesController extends Controller
 
         if (!$node) {
             Log::add($user, 'cms.node_not_found', [
-                'message' => 'while_unpublish'
+                'message' => 'while_unpublish',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -663,14 +678,16 @@ class CmsPagesController extends Controller
         }
 
         Log::add($user, 'cms.delete', [
-            'model' => $node->{$node->tree_document_type}
+            'model' => $node->{$node->tree_object_type},
+            'request' => $request
         ]);
 
         foreach ($node->descendants as $d) {
             Log::add($user, 'cms.delete', [
                 'model' => $node,
-                'message' => "{$d->tree_document_type}.deleted_as_descendant",
+                'message' => "{$d->tree_object_type}.deleted_as_descendant",
                 'related_model' => $d,
+                'request' => $request
             ]);
             $d->delete();
         }
@@ -723,7 +740,8 @@ class CmsPagesController extends Controller
         $tree->save();
 
         Log::add($user, 'cms.add_document', [
-            'model' => $tree->document
+            'model' => $tree->document,
+            'request' => $request
         ]);
 
         return $this->responseOK([
@@ -767,7 +785,8 @@ class CmsPagesController extends Controller
         $tree->save();
 
         Log::add($user, 'cms.add_link', [
-            'model' => $tree->link
+            'model' => $tree->link,
+            'request' => $request
         ]);
 
         return $this->responseOK([

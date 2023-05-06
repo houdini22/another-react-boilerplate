@@ -191,15 +191,23 @@ class AddForm extends React.Component<null, null> {
                                 noAddToUsers
                                 save={(values) => {
                                     return new Promise((resolve, reject) => {
-                                        return addRole(values, newRolePermissions, [])
-                                            .then((role) => {
-                                                fetchRoles().then(() => {
-                                                    clearPermissionsFromNewRole()
-                                                    addRoleToNewUser(role)
-                                                    resolve(role)
-                                                })
-                                            })
-                                            .catch((e) => reject(e))
+                                        return addRole(values, newRolePermissions, []).then(
+                                            (role) => {
+                                                fetchRoles().then(
+                                                    () => {
+                                                        clearPermissionsFromNewRole()
+                                                        addRoleToNewUser(role)
+                                                        resolve(role)
+                                                    },
+                                                    () => {
+                                                        reject()
+                                                    },
+                                                )
+                                            },
+                                            () => {
+                                                reject()
+                                            },
+                                        )
                                     })
                                 }}
                                 canByPermission={canByPermission}

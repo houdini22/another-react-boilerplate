@@ -48,18 +48,30 @@ export class PermissionsTable extends React.Component<PermissionsTableProps, nul
                                 <ModalConfirm
                                     onConfirm={() => {
                                         setIsLoading(true)
-                                        deletePermission(permission.id).then(() => {
-                                            fetch().then(() => {
+                                        deletePermission(permission.id).then(
+                                            () => {
+                                                fetch().then(
+                                                    () => {
+                                                        closeModal(`user-permission-${permission.id}-delete`)
+                                                        addToastNotification({
+                                                            title: 'Remove success.',
+                                                            text: `Permission ID: ${permission.id} has been removed.`,
+                                                            type: 'success',
+                                                            href: `/permissions`,
+                                                        })
+                                                        setIsLoading(false)
+                                                    },
+                                                    () => {
+                                                        closeModal(`user-permission-${permission.id}-delete`)
+                                                        setIsLoading(false)
+                                                    },
+                                                )
+                                            },
+                                            () => {
                                                 closeModal(`user-permission-${permission.id}-delete`)
-                                                addToastNotification({
-                                                    title: 'Remove success.',
-                                                    text: `Permission ID: ${permission.id} has been removed.`,
-                                                    type: 'success',
-                                                    href: `/permissions`,
-                                                })
                                                 setIsLoading(false)
-                                            })
-                                        })
+                                            },
+                                        )
                                     }}
                                     onCancel={() => closeModal(`user-permission-${permission.id}-delete`)}
                                 >

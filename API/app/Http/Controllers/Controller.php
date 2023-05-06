@@ -43,6 +43,7 @@ class Controller extends BaseController
         if (!$user) {
             Log::add(NULL, 'users.not_found', [
                 'message' => 'while_get_by_token',
+                'request' => $request
             ]);
             return $this->response401();
         }

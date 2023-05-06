@@ -69,7 +69,8 @@ class FilesController extends Controller
 
         $files = $query->paginate($filters['items_per_page']);
 
-        Log::add($user, 'files.list', []);
+        Log::add($user, 'files.list', [
+            'request' => $request]);
 
         return response()->json([
             'data' => $files->toArray(),
@@ -83,7 +84,8 @@ class FilesController extends Controller
         $file = File::find($request->route('id'));
         if (!$file) {
             Log::add($user, 'media.not_found', [
-                'message' => 'while.delete'
+                'message' => 'while.delete',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -96,7 +98,8 @@ class FilesController extends Controller
         $file->delete();
 
         Log::add($user, 'media.delete', [
-            'model' => $file
+            'model' => $file,
+            'request' => $request
         ]);
 
         return response()->json([
@@ -112,7 +115,8 @@ class FilesController extends Controller
         foreach ($files as $f) {
             $file = File::upload($f, $user);
             Log::add($user, 'media.upload', [
-                'model' => $file
+                'model' => $file,
+                'request' => $request
             ]);
         }
 
@@ -126,7 +130,8 @@ class FilesController extends Controller
         $file = File::find($request->route('id'));
         if (!$file) {
             Log::add($user, 'media.not_found', [
-                'message' => 'while.edit'
+                'message' => 'while.edit',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [
@@ -140,7 +145,8 @@ class FilesController extends Controller
         $file->save();
 
         Log::add($user, 'media.edit', [
-            'model' => $file
+            'model' => $file,
+            'request' => $request
         ]);
 
         return $this->responseOK();
@@ -151,7 +157,8 @@ class FilesController extends Controller
         $file = File::find($request->route('id'));
         if (!$file) {
             Log::add(NULL, 'media.not_found', [
-                'message' => 'while.download'
+                'message' => 'while.download',
+                'request' => $request
             ]);
             return $this->response404([
                 'data' => [

@@ -7,6 +7,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
@@ -40,6 +41,15 @@ class LogsController extends Controller
             ->where(function ($query) use ($filters) {
                 if (!empty($filters['type'])) {
                     $query->where('type', '=', $filters['type']);
+                }
+            })
+            ->where(function ($query) use ($filters) {
+                if (Arr::get($filters, 'related_model_name')) {
+                    if (Arr::get($filters, 'related_model_name') === 'none') {
+                        $query->whereNull('related_model_class_name');
+                    } else {
+                        $query->where('related_model_class_name', '=', Arr::get($filters, 'related_model_name'));
+                    }
                 }
             })
             ->orderBy(empty($filters['order_by']) ? 'id' : $filters['order_by'], empty($filters['order_direction']) ? 'desc' : $filters['order_direction']);
@@ -87,34 +97,119 @@ class LogsController extends Controller
     {
         $user = $this->getUserFromRequest($request);
 
-        $users = Log::with('user')->select(
+        DB::connection()->enableQueryLog();
+
+        $filters = $request->get('filters');
+
+        $users = Log::select(
             [
-                DB::raw('(SELECT COUNT(*) as count FROM logs as l WHERE l.user_id = logs.user_id) as count'),
-                'logs.user_id'
+                DB::raw('l_parent.user_id as user_id'),
+                DB::raw('users.name as name'),
+                DB::raw('l_parent.model_class_name as model_class_name'),
+                DB::raw('l_parent.type as type'),
+                DB::raw('count(*) as count'),
+                DB::raw('l_parent.related_model_class_name as related_model_class_name'),
             ]
-        )
-            ->distinct()
+        )->leftJoin('users', 'users.id', 'l_parent.user_id')->groupBy("user_id")
+            ->where(function ($query) use ($filters) {
+                if (Arr::get($filters, 'type')) {
+                    $query->where('type', '=', Arr::get($filters, 'type'));
+                }
+                if (Arr::get($filters, 'model_name')) {
+                    $query->where('model_class_name', '=', Arr::get($filters, 'model_name'));
+                }
+                if (Arr::get($filters, 'related_model_name')) {
+                    if (Arr::get($filters, 'related_model_name') === 'none') {
+                        $query->whereNull('related_model_class_name');
+                    } else {
+                        $query->where('related_model_class_name', '=', Arr::get($filters, 'related_model_name'));
+                    }
+                }
+            })
+            ->from('logs', 'l_parent')
             ->get();
 
         $models = Log::select(
             [
-                DB::raw('(SELECT COUNT(*) as count FROM logs as l WHERE
-                IF(
-                    ISNULL(logs.model_class_name), ISNULL(l.model_class_name), l.model_class_name = logs.model_class_name)
-                ) as count'),
-                'logs.model_class_name'
+                DB::raw('l_parent.user_id as user_id'),
+                DB::raw('users.name as name'),
+                DB::raw('l_parent.model_class_name as model_class_name'),
+                DB::raw('count(*) as count'),
+                DB::raw('l_parent.related_model_class_name as related_model_class_name'),
             ]
-        )
-            ->distinct()
-            ->orderBy('logs.model_class_name')
+        )->leftJoin('users', 'users.id', 'l_parent.user_id')->groupBy("model_class_name")
+            ->where(function ($query) use ($filters) {
+                if (Arr::get($filters, 'user') === "none") {
+                    $query->where('user_id', '=', 0);
+                } else if (Arr::get($filters, 'user') !== "all" && Arr::get($filters, 'user')) {
+                    $query->where('user_id', '=', Arr::get($filters, 'user'));
+                }
+                if (Arr::get($filters, 'type')) {
+                    $query->where('type', '=', Arr::get($filters, 'type'));
+                }
+                if (Arr::get($filters, 'related_model_name')) {
+                    if (Arr::get($filters, 'related_model_name') === 'none') {
+                        $query->whereNull('related_model_class_name');
+                    } else {
+                        $query->where('related_model_class_name', '=', Arr::get($filters, 'related_model_name'));
+                    }
+                }
+            })
+            ->from('logs', 'l_parent')
             ->get();
 
-
         $types = Log::select(
-            [DB::raw('(SELECT COUNT(*) as count FROM logs as l WHERE l.type = logs.type) as count'), 'logs.type']
-        )
-            ->orderBy('logs.type', 'ASC')
-            ->distinct()
+            [
+                DB::raw('l_parent.user_id as user_id'),
+                DB::raw('users.name as name'),
+                DB::raw('l_parent.type as type'),
+                DB::raw('count(*) as count'),
+                DB::raw('l_parent.related_model_class_name as related_model_class_name'),
+            ]
+        )->leftJoin('users', 'users.id', 'l_parent.user_id')->groupBy("type")
+            ->where(function ($query) use ($filters) {
+                if (Arr::get($filters, 'user') === "none") {
+                    $query->where('user_id', '=', 0);
+                } else if (Arr::get($filters, 'user') !== "all" && Arr::get($filters, 'user')) {
+                    $query->where('user_id', '=', Arr::get($filters, 'user'));
+                }
+                if (Arr::get($filters, 'related_model_name')) {
+                    if (Arr::get($filters, 'related_model_name') === 'none') {
+                        $query->whereNull('related_model_class_name');
+                    } else {
+                        $query->where('related_model_class_name', '=', Arr::get($filters, 'related_model_name'));
+                    }
+                }
+                if (Arr::get($filters, 'model_name')) {
+                    $query->where('model_class_name', '=', Arr::get($filters, 'model_name'));
+                }
+            })
+            ->from('logs', 'l_parent')
+            ->get();
+
+        $related_models = Log::select(
+            [
+                DB::raw('l_parent.user_id as user_id'),
+                DB::raw('users.name as name'),
+                DB::raw('l_parent.related_model_class_name as related_model_class_name'),
+                DB::raw('l_parent.related_model_id as related_model_id'),
+                DB::raw('count(*) as count')
+            ]
+        )->leftJoin('users', 'users.id', 'l_parent.user_id')->groupBy("related_model_class_name")
+            ->where(function ($query) use ($filters) {
+                if (Arr::get($filters, 'user') === "none") {
+                    $query->where('user_id', '=', 0);
+                } else if (Arr::get($filters, 'user') !== "all" && Arr::get($filters, 'user')) {
+                    $query->where('user_id', '=', Arr::get($filters, 'user'));
+                }
+                if (Arr::get($filters, 'type')) {
+                    $query->where('type', '=', Arr::get($filters, 'type'));
+                }
+                if (Arr::get($filters, 'model_name')) {
+                    $query->where('model_class_name', '=', Arr::get($filters, 'model_name'));
+                }
+            })
+            ->from('logs', 'l_parent')
             ->get();
 
         return $this->responseOK([
@@ -122,6 +217,8 @@ class LogsController extends Controller
                 'users' => $users->toArray(),
                 'models' => $models->toArray(),
                 'types' => $types->toArray(),
+                'related_models' => $related_models->toArray(),
+                'queries' => DB::getQueryLog()
             ]
         ]);
     }

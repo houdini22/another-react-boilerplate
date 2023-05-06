@@ -35,13 +35,14 @@ const setCurrentId = (currentId) => (dispatch) => {
 }
 
 const fetch = () => (dispatch, state) => {
-    return new Promise<void>((resolve) => {
-        http.get('/cms/pages', {
-            params: {
-                parent_id: getCurrentId(state()),
-                filters: getFilters(state()),
-            },
-        })
+    return new Promise<void>((resolve, reject) => {
+        return http
+            .get('/cms/pages', {
+                params: {
+                    parent_id: getCurrentId(state()),
+                    filters: getFilters(state()),
+                },
+            })
             .then(
                 ({
                     data: {
@@ -56,12 +57,14 @@ const fetch = () => (dispatch, state) => {
                     resolve()
                 },
             )
-            .catch((e) => {})
+            .catch(() => {
+                reject()
+            })
     })
 }
 
 const fetchParentCategorySelectOptions = () => (dispatch) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         http.get('/cms/pages/fetchParentCategorySelectOptions')
             .then(
                 ({
@@ -74,12 +77,14 @@ const fetchParentCategorySelectOptions = () => (dispatch) => {
                     resolve(data)
                 },
             )
-            .catch((e) => {})
+            .catch((e) => {
+                reject()
+            })
     })
 }
 
 const fetchIndexDocumentsSelectOptions = () => (dispatch) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         http.get('/cms/pages/fetchIndexDocumentsSelectOptions')
             .then(
                 ({
@@ -92,7 +97,9 @@ const fetchIndexDocumentsSelectOptions = () => (dispatch) => {
                     resolve(data)
                 },
             )
-            .catch((e) => {})
+            .catch((e) => {
+                reject()
+            })
     })
 }
 

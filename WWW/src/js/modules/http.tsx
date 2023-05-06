@@ -4,7 +4,7 @@ import { store } from '../../index'
 import config from '../config'
 import _ from 'lodash'
 
-const { setConnectionErrorModalVisible, setFetchError } = commonActions
+const { setConnectionErrorModalVisible, setFetchError, set404error } = commonActions
 
 const instance = axios.create({
     baseURL: config['api']['baseURL'],
@@ -13,7 +13,7 @@ const instance = axios.create({
 
 instance.interceptors.response.use(
     undefined,
-    ({ message, code, response: { status, data, statusText } = {}, ...rest }) => {
+    ({ message, code, response: { status, data, statusText, ...responseRest } = {}, ...rest }) => {
         if (code === 'ERR_NETWORK') {
             store.dispatch(
                 setConnectionErrorModalVisible({
@@ -27,11 +27,12 @@ instance.interceptors.response.use(
         }
         if (status === 500) {
             store.dispatch(setFetchError({ message, code, status, data, statusText }))
-        }
-        if (status === 401) {
+        } else if (status === 401) {
             import('../reducers/auth').then((obj) => {
                 store.dispatch(obj.actions.gentlyLogOff())
             })
+        } else if (status === 404) {
+            store.dispatch(set404error({ message, code, status, data, statusText }))
         }
         return Promise.reject({ message, status, code, data, statusText })
     },
