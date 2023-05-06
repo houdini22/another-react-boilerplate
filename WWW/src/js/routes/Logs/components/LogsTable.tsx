@@ -8,20 +8,7 @@ interface PermissionsTableProps {}
 
 export class LogsTable extends React.Component<PermissionsTableProps, null> {
     render() {
-        const {
-            setIsLoading,
-            permissions,
-            fetch,
-            addToastNotification,
-            page,
-            perPage,
-            total,
-            totalPages,
-            navigate,
-            openModal,
-            canByPermission,
-            data,
-        } = this.props
+        const { page, perPage, total, totalPages, data } = this.props
 
         return (
             <Table.Container bordered striped>
@@ -66,7 +53,7 @@ export class LogsTable extends React.Component<PermissionsTableProps, null> {
                                                     <Popover.Content>
                                                         <Row>
                                                             <Col xs={5}>Message:</Col>
-                                                            <Col xs={7}>{log.message}</Col>
+                                                            <Col xs={7}>{log.message || '---'}</Col>
                                                         </Row>
                                                         <Row>
                                                             <Col xs={5}>Model:</Col>

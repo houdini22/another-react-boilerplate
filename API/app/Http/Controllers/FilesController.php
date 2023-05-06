@@ -69,6 +69,8 @@ class FilesController extends Controller
 
         $files = $query->paginate($filters['items_per_page']);
 
+        Log::add($user, 'files.list', []);
+
         return response()->json([
             'data' => $files->toArray(),
         ]);
@@ -83,6 +85,9 @@ class FilesController extends Controller
 
         $file = File::find($request->route('id'));
         if (!$file) {
+            Log::add($user, 'media.not_found', [
+                'message' => 'while.delete'
+            ]);
             return $this->response404();
         }
 
@@ -112,9 +117,7 @@ class FilesController extends Controller
             ]);
         }
 
-        return response()->json([
-            'msg' => 'ok',
-        ]);
+        return $this->responseOK();
     }
 
     public function postEdit(Request $request)
@@ -126,6 +129,9 @@ class FilesController extends Controller
 
         $file = File::find($request->route('id'));
         if (!$file) {
+            Log::add($user, 'media.not_found', [
+                'message' => 'while.edit'
+            ]);
             return $this->response404();
         }
 
@@ -136,15 +142,16 @@ class FilesController extends Controller
             'model' => $file
         ]);
 
-        return response()->json([
-            'msg' => 'ok',
-        ]);
+        return $this->responseOK();
     }
 
     public function getDownload(Request $request)
     {
         $file = File::find($request->route('id'));
         if (!$file) {
+            Log::add(NULL, 'media.not_found', [
+                'message' => 'while.download'
+            ]);
             return $this->response404();
         }
 

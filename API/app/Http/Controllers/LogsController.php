@@ -34,7 +34,11 @@ class LogsController extends Controller
             })
             ->where(function ($query) use ($filters) {
                 if (!empty($filters['model_name'])) {
-                    $query->where('model_class_name', '=', $filters['model_name']);
+                    if ($filters['model_name'] === "none") {
+                        $query->whereNull('model_class_name');
+                    } else {
+                        $query->where('model_class_name', '=', $filters['model_name']);
+                    }
                 }
             })
             ->where(function ($query) use ($filters) {

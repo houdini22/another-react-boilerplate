@@ -67,6 +67,8 @@ class PermissionsController extends Controller
 
         $permissions = $query->paginate(empty($filters['items_per_page']) ? 10000 : $filters['items_per_page']);
 
+        Log::add($user, 'permissions.list', []);
+
         return response()->json([
             'data' => $permissions->toArray(),
         ]);
@@ -80,6 +82,13 @@ class PermissionsController extends Controller
         }
 
         $permission = Permission::with('roles')->with('users')->find($id);
+
+        if (!$permission) {
+            Log::add($user, 'permissions.not_found', [
+                'message' => 'while.get'
+            ]);
+            return $this->response404();
+        }
 
         return response()->json([
             'permission' => $permission->toArray(),
@@ -95,6 +104,9 @@ class PermissionsController extends Controller
 
         $permission = Permission::find($request->post('id'));
         if (!$permission) {
+            Log::add($user, 'permissions.not_found', [
+                'message' => 'while.permissions_edit'
+            ]);
             return $this->response404();
         }
 
@@ -127,12 +139,19 @@ class PermissionsController extends Controller
         if ($request->post('role_id') && $request->post("permission") && $request->post("permission") !== "add") {
             $permission = Permission::findById($request->post('permission'));
             if (!$permission) {
+                Log::add($user, 'permissions.not_found', [
+                    'message' => 'while.permissions_add',
+                ]);
                 return response()->json([
                     'message' => 'Not found.',
                 ], 404);
             }
             $role = Role::findById($request->post('role_id'));
             if (!$role) {
+                Log::add($user, 'roles.not_found', [
+                    'message' => 'while.permissions_add',
+                    'model' => $permission
+                ]);
                 return response()->json([
                     'message' => 'Not found.',
                 ], 404);
@@ -165,6 +184,10 @@ class PermissionsController extends Controller
             if ($request->post('role_id')) {
                 $role = Role::findById($request->post('role_id'));
                 if (!$role) {
+                    Log::add($user, 'roles.not_found', [
+                        'message' => 'while.permissions_add',
+                        'model' => $permission
+                    ]);
                     return $this->response404();
                 }
                 $role->givePermissionTo($permission);
@@ -190,11 +213,18 @@ class PermissionsController extends Controller
 
         $permission = Permission::find($request->route('permission_id'));
         if (!$permission) {
+            Log::add($user, 'permissions.not_found', [
+                'message' => 'while.users_add_permission',
+            ]);
             return $this->response404();
         }
 
         $u = User::find($request->route('user_id'));
         if (!$u) {
+            Log::add($user, 'users.not_found', [
+                'message' => 'while.users_add_permission',
+                'model' => $permission
+            ]);
             return $this->response404();
         }
 
@@ -219,11 +249,18 @@ class PermissionsController extends Controller
 
         $permission = Permission::find($request->route('permission_id'));
         if (!$permission) {
+            Log::add($user, 'permissions.not_found', [
+                'message' => 'while.users_remove_permission'
+            ]);
             return $this->response404();
         }
 
         $u = User::find($request->route('user_id'));
         if (!$u) {
+            Log::add($user, 'users.not_found', [
+                'model' => $permission,
+                'message' => 'while.users_remove_permission'
+            ]);
             return $this->response404();
         }
 

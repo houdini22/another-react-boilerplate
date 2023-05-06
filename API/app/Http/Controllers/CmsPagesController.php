@@ -273,6 +273,8 @@ class CmsPagesController extends Controller
         $currentNodeParent = $currentNode->parent()->first();
         $currentNodeData['parent'] = $currentNodeParent ? $currentNodeParent->toArray() : null;
 
+        Log::add($user, 'cms.list', []);
+
         return $this->responseOK([
             'nodes' => $nodes->toArray(),
             'currentNode' => $currentNodeData,
@@ -390,7 +392,9 @@ class CmsPagesController extends Controller
         $tree->category_id = $category->id;
         $tree->save();
 
-        Log::add($user, 'cms.add_category', $category);
+        Log::add($user, 'cms.add_category', [
+            'model' => $category
+        ]);
 
         return $this->responseOK([
             'data' => $tree->toArray()
@@ -406,6 +410,9 @@ class CmsPagesController extends Controller
 
         $tree = Tree::with('category')->where('id', '=', Arr::get($request->post(), 'tree.id'))->first();
         if (!$tree) {
+            Log::add($user, 'cms.category_not_found', [
+                'message' => 'while_edit_category'
+            ]);
             return $this->response404('NOT_FOUND', [
                 'id' => Arr::get('tree.id', $request->post())
             ]);
@@ -462,6 +469,9 @@ class CmsPagesController extends Controller
 
         $tree = Tree::with('document')->where('id', '=', Arr::get($request->post(), 'tree.id'))->first();
         if (!$tree) {
+            Log::add($user, 'cms.document_not_found', [
+                'message' => 'while_edit_document'
+            ]);
             return $this->response404('NOT_FOUND', [
                 'id' => Arr::get('tree.id', $request->post())
             ]);
@@ -518,6 +528,9 @@ class CmsPagesController extends Controller
 
         $tree = Tree::with('link')->where('id', '=', Arr::get($request->post(), 'tree.id'))->first();
         if (!$tree) {
+            Log::add($user, 'cms.link_not_found', [
+                'message' => 'while_edit_link'
+            ]);
             return $this->response404('NOT_FOUND', [
                 'id' => Arr::get('tree.id', $request->post())
             ]);
@@ -572,6 +585,12 @@ class CmsPagesController extends Controller
             ->with('category')
             ->find($request->post('id'));
 
+        if (!$tree) {
+            Log::add($user, 'cms.node_not_found', [
+                'message' => 'while_publish'
+            ]);
+        }
+
         $tree->tree_is_published = true;
 
         $now = Carbon::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'));
@@ -616,6 +635,13 @@ class CmsPagesController extends Controller
             ->with('link')
             ->with('category')
             ->find($request->post('id'));
+
+        if (!$tree) {
+            Log::add($user, 'cms.node_not_found', [
+                'message' => 'while_unpublish'
+            ]);
+        }
+
         $tree->tree_is_published = false;
         $tree->save();
 
@@ -640,14 +666,22 @@ class CmsPagesController extends Controller
             ->with('category')
             ->find($request->get('id'));
 
+        if (!$node) {
+            Log::add($user, 'cms.node_not_found', [
+                'message' => 'while_unpublish'
+            ]);
+            return $this->response404();
+        }
+
         Log::add($user, 'cms.delete', [
             'model' => $node->{$node->tree_document_type}
         ]);
 
         foreach ($node->descendants as $d) {
             Log::add($user, 'cms.delete', [
-                'model' => $d,
-                'message' => 'deleted_as_descendant'
+                'model' => $node,
+                'message' => "{$d->tree_document_type}.deleted_as_descendant",
+                'related_model' => $d,
             ]);
             $d->delete();
         }

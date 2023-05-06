@@ -108,7 +108,9 @@ class AuthController extends Controller
                 $avatar = null;
             }
 
-            Log::add($user, 'auth.login_with_token');
+            Log::add($user, 'auth.login_with_token', [
+                'model' => $user,
+            ]);
 
             return $this->responseOK([
                 'data' => $user->toAuthArray(),
@@ -116,7 +118,7 @@ class AuthController extends Controller
         } else {
             Log::add($user, 'auth.login_with_token_failed', [
                 'model' => $user,
-                'message' => 'account_not_active'
+                'message' => 'email_not_verified'
             ]);
         }
 

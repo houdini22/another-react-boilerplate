@@ -37,19 +37,25 @@ export class Filters extends React.Component<FiltersProps, null> {
                 filtersToRender={[
                     {
                         type: 'select',
-                        options: Object.keys(logsData?.models || {})
-                            ?.map((key) => {
-                                return {
-                                    name: key,
-                                    items: logsData?.models[key],
-                                }
-                            })
-                            ?.map(({ name, items }) => {
-                                return {
-                                    label: `${name} (${items.length})`,
-                                    value: name,
-                                }
-                            }),
+                        options: [
+                            {
+                                label: 'None',
+                                value: 'none',
+                            },
+                            ...Object.keys(logsData?.models || {})
+                                ?.map((key) => {
+                                    return {
+                                        name: key,
+                                        items: logsData?.models[key],
+                                    }
+                                })
+                                ?.map(({ name, items }) => {
+                                    return {
+                                        label: `${name} (${items.length})`,
+                                        value: name,
+                                    }
+                                }),
+                        ],
                         name: 'model_name',
                         label: 'Model',
                     },

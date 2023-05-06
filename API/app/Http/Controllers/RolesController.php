@@ -65,6 +65,8 @@ class RolesController extends Controller
 
         $roles = $query->paginate(empty($filters['items_per_page']) ? 10000 : $filters['items_per_page']);
 
+        Log::add($user, 'roles.list', []);
+
         return response()->json([
             'data' => $roles->toArray(),
         ]);
@@ -81,6 +83,13 @@ class RolesController extends Controller
             ->with('users')
             ->find($id);
 
+        if (!$role) {
+            Log::add($user, 'roles.not_found', [
+                'message' => 'while.get',
+            ]);
+            return $this->response404();
+        }
+
         return response()->json([
             'role' => $role->toArray(),
         ]);
@@ -95,6 +104,9 @@ class RolesController extends Controller
 
         $role = Role::find($request->post('id'));
         if (!$role) {
+            Log::add($user, 'roles.not_found', [
+                'message' => 'while.edit'
+            ]);
             return $this->response404();
         }
 
@@ -152,6 +164,10 @@ class RolesController extends Controller
 
         $role = Role::find($request->route('id'));
         if (!$role) {
+            Log::add($user, 'roles.not_found', [
+                'model' => $role,
+                'message' => 'while.delete'
+            ]);
             return $this->response404();
         }
 
@@ -189,11 +205,18 @@ class RolesController extends Controller
 
         $u = User::find($request->route('user_id'));
         if (!$u) {
+            Log::add($user, 'users.not_found', [
+                'message' => 'while.users_remove_role'
+            ]);
             return $this->response404();
         }
 
         $role = Role::find($request->route('role_id'));
         if (!$role) {
+            Log::add($user, 'roles.not_found', [
+                'message' => 'while.users_remove_role',
+                'model' => $u,
+            ]);
             return $this->response404();
         }
 
@@ -218,11 +241,18 @@ class RolesController extends Controller
 
         $role = Role::find($request->route('role_id'));
         if (!$role) {
+            Log::add($user, 'roles.not_found', [
+                'message' => 'while.roles_remove_permission',
+            ]);
             return $this->response404();
         }
 
         $permission = Permission::find($request->route('permission_id'));
         if (!$permission) {
+            Log::add($user, 'permissions.not_found', [
+                'message' => 'while.roles_remove_permission',
+                'model' => $role,
+            ]);
             return $this->response404();
         }
 
@@ -247,6 +277,9 @@ class RolesController extends Controller
 
         $permission = Permission::find($request->route('permission_id'));
         if (!$permission) {
+            Log::add($user, 'permissions.not_found', [
+                'message' => 'while.delete',
+            ]);
             return $this->response404();
         }
 
