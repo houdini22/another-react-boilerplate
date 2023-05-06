@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Models\Log;
 use App\Models\Permission;
 use App\Models\Role;
@@ -13,10 +14,7 @@ class RolesController extends Controller
 {
     public function getList(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $filters = $request->get('filters');
 
@@ -74,10 +72,7 @@ class RolesController extends Controller
 
     public function getGet(Request $request, $id)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $role = Role::with('permissions')
             ->with('users')
@@ -87,7 +82,12 @@ class RolesController extends Controller
             Log::add($user, 'roles.not_found', [
                 'message' => 'while.get',
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $id,
+                    'model' => Role::class,
+                ],
+            ]);
         }
 
         return response()->json([
@@ -97,17 +97,19 @@ class RolesController extends Controller
 
     public function postEdit(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $role = Role::find($request->post('id'));
         if (!$role) {
             Log::add($user, 'roles.not_found', [
                 'message' => 'while.edit'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('id'),
+                    'model' => Role::class,
+                ],
+            ]);
         }
 
         $request->validate([
@@ -131,10 +133,7 @@ class RolesController extends Controller
 
     public function postAdd(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $request->validate([
             'name' => 'required|unique:roles,name',
@@ -157,18 +156,19 @@ class RolesController extends Controller
 
     public function deleteDeleteRole(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
-
+        $user = $this->getUserFromRequest($request);
         $role = Role::find($request->route('id'));
         if (!$role) {
             Log::add($user, 'roles.not_found', [
                 'model' => $role,
                 'message' => 'while.delete'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('id'),
+                    'model' => Role::class,
+                ],
+            ]);
         }
 
         Log::add($user, 'roles.delete', [
@@ -184,10 +184,7 @@ class RolesController extends Controller
 
     public function getPermissionList(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $permisions = Permission::orderBy('name', 'ASC')->get();
 
@@ -198,17 +195,19 @@ class RolesController extends Controller
 
     public function deleteDeleteUserRole(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $u = User::find($request->route('user_id'));
         if (!$u) {
             Log::add($user, 'users.not_found', [
                 'message' => 'while.users_remove_role'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('user_id'),
+                    'model' => User::class,
+                ],
+            ]);
         }
 
         $role = Role::find($request->route('role_id'));
@@ -217,7 +216,12 @@ class RolesController extends Controller
                 'message' => 'while.users_remove_role',
                 'model' => $u,
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('role_id'),
+                    'model' => Role::class,
+                ],
+            ]);
         }
 
         $u->removeRole($role);
@@ -234,17 +238,19 @@ class RolesController extends Controller
 
     public function deleteDeleteRolePermission(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $role = Role::find($request->route('role_id'));
         if (!$role) {
             Log::add($user, 'roles.not_found', [
                 'message' => 'while.roles_remove_permission',
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('role_id'),
+                    'model' => Role::class,
+                ],
+            ]);
         }
 
         $permission = Permission::find($request->route('permission_id'));
@@ -253,7 +259,12 @@ class RolesController extends Controller
                 'message' => 'while.roles_remove_permission',
                 'model' => $role,
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('permission_id'),
+                    'model' => Permission::class,
+                ],
+            ]);
         }
 
         $permission->removeRole($role);
@@ -270,17 +281,19 @@ class RolesController extends Controller
 
     public function deleteDeletePermission(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $permission = Permission::find($request->route('permission_id'));
         if (!$permission) {
             Log::add($user, 'permissions.not_found', [
                 'message' => 'while.delete',
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('permission_id'),
+                    'model' => Permission::class,
+                ],
+            ]);
         }
 
         Log::add($user, 'permissions.delete', [

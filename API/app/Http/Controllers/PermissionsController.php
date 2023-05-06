@@ -13,10 +13,7 @@ class PermissionsController extends Controller
 {
     public function getList(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $filters = $request->get('filters');
 
@@ -76,10 +73,7 @@ class PermissionsController extends Controller
 
     public function getGetPermission(Request $request, $id)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $permission = Permission::with('roles')->with('users')->find($id);
 
@@ -97,10 +91,7 @@ class PermissionsController extends Controller
 
     public function postEdit(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $permission = Permission::find($request->post('id'));
         if (!$permission) {
@@ -131,10 +122,7 @@ class PermissionsController extends Controller
 
     public function postAdd(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         if ($request->post('role_id') && $request->post("permission") && $request->post("permission") !== "add") {
             $permission = Permission::findById($request->post('permission'));
@@ -206,10 +194,7 @@ class PermissionsController extends Controller
 
     public function postAddPermissionToUser(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $permission = Permission::find($request->route('permission_id'));
         if (!$permission) {
@@ -242,10 +227,7 @@ class PermissionsController extends Controller
 
     public function postDeleteUserPermission(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $permission = Permission::find($request->route('permission_id'));
         if (!$permission) {

@@ -30,7 +30,7 @@ class Log extends Authenticatable
     public static function add($user, $type, $data = []) {
         return Log::create([
             'type' => $type,
-            'user_id' => $user ? $user->id : 0,
+            'user_id' => (is_object($user) && ((new \ReflectionClass($user))->getName()) === User::class) ? $user->id : 0,
             'model_class_name' => Arr::get($data, 'model') ? (new \ReflectionClass(Arr::get($data, 'model')))->getName() : NULL,
             'model_id' => Arr::get($data, 'model') ? Arr::get($data, 'model')->id : NULL,
             'message' => Arr::get($data, 'message'),

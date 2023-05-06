@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Log;
+use App\Models\Tree;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -48,10 +49,12 @@ class AuthController extends Controller
                     $additional[] = 'Super Admin';
                 }
 
-                Log::add($user, 'auth.login_success');
+                Log::add($user, 'auth.login_success', [
+                    'model' => $user,
+                ]);
 
                 return $this->responseOK([
-                    'data' => $user->toAuthArray()
+                    'user' => $user->toAuthArray()
                 ]);
             }
         }
@@ -73,7 +76,9 @@ class AuthController extends Controller
             Log::add(NULL, 'auth.login_with_token_failed', [
                 'message' => 'empty_token_or_email'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'message' => 'empty_token_or_email'
+            ]);
         }
 
         $user = User::where('email', $credentials['email'])->where('token', $credentials['token'])->first();
@@ -82,7 +87,9 @@ class AuthController extends Controller
             Log::add(NULL, 'auth.login_with_token_failed', [
                 'message' => 'user_not_found'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'message' => 'user_not_found'
+            ]);
         }
 
         if ($user->status === User::$STATUS_NOT_ACTIVE) {
@@ -113,7 +120,7 @@ class AuthController extends Controller
             ]);
 
             return $this->responseOK([
-                'data' => $user->toAuthArray(),
+                'user' => $user->toAuthArray(),
             ]);
         } else {
             Log::add($user, 'auth.login_with_token_failed', [
@@ -122,20 +129,21 @@ class AuthController extends Controller
             ]);
         }
 
-        return $this->response404();
+        return $this->response404([
+            'message' => 'email_not_verified'
+        ]);
     }
 
     public function postLogout(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $user->token = null;
         $user->save();
 
-        Log::add($user, 'auth.logout');
+        Log::add($user, 'auth.logout', [
+            'model' => $user
+        ]);
 
         return response()->json([
             'message' => 'OK'

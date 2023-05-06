@@ -38,7 +38,20 @@ export class Filters extends React.Component<FiltersProps, null> {
                     {
                         type: 'select',
                         options: [
-                            {
+                            ...(logsData?.models?.map(({ count, model_class_name }) => {
+                                if (model_class_name === null) {
+                                    return {
+                                        value: 'none',
+                                        label: `NONE (${count})`,
+                                    }
+                                } else {
+                                    return {
+                                        value: model_class_name,
+                                        label: `${model_class_name} (${count})`,
+                                    }
+                                }
+                            }) || []),
+                            /*{
                                 label: 'None',
                                 value: 'none',
                             },
@@ -54,7 +67,7 @@ export class Filters extends React.Component<FiltersProps, null> {
                                         label: `${name} (${items.length})`,
                                         value: name,
                                     }
-                                }),
+                                }),*/
                         ],
                         name: 'model_name',
                         label: 'Model',
@@ -62,7 +75,26 @@ export class Filters extends React.Component<FiltersProps, null> {
                     {
                         type: 'select',
                         options: [
-                            {
+                            ...(logsData?.users
+                                ?.map(({ count, user, user_id }) => {
+                                    if (user === null && user_id === 0) {
+                                        return {
+                                            value: 'none',
+                                            label: `NONE (${count})`,
+                                        }
+                                    } else if (user === null) {
+                                        return {
+                                            value: user_id,
+                                            label: `_USER ID: ${user_id} (${count})`,
+                                        }
+                                    }
+                                    return {
+                                        value: user_id,
+                                        label: `${user.name} (${count})`,
+                                    }
+                                })
+                                .sort(({ label: labelA }, { label: labelB }) => labelA.localeCompare(labelB)) || []),
+                            /*{
                                 label: 'None',
                                 value: 'none',
                             },
@@ -78,14 +110,19 @@ export class Filters extends React.Component<FiltersProps, null> {
                                         label: `${name} (${items.length})`,
                                         value: name,
                                     }
-                                }),
+                                }),*/
                         ],
                         name: 'user',
                         label: 'User',
                     },
                     {
                         type: 'select',
-                        options: Object.keys(logsData?.types || {})
+                        options: logsData?.types?.map(({ count, type }) => {
+                            return {
+                                value: type,
+                                label: `${type} (${count})`,
+                            }
+                        }) /*Object.keys(logsData?.types || {})
                             ?.map((key) => {
                                 return {
                                     type: key,
@@ -97,7 +134,7 @@ export class Filters extends React.Component<FiltersProps, null> {
                                     label: `${type} (${items.length})`,
                                     value: type,
                                 }
-                            }),
+                            })*/,
                         name: 'type',
                         label: 'Type',
                     },

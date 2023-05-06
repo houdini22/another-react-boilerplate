@@ -20,10 +20,7 @@ class CmsPagesController extends Controller
 {
     public function getPages(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $filters = $request->get('filters');
 
@@ -195,6 +192,17 @@ class CmsPagesController extends Controller
                 ->withDepth()
                 ->first();
 
+            if (!$currentNode) {
+                Log::add($user, 'cms.node_not_found', [
+                ]);
+                return $this->response404([
+                    'data' => [
+                        'id' => Arr::get($request->post(), 'parent_id'),
+                        'model' => Tree::class,
+                    ],
+                ]);
+            }
+
             $nodes = $currentNode
                 ->children()
                 ->where(function ($query) use ($currentNode, $filters) {
@@ -284,10 +292,7 @@ class CmsPagesController extends Controller
 
     public function getParentCategorySelectOptions(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $nodes = Tree::where('tree_is_visible_backend', '=', true)
             ->where('tree_is_visible_in_select', '=', true)
@@ -318,10 +323,7 @@ class CmsPagesController extends Controller
 
     public function getFetchIndexDocumentsSelectOptions(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $nodes = Tree::where('tree_is_visible_backend', '=', true)
             ->where('tree_is_visible_in_select', '=', true)
@@ -339,10 +341,7 @@ class CmsPagesController extends Controller
 
     public function postAddCategory(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $values = $request->post();
 
@@ -403,17 +402,14 @@ class CmsPagesController extends Controller
 
     public function postEditCategory(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $tree = Tree::with('category')->where('id', '=', Arr::get($request->post(), 'tree.id'))->first();
         if (!$tree) {
             Log::add($user, 'cms.category_not_found', [
                 'message' => 'while_edit_category'
             ]);
-            return $this->response404('NOT_FOUND', [
+            return $this->response404([
                 'id' => Arr::get('tree.id', $request->post())
             ]);
         }
@@ -462,17 +458,14 @@ class CmsPagesController extends Controller
 
     public function postEditDocument(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $tree = Tree::with('document')->where('id', '=', Arr::get($request->post(), 'tree.id'))->first();
         if (!$tree) {
             Log::add($user, 'cms.document_not_found', [
                 'message' => 'while_edit_document'
             ]);
-            return $this->response404('NOT_FOUND', [
+            return $this->response404([
                 'id' => Arr::get('tree.id', $request->post())
             ]);
         }
@@ -521,18 +514,18 @@ class CmsPagesController extends Controller
 
     public function postEditLink(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $tree = Tree::with('link')->where('id', '=', Arr::get($request->post(), 'tree.id'))->first();
         if (!$tree) {
             Log::add($user, 'cms.link_not_found', [
                 'message' => 'while_edit_link'
             ]);
-            return $this->response404('NOT_FOUND', [
-                'id' => Arr::get('tree.id', $request->post())
+            return $this->response404([
+                'data' => [
+                    'id' => Arr::get('tree.id', $request->post()),
+                    'model' => Tree::class,
+                ],
             ]);
         }
 
@@ -575,10 +568,7 @@ class CmsPagesController extends Controller
 
     public function postPublish(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $tree = Tree::with('document')
             ->with('link')
@@ -626,10 +616,7 @@ class CmsPagesController extends Controller
 
     public function postUnpublish(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $tree = Tree::with('document')
             ->with('link')
@@ -656,10 +643,7 @@ class CmsPagesController extends Controller
 
     public function deleteDeleteNode(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $node = Tree::with('document')
             ->with('link')
@@ -670,7 +654,12 @@ class CmsPagesController extends Controller
             Log::add($user, 'cms.node_not_found', [
                 'message' => 'while_unpublish'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->get('id'),
+                    'model' => Tree::class,
+                ],
+            ]);
         }
 
         Log::add($user, 'cms.delete', [
@@ -692,10 +681,7 @@ class CmsPagesController extends Controller
 
     public function postAddDocument(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $values = $request->post();
 
@@ -747,10 +733,7 @@ class CmsPagesController extends Controller
 
     public function postAddLink(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $values = $request->post();
 

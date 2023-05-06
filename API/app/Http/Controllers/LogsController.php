@@ -7,16 +7,14 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class LogsController extends Controller
 {
     public function getList(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $filters = $request->get('filters');
 
@@ -24,11 +22,9 @@ class LogsController extends Controller
             ->where(function ($query) use ($filters) {
                 if (!empty($filters['user'])) {
                     if ($filters['user'] !== 'none') {
-                        $query->whereHas('user', function($query) use ($filters) {
-                            $query->where('name', '=', $filters['user']);
-                        });
+                        $query->where('user_id', '=', $filters['user']);
                     } else {
-                        $query->whereDoesntHave('user');
+                        $query->where('user_id', '=', 0);
                     }
                 }
             })
@@ -89,17 +85,37 @@ class LogsController extends Controller
 
     public function getData(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
+
+        $users = Log::with('user')->select(
+            [
+                DB::raw('(SELECT COUNT(*) as count FROM logs as l WHERE l.user_id = logs.user_id) as count'),
+                'logs.user_id'
+            ]
+        )
+            ->distinct()
+            ->get();
+
+        $models = Log::select(
+            [
+                DB::raw('(SELECT COUNT(*) as count FROM logs as l WHERE
+                IF(
+                    ISNULL(logs.model_class_name), ISNULL(l.model_class_name), l.model_class_name = logs.model_class_name)
+                ) as count'),
+                'logs.model_class_name'
+            ]
+        )
+            ->distinct()
+            ->orderBy('logs.model_class_name')
+            ->get();
 
 
-        $users = collect(Log::with('user')->whereHas('user')->get()->toArray())->groupBy('user.name');
-
-        $models = collect(Log::whereNotNull('model_class_name')->orderBy('model_class_name', 'asc')->get()->toArray())->groupBy('model_class_name');
-
-        $types = collect(Log::whereNotNull('type')->orderBy('type', 'asc')->get()->toArray())->unique('type')->groupBy('type');
+        $types = Log::select(
+            [DB::raw('(SELECT COUNT(*) as count FROM logs as l WHERE l.type = logs.type) as count'), 'logs.type']
+        )
+            ->orderBy('logs.type', 'ASC')
+            ->distinct()
+            ->get();
 
         return $this->responseOK([
             'data' => [

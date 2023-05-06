@@ -6,6 +6,7 @@ use App\Events\UserDataChanged;
 use App\Events\UserForceLogout;
 use App\Models\File;
 use App\Models\Log;
+use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
@@ -18,10 +19,7 @@ class UsersController extends Controller
 {
     public function getList(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $filters = $request->get('filters');
 
@@ -117,10 +115,7 @@ class UsersController extends Controller
 
     public function getGet(Request $request, $id)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $u = User::with('roles')
             ->with('permissions')
@@ -134,7 +129,12 @@ class UsersController extends Controller
             Log::add($user, 'users.not_found', [
                 'message' => 'while.get'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $id,
+                    'model' => User::class,
+                ],
+            ]);
         }
 
         return response()->json([
@@ -144,17 +144,19 @@ class UsersController extends Controller
 
     public function postEdit(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $u = User::find($request->post('id'));
         if (!$u) {
-            Log::add($u, 'users.not_found', [
+            Log::add(NULL, 'users.not_found', [
                 'message' => 'while.edit'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->post('id'),
+                    'model' => User::class,
+                ],
+            ]);
         }
 
         $request->validate([
@@ -200,10 +202,7 @@ class UsersController extends Controller
 
     public function postAdd(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $request->validate([
             'email' => ['required', 'email', 'unique:users,email'],
@@ -232,17 +231,19 @@ class UsersController extends Controller
 
     public function deleteDeleteUser(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $u = User::find($request->route('id'));
         if (!$u) {
             Log::add($user, 'users.not_found', [
                 'message' => 'while.delete'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('id'),
+                    'model' => User::class,
+                ],
+            ]);
         }
 
         Log::add($user, 'users.delete', [
@@ -258,17 +259,19 @@ class UsersController extends Controller
 
     public function postAddUserRole(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $u = User::find($request->route('user_id'));
         if (!$u) {
-            Log::add($u, 'users.not_found', [
+            Log::add(NULL, 'users.not_found', [
                 'message' => 'while.add_to_user'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('user_id'),
+                    'model' => User::class,
+                ],
+            ]);
         }
 
         $role = Role::find($request->route('role_id'));
@@ -277,7 +280,12 @@ class UsersController extends Controller
                 'model' => $u,
                 'message' => 'while.add_to_user'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('role_id'),
+                    'model' => Role::class,
+                ],
+            ]);
         }
 
         $u->assignRole($role);
@@ -294,17 +302,19 @@ class UsersController extends Controller
 
     public function postSendActivationEmail(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $u = User::find($request->post('id'));
         if (!$u) {
             Log::add($user, 'users.not_found', [
                 'message' => 'while.send_activation_email'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->post('id'),
+                    'model' => User::class,
+                ],
+            ]);
         }
 
         $u->email_verified_at = NULL;
@@ -330,12 +340,19 @@ class UsersController extends Controller
     public function getActivate(Request $request)
     {
         $user = User::where('email_verify_token', $request->route('email_verified_token'))
-            ->get()->first();
+            ->get()
+            ->first();
+
         if (!$user) {
             Log::add(NULL, 'users.not_found', [
                 'message' => 'while.activate'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('email_verified_token'),
+                    'model' => User::class,
+                ],
+            ]);
         }
 
         $user->email_verify_token = NULL;
@@ -351,17 +368,19 @@ class UsersController extends Controller
 
     public function postChangeAvatar(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $u = User::find($request->route('id'));
         if (!$u) {
             Log::add($user, 'users.not_found', [
                 'message' => 'while.change_avatar'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('id'),
+                    'model' => User::class,
+                ],
+            ]);
         }
 
         $request->validate([
@@ -396,17 +415,19 @@ class UsersController extends Controller
 
     public function postDeleteAvatar(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $u = User::find($request->post('id'));
         if (!$u) {
             Log::add($user, 'users.not_found', [
                 'message' => 'while.delete_avatar'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->post('id'),
+                    'model' => User::class,
+                ],
+            ]);
         }
 
         if ($u->avatar()->first()) {
@@ -430,17 +451,19 @@ class UsersController extends Controller
 
     public function postForceLogin(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $u = User::find($request->route('id'));
         if (!$u) {
             Log::add($user, 'users.not_found', [
                 'message' => 'while.force_login',
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('id'),
+                    'model' => User::class,
+                ],
+            ]);
         }
 
         $token = $u->token;
@@ -459,17 +482,19 @@ class UsersController extends Controller
 
     public function postActivate(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $u = User::find($request->route('id'));
         if (!$u) {
             Log::add($user, 'users.not_found', [
                 'message' => 'while.activate',
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('id'),
+                    'model' => User::class,
+                ],
+            ]);
         }
 
         $u->status = 1;
@@ -486,17 +511,19 @@ class UsersController extends Controller
 
     public function postDeactivate(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $u = User::find($request->route('id'));
         if (!$u) {
             Log::add($user, 'users.not_found', [
                 'message' => 'while.deactivate',
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('id'),
+                    'model' => User::class,
+                ],
+            ]);
         }
 
         $u->status = 0;

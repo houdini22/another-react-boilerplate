@@ -55,22 +55,22 @@ const login = (email, password) => (dispatch) => {
                 ({
                     data: {
                         data: {
-                            data: { data },
+                            data: { user },
                         },
                     },
                 }) => {
-                    dispatch(loggedIn(data))
-                    setAuthToken(data.token)
+                    dispatch(loggedIn(user))
+                    setAuthToken(user.token)
 
                     LocalStorage.update('LoginFormContainer', { ID: 1 }, (row) => {
-                        row.email = data.email
-                        row.token = data.token
+                        row.email = user.email
+                        row.token = user.token
                         return row
                     })
                     LocalStorage.commit()
                     dispatch(setIsLoading(false))
 
-                    resolve(data)
+                    resolve(user)
                 },
                 ({ data: { message = '' } = {} }) => {
                     dispatch(setIsLoading(false))
@@ -97,7 +97,7 @@ const loginWithToken = (email, token) => (dispatch, state) => {
                 ({
                     data: {
                         data: {
-                            data: { data: user },
+                            data: { user },
                         },
                     },
                 }) => {

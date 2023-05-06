@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use App\Models\Log;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Intervention\Image\Image;
 
 class FilesController extends Controller
 {
@@ -14,7 +12,12 @@ class FilesController extends Controller
     {
         $file = File::find($request->route('file_id'));
         if (!$file) {
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('file_id'),
+                    'model' => File::class,
+                ],
+            ]);
         }
 
         $file->preview_count += 1;
@@ -38,10 +41,7 @@ class FilesController extends Controller
 
     public function getList(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $filters = $request->get('filters');
 
@@ -78,17 +78,19 @@ class FilesController extends Controller
 
     public function deleteFile(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $file = File::find($request->route('id'));
         if (!$file) {
             Log::add($user, 'media.not_found', [
                 'message' => 'while.delete'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('id'),
+                    'model' => File::class,
+                ],
+            ]);
         }
 
         $file->delete();
@@ -104,10 +106,7 @@ class FilesController extends Controller
 
     public function postUpload(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $files = $request->allFiles();
         foreach ($files as $f) {
@@ -122,17 +121,19 @@ class FilesController extends Controller
 
     public function postEdit(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $file = File::find($request->route('id'));
         if (!$file) {
             Log::add($user, 'media.not_found', [
                 'message' => 'while.edit'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('id'),
+                    'model' => File::class,
+                ],
+            ]);
         }
 
         $file->fill($request->post());
@@ -152,7 +153,12 @@ class FilesController extends Controller
             Log::add(NULL, 'media.not_found', [
                 'message' => 'while.download'
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'id' => $request->route('id'),
+                    'model' => File::class,
+                ],
+            ]);
         }
 
         $file->download_count += 1;
