@@ -2,13 +2,13 @@ import * as React from 'react'
 import { bindActionCreators, compose } from 'redux'
 import { connect } from 'react-redux'
 import { AddCategoryForm } from '../components/AddCategory/AddCategoryForm'
-import { reduxForm, SubmissionError } from 'redux-form'
+import { reduxForm, SubmissionError, formValueSelector } from 'redux-form'
 import { actions } from '../../../reducers/cms-pages'
 import { processAPIerrorResponseToFormErrors } from '../../../modules/http'
 import { withRouter } from '../../../helpers/router'
 
 export const FORM_NAME = 'add-category-form'
-
+const selector = formValueSelector(FORM_NAME)
 interface AddCategoryFormContainerBaseState {
     categories: Array<any>
     indexDocuments: Array<any>
@@ -45,16 +45,6 @@ class AddCategoryFormContainerBase extends React.Component<null, AddCategoryForm
         })
     }
 
-    fetchIndexDocumentSelectOptions() {
-        const { fetchIndexDocumentSelectOptions } = this.props
-
-        return fetchIndexDocumentSelectOptions().then((options) => {
-            this.setState({
-                indexDocuments: options,
-            })
-        })
-    }
-
     render() {
         return <AddCategoryForm {...this.props} {...this.state} />
     }
@@ -64,7 +54,15 @@ const AddCategoryFormContainer = compose(
     withRouter,
     connect(
         (state) => {
-            return {}
+            const formValues = selector(
+                state,
+                'tree.tree_is_published',
+                'tree.tree_published_from',
+                'tree.tree_published_to',
+            )
+            return {
+                formValues,
+            }
         },
         (dispatch) => {
             return bindActionCreators(

@@ -39,11 +39,11 @@
                 list-style-type: none;
                 margin: 0;
                 padding: 0;
-                display: flex;
+                display: block;
                 align-content: center;
 
                 & > li {
-                    display: flex;
+                    display: inline-flex;
                     align-items: center;
 
                     &:not(:first-child) {
@@ -159,9 +159,10 @@
 
             & > .component-page-header__breadcrumbs--inner {
                 & > ul {
-                    height: 41px;
+                    min-height: 41px;
 
                     & > li {
+                        line-height: 41px;
                         & > a {
                             font-size: $COMPONENT_ELEMENT_FONT_SIZE_MD;
                         }

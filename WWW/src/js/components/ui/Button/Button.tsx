@@ -114,6 +114,7 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                         style,
                         isLoading,
                         href,
+                        disableContext,
                         ...rest
                     } = this.props
 

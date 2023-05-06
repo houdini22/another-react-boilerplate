@@ -14,7 +14,7 @@ class Controller extends BaseController
     public function response401()
     {
         return response()->json([
-            'message' => 'You have to be logged in.',
+            'message' => 'NOT_LOGGED_IN',
         ], 401);
     }
 
@@ -24,5 +24,14 @@ class Controller extends BaseController
             'message' => $message,
             'data' => $data,
         ], 404);
+    }
+
+    public function responseOK($data = null) {
+        return response()->json([
+            'message' => 'ok',
+            'data' => [
+                'data' => $data
+            ],
+        ]);
     }
 }

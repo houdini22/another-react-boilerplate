@@ -24,8 +24,6 @@ class CmsPagesController extends Controller
             return $this->response401();
         }
 
-        DB::connection()->enableQueryLog();
-
         $filters = $request->get('filters');
 
         if (!empty($filters['search_in']) && ($filters['search_in'] === 'everywhere')) {
@@ -57,6 +55,13 @@ class CmsPagesController extends Controller
                                 ->whereNotNull('tree_published_to')
                                 ->where('tree_published_from', '<', $date)
                                 ->where('tree_published_to', '>', $date);
+                        }
+                    }
+                })
+                ->where(function ($query) use ($currentNode, $filters) {
+                    if (!empty($filters['type'])) {
+                        if ($filters['type'] !== 'all') {
+                            $query->where('tree_object_type', '=', $filters['type']);
                         }
                     }
                 })
@@ -110,6 +115,13 @@ class CmsPagesController extends Controller
 
             $nodes = $currentNode
                 ->descendants()
+                ->where(function ($query) use ($currentNode, $filters) {
+                    if (!empty($filters['type'])) {
+                        if ($filters['type'] !== 'all') {
+                            $query->where('tree_object_type', '=', $filters['type']);
+                        }
+                    }
+                })
                 ->where(function ($query) use ($currentNode, $filters) {
                     if (!empty($filters['is_published'])) {
                         if ($filters['is_published'] === 'no') {
@@ -185,6 +197,13 @@ class CmsPagesController extends Controller
             $nodes = $currentNode
                 ->children()
                 ->where(function ($query) use ($currentNode, $filters) {
+                    if (!empty($filters['type'])) {
+                        if ($filters['type'] !== 'all') {
+                            $query->where('tree_object_type', '=', $filters['type']);
+                        }
+                    }
+                })
+                ->where(function ($query) use ($currentNode, $filters) {
                     if (!empty($filters['is_published'])) {
                         if ($filters['is_published'] === 'no') {
                             $query->where('tree_is_published', '=', 0)
@@ -253,11 +272,10 @@ class CmsPagesController extends Controller
         $currentNodeParent = $currentNode->parent()->first();
         $currentNodeData['parent'] = $currentNodeParent ? $currentNodeParent->toArray() : null;
 
-        return response()->json([
+        return $this->responseOK([
             'nodes' => $nodes->toArray(),
             'currentNode' => $currentNodeData,
             'parents' => $parents ? $parents : [],
-            'queries' => DB::getQueryLog()
         ]);
     }
 
@@ -290,8 +308,8 @@ class CmsPagesController extends Controller
 
         $traverse($nodes);
 
-        return response()->json([
-            'options' => $options
+        return $this->responseOK([
+            'data' => $options,
         ]);
     }
 
@@ -311,11 +329,8 @@ class CmsPagesController extends Controller
             ->orderBy('_lft', "ASC")
             ->get();
 
-        $options = [
-        ];
-
-        return response()->json([
-            'options' => $nodes->toArray(),
+        return $this->responseOK([
+            'data' => $nodes->toArray()
         ]);
     }
 
@@ -374,11 +389,8 @@ class CmsPagesController extends Controller
         $tree->category_id = $category->id;
         $tree->save();
 
-        return response()->json([
-            'message' => 'ok',
-            'data' => [
-                'data' => $tree->toArray()
-            ],
+        return $this->responseOK([
+            'data' => $tree->toArray()
         ]);
     }
 
@@ -429,11 +441,8 @@ class CmsPagesController extends Controller
             $tree->appendToNode(Tree::find(Arr::get($values, 'parent_id')))->save();
         }
 
-        return response()->json([
-            'message' => 'ok',
-            'data' => [
-                'data' => $tree->toArray()
-            ],
+        return $this->responseOK([
+            'data' => $tree->toArray()
         ]);
     }
 
@@ -484,11 +493,8 @@ class CmsPagesController extends Controller
             $tree->appendToNode(Tree::find(Arr::get($values, 'parent_id')))->save();
         }
 
-        return response()->json([
-            'message' => 'ok',
-            'data' => [
-                'data' => $tree->toArray()
-            ],
+        return $this->responseOK([
+            'data' => $tree->toArray()
         ]);
     }
 
@@ -534,11 +540,8 @@ class CmsPagesController extends Controller
             $tree->appendToNode(Tree::find(Arr::get($values, 'parent_id')))->save();
         }
 
-        return response()->json([
-            'message' => 'ok',
-            'data' => [
-                'data' => $tree->toArray()
-            ],
+        return $this->responseOK([
+            'data' => $tree->toArray()
         ]);
     }
 
@@ -569,11 +572,8 @@ class CmsPagesController extends Controller
 
         $tree->save();
 
-        return response()->json([
-            'message' => 'OK',
-            'data' => [
-                'tree' => $tree->toArray()
-            ],
+        return $this->responseOK([
+            'data' => $tree->toArray()
         ]);
     }
 
@@ -583,11 +583,8 @@ class CmsPagesController extends Controller
         $tree->tree_is_published = false;
         $tree->save();
 
-        return response()->json([
-            'message' => 'OK',
-            'data' => [
-                'tree' => $tree->toArray()
-            ],
+        return $this->responseOK([
+            'data' => $tree->toArray()
         ]);
     }
 
@@ -605,9 +602,7 @@ class CmsPagesController extends Controller
         }
         $node->delete();
 
-        return response()->json([
-            'message' => 'ok'
-        ]);
+        return $this->responseOK();
     }
 
     public function postAddDocument(Request $request)
@@ -651,11 +646,8 @@ class CmsPagesController extends Controller
         $tree->document_id = $document->id;
         $tree->save();
 
-        return response()->json([
-            'message' => 'ok',
-            'data' => [
-                'data' => $tree->toArray()
-            ],
+        return $this->responseOK([
+            'data' => $tree->toArray(),
         ]);
     }
 
@@ -692,11 +684,8 @@ class CmsPagesController extends Controller
         $tree->link_id = $link->id;
         $tree->save();
 
-        return response()->json([
-            'message' => 'ok',
-            'data' => [
-                'data' => $tree->toArray()
-            ],
+        return $this->responseOK([
+            'data' => $tree->toArray(),
         ]);
     }
 }

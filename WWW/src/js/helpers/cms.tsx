@@ -18,7 +18,7 @@ export const generateUrl = (parentUrl = '', categoryName = '') => {
     return `${parentUrl}/${value}`
 }
 
-export const isPublished = (node) => {
+export const isPublished = (node = {}) => {
     if (!node.tree_is_published) return false
     if (node.tree_published_from === null) return false
     if (node.tree_published_to === null) return false

@@ -42,12 +42,20 @@ const fetch = () => (dispatch, state) => {
                 filters: getFilters(state()),
             },
         })
-            .then(({ data: { nodes, currentNode, parents } }) => {
-                dispatch(setNodes(nodes))
-                dispatch(setCurrentNode(currentNode))
-                dispatch(setCurrentNodeParents(parents))
-                resolve()
-            })
+            .then(
+                ({
+                    data: {
+                        data: {
+                            data: { nodes, currentNode, parents },
+                        },
+                    },
+                }) => {
+                    dispatch(setNodes(nodes))
+                    dispatch(setCurrentNode(currentNode))
+                    dispatch(setCurrentNodeParents(parents))
+                    resolve()
+                },
+            )
             .catch((e) => {})
     })
 }
@@ -55,9 +63,17 @@ const fetch = () => (dispatch, state) => {
 const fetchParentCategorySelectOptions = () => (dispatch) => {
     return new Promise((resolve) => {
         http.get('/cms/pages/fetchParentCategorySelectOptions')
-            .then(({ data: { options } }) => {
-                resolve(options)
-            })
+            .then(
+                ({
+                    data: {
+                        data: {
+                            data: { data },
+                        },
+                    },
+                }) => {
+                    resolve(data)
+                },
+            )
             .catch((e) => {})
     })
 }
@@ -65,9 +81,17 @@ const fetchParentCategorySelectOptions = () => (dispatch) => {
 const fetchIndexDocumentsSelectOptions = () => (dispatch) => {
     return new Promise((resolve) => {
         http.get('/cms/pages/fetchIndexDocumentsSelectOptions')
-            .then(({ data: { options } }) => {
-                resolve(options)
-            })
+            .then(
+                ({
+                    data: {
+                        data: {
+                            data: { data },
+                        },
+                    },
+                }) => {
+                    resolve(data)
+                },
+            )
             .catch((e) => {})
     })
 }
@@ -76,11 +100,17 @@ const addCategory = (values) => (dispatch, getState) => {
     return new Promise<void>((resolve, reject) => {
         return http
             .post('/cms/pages/addCategory', values)
-            .then(({ data: { data } }) => {
-                return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
-                    resolve(data)
-                })
-            })
+            .then(
+                ({
+                    data: {
+                        data: { data },
+                    },
+                }) => {
+                    return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                        resolve(data)
+                    })
+                },
+            )
             .catch((e) => {
                 reject(e)
             })
@@ -91,11 +121,17 @@ const editCategory = (values) => (dispatch, getState) => {
     return new Promise<void>((resolve, reject) => {
         return http
             .post('/cms/pages/editCategory', values)
-            .then(({ data: { data } }) => {
-                return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
-                    resolve(data)
-                })
-            })
+            .then(
+                ({
+                    data: {
+                        data: { data },
+                    },
+                }) => {
+                    return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                        resolve(data)
+                    })
+                },
+            )
             .catch((e) => {
                 reject(e)
             })
@@ -106,11 +142,17 @@ const addDocument = (values) => (dispatch, getState) => {
     return new Promise<void>((resolve, reject) => {
         return http
             .post('/cms/pages/addDocument', values)
-            .then(({ data: { data } }) => {
-                return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
-                    resolve(data)
-                })
-            })
+            .then(
+                ({
+                    data: {
+                        data: { data },
+                    },
+                }) => {
+                    return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                        resolve(data)
+                    })
+                },
+            )
             .catch((e) => reject(e))
     })
 }
@@ -119,11 +161,17 @@ const editDocument = (values) => (dispatch, getState) => {
     return new Promise<void>((resolve, reject) => {
         return http
             .post('/cms/pages/editDocument', values)
-            .then(({ data: { data } }) => {
-                return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
-                    resolve(data)
-                })
-            })
+            .then(
+                ({
+                    data: {
+                        data: { data },
+                    },
+                }) => {
+                    return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                        resolve(data)
+                    })
+                },
+            )
             .catch((e) => reject(e))
     })
 }
@@ -132,11 +180,17 @@ const addLink = (values) => (dispatch, getState) => {
     return new Promise<void>((resolve, reject) => {
         return http
             .post('/cms/pages/addLink', values)
-            .then(({ data: { data } }) => {
-                return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
-                    resolve(data)
-                })
-            })
+            .then(
+                ({
+                    data: {
+                        data: { data },
+                    },
+                }) => {
+                    return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                        resolve(data)
+                    })
+                },
+            )
             .catch((e) => {
                 reject(e)
             })
@@ -185,7 +239,10 @@ const setFilter = (name, value) => (dispatch) => {
     })
 }
 const setFilters = (payload) => (dispatch) => {
-    dispatch({ type: SET_FILTERS, payload })
+    return new Promise((resolve) => {
+        dispatch({ type: SET_FILTERS, payload })
+        resolve()
+    })
 }
 const resetFilters = () => (dispatch) => {
     dispatch({ type: RESET_FILTERS })

@@ -2,12 +2,13 @@ import * as React from 'react'
 import { bindActionCreators, compose } from 'redux'
 import { connect } from 'react-redux'
 import { AddLinkForm } from '../components/AddLink/AddLinkForm'
-import { reduxForm, SubmissionError } from 'redux-form'
+import { reduxForm, SubmissionError, formValueSelector } from 'redux-form'
 import { actions } from '../../../reducers/cms-pages'
 import { processAPIerrorResponseToFormErrors } from '../../../modules/http'
 import { withRouter } from '../../../helpers/router'
 
 export const FORM_NAME = 'add-link-form-container'
+const selector = formValueSelector(FORM_NAME)
 
 class AddLinkFormContainerBase extends React.Component<null, null> {
     state = {
@@ -35,15 +36,28 @@ class AddLinkFormContainerBase extends React.Component<null, null> {
 
 const AddLinkFormContainer = compose(
     withRouter,
-    connect(null, (dispatch) => {
-        return bindActionCreators(
-            {
-                fetchParentCategorySelectOptions: actions.fetchParentCategorySelectOptions,
-                addLink: actions.addLink,
-            },
-            dispatch,
-        )
-    }),
+    connect(
+        (state) => {
+            const formValues = selector(
+                state,
+                'tree.tree_is_published',
+                'tree.tree_published_from',
+                'tree.tree_published_to',
+            )
+            return {
+                formValues,
+            }
+        },
+        (dispatch) => {
+            return bindActionCreators(
+                {
+                    fetchParentCategorySelectOptions: actions.fetchParentCategorySelectOptions,
+                    addLink: actions.addLink,
+                },
+                dispatch,
+            )
+        },
+    ),
     reduxForm({
         form: FORM_NAME,
         onSubmit: (values, dispatch, { save, navigate, setIsLoading }) => {

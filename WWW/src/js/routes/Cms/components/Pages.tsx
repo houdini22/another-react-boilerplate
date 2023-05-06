@@ -27,6 +27,7 @@ export class CmsPagesView extends React.Component<null, null> {
                                     const defaultFilters = {
                                         search_in: 'current',
                                         is_published: 'yes_or_no',
+                                        type: 'all',
                                         search: '',
                                     }
 
@@ -86,6 +87,29 @@ export class CmsPagesView extends React.Component<null, null> {
                                                                         type: 'radio',
                                                                         name: 'search_in',
                                                                         label: 'Search in',
+                                                                    },
+                                                                    {
+                                                                        options: [
+                                                                            {
+                                                                                label: 'all',
+                                                                                value: 'all',
+                                                                            },
+                                                                            {
+                                                                                label: 'Category',
+                                                                                value: 'category',
+                                                                            },
+                                                                            {
+                                                                                label: 'Document',
+                                                                                value: 'document',
+                                                                            },
+                                                                            {
+                                                                                label: 'Link',
+                                                                                value: 'link',
+                                                                            },
+                                                                        ],
+                                                                        type: 'radio',
+                                                                        name: 'type',
+                                                                        label: 'Type',
                                                                     },
                                                                     {
                                                                         options: [
