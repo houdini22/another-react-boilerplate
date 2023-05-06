@@ -17,5 +17,6 @@ class Document extends Model
         'document_meta_keywords',
         'document_meta_description',
         'document_meta_robots',
+        'document_content',
     ];
 }

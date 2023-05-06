@@ -14,7 +14,7 @@ export class EditDocumentView extends React.Component {
                     <AuthorizationManager>
                         {({ canByPermission }) => (
                             <PageContent>
-                                <Manager currentId={id}>
+                                <Manager id={id}>
                                     {({ currentNode, isLoading, setIsLoading, currentNodeParents, editDocument }) => {
                                         return (
                                             <div>

@@ -24,7 +24,7 @@ class CreateLinksTable extends Migration
 
             //$table->foreign('tree_id')->references('id')->on('tree');
             $table->index('link_name');
-            $table->index('link_url');
+            $table->index('tree_id');
         });
 
         //Schema::table('tree', function(Blueprint $table) {

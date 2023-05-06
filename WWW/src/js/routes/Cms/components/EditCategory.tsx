@@ -14,7 +14,7 @@ export class EditCategoryView extends React.Component {
                     <AuthorizationManager>
                         {({ canByPermission }) => (
                             <PageContent>
-                                <Manager currentId={id}>
+                                <Manager id={id}>
                                     {({ currentNode, currentNodeParents, editCategory, setIsLoading, isLoading }) => {
                                         return (
                                             <>

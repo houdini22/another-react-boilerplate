@@ -69,7 +69,14 @@ class AddCategoryForm extends React.Component {
                                                     label="Index Document"
                                                     type="select"
                                                     component={FormField}
-                                                    options={indexDocuments}
+                                                    options={indexDocuments.map(
+                                                        ({ id, depth, document: { document_name } }) => {
+                                                            return {
+                                                                label: ' - '.repeat(depth) + document_name,
+                                                                value: id,
+                                                            }
+                                                        },
+                                                    )}
                                                     placeholder={'None'}
                                                 />
                                                 <Field

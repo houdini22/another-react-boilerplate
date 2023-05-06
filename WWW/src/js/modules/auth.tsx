@@ -89,8 +89,18 @@ class UserIsAuthenticatedRouteBase extends React.Component<UserIsAuthenticatedRo
         })
 
         return <Component />
+
+        /*return <AuthorizationManager>
+            {({canByPermission}) => (
+                <>{!!permission && canByPermission(permission) && children}
+                    {!!permission && !canByPermission(permission) && <Page401/>}
+                    {!permission && children}
+                </>
+            )}
+        </AuthorizationManager>*/
     }
 }
+
 const UserIsAuthenticatedRoute = compose(
     connect(mapStateToProps, (dispatch) => {
         return bindActionCreators(
@@ -104,22 +114,40 @@ const UserIsAuthenticatedRoute = compose(
 )(UserIsAuthenticatedRouteBase)
 
 export { UserIsAuthenticatedRoute }
-export default { UserIsAuthenticatedRoute }
+export default {
+    UserIsAuthenticatedRoute,
+}
 
 /*
 export const userIsAdmin = connectedRouterRedirect({
-  redirectPath: '/',
-  allowRedirectBack: false,
-  authenticatedSelector: state => state.user.data !== null && state.user.data.isAdmin,
-  redirectAction: routerActions.replace,
-  wrapperDisplayName: 'UserIsAdmin'
+    redirectPath: '/',
+        allowRedirectBack
+:
+    false,
+        authenticatedSelector
+:
+    state => state.user.data !== null && state.user.data.isAdmin,
+        redirectAction
+:
+    routerActions.replace,
+        wrapperDisplayName
+:
+    'UserIsAdmin'
 })
 
 export const userIsNotAuthenticated = connectedRouterRedirect({
-  redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps) || '/foo',
-  allowRedirectBack: false,
-  authenticatedSelector: state => state.user.data === null && state.user.isLoading === false,
-  redirectAction: routerActions.replace,
-  wrapperDisplayName: 'UserIsNotAuthenticated'
+    redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps) || '/foo',
+        allowRedirectBack
+:
+    false,
+        authenticatedSelector
+:
+    state => state.user.data === null && state.user.isLoading === false,
+        redirectAction
+:
+    routerActions.replace,
+        wrapperDisplayName
+:
+    'UserIsNotAuthenticated'
 })
 */

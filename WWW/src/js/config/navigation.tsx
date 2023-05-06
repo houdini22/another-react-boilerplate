@@ -91,7 +91,7 @@ export const navigation = [
         href: '/users',
         caption: 'Users',
         icon: <UserIcon />,
-        urlActive: [/^\/users$/, /^\/users\/add$/, /^\/users\/edit$/],
+        urlActive: [/^\/users$/, /^\/users\/add$/, /^\/users\/edit$/, /^\/users\/logs$/],
         permission: 'users.list',
         children: [
             {

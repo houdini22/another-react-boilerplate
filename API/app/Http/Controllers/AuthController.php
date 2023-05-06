@@ -79,7 +79,7 @@ class AuthController extends Controller
         $user = User::where('email', $credentials['email'])->where('token', $credentials['token'])->first();
 
         if (!$user) {
-            return $this->response401();
+            return $this->response404();
         }
 
         if ($user->status === User::$STATUS_NOT_ACTIVE) {
@@ -116,8 +116,8 @@ class AuthController extends Controller
         }
 
         return response()->json([
-            'message' => 'ERR'
-        ], 401);
+            'message' => 'NOT_FOUND'
+        ], 404);
     }
 
     public function postLogout(Request $request)

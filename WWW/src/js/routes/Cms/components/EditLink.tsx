@@ -14,7 +14,7 @@ export class EditLinkView extends React.Component {
                     <AuthorizationManager>
                         {({ canByPermission }) => (
                             <PageContent>
-                                <Manager currentId={id}>
+                                <Manager id={id}>
                                     {({ setIsLoading, currentNode, isLoading, currentNodeParents, editLink }) => {
                                         return (
                                             <div>

@@ -15,7 +15,7 @@ export class AddLinkView extends React.Component {
                     <AuthorizationManager>
                         {({ canByPermission }) => (
                             <PageContent>
-                                <Manager currentId={parent_id}>
+                                <Manager id={parent_id}>
                                     {({ setIsLoading, currentNode, isLoading, currentNodeParents, addLink }) => {
                                         return (
                                             <div>
@@ -31,7 +31,14 @@ export class AddLinkView extends React.Component {
                                                     currentNode={currentNode}
                                                     initialValues={{
                                                         tree: {
-                                                            tree_published_from: formattedCurrentDate(),
+                                                            tree_published_from: formattedDateTime({
+                                                                year: 2000,
+                                                                month: 1,
+                                                                day: 1,
+                                                                hour: 0,
+                                                                minute: 0,
+                                                                second: 0,
+                                                            }),
                                                             tree_published_to: formattedDateTime({
                                                                 year: 2099,
                                                                 month: 1,

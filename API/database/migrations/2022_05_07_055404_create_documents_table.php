@@ -17,6 +17,7 @@ class CreateDocumentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('tree_id');
             $table->string('document_name', 256);
+            $table->text('document_content')->nullable()->default(null);
             $table->string('document_url', 256)->nullable()->default(null);
             $table->string('document_meta_title', 256)->nullable()->default(null);
             $table->string('document_meta_keywords', 512)->nullable()->default(null);
@@ -27,6 +28,7 @@ class CreateDocumentsTable extends Migration
 
             //$table->foreign('tree_id')->references('id')->on('tree');
             $table->index('document_url');
+            $table->index('tree_id');
         });
 
         //Schema::table('tree', function(Blueprint $table) {

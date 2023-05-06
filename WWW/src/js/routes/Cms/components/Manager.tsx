@@ -8,8 +8,26 @@ export class Manager extends React.Component<null, null> {
     }
 
     componentDidMount() {
-        const { setCurrentId, currentId = 1 } = this.props
-        setCurrentId(currentId)
+        const {
+            defaultFilters = {},
+            urlFilters = {},
+            setCurrentId,
+            setFilters,
+            setDefaultFilters,
+            fetch,
+            setIsLoading,
+            id = 1,
+        } = this.props
+        const newFilters = {
+            ...defaultFilters,
+            ...urlFilters,
+        }
+        setDefaultFilters(defaultFilters)
+
+        Promise.all([setCurrentId(id), setFilters(newFilters)]).then(() => {
+            setIsLoading(true)
+            fetch().then(() => setIsLoading(false))
+        })
     }
 
     render() {
@@ -17,7 +35,6 @@ export class Manager extends React.Component<null, null> {
             children,
             nodes,
             isLoading,
-            fetchError,
             currentNode,
             setCurrentId,
             setIsLoading,
@@ -31,12 +48,17 @@ export class Manager extends React.Component<null, null> {
             editDocument,
             addLink,
             editLink,
+            fetch,
+            setFilter,
+            setFilters,
+            resetFilters,
+            setDefaultFilters,
+            filters,
         } = this.props
 
         const renderProps = {
             nodes,
             isLoading,
-            fetchError,
             currentNode,
             setCurrentId,
             setIsLoading,
@@ -50,6 +72,12 @@ export class Manager extends React.Component<null, null> {
             editDocument,
             addLink,
             editLink,
+            fetch,
+            filters,
+            setFilter,
+            setFilters,
+            resetFilters,
+            setDefaultFilters,
         }
 
         return children(renderProps)
@@ -58,10 +86,11 @@ export class Manager extends React.Component<null, null> {
 
 const mapStateToProps = (state) => ({
     isLoading: selectors.getIsLoading(state),
-    fetchError: selectors.getFetchError(state),
     nodes: selectors.getNodes(state),
     currentNode: selectors.getCurrentNode(state),
     currentNodeParents: selectors.getCurrentNodeParents(state),
+    currentId: selectors.getCurrentId(state),
+    filters: selectors.getFilters(state),
 })
 
 const mapDispatchToProps = (dispatch) => {
@@ -77,6 +106,11 @@ const mapDispatchToProps = (dispatch) => {
         editDocument: (values) => dispatch(actions.editDocument(values)),
         addLink: (values) => dispatch(actions.addLink(values)),
         editLink: (values) => dispatch(actions.editLink(values)),
+        setFilter: (name, value) => dispatch(actions.setFilter(name, value)),
+        setFilters: (values) => dispatch(actions.setFilters(values)),
+        resetFilters: () => dispatch(actions.resetFilters()),
+        setDefaultFilters: (values) => dispatch(actions.setDefaultFilters(values)),
+        fetch: () => dispatch(actions.fetch()),
     }
 }
 

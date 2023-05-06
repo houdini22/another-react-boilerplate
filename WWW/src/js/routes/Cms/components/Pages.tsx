@@ -11,6 +11,7 @@ import { FiltersFormContainer } from '../containers/FiltersFormContainer'
 import List from './Pages/List'
 import { ModalManager } from '../../../components/ui/Modal'
 import { AuthorizationManager } from '../../../containers/AuthorizationManager'
+import { FiltersCard } from '../../../components/common/FiltersCard'
 
 const cx = classNames.bind(styles)
 
@@ -22,55 +23,123 @@ export class CmsPagesView extends React.Component<null, null> {
                     <AuthorizationManager>
                         {({ canByPermission }) => (
                             <ModalManager>
-                                {({ registerModal, openModal, closeModal }) => (
-                                    <Manager currentId={parent_id}>
-                                        {({
-                                            nodes,
-                                            currentNode,
-                                            isLoading,
-                                            publish,
-                                            unpublish,
-                                            deleteNode,
-                                            currentNodeParents,
-                                            setIsLoading,
-                                        }) => {
-                                            return (
-                                                <PageContent>
-                                                    <div className={cx('route--cms')}>
-                                                        <Header
-                                                            currentNodeParents={currentNodeParents}
-                                                            currentNode={currentNode}
-                                                            title={'CMS - Pages'}
-                                                            canByPermission={canByPermission}
-                                                        />
+                                {({ registerModal, openModal, closeModal }) => {
+                                    const defaultFilters = {
+                                        search_in: 'current',
+                                        is_published: 'yes_or_no',
+                                        search: '',
+                                    }
 
-                                                        <Card header={<h1>Filters</h1>} withMinimizeIcon>
-                                                            <FiltersFormContainer />
-                                                            {isLoading && <LoadingOverlay />}
-                                                        </Card>
-
-                                                        {canByPermission('cms.list') && (
-                                                            <List
-                                                                nodes={nodes}
-                                                                isLoading={isLoading}
+                                    return (
+                                        <Manager id={parent_id} defaultFilters={defaultFilters}>
+                                            {({
+                                                nodes,
+                                                currentNode,
+                                                isLoading,
+                                                publish,
+                                                unpublish,
+                                                deleteNode,
+                                                currentNodeParents,
+                                                setIsLoading,
+                                                filters,
+                                                setFilter,
+                                                setFilters,
+                                                resetFilters,
+                                                fetch,
+                                                setCurrentId,
+                                            }) => {
+                                                return (
+                                                    <PageContent>
+                                                        <div className={cx('route--cms')}>
+                                                            <Header
+                                                                currentNodeParents={currentNodeParents}
                                                                 currentNode={currentNode}
-                                                                setIsLoading={setIsLoading}
-                                                                publish={publish}
-                                                                unpublish={unpublish}
-                                                                deleteNode={deleteNode}
-                                                                navigate={navigate}
-                                                                registerModal={registerModal}
-                                                                openModal={openModal}
-                                                                closeModal={closeModal}
+                                                                title={'CMS - Pages'}
                                                                 canByPermission={canByPermission}
                                                             />
-                                                        )}
-                                                    </div>
-                                                </PageContent>
-                                            )
-                                        }}
-                                    </Manager>
-                                )}
+
+                                                            <FiltersCard
+                                                                name={'CmsPages'}
+                                                                filters={filters}
+                                                                setFilter={setFilter}
+                                                                setFilters={setFilters}
+                                                                resetFilters={resetFilters}
+                                                                fetch={fetch}
+                                                                defaultFilters={defaultFilters}
+                                                                isLoading={isLoading}
+                                                                filtersToRender={[
+                                                                    {
+                                                                        options: [
+                                                                            {
+                                                                                label: 'current category',
+                                                                                value: 'current',
+                                                                            },
+                                                                            {
+                                                                                label: 'everywhere',
+                                                                                value: 'everywhere',
+                                                                            },
+                                                                            {
+                                                                                label: 'descendants of current node',
+                                                                                value: 'descendants',
+                                                                            },
+                                                                        ],
+                                                                        type: 'radio',
+                                                                        name: 'search_in',
+                                                                        label: 'Search in',
+                                                                    },
+                                                                    {
+                                                                        options: [
+                                                                            {
+                                                                                label: 'yes or no',
+                                                                                value: 'yes_or_no',
+                                                                            },
+                                                                            {
+                                                                                label: 'yes',
+                                                                                value: 'yes',
+                                                                            },
+                                                                            {
+                                                                                label: 'no',
+                                                                                value: 'no',
+                                                                            },
+                                                                        ],
+                                                                        type: 'radio',
+                                                                        name: 'is_published',
+                                                                        label: 'Is published',
+                                                                    },
+                                                                    {
+                                                                        type: 'text',
+                                                                        name: 'search',
+                                                                        label: 'Search',
+                                                                    },
+                                                                ]}
+                                                            />
+
+                                                            {canByPermission('cms.list') && (
+                                                                <List
+                                                                    nodes={nodes}
+                                                                    isLoading={isLoading}
+                                                                    currentNode={currentNode}
+                                                                    setIsLoading={setIsLoading}
+                                                                    publish={publish}
+                                                                    unpublish={unpublish}
+                                                                    deleteNode={deleteNode}
+                                                                    navigate={navigate}
+                                                                    registerModal={registerModal}
+                                                                    openModal={openModal}
+                                                                    closeModal={closeModal}
+                                                                    canByPermission={canByPermission}
+                                                                    setCurrentId={setCurrentId}
+                                                                    fetch={fetch}
+                                                                    filters={filters}
+                                                                />
+                                                            )}
+                                                        </div>
+                                                    </PageContent>
+                                                )
+                                            }}
+                                        </Manager>
+                                    )
+                                }}
                             </ModalManager>
                         )}
                     </AuthorizationManager>

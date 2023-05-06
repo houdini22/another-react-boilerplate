@@ -6,6 +6,10 @@ const SET_CURRENT_ID = 'cms-pages::set-current-id'
 const SET_NODES = 'cms-pages::set-nodes'
 const SET_CURRENT_NODE = 'cms-pages::set-current-node'
 const SET_CURRENT_NODE_PARENTS = 'cms-pages::set-current-node-parents'
+const SET_FILTER = 'cms-pages::set-filter'
+const SET_FILTERS = 'cms-pages::set-filters'
+const SET_DEFAULT_FILTERS = 'cms-pages::set-default-filters'
+const RESET_FILTERS = 'cms-pages::reset-filters'
 
 const setIsLoading = (data) => (dispatch) => {
     dispatch({ type: SET_IS_LOADING, payload: data })
@@ -24,30 +28,29 @@ const setCurrentNodeParents = (data) => (dispatch) => {
 }
 
 const setCurrentId = (currentId) => (dispatch) => {
-    dispatch({ type: SET_CURRENT_ID, payload: currentId })
-    dispatch(fetch(currentId))
+    return new Promise((resolve) => {
+        dispatch({ type: SET_CURRENT_ID, payload: currentId })
+        resolve()
+    })
 }
 
-const fetch =
-    (parent_id = 0) =>
-    (dispatch) => {
-        return new Promise<void>((resolve) => {
-            setNodes([])
-
-            http.get('/cms/pages', {
-                params: {
-                    parent_id,
-                },
-            })
-                .then(({ data: { nodes, currentNode, parents } }) => {
-                    dispatch(setNodes(nodes))
-                    dispatch(setCurrentNode(currentNode))
-                    dispatch(setCurrentNodeParents(parents))
-                    resolve()
-                })
-                .catch((e) => {})
+const fetch = () => (dispatch, state) => {
+    return new Promise<void>((resolve) => {
+        http.get('/cms/pages', {
+            params: {
+                parent_id: getCurrentId(state()),
+                filters: getFilters(state()),
+            },
         })
-    }
+            .then(({ data: { nodes, currentNode, parents } }) => {
+                dispatch(setNodes(nodes))
+                dispatch(setCurrentNode(currentNode))
+                dispatch(setCurrentNodeParents(parents))
+                resolve()
+            })
+            .catch((e) => {})
+    })
+}
 
 const fetchParentCategorySelectOptions = () => (dispatch) => {
     return new Promise((resolve) => {
@@ -175,6 +178,23 @@ const deleteNode =
         })
     }
 
+const setFilter = (name, value) => (dispatch) => {
+    return new Promise((resolve) => {
+        dispatch({ type: SET_FILTER, payload: { name, value } })
+        resolve()
+    })
+}
+const setFilters = (payload) => (dispatch) => {
+    dispatch({ type: SET_FILTERS, payload })
+}
+const resetFilters = () => (dispatch) => {
+    dispatch({ type: RESET_FILTERS })
+    dispatch(fetch())
+}
+const setDefaultFilters = (payload) => (dispatch) => {
+    dispatch({ type: SET_DEFAULT_FILTERS, payload })
+}
+
 export const actions = {
     fetch,
     setIsLoading,
@@ -191,6 +211,10 @@ export const actions = {
     editCategory,
     editDocument,
     editLink,
+    setFilter,
+    setFilters,
+    resetFilters,
+    setDefaultFilters,
 }
 
 // ------------------------------------
@@ -233,6 +257,33 @@ const ACTION_HANDLERS = {
             currentNodeParents: payload,
         }
     },
+    [SET_FILTER]: (state, { payload: { name, value } }) => {
+        return {
+            ...state,
+            filters: {
+                ...state.filters,
+                [name]: value,
+            },
+        }
+    },
+    [SET_FILTERS]: (state, { payload }) => {
+        return {
+            ...state,
+            filters: payload,
+        }
+    },
+    [SET_DEFAULT_FILTERS]: (state, { payload }) => {
+        return {
+            ...state,
+            default_filters: payload,
+        }
+    },
+    [RESET_FILTERS]: (state) => {
+        return {
+            ...state,
+            filters: { ...state.default_filters },
+        }
+    },
 }
 
 // ------------------------------------
@@ -245,6 +296,8 @@ const getInitialState = () => ({
     currentId: undefined,
     currentNode: {},
     currentNodeParents: [],
+    filters: {},
+    default_filters: {},
 })
 
 export default function cmsPagesReducer(state = getInitialState(), action) {
@@ -257,17 +310,17 @@ export default function cmsPagesReducer(state = getInitialState(), action) {
 const getState = (state) => state['cmsPages']
 const getNodes = (state) => getState(state)['nodes']
 const getIsLoading = (state) => getState(state)['isLoading']
-const getFetchError = (state) => getState(state)['fetchError']
 const getCurrentId = (state) => getState(state)['currentId']
 const getCurrentNode = (state) => getState(state)['currentNode']
 const getCurrentNodeParents = (state) => getState(state)['currentNodeParents']
+const getFilters = (state) => getState(state)['filters']
 
 export const selectors = {
     getState,
     getNodes,
     getIsLoading,
-    getFetchError,
     getCurrentId,
     getCurrentNode,
     getCurrentNodeParents,
+    getFilters,
 }

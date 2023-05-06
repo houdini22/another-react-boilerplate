@@ -37,6 +37,7 @@ class AddDocumentForm extends React.Component {
                                                     name="document.document_name"
                                                     label="Document Name"
                                                     type="text"
+                                                    placeholder={'Document Name'}
                                                     component={FormField}
                                                     onChange={(e, value) => {
                                                         change(
@@ -53,7 +54,15 @@ class AddDocumentForm extends React.Component {
                                                 <Field
                                                     name="tree.tree_display_name"
                                                     label="Display Name"
+                                                    placeholder={'Display Name'}
                                                     type="text"
+                                                    component={FormField}
+                                                />
+                                                <Field
+                                                    name="document.document_content"
+                                                    label="Content"
+                                                    placeholder={'Content'}
+                                                    type="textarea"
                                                     component={FormField}
                                                 />
                                                 <Field
@@ -77,6 +86,7 @@ class AddDocumentForm extends React.Component {
                                                 <Field
                                                     name="document.document_url"
                                                     label="URL"
+                                                    placeholder={'URL'}
                                                     type="text"
                                                     component={FormField}
                                                 />

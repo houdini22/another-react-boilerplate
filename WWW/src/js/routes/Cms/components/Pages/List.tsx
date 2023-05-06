@@ -15,6 +15,7 @@ import { formatDateTime } from '../../../../helpers/date-time'
 import styles from '../../../../../assets/scss/routes/cms.scss'
 import classNames from 'classnames/bind'
 import { ModalConfirm } from '../../../../components/common/ModalConfirm'
+import { isPublished } from '../../../../helpers/cms'
 
 const cx = classNames.bind(styles)
 
@@ -33,6 +34,9 @@ export class List extends React.Component<null, null> {
             openModal,
             closeModal,
             canByPermission,
+            setCurrentId,
+            fetch,
+            filters,
         } = this.props
 
         return (
@@ -111,6 +115,10 @@ export class List extends React.Component<null, null> {
                                     alignCenter
                                     onClick={() => {
                                         navigate(`/cms/pages?parent_id=${currentNode.parent_id}`)
+                                        /*setCurrentId(currentNode.parent_id).then(() => {
+                                            setIsLoading(true)
+                                            fetch().then(() => setIsLoading(false));
+                                        })*/
                                     }}
                                 >
                                     <Button block color={'primary'}>
@@ -135,8 +143,10 @@ export class List extends React.Component<null, null> {
                                     onConfirm={() => {
                                         setIsLoading(true)
                                         deleteNode(node).then(() => {
-                                            setIsLoading(false)
-                                            closeModal(`tree-delete-${node.id}`)
+                                            fetch().then(() => {
+                                                setIsLoading(false)
+                                                closeModal(`tree-delete-${node.id}`)
+                                            })
                                         })
                                     }}
                                     onCancel={() => {
@@ -153,12 +163,26 @@ export class List extends React.Component<null, null> {
                                     onClick={
                                         node.tree_object_type === 'category'
                                             ? () => {
-                                                  navigate(`/cms/pages?parent_id=${node.id}`)
+                                                  setCurrentId(node.id).then(() => {
+                                                      navigate(`/cms/pages?parent_id=${node.id}`)
+                                                      /*setIsLoading(true)
+                                                    fetch().then(() => {
+                                                        setIsLoading(false)
+                                                    })*/
+                                                  })
                                               }
                                             : null
                                     }
                                     color={node.tree_object_type === 'category' ? 'default' : null}
                                     key={node.id}
+                                    style={{
+                                        paddingLeft: ['everywhere', 'descendants'].includes(filters.search_in)
+                                            ? 40 *
+                                              (filters.search_in === 'descendants'
+                                                  ? node.depth - currentNode.depth - 1
+                                                  : node.depth - 1)
+                                            : undefined,
+                                    }}
                                 >
                                     <Table.Td xs={1} alignCenter className={cx('tree-icon')}>
                                         {node.tree_object_type === 'category' && <CategoryIcon />}
@@ -177,7 +201,7 @@ export class List extends React.Component<null, null> {
                                         {node.tree_object_type === 'link' && node?.link?.link_url}
                                     </Table.Td>
                                     <Table.Td xs={1} className={cx('tree-icon')}>
-                                        {!node.tree_is_published && (
+                                        {!isPublished(node) && (
                                             <Tooltip
                                                 tooltip={
                                                     <Typography.Container>
@@ -193,6 +217,7 @@ export class List extends React.Component<null, null> {
                                                                 ? formatDateTime(node.tree_published_to)
                                                                 : 'never'}
                                                         </p>
+                                                        {!node.tree_is_published && <p>Publishing disabled.</p>}
                                                     </Typography.Container>
                                                 }
                                                 placement={'top'}
@@ -200,7 +225,7 @@ export class List extends React.Component<null, null> {
                                                 <UnpublishIcon className={cx('text-danger')} />
                                             </Tooltip>
                                         )}
-                                        {!!node.tree_is_published && (
+                                        {isPublished(node) && (
                                             <Tooltip
                                                 tooltip={
                                                     <Typography.Container>
@@ -238,7 +263,7 @@ export class List extends React.Component<null, null> {
                                             {!!(
                                                 node.tree_class !== 'system_page' &&
                                                 node.tree_is_editable &&
-                                                !node.tree_is_published &&
+                                                !isPublished(node) &&
                                                 canByPermission(`cms.publish`)
                                             ) && (
                                                 <Tooltip tooltip={'Publish'}>
@@ -259,7 +284,7 @@ export class List extends React.Component<null, null> {
                                             {!!(
                                                 node.tree_class !== 'system_page' &&
                                                 node.tree_is_editable &&
-                                                !!node.tree_is_published &&
+                                                isPublished(node) &&
                                                 canByPermission(`cms.unpublish`)
                                             ) && (
                                                 <Tooltip tooltip={'Unpublish'}>

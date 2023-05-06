@@ -16,7 +16,7 @@ export class AddDocumentView extends React.Component {
                     <AuthorizationManager>
                         {({ canByPermission }) => (
                             <PageContent>
-                                <Manager currentId={parent_id}>
+                                <Manager id={parent_id}>
                                     {({ setIsLoading, currentNode, isLoading, currentNodeParents, addDocument }) => {
                                         return (
                                             <div>
@@ -33,7 +33,14 @@ export class AddDocumentView extends React.Component {
                                                     currentNode={currentNode}
                                                     initialValues={{
                                                         tree: {
-                                                            tree_published_from: formattedCurrentDate(),
+                                                            tree_published_from: formattedDateTime({
+                                                                year: 2000,
+                                                                month: 1,
+                                                                day: 1,
+                                                                hour: 0,
+                                                                minute: 0,
+                                                                second: 0,
+                                                            }),
                                                             tree_published_to: formattedDateTime({
                                                                 year: 2099,
                                                                 month: 1,

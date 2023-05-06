@@ -30,6 +30,7 @@ class CreateCategoriesTable extends Migration
             //$table->foreign('tree_id')->references('id')->on('tree');
             $table->index('category_name');
             $table->index('category_url');
+            $table->index('tree_id');
         });
 
         //Schema::table('tree', function(Blueprint $table) {
