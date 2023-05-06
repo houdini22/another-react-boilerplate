@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\UserDataChanged;
 use App\Events\UserForceLogout;
 use App\Models\File;
+use App\Models\Log;
 use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
@@ -145,17 +146,17 @@ class UsersController extends Controller
             return $this->response401();
         }
 
-        $user = User::find($request->post('id'));
-        if (!$user) {
+        $u = User::find($request->post('id'));
+        if (!$u) {
             return $this->response404();
         }
 
         $request->validate([
-            'email' => ['required', 'email', Rule::unique('users')->where(function ($query) use ($user) {
-                return $query->where('id', '<>', $user->id);
+            'email' => ['required', 'email', Rule::unique('users')->where(function ($query) use ($u) {
+                return $query->where('id', '<>', $u->id);
             })],
-            'name' => ['required', Rule::unique('users')->where(function ($query) use ($user) {
-                return $query->where('id', '<>', $user->id);
+            'name' => ['required', Rule::unique('users')->where(function ($query) use ($u) {
+                return $query->where('id', '<>', $u->id);
             })],
             'password' => ['confirmed', Password::min(8)
                 ->mixedCase()
@@ -172,18 +173,20 @@ class UsersController extends Controller
         $values = $request->post();
         unset($values['avatar']);
 
-        $user->fill($values);
+        $u->fill($values);
 
         if ($request->post('password')) {
-            $user->password = bcrypt($request->post('password'));
+            $u->password = bcrypt($request->post('password'));
         }
 
-        $user->save();
+        $u->save();
 
-        broadcast(new UserDataChanged($user));
+        Log::add($user, 'users.edit', $u);
+
+        broadcast(new UserDataChanged($u));
 
         return response()->json([
-            'user' => $user->toArray(),
+            'user' => $u->toArray(),
         ]);
     }
 
@@ -205,13 +208,15 @@ class UsersController extends Controller
             'password_confirmation' => ['required'],
         ]);
 
-        $user = new User();
-        $user->fill($request->post());
-        $user->password = bcrypt($user->password);
-        $user->save();
+        $u = new User();
+        $u->fill($request->post());
+        $u->password = bcrypt($user->password);
+        $u->save();
+
+        Log::add($user, 'users.add', $u);
 
         return response()->json([
-            'user' => $user->toArray(),
+            'user' => $u->toArray(),
         ]);
     }
 
@@ -222,12 +227,14 @@ class UsersController extends Controller
             return $this->response401();
         }
 
-        $user = User::find($request->route('id'));
-        if (!$user) {
+        $u = User::find($request->route('id'));
+        if (!$u) {
             return $this->response404();
         }
 
-        $user->delete();
+        Log::add($user, 'users.add', $u);
+
+        $u->delete();
 
         return response()->json([
             'msg' => 'ok',
@@ -241,8 +248,8 @@ class UsersController extends Controller
             return $this->response401();
         }
 
-        $user = User::find($request->route('user_id'));
-        if (!$user) {
+        $u = User::find($request->route('user_id'));
+        if (!$u) {
             return $this->response404();
         }
 
@@ -251,7 +258,9 @@ class UsersController extends Controller
             return $this->response404();
         }
 
-        $user->assignRole($role);
+        $u->assignRole($role);
+
+        Log::add($user, 'users.add_role', $u);
 
         return response()->json([
             'msg' => 'ok',
@@ -265,24 +274,26 @@ class UsersController extends Controller
             return $this->response401();
         }
 
-        $user = User::find($request->post('id'));
-        if (!$user) {
+        $u = User::find($request->post('id'));
+        if (!$u) {
             return $this->response404();
         }
 
-        $user->email_verified_at = NULL;
-        $user->email_verify_token = \Illuminate\Support\Str::random(16);
-        $user->save();
+        $u->email_verified_at = NULL;
+        $u->email_verify_token = \Illuminate\Support\Str::random(16);
+        $u->save();
 
         Mail::send('email_users_activate_account', [
-            'url' => url('/users/activate/' . $user->email_verify_token),
-        ], function ($message) use ($request, $user) {
-            $message->to($user->email, $user->email)->subject('Activate account on ' . url('/'));
+            'url' => url('/users/activate/' . $u->email_verify_token),
+        ], function ($message) use ($request, $u) {
+            $message->to($u->email, $u->email)->subject('Activate account on ' . url('/'));
             $message->from(config('app.from_email'));
         });
 
+        Log::add($user, 'users.send_activation_email', $u);
+
         return response()->json([
-            'user' => $user->toArray(),
+            'user' => $u->toArray(),
         ]);
     }
 
@@ -298,6 +309,8 @@ class UsersController extends Controller
         $user->email_verified_at = Carbon::now();
         $user->save();
 
+        Log::add(NULL, 'users.activate', $user);
+
         return redirect('/#/users/account_activated');
     }
 
@@ -308,8 +321,8 @@ class UsersController extends Controller
             return $this->response401();
         }
 
-        $user = User::find($request->route('id'));
-        if (!$user) {
+        $u = User::find($request->route('id'));
+        if (!$u) {
             return $this->response404();
         }
 
@@ -317,20 +330,20 @@ class UsersController extends Controller
             'avatar' => 'required|file|max:2048'
         ]);
 
-        if ($user->avatar()) {
-            $user->avatar()->delete();
+        if ($u->avatar()) {
+            $u->avatar()->delete();
         }
 
-        $file = File::upload($request->file('avatar'), $user);
+        $file = File::upload($request->file('avatar'), $u);
 
-        $user->avatar_id = $file->id;
-        $user->save();
+        $u->avatar_id = $file->id;
+        $u->save();
 
-        broadcast(new UserDataChanged($user));
+        Log::add($user, 'users.change_avatar', $u);
 
-        return response()->json([
-            'msg' => 'ok',
-        ]);
+        broadcast(new UserDataChanged($u));
+
+        return $this->responseOK();
     }
 
     public function postDeleteAvatar(Request $request)
@@ -340,19 +353,21 @@ class UsersController extends Controller
             return $this->response401();
         }
 
-        $user = User::find($request->post('id'));
-        if (!$user) {
+        $u = User::find($request->post('id'));
+        if (!$u) {
             return $this->response404();
         }
 
-        if ($user->avatar()->get()) {
-            $user->avatar()->delete();
+        if ($u->avatar()->get()) {
+            $u->avatar()->delete();
         }
 
-        $user->avatar_id = NULL;
-        $user->save();
+        $u->avatar_id = NULL;
+        $u->save();
 
-        broadcast(new UserDataChanged($user));
+        Log::add($user, 'users.delete_avatar', $u);
+
+        broadcast(new UserDataChanged($u));
 
         return response()->json([
             'msg' => 'ok',
@@ -366,21 +381,21 @@ class UsersController extends Controller
             return $this->response401();
         }
 
-        $user = User::find($request->route('id'));
-        if (!$user) {
+        $u = User::find($request->route('id'));
+        if (!$u) {
             return $this->response404();
         }
 
-        $token = $user->token;
+        $token = $u->token;
 
-        $user->token = NULL;
-        $user->save();
+        $u->token = NULL;
+        $u->save();
 
-        broadcast(new UserForceLogout($user, $token));
+        Log::add($user, 'users.force_login', $u);
 
-        return response()->json([
-            'msg' => 'ok',
-        ]);
+        broadcast(new UserForceLogout($u, $token));
+
+        return $this->responseOK();
     }
 
     public function postActivate(Request $request)
@@ -390,16 +405,18 @@ class UsersController extends Controller
             return $this->response401();
         }
 
-        $user = User::find($request->route('id'));
-        if (!$user) {
+        $u = User::find($request->route('id'));
+        if (!$u) {
             return $this->response404();
         }
 
-        $user->status = 1;
-        $user->save();
+        $u->status = 1;
+        $u->save();
+
+        Log::add($user, 'users.activate', $u);
 
         return response()->json([
-            'user' => $user->toArray(),
+            'user' => $u->toArray(),
         ]);
     }
 
@@ -410,16 +427,18 @@ class UsersController extends Controller
             return $this->response401();
         }
 
-        $user = User::find($request->route('id'));
-        if (!$user) {
+        $u = User::find($request->route('id'));
+        if (!$u) {
             return $this->response404();
         }
 
-        $user->status = 0;
-        $user->save();
+        $u->status = 0;
+        $u->save();
+
+        Log::add($user, 'users.deactivate', $u);
 
         return response()->json([
-            'user' => $user->toArray(),
+            'user' => $u->toArray(),
         ]);
     }
 }

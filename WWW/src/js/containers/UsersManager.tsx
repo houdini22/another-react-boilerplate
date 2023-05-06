@@ -69,6 +69,8 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             fetchPermission,
             getUsers,
             setIsLoading,
+            getLogsData,
+            fetchLogsData,
         } = this.props
         const promises = []
 
@@ -96,6 +98,10 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
 
         if (permissionId) {
             promises.push(fetchPermission(permissionId))
+        }
+
+        if (getLogsData) {
+            promises.push(fetchLogsData())
         }
 
         Promise.all(promises).then(() => {
@@ -241,6 +247,7 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             deletePermission,
             deleteRole,
             fetchRoles,
+            logsData,
         } = this.props
         const { newUserRoles, newUserPermissions, newRoleUsers, newPermissionUsers, newRolePermissions } = this.state
         const renderProps = {
@@ -296,6 +303,7 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             deleteRole,
             fetchRoles,
             clearPermissionsFromNewRole: this.clearPermissionsFromNewRole.bind(this),
+            logsData,
         }
 
         return (
@@ -315,6 +323,7 @@ const mapStateToProps = (state) => ({
     role: usersSelectors['getRole'](state),
     permissions: usersSelectors['getPermissions'](state),
     permission: usersSelectors['getPermission'](state),
+    logsData: usersSelectors['getLogsData'](state),
 })
 
 const UsersManager = connect(mapStateToProps, (dispatch) => {
@@ -348,6 +357,7 @@ const UsersManager = connect(mapStateToProps, (dispatch) => {
             addUserPermission: usersActions.addUserPermission,
             deleteUserPermission: usersActions.deleteUserPermission,
             fetchRoles: usersActions.fetchRoles,
+            fetchLogsData: usersActions.fetchLogsData,
         },
         dispatch,
     )

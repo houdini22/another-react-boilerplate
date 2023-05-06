@@ -8,7 +8,11 @@ const SET_PERMISSIONS = 'users::set-permissions'
 const SET_PERMISSION = 'users::set-permission'
 const SET_ROLES = 'users::set-roles'
 const SET_ROLE = 'users::set-role'
+const SET_LOGS_DATA = 'users::set-logs-data'
 
+const setLogsData = (data) => (dispatch) => {
+    dispatch({ type: SET_LOGS_DATA, payload: data })
+}
 const setIsLoading = (data) => (dispatch) => {
     dispatch({ type: SET_IS_LOADING, payload: data })
 }
@@ -431,6 +435,25 @@ const fetchRoles = () => (dispatch) => {
     })
 }
 
+const fetchLogsData = () => (dispatch) => {
+    return new Promise<void>((resolve) => {
+        http.get('/logs/data')
+            .then(
+                ({
+                    data: {
+                        data: {
+                            data: { data },
+                        },
+                    },
+                }) => {
+                    dispatch(setLogsData(data))
+                    resolve()
+                },
+            )
+            .catch((e) => {})
+    })
+}
+
 const fetchRole =
     (id = 0) =>
     (dispatch) => {
@@ -474,6 +497,7 @@ export const actions = {
     addRole,
     fetchRoles,
     fetchRole,
+    fetchLogsData,
 }
 
 // ------------------------------------
@@ -528,6 +552,12 @@ const ACTION_HANDLERS = {
             role: payload,
         }
     },
+    [SET_LOGS_DATA]: (state, { payload }) => {
+        return {
+            ...state,
+            logsData: payload,
+        }
+    },
 }
 
 // ------------------------------------
@@ -545,6 +575,7 @@ const getInitialState = () => ({
     users: [],
     role: {},
     roles: [],
+    logsData: {},
 })
 
 export default function cmsPagesReducer(state = getInitialState(), action) {
@@ -565,6 +596,7 @@ const getRoles = (state) => getState(state)['roles']
 const getRole = (state) => getState(state)['role']
 const getPermissions = (state) => getState(state)['permissions']
 const getPermission = (state) => getState(state)['permission']
+const getLogsData = (state) => getState(state)['logsData']
 export const selectors = {
     getState,
     getUsers,
@@ -577,4 +609,5 @@ export const selectors = {
     getRole,
     getPermissions,
     getPermission,
+    getLogsData,
 }

@@ -201,11 +201,17 @@ const editLink = (values) => (dispatch, getState) => {
     return new Promise<void>((resolve, reject) => {
         return http
             .post('/cms/pages/editLink', values)
-            .then(({ data: { data } }) => {
-                return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
-                    resolve(data)
-                })
-            })
+            .then(
+                ({
+                    data: {
+                        data: { data },
+                    },
+                }) => {
+                    return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                        resolve(data)
+                    })
+                },
+            )
             .catch((e) => {
                 reject(e)
             })

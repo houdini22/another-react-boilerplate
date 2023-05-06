@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Document;
 use App\Models\Link;
+use App\Models\Log;
 use App\Models\Permission;
 use App\Models\Tree;
 use App\Models\User;
@@ -389,6 +390,8 @@ class CmsPagesController extends Controller
         $tree->category_id = $category->id;
         $tree->save();
 
+        Log::add($user, 'cms.add_category', $category);
+
         return $this->responseOK([
             'data' => $tree->toArray()
         ]);
@@ -440,6 +443,8 @@ class CmsPagesController extends Controller
         if (Arr::get($values, 'parent_id') != $tree->parent_id) {
             $tree->appendToNode(Tree::find(Arr::get($values, 'parent_id')))->save();
         }
+
+        Log::add($user, 'cms.edit_category', $tree->category);
 
         return $this->responseOK([
             'data' => $tree->toArray()
@@ -493,6 +498,8 @@ class CmsPagesController extends Controller
             $tree->appendToNode(Tree::find(Arr::get($values, 'parent_id')))->save();
         }
 
+        Log::add($user, 'cms.edit_document', $tree->document);
+
         return $this->responseOK([
             'data' => $tree->toArray()
         ]);
@@ -540,6 +547,8 @@ class CmsPagesController extends Controller
             $tree->appendToNode(Tree::find(Arr::get($values, 'parent_id')))->save();
         }
 
+        Log::add($user, 'cms.edit_link', $tree->link);
+
         return $this->responseOK([
             'data' => $tree->toArray()
         ]);
@@ -547,7 +556,16 @@ class CmsPagesController extends Controller
 
     public function postPublish(Request $request)
     {
-        $tree = Tree::find($request->post('id'));
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $tree = Tree::with('document')
+            ->with('link')
+            ->with('category')
+            ->find($request->post('id'));
+
         $tree->tree_is_published = true;
 
         $now = Carbon::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'));
@@ -572,6 +590,8 @@ class CmsPagesController extends Controller
 
         $tree->save();
 
+        Log::add($user, 'cms.publish', $tree->{$tree->tree_document_type});
+
         return $this->responseOK([
             'data' => $tree->toArray()
         ]);
@@ -579,9 +599,19 @@ class CmsPagesController extends Controller
 
     public function postUnpublish(Request $request)
     {
-        $tree = Tree::find($request->post('id'));
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
+        $tree = Tree::with('document')
+            ->with('link')
+            ->with('category')
+            ->find($request->post('id'));
         $tree->tree_is_published = false;
         $tree->save();
+
+        Log::add($user, 'cms.unpublish', $tree->{$tree->tree_document_type});
 
         return $this->responseOK([
             'data' => $tree->toArray()
@@ -597,6 +627,8 @@ class CmsPagesController extends Controller
 
         $node = Tree::find($request->get('id'));
 
+        Log::add($user, 'cms.delete', $tree->{$tree->tree_document_type}()->first());
+
         foreach ($node->descendants as $d) {
             $d->delete();
         }
@@ -607,6 +639,11 @@ class CmsPagesController extends Controller
 
     public function postAddDocument(Request $request)
     {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
         $values = $request->post();
 
         $validator = Validator::make($values, [
@@ -646,6 +683,8 @@ class CmsPagesController extends Controller
         $tree->document_id = $document->id;
         $tree->save();
 
+        Log::add($user, 'cms.add_document', $tree->document);
+
         return $this->responseOK([
             'data' => $tree->toArray(),
         ]);
@@ -653,6 +692,11 @@ class CmsPagesController extends Controller
 
     public function postAddLink(Request $request)
     {
+        $user = User::getFromRequest($request);
+        if (!$user) {
+            return $this->response401();
+        }
+
         $values = $request->post();
 
         $validator = Validator::make($values, [
@@ -683,6 +727,8 @@ class CmsPagesController extends Controller
 
         $tree->link_id = $link->id;
         $tree->save();
+
+        Log::add($user, 'cms.add_link', $tree->link);
 
         return $this->responseOK([
             'data' => $tree->toArray(),

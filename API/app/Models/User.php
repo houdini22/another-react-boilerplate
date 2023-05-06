@@ -101,24 +101,22 @@ class User extends Authenticatable
         }
 
         return [
-            'user' => [
-                'name' => $this->name,
-                'email' => $this->email,
-                'token' => $this->token,
-                'roles' => array_unique(
-                    array_merge(
-                        $this->roles->pluck('name')->toArray(),
-                        $additional
-                    )
-                ),
-                'permissions' => array_unique(
-                    array_merge(
-                        $this->getPermissionsViaRoles()->pluck('name')->toArray(),
-                        collect($this->permissions->toArray())->pluck('name')->toArray(),
-                    )
-                ),
-                'avatar' => $avatar ? $avatar->toArray() : null,
-            ]
+            'name' => $this->name,
+            'email' => $this->email,
+            'token' => $this->token,
+            'roles' => array_unique(
+                array_merge(
+                    $this->roles->pluck('name')->toArray(),
+                    $additional
+                )
+            ),
+            'permissions' => array_unique(
+                array_merge(
+                    $this->getPermissionsViaRoles()->pluck('name')->toArray(),
+                    collect($this->permissions->toArray())->pluck('name')->toArray(),
+                )
+            ),
+            'avatar' => $avatar ? $avatar->toArray() : null,
         ];
     }
 }

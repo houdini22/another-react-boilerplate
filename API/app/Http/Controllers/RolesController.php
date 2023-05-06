@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
@@ -107,6 +108,8 @@ class RolesController extends Controller
         $role->fill($request->post());
         $role->save();
 
+        Log::add($user, 'roles.edit', $role);
+
         return response()->json([
             'role' => $role->toArray(),
         ]);
@@ -129,6 +132,8 @@ class RolesController extends Controller
         $role->guard_name = 'web';
         $role->save();
 
+        Log::add($user, 'roles.add', $role);
+
         return response()->json([
             'role' => $role->toArray(),
         ]);
@@ -145,6 +150,8 @@ class RolesController extends Controller
         if (!$role) {
             return $this->response404();
         }
+
+        Log::add($user, 'roles.delete', $role);
 
         $role->delete();
 
@@ -174,8 +181,8 @@ class RolesController extends Controller
             return $this->response401();
         }
 
-        $user = User::find($request->route('user_id'));
-        if (!$user) {
+        $u = User::find($request->route('user_id'));
+        if (!$u) {
             return $this->response404();
         }
 
@@ -184,7 +191,9 @@ class RolesController extends Controller
             return $this->response404();
         }
 
-        $user->removeRole($role);
+        $u->removeRole($role);
+
+        Log::add($user, 'users.remove_permission', $u);
 
         return response()->json([
             'msg' => 'ok',
@@ -210,6 +219,8 @@ class RolesController extends Controller
 
         $permission->removeRole($role);
 
+        Log::add($user, 'roles.remove_permission', $permission);
+
         return response()->json([
             'msg' => 'ok',
         ]);
@@ -226,6 +237,8 @@ class RolesController extends Controller
         if (!$permission) {
             return $this->response404();
         }
+
+        Log::add($user, 'permissions.delete', $permission);
 
         $permission->delete();
 

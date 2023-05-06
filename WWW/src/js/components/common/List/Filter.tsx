@@ -55,6 +55,23 @@ class Filter extends React.Component<FilterProps, null> {
             />
         )
     }
+    renderSelect() {
+        const { filters, setFilter, fetch, name, options } = this.props
+
+        return (
+            <FormField
+                type={'select'}
+                name={name}
+                placeholder={'--- choose ---'}
+                options={options}
+                inputOnly
+                defaultValue={filters[name]}
+                onChange={({ target: { value } }) => {
+                    setFilter(name, value).then(() => fetch())
+                }}
+            />
+        )
+    }
     renderOrderDirection() {
         const { filters, setFilter, fetch } = this.props
         const options = [
@@ -172,6 +189,7 @@ class Filter extends React.Component<FilterProps, null> {
                         </span>
                     </Col>
                     <Col xs={8}>
+                        {type === 'select' && this.renderSelect()}
                         {type === 'search' && this.renderSearch()}
                         {type === 'radio' && this.renderRadio()}
                         {type === 'multiple' && this.renderMultiple()}

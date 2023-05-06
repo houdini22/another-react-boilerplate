@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use App\Models\Log;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Intervention\Image\Image;
@@ -87,6 +88,8 @@ class FilesController extends Controller
 
         $file->delete();
 
+        Log::add($user, 'media.delete', $file);
+
         return response()->json([
             'msg' => 'ok',
         ]);
@@ -102,6 +105,7 @@ class FilesController extends Controller
         $files = $request->allFiles();
         foreach ($files as $f) {
             $file = File::upload($f, $user);
+            Log::add($user, 'media.upload', $file);
         }
 
         return response()->json([
@@ -123,6 +127,8 @@ class FilesController extends Controller
 
         $file->fill($request->post());
         $file->save();
+
+        Log::add($user, 'media.edit', $file);
 
         return response()->json([
             'msg' => 'ok',

@@ -77,6 +77,11 @@ Route::prefix('api/v1')->group(function () {
         Route::post('edit/{id}', '\App\Http\Controllers\FilesController@postEdit');
         Route::delete('delete/{id}', '\App\Http\Controllers\FilesController@deleteFile');
     });
+
+    Route::prefix('logs')->group(function () {
+        Route::get('list', '\App\Http\Controllers\LogsController@getList');
+        Route::get('data', '\App\Http\Controllers\LogsController@getData');
+    });
 });
 
 Route::get('/', function () {

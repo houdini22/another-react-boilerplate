@@ -34,10 +34,7 @@ class WebsocketsManagerBase extends React.Component<WebsocketsManagerBaseProps, 
 
     componentDidUpdate(prevProps: Readonly<WebsocketsManagerBaseProps>, prevState: Readonly<null>, snapshot?: any) {
         const {
-            auth: {
-                user: { token },
-                isLoggedIn,
-            },
+            auth: { user: { token } = {}, isLoggedIn },
         } = this.props
 
         if (!prevProps.auth.isLoggedIn && isLoggedIn && token) {
@@ -48,8 +45,8 @@ class WebsocketsManagerBase extends React.Component<WebsocketsManagerBaseProps, 
 
             this.client
                 ?.channel(`user.${token}`)
-                .listen('.user_data_changed', ({ user }) => {
-                    setUserData(user)
+                .listen('.user_data_changed', (data) => {
+                    setUserData(data)
                 })
                 .listen('.force_logout', () => {
                     console.log('force logout')

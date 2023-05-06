@@ -54,21 +54,23 @@ const login = (email, password) => (dispatch) => {
             .then(
                 ({
                     data: {
-                        data: { user },
+                        data: {
+                            data: { data },
+                        },
                     },
                 }) => {
-                    dispatch(loggedIn(user))
-                    setAuthToken(user.token)
+                    dispatch(loggedIn(data))
+                    setAuthToken(data.token)
 
                     LocalStorage.update('LoginFormContainer', { ID: 1 }, (row) => {
-                        row.email = user.email
-                        row.token = user.token
+                        row.email = data.email
+                        row.token = data.token
                         return row
                     })
                     LocalStorage.commit()
                     dispatch(setIsLoading(false))
 
-                    resolve(user)
+                    resolve(data)
                 },
                 ({ data: { message = '' } = {} }) => {
                     dispatch(setIsLoading(false))
@@ -91,20 +93,28 @@ const loginWithToken = (email, token) => (dispatch, state) => {
             email,
             token,
         })
-            .then((response) => {
-                dispatch(loggedIn(response.data.data.user))
-                setAuthToken(response.data.data.user.token)
+            .then(
+                ({
+                    data: {
+                        data: {
+                            data: { data: user },
+                        },
+                    },
+                }) => {
+                    dispatch(loggedIn(user))
+                    setAuthToken(user.token)
 
-                LocalStorage.update('LoginFormContainer', { ID: 1 }, (row) => {
-                    row.email = response.data.data.user.email
-                    row.token = response.data.data.user.token
-                    return row
-                })
-                LocalStorage.commit()
+                    LocalStorage.update('LoginFormContainer', { ID: 1 }, (row) => {
+                        row.email = user.email
+                        row.token = user.token
+                        return row
+                    })
+                    LocalStorage.commit()
 
-                resolve(response.data.data.user)
-                dispatch(setLoginWithTokenRequestInProgress(true))
-            })
+                    resolve(user)
+                    dispatch(setLoginWithTokenRequestInProgress(true))
+                },
+            )
             .catch(({ data: { message = '' } = {} }) => {
                 dispatch(setLoginError(message))
                 reject()

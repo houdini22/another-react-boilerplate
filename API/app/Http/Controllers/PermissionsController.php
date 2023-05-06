@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
@@ -107,6 +108,8 @@ class PermissionsController extends Controller
         $permission->fill($request->post());
         $permission->save();
 
+        Log::add($user, 'permissions.edit', $permission);
+
         return response()->json([
             'permission' => $permission->toArray(),
         ]);
@@ -134,6 +137,9 @@ class PermissionsController extends Controller
             }
             $role->givePermissionTo($permission);
 
+            Log::add($user, 'permissions.add', $permission);
+            Log::add($user, 'roles.add_permission', $role);
+
             return response()->json([
                 'permission' => $permission->toArray(),
             ]);
@@ -146,14 +152,14 @@ class PermissionsController extends Controller
             $permission->fill($request->post());
             $permission->guard_name = 'web';
             $permission->save();
+            Log::add($user, 'permissions.add', $permission);
             if ($request->post('role_id')) {
                 $role = Role::findById($request->post('role_id'));
                 if (!$role) {
-                    return response()->json([
-                        'message' => 'Not found.',
-                    ], 404);
+                    return $this->response404();
                 }
                 $role->givePermissionTo($permission);
+                Log::add($user, 'roles.add_permission', $role);
             }
             return response()->json([
                 'permission' => $permission->toArray(),
@@ -182,6 +188,8 @@ class PermissionsController extends Controller
 
         $u->givePermissionTo($permission);
 
+        Log::add($user, 'users.add_permission', $u);
+
         return response()->json([
             'msg' => 'ok',
         ]);
@@ -203,6 +211,8 @@ class PermissionsController extends Controller
         if (!$u) {
             return $this->response404();
         }
+
+        Log::add($user, 'users.delete_permission', $u);
 
         $u->revokePermissionTo($permission);
 
