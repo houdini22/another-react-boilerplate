@@ -108,7 +108,9 @@ class PermissionsController extends Controller
         $permission->fill($request->post());
         $permission->save();
 
-        Log::add($user, 'permissions.edit', $permission);
+        Log::add($user, 'permissions.edit', [
+            'model' => $permission
+        ]);
 
         return response()->json([
             'permission' => $permission->toArray(),
@@ -137,8 +139,13 @@ class PermissionsController extends Controller
             }
             $role->givePermissionTo($permission);
 
-            Log::add($user, 'permissions.add', $permission);
-            Log::add($user, 'roles.add_permission', $role);
+            Log::add($user, 'permissions.add', [
+                'model' => $permission
+            ]);
+            Log::add($user, 'roles.add_permission', [
+                'model' => $role,
+                'related_model' => $permission,
+            ]);
 
             return response()->json([
                 'permission' => $permission->toArray(),
@@ -152,14 +159,19 @@ class PermissionsController extends Controller
             $permission->fill($request->post());
             $permission->guard_name = 'web';
             $permission->save();
-            Log::add($user, 'permissions.add', $permission);
+            Log::add($user, 'permissions.add', [
+                'model' => $permission,
+            ]);
             if ($request->post('role_id')) {
                 $role = Role::findById($request->post('role_id'));
                 if (!$role) {
                     return $this->response404();
                 }
                 $role->givePermissionTo($permission);
-                Log::add($user, 'roles.add_permission', $role);
+                Log::add($user, 'roles.add_permission', [
+                    'model' => $role,
+                    'related_model' => $role,
+                ]);
             }
             return response()->json([
                 'permission' => $permission->toArray(),
@@ -188,7 +200,10 @@ class PermissionsController extends Controller
 
         $u->givePermissionTo($permission);
 
-        Log::add($user, 'users.add_permission', $u);
+        Log::add($user, 'users.add_permission', [
+            'model' => $u,
+            'related_model' => $permission
+        ]);
 
         return response()->json([
             'msg' => 'ok',
@@ -212,7 +227,10 @@ class PermissionsController extends Controller
             return $this->response404();
         }
 
-        Log::add($user, 'users.delete_permission', $u);
+        Log::add($user, 'users.remove_permission', [
+            'model' => $u,
+            'related_model' => $permission
+        ]);
 
         $u->revokePermissionTo($permission);
 

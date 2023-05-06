@@ -444,7 +444,9 @@ class CmsPagesController extends Controller
             $tree->appendToNode(Tree::find(Arr::get($values, 'parent_id')))->save();
         }
 
-        Log::add($user, 'cms.edit_category', $tree->category);
+        Log::add($user, 'cms.edit_category', [
+            'model' => $tree->category
+        ]);
 
         return $this->responseOK([
             'data' => $tree->toArray()
@@ -498,7 +500,9 @@ class CmsPagesController extends Controller
             $tree->appendToNode(Tree::find(Arr::get($values, 'parent_id')))->save();
         }
 
-        Log::add($user, 'cms.edit_document', $tree->document);
+        Log::add($user, 'cms.edit_document', [
+            'model' => $tree->document
+        ]);
 
         return $this->responseOK([
             'data' => $tree->toArray()
@@ -547,7 +551,9 @@ class CmsPagesController extends Controller
             $tree->appendToNode(Tree::find(Arr::get($values, 'parent_id')))->save();
         }
 
-        Log::add($user, 'cms.edit_link', $tree->link);
+        Log::add($user, 'cms.edit_link', [
+            'model' => $tree->link
+        ]);
 
         return $this->responseOK([
             'data' => $tree->toArray()
@@ -590,7 +596,9 @@ class CmsPagesController extends Controller
 
         $tree->save();
 
-        Log::add($user, 'cms.publish', $tree->{$tree->tree_document_type});
+        Log::add($user, 'cms.publish', [
+            'model' => $tree->{$tree->tree_document_type}
+        ]);
 
         return $this->responseOK([
             'data' => $tree->toArray()
@@ -611,7 +619,9 @@ class CmsPagesController extends Controller
         $tree->tree_is_published = false;
         $tree->save();
 
-        Log::add($user, 'cms.unpublish', $tree->{$tree->tree_document_type});
+        Log::add($user, 'cms.unpublish', [
+            'model' => $tree->{$tree->tree_document_type}
+        ]);
 
         return $this->responseOK([
             'data' => $tree->toArray()
@@ -625,11 +635,20 @@ class CmsPagesController extends Controller
             return $this->response401();
         }
 
-        $node = Tree::find($request->get('id'));
+        $node = Tree::with('document')
+            ->with('link')
+            ->with('category')
+            ->find($request->get('id'));
 
-        Log::add($user, 'cms.delete', $tree->{$tree->tree_document_type}()->first());
+        Log::add($user, 'cms.delete', [
+            'model' => $node->{$node->tree_document_type}
+        ]);
 
         foreach ($node->descendants as $d) {
+            Log::add($user, 'cms.delete', [
+                'model' => $d,
+                'message' => 'deleted_as_descendant'
+            ]);
             $d->delete();
         }
         $node->delete();
@@ -683,7 +702,9 @@ class CmsPagesController extends Controller
         $tree->document_id = $document->id;
         $tree->save();
 
-        Log::add($user, 'cms.add_document', $tree->document);
+        Log::add($user, 'cms.add_document', [
+            'model' => $tree->document
+        ]);
 
         return $this->responseOK([
             'data' => $tree->toArray(),
@@ -728,7 +749,9 @@ class CmsPagesController extends Controller
         $tree->link_id = $link->id;
         $tree->save();
 
-        Log::add($user, 'cms.add_link', $tree->link);
+        Log::add($user, 'cms.add_link', [
+            'model' => $tree->link
+        ]);
 
         return $this->responseOK([
             'data' => $tree->toArray(),

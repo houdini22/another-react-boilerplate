@@ -4,6 +4,7 @@ import { FiltersCard } from '../../../components/common/FiltersCard'
 interface FiltersProps {
     filters: Object
     setFilter: Function
+
     fetch(): Function
 }
 
@@ -36,12 +37,19 @@ export class Filters extends React.Component<FiltersProps, null> {
                 filtersToRender={[
                     {
                         type: 'select',
-                        options: logsData?.models?.map(({ name }) => {
-                            return {
-                                label: name,
-                                value: name,
-                            }
-                        }),
+                        options: Object.keys(logsData?.models || {})
+                            ?.map((key) => {
+                                return {
+                                    name: key,
+                                    items: logsData?.models[key],
+                                }
+                            })
+                            ?.map(({ name, items }) => {
+                                return {
+                                    label: `${name} (${items.length})`,
+                                    value: name,
+                                }
+                            }),
                         name: 'model_name',
                         label: 'Model',
                     },
@@ -52,24 +60,38 @@ export class Filters extends React.Component<FiltersProps, null> {
                                 label: 'None',
                                 value: 'none',
                             },
-                            ...(logsData?.users?.map(({ id, name }) => {
-                                return {
-                                    label: name,
-                                    value: id,
-                                }
-                            }) || []),
+                            ...Object.keys(logsData?.users || {})
+                                ?.map((key) => {
+                                    return {
+                                        name: key,
+                                        items: logsData?.users[key],
+                                    }
+                                })
+                                ?.map(({ name, items }) => {
+                                    return {
+                                        label: `${name} (${items.length})`,
+                                        value: name,
+                                    }
+                                }),
                         ],
                         name: 'user',
                         label: 'User',
                     },
                     {
                         type: 'select',
-                        options: Object.values(logsData?.types || {})?.map((name) => {
-                            return {
-                                label: name,
-                                value: name,
-                            }
-                        }),
+                        options: Object.keys(logsData?.types || {})
+                            ?.map((key) => {
+                                return {
+                                    type: key,
+                                    items: logsData?.types[key],
+                                }
+                            })
+                            ?.map(({ type, items }) => {
+                                return {
+                                    label: `${type} (${items.length})`,
+                                    value: type,
+                                }
+                            }),
                         name: 'type',
                         label: 'Type',
                     },

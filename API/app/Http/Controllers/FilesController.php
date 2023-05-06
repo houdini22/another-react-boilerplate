@@ -88,7 +88,9 @@ class FilesController extends Controller
 
         $file->delete();
 
-        Log::add($user, 'media.delete', $file);
+        Log::add($user, 'media.delete', [
+            'model' => $file
+        ]);
 
         return response()->json([
             'msg' => 'ok',
@@ -105,7 +107,9 @@ class FilesController extends Controller
         $files = $request->allFiles();
         foreach ($files as $f) {
             $file = File::upload($f, $user);
-            Log::add($user, 'media.upload', $file);
+            Log::add($user, 'media.upload', [
+                'model' => $file
+            ]);
         }
 
         return response()->json([
@@ -128,7 +132,9 @@ class FilesController extends Controller
         $file->fill($request->post());
         $file->save();
 
-        Log::add($user, 'media.edit', $file);
+        Log::add($user, 'media.edit', [
+            'model' => $file
+        ]);
 
         return response()->json([
             'msg' => 'ok',

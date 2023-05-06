@@ -76,6 +76,14 @@ export class LogsTable extends React.Component<PermissionsTableProps, null> {
                                                             <Col xs={5}>Model ID:</Col>
                                                             <Col xs={7}>{log.model_id || '---'}</Col>
                                                         </Row>
+                                                        <Row>
+                                                            <Col xs={5}>Related Model:</Col>
+                                                            <Col xs={7}>{log.related_model_class_name || '---'}</Col>
+                                                        </Row>
+                                                        <Row>
+                                                            <Col xs={5}>Model ID:</Col>
+                                                            <Col xs={7}>{log.related_model_id || '---'}</Col>
+                                                        </Row>
                                                     </Popover.Content>
                                                 </Popover.Container>
                                             </Table.Td>

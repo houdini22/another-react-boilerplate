@@ -23,7 +23,13 @@ class LogsController extends Controller
         $query = Log::with('user')
             ->where(function ($query) use ($filters) {
                 if (!empty($filters['user'])) {
-                    $query->where('user_id', '=', $filters['user']);
+                    if ($filters['user'] !== 'none') {
+                        $query->whereHas('user', function($query) use ($filters) {
+                            $query->where('name', '=', $filters['user']);
+                        });
+                    } else {
+                        $query->whereDoesntHave('user');
+                    }
                 }
             })
             ->where(function ($query) use ($filters) {
@@ -85,24 +91,11 @@ class LogsController extends Controller
         }
 
 
-        $users = Log::with('user')->whereHas('user')->get()->unique('user_id')->map(function ($item) {
-            return $item['user'];
-        })->map(function ($item) {
-            return [
-                'id' => $item['id'],
-                'name' => $item['name']
-            ];
-        });
+        $users = collect(Log::with('user')->whereHas('user')->get()->toArray())->groupBy('user.name');
 
-        $models = Log::whereNotNull('model_class_name')->get()->unique('model_class_name')->map(function ($item) {
-            return [
-                'name' => $item['model_class_name']
-            ];
-        });
+        $models = collect(Log::whereNotNull('model_class_name')->orderBy('model_class_name', 'asc')->get()->toArray())->groupBy('model_class_name');
 
-        $types = Log::whereNotNull('type')->get()->unique('type')->map(function ($item) {
-            return $item['type'];
-        });
+        $types = collect(Log::whereNotNull('type')->orderBy('type', 'asc')->get()->toArray())->unique('type')->groupBy('type');
 
         return $this->responseOK([
             'data' => [

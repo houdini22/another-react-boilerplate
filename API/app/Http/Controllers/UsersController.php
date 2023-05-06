@@ -181,7 +181,9 @@ class UsersController extends Controller
 
         $u->save();
 
-        Log::add($user, 'users.edit', $u);
+        Log::add($user, 'users.edit', [
+            'model' => $u
+        ]);
 
         broadcast(new UserDataChanged($u));
 
@@ -213,7 +215,9 @@ class UsersController extends Controller
         $u->password = bcrypt($user->password);
         $u->save();
 
-        Log::add($user, 'users.add', $u);
+        Log::add($user, 'users.add', [
+            'model' => $u
+        ]);
 
         return response()->json([
             'user' => $u->toArray(),
@@ -232,7 +236,9 @@ class UsersController extends Controller
             return $this->response404();
         }
 
-        Log::add($user, 'users.add', $u);
+        Log::add($user, 'users.add', [
+            'model' => $u
+        ]);
 
         $u->delete();
 
@@ -260,7 +266,9 @@ class UsersController extends Controller
 
         $u->assignRole($role);
 
-        Log::add($user, 'users.add_role', $u);
+        Log::add($user, 'users.add_role', [
+            'model' => $u
+        ]);
 
         return response()->json([
             'msg' => 'ok',
@@ -290,7 +298,9 @@ class UsersController extends Controller
             $message->from(config('app.from_email'));
         });
 
-        Log::add($user, 'users.send_activation_email', $u);
+        Log::add($user, 'users.send_activation_email', [
+            'model' => $u
+        ]);
 
         return response()->json([
             'user' => $u->toArray(),
@@ -309,7 +319,9 @@ class UsersController extends Controller
         $user->email_verified_at = Carbon::now();
         $user->save();
 
-        Log::add(NULL, 'users.activate', $user);
+        Log::add(NULL, 'users.activate', [
+            'model' => $user
+        ]);
 
         return redirect('/#/users/account_activated');
     }
@@ -334,12 +346,14 @@ class UsersController extends Controller
             $u->avatar()->delete();
         }
 
-        $file = File::upload($request->file('avatar'), $u);
+        $file = File::upload($request->file('avatar'), $user);
 
         $u->avatar_id = $file->id;
         $u->save();
 
-        Log::add($user, 'users.change_avatar', $u);
+        Log::add($user, 'users.change_avatar', [
+            'model' => $u
+        ]);
 
         broadcast(new UserDataChanged($u));
 
@@ -365,7 +379,9 @@ class UsersController extends Controller
         $u->avatar_id = NULL;
         $u->save();
 
-        Log::add($user, 'users.delete_avatar', $u);
+        Log::add($user, 'users.remove_avatar', [
+            'model' => $u
+        ]);
 
         broadcast(new UserDataChanged($u));
 
@@ -391,7 +407,9 @@ class UsersController extends Controller
         $u->token = NULL;
         $u->save();
 
-        Log::add($user, 'users.force_login', $u);
+        Log::add($user, 'users.force_login', [
+            'model' => $u
+        ]);
 
         broadcast(new UserForceLogout($u, $token));
 
@@ -413,7 +431,9 @@ class UsersController extends Controller
         $u->status = 1;
         $u->save();
 
-        Log::add($user, 'users.activate', $u);
+        Log::add($user, 'users.activate', [
+            'model' => $u
+        ]);
 
         return response()->json([
             'user' => $u->toArray(),
@@ -435,7 +455,9 @@ class UsersController extends Controller
         $u->status = 0;
         $u->save();
 
-        Log::add($user, 'users.deactivate', $u);
+        Log::add($user, 'users.deactivate', [
+            'model' => $u
+        ]);
 
         return response()->json([
             'user' => $u->toArray(),

@@ -108,7 +108,9 @@ class RolesController extends Controller
         $role->fill($request->post());
         $role->save();
 
-        Log::add($user, 'roles.edit', $role);
+        Log::add($user, 'roles.edit', [
+            'model' => $role
+        ]);
 
         return response()->json([
             'role' => $role->toArray(),
@@ -132,7 +134,9 @@ class RolesController extends Controller
         $role->guard_name = 'web';
         $role->save();
 
-        Log::add($user, 'roles.add', $role);
+        Log::add($user, 'roles.add', [
+            'model' => $role
+        ]);
 
         return response()->json([
             'role' => $role->toArray(),
@@ -151,7 +155,9 @@ class RolesController extends Controller
             return $this->response404();
         }
 
-        Log::add($user, 'roles.delete', $role);
+        Log::add($user, 'roles.delete', [
+            'model' => $role
+        ]);
 
         $role->delete();
 
@@ -193,7 +199,10 @@ class RolesController extends Controller
 
         $u->removeRole($role);
 
-        Log::add($user, 'users.remove_permission', $u);
+        Log::add($user, 'users.remove_role', [
+            'model' => $u,
+            'related_model' => $role
+        ]);
 
         return response()->json([
             'msg' => 'ok',
@@ -219,7 +228,10 @@ class RolesController extends Controller
 
         $permission->removeRole($role);
 
-        Log::add($user, 'roles.remove_permission', $permission);
+        Log::add($user, 'roles.remove_permission', [
+            'model' => $role,
+            'related_model' => $permission
+        ]);
 
         return response()->json([
             'msg' => 'ok',
@@ -238,7 +250,9 @@ class RolesController extends Controller
             return $this->response404();
         }
 
-        Log::add($user, 'permissions.delete', $permission);
+        Log::add($user, 'permissions.delete', [
+            'model' => $permission
+        ]);
 
         $permission->delete();
 
