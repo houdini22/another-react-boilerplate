@@ -80,7 +80,7 @@ Route::prefix('api/v1')->group(function () {
 
     Route::prefix('logs')->group(function () {
         Route::get('list', '\App\Http\Controllers\LogsController@getList');
-        Route::get('data', '\App\Http\Controllers\LogsController@getData');
+        Route::get('filtersData', '\App\Http\Controllers\LogsController@getFiltersData');
     });
 });
 

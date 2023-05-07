@@ -24,6 +24,7 @@ interface ListManagerState {
     perPage: number
     links: Array<Object>
     setIsLoading: SetIsLoading
+    filtersData: Object
 }
 
 class ListManager extends React.Component<ListManagerProps, ListManagerState> {
@@ -37,6 +38,7 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
         total: 0,
         perPage: 0,
         links: [],
+        filtersData: {},
     }
 
     requestInProgress = false
@@ -96,50 +98,83 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
                 page,
             }
 
-            http.get(`${url}`, {
-                params,
-            }).then(
-                ({
-                    data: {
-                        data: {
-                            data = [],
-                            next_page_url = '',
-                            prev_page_url = '',
-                            last_page = 0,
-                            total = 0,
-                            current_page = 0,
-                            per_page = 0,
-                            links = [],
-                        } = {},
-                    } = {},
-                }) => {
-                    this.setState(
-                        {
-                            data,
-                            page: current_page,
-                            hasNextPage: !!next_page_url,
-                            hasPrevPage: !!prev_page_url,
-                            totalPages: last_page,
-                            total,
-                            perPage: per_page,
-                            links,
+            Promise.all([
+                new Promise((resolve) => {
+                    http.get(`${url}`, {
+                        params,
+                    }).then(
+                        ({
+                            data: {
+                                data: {
+                                    data = [],
+                                    next_page_url = '',
+                                    prev_page_url = '',
+                                    last_page = 0,
+                                    total = 0,
+                                    current_page = 0,
+                                    per_page = 0,
+                                    links = [],
+                                } = {},
+                            } = {},
+                        }) => {
+                            this.setState(
+                                {
+                                    data,
+                                    page: current_page,
+                                    hasNextPage: !!next_page_url,
+                                    hasPrevPage: !!prev_page_url,
+                                    totalPages: last_page,
+                                    total,
+                                    perPage: per_page,
+                                    links,
+                                },
+                                () => {
+                                    resolve()
+                                },
+                            )
                         },
                         () => {
                             resolve()
-                            this.requestInProgress = false
                         },
                     )
-                },
-                () => {
-                    resolve()
-                    this.requestInProgress = false
-                },
-            )
+                }),
+                new Promise((resolve) => {
+                    const { filtersDataUrl } = this.props
+
+                    if (!filtersDataUrl) {
+                        resolve()
+                        return
+                    }
+
+                    http.get(`${filtersDataUrl}`, {
+                        params: {
+                            filters,
+                        },
+                    }).then(
+                        ({ data: { data: { data } } = {} }) => {
+                            this.setState(
+                                {
+                                    filtersData: data,
+                                },
+                                () => {
+                                    resolve()
+                                },
+                            )
+                        },
+                        () => {
+                            resolve()
+                        },
+                    )
+                }),
+            ]).then(() => {
+                resolve()
+                this.requestInProgress = false
+            })
         })
     }
 
     render() {
-        const { data, total, hasPrevPage, hasNextPage, totalPages, page, perPage, links } = this.state
+        const { data, total, hasPrevPage, hasNextPage, totalPages, page, perPage, links, filtersData } = this.state
         const { children } = this.props
 
         const renderProps = {
@@ -153,6 +188,7 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
             setPage: this.setPage.bind(this),
             perPage,
             links,
+            filtersData,
         }
 
         return <div className={cx('list-manager-container')}>{children(renderProps)}</div>

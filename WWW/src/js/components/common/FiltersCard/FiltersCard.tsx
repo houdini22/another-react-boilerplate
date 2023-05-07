@@ -21,6 +21,7 @@ interface FiltersCardProps {
     saveFilters: SaveFilters
     restoreSavedFilter: RestoreSavedFilter
     children: any
+    filtersData: Object
 }
 
 class FiltersCard extends React.Component<FiltersCardProps, null> {
@@ -37,6 +38,7 @@ class FiltersCard extends React.Component<FiltersCardProps, null> {
             saveFilters,
             restoreSavedFilter,
             children,
+            filtersData,
         } = this.props
 
         return (
@@ -102,7 +104,13 @@ class FiltersCard extends React.Component<FiltersCardProps, null> {
                                 </Button>,
                             ]}
                         >
-                            <FiltersFactory filters={filters} setFilter={setFilter} defaultFilters={defaultFilters} body={filtersToRender} />
+                            <FiltersFactory
+                                filtersData={filtersData}
+                                filters={filters}
+                                setFilter={setFilter}
+                                defaultFilters={defaultFilters}
+                                body={filtersToRender}
+                            />
                             {children}
                         </Card>
                     )

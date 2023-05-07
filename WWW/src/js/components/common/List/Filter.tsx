@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styles from '../../../../assets/scss/components/_list_manager.scss'
 import classNames from 'classnames/bind'
-import { Button, FormField, Col, Row, Label } from '../../../components'
+import { Button, FormField, Col, Row, Label, Badge } from '../../../components'
 
 const cx = classNames.bind(styles)
 
@@ -38,6 +38,7 @@ class Filter extends React.Component<FilterProps, null> {
             </>
         )
     }
+
     renderOrderByColumn() {
         const { options, filters, setFilter } = this.props
 
@@ -54,6 +55,7 @@ class Filter extends React.Component<FilterProps, null> {
             />
         )
     }
+
     renderSelect() {
         const { filters, setFilter, name, options } = this.props
 
@@ -71,6 +73,7 @@ class Filter extends React.Component<FilterProps, null> {
             />
         )
     }
+
     renderOrderDirection() {
         const { filters, setFilter } = this.props
         const options = [
@@ -97,18 +100,31 @@ class Filter extends React.Component<FilterProps, null> {
             />
         )
     }
+
     renderFilterLabel() {
-        const { type, label } = this.props
+        const { type, label, filterData = {}, name, defaultFilters, filters } = this.props
 
-        if (type === 'order') {
-            return 'Sort by'
-        }
+        const changed = this.getChanged(defaultFilters, filters, name, type)
 
-        return label
+        return (
+            <p>
+                {type === 'order' && 'Sort by'}
+                {type !== 'order' && (
+                    <>
+                        {typeof filterData?.count !== 'undefined' && (
+                            <Badge color={filterData.count === 0 ? 'warning' : 'info'}>{filterData.count}</Badge>
+                        )}{' '}
+                        {label}: {changed && <Label color={'info'}>Active</Label>}
+                    </>
+                )}
+            </p>
+        )
     }
+
     renderSearch() {
         return this.renderText({ name: 'search', placeholder: 'Search phrase' })
     }
+
     renderText({ name, placeholder }) {
         const { filters } = this.props
         return (
@@ -125,6 +141,7 @@ class Filter extends React.Component<FilterProps, null> {
             />
         )
     }
+
     renderMultiple() {
         const { options, filters, setFilter, name } = this.props
         return (
@@ -156,6 +173,7 @@ class Filter extends React.Component<FilterProps, null> {
             </>
         )
     }
+
     getChanged(defaultFilters, filters, name, type) {
         if (
             type === 'order' &&
@@ -173,18 +191,15 @@ class Filter extends React.Component<FilterProps, null> {
 
         return defaultFilter !== filter
     }
-    render() {
-        const { type, name, placeholder, defaultFilters = {}, filters } = this.props
 
-        const changed = this.getChanged(defaultFilters, filters, name, type)
+    render() {
+        const { type, name, placeholder } = this.props
 
         return (
             <div className={cx('filter')}>
                 <Row>
                     <Col xs={4}>
-                        <span>
-                            {this.renderFilterLabel()}:{changed && <Label color={'info'}>Active</Label>}
-                        </span>
+                        <span>{this.renderFilterLabel()}</span>
                     </Col>
                     <Col xs={8}>
                         {type === 'select' && this.renderSelect()}

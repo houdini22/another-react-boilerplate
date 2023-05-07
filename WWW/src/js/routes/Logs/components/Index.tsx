@@ -33,7 +33,13 @@ export class LogsView extends React.Component<null, null> {
                                                 savedFilters,
                                                 restoreSavedFilter,
                                             }) => (
-                                                <ListManager url={'/logs/list'} filters={filters} setIsLoading={setIsLoading} isLoading={isLoading}>
+                                                <ListManager
+                                                    url={'/logs/list'}
+                                                    filtersDataUrl={'/logs/filtersData'}
+                                                    filters={filters}
+                                                    setIsLoading={setIsLoading}
+                                                    isLoading={isLoading}
+                                                >
                                                     {({
                                                         data,
                                                         links,
@@ -65,16 +71,7 @@ export class LogsView extends React.Component<null, null> {
                                                                 />
 
                                                                 <List
-                                                                    filters={filters}
-                                                                    setFilter={setFilter}
-                                                                    resetFilters={resetFilters}
-                                                                    defaultFilters={defaultFilters}
                                                                     isLoading={isLoading}
-                                                                    setFilters={setFilters}
-                                                                    savedFilters={savedFilters}
-                                                                    saveFilters={saveFilters}
-                                                                    deleteSavedFilter={deleteSavedFilter}
-                                                                    restoreSavedFilter={restoreSavedFilter}
                                                                     links={links}
                                                                     page={page}
                                                                     setPage={setPage}

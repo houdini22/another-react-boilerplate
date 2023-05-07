@@ -6,7 +6,6 @@ import { LoadingOverlay } from '../../../components'
 interface LogsFiltersProps {
     filters: Object
     setFilter: SetFilter
-    filtersData: Array<Object>
     resetFilters: ResetFilters
     defaultFilters: Filters
     isLoading: boolean
@@ -15,6 +14,7 @@ interface LogsFiltersProps {
     deleteSavedFilter: DeleteSavedFilter
     saveFilters: SaveFilters
     restoreSavedFilter: RestoreSavedFilter
+    filtersData: Object
 }
 
 export class LogsFilters extends React.Component<LogsFiltersProps, null> {
@@ -46,11 +46,12 @@ export class LogsFilters extends React.Component<LogsFiltersProps, null> {
                 restoreSavedFilter={restoreSavedFilter}
                 defaultFilters={defaultFilters}
                 isLoading={isLoading}
+                filtersData={filtersData}
                 filtersToRender={[
                     {
                         type: 'select',
                         options: [
-                            ...(filtersData?.models?.map(({ count, model_class_name }) => {
+                            ...(filtersData?.model?.data?.map(({ count, model_class_name }) => {
                                 if (model_class_name === null) {
                                     return {
                                         value: 'none',
@@ -64,13 +65,13 @@ export class LogsFilters extends React.Component<LogsFiltersProps, null> {
                                 }
                             }) || []),
                         ],
-                        name: 'model_name',
+                        name: 'model',
                         label: 'Model',
                     },
                     {
                         type: 'select',
                         options: [
-                            ...(filtersData?.users
+                            ...(filtersData?.user?.data
                                 ?.map(({ count, name, user_id }) => {
                                     if (!name && user_id === 0) {
                                         return {
@@ -95,7 +96,7 @@ export class LogsFilters extends React.Component<LogsFiltersProps, null> {
                     },
                     {
                         type: 'select',
-                        options: filtersData?.types?.map(({ count, type }) => {
+                        options: filtersData?.type?.data?.map(({ count, type }) => {
                             return {
                                 value: type,
                                 label: `${type} (${count})`,
@@ -107,7 +108,7 @@ export class LogsFilters extends React.Component<LogsFiltersProps, null> {
                     {
                         type: 'select',
                         options: [
-                            ...(filtersData?.related_models?.map(({ count, related_model_class_name, related_model_id }) => {
+                            ...(filtersData?.related_model?.data?.map(({ count, related_model_class_name, related_model_id }) => {
                                 if (related_model_class_name === null) {
                                     return {
                                         value: 'none',
@@ -121,8 +122,8 @@ export class LogsFilters extends React.Component<LogsFiltersProps, null> {
                                 }
                             }) || []),
                         ],
-                        name: 'related_model_name',
-                        label: 'RelatedModel',
+                        name: 'related_model',
+                        label: 'Related Model',
                     },
 
                     {

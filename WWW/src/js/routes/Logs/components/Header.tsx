@@ -7,8 +7,6 @@ interface HeaderProps {}
 
 export class Header extends React.Component<HeaderProps, null> {
     render() {
-        const { navigate } = this.props
-
         return (
             <RouteManager>
                 {() => (
