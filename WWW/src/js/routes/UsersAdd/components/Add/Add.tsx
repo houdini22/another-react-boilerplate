@@ -1,15 +1,9 @@
 import * as React from 'react'
 import { LoadingOverlay } from '../../../../components'
 import { AddFormContainer } from './AddFormContainer'
-interface EditProps {
-    addUser: Function
-    fetchOne: Function
-    isLoading: boolean
-}
+interface AddProps {}
 
-interface EditState {}
-
-export class Add extends React.Component<EditProps, EditState> {
+export class Add extends React.Component<AddProps, null> {
     render() {
         const {
             addUser,
@@ -40,6 +34,7 @@ export class Add extends React.Component<EditProps, EditState> {
             clearPermissionsFromNewRole,
             canByPermission,
         } = this.props
+
         return (
             <div>
                 <AddFormContainer

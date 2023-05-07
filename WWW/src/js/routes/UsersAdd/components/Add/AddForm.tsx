@@ -42,7 +42,7 @@ class AddForm extends React.Component<null, null> {
                     <Tabs.Content>
                         <form onSubmit={handleSubmit}>
                             <Row>
-                                <Col xs={12}>
+                                <Col xs={6}>
                                     <Card header={<h1>User</h1>} color={'primary'}>
                                         <Field name="name" label="Name" type="text" component={FormField} autoFocus />
                                         <Field name="email" label="Email" type="text" component={FormField} />
@@ -65,8 +65,10 @@ class AddForm extends React.Component<null, null> {
                                             component={FormField}
                                         />
                                     </Card>
+                                </Col>
+                                <Col xs={6}>
                                     {canByPermission('users.add_role') && (
-                                        <Card header={<h1>Associate Roles</h1>} size={'md'}>
+                                        <Card header={<h1>Associate Roles</h1>} size={'md'} color={'secondary'}>
                                             {newUserRoles.length > 0 && <Alert color={'info'}>Click added Role to remove.</Alert>}
                                             <Field
                                                 name="_roles"
@@ -105,7 +107,7 @@ class AddForm extends React.Component<null, null> {
                                     )}
 
                                     {canByPermission('users.add_permission') && (
-                                        <Card header={<h1>Associate Permissions</h1>} size={'md'}>
+                                        <Card header={<h1>Associate Permissions</h1>} size={'md'} color={'secondary'}>
                                             {newUserPermissions.length > 0 && <Alert color={'info'}>Click added Permission to remove.</Alert>}
                                             <Field
                                                 name="_permissions"
@@ -144,7 +146,8 @@ class AddForm extends React.Component<null, null> {
                                             </Section>
                                         </Card>
                                     )}
-
+                                </Col>
+                                <Col xs={12}>
                                     <Button type={'submit'} color={'success'} block>
                                         Save
                                     </Button>

@@ -7,33 +7,33 @@ import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 import { SubmissionError } from 'redux-form'
 
 const onSubmit = (values, _, { setIsLoading, addPermission, addToastNotification, navigate, newPermissionUsers = [], reset }) => {
-    setIsLoading(true)
-
-    return addPermission({ ...values }, newPermissionUsers).then(
-        (permission) => {
-            setIsLoading(false)
-            addToastNotification({
-                type: 'success',
-                title: 'Save success.',
-                text: `Permission has been saved with ID: ${permission?.id}.`,
-                href: '/permissions/add',
-            })
-            if (navigate) {
-                navigate('/permissions/add')
-            }
-            reset()
-        },
-        (response) => {
-            setIsLoading(false)
-            addToastNotification({
-                title: 'Form Validation Error',
-                text: response.message,
-                type: 'danger',
-                href: '/permissions/add',
-            })
-            throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
-        },
-    )
+    return setIsLoading(true).then(() => {
+        return addPermission({ ...values }, newPermissionUsers).then(
+            (permission) => {
+                setIsLoading(false)
+                addToastNotification({
+                    type: 'success',
+                    title: 'Save success.',
+                    text: `Permission has been saved with ID: ${permission?.id}.`,
+                    href: '/permissions/add',
+                })
+                if (navigate) {
+                    navigate('/permissions/add')
+                }
+                reset()
+            },
+            (response) => {
+                setIsLoading(false)
+                addToastNotification({
+                    title: 'Form Validation Error',
+                    text: response.message,
+                    type: 'danger',
+                    href: '/permissions/add',
+                })
+                throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
+            },
+        )
+    })
 }
 
 const AddFormContainer = compose(

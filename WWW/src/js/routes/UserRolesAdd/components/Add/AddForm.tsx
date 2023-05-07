@@ -1,11 +1,10 @@
 import * as React from 'react'
-import { Field } from 'redux-form'
+import { Field, SubmissionError } from 'redux-form'
 import { Alert, Button, Card, Col, FormField, Row, Section } from '../../../../components'
 import { sortPermissionsByNameAscending } from '../../../../helpers/permissions'
 import { sortUsersByNameAscending } from '../../../../helpers/users'
 import { AddPermission } from '../../../UsersPermissionsAdd/components/Add/Index'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
-import { SubmissionError } from 'redux-form'
 
 class AddForm extends React.Component<null, null> {
     render() {
@@ -38,7 +37,7 @@ class AddForm extends React.Component<null, null> {
                         </Card>
 
                         {!noAddToUsers && canByPermission('users.add_permission') && (
-                            <Card header={<h1>Add to Users</h1>}>
+                            <Card header={<h1>Add to Users</h1>} color={'secondary'}>
                                 {newRoleUsers.length > 0 && <Alert color={'info'}>Click added User to remove.</Alert>}
                                 <Field
                                     name="_users"
@@ -78,7 +77,7 @@ class AddForm extends React.Component<null, null> {
                         )}
 
                         {canByPermission('roles.add_permission') && (
-                            <Card header={<h1>Associate Permissions</h1>}>
+                            <Card header={<h1>Associate Permissions</h1>} color={'secondary'}>
                                 {newRolePermissions.length > 0 && <Alert color={'info'}>Click added Permission to remove.</Alert>}
                                 <Field
                                     name="_permissions"
@@ -140,8 +139,8 @@ class AddForm extends React.Component<null, null> {
                                                 },
                                             )
                                         },
-                                        () => {
-                                            reject()
+                                        (response) => {
+                                            reject(response)
                                         },
                                     )
                                 })

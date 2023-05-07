@@ -14,7 +14,7 @@ export class LogsView extends React.Component<null, null> {
     render() {
         return (
             <RouteManager>
-                {({ query }) => (
+                {() => (
                     <TitleManager>
                         {({ setTitleSegments }) => {
                             setTitleSegments(['Users', 'Logs'])

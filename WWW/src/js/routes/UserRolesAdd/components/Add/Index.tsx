@@ -2,11 +2,9 @@ import * as React from 'react'
 import { Card, LoadingOverlay } from '../../../../components'
 import { AddFormContainer } from './AddFormContainer'
 
-interface EditProps {}
+interface AddRoleProps {}
 
-interface EditState {}
-
-export class AddRole extends React.Component<EditProps, EditState> {
+export class AddRole extends React.Component<AddRoleProps, null> {
     render() {
         const {
             addRole,
@@ -26,6 +24,7 @@ export class AddRole extends React.Component<EditProps, EditState> {
             fetchPermissions,
             canByPermission,
         } = this.props
+
         return (
             <Card header={<h1>Add Role</h1>} color={'primary'}>
                 <AddFormContainer
