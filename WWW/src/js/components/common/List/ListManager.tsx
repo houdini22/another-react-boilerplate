@@ -50,7 +50,7 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
         })
     }
 
-    setPage(page) {
+    setPage(page: number) {
         return new Promise((resolve) => {
             this.setState(
                 {
@@ -80,7 +80,6 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
     }
 
     fetch() {
-        console.log('fetch')
         return new Promise((resolve, reject) => {
             if (this.requestInProgress) {
                 reject()

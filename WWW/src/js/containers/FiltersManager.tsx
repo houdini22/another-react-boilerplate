@@ -7,7 +7,7 @@ import { LocalStorage } from '../modules/database'
 
 interface FiltersManagerBaseProps {
     defaultFilters: Object
-    urlFilters: Object
+    urlFilters?: Object
     filters: Object
 }
 

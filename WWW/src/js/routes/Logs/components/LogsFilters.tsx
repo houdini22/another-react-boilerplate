@@ -1,34 +1,56 @@
 import * as React from 'react'
 import { FiltersCard } from '../../../components/common/FiltersCard'
+import { DeleteSavedFilter, Filters, ResetFilters, RestoreSavedFilter, SavedFilters, SaveFilters, SetFilter, SetFilters } from '../../../../types.d'
+import { LoadingOverlay } from '../../../components'
 
-interface FiltersProps {
+interface LogsFiltersProps {
     filters: Object
-    setFilter: Function
-
-    fetch(): Function
+    setFilter: SetFilter
+    filtersData: Array<Object>
+    resetFilters: ResetFilters
+    defaultFilters: Filters
+    isLoading: boolean
+    setFilters: SetFilters
+    savedFilters: SavedFilters
+    deleteSavedFilter: DeleteSavedFilter
+    saveFilters: SaveFilters
+    restoreSavedFilter: RestoreSavedFilter
 }
 
-export class Filters extends React.Component<FiltersProps, null> {
+export class LogsFilters extends React.Component<LogsFiltersProps, null> {
     render() {
-        const { filters, setFilter, fetch, logsData, isLoading, resetFilters, defaultFilters, setFilters, setIsLoading } = this.props
+        const {
+            filters,
+            setFilter,
+            filtersData,
+            defaultFilters,
+            isLoading,
+            resetFilters,
+            setFilters,
+            savedFilters,
+            saveFilters,
+            deleteSavedFilter,
+            restoreSavedFilter,
+        } = this.props
+
         return (
             <FiltersCard
-                name={'UsersLogsList'}
+                name={'UserLogsList'}
                 filters={filters}
                 setFilter={setFilter}
                 setFilters={setFilters}
                 resetFilters={resetFilters}
-                fetch={() => {
-                    setIsLoading(true)
-                    fetch().then(() => setIsLoading(false))
-                }}
+                savedFilters={savedFilters}
+                saveFilters={saveFilters}
+                deleteSavedFilter={deleteSavedFilter}
+                restoreSavedFilter={restoreSavedFilter}
                 defaultFilters={defaultFilters}
                 isLoading={isLoading}
                 filtersToRender={[
                     {
                         type: 'select',
                         options: [
-                            ...(logsData?.models?.map(({ count, model_class_name }) => {
+                            ...(filtersData?.models?.map(({ count, model_class_name }) => {
                                 if (model_class_name === null) {
                                     return {
                                         value: 'none',
@@ -41,23 +63,6 @@ export class Filters extends React.Component<FiltersProps, null> {
                                     }
                                 }
                             }) || []),
-                            /*{
-                                label: 'None',
-                                value: 'none',
-                            },
-                            ...Object.keys(logsData?.models || {})
-                                ?.map((key) => {
-                                    return {
-                                        name: key,
-                                        items: logsData?.models[key],
-                                    }
-                                })
-                                ?.map(({ name, items }) => {
-                                    return {
-                                        label: `${name} (${items.length})`,
-                                        value: name,
-                                    }
-                                }),*/
                         ],
                         name: 'model_name',
                         label: 'Model',
@@ -65,7 +70,7 @@ export class Filters extends React.Component<FiltersProps, null> {
                     {
                         type: 'select',
                         options: [
-                            ...(logsData?.users
+                            ...(filtersData?.users
                                 ?.map(({ count, name, user_id }) => {
                                     if (!name && user_id === 0) {
                                         return {
@@ -84,54 +89,25 @@ export class Filters extends React.Component<FiltersProps, null> {
                                     }
                                 })
                                 .sort(({ label: labelA }, { label: labelB }) => labelA.localeCompare(labelB)) || []),
-                            /*{
-                                label: 'None',
-                                value: 'none',
-                            },
-                            ...Object.keys(logsData?.users || {})
-                                ?.map((key) => {
-                                    return {
-                                        name: key,
-                                        items: logsData?.users[key],
-                                    }
-                                })
-                                ?.map(({ name, items }) => {
-                                    return {
-                                        label: `${name} (${items.length})`,
-                                        value: name,
-                                    }
-                                }),*/
                         ],
                         name: 'user',
                         label: 'User',
                     },
                     {
                         type: 'select',
-                        options: logsData?.types?.map(({ count, type }) => {
+                        options: filtersData?.types?.map(({ count, type }) => {
                             return {
                                 value: type,
                                 label: `${type} (${count})`,
                             }
-                        }) /*Object.keys(logsData?.types || {})
-                            ?.map((key) => {
-                                return {
-                                    type: key,
-                                    items: logsData?.types[key],
-                                }
-                            })
-                            ?.map(({ type, items }) => {
-                                return {
-                                    label: `${type} (${items.length})`,
-                                    value: type,
-                                }
-                            })*/,
+                        }),
                         name: 'type',
                         label: 'Type',
                     },
                     {
                         type: 'select',
                         options: [
-                            ...(logsData?.related_models?.map(({ count, related_model_class_name, related_model_id }) => {
+                            ...(filtersData?.related_models?.map(({ count, related_model_class_name, related_model_id }) => {
                                 if (related_model_class_name === null) {
                                     return {
                                         value: 'none',
@@ -177,7 +153,7 @@ export class Filters extends React.Component<FiltersProps, null> {
                             },
                             {
                                 label: '50',
-                                value: 50,
+                                value: 40,
                             },
                             {
                                 label: '100',
@@ -186,9 +162,11 @@ export class Filters extends React.Component<FiltersProps, null> {
                         ],
                     },
                 ]}
-            />
+            >
+                {isLoading && <LoadingOverlay />}
+            </FiltersCard>
         )
     }
 }
 
-export default Filters
+export default LogsFilters

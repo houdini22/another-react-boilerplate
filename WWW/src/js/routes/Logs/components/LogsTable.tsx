@@ -1,12 +1,19 @@
 import * as React from 'react'
-import { Button, Col, Popover, Row, Table, Tooltip } from '../../../components'
+import { Button, Col, Popover, Row, Table } from '../../../components'
 import { DetailsIcon } from '../../../components/icons'
 import { TableSummary } from '../../../components/common/List/TableSummary'
 import { formatDateTimeAPI } from '../../../helpers/date-time'
+import { Log } from '../../../../types.d'
 
-interface PermissionsTableProps {}
+interface LogsTableProps {
+    data: Array<Log>
+    page: number
+    perPage: number
+    total: number
+    totalPages: number
+}
 
-export class LogsTable extends React.Component<PermissionsTableProps, null> {
+export class LogsTable extends React.Component<LogsTableProps, null> {
     render() {
         const { page, perPage, total, totalPages, data } = this.props
 

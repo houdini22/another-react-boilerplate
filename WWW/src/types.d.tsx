@@ -47,6 +47,19 @@ interface UserAvatar {
     id: number
 }
 
+export interface Log {
+    id: number
+    type: string
+    user: User
+    ip_address: string
+    created_at: string
+    message: string
+    model_class_name: string
+    model_id: string
+    related_model_class_name: string
+    related_model_id: string
+}
+
 export type Navigate = (url: string) => any
 export type SetIsLoading = (value: boolean) => Promise<void>
 
