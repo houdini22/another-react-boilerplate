@@ -10,6 +10,7 @@ import { Pagination } from '../../../components/common/List/Pagination'
 import FilesFilters from './FilesFilters'
 import Header from './Header'
 import { getDefaultFilters } from '../../../helpers/media'
+import { createUrlFilters } from '../../../helpers/filters'
 
 interface UsersViewState {
     addVisible: boolean
@@ -68,7 +69,7 @@ export class Index extends React.Component<null, UsersViewState> {
                                                                 <ListManager
                                                                     url={'/files/list'}
                                                                     defaultFilters={defaultFilters}
-                                                                    urlFilters={{ user }}
+                                                                    urlFilters={createUrlFilters({ user })}
                                                                     filters={filters}
                                                                     setIsLoading={setIsLoading}
                                                                 >

@@ -86,7 +86,7 @@ class PermissionsController extends Controller
         if (Arr::get($filters, 'has_roles') === 'no') {
             $roles = $roles->whereDoesntHave('roles');
             $users = $users->whereDoesntHave('roles');
-        } else if (Arr::get($filters, 'has_roles')) {
+        } else if (Arr::get($filters, 'has_roles') === 'yes') {
             $roles = $roles->whereHas('roles');
             $users = $users->whereHas('roles');
         }
@@ -94,7 +94,7 @@ class PermissionsController extends Controller
         if (Arr::get($filters, 'has_users') === 'no') {
             $users = $users->whereDoesntHave('users');
             $roles  = $roles->whereDoesntHave('users');
-        } else if (Arr::get($filters, 'has_users')) {
+        } else if (Arr::get($filters, 'has_users') === 'yes') {
             $users = $users->whereHas('users');
             $roles = $roles->whereHas('users');
         }

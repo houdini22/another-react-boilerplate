@@ -6,7 +6,7 @@ import Header from './Header'
 import { UsersManager } from '../../../containers/UsersManager'
 import { TitleManager } from '../../../containers/TitleManager'
 import { getDefaultFilters } from '../../../helpers/roles'
-import { splitIds } from '../../../helpers/filters'
+import { createUrlFilters, splitIds } from '../../../helpers/filters'
 import { FiltersManager } from '../../../containers/FiltersManager'
 import List from './List'
 
@@ -34,10 +34,10 @@ export class UsersView extends React.Component<null, null> {
                                             <FiltersManager
                                                 name={'roles-list'}
                                                 defaultFilters={getDefaultFilters()}
-                                                urlFilters={{
+                                                urlFilters={createUrlFilters({
                                                     user,
                                                     permissions: splitIds(permissionsFromUri),
-                                                }}
+                                                })}
                                             >
                                                 {({
                                                     defaultFilters,
@@ -62,6 +62,7 @@ export class UsersView extends React.Component<null, null> {
                                                             perPage,
                                                             total,
                                                             fetch,
+                                                            filtersData,
                                                         }) => {
                                                             return (
                                                                 <PageContent>
@@ -69,6 +70,7 @@ export class UsersView extends React.Component<null, null> {
 
                                                                     <List
                                                                         filters={filters}
+                                                                        filtersData={filtersData}
                                                                         setFilter={setFilter}
                                                                         permissions={permissions}
                                                                         resetFilters={resetFilters}

@@ -3,7 +3,7 @@ import { PageContent } from '../../../layouts/PageLayout/components'
 import { ListManager } from '../../../components/common/List/ListManager'
 import Header from './Header'
 import { getDefaultFilters } from '../../../helpers/permissions'
-import { splitIds } from '../../../helpers/filters'
+import { createUrlFilters, splitIds } from '../../../helpers/filters'
 import List from './List'
 import { PermissionsManager, FiltersManager, TitleManager, RouteManager } from '../../../containers'
 
@@ -31,10 +31,10 @@ export class UsersPermissions extends React.Component<null, null> {
                                         <FiltersManager
                                             name={'permissions-list'}
                                             defaultFilters={getDefaultFilters()}
-                                            urlFilters={{
+                                            urlFilters={createUrlFilters({
                                                 user,
                                                 roles: splitIds(rolesFromUri),
-                                            }}
+                                            })}
                                         >
                                             {({
                                                 defaultFilters,

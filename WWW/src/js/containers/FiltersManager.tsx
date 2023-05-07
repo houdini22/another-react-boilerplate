@@ -2,7 +2,7 @@ import * as React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { actions as filtersActions, selectors as filtersSelectors } from '../reducers/filters'
-import { ifDeepDiff } from '../utils/javascript'
+import { deepDiff, ifDeepDiff } from '../utils/javascript'
 import { LocalStorage } from '../modules/database'
 
 interface FiltersManagerBaseProps {
@@ -30,37 +30,43 @@ class FiltersManagerBase extends React.Component<FiltersManagerBaseProps, Filter
 
         const { defaultFilters = {}, urlFilters = {}, filters, name, setFilters } = props
 
-        if (!!filters[name]) {
-            this.state = {
-                defaultFilters,
-                filters: {
-                    ...filters[name],
-                    ...urlFilters,
-                },
-                savedFilters: this.getSavedFilters(),
-            }
-        } else {
-            this.state = {
-                defaultFilters,
-                filters: {
-                    ...defaultFilters,
-                    ...urlFilters,
-                },
-                savedFilters: this.getSavedFilters(),
-            }
+        let filtersToSet
 
-            setFilters(name, defaultFilters)
+        if (!!filters[name]) {
+            filtersToSet = filters[name]
+        } else {
+            filtersToSet = defaultFilters
         }
+
+        if (Object.keys(urlFilters).length) {
+            filtersToSet = {
+                ...defaultFilters,
+                ...urlFilters,
+            }
+        }
+
+        this.state = {
+            defaultFilters,
+            filters: filtersToSet,
+            savedFilters: this.getSavedFilters(),
+        }
+
+        setFilters(name, filtersToSet)
     }
 
     componentDidUpdate(prevProps: Readonly<FiltersManagerBaseProps>, prevState: Readonly<FiltersManagerBaseState>, snapshot?: any) {
-        const { filters: stateFilters } = this.state
         const { filters: propsFilters, name } = this.props
 
-        if (ifDeepDiff(prevProps.filters, propsFilters[name]) && ifDeepDiff(stateFilters, propsFilters[name])) {
-            this.setState({
-                filters: propsFilters[name],
-            })
+        const filters = {
+            ...propsFilters[name],
+        }
+
+        const prevFilters = {
+            ...prevProps.filters[name],
+        }
+
+        if (ifDeepDiff(prevFilters, filters)) {
+            this.setFilters(filters)
         }
     }
 
@@ -76,11 +82,18 @@ class FiltersManagerBase extends React.Component<FiltersManagerBaseProps, Filter
 
     setFilters(filters) {
         return new Promise((resolve) => {
-            const { name: containerName, setFilters } = this.props
+            const { name, setFilters } = this.props
 
-            setFilters(containerName, filters)
+            setFilters(name, filters)
 
-            resolve()
+            this.setState(
+                {
+                    filters,
+                },
+                () => {
+                    resolve()
+                },
+            )
         })
     }
 
@@ -89,10 +102,12 @@ class FiltersManagerBase extends React.Component<FiltersManagerBaseProps, Filter
 
         return this.setFilters(defaultFilters)
     }
+
     getSavedFilters() {
         const { name } = this.props
         return LocalStorage.queryAll('ListManagerFilters', { query: { name: name } })
     }
+
     deleteSavedFilter(name) {
         const { name: containerName } = this.props
 

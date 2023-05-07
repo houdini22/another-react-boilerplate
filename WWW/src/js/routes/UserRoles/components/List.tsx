@@ -82,6 +82,7 @@ export class List extends React.Component<ListProps, null> {
             deletePermission,
             data,
             permissions,
+            filtersData,
         } = this.props
 
         return (
@@ -91,6 +92,7 @@ export class List extends React.Component<ListProps, null> {
                         {canByPermission('roles.list') && (
                             <>
                                 <RolesFilters
+                                    filtersData={filtersData}
                                     filters={filters}
                                     setFilter={setFilter}
                                     fetch={fetch}

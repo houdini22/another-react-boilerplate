@@ -3,6 +3,7 @@ import { FiltersCard } from '../../../components/common/FiltersCard'
 import { LoadingOverlay } from '../../../components'
 import {
     DeleteSavedFilter,
+    Filters,
     Permission,
     ResetFilters,
     RestoreSavedFilter,
@@ -16,7 +17,6 @@ import {
 interface RolesFiltersProps {
     filters: Object
     setFilter: SetFilter
-    roles: Array<Role>
     permissions: Array<Permission>
     resetFilters: ResetFilters
     defaultFilters: Filters
@@ -42,6 +42,7 @@ export class RolesFilters extends React.Component<RolesFiltersProps, null> {
             saveFilters,
             deleteSavedFilter,
             restoreSavedFilter,
+            filtersData,
         } = this.props
 
         return (
@@ -57,6 +58,7 @@ export class RolesFilters extends React.Component<RolesFiltersProps, null> {
                 saveFilters={saveFilters}
                 deleteSavedFilter={deleteSavedFilter}
                 restoreSavedFilter={restoreSavedFilter}
+                filtersData={filtersData}
                 filtersToRender={[
                     {
                         type: 'search',

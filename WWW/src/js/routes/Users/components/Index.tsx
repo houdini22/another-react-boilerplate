@@ -7,7 +7,7 @@ import Header from './Header'
 import { TitleManager } from '../../../containers/TitleManager'
 import { FiltersManager } from '../../../containers/FiltersManager'
 import { getDefaultFilters } from '../../../helpers/users'
-import { splitIds } from '../../../helpers/filters'
+import { createUrlFilters, splitIds } from '../../../helpers/filters'
 import List from './List'
 
 export class UsersView extends React.Component<null, null> {
@@ -36,10 +36,10 @@ export class UsersView extends React.Component<null, null> {
                                         <FiltersManager
                                             name={'users-list'}
                                             defaultFilters={getDefaultFilters()}
-                                            urlFilters={{
+                                            urlFilters={createUrlFilters({
                                                 roles: splitIds(rolesFromUri),
                                                 permissions: splitIds(permissionsFromUri),
-                                            }}
+                                            })}
                                         >
                                             {({
                                                 defaultFilters,

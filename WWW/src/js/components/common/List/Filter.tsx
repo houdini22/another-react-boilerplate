@@ -144,6 +144,7 @@ class Filter extends React.Component<FilterProps, null> {
 
     renderMultiple() {
         const { options, filters, setFilter, name } = this.props
+
         return (
             <>
                 {options
