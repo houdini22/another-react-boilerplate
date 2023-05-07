@@ -7,15 +7,7 @@ import { ModalManager } from '../../ui/Modal'
 import { SaveFiltersModal } from './SaveFiltersModal'
 import { DropdownContainer, DropdownItem, DropdownMenu, DropdownTrigger } from '../../ui/Dropdown'
 import { DeleteIcon } from '../../icons'
-import {
-    ResetFilters,
-    Filters,
-    SetFilter,
-    DeleteSavedFilter,
-    SaveFilters,
-    RestoreSavedFilter,
-    SavedFilters,
-} from '../../../../types.d'
+import { ResetFilters, Filters, SetFilter, DeleteSavedFilter, SaveFilters, RestoreSavedFilter, SavedFilters } from '../../../../types.d'
 
 interface FiltersCardProps {
     name: string
@@ -110,12 +102,7 @@ class FiltersCard extends React.Component<FiltersCardProps, null> {
                                 </Button>,
                             ]}
                         >
-                            <FiltersFactory
-                                filters={filters}
-                                setFilter={setFilter}
-                                defaultFilters={defaultFilters}
-                                body={filtersToRender}
-                            />
+                            <FiltersFactory filters={filters} setFilter={setFilter} defaultFilters={defaultFilters} body={filtersToRender} />
                             {children}
                         </Card>
                     )

@@ -67,11 +67,7 @@ class PopoverView extends React.Component<PopoverViewProps, PopoverViewState> {
                 <Row>
                     <Col xs={12} md={6}>
                         <Section>
-                            <PopoverFormContainer
-                                options={options}
-                                setOptions={this.setOptions.bind(this)}
-                                colSize1={colSize2}
-                            />
+                            <PopoverFormContainer options={options} setOptions={this.setOptions.bind(this)} colSize1={colSize2} />
                         </Section>
                     </Col>
                     <Col xs={12} md={6}>

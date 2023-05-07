@@ -3,14 +3,7 @@ import { Button, Table, Tooltip } from '../../../components'
 import { UserIcon, HelpIcon, RoleIcon } from '../../../components/icons'
 import { TableSummary } from '../../../components/common/List/TableSummary'
 import { ModalConfirm } from '../../../components/common/ModalConfirm'
-import {
-    DeletePermission,
-    DeleteRolePermission,
-    DeleteUserPermission,
-    DeleteUserRole,
-    Permission,
-    SetIsLoading,
-} from '../../../../types.d'
+import { DeletePermission, DeleteRolePermission, DeleteUserPermission, DeleteUserRole, Permission, SetIsLoading } from '../../../../types.d'
 import { ButtonEdit } from '../../../components/common/ButtonEdit'
 import { ButtonDelete } from '../../../components/common/ButtonDelete'
 import { RouteManager } from '../../../containers/RouteManager'
@@ -36,18 +29,8 @@ interface RolesTableProps {
 
 export class PermissionsTable extends React.Component<RolesTableProps, null> {
     render() {
-        const {
-            setIsLoading,
-            deleteUserPermission,
-            fetch,
-            deletePermission,
-            page,
-            perPage,
-            total,
-            totalPages,
-            deleteRolePermission,
-            data,
-        } = this.props
+        const { setIsLoading, deleteUserPermission, fetch, deletePermission, page, perPage, total, totalPages, deleteRolePermission, data } =
+            this.props
 
         return (
             <RouteManager>
@@ -79,9 +62,7 @@ export class PermissionsTable extends React.Component<RolesTableProps, null> {
                                                                                 () => {
                                                                                     fetch().then(
                                                                                         () => {
-                                                                                            closeModal(
-                                                                                                `user-permission-${permission.id}-delete`,
-                                                                                            )
+                                                                                            closeModal(`user-permission-${permission.id}-delete`)
                                                                                             addToastNotification({
                                                                                                 title: 'Remove success.',
                                                                                                 text: `Permission ID: ${permission.id} has been removed.`,
@@ -91,40 +72,29 @@ export class PermissionsTable extends React.Component<RolesTableProps, null> {
                                                                                             setIsLoading(false)
                                                                                         },
                                                                                         () => {
-                                                                                            closeModal(
-                                                                                                `user-permission-${permission.id}-delete`,
-                                                                                            )
+                                                                                            closeModal(`user-permission-${permission.id}-delete`)
                                                                                             setIsLoading(false)
                                                                                         },
                                                                                     )
                                                                                 },
                                                                                 () => {
-                                                                                    closeModal(
-                                                                                        `user-permission-${permission.id}-delete`,
-                                                                                    )
+                                                                                    closeModal(`user-permission-${permission.id}-delete`)
                                                                                     setIsLoading(false)
                                                                                 },
                                                                             )
                                                                         })
                                                                     }}
-                                                                    onCancel={() =>
-                                                                        closeModal(
-                                                                            `user-permission-${permission.id}-delete`,
-                                                                        )
-                                                                    }
+                                                                    onCancel={() => closeModal(`user-permission-${permission.id}-delete`)}
                                                                 >
                                                                     <p>
-                                                                        Are you sure to delete Permission:{' '}
-                                                                        <b>{permission.name}</b>?
+                                                                        Are you sure to delete Permission: <b>{permission.name}</b>?
                                                                     </p>
                                                                 </ModalConfirm>,
                                                             )
                                                         }
 
                                                         return (
-                                                            <Table.ExpandManager
-                                                                key={`expand-manager-${permission.id}`}
-                                                            >
+                                                            <Table.ExpandManager key={`expand-manager-${permission.id}`}>
                                                                 {({ addExpand, expand }) => {
                                                                     addExpand(
                                                                         'roles',
@@ -162,21 +132,14 @@ export class PermissionsTable extends React.Component<RolesTableProps, null> {
                                                                                                 <span
                                                                                                     style={{
                                                                                                         maxWidth: 300,
-                                                                                                        display:
-                                                                                                            'block',
+                                                                                                        display: 'block',
                                                                                                     }}
                                                                                                 >
-                                                                                                    {
-                                                                                                        permission.description
-                                                                                                    }
+                                                                                                    {permission.description}
                                                                                                 </span>
                                                                                             }
                                                                                         >
-                                                                                            <Button
-                                                                                                icon={<HelpIcon />}
-                                                                                                iconOnly
-                                                                                                color={'info'}
-                                                                                            />
+                                                                                            <Button icon={<HelpIcon />} iconOnly color={'info'} />
                                                                                         </Tooltip>
                                                                                     )}
                                                                                 </div>
@@ -184,42 +147,26 @@ export class PermissionsTable extends React.Component<RolesTableProps, null> {
                                                                             <Table.Td xs={5} alignRight>
                                                                                 <div>
                                                                                     {permission.roles_count > 0 &&
-                                                                                        canByPermission(
-                                                                                            'roles.list_permissions',
-                                                                                        ) && (
-                                                                                            <Tooltip
-                                                                                                tooltip={`Roles with Permission`}
-                                                                                            >
+                                                                                        canByPermission('roles.list_permissions') && (
+                                                                                            <Tooltip tooltip={`Roles with Permission`}>
                                                                                                 <Button
                                                                                                     color={'info'}
                                                                                                     icon={<RoleIcon />}
-                                                                                                    onClick={() =>
-                                                                                                        expand('roles')
-                                                                                                    }
+                                                                                                    onClick={() => expand('roles')}
                                                                                                 >
-                                                                                                    {
-                                                                                                        permission.roles_count
-                                                                                                    }
+                                                                                                    {permission.roles_count}
                                                                                                 </Button>
                                                                                             </Tooltip>
                                                                                         )}
                                                                                     {permission.users_count > 0 &&
-                                                                                        canByPermission(
-                                                                                            'users.list_permissions',
-                                                                                        ) && (
-                                                                                            <Tooltip
-                                                                                                tooltip={`Users with Permission`}
-                                                                                            >
+                                                                                        canByPermission('users.list_permissions') && (
+                                                                                            <Tooltip tooltip={`Users with Permission`}>
                                                                                                 <Button
                                                                                                     color={'info'}
                                                                                                     icon={<UserIcon />}
-                                                                                                    onClick={() =>
-                                                                                                        expand('users')
-                                                                                                    }
+                                                                                                    onClick={() => expand('users')}
                                                                                                 >
-                                                                                                    {
-                                                                                                        permission.users_count
-                                                                                                    }
+                                                                                                    {permission.users_count}
                                                                                                 </Button>
                                                                                             </Tooltip>
                                                                                         )}
@@ -227,17 +174,11 @@ export class PermissionsTable extends React.Component<RolesTableProps, null> {
                                                                             </Table.Td>
                                                                             <Table.Td xs={2}>
                                                                                 <div>
-                                                                                    {canByPermission(
-                                                                                        'permissions.edit',
-                                                                                    ) && (
-                                                                                        <ButtonEdit
-                                                                                            href={`/permissions/edit?id=${permission.id}`}
-                                                                                        />
+                                                                                    {canByPermission('permissions.edit') && (
+                                                                                        <ButtonEdit href={`/permissions/edit?id=${permission.id}`} />
                                                                                     )}
                                                                                     {permission.is_deletable == 1 &&
-                                                                                        canByPermission(
-                                                                                            'permissions.delete',
-                                                                                        ) && (
+                                                                                        canByPermission('permissions.delete') && (
                                                                                             <ButtonDelete
                                                                                                 onClick={() => {
                                                                                                     openModal(
@@ -255,12 +196,7 @@ export class PermissionsTable extends React.Component<RolesTableProps, null> {
                                                         )
                                                     })}
                                                 </Table.TBody>
-                                                <TableSummary
-                                                    page={page}
-                                                    perPage={perPage}
-                                                    total={total}
-                                                    totalPages={totalPages}
-                                                />
+                                                <TableSummary page={page} perPage={perPage} total={total} totalPages={totalPages} />
                                             </Table.Container>
                                         )}
                                     </NotificationsManager>

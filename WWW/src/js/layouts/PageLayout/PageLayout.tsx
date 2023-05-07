@@ -35,11 +35,7 @@ class PageLayout extends React.Component<PageLayoutProps, null> {
             children,
             layout: { disableHeader, disableFooter, disableSidebar },
             connectionErrorModalVisible: { message: connectionErrorMessage, code: connectionErrorCode },
-            connectionFetchError: {
-                message: connectionFetchErrorMessage,
-                statusText: connectionErrorStatusText,
-                data: connectionErrorStatusData,
-            },
+            connectionFetchError: { message: connectionFetchErrorMessage, statusText: connectionErrorStatusText, data: connectionErrorStatusData },
             setConnectionErrorModalVisible,
             setFetchError,
             error404,
@@ -92,11 +88,7 @@ class PageLayout extends React.Component<PageLayoutProps, null> {
                                     message={connectionFetchErrorMessage}
                                     close={() => setFetchError({})}
                                 />
-                                <ConnectionFetchError404
-                                    data={error404}
-                                    visible={Object.keys(error404).length > 0}
-                                    close={() => set404error({})}
-                                />
+                                <ConnectionFetchError404 data={error404} visible={Object.keys(error404).length > 0} close={() => set404error({})} />
                             </div>
                         )}
                     </AuthManager>

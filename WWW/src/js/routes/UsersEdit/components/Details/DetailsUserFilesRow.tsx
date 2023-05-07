@@ -20,11 +20,7 @@ class DetailsUserFilesRow extends React.Component<DetailsUserFilesRowProps, null
                             Files
                         </Col>
                         <Col xs={8} style={{ marginBottom: 10 }}>
-                            <Button
-                                color={'info'}
-                                icon={<FileIcon />}
-                                onClick={() => navigate(`/media?user=${user.name}`)}
-                            >
+                            <Button color={'info'} icon={<FileIcon />} onClick={() => navigate(`/media?user=${user.name}`)}>
                                 {user.files_count}
                             </Button>
                         </Col>

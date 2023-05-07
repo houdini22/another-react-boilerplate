@@ -16,18 +16,8 @@ interface AddRoleProps {
 
 export class Roles extends React.Component<AddRoleProps, null> {
     render() {
-        const {
-            setIsLoading,
-            deleteUserRole,
-            fetchOne,
-            user,
-            isLoading,
-            navigate,
-            addToastNotification,
-            openModal,
-            closeModal,
-            registerModal,
-        } = this.props
+        const { setIsLoading, deleteUserRole, fetchOne, user, isLoading, navigate, addToastNotification, openModal, closeModal, registerModal } =
+            this.props
 
         return (
             <Card

@@ -66,12 +66,7 @@ export class LogsView extends React.Component<null, null> {
                                                                         {({ setIsLoading, isLoading, logsData }) => {
                                                                             return (
                                                                                 <PageContent>
-                                                                                    <Header
-                                                                                        navigate={navigate}
-                                                                                        canByPermission={
-                                                                                            canByPermission
-                                                                                        }
-                                                                                    />
+                                                                                    <Header navigate={navigate} canByPermission={canByPermission} />
 
                                                                                     {canByPermission('logs.list') && (
                                                                                         <>
@@ -79,23 +74,12 @@ export class LogsView extends React.Component<null, null> {
                                                                                                 filters={filters}
                                                                                                 setFilter={setFilter}
                                                                                                 fetch={fetch}
-                                                                                                resetFilters={
-                                                                                                    resetFilters
-                                                                                                }
-                                                                                                restoreFilters={
-                                                                                                    restoreFilters
-                                                                                                }
-                                                                                                defaultFilters={
-                                                                                                    defaultFilters
-                                                                                                }
+                                                                                                resetFilters={resetFilters}
+                                                                                                restoreFilters={restoreFilters}
+                                                                                                defaultFilters={defaultFilters}
                                                                                                 setFilters={setFilters}
-                                                                                                isLoading={
-                                                                                                    isLoading ||
-                                                                                                    isLoading2
-                                                                                                }
-                                                                                                setIsLoading={
-                                                                                                    setIsLoading
-                                                                                                }
+                                                                                                isLoading={isLoading || isLoading2}
+                                                                                                setIsLoading={setIsLoading}
                                                                                                 logsData={logsData}
                                                                                             />
 
@@ -105,64 +89,35 @@ export class LogsView extends React.Component<null, null> {
                                                                                                     page={page}
                                                                                                     fetch={fetch}
                                                                                                     setPage={setPage}
-                                                                                                    hasNextPage={
-                                                                                                        hasNextPage
-                                                                                                    }
-                                                                                                    hasPrevPage={
-                                                                                                        hasPrevPage
-                                                                                                    }
-                                                                                                    totalPages={
-                                                                                                        totalPages
-                                                                                                    }
+                                                                                                    hasNextPage={hasNextPage}
+                                                                                                    hasPrevPage={hasPrevPage}
+                                                                                                    totalPages={totalPages}
                                                                                                 />
                                                                                                 <LogsTable
-                                                                                                    setIsLoading={
-                                                                                                        setIsLoading
-                                                                                                    }
+                                                                                                    setIsLoading={setIsLoading}
                                                                                                     data={data}
                                                                                                     fetch={fetch}
-                                                                                                    addToastNotification={
-                                                                                                        addToastNotification
-                                                                                                    }
+                                                                                                    addToastNotification={addToastNotification}
                                                                                                     page={page}
                                                                                                     perPage={perPage}
                                                                                                     total={total}
-                                                                                                    totalPages={
-                                                                                                        totalPages
-                                                                                                    }
+                                                                                                    totalPages={totalPages}
                                                                                                     navigate={navigate}
-                                                                                                    openModal={
-                                                                                                        openModal
-                                                                                                    }
-                                                                                                    registerModal={
-                                                                                                        registerModal
-                                                                                                    }
-                                                                                                    closeModal={
-                                                                                                        closeModal
-                                                                                                    }
-                                                                                                    canByPermission={
-                                                                                                        canByPermission
-                                                                                                    }
+                                                                                                    openModal={openModal}
+                                                                                                    registerModal={registerModal}
+                                                                                                    closeModal={closeModal}
+                                                                                                    canByPermission={canByPermission}
                                                                                                 />
                                                                                                 <Pagination
                                                                                                     links={links}
                                                                                                     page={page}
                                                                                                     fetch={fetch}
                                                                                                     setPage={setPage}
-                                                                                                    hasNextPage={
-                                                                                                        hasNextPage
-                                                                                                    }
-                                                                                                    hasPrevPage={
-                                                                                                        hasPrevPage
-                                                                                                    }
-                                                                                                    totalPages={
-                                                                                                        totalPages
-                                                                                                    }
+                                                                                                    hasNextPage={hasNextPage}
+                                                                                                    hasPrevPage={hasPrevPage}
+                                                                                                    totalPages={totalPages}
                                                                                                 />
-                                                                                                {(isLoading ||
-                                                                                                    isLoading2) && (
-                                                                                                    <LoadingOverlay />
-                                                                                                )}
+                                                                                                {(isLoading || isLoading2) && <LoadingOverlay />}
                                                                                             </Card>
                                                                                         </>
                                                                                     )}

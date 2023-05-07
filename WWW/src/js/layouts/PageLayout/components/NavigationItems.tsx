@@ -35,10 +35,7 @@ const NavigationItems = ({ items, setNested, nestedIds }) => {
                                             return null
                                         }
 
-                                        if (
-                                            (typeof permission === 'string' || Array.isArray(permission)) &&
-                                            !canByPermission(permission)
-                                        ) {
+                                        if ((typeof permission === 'string' || Array.isArray(permission)) && !canByPermission(permission)) {
                                             return null
                                         }
 
@@ -50,11 +47,7 @@ const NavigationItems = ({ items, setNested, nestedIds }) => {
                                                     href={href}
                                                     icon={icon}
                                                     key={`${type}-${caption}-${href}`}
-                                                    active={
-                                                        urlActive
-                                                            .map((regexp) => regexp.test(pathname))
-                                                            .filter((v) => !!v).length > 0
-                                                    }
+                                                    active={urlActive.map((regexp) => regexp.test(pathname)).filter((v) => !!v).length > 0}
                                                     componentType={componentType}
                                                     nested={children}
                                                     setNested={setNested}

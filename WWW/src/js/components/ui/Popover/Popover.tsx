@@ -99,18 +99,7 @@ class Container extends React.Component<ContainerProps, ContainerState> {
     }
 
     render() {
-        const {
-            children,
-            pixelsWidth,
-            outline,
-            color = 'default',
-            className,
-            placement,
-            noPadding,
-            trigger,
-            transparent,
-            style,
-        } = this.props
+        const { children, pixelsWidth, outline, color = 'default', className, placement, noPadding, trigger, transparent, style } = this.props
         const { isOpen, contentElement, contentElementMarginTop } = this.state
 
         return (
@@ -143,10 +132,7 @@ class Container extends React.Component<ContainerProps, ContainerState> {
                         className={cx('component-popover__content')}
                         style={{
                             width: Number(pixelsWidth),
-                            marginTop:
-                                placement === 'right-center' || placement === 'left-center'
-                                    ? contentElementMarginTop
-                                    : 0,
+                            marginTop: placement === 'right-center' || placement === 'left-center' ? contentElementMarginTop : 0,
                         }}
                         ref={(e) => this.registerContentElement(e)}
                     />

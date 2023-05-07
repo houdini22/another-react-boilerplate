@@ -51,11 +51,7 @@ export class UsersPermissions extends React.Component<null, null> {
                                                     savedFilters,
                                                     restoreSavedFilter,
                                                 }) => (
-                                                    <ListManager
-                                                        url={'/permissions/list'}
-                                                        filters={filters}
-                                                        setIsLoading={setIsLoading}
-                                                    >
+                                                    <ListManager url={'/permissions/list'} filters={filters} setIsLoading={setIsLoading}>
                                                         {({
                                                             data,
                                                             links,

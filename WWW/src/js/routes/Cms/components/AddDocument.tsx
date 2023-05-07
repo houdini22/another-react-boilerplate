@@ -53,8 +53,7 @@ export class AddDocumentView extends React.Component {
                                                         },
                                                         parent_id: currentNode.id,
                                                         document: {
-                                                            document_url:
-                                                                generateUrl(currentNode?.category?.category_url) || '/',
+                                                            document_url: generateUrl(currentNode?.category?.category_url) || '/',
                                                         },
                                                     }}
                                                     save={addDocument}

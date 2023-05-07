@@ -476,17 +476,14 @@
                                             align-content: center;
                                         }
 
-                                        &
-                                            > .layout__header__bar__right__element--notifications__expanded__item__content {
+                                        & > .layout__header__bar__right__element--notifications__expanded__item__content {
                                             width: 70%;
-                                            &
-                                                > .layout__header__bar__right__element--notifications__expanded__item__content__title {
+                                            & > .layout__header__bar__right__element--notifications__expanded__item__content__title {
                                                 display: block;
                                                 font-size: 18px;
                                                 font-weight: bold;
                                             }
-                                            &
-                                                > .layout__header__bar__right__element--notifications__expanded__item__content__text {
+                                            & > .layout__header__bar__right__element--notifications__expanded__item__content__text {
                                                 line-height: 13px;
                                                 font-size: 13px;
                                                 p {

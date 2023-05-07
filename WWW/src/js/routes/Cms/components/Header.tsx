@@ -30,19 +30,13 @@ export class Header extends React.Component<HeaderProps, null> {
                                 <Dropdown.Menu>
                                     <Dropdown.Item href={`/cms/pages?parent_id=${id}`}>Show Items</Dropdown.Item>
                                     {canByPermission('cms.add_category') && (
-                                        <Dropdown.Item href={`/cms/pages/add_category?parent_id=${id}`}>
-                                            Add Category
-                                        </Dropdown.Item>
+                                        <Dropdown.Item href={`/cms/pages/add_category?parent_id=${id}`}>Add Category</Dropdown.Item>
                                     )}
                                     {canByPermission('cms.add_document') && (
-                                        <Dropdown.Item href={`/cms/pages/add_document?parent_id=${id}`}>
-                                            Add Document
-                                        </Dropdown.Item>
+                                        <Dropdown.Item href={`/cms/pages/add_document?parent_id=${id}`}>Add Document</Dropdown.Item>
                                     )}
                                     {canByPermission('cms.add_link') && (
-                                        <Dropdown.Item href={`/cms/pages/add_link?parent_id=${id}`}>
-                                            Add Link
-                                        </Dropdown.Item>
+                                        <Dropdown.Item href={`/cms/pages/add_link?parent_id=${id}`}>Add Link</Dropdown.Item>
                                     )}
                                 </Dropdown.Menu>
                             </Dropdown.Container>
@@ -50,59 +44,35 @@ export class Header extends React.Component<HeaderProps, null> {
                     ))}
                     {!!currentNode?.parent?.category && (
                         <PageHeader.BreadcrumbsItem
-                            href={
-                                currentNode?.tree_object_type === 'category'
-                                    ? `/cms/pages?parent_id=${currentNode.id}`
-                                    : undefined
-                            }
+                            href={currentNode?.tree_object_type === 'category' ? `/cms/pages?parent_id=${currentNode.id}` : undefined}
                         >
                             {currentNode?.tree_object_type === 'category' && (
                                 <PageHeader.BreadcrumbsItem href={`/cms/pages?parent_id=${currentNode?.id}`}>
                                     <Dropdown.Container size={'sm'} placement={'right'}>
                                         <Dropdown.Trigger component={Button} transparent>
-                                            {
-                                                currentNode?.[currentNode?.tree_object_type]?.[
-                                                    `${currentNode?.tree_object_type}_name`
-                                                ]
-                                            }
+                                            {currentNode?.[currentNode?.tree_object_type]?.[`${currentNode?.tree_object_type}_name`]}
                                         </Dropdown.Trigger>
                                         <Dropdown.Menu>
-                                            <Dropdown.Item href={`/cms/pages?parent_id=${currentNode?.id}`}>
-                                                Show Items
-                                            </Dropdown.Item>
+                                            <Dropdown.Item href={`/cms/pages?parent_id=${currentNode?.id}`}>Show Items</Dropdown.Item>
                                             {canByPermission('cms.add_category') && (
-                                                <Dropdown.Item
-                                                    href={`/cms/pages/add_category?parent_id=${currentNode?.id}`}
-                                                >
+                                                <Dropdown.Item href={`/cms/pages/add_category?parent_id=${currentNode?.id}`}>
                                                     Add Category
                                                 </Dropdown.Item>
                                             )}
                                             {canByPermission('cms.add_document') && (
-                                                <Dropdown.Item
-                                                    href={`/cms/pages/add_document?parent_id=${currentNode?.id}`}
-                                                >
+                                                <Dropdown.Item href={`/cms/pages/add_document?parent_id=${currentNode?.id}`}>
                                                     Add Document
                                                 </Dropdown.Item>
                                             )}
                                             {canByPermission('cms.add_link') && (
-                                                <Dropdown.Item
-                                                    href={`/cms/pages/add_link?parent_id=${currentNode?.id}`}
-                                                >
-                                                    Add Link
-                                                </Dropdown.Item>
+                                                <Dropdown.Item href={`/cms/pages/add_link?parent_id=${currentNode?.id}`}>Add Link</Dropdown.Item>
                                             )}
                                         </Dropdown.Menu>
                                     </Dropdown.Container>
                                 </PageHeader.BreadcrumbsItem>
                             )}
                             {currentNode?.tree_object_type !== 'category' && (
-                                <>
-                                    {
-                                        currentNode?.[currentNode?.tree_object_type]?.[
-                                            `${currentNode?.tree_object_type}_name`
-                                        ]
-                                    }
-                                </>
+                                <>{currentNode?.[currentNode?.tree_object_type]?.[`${currentNode?.tree_object_type}_name`]}</>
                             )}
                         </PageHeader.BreadcrumbsItem>
                     )}

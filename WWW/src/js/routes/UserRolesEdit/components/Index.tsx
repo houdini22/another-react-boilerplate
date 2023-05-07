@@ -55,40 +55,26 @@ export class UserRolesEdit extends React.Component<null, UsersViewState> {
                                                                                 <Edit
                                                                                     editRole={editRole}
                                                                                     role={role}
-                                                                                    fetchOne={() =>
-                                                                                        fetchRole(role['id'])
-                                                                                    }
+                                                                                    fetchOne={() => fetchRole(role['id'])}
                                                                                     fetch={fetch}
                                                                                     isLoading={isLoading}
-                                                                                    addToastNotification={
-                                                                                        addToastNotification
-                                                                                    }
+                                                                                    addToastNotification={addToastNotification}
                                                                                     setIsLoading={setIsLoading}
                                                                                 />
                                                                             </Col>
                                                                         </Row>
                                                                         <Row>
                                                                             <Col xs={12} md={6}>
-                                                                                {canByPermission(
-                                                                                    'roles.list_permissions',
-                                                                                ) && (
+                                                                                {canByPermission('roles.list_permissions') && (
                                                                                     <Permissions
                                                                                         role={role}
                                                                                         setIsLoading={setIsLoading}
-                                                                                        fetch={() =>
-                                                                                            fetchRole(role['id'])
-                                                                                        }
+                                                                                        fetch={() => fetchRole(role['id'])}
                                                                                         isLoading={isLoading}
-                                                                                        deletePermission={
-                                                                                            deletePermission
-                                                                                        }
-                                                                                        deleteRolePermission={
-                                                                                            deleteRolePermission
-                                                                                        }
+                                                                                        deletePermission={deletePermission}
+                                                                                        deleteRolePermission={deleteRolePermission}
                                                                                         navigate={navigate}
-                                                                                        addToastNotification={
-                                                                                            addToastNotification
-                                                                                        }
+                                                                                        addToastNotification={addToastNotification}
                                                                                         openModal={openModal}
                                                                                         registerModal={registerModal}
                                                                                         closeModal={closeModal}
@@ -96,44 +82,30 @@ export class UserRolesEdit extends React.Component<null, UsersViewState> {
                                                                                 )}
                                                                             </Col>
                                                                             <Col xs={12} md={6}>
-                                                                                {canByPermission(
-                                                                                    'roles.add_permission',
-                                                                                ) && (
+                                                                                {canByPermission('roles.add_permission') && (
                                                                                     <AddPermissions
                                                                                         role={role}
                                                                                         permissions={permissions}
                                                                                         setIsLoading={setIsLoading}
                                                                                         addPermission={addPermission}
-                                                                                        fetchPermissions={
-                                                                                            fetchPermissions
-                                                                                        }
-                                                                                        fetchOne={() =>
-                                                                                            fetchRole(role.id)
-                                                                                        }
+                                                                                        fetchPermissions={fetchPermissions}
+                                                                                        fetchOne={() => fetchRole(role.id)}
                                                                                         isLoading={isLoading}
-                                                                                        addToastNotification={
-                                                                                            addToastNotification
-                                                                                        }
+                                                                                        addToastNotification={addToastNotification}
                                                                                     />
                                                                                 )}
                                                                             </Col>
                                                                         </Row>
                                                                         <Row>
                                                                             <Col xs={12} md={6}>
-                                                                                {canByPermission(
-                                                                                    'roles.list_users',
-                                                                                ) && (
+                                                                                {canByPermission('roles.list_users') && (
                                                                                     <Users
                                                                                         role={role}
                                                                                         setIsLoading={setIsLoading}
-                                                                                        fetch={() =>
-                                                                                            fetchRole(role['id'])
-                                                                                        }
+                                                                                        fetch={() => fetchRole(role['id'])}
                                                                                         isLoading={isLoading}
                                                                                         navigate={navigate}
-                                                                                        addToastNotification={
-                                                                                            addToastNotification
-                                                                                        }
+                                                                                        addToastNotification={addToastNotification}
                                                                                         openModal={openModal}
                                                                                         registerModal={registerModal}
                                                                                         closeModal={closeModal}
@@ -142,20 +114,14 @@ export class UserRolesEdit extends React.Component<null, UsersViewState> {
                                                                                 )}
                                                                             </Col>
                                                                             <Col xs={12} md={6}>
-                                                                                {canByPermission(
-                                                                                    'users.add_permission',
-                                                                                ) && (
+                                                                                {canByPermission('users.add_permission') && (
                                                                                     <AddUsers
                                                                                         role={role}
                                                                                         users={users}
                                                                                         setIsLoading={setIsLoading}
-                                                                                        fetch={() =>
-                                                                                            fetchRole(role['id'])
-                                                                                        }
+                                                                                        fetch={() => fetchRole(role['id'])}
                                                                                         isLoading={isLoading}
-                                                                                        addToastNotification={
-                                                                                            addToastNotification
-                                                                                        }
+                                                                                        addToastNotification={addToastNotification}
                                                                                         addUserRole={addUserRole}
                                                                                     />
                                                                                 )}

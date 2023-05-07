@@ -20,11 +20,7 @@ class DetailsUserPermissionsRow extends React.Component<DetailsUserPermissionsRo
                             Permissions
                         </Col>
                         <Col xs={8} style={{ marginBottom: 10 }}>
-                            <Button
-                                color={'info'}
-                                icon={<RoleIcon />}
-                                onClick={() => navigate(`/permissions?user=${user.name}`)}
-                            >
+                            <Button color={'info'} icon={<RoleIcon />} onClick={() => navigate(`/permissions?user=${user.name}`)}>
                                 {user.permissions_count}
                             </Button>
                         </Col>

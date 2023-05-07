@@ -45,9 +45,7 @@ class AddDocumentForm extends React.Component {
                                                         change(
                                                             'document.document_url',
                                                             generateUrl(
-                                                                id
-                                                                    ? currentNode.parent.category.category_url
-                                                                    : currentNode.category.category_url,
+                                                                id ? currentNode.parent.category.category_url : currentNode.category.category_url,
                                                                 value,
                                                             ),
                                                         )
@@ -73,12 +71,8 @@ class AddDocumentForm extends React.Component {
                                                     header={
                                                         <h1>
                                                             Publishing{' '}
-                                                            <Badge
-                                                                color={isPublished(formValues) ? 'success' : 'warning'}
-                                                            >
-                                                                {isPublished(formValues)
-                                                                    ? 'Is published'
-                                                                    : 'Is not Published'}
+                                                            <Badge color={isPublished(formValues) ? 'success' : 'warning'}>
+                                                                {isPublished(formValues) ? 'Is published' : 'Is not Published'}
                                                             </Badge>
                                                         </h1>
                                                     }
@@ -89,18 +83,8 @@ class AddDocumentForm extends React.Component {
                                                         type="checkbox"
                                                         component={FormField}
                                                     />
-                                                    <Field
-                                                        name="tree.tree_published_from"
-                                                        label="Published from"
-                                                        type="text"
-                                                        component={FormField}
-                                                    />
-                                                    <Field
-                                                        name="tree.tree_published_to"
-                                                        label="Published to"
-                                                        type="text"
-                                                        component={FormField}
-                                                    />
+                                                    <Field name="tree.tree_published_from" label="Published from" type="text" component={FormField} />
+                                                    <Field name="tree.tree_published_to" label="Published to" type="text" component={FormField} />
                                                 </Card>
                                                 <Field
                                                     name="document.document_url"

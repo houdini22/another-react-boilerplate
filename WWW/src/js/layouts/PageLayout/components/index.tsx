@@ -8,14 +8,4 @@ import { NavigationHeader } from './NavigationHeader'
 import { SidebarTabIcon } from './SidebarTabIcon'
 import { PageContent } from './PageContent'
 
-export {
-    Sidebar,
-    SidebarHeader,
-    Navigation,
-    NavigationLink,
-    Container,
-    Footer,
-    NavigationHeader,
-    SidebarTabIcon,
-    PageContent,
-}
+export { Sidebar, SidebarHeader, Navigation, NavigationLink, Container, Footer, NavigationHeader, SidebarTabIcon, PageContent }

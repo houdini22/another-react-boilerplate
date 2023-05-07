@@ -52,11 +52,7 @@ class FiltersManagerBase extends React.Component<FiltersManagerBaseProps, Filter
         }
     }
 
-    componentDidUpdate(
-        prevProps: Readonly<FiltersManagerBaseProps>,
-        prevState: Readonly<FiltersManagerBaseState>,
-        snapshot?: any,
-    ) {
+    componentDidUpdate(prevProps: Readonly<FiltersManagerBaseProps>, prevState: Readonly<FiltersManagerBaseState>, snapshot?: any) {
         const { filters: stateFilters } = this.state
         const { filters: propsFilters, name } = this.props
 

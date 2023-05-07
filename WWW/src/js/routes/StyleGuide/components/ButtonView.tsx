@@ -65,20 +65,7 @@ class ButtonView extends React.Component<ButtonViewProps, ButtonViewState> {
     render() {
         const { colSize1 = 4, createPresentationTab = _createPresentationTab } = this.props
         const { options } = this.state
-        const {
-            size,
-            isLoading,
-            block,
-            disabled,
-            rounded,
-            outline,
-            roundless,
-            borderless,
-            icon,
-            iconOnly,
-            color,
-            navigationHref,
-        } = options
+        const { size, isLoading, block, disabled, rounded, outline, roundless, borderless, icon, iconOnly, color, navigationHref } = options
 
         const code = generateCode('Button', options, 'Click me!')
 

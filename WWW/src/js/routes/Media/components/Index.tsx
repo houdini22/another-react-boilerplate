@@ -64,17 +64,11 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                         <PageHeader.BreadcrumbsItem href="/">
                                                             <HomeIcon /> Home
                                                         </PageHeader.BreadcrumbsItem>
-                                                        <PageHeader.BreadcrumbsItem href="/media">
-                                                            Media
-                                                        </PageHeader.BreadcrumbsItem>
+                                                        <PageHeader.BreadcrumbsItem href="/media">Media</PageHeader.BreadcrumbsItem>
                                                     </PageHeader.Breadcrumbs>
                                                 </PageHeader.Container>
 
-                                                <ListManager
-                                                    url={'/files/list'}
-                                                    defaultFilters={defaultFilters}
-                                                    urlFilters={{ user }}
-                                                >
+                                                <ListManager url={'/files/list'} defaultFilters={defaultFilters} urlFilters={{ user }}>
                                                     {({
                                                         data,
                                                         isLoading,
@@ -93,12 +87,7 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                         setFilters,
                                                     }) => (
                                                         <MediaManager>
-                                                            {({
-                                                                deleteFile,
-                                                                uploadFiles,
-                                                                uploadProgress,
-                                                                editFile,
-                                                            }) => {
+                                                            {({ deleteFile, uploadFiles, uploadProgress, editFile }) => {
                                                                 let totalSize = 0
                                                                 data.forEach(({ size }) => {
                                                                     totalSize += size
@@ -112,9 +101,7 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                                     uploadFiles={uploadFiles}
                                                                                     uploadProgress={uploadProgress}
                                                                                     fetch={fetch}
-                                                                                    addToastNotification={
-                                                                                        addToastNotification
-                                                                                    }
+                                                                                    addToastNotification={addToastNotification}
                                                                                 />
                                                                             </Card>
                                                                         )}
@@ -141,21 +128,14 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                             />
                                                                             <Row>
                                                                                 {data?.map((file) => (
-                                                                                    <Col
-                                                                                        xs={2}
-                                                                                        sm={2}
-                                                                                        md={2}
-                                                                                        key={file.id}
-                                                                                    >
+                                                                                    <Col xs={2} sm={2} md={2} key={file.id}>
                                                                                         <File
                                                                                             file={file}
                                                                                             deleteFile={deleteFile}
                                                                                             fetch={fetch}
                                                                                             editFile={editFile}
                                                                                             isLoading={isLoading}
-                                                                                            addToastNotification={
-                                                                                                addToastNotification
-                                                                                            }
+                                                                                            addToastNotification={addToastNotification}
                                                                                         />
                                                                                     </Col>
                                                                                 ))}
@@ -172,19 +152,13 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                             <div style={{ textAlign: 'right' }}>
                                                                                 Records:{' '}
                                                                                 <b>
-                                                                                    {(page - 1) * perPage + 1} -{' '}
-                                                                                    {Math.min(perPage * page, total)} /{' '}
+                                                                                    {(page - 1) * perPage + 1} - {Math.min(perPage * page, total)} /{' '}
                                                                                     {total}
                                                                                 </b>
                                                                                 <br />
                                                                                 Total pages: <b>{totalPages}</b>
                                                                                 <br />
-                                                                                Total size:{' '}
-                                                                                <b>
-                                                                                    {getReadableFileSizeString(
-                                                                                        totalSize,
-                                                                                    )}
-                                                                                </b>
+                                                                                Total size: <b>{getReadableFileSizeString(totalSize)}</b>
                                                                             </div>
                                                                             {isLoading && <LoadingOverlay />}
                                                                         </Card>

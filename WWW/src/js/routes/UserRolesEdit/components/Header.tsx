@@ -18,9 +18,7 @@ export class Header extends React.Component<HeaderProps, null> {
                     </PageHeader.BreadcrumbsItem>
                     <PageHeader.BreadcrumbsItem href="/users">Users</PageHeader.BreadcrumbsItem>
                     <PageHeader.BreadcrumbsItem href="/roles">Roles</PageHeader.BreadcrumbsItem>
-                    <PageHeader.BreadcrumbsItem href={`/roles/edit?id=${role['id']}`}>
-                        Edit Role
-                    </PageHeader.BreadcrumbsItem>
+                    <PageHeader.BreadcrumbsItem href={`/roles/edit?id=${role['id']}`}>Edit Role</PageHeader.BreadcrumbsItem>
                 </PageHeader.Breadcrumbs>
             </PageHeader.Container>
         )

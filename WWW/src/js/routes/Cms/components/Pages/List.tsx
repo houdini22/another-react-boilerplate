@@ -89,9 +89,7 @@ export class List extends React.Component<null, null> {
                             icon={<EditIcon />}
                             iconOnly
                             color={'warning'}
-                            onClick={() =>
-                                navigate(`/cms/pages/edit_${currentNode.tree_object_type}?id=${currentNode.id}`)
-                            }
+                            onClick={() => navigate(`/cms/pages/edit_${currentNode.tree_object_type}?id=${currentNode.id}`)}
                         />
                     ) : undefined,
                 ]}
@@ -183,10 +181,7 @@ export class List extends React.Component<null, null> {
                                     key={node.id}
                                     style={{
                                         paddingLeft: ['everywhere', 'descendants'].includes(filters.search_in)
-                                            ? 40 *
-                                              (filters.search_in === 'descendants'
-                                                  ? node.depth - currentNode.depth - 1
-                                                  : node.depth - 1)
+                                            ? 40 * (filters.search_in === 'descendants' ? node.depth - currentNode.depth - 1 : node.depth - 1)
                                             : undefined,
                                     }}
                                 >
@@ -201,8 +196,7 @@ export class List extends React.Component<null, null> {
                                         {node.tree_object_type === 'link' && node?.link?.link_name}
                                     </Table.Td>
                                     <Table.Td xs={3}>
-                                        {node.tree_object_type === 'category' &&
-                                            (node?.category?.category_url || '---')}
+                                        {node.tree_object_type === 'category' && (node?.category?.category_url || '---')}
                                         {node.tree_object_type === 'document' && node?.document?.document_url}
                                         {node.tree_object_type === 'link' && node?.link?.link_url}
                                     </Table.Td>
@@ -213,15 +207,10 @@ export class List extends React.Component<null, null> {
                                                     <Typography.Container>
                                                         <p>
                                                             Published from:{' '}
-                                                            {node.tree_published_from
-                                                                ? formatDateTime(node.tree_published_from)
-                                                                : 'never'}
+                                                            {node.tree_published_from ? formatDateTime(node.tree_published_from) : 'never'}
                                                         </p>
                                                         <p>
-                                                            Published to:{' '}
-                                                            {node.tree_published_to
-                                                                ? formatDateTime(node.tree_published_to)
-                                                                : 'never'}
+                                                            Published to: {node.tree_published_to ? formatDateTime(node.tree_published_to) : 'never'}
                                                         </p>
                                                         {!node.tree_is_published && <p>Publishing disabled.</p>}
                                                     </Typography.Container>
@@ -237,15 +226,10 @@ export class List extends React.Component<null, null> {
                                                     <Typography.Container>
                                                         <p>
                                                             Published from:{' '}
-                                                            {node.tree_published_from
-                                                                ? formatDateTime(node.tree_published_from)
-                                                                : 'never'}
+                                                            {node.tree_published_from ? formatDateTime(node.tree_published_from) : 'never'}
                                                         </p>
                                                         <p>
-                                                            Published to:{' '}
-                                                            {node.tree_published_to
-                                                                ? formatDateTime(node.tree_published_to)
-                                                                : 'never'}
+                                                            Published to: {node.tree_published_to ? formatDateTime(node.tree_published_to) : 'never'}
                                                         </p>
                                                     </Typography.Container>
                                                 }
@@ -311,11 +295,7 @@ export class List extends React.Component<null, null> {
 
                                             {!!node.tree_is_editable &&
                                                 node.tree_object_type === 'category' &&
-                                                canByPermission([
-                                                    'cms.add_link',
-                                                    'cms.add_document',
-                                                    'cms.add_category',
-                                                ]) && (
+                                                canByPermission(['cms.add_link', 'cms.add_document', 'cms.add_category']) && (
                                                     <Dropdown.Container triggerColor={'success'} placement={'right'}>
                                                         <Dropdown.Trigger
                                                             component={Button}
@@ -327,18 +307,14 @@ export class List extends React.Component<null, null> {
                                                         <Dropdown.Menu>
                                                             <Dropdown.Item
                                                                 onClick={() => {
-                                                                    navigate(
-                                                                        `/cms/pages/add_category?parent_id=${node.id}`,
-                                                                    )
+                                                                    navigate(`/cms/pages/add_category?parent_id=${node.id}`)
                                                                 }}
                                                             >
                                                                 Category
                                                             </Dropdown.Item>
                                                             <Dropdown.Item
                                                                 onClick={() => {
-                                                                    navigate(
-                                                                        `/cms/pages/add_document?parent_id=${node.id}`,
-                                                                    )
+                                                                    navigate(`/cms/pages/add_document?parent_id=${node.id}`)
                                                                 }}
                                                             >
                                                                 Document
@@ -353,32 +329,28 @@ export class List extends React.Component<null, null> {
                                                         </Dropdown.Menu>
                                                     </Dropdown.Container>
                                                 )}
-                                            {!!node.tree_is_editable &&
-                                                canByPermission(`cms.edit_${node.tree_object_type}`) && (
-                                                    <Button
-                                                        color="warning"
-                                                        icon={<EditIcon />}
-                                                        iconOnly
-                                                        onClick={(e) => {
-                                                            e.stopPropagation()
-                                                            navigate(
-                                                                `/cms/pages/edit_${node.tree_object_type}?id=${node.id}`,
-                                                            )
-                                                        }}
-                                                    />
-                                                )}
-                                            {!!node.tree_is_deletable &&
-                                                canByPermission(`cms.delete_${node.tree_object_type}`) && (
-                                                    <Button
-                                                        color="danger"
-                                                        icon={<DeleteIcon />}
-                                                        iconOnly
-                                                        onClick={(e) => {
-                                                            e.stopPropagation()
-                                                            openModal(`tree-delete-${node.id}`)
-                                                        }}
-                                                    />
-                                                )}
+                                            {!!node.tree_is_editable && canByPermission(`cms.edit_${node.tree_object_type}`) && (
+                                                <Button
+                                                    color="warning"
+                                                    icon={<EditIcon />}
+                                                    iconOnly
+                                                    onClick={(e) => {
+                                                        e.stopPropagation()
+                                                        navigate(`/cms/pages/edit_${node.tree_object_type}?id=${node.id}`)
+                                                    }}
+                                                />
+                                            )}
+                                            {!!node.tree_is_deletable && canByPermission(`cms.delete_${node.tree_object_type}`) && (
+                                                <Button
+                                                    color="danger"
+                                                    icon={<DeleteIcon />}
+                                                    iconOnly
+                                                    onClick={(e) => {
+                                                        e.stopPropagation()
+                                                        openModal(`tree-delete-${node.id}`)
+                                                    }}
+                                                />
+                                            )}
                                         </div>
                                     </Table.Td>
                                 </Table.Tr>

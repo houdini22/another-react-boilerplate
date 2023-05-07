@@ -18,9 +18,7 @@ export class Header extends React.Component<HeaderProps, null> {
                     </PageHeader.BreadcrumbsItem>
                     <PageHeader.BreadcrumbsItem href="/users">Users</PageHeader.BreadcrumbsItem>
                     <PageHeader.BreadcrumbsItem href="/permissions">Permissions</PageHeader.BreadcrumbsItem>
-                    <PageHeader.BreadcrumbsItem href={`/permissions/edit?id=${permission['id']}`}>
-                        Edit Permission
-                    </PageHeader.BreadcrumbsItem>
+                    <PageHeader.BreadcrumbsItem href={`/permissions/edit?id=${permission['id']}`}>Edit Permission</PageHeader.BreadcrumbsItem>
                 </PageHeader.Breadcrumbs>
             </PageHeader.Container>
         )

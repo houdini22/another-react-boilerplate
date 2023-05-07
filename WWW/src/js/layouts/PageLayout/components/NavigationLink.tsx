@@ -56,9 +56,7 @@ class NavigationLink extends React.Component<NavigationLinkProps, NavigationLink
                     >
                         {content}
                     </a>
-                    {!_.isEmpty(nested) && isExpanded && (
-                        <NavigationItems items={nested} setNested={setNested} nestedIds={nestedIds} />
-                    )}
+                    {!_.isEmpty(nested) && isExpanded && <NavigationItems items={nested} setNested={setNested} nestedIds={nestedIds} />}
                 </li>
             )
         }
@@ -79,9 +77,7 @@ class NavigationLink extends React.Component<NavigationLinkProps, NavigationLink
                 >
                     {content}
                 </Link>
-                {!_.isEmpty(nested) && isExpanded && (
-                    <NavigationItems items={nested} setNested={setNested} nestedIds={nestedIds} />
-                )}
+                {!_.isEmpty(nested) && isExpanded && <NavigationItems items={nested} setNested={setNested} nestedIds={nestedIds} />}
             </li>
         )
     }

@@ -47,12 +47,7 @@ class AddForm extends React.Component<null, null> {
                                         <Field name="name" label="Name" type="text" component={FormField} autoFocus />
                                         <Field name="email" label="Email" type="text" component={FormField} />
                                         <Field name="password" label="Password" type="password" component={FormField} />
-                                        <Field
-                                            name="password_confirmation"
-                                            label="Confirm password"
-                                            type="password"
-                                            component={FormField}
-                                        />
+                                        <Field name="password_confirmation" label="Confirm password" type="password" component={FormField} />
                                         <Field
                                             name="status"
                                             label="Status"
@@ -72,9 +67,7 @@ class AddForm extends React.Component<null, null> {
                                     </Card>
                                     {canByPermission('users.add_role') && (
                                         <Card header={<h1>Associate Roles</h1>} size={'md'}>
-                                            {newUserRoles.length > 0 && (
-                                                <Alert color={'info'}>Click added Role to remove.</Alert>
-                                            )}
+                                            {newUserRoles.length > 0 && <Alert color={'info'}>Click added Role to remove.</Alert>}
                                             <Field
                                                 name="_roles"
                                                 label="Role"
@@ -87,9 +80,7 @@ class AddForm extends React.Component<null, null> {
                                                 }))}
                                                 onChange={(e, value) => {
                                                     if (value) {
-                                                        addRoleToNewUser(
-                                                            roles.find((role) => Number(role.id) === Number(value)),
-                                                        )
+                                                        addRoleToNewUser(roles.find((role) => Number(role.id) === Number(value)))
                                                     }
                                                 }}
                                                 component={FormField}
@@ -115,29 +106,21 @@ class AddForm extends React.Component<null, null> {
 
                                     {canByPermission('users.add_permission') && (
                                         <Card header={<h1>Associate Permissions</h1>} size={'md'}>
-                                            {newUserPermissions.length > 0 && (
-                                                <Alert color={'info'}>Click added Permission to remove.</Alert>
-                                            )}
+                                            {newUserPermissions.length > 0 && <Alert color={'info'}>Click added Permission to remove.</Alert>}
                                             <Field
                                                 name="_permissions"
                                                 label="Permission"
                                                 type="select"
                                                 placeholder={`--- choose ---`}
-                                                options={sortPermissionsByNameAscending(permissions).map(
-                                                    ({ id, name }) => ({
-                                                        label: name,
-                                                        value: id,
-                                                        disabled: !!newUserPermissions.find(
-                                                            ({ id: _id }) => id === _id,
-                                                        ),
-                                                    }),
-                                                )}
+                                                options={sortPermissionsByNameAscending(permissions).map(({ id, name }) => ({
+                                                    label: name,
+                                                    value: id,
+                                                    disabled: !!newUserPermissions.find(({ id: _id }) => id === _id),
+                                                }))}
                                                 onChange={(e, value) => {
                                                     if (value) {
                                                         addPermissionToNewUser(
-                                                            permissions.find(
-                                                                (permission) => Number(permission.id) === Number(value),
-                                                            ),
+                                                            permissions.find((permission) => Number(permission.id) === Number(value)),
                                                         )
                                                     }
                                                 }}

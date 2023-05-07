@@ -139,10 +139,7 @@ class TypographyView extends React.Component {
                             <Card header={<h1>Blocks</h1>}>
                                 <Typography.Container>
                                     <blockquote>
-                                        <p>
-                                            Two things are infinite: the universe and human stupidity; and I'm not sure
-                                            about the universe.
-                                        </p>
+                                        <p>Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.</p>
                                         <footer>Albert Einstein</footer>
                                     </blockquote>
                                 </Typography.Container>

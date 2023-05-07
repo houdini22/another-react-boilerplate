@@ -34,10 +34,7 @@ interface SidebarHeaderNotificationsState {
     expanded: boolean
 }
 
-class BaseSidebarHeaderNotifications extends React.Component<
-    SidebarHeaderNotificationsProps,
-    SidebarHeaderNotificationsState
-> {
+class BaseSidebarHeaderNotifications extends React.Component<SidebarHeaderNotificationsProps, SidebarHeaderNotificationsState> {
     state = {
         expanded: false,
     }
@@ -72,12 +69,7 @@ class BaseSidebarHeaderNotifications extends React.Component<
         const { notifications, unread, resetUnread } = this.props
 
         return (
-            <span
-                className={cx(
-                    'layout__header__bar__right__element',
-                    'layout__header__bar__right__element--notifications',
-                )}
-            >
+            <span className={cx('layout__header__bar__right__element', 'layout__header__bar__right__element--notifications')}>
                 <div className={cx('layout__header__bar__right__element--notifications__button')}>
                     <IoIosNotificationsOutline
                         onClick={() => {
@@ -100,26 +92,16 @@ class BaseSidebarHeaderNotifications extends React.Component<
                                     return (
                                         <li
                                             className={cx({
-                                                'layout__header__bar__right__element--notifications__expanded__item':
-                                                    true,
-                                                [`layout__header__bar__right__element--notifications__expanded__item--color-${type}`]:
-                                                    true,
+                                                'layout__header__bar__right__element--notifications__expanded__item': true,
+                                                [`layout__header__bar__right__element--notifications__expanded__item--color-${type}`]: true,
                                             })}
                                             key={`${id}`}
                                         >
                                             <Link to={href}>
-                                                <span
-                                                    className={cx(
-                                                        'layout__header__bar__right__element--notifications__expanded__item__icon',
-                                                    )}
-                                                >
+                                                <span className={cx('layout__header__bar__right__element--notifications__expanded__item__icon')}>
                                                     {this.getIcon(type)}
                                                 </span>
-                                                <span
-                                                    className={cx(
-                                                        'layout__header__bar__right__element--notifications__expanded__item__content',
-                                                    )}
-                                                >
+                                                <span className={cx('layout__header__bar__right__element--notifications__expanded__item__content')}>
                                                     <span
                                                         className={cx(
                                                             'layout__header__bar__right__element--notifications__expanded__item__content__title',

@@ -159,8 +159,7 @@ class Filter extends React.Component<FilterProps, null> {
     getChanged(defaultFilters, filters, name, type) {
         if (
             type === 'order' &&
-            (defaultFilters['order_by'] !== filters['order_by'] ||
-                defaultFilters['order_direction'] !== filters['order_direction'])
+            (defaultFilters['order_by'] !== filters['order_by'] || defaultFilters['order_direction'] !== filters['order_direction'])
         ) {
             return true
         }

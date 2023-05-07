@@ -12,11 +12,7 @@ class TitleManagerBase extends React.Component<TitleManagerProps, null> {
         titleSegments: [],
     }
 
-    shouldComponentUpdate(
-        nextProps: Readonly<TitleManagerProps>,
-        nextState: Readonly<null>,
-        nextContext: any,
-    ): boolean {
+    shouldComponentUpdate(nextProps: Readonly<TitleManagerProps>, nextState: Readonly<null>, nextContext: any): boolean {
         const { titleSegments } = this.state
 
         if (nextState.titleSegments.join('') === titleSegments.join('')) {

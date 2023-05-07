@@ -26,8 +26,7 @@ class MediaManagerBase extends React.Component<UsersManagerProps, null> {
     }
 
     render() {
-        const { children, files, setIsLoading, isLoading, deleteFile, uploadProgress, uploadFiles, editFile } =
-            this.props
+        const { children, files, setIsLoading, isLoading, deleteFile, uploadProgress, uploadFiles, editFile } = this.props
         const renderProps = {
             files,
             setIsLoading,

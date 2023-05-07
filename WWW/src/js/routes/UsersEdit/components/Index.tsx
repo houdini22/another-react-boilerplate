@@ -79,21 +79,15 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                                 <Details
                                                                                     user={user}
                                                                                     navigate={navigate}
-                                                                                    setUploadProgress={
-                                                                                        setUploadProgress
-                                                                                    }
+                                                                                    setUploadProgress={setUploadProgress}
                                                                                     setIsLoading={setIsLoading}
                                                                                     uploadProgress={uploadProgress}
                                                                                     sendAvatar={sendAvatar}
                                                                                     fetchOne={fetchOne}
                                                                                     forceLogin={forceLogin}
-                                                                                    sendActivationEmail={
-                                                                                        sendActivationEmail
-                                                                                    }
+                                                                                    sendActivationEmail={sendActivationEmail}
                                                                                     isLoading={isLoading}
-                                                                                    addToastNotification={
-                                                                                        addToastNotification
-                                                                                    }
+                                                                                    addToastNotification={addToastNotification}
                                                                                     deleteAvatar={deleteAvatar}
                                                                                     registerModal={registerModal}
                                                                                     openModal={openModal}
@@ -107,9 +101,7 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                                     user={user}
                                                                                     fetchOne={fetchOne}
                                                                                     isLoading={isLoading}
-                                                                                    addToastNotification={
-                                                                                        addToastNotification
-                                                                                    }
+                                                                                    addToastNotification={addToastNotification}
                                                                                     setIsLoading={setIsLoading}
                                                                                     canByPermission={canByPermission}
                                                                                 />
@@ -117,23 +109,17 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                         </Row>
                                                                         <Row>
                                                                             <Col xs={12} md={6}>
-                                                                                {canByPermission(
-                                                                                    'users.list_roles',
-                                                                                ) && (
+                                                                                {canByPermission('users.list_roles') && (
                                                                                     <Roles
                                                                                         roles={roles}
                                                                                         setIsLoading={setIsLoading}
                                                                                         deleteUserRole={deleteUserRole}
-                                                                                        deletePermission={
-                                                                                            deletePermission
-                                                                                        }
+                                                                                        deletePermission={deletePermission}
                                                                                         fetchOne={fetchOne}
                                                                                         user={user}
                                                                                         isLoading={isLoading}
                                                                                         navigate={navigate}
-                                                                                        addToastNotification={
-                                                                                            addToastNotification
-                                                                                        }
+                                                                                        addToastNotification={addToastNotification}
                                                                                         openModal={openModal}
                                                                                         closeModal={closeModal}
                                                                                         registerModal={registerModal}
@@ -149,37 +135,25 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                                         fetchOne={fetchOne}
                                                                                         user={user}
                                                                                         isLoading={isLoading}
-                                                                                        addToastNotification={
-                                                                                            addToastNotification
-                                                                                        }
+                                                                                        addToastNotification={addToastNotification}
                                                                                     />
                                                                                 )}
                                                                             </Col>
                                                                         </Row>
                                                                         <Row>
                                                                             <Col xs={12} md={6}>
-                                                                                {canByPermission(
-                                                                                    'users.list_permissions',
-                                                                                ) && (
+                                                                                {canByPermission('users.list_permissions') && (
                                                                                     <Permissions
                                                                                         roles={roles}
                                                                                         setIsLoading={setIsLoading}
-                                                                                        deletePermission={
-                                                                                            deletePermission
-                                                                                        }
+                                                                                        deletePermission={deletePermission}
                                                                                         fetchOne={fetchOne}
                                                                                         user={user}
                                                                                         isLoading={isLoading}
                                                                                         navigate={navigate}
-                                                                                        deleteUserPermission={
-                                                                                            deleteUserPermission
-                                                                                        }
-                                                                                        fetchPermissions={
-                                                                                            fetchPermissions
-                                                                                        }
-                                                                                        addToastNotification={
-                                                                                            addToastNotification
-                                                                                        }
+                                                                                        deleteUserPermission={deleteUserPermission}
+                                                                                        fetchPermissions={fetchPermissions}
+                                                                                        addToastNotification={addToastNotification}
                                                                                         openModal={openModal}
                                                                                         registerModal={registerModal}
                                                                                         closeModal={closeModal}
@@ -187,21 +161,15 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                                 )}
                                                                             </Col>
                                                                             <Col xs={12} md={6}>
-                                                                                {canByPermission(
-                                                                                    'users.add_permission',
-                                                                                ) && (
+                                                                                {canByPermission('users.add_permission') && (
                                                                                     <AddPermission
                                                                                         permissions={permissions}
                                                                                         setIsLoading={setIsLoading}
-                                                                                        addUserPermission={
-                                                                                            addUserPermission
-                                                                                        }
+                                                                                        addUserPermission={addUserPermission}
                                                                                         fetchOne={fetchOne}
                                                                                         user={user}
                                                                                         isLoading={isLoading}
-                                                                                        addToastNotification={
-                                                                                            addToastNotification
-                                                                                        }
+                                                                                        addToastNotification={addToastNotification}
                                                                                     />
                                                                                 )}
                                                                             </Col>

@@ -79,9 +79,7 @@ class AddForm extends React.Component<null, null> {
 
                         {canByPermission('roles.add_permission') && (
                             <Card header={<h1>Associate Permissions</h1>}>
-                                {newRolePermissions.length > 0 && (
-                                    <Alert color={'info'}>Click added Permission to remove.</Alert>
-                                )}
+                                {newRolePermissions.length > 0 && <Alert color={'info'}>Click added Permission to remove.</Alert>}
                                 <Field
                                     name="_permissions"
                                     label="Permission"
@@ -94,11 +92,7 @@ class AddForm extends React.Component<null, null> {
                                     }))}
                                     onChange={(e, value) => {
                                         if (value) {
-                                            addPermissionToNewRole(
-                                                permissions.find(
-                                                    (permission) => Number(permission.id) === Number(value),
-                                                ),
-                                            )
+                                            addPermissionToNewRole(permissions.find((permission) => Number(permission.id) === Number(value)))
                                         }
                                     }}
                                     component={FormField}

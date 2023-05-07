@@ -5,11 +5,7 @@ import { reduxForm, SubmissionError } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 import { connect } from 'react-redux'
 
-const onSubmit = (
-    values,
-    _,
-    { save, setIsLoading, addToastNotification, reset, newRolePermissions = [], newRoleUsers = [], navigate },
-) => {
+const onSubmit = (values, _, { save, setIsLoading, addToastNotification, reset, newRolePermissions = [], newRoleUsers = [], navigate }) => {
     setIsLoading(true)
     return save({ ...values }, newRolePermissions, newRoleUsers).then(
         (role) => {

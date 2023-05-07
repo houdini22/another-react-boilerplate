@@ -22,13 +22,7 @@ export class UserRolesEdit extends React.Component<null, null> {
 
                                         return (
                                             <UsersManager permissionId={query['id']}>
-                                                {({
-                                                    isLoading,
-                                                    setIsLoading,
-                                                    fetchPermission,
-                                                    editPermission,
-                                                    permission,
-                                                }) => {
+                                                {({ isLoading, setIsLoading, fetchPermission, editPermission, permission }) => {
                                                     return (
                                                         <PageContent>
                                                             <Header navigate={navigate} permission={permission} />

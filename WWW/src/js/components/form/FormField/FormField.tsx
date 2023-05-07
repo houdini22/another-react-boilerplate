@@ -44,15 +44,11 @@ class FormField extends React.Component<FormFieldProps, null> {
             case 'hidden':
             case 'file':
             case 'password':
-                inputComponent = (
-                    <TextField {...input} {...custom} placeholder={placeholder} type={type} error={error} />
-                )
+                inputComponent = <TextField {...input} {...custom} placeholder={placeholder} type={type} error={error} />
                 break
 
             case 'select':
-                inputComponent = (
-                    <Select {...input} {...custom} options={options} placeholder={placeholder} error={error} />
-                )
+                inputComponent = <Select {...input} {...custom} options={options} placeholder={placeholder} error={error} />
                 break
 
             case 'html':
@@ -85,12 +81,8 @@ class FormField extends React.Component<FormFieldProps, null> {
                 >
                     <div className={cx('component-form-field__input-container')}>
                         {inputComponent}
-                        {htmlAfter && (
-                            <p className={cx('component-form-field__input-container__html-after')}>{htmlAfter}</p>
-                        )}
-                        {error && withError && (
-                            <p className={cx('component-form-field__input-container__error')}>{error}</p>
-                        )}
+                        {htmlAfter && <p className={cx('component-form-field__input-container__html-after')}>{htmlAfter}</p>}
+                        {error && withError && <p className={cx('component-form-field__input-container__error')}>{error}</p>}
                     </div>
                 </div>
             )
@@ -110,9 +102,7 @@ class FormField extends React.Component<FormFieldProps, null> {
                 </div>
                 <div className={cx('component-form-field__input-container')}>
                     {inputComponent}
-                    {htmlAfter && (
-                        <p className={cx('component-form-field__input-container__html-after')}>{htmlAfter}</p>
-                    )}
+                    {htmlAfter && <p className={cx('component-form-field__input-container__html-after')}>{htmlAfter}</p>}
                     {error && <p className={cx('component-form-field__input-container__error')}>{error}</p>}
                 </div>
             </div>

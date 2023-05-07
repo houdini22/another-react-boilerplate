@@ -38,28 +38,19 @@ export class UserPermissionsAdd extends React.Component<null, null> {
                                                         }) => {
                                                             return (
                                                                 <PageContent>
-                                                                    <Header
-                                                                        navigate={navigate}
-                                                                        permission={permission}
-                                                                    />
+                                                                    <Header navigate={navigate} permission={permission} />
                                                                     <Row>
                                                                         <Col xs={12}>
                                                                             <AddPermission
                                                                                 addPermission={addPermission}
                                                                                 isLoading={isLoading}
-                                                                                addToastNotification={
-                                                                                    addToastNotification
-                                                                                }
+                                                                                addToastNotification={addToastNotification}
                                                                                 setIsLoading={setIsLoading}
                                                                                 roles={roles}
                                                                                 users={users}
                                                                                 newPermissionUsers={newPermissionUsers}
-                                                                                addNewPermissionToUser={
-                                                                                    addNewPermissionToUser
-                                                                                }
-                                                                                removeNewPermissionFromUser={
-                                                                                    removeNewPermissionFromUser
-                                                                                }
+                                                                                addNewPermissionToUser={addNewPermissionToUser}
+                                                                                removeNewPermissionFromUser={removeNewPermissionFromUser}
                                                                                 navigate={navigate}
                                                                                 canByPermission={canByPermission}
                                                                             />

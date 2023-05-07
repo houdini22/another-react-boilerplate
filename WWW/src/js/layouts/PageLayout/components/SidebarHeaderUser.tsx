@@ -26,17 +26,10 @@ class BaseSidebarHeaderUser extends React.Component<BaseSidebarHeaderUserProps, 
         return (
             <RouteManager>
                 {({ navigate }) => (
-                    <span
-                        className={cx(
-                            'layout__header__bar__right__element',
-                            'layout__header__bar__right__element--user',
-                        )}
-                    >
+                    <span className={cx('layout__header__bar__right__element', 'layout__header__bar__right__element--user')}>
                         <Dropdown.Container placement={'right'}>
                             <Dropdown.Trigger component={Button}>
-                                <span className={'layout__header__bar__right__element--user__user-name'}>
-                                    {user.name}
-                                </span>
+                                <span className={'layout__header__bar__right__element--user__user-name'}>{user.name}</span>
                                 {user.avatar && (
                                     <span className={'layout__header__bar__right__element--user__avatar'}>
                                         <img src={apiURL(`files/preview/${user.avatar.id}`)} alt={''} />

@@ -56,12 +56,8 @@ class AddLinkForm extends React.Component {
                                                     header={
                                                         <h1>
                                                             Publishing{' '}
-                                                            <Badge
-                                                                color={isPublished(formValues) ? 'success' : 'warning'}
-                                                            >
-                                                                {isPublished(formValues)
-                                                                    ? 'Is published'
-                                                                    : 'Is not Published'}
+                                                            <Badge color={isPublished(formValues) ? 'success' : 'warning'}>
+                                                                {isPublished(formValues) ? 'Is published' : 'Is not Published'}
                                                             </Badge>
                                                         </h1>
                                                     }
@@ -72,26 +68,10 @@ class AddLinkForm extends React.Component {
                                                         type="checkbox"
                                                         component={FormField}
                                                     />
-                                                    <Field
-                                                        name="tree.tree_published_from"
-                                                        label="Published from"
-                                                        type="text"
-                                                        component={FormField}
-                                                    />
-                                                    <Field
-                                                        name="tree.tree_published_to"
-                                                        label="Published to"
-                                                        type="text"
-                                                        component={FormField}
-                                                    />
+                                                    <Field name="tree.tree_published_from" label="Published from" type="text" component={FormField} />
+                                                    <Field name="tree.tree_published_to" label="Published to" type="text" component={FormField} />
                                                 </Card>
-                                                <Field
-                                                    name="link.link_url"
-                                                    label="URL"
-                                                    type="text"
-                                                    placeholder={'URL'}
-                                                    component={FormField}
-                                                />
+                                                <Field name="link.link_url" label="URL" type="text" placeholder={'URL'} component={FormField} />
                                                 <Field
                                                     name="link.link_target"
                                                     label="Target"

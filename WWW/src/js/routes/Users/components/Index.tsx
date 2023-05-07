@@ -52,11 +52,7 @@ export class UsersView extends React.Component<null, null> {
                                                 savedFilters,
                                                 restoreSavedFilter,
                                             }) => (
-                                                <ListManager
-                                                    url={'/users/list'}
-                                                    filters={filters}
-                                                    setIsLoading={setIsLoading}
-                                                >
+                                                <ListManager url={'/users/list'} filters={filters} setIsLoading={setIsLoading}>
                                                     {({
                                                         fetch,
                                                         data,

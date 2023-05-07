@@ -38,24 +38,11 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps, null> {
                     ]}
                     component={FormField}
                 />
-                <Field
-                    type={'hidden'}
-                    name={'role_id'}
-                    value={role?.id || 0}
-                    component={FormField}
-                    inputOnly
-                    style={{ display: 'none' }}
-                />
+                <Field type={'hidden'} name={'role_id'} value={role?.id || 0} component={FormField} inputOnly style={{ display: 'none' }} />
                 {permission === 'add' && (
                     <>
                         <Field name="name" label="Name" type="text" component={FormField} autoFocus />
-                        <Field
-                            type={'textarea'}
-                            name={'description'}
-                            component={FormField}
-                            label={'Description'}
-                            placeholder={'Description'}
-                        />
+                        <Field type={'textarea'} name={'description'} component={FormField} label={'Description'} placeholder={'Description'} />
                     </>
                 )}
                 <Button color="success" type="submit" block>

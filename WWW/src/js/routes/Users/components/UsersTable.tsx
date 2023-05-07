@@ -148,8 +148,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                         onCancel={() => closeModal(modalName)}
                                                                     >
                                                                         <p>
-                                                                            Are you sure to delete user:{' '}
-                                                                            <b>{user.name}</b>?
+                                                                            Are you sure to delete user: <b>{user.name}</b>?
                                                                         </p>
                                                                     </ModalConfirm>,
                                                                 )
@@ -193,12 +192,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                 )
                                             })}
                                         </Table.TBody>
-                                        <TableSummary
-                                            page={page}
-                                            perPage={perPage}
-                                            total={total}
-                                            totalPages={totalPages}
-                                        />
+                                        <TableSummary page={page} perPage={perPage} total={total} totalPages={totalPages} />
                                     </Table.Container>
                                 )}
                             </ModalManager>

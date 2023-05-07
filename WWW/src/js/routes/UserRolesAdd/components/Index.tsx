@@ -54,18 +54,12 @@ export class UserRolesEdit extends React.Component<null, UsersViewState> {
                                                                             setIsLoading={setIsLoading}
                                                                             permissions={permissions}
                                                                             newRolePermissions={newRolePermissions}
-                                                                            addPermissionToNewRole={
-                                                                                addPermissionToNewRole
-                                                                            }
-                                                                            removePermissionFromNewRole={
-                                                                                removePermissionFromNewRole
-                                                                            }
+                                                                            addPermissionToNewRole={addPermissionToNewRole}
+                                                                            removePermissionFromNewRole={removePermissionFromNewRole}
                                                                             users={users}
                                                                             newRoleUsers={newRoleUsers}
                                                                             addNewRoleToUser={addNewRoleToUser}
-                                                                            removeNewRoleFromUser={
-                                                                                removeNewRoleFromUser
-                                                                            }
+                                                                            removeNewRoleFromUser={removeNewRoleFromUser}
                                                                             navigate={navigate}
                                                                             addPermission={addPermission}
                                                                             fetchPermissions={fetchPermissions}

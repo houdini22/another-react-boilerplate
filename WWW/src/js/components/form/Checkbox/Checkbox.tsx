@@ -70,13 +70,7 @@ class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
                     )}
                 </span>
 
-                <input
-                    {...props}
-                    disabled={disabled}
-                    type="checkbox"
-                    className={cx('component-checkbox__input')}
-                    ref={(el) => (this.el = el)}
-                />
+                <input {...props} disabled={disabled} type="checkbox" className={cx('component-checkbox__input')} ref={(el) => (this.el = el)} />
             </div>
         )
     }

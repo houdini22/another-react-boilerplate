@@ -59,20 +59,10 @@ class PopoverForm extends React.Component {
                                             />
                                         </Col>
                                         <Col xs={12}>
-                                            <Field
-                                                name="outline"
-                                                label="outline"
-                                                type="checkbox"
-                                                component={FormField}
-                                            />
+                                            <Field name="outline" label="outline" type="checkbox" component={FormField} />
                                         </Col>
                                         <Col xs={12}>
-                                            <Field
-                                                name="pixelsWidth"
-                                                label="pixelsWidth"
-                                                type="text"
-                                                component={FormField}
-                                            />
+                                            <Field name="pixelsWidth" label="pixelsWidth" type="text" component={FormField} />
                                         </Col>
                                         <Col xs={12}>
                                             <Field name="clean" label="clean" type="checkbox" component={FormField} />
@@ -104,12 +94,7 @@ class PopoverForm extends React.Component {
                                             />
                                         </Col>
                                         <Col xs={12}>
-                                            <Field
-                                                name="disableOutsideClick"
-                                                label="disableOutsideClick"
-                                                type="checkbox"
-                                                component={FormField}
-                                            />
+                                            <Field name="disableOutsideClick" label="disableOutsideClick" type="checkbox" component={FormField} />
                                         </Col>
                                         <Col xs={12}>
                                             <Field

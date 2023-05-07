@@ -81,16 +81,7 @@ export class DropdownContainer extends React.Component<DropdownContainerProps, D
     }
 
     render() {
-        const {
-            children,
-            size = 'md',
-            triggerColor,
-            color = 'default',
-            triggerSize,
-            trigger = 'click',
-            placement = 'left',
-            transparent,
-        } = this.props
+        const { children, size = 'md', triggerColor, color = 'default', triggerSize, trigger = 'click', placement = 'left', transparent } = this.props
         const { isOpen, triggerElement, itemsElement } = this.state
 
         return (
@@ -120,10 +111,7 @@ export class DropdownContainer extends React.Component<DropdownContainerProps, D
                             })}
                             ref={(e) => (this.ref = e)}
                         >
-                            <div
-                                className={cx('component-dropdown__trigger')}
-                                ref={(e) => this.registerTriggerElement(e)}
-                            />
+                            <div className={cx('component-dropdown__trigger')} ref={(e) => this.registerTriggerElement(e)} />
                             <div
                                 className={cx('component-dropdown__dropdown-menu', {
                                     'component-dropdown__dropdown-menu--is-open': isOpen,
@@ -342,16 +330,9 @@ export class DropdownItem extends React.Component<DropdownItemProps, DropdownIte
                         }
                     }}
                 >
-                    <div
-                        className={cx('component-dropdown__dropdown-menu__items__item__submenu')}
-                        ref={(e) => this.registerItemsElement(e)}
-                    />
+                    <div className={cx('component-dropdown__dropdown-menu__items__item__submenu')} ref={(e) => this.registerItemsElement(e)} />
                     {getComponent()}
-                    {hasSubmenu && (
-                        <ArrowRightIcon
-                            className={cx('component-dropdown__dropdown-menu__items__item__sub-menu-icon')}
-                        />
-                    )}
+                    {hasSubmenu && <ArrowRightIcon className={cx('component-dropdown__dropdown-menu__items__item__sub-menu-icon')} />}
                 </li>
             </AppContext.Provider>
         )

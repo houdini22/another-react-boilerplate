@@ -52,9 +52,7 @@ export class AddCategoryView extends React.Component {
                                                         },
                                                         category: {
                                                             menu_category_id: 'new',
-                                                            category_url: generateUrl(
-                                                                currentNode?.category?.category_url,
-                                                            ),
+                                                            category_url: generateUrl(currentNode?.category?.category_url),
                                                         },
                                                         parent_id: currentNode.id,
                                                     }}

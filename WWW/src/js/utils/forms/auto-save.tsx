@@ -255,13 +255,7 @@ export class AutoSaveForm extends React.Component<AutoSaveFormProps, AutoSaveFor
 
         // it has container with APIClient logic
         if (FormComponentContainer) {
-            return (
-                <FormComponentContainer
-                    {...this.props}
-                    component={FormComponent}
-                    isRequestInProgress={this.isRequestInProgress}
-                />
-            )
+            return <FormComponentContainer {...this.props} component={FormComponent} isRequestInProgress={this.isRequestInProgress} />
         }
 
         // only presentation component

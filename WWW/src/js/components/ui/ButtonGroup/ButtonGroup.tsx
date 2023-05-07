@@ -25,18 +25,7 @@ class ButtonGroup extends React.Component<ButtonGroupProps, null> {
     }
 
     render() {
-        const {
-            size = 'md',
-            color = 'primary',
-            outline,
-            children,
-            block,
-            rounded,
-            roundless,
-            isLoading,
-            disabled,
-            borderless,
-        } = this.props
+        const { size = 'md', color = 'primary', outline, children, block, rounded, roundless, isLoading, disabled, borderless } = this.props
 
         return (
             <AppContext.Provider

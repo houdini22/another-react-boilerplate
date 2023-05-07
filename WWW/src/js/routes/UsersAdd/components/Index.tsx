@@ -65,40 +65,26 @@ export class UsersAddView extends React.Component<null, UsersViewState> {
                                                                             navigate={navigate}
                                                                             addUserRole={addUserRole}
                                                                             addRoleToNewUser={addRoleToNewUser}
-                                                                            removeRoleFromNewUser={
-                                                                                removeRoleFromNewUser
-                                                                            }
+                                                                            removeRoleFromNewUser={removeRoleFromNewUser}
                                                                             roles={roles}
                                                                             permissions={permissions}
-                                                                            addPermissionToNewUser={
-                                                                                addPermissionToNewUser
-                                                                            }
-                                                                            removePermissionFromNewUser={
-                                                                                removePermissionFromNewUser
-                                                                            }
+                                                                            addPermissionToNewUser={addPermissionToNewUser}
+                                                                            removePermissionFromNewUser={removePermissionFromNewUser}
                                                                             addToastNotification={addToastNotification}
                                                                             newUserRoles={newUserRoles}
                                                                             newUserPermissions={newUserPermissions}
                                                                             addRole={addRole}
                                                                             newRolePermissions={newRolePermissions}
-                                                                            addPermissionToNewRole={
-                                                                                addPermissionToNewRole
-                                                                            }
-                                                                            removePermissionFromNewRole={
-                                                                                removePermissionFromNewRole
-                                                                            }
+                                                                            addPermissionToNewRole={addPermissionToNewRole}
+                                                                            removePermissionFromNewRole={removePermissionFromNewRole}
                                                                             users={users}
                                                                             newRoleUsers={newRoleUsers}
                                                                             addNewRoleToUser={addNewRoleToUser}
-                                                                            removeNewRoleFromUser={
-                                                                                removeNewRoleFromUser
-                                                                            }
+                                                                            removeNewRoleFromUser={removeNewRoleFromUser}
                                                                             addPermission={addPermission}
                                                                             fetchPermissions={fetchPermissions}
                                                                             fetchRoles={fetchRoles}
-                                                                            clearPermissionsFromNewRole={
-                                                                                clearPermissionsFromNewRole
-                                                                            }
+                                                                            clearPermissionsFromNewRole={clearPermissionsFromNewRole}
                                                                             canByPermission={canByPermission}
                                                                         />
                                                                     </Col>

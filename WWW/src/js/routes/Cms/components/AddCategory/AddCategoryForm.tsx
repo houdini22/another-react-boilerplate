@@ -27,20 +27,8 @@ class AddCategoryForm extends React.Component {
                                 <Tabs.Tab name="main">
                                     <Tabs.Trigger>Main</Tabs.Trigger>
                                     <Tabs.Content>
-                                        <Field
-                                            name="tree.id"
-                                            type="hidden"
-                                            component={FormField}
-                                            inputOnly
-                                            style={{ display: 'none' }}
-                                        />
-                                        <Field
-                                            name="parent_id"
-                                            label="Parent Category"
-                                            type="select"
-                                            component={FormField}
-                                            options={categories}
-                                        />
+                                        <Field name="tree.id" type="hidden" component={FormField} inputOnly style={{ display: 'none' }} />
+                                        <Field name="parent_id" label="Parent Category" type="select" component={FormField} options={categories} />
                                         <Field
                                             name="category.category_name"
                                             label="Category Name"
@@ -51,9 +39,7 @@ class AddCategoryForm extends React.Component {
                                                 change(
                                                     'category.category_url',
                                                     generateUrl(
-                                                        id
-                                                            ? currentNode.parent.category.category_url
-                                                            : currentNode.category.category_url,
+                                                        id ? currentNode.parent.category.category_url : currentNode.category.category_url,
                                                         value,
                                                     ),
                                                 )
@@ -72,14 +58,12 @@ class AddCategoryForm extends React.Component {
                                                 label="Index Document"
                                                 type="select"
                                                 component={FormField}
-                                                options={indexDocuments.map(
-                                                    ({ id, depth, document: { document_name } }) => {
-                                                        return {
-                                                            label: ' - '.repeat(depth) + document_name,
-                                                            value: id,
-                                                        }
-                                                    },
-                                                )}
+                                                options={indexDocuments.map(({ id, depth, document: { document_name } }) => {
+                                                    return {
+                                                        label: ' - '.repeat(depth) + document_name,
+                                                        value: id,
+                                                    }
+                                                })}
                                                 placeholder={'None'}
                                             />
                                             <Field
@@ -107,32 +91,11 @@ class AddCategoryForm extends React.Component {
                                                 </h1>
                                             }
                                         >
-                                            <Field
-                                                name="tree.tree_is_published"
-                                                label="Is published?"
-                                                type="checkbox"
-                                                component={FormField}
-                                            />
-                                            <Field
-                                                name="tree.tree_published_from"
-                                                label="Published from"
-                                                type="text"
-                                                component={FormField}
-                                            />
-                                            <Field
-                                                name="tree.tree_published_to"
-                                                label="Published to"
-                                                type="text"
-                                                component={FormField}
-                                            />
+                                            <Field name="tree.tree_is_published" label="Is published?" type="checkbox" component={FormField} />
+                                            <Field name="tree.tree_published_from" label="Published from" type="text" component={FormField} />
+                                            <Field name="tree.tree_published_to" label="Published to" type="text" component={FormField} />
                                         </Card>
-                                        <Field
-                                            name="category.category_url"
-                                            label="URL"
-                                            placeholder={'URL'}
-                                            type="text"
-                                            component={FormField}
-                                        />
+                                        <Field name="category.category_url" label="URL" placeholder={'URL'} type="text" component={FormField} />
                                     </Tabs.Content>
                                 </Tabs.Tab>
                                 <Tabs.Tab name="meta">

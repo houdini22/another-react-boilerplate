@@ -28,11 +28,7 @@ class Navigation extends React.Component<null, null> {
         const { nested } = this.state
         return (
             <div className={cx('layout__sidebar__content__navigation')}>
-                <NavigationItems
-                    items={navigation}
-                    setNested={this.setNested.bind(this)}
-                    nestedIds={nested}
-                ></NavigationItems>
+                <NavigationItems items={navigation} setNested={this.setNested.bind(this)} nestedIds={nested}></NavigationItems>
             </div>
         )
     }

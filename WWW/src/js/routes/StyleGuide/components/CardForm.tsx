@@ -80,44 +80,19 @@ class CardForm extends React.Component {
                                     <Field name="header" label="Header" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="withCloseIcon"
-                                        label="With Close Icon"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="withCloseIcon" label="With Close Icon" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="withMinimizeIcon"
-                                        label="With Minimize Icon"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="withMinimizeIcon" label="With Minimize Icon" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="headerActions"
-                                        label="Header Actions"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="headerActions" label="Header Actions" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="noBorderTop"
-                                        label="No Border Top"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="noBorderTop" label="No Border Top" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="solidBackground"
-                                        label="Solid Background"
-                                        type="checkbox"
-                                        component={FormField}
-                                    />
+                                    <Field name="solidBackground" label="Solid Background" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
                                     <Field name="footer" label="footer" type="checkbox" component={FormField} />

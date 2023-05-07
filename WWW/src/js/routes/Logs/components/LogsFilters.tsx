@@ -10,17 +10,7 @@ interface FiltersProps {
 
 export class Filters extends React.Component<FiltersProps, null> {
     render() {
-        const {
-            filters,
-            setFilter,
-            fetch,
-            logsData,
-            isLoading,
-            resetFilters,
-            defaultFilters,
-            setFilters,
-            setIsLoading,
-        } = this.props
+        const { filters, setFilter, fetch, logsData, isLoading, resetFilters, defaultFilters, setFilters, setIsLoading } = this.props
         return (
             <FiltersCard
                 name={'UsersLogsList'}
@@ -141,21 +131,19 @@ export class Filters extends React.Component<FiltersProps, null> {
                     {
                         type: 'select',
                         options: [
-                            ...(logsData?.related_models?.map(
-                                ({ count, related_model_class_name, related_model_id }) => {
-                                    if (related_model_class_name === null) {
-                                        return {
-                                            value: 'none',
-                                            label: `NONE (${count})`,
-                                        }
-                                    } else {
-                                        return {
-                                            value: related_model_class_name,
-                                            label: `${related_model_class_name} ID:${related_model_id} (${count})`,
-                                        }
+                            ...(logsData?.related_models?.map(({ count, related_model_class_name, related_model_id }) => {
+                                if (related_model_class_name === null) {
+                                    return {
+                                        value: 'none',
+                                        label: `NONE (${count})`,
                                     }
-                                },
-                            ) || []),
+                                } else {
+                                    return {
+                                        value: related_model_class_name,
+                                        label: `${related_model_class_name} ID:${related_model_id} (${count})`,
+                                    }
+                                }
+                            }) || []),
                         ],
                         name: 'related_model_name',
                         label: 'RelatedModel',

@@ -21,10 +21,7 @@ export class RowResourcesAvatarDropdown extends React.Component<RowResourcesAvat
                     <Popover.Container trigger={'hover'} placement={'left-center'}>
                         <Popover.Trigger color={'info'}>
                             <Dropdown.Container>
-                                <Dropdown.Trigger
-                                    component={Button}
-                                    componentProps={{ iconOnly: true, icon: <AvatarIcon /> }}
-                                ></Dropdown.Trigger>
+                                <Dropdown.Trigger component={Button} componentProps={{ iconOnly: true, icon: <AvatarIcon /> }}></Dropdown.Trigger>
                                 <Dropdown.Menu>
                                     <Dropdown.Item
                                         onClick={() => {
@@ -44,11 +41,7 @@ export class RowResourcesAvatarDropdown extends React.Component<RowResourcesAvat
                         </Popover.Trigger>
                         <Popover.Content>
                             <a href={apiURL(`files/preview/${user?.avatar?.id}`)} target={'_blank'}>
-                                <img
-                                    src={apiURL(`files/preview/${user?.avatar?.id}?width=200&height=200`)}
-                                    style={{ maxWidth: 200 }}
-                                    alt={''}
-                                />
+                                <img src={apiURL(`files/preview/${user?.avatar?.id}?width=200&height=200`)} style={{ maxWidth: 200 }} alt={''} />
                             </a>
                         </Popover.Content>
                     </Popover.Container>

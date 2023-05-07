@@ -101,11 +101,7 @@ class TableView extends React.Component<TableViewProps, TableViewState> {
                 <Row>
                     <Col xs={12} md={6}>
                         <Section>
-                            <TableFormContainer
-                                options={options}
-                                setOptions={this.setOptions.bind(this)}
-                                colSize1={colSize2}
-                            />
+                            <TableFormContainer options={options} setOptions={this.setOptions.bind(this)} colSize1={colSize2} />
                         </Section>
                     </Col>
                     <Col xs={12} md={6}>

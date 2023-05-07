@@ -89,11 +89,7 @@ export class FileView extends React.Component<FileProps, FileState> {
                     <Modal.Footer>
                         <Row>
                             <Col xs={6}>
-                                <Button
-                                    block
-                                    color={'secondary'}
-                                    onClick={() => this.setState({ confirmDeleteModalVisible: false })}
-                                >
+                                <Button block color={'secondary'} onClick={() => this.setState({ confirmDeleteModalVisible: false })}>
                                     Cancel
                                 </Button>
                             </Col>

@@ -38,35 +38,25 @@ export class RowResources extends React.Component<RowResourcesProps, null> {
                                         </Button>
                                     </Tooltip>
                                 )}
-                                {Object.keys(permissionsFromRoles).length > 0 &&
-                                    canByPermission('users.list_permissions') && (
-                                        <Tooltip tooltip={`User Permissions`}>
-                                            <Button
-                                                color={'info'}
-                                                icon={<PermissionIcon />}
-                                                onClick={() => {
-                                                    expand('permissions')
-                                                }}
-                                            >
-                                                {Object.keys(permissionsFromRoles).length || 0}
-                                            </Button>
-                                        </Tooltip>
-                                    )}
+                                {Object.keys(permissionsFromRoles).length > 0 && canByPermission('users.list_permissions') && (
+                                    <Tooltip tooltip={`User Permissions`}>
+                                        <Button
+                                            color={'info'}
+                                            icon={<PermissionIcon />}
+                                            onClick={() => {
+                                                expand('permissions')
+                                            }}
+                                        >
+                                            {Object.keys(permissionsFromRoles).length || 0}
+                                        </Button>
+                                    </Tooltip>
+                                )}
                                 {user.files_count > 0 && canByPermission('users.list_files') && (
-                                    <Button
-                                        color={'info'}
-                                        icon={<FileIcon />}
-                                        onClick={() => navigate(`/media?user=${user.name}`)}
-                                    >
+                                    <Button color={'info'} icon={<FileIcon />} onClick={() => navigate(`/media?user=${user.name}`)}>
                                         {user.files_count}
                                     </Button>
                                 )}
-                                <RowResourcesAvatarDropdown
-                                    user={user}
-                                    deleteAvatar={deleteAvatar}
-                                    setIsLoading={setIsLoading}
-                                    fetch={fetch}
-                                />
+                                <RowResourcesAvatarDropdown user={user} deleteAvatar={deleteAvatar} setIsLoading={setIsLoading} fetch={fetch} />
                             </div>
                         )}
                     </AuthorizationManager>

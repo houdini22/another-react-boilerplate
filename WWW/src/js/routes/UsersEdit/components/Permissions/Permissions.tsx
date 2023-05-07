@@ -2,11 +2,7 @@ import * as React from 'react'
 import { Badge, Card, Dropdown, Label, LoadingOverlay, Tabs } from '../../../../components'
 import { DeleteIcon, InfoIcon, DetailsIcon, EditIcon } from '../../../../components/icons'
 import { ModalConfirm } from '../../../../components/common/ModalConfirm'
-import {
-    mergeUserPermissions,
-    sortPermissionsByNameAscending,
-    userPermissionFromRoles,
-} from '../../../../helpers/permissions'
+import { mergeUserPermissions, sortPermissionsByNameAscending, userPermissionFromRoles } from '../../../../helpers/permissions'
 import { User } from '../../../../../types.d'
 
 interface AddRoleProps {

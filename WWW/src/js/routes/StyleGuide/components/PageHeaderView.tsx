@@ -64,9 +64,7 @@ class PageHeaderView extends React.Component<any, PageHeaderViewState> {
                                 <HomeIcon /> Home
                             </PageHeader.BreadcrumbsItem>
                             <PageHeader.BreadcrumbsItem href="/components">Components</PageHeader.BreadcrumbsItem>
-                            <PageHeader.BreadcrumbsItem href="/components/page-header">
-                                PageHeader
-                            </PageHeader.BreadcrumbsItem>
+                            <PageHeader.BreadcrumbsItem href="/components/page-header">PageHeader</PageHeader.BreadcrumbsItem>
                         </PageHeader.Breadcrumbs>
                     )}
                     {actions && (

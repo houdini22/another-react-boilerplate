@@ -8,16 +8,7 @@ export class Manager extends React.Component<null, null> {
     }
 
     componentDidMount() {
-        const {
-            defaultFilters = {},
-            urlFilters = {},
-            setCurrentId,
-            setFilters,
-            setDefaultFilters,
-            fetch,
-            setIsLoading,
-            id = 1,
-        } = this.props
+        const { defaultFilters = {}, urlFilters = {}, setCurrentId, setFilters, setDefaultFilters, fetch, setIsLoading, id = 1 } = this.props
         const newFilters = {
             ...defaultFilters,
             ...urlFilters,

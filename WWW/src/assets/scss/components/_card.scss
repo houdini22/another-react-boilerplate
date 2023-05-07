@@ -269,8 +269,7 @@
                 }
             }
 
-            &
-                > .component-card__header__actions__action-button.component-card__header__actions__action-button--outline {
+            & > .component-card__header__actions__action-button.component-card__header__actions__action-button--outline {
                 &.component-card__header__actions__action-button--color-primary.component-card__header__actions__action-button--outline {
                     color: $primary_LIGHTEN_X3;
                 }

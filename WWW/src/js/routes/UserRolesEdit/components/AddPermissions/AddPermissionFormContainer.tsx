@@ -16,11 +16,7 @@ const validate = (values) => {
     return errors
 }
 
-const onSubmit = (
-    values,
-    _,
-    { setIsLoading, addPermission, role, fetchPermissions, fetchOne, addToastNotification, reset },
-) => {
+const onSubmit = (values, _, { setIsLoading, addPermission, role, fetchPermissions, fetchOne, addToastNotification, reset }) => {
     setIsLoading(true)
 
     return addPermission({ ...values, role_id: role.id, guard_name: 'web' }).then(

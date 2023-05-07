@@ -10,18 +10,8 @@ interface HeaderProps {
 
 export class Users extends React.Component<HeaderProps, null> {
     render() {
-        const {
-            role,
-            setIsLoading,
-            fetch,
-            isLoading,
-            navigate,
-            addToastNotification,
-            openModal,
-            registerModal,
-            closeModal,
-            deleteUserRole,
-        } = this.props
+        const { role, setIsLoading, fetch, isLoading, navigate, addToastNotification, openModal, registerModal, closeModal, deleteUserRole } =
+            this.props
         return (
             <Card header={<h1>Users</h1>}>
                 {role?.users?.map(({ id: _id, name }) => {

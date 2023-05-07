@@ -11,32 +11,29 @@ const instance = axios.create({
     timeout: config['api']['timeout'],
 })
 
-instance.interceptors.response.use(
-    undefined,
-    ({ message, code, response: { status, data, statusText, ...responseRest } = {}, ...rest }) => {
-        if (code === 'ERR_NETWORK') {
-            store.dispatch(
-                setConnectionErrorModalVisible({
-                    message,
-                    status,
-                    code,
-                    data,
-                    statusText,
-                }),
-            )
-        }
-        if (status === 500) {
-            store.dispatch(setFetchError({ message, code, status, data, statusText }))
-        } else if (status === 401) {
-            import('../reducers/auth').then((obj) => {
-                store.dispatch(obj.actions.gentlyLogOff())
-            })
-        } else if (status === 404) {
-            store.dispatch(set404error({ message, code, status, data, statusText }))
-        }
-        return Promise.reject({ message, status, code, data, statusText })
-    },
-)
+instance.interceptors.response.use(undefined, ({ message, code, response: { status, data, statusText, ...responseRest } = {}, ...rest }) => {
+    if (code === 'ERR_NETWORK') {
+        store.dispatch(
+            setConnectionErrorModalVisible({
+                message,
+                status,
+                code,
+                data,
+                statusText,
+            }),
+        )
+    }
+    if (status === 500) {
+        store.dispatch(setFetchError({ message, code, status, data, statusText }))
+    } else if (status === 401) {
+        import('../reducers/auth').then((obj) => {
+            store.dispatch(obj.actions.gentlyLogOff())
+        })
+    } else if (status === 404) {
+        store.dispatch(set404error({ message, code, status, data, statusText }))
+    }
+    return Promise.reject({ message, status, code, data, statusText })
+})
 
 const setAuthToken = (token) => {
     instance.defaults.headers.common['X-SESSION-TOKEN'] = token

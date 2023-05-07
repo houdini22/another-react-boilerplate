@@ -71,11 +71,7 @@ class AlertView extends React.Component<AlertViewProps, AlertViewState> {
                 <Row>
                     <Col xs={12} md={6}>
                         <Section>
-                            <AlertFormContainer
-                                options={options}
-                                setOptions={this.setOptions.bind(this)}
-                                colSize1={colSize2}
-                            />
+                            <AlertFormContainer options={options} setOptions={this.setOptions.bind(this)} colSize1={colSize2} />
                         </Section>
                     </Col>
                     <Col xs={12} md={6}>

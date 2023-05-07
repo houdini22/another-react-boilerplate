@@ -54,12 +54,7 @@ const AddCategoryFormContainer = compose(
     withRouter,
     connect(
         (state) => {
-            const formValues = selector(
-                state,
-                'tree.tree_is_published',
-                'tree.tree_published_from',
-                'tree.tree_published_to',
-            )
+            const formValues = selector(state, 'tree.tree_is_published', 'tree.tree_published_from', 'tree.tree_published_to')
             return {
                 formValues,
             }

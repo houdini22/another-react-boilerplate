@@ -63,19 +63,8 @@ class CardView extends React.Component<CardViewProps, CardViewState> {
     render() {
         const { colSize1 = 4, createPresentationTab = _createPresentationTab } = this.props
         const { options } = this.state
-        const {
-            size,
-            withCloseIcon,
-            withMinimizeIcon,
-            header,
-            headerActions,
-            isLoading,
-            noBorderTop,
-            footer,
-            footerType,
-            color,
-            solidBackground,
-        } = options
+        const { size, withCloseIcon, withMinimizeIcon, header, headerActions, isLoading, noBorderTop, footer, footerType, color, solidBackground } =
+            options
 
         return (
             <PageContent>

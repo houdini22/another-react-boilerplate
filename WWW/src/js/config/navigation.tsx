@@ -1,17 +1,7 @@
 import * as React from 'react'
 import { FaSitemap } from 'react-icons/fa'
 import { AiOutlineOrderedList } from 'react-icons/ai'
-import {
-    AddIcon,
-    CategoryIcon,
-    DocumentIcon,
-    FileIcon,
-    LinkIcon,
-    LogsIcon,
-    PermissionIcon,
-    RoleIcon,
-    UserIcon,
-} from '../components/icons'
+import { AddIcon, CategoryIcon, DocumentIcon, FileIcon, LinkIcon, LogsIcon, PermissionIcon, RoleIcon, UserIcon } from '../components/icons'
 
 export const navigation = [
     {
@@ -31,12 +21,7 @@ export const navigation = [
                 href: '/cms/pages',
                 caption: 'Pages',
                 icon: <AiOutlineOrderedList />,
-                urlActive: [
-                    /^\/cms\/pages/,
-                    /\/cms\/pages\/edit_category/,
-                    /\/cms\/pages\/edit_document/,
-                    /\/cms\/pages\/edit_link/,
-                ],
+                urlActive: [/^\/cms\/pages/, /\/cms\/pages\/edit_category/, /\/cms\/pages\/edit_document/, /\/cms\/pages\/edit_link/],
                 permission: 'cms.list',
             },
             {

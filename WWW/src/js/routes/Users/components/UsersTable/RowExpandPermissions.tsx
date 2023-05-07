@@ -46,35 +46,33 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
                                                 <h3>User Permissions</h3>
                                             </Typography.Container>
                                         </Col>
-                                        {sortPermissionsByNameAscending(user?.permissions).map(
-                                            (permission: Permission) => {
-                                                const modalName = `user-remove-permission-${permission.id}-delete`
+                                        {sortPermissionsByNameAscending(user?.permissions).map((permission: Permission) => {
+                                            const modalName = `user-remove-permission-${permission.id}-delete`
 
-                                                registerModal(
-                                                    modalName,
-                                                    <ModalDeleteUserPermission
-                                                        deleteUserPermission={deleteUserPermission}
-                                                        fetch={fetch}
-                                                        user={user}
-                                                        closeModal={() => closeModal(modalName)}
-                                                        permission={permission}
-                                                        setIsLoading={setIsLoading}
-                                                    />,
-                                                )
+                                            registerModal(
+                                                modalName,
+                                                <ModalDeleteUserPermission
+                                                    deleteUserPermission={deleteUserPermission}
+                                                    fetch={fetch}
+                                                    user={user}
+                                                    closeModal={() => closeModal(modalName)}
+                                                    permission={permission}
+                                                    setIsLoading={setIsLoading}
+                                                />,
+                                            )
 
-                                                return (
-                                                    <Col xs={4} key={`${permission.id}`}>
-                                                        <PermissionDropdown
-                                                            navigate={navigate}
-                                                            openDeleteModal={() => {
-                                                                openModal(modalName)
-                                                            }}
-                                                            permission={{ ...permission, hasUser: true }}
-                                                        />
-                                                    </Col>
-                                                )
-                                            },
-                                        )}
+                                            return (
+                                                <Col xs={4} key={`${permission.id}`}>
+                                                    <PermissionDropdown
+                                                        navigate={navigate}
+                                                        openDeleteModal={() => {
+                                                            openModal(modalName)
+                                                        }}
+                                                        permission={{ ...permission, hasUser: true }}
+                                                    />
+                                                </Col>
+                                            )
+                                        })}
                                     </Row>
                                 </Table.Td>
                             </Table.Tr>

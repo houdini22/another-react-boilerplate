@@ -27,9 +27,7 @@ export class Header extends React.Component<HeaderProps, null> {
                                         <HomeIcon /> Home
                                     </PageHeader.BreadcrumbsItem>
                                     <PageHeader.BreadcrumbsItem href="/users">Users</PageHeader.BreadcrumbsItem>
-                                    <PageHeader.BreadcrumbsItem href="/permissions">
-                                        Permissions
-                                    </PageHeader.BreadcrumbsItem>
+                                    <PageHeader.BreadcrumbsItem href="/permissions">Permissions</PageHeader.BreadcrumbsItem>
                                 </PageHeader.Breadcrumbs>
                             </PageHeader.Container>
                         )}

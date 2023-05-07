@@ -41,18 +41,7 @@ interface RolesTableProps {
 
 export class RolesTable extends React.Component<RolesTableProps, null> {
     render() {
-        const {
-            setIsLoading,
-            roles,
-            fetch,
-            deleteUserRole,
-            page,
-            perPage,
-            total,
-            totalPages,
-            deleteRole,
-            deleteRolePermission,
-        } = this.props
+        const { setIsLoading, roles, fetch, deleteUserRole, page, perPage, total, totalPages, deleteRole, deleteRolePermission } = this.props
 
         return (
             <RouteManager>
@@ -124,19 +113,14 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                                                                                 <span
                                                                                                     style={{
                                                                                                         maxWidth: 300,
-                                                                                                        display:
-                                                                                                            'block',
+                                                                                                        display: 'block',
                                                                                                     }}
                                                                                                 >
                                                                                                     {role.description}
                                                                                                 </span>
                                                                                             }
                                                                                         >
-                                                                                            <Button
-                                                                                                icon={<HelpIcon />}
-                                                                                                iconOnly
-                                                                                                color={'info'}
-                                                                                            />
+                                                                                            <Button icon={<HelpIcon />} iconOnly color={'info'} />
                                                                                         </Tooltip>
                                                                                     )}
                                                                                 </div>
@@ -144,42 +128,27 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                                                             <Table.Td xs={5} alignRight>
                                                                                 <div>
                                                                                     {role?.permissions?.length > 0 &&
-                                                                                        canByPermission(
-                                                                                            'roles.list_permissions',
-                                                                                        ) && (
-                                                                                            <Tooltip
-                                                                                                tooltip={`Role Permissions`}
-                                                                                            >
+                                                                                        canByPermission('roles.list_permissions') && (
+                                                                                            <Tooltip tooltip={`Role Permissions`}>
                                                                                                 <Button
                                                                                                     color={'info'}
-                                                                                                    icon={
-                                                                                                        <PermissionIcon />
-                                                                                                    }
+                                                                                                    icon={<PermissionIcon />}
                                                                                                     onClick={() => {
-                                                                                                        expand(
-                                                                                                            'permissions',
-                                                                                                        )
+                                                                                                        expand('permissions')
                                                                                                     }}
                                                                                                 >
-                                                                                                    {role?.permissions
-                                                                                                        ?.length || 0}
+                                                                                                    {role?.permissions?.length || 0}
                                                                                                 </Button>
                                                                                             </Tooltip>
                                                                                         )}
 
                                                                                     {role?.users?.length > 0 &&
-                                                                                        canByPermission(
-                                                                                            'roles.list_users',
-                                                                                        ) && (
-                                                                                            <Tooltip
-                                                                                                tooltip={`Users with Role`}
-                                                                                            >
+                                                                                        canByPermission('roles.list_users') && (
+                                                                                            <Tooltip tooltip={`Users with Role`}>
                                                                                                 <Button
                                                                                                     color={'info'}
                                                                                                     icon={<UserIcon />}
-                                                                                                    onClick={() =>
-                                                                                                        expand('users')
-                                                                                                    }
+                                                                                                    onClick={() => expand('users')}
                                                                                                 >
                                                                                                     {role.users_count}
                                                                                                 </Button>
@@ -190,22 +159,13 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                                                             <Table.Td xs={2}>
                                                                                 <div>
                                                                                     {canByPermission('roles.edit') && (
-                                                                                        <ButtonEdit
-                                                                                            href={`/roles/edit?id=${role.id}`}
+                                                                                        <ButtonEdit href={`/roles/edit?id=${role.id}`} />
+                                                                                    )}
+                                                                                    {role.is_deletable && canByPermission('roles.delete') && (
+                                                                                        <ButtonDelete
+                                                                                            onClick={() => openModal(`user-role-${role.id}-delete`)}
                                                                                         />
                                                                                     )}
-                                                                                    {role.is_deletable &&
-                                                                                        canByPermission(
-                                                                                            'roles.delete',
-                                                                                        ) && (
-                                                                                            <ButtonDelete
-                                                                                                onClick={() =>
-                                                                                                    openModal(
-                                                                                                        `user-role-${role.id}-delete`,
-                                                                                                    )
-                                                                                                }
-                                                                                            />
-                                                                                        )}
                                                                                 </div>
                                                                             </Table.Td>
                                                                         </Table.Tr>
@@ -215,12 +175,7 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                                         )
                                                     })}
                                                 </Table.TBody>
-                                                <TableSummary
-                                                    page={page}
-                                                    perPage={perPage}
-                                                    total={total}
-                                                    totalPages={totalPages}
-                                                />
+                                                <TableSummary page={page} perPage={perPage} total={total} totalPages={totalPages} />
                                             </Table.Container>
                                         )}
                                     </NotificationsManager>

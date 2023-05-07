@@ -34,9 +34,7 @@ export class LoginForm extends React.Component<LoginFormProps, null> {
                         <Col xs={10} sm={6} md={4}>
                             <form onSubmit={handleSubmit}>
                                 {loginError && <Alert color={'danger'}>{loginError}</Alert>}
-                                {query['reason'] === '401' && !loginError && (
-                                    <Alert color={'danger'}>You was logged out.</Alert>
-                                )}
+                                {query['reason'] === '401' && !loginError && <Alert color={'danger'}>You was logged out.</Alert>}
                                 <Field
                                     name="username"
                                     component={FormField}
