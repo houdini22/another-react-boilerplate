@@ -6,9 +6,9 @@ import { reduxForm, formValueSelector } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 import { SubmissionError } from 'redux-form'
 
-const onSubmit = (values, _, { setIsLoading, addPermission, addToastNotification, navigate, newPermissionUsers = [], reset }) => {
+const onSubmit = (values, _, { setIsLoading, addPermission, addToastNotification, navigate, newUsers = [], reset }) => {
     return setIsLoading(true).then(() => {
-        return addPermission({ ...values }, newPermissionUsers).then(
+        return addPermission({ ...values }, newUsers).then(
             (permission) => {
                 setIsLoading(false)
                 addToastNotification({
@@ -51,7 +51,6 @@ const AddFormContainer = compose(
         form: 'AddPermissionForm',
         initialValues: {
             name: '',
-            guard_name: 'web',
             role_id: '',
         },
     }),

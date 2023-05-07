@@ -19,8 +19,8 @@ import { UsersEditView } from './routes/UsersEdit'
 import UsersAddView from './routes/UsersAdd/components/Index'
 import { UserRolesEdit } from './routes/UserRolesEdit'
 import { UsersPermissions } from './routes/UsersPermissions'
-import { UsersPermissionsEdit } from './routes/UsersPermissionsEdit'
-import { UsersPermissionsAdd } from './routes/UsersPermissionsAdd'
+import { UsersPermissionsEditView } from './routes/UsersPermissionsEdit'
+import { UsersPermissionsAddView } from './routes/UsersPermissionsAdd'
 import { UserRolesAdd } from './routes/UserRolesAdd'
 import { WebsocketsManager } from './containers/WebsocketsManager'
 import { EditCategoryView } from './routes/Cms/components/EditCategory'
@@ -204,7 +204,7 @@ const App = () => (
                         element={
                             <PageLayout>
                                 <UserIsAuthenticatedRoute permission={'permissions.add'}>
-                                    <UsersPermissionsAdd />
+                                    <UsersPermissionsAddView />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
                         }
@@ -214,7 +214,7 @@ const App = () => (
                         element={
                             <PageLayout>
                                 <UserIsAuthenticatedRoute permission={'permissions.edit'}>
-                                    <UsersPermissionsEdit />
+                                    <UsersPermissionsEditView />
                                 </UserIsAuthenticatedRoute>
                             </PageLayout>
                         }

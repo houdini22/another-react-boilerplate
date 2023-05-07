@@ -41,6 +41,7 @@ export class PermissionsFilters extends React.Component<RolesFiltersProps, null>
             saveFilters,
             deleteSavedFilter,
             restoreSavedFilter,
+            filtersData,
         } = this.props
 
         return (
@@ -56,6 +57,7 @@ export class PermissionsFilters extends React.Component<RolesFiltersProps, null>
                 restoreSavedFilter={restoreSavedFilter}
                 defaultFilters={defaultFilters}
                 isLoading={isLoading}
+                filtersData={filtersData}
                 filtersToRender={[
                     {
                         type: 'search',

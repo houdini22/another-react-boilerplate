@@ -48,7 +48,7 @@ export class RoleDropdown extends React.Component<RoleDropdownProps, null> {
                                     >
                                         <EditIcon /> Edit Role
                                     </Dropdown.Item>
-                                    {canByPermission('users.remove_role') && (
+                                    {!role.hasPermission && canByPermission('users.remove_role') && (
                                         <Dropdown.Item
                                             color="danger"
                                             onClick={() => {
@@ -56,6 +56,16 @@ export class RoleDropdown extends React.Component<RoleDropdownProps, null> {
                                             }}
                                         >
                                             <DeleteIcon /> Remove Role from User
+                                        </Dropdown.Item>
+                                    )}
+                                    {role.hasPermission && canByPermission('roles.remove_permission') && (
+                                        <Dropdown.Item
+                                            color="danger"
+                                            onClick={() => {
+                                                openDeleteModal()
+                                            }}
+                                        >
+                                            <DeleteIcon /> Remove Permission from Role
                                         </Dropdown.Item>
                                     )}
                                 </Dropdown.Menu>

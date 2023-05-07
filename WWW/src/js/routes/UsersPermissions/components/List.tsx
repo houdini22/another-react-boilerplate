@@ -53,6 +53,7 @@ interface ListProps {
     deleteRole: DeleteRole
     roles: Array<Role>
     deleteUserPermission: DeleteUserPermission
+    filtersData: Object
 }
 
 export class List extends React.Component<ListProps, null> {
@@ -86,13 +87,14 @@ export class List extends React.Component<ListProps, null> {
             deletePermission,
             roles,
             deleteUserPermission,
+            filtersData,
         } = this.props
 
         return (
             <AuthorizationManager>
                 {({ canByPermission }) => (
                     <>
-                        {canByPermission('roles.list') && (
+                        {canByPermission('permissions.list') && (
                             <>
                                 <PermissionsFilters
                                     filters={filters}
@@ -109,6 +111,7 @@ export class List extends React.Component<ListProps, null> {
                                     deleteSavedFilter={deleteSavedFilter}
                                     restoreSavedFilter={restoreSavedFilter}
                                     roles={roles}
+                                    filtersData={filtersData}
                                 />
                                 <Card>
                                     <Pagination

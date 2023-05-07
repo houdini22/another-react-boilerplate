@@ -1,44 +1,54 @@
 import * as React from 'react'
 import { Card, LoadingOverlay } from '../../../../components'
 import { AddFormContainer } from './AddFormContainer'
+import { AuthorizationManager, NotificationsManager, RouteManager } from '../../../../containers'
 
-interface HeaderProps {}
+interface AddPermissionProps {}
 
-export class AddPermission extends React.Component<HeaderProps, null> {
+export class AddPermission extends React.Component<AddPermissionProps, null> {
     render() {
         const {
             roles,
             setIsLoading,
             addPermission,
             isLoading,
-            addToastNotification,
             users,
-            newPermissionUsers,
-            removeNewPermissionFromUser,
-            addNewPermissionToUser,
-            navigate,
+            removeUserFromNewPermission,
+            addUserToNewPermission,
             noAddToUsers,
             noRoleId,
-            canByPermission,
+            newUsers,
         } = this.props
         return (
-            <Card header={<h1>Add Permission</h1>} color="primary">
-                <AddFormContainer
-                    roles={roles}
-                    setIsLoading={setIsLoading}
-                    addPermission={addPermission}
-                    addToastNotification={addToastNotification}
-                    users={users}
-                    newPermissionUsers={newPermissionUsers}
-                    removeNewPermissionFromUser={removeNewPermissionFromUser}
-                    addNewPermissionToUser={addNewPermissionToUser}
-                    navigate={navigate}
-                    noAddToUsers={noAddToUsers}
-                    noRoleId={noRoleId}
-                    canByPermission={canByPermission}
-                />
-                {isLoading && <LoadingOverlay />}
-            </Card>
+            <RouteManager>
+                {({ navigate }) => (
+                    <NotificationsManager>
+                        {({ addToastNotification }) => (
+                            <AuthorizationManager>
+                                {({ canByPermission }) => (
+                                    <Card header={<h1>Add Permission</h1>} color="primary">
+                                        <AddFormContainer
+                                            roles={roles}
+                                            setIsLoading={setIsLoading}
+                                            addPermission={addPermission}
+                                            addToastNotification={addToastNotification}
+                                            users={users}
+                                            newUsers={newUsers}
+                                            removeUserFromNewPermission={removeUserFromNewPermission}
+                                            addUserToNewPermission={addUserToNewPermission}
+                                            navigate={navigate}
+                                            noAddToUsers={noAddToUsers}
+                                            noRoleId={noRoleId}
+                                            canByPermission={canByPermission}
+                                        />
+                                        {isLoading && <LoadingOverlay />}
+                                    </Card>
+                                )}
+                            </AuthorizationManager>
+                        )}
+                    </NotificationsManager>
+                )}
+            </RouteManager>
         )
     }
 }

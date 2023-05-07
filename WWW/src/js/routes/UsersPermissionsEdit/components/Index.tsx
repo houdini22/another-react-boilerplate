@@ -1,23 +1,21 @@
 import * as React from 'react'
-import { RouteManager } from '../../../containers/RouteManager'
 import { Col, Row } from '../../../components'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Header } from './Header'
 import { EditPermission } from './Edit/Index'
-import { UsersManager } from '../../../containers/UsersManager'
-import { TitleManager } from '../../../containers/TitleManager'
+import { TitleManager, RouteManager, PermissionsManager } from '../../../containers'
 
 export class UserRolesEdit extends React.Component<null, null> {
     render() {
         return (
-            <RouteManager>
-                {({ query: { id: permissionId } }) => (
-                    <TitleManager>
-                        {({ setTitleSegments }) => {
-                            setTitleSegments(['Users', 'Permissions', 'Edit'])
+            <TitleManager>
+                {({ setTitleSegments }) => {
+                    setTitleSegments(['Users', 'Permissions', 'Edit'])
 
-                            return (
-                                <UsersManager permissionId={permissionId}>
+                    return (
+                        <RouteManager>
+                            {({ query: { id } }) => (
+                                <PermissionsManager id={id}>
                                     {({ isLoading, setIsLoading, fetchPermission, editPermission, permission }) => {
                                         return (
                                             <PageContent>
@@ -36,12 +34,12 @@ export class UserRolesEdit extends React.Component<null, null> {
                                             </PageContent>
                                         )
                                     }}
-                                </UsersManager>
-                            )
-                        }}
-                    </TitleManager>
-                )}
-            </RouteManager>
+                                </PermissionsManager>
+                            )}
+                        </RouteManager>
+                    )
+                }}
+            </TitleManager>
         )
     }
 }

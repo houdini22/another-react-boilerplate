@@ -7,6 +7,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 
 class PermissionsController extends Controller
@@ -70,6 +71,53 @@ class PermissionsController extends Controller
 
         return response()->json([
             'data' => $permissions->toArray(),
+        ]);
+    }
+
+    public function getFiltersData(Request $request)
+    {
+        $user = $this->getUserFromRequest($request);
+
+        $filters = $request->get('filters');
+
+        $roles = Permission::select('id');
+        $users = Permission::select('id');
+
+        if (Arr::get($filters, 'has_roles') === 'no') {
+            $roles = $roles->whereDoesntHave('roles');
+            $users = $users->whereDoesntHave('roles');
+        } else if (Arr::get($filters, 'has_roles')) {
+            $roles = $roles->whereHas('roles');
+            $users = $users->whereHas('roles');
+        }
+
+        if (Arr::get($filters, 'has_users') === 'no') {
+            $users = $users->whereDoesntHave('users');
+            $roles  = $roles->whereDoesntHave('users');
+        } else if (Arr::get($filters, 'has_users')) {
+            $users = $users->whereHas('users');
+            $roles = $roles->whereHas('users');
+        }
+
+        if (Arr::get($filters, 'roles')) {
+            $roles = $roles->whereHas('roles', function($query) use ($filters) {
+                $query->whereIn('id', $filters['roles']);
+            });
+            $users = $users->whereHas('roles', function($query) use ($filters) {
+                $query->whereIn('id', $filters['roles']);
+            });
+        }
+
+        $roles = $roles->get();
+        $users = $users->get();
+
+        return $this->responseOK([
+           'has_roles' => [
+               'count' => $roles->count()
+           ],
+            'has_users' => [
+                'count' => $users->count()
+            ]
         ]);
     }
 

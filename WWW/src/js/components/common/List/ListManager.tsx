@@ -10,6 +10,7 @@ const cx = classNames.bind(styles)
 interface ListManagerProps {
     url: string
     filters: Object
+    filtersDataUrl?: string
 }
 
 interface ListManagerState {

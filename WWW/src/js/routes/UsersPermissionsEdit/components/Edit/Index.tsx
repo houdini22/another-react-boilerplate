@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Card, LoadingOverlay } from '../../../../components'
 import { EditFormContainer } from './EditFormContainer'
-import { NotificationsManager } from '../../../../containers/NotificationsManager'
+import { NotificationsManager } from '../../../../containers'
 import { Permission, SetIsLoading } from '../../../../../types.d'
 interface EditProps {
     editPermission: EditPermission

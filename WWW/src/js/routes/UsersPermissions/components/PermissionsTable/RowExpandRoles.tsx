@@ -3,7 +3,7 @@ import { Col, Modal, Row, Table, Typography } from '../../../../components'
 import { sortRolesByNameAscending } from '../../../../helpers/roles'
 import { ModalDeleteRolePermission } from '../../../UserRoles/components/RolesTable/ModalDeleteRolePermission'
 import { Role } from '../../../../../types.d'
-import PermissionDropdown from '../../../Users/components/PermissionDropdown'
+import RoleDropdown from '../../../Users/components/RoleDropdown'
 
 interface RowExpandRolesProps {}
 
@@ -39,10 +39,10 @@ export class RowExpandRoles extends React.Component<RowExpandRolesProps, null> {
 
                                         return (
                                             <Col key={role.id} xs={4}>
-                                                <PermissionDropdown
-                                                    permission={{
-                                                        ...permission,
-                                                        hasRole: true,
+                                                <RoleDropdown
+                                                    role={{
+                                                        ...role,
+                                                        hasPermission: true,
                                                     }}
                                                     openDeleteModal={() => openModal(modalName)}
                                                 />

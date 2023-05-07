@@ -69,6 +69,7 @@ Route::prefix('api/v1')->group(function () {
         Route::post('add/{user_id}/{permission_id}', '\App\Http\Controllers\PermissionsController@postAddPermissionToUser');
         Route::post('delete_user_permission/{permission_id}/{user_id}', '\App\Http\Controllers\PermissionsController@postDeleteUserPermission');
         Route::post('add', '\App\Http\Controllers\PermissionsController@postAdd');
+        Route::get('filtersData', '\App\Http\Controllers\PermissionsController@getFiltersData');
     });
 
     Route::prefix('files')->group(function () {

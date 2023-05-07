@@ -29,6 +29,7 @@ export interface Role {
     users_count: number
     users: Array<User>
     description: string
+    hasPermission: boolean
 }
 
 export interface Permission {

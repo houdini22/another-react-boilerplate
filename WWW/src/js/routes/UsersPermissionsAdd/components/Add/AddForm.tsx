@@ -10,9 +10,9 @@ class AddForm extends React.Component<null, null> {
             handleSubmit,
             roles,
             users,
-            newPermissionUsers = [],
-            addNewPermissionToUser,
-            removeNewPermissionFromUser,
+            newUsers = [],
+            addUserToNewPermission,
+            removeUserFromNewPermission,
             role_id,
             noAddToUsers,
             noRoleId,
@@ -46,7 +46,7 @@ class AddForm extends React.Component<null, null> {
                     <Col xs={6}>
                         {!role_id && !noAddToUsers && canByPermission('users.add_permission') && (
                             <Card header={<h1>Add to Users</h1>} color={'secondary'}>
-                                {newPermissionUsers.length > 0 && <Alert color={'info'}>Click added User to remove.</Alert>}
+                                {newUsers.length > 0 && <Alert color={'info'}>Click added User to remove.</Alert>}
                                 <Field
                                     name="_users"
                                     label="User"
@@ -55,17 +55,17 @@ class AddForm extends React.Component<null, null> {
                                     options={sortUsersByNameAscending(users).map(({ id, name }) => ({
                                         label: name,
                                         value: id,
-                                        disabled: !!newPermissionUsers.find(({ id: _id }) => id === _id),
+                                        disabled: !!newUsers.find(({ id: _id }) => id === _id),
                                     }))}
                                     onChange={(e, value) => {
                                         if (value) {
-                                            addNewPermissionToUser(users.find((user) => Number(user.id) === Number(value)))
+                                            addUserToNewPermission(users.find((user) => Number(user.id) === Number(value)))
                                         }
                                     }}
                                     component={FormField}
                                 />
                                 <Section>
-                                    {newPermissionUsers.map((user) => {
+                                    {newUsers.map((user) => {
                                         return (
                                             <Button
                                                 key={user.id}
@@ -73,7 +73,7 @@ class AddForm extends React.Component<null, null> {
                                                 color={'secondary'}
                                                 block
                                                 onClick={() => {
-                                                    removeNewPermissionFromUser(user.id)
+                                                    removeUserFromNewPermission(user.id)
                                                 }}
                                             >
                                                 {user.name}
