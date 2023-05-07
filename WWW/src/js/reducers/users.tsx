@@ -1,5 +1,5 @@
 import { http } from '../modules/http'
-import { Role, User } from '../../types.d'
+import { Permission, Role, User } from '../../types.d'
 
 const SET_IS_LOADING = 'users::set-is-loading'
 const SET_USER = 'users::set-user'
@@ -371,9 +371,9 @@ const deleteRolePermission =
         })
     }
 
-const deletePermission = (permission_id) => (dispatch) => {
+const deletePermission = (permission: Permission) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        http.delete(`/roles/permissions/delete/${permission_id}`)
+        http.delete(`/roles/permissions/delete/${permission.id}`)
             .then(() => {
                 resolve()
             })

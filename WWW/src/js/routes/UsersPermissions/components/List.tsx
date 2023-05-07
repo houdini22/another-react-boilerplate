@@ -7,6 +7,7 @@ import {
     DeleteRole,
     DeleteRolePermission,
     DeleteSavedFilter,
+    DeleteUserPermission,
     DeleteUserRole,
     Filters,
     PaginationLinks,
@@ -21,8 +22,8 @@ import {
     SetIsLoading,
     SetPage,
 } from '../../../../types.d'
-import RolesFilters from './RolesFilters'
-import RolesTable from './RolesTable'
+import PermissionsFilters from './PermissionsFilters'
+import PermissionsTable from './PermissionsTable'
 
 interface ListProps {
     filters: Filters
@@ -41,7 +42,7 @@ interface ListProps {
     hasNextPage: boolean
     hasPrevPage: boolean
     totalPages: number
-    data: Array<Role>
+    data: Array<Permission>
     setIsLoading: SetIsLoading
     deleteUserRole: DeleteUserRole
     perPage: number
@@ -50,7 +51,8 @@ interface ListProps {
     fetch: () => Promise<void>
     deletePermission: DeletePermission
     deleteRole: DeleteRole
-    permissions: Array<Permission>
+    roles: Array<Role>
+    deleteUserPermission: DeleteUserPermission
 }
 
 export class List extends React.Component<ListProps, null> {
@@ -58,6 +60,7 @@ export class List extends React.Component<ListProps, null> {
         const {
             filters,
             setFilter,
+            permissions,
             resetFilters,
             defaultFilters,
             isLoading,
@@ -72,6 +75,7 @@ export class List extends React.Component<ListProps, null> {
             hasNextPage,
             hasPrevPage,
             totalPages,
+            data,
             setIsLoading,
             deleteUserRole,
             perPage,
@@ -80,8 +84,8 @@ export class List extends React.Component<ListProps, null> {
             fetch,
             deleteRolePermission,
             deletePermission,
-            data,
-            permissions,
+            roles,
+            deleteUserPermission,
         } = this.props
 
         return (
@@ -90,7 +94,7 @@ export class List extends React.Component<ListProps, null> {
                     <>
                         {canByPermission('roles.list') && (
                             <>
-                                <RolesFilters
+                                <PermissionsFilters
                                     filters={filters}
                                     setFilter={setFilter}
                                     fetch={fetch}
@@ -104,6 +108,7 @@ export class List extends React.Component<ListProps, null> {
                                     saveFilters={saveFilters}
                                     deleteSavedFilter={deleteSavedFilter}
                                     restoreSavedFilter={restoreSavedFilter}
+                                    roles={roles}
                                 />
                                 <Card>
                                     <Pagination
@@ -115,9 +120,9 @@ export class List extends React.Component<ListProps, null> {
                                         hasPrevPage={hasPrevPage}
                                         totalPages={totalPages}
                                     />
-                                    <RolesTable
+                                    <PermissionsTable
                                         setIsLoading={setIsLoading}
-                                        roles={data}
+                                        data={data}
                                         deleteRolePermission={deleteRolePermission}
                                         deleteUserRole={deleteUserRole}
                                         fetch={fetch}
@@ -127,6 +132,8 @@ export class List extends React.Component<ListProps, null> {
                                         total={total}
                                         totalPages={totalPages}
                                         deleteRole={deleteRole}
+                                        deleteUserPermission={deleteUserPermission}
+                                        permissions={permissions}
                                     />
                                     <Pagination
                                         links={links}

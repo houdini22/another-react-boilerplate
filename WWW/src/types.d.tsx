@@ -18,6 +18,7 @@ export interface User {
     avatar: UserAvatar
     email: string
     hasRole: boolean
+    hasPermission: boolean
 }
 
 export interface Role {

@@ -89,7 +89,6 @@ export class UsersView extends React.Component<null, null> {
                                                                         hasNextPage={hasNextPage}
                                                                         hasPrevPage={hasPrevPage}
                                                                         totalPages={totalPages}
-                                                                        data={data}
                                                                         setIsLoading={setIsLoading}
                                                                         deleteUserRole={deleteUserRole}
                                                                         perPage={perPage}
@@ -98,6 +97,7 @@ export class UsersView extends React.Component<null, null> {
                                                                         fetch={fetch}
                                                                         deletePermission={deletePermission}
                                                                         deleteRole={deleteRole}
+                                                                        data={data}
                                                                     />
                                                                 </PageContent>
                                                             )

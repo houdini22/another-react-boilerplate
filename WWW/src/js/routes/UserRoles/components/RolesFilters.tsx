@@ -3,7 +3,6 @@ import { FiltersCard } from '../../../components/common/FiltersCard'
 import { LoadingOverlay } from '../../../components'
 import {
     DeleteSavedFilter,
-    Filters,
     Permission,
     ResetFilters,
     RestoreSavedFilter,
@@ -17,6 +16,7 @@ import {
 interface RolesFiltersProps {
     filters: Object
     setFilter: SetFilter
+    roles: Array<Role>
     permissions: Array<Permission>
     resetFilters: ResetFilters
     defaultFilters: Filters

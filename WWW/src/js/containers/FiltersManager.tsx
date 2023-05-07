@@ -32,7 +32,10 @@ class FiltersManagerBase extends React.Component<FiltersManagerBaseProps, Filter
         if (!!filters[name]) {
             this.state = {
                 defaultFilters,
-                filters: filters[name],
+                filters: {
+                    ...filters[name],
+                    ...urlFilters,
+                },
                 savedFilters: this.getSavedFilters(),
             }
         } else {

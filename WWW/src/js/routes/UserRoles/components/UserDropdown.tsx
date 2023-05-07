@@ -69,6 +69,16 @@ export class UserDropdown extends React.Component<UserDropdownProps, null> {
                                             <DeleteIcon /> Remove Role from User
                                         </Dropdown.Item>
                                     )}
+                                    {user.hasPermission && (
+                                        <Dropdown.Item
+                                            color="danger"
+                                            onClick={() => {
+                                                openDeleteModal()
+                                            }}
+                                        >
+                                            <DeleteIcon /> Remove Permission from User
+                                        </Dropdown.Item>
+                                    )}
                                 </Dropdown.Menu>
                             </Dropdown.Container>
                         )}
