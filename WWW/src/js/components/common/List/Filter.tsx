@@ -10,14 +10,13 @@ interface FilterProps {
     options?: Array<{ label: string; value: string | number }>
     filters: Object
     setFilter: Function
-    fetch: Function
     type: string
     label: string
 }
 
 class Filter extends React.Component<FilterProps, null> {
     renderRadio() {
-        const { name, options, filters, setFilter, fetch } = this.props
+        const { name, options, filters, setFilter } = this.props
 
         return (
             <>
@@ -29,7 +28,7 @@ class Filter extends React.Component<FilterProps, null> {
                                 key={`${name}${value}${label}`}
                                 color={filters[name] === value ? 'warning' : 'secondary'}
                                 onClick={() => {
-                                    setFilter(name, value).then(() => fetch())
+                                    setFilter(name, value)
                                 }}
                             >
                                 {label}
@@ -40,7 +39,7 @@ class Filter extends React.Component<FilterProps, null> {
         )
     }
     renderOrderByColumn() {
-        const { options, filters, setFilter, fetch } = this.props
+        const { options, filters, setFilter } = this.props
 
         return (
             <FormField
@@ -50,13 +49,13 @@ class Filter extends React.Component<FilterProps, null> {
                 inputOnly
                 defaultValue={filters['order_by']}
                 onChange={({ target: { value } }) => {
-                    setFilter('order_by', value).then(() => fetch())
+                    setFilter('order_by', value)
                 }}
             />
         )
     }
     renderSelect() {
-        const { filters, setFilter, fetch, name, options } = this.props
+        const { filters, setFilter, name, options } = this.props
 
         return (
             <FormField
@@ -67,13 +66,13 @@ class Filter extends React.Component<FilterProps, null> {
                 inputOnly
                 defaultValue={filters[name]}
                 onChange={({ target: { value } }) => {
-                    setFilter(name, value).then(() => fetch())
+                    setFilter(name, value)
                 }}
             />
         )
     }
     renderOrderDirection() {
-        const { filters, setFilter, fetch } = this.props
+        const { filters, setFilter } = this.props
         const options = [
             {
                 label: 'Ascending',
@@ -93,7 +92,7 @@ class Filter extends React.Component<FilterProps, null> {
                 inputOnly
                 defaultValue={filters['order_direction']}
                 onChange={({ target: { value } }) => {
-                    setFilter('order_direction', value).then(() => fetch())
+                    setFilter('order_direction', value)
                 }}
             />
         )
@@ -120,14 +119,14 @@ class Filter extends React.Component<FilterProps, null> {
                 inputOnly
                 defaultValue={filters[name]}
                 onBlur={({ target: { value } }) => {
-                    const { setFilter, fetch } = this.props
-                    setFilter(name, value).then(() => fetch())
+                    const { setFilter } = this.props
+                    setFilter(name, value)
                 }}
             />
         )
     }
     renderMultiple() {
-        const { options, filters, setFilter, name, fetch } = this.props
+        const { options, filters, setFilter, name } = this.props
         return (
             <>
                 {options
@@ -139,14 +138,14 @@ class Filter extends React.Component<FilterProps, null> {
                                 color={filters[name].indexOf(value) === -1 ? 'secondary' : 'warning'}
                                 onClick={() => {
                                     if (filters[name].indexOf(value) === -1) {
-                                        setFilter(name, [...filters[name], value]).then(() => fetch())
+                                        setFilter(name, [...filters[name], value])
                                     } else {
                                         setFilter(
                                             name,
                                             filters[name].filter((v) => {
                                                 return v !== value
                                             }),
-                                        ).then(() => fetch())
+                                        )
                                     }
                                 }}
                             >

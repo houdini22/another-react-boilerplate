@@ -1,66 +1,68 @@
 import * as React from 'react'
-import { Button, Col, Popover, Row } from '../../../../components'
-import { DeleteIcon, DetailsIcon, EditIcon } from '../../../../components/icons'
+import { Col, Row } from '../../../../components'
 import { formatDateTime } from '../../../../helpers/date-time'
-import { User } from '../../../../../types.d'
+import { OpenModal, User } from '../../../../../types.d'
+import { ButtonEdit } from '../../../../components/common/ButtonEdit'
+import { ButtonDelete } from '../../../../components/common/ButtonDelete'
+import { ButtonDetails } from '../../../../components/common/ButtonDetails'
+import { AuthorizationManager } from '../../../../containers/AuthorizationManager'
 
-interface FiltersProps {
+interface RowActionsProps {
     user: User
-    navigate: Function
+    openModal: OpenModal
 }
 
-export class RowActions extends React.Component<FiltersProps, null> {
+export class RowActions extends React.Component<RowActionsProps, null> {
     render() {
-        const { user, navigate, openModal, canByPermissions } = this.props
+        const { user, openModal } = this.props
 
         return (
-            <div>
-                {canByPermissions('users.edit') && (
-                    <Button
-                        icon={<EditIcon />}
-                        iconOnly
-                        color={'warning'}
-                        onClick={() => {
-                            navigate(`/users/edit?id=${user.id}`)
-                        }}
-                    />
+            <AuthorizationManager>
+                {({ canByPermission }) => (
+                    <div>
+                        {canByPermission('users.edit') && <ButtonEdit href={`/users/edit?id=${user.id}`} />}
+                        {!!user.is_deletable && canByPermission('users.delete') && (
+                            <ButtonDelete
+                                onClick={() => {
+                                    openModal(`user-${user.id}-delete`)
+                                }}
+                            />
+                        )}
+                        <ButtonDetails
+                            content={
+                                <>
+                                    <Row>
+                                        <Col xs={5}>Created at:</Col>
+                                        <Col xs={7}>
+                                            {user.created_at != null ? formatDateTime(user.created_at) : 'never'}
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col xs={5}>Last edit:</Col>
+                                        <Col xs={7}>
+                                            {user.updated_at != null ? formatDateTime(user.updated_at) : 'never'}
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col xs={5}>Last active:</Col>
+                                        <Col xs={7}>
+                                            {user.last_active != null ? formatDateTime(user.last_active) : 'never'}
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col xs={5}>Email verified at:</Col>
+                                        <Col xs={7}>
+                                            {user.email_verified_at != null
+                                                ? formatDateTime(user.email_verified_at)
+                                                : 'never'}
+                                        </Col>
+                                    </Row>
+                                </>
+                            }
+                        />
+                    </div>
                 )}
-                {user.is_deletable == 1 && canByPermissions('users.delete') && (
-                    <Button
-                        icon={<DeleteIcon />}
-                        iconOnly
-                        color={'danger'}
-                        onClick={() => {
-                            openModal(`user-${user.id}-delete`)
-                        }}
-                    />
-                )}
-                <Popover.Container placement={'left-center'} pixelsWidth={300} trigger={'hover'}>
-                    <Popover.Trigger>
-                        <Button icon={<DetailsIcon />} iconOnly color={'info'} />
-                    </Popover.Trigger>
-                    <Popover.Content>
-                        <Row>
-                            <Col xs={5}>Created at:</Col>
-                            <Col xs={7}>{user.created_at != null ? formatDateTime(user.created_at) : 'never'}</Col>
-                        </Row>
-                        <Row>
-                            <Col xs={5}>Last edit:</Col>
-                            <Col xs={7}>{user.updated_at != null ? formatDateTime(user.updated_at) : 'never'}</Col>
-                        </Row>
-                        <Row>
-                            <Col xs={5}>Last active:</Col>
-                            <Col xs={7}>{user.last_active != null ? formatDateTime(user.last_active) : 'never'}</Col>
-                        </Row>
-                        <Row>
-                            <Col xs={5}>Email verified at:</Col>
-                            <Col xs={7}>
-                                {user.email_verified_at != null ? formatDateTime(user.email_verified_at) : 'never'}
-                            </Col>
-                        </Row>
-                    </Popover.Content>
-                </Popover.Container>
-            </div>
+            </AuthorizationManager>
         )
     }
 }

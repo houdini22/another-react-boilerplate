@@ -1,4 +1,5 @@
 import { http } from '../modules/http'
+import { User } from '../../types.d'
 
 const SET_IS_LOADING = 'users::set-is-loading'
 const SET_USER = 'users::set-user'
@@ -14,7 +15,10 @@ const setLogsData = (data) => (dispatch) => {
     dispatch({ type: SET_LOGS_DATA, payload: data })
 }
 const setIsLoading = (data) => (dispatch) => {
-    dispatch({ type: SET_IS_LOADING, payload: data })
+    return new Promise((resolve) => {
+        dispatch({ type: SET_IS_LOADING, payload: data })
+        resolve()
+    })
 }
 
 const setUser = (data) => (dispatch) => {
@@ -143,9 +147,9 @@ const fetch = () => (dispatch) => {
     })
 }
 
-const deleteUser = (id) => (dispatch) => {
+const deleteUser = (user: User) => (dispatch) => {
     return new Promise<void>((resolve, reject) => {
-        http.delete(`/users/delete/${id}`)
+        http.delete(`/users/delete/${user.id}`)
             .then(({ data: { user } }) => {
                 resolve()
             })

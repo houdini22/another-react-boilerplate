@@ -2,12 +2,14 @@ import React from 'react'
 import { http } from '../../../modules/http'
 import styles from '../../../../assets/scss/components/_list_manager.scss'
 import classNames from 'classnames/bind'
+import { SetIsLoading } from '../../../../types.d'
+import { ifDeepDiff } from '../../../utils/javascript'
 
 const cx = classNames.bind(styles)
 
 interface ListManagerProps {
     url: string
-    defaultFilters: Object
+    filters: Object
 }
 
 interface ListManagerState {
@@ -21,6 +23,7 @@ interface ListManagerState {
     total: number
     perPage: number
     links: Array<Object>
+    setIsLoading: SetIsLoading
 }
 
 class ListManager extends React.Component<ListManagerProps, ListManagerState> {
@@ -31,39 +34,19 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
         hasPrevPage: false,
         hasNextPage: false,
         totalPages: 0,
-        filters: {},
         total: 0,
         perPage: 0,
         links: [],
     }
 
+    requestInProgress = false
+
     componentDidMount() {
-        const { defaultFilters = {}, urlFilters = {} } = this.props
-        const newFilters = {
-            ...defaultFilters,
-            ...urlFilters,
-        }
-
-        this.setState({ filters: newFilters }, () => {
-            this.fetch()
-        })
-    }
-
-    setFilter(name, value) {
-        return new Promise((resolve) => {
-            const { filters } = this.state
-
-            this.setState(
-                {
-                    filters: {
-                        ...filters,
-                        [name]: value,
-                    },
-                },
-                () => {
-                    resolve()
-                },
-            )
+        const { setIsLoading } = this.props
+        setIsLoading(true).then(() => {
+            this.fetch().then(() => {
+                setIsLoading(false)
+            })
         })
     }
 
@@ -80,117 +63,97 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
         })
     }
 
-    setIsLoading(isLoading) {
-        return new Promise((resolve) => {
-            this.setState({ isLoading }, () => {
-                resolve()
+    componentDidUpdate(prevProps: Readonly<ListManagerProps>, prevState: Readonly<ListManagerState>, snapshot?: any) {
+        const { filters, setIsLoading } = this.props
+        const { page } = this.state
+
+        if (ifDeepDiff(prevProps.filters, filters) || prevState.page !== page) {
+            setIsLoading(true).then(() => {
+                this.fetch().then(
+                    () => {
+                        setIsLoading(false)
+                    },
+                    () => setIsLoading(false),
+                )
             })
-        })
+        }
     }
 
     fetch() {
-        return new Promise((resolve) => {
-            this.setIsLoading(true).then(() => {
-                const { url, defaultFilters } = this.props
-                const { page, filters } = this.state
+        console.log('fetch')
+        return new Promise((resolve, reject) => {
+            if (this.requestInProgress) {
+                reject()
+                return
+            }
 
-                const params = {
-                    filters: {
-                        ...defaultFilters,
-                        ...filters,
-                    },
-                    page,
-                }
+            this.requestInProgress = true
 
-                http.get(`${url}`, {
-                    params,
-                }).then(
-                    ({
+            const { url, filters } = this.props
+            const { page } = this.state
+
+            const params = {
+                filters,
+                page,
+            }
+
+            http.get(`${url}`, {
+                params,
+            }).then(
+                ({
+                    data: {
                         data: {
-                            data: {
-                                data = [],
-                                next_page_url = '',
-                                prev_page_url = '',
-                                last_page = 0,
-                                total = 0,
-                                current_page = 0,
-                                per_page = 0,
-                                links = [],
-                            } = {},
+                            data = [],
+                            next_page_url = '',
+                            prev_page_url = '',
+                            last_page = 0,
+                            total = 0,
+                            current_page = 0,
+                            per_page = 0,
+                            links = [],
                         } = {},
-                    }) => {
-                        this.setState(
-                            {
-                                data,
-                                page: current_page,
-                                hasNextPage: !!next_page_url,
-                                hasPrevPage: !!prev_page_url,
-                                totalPages: last_page,
-                                total,
-                                perPage: per_page,
-                                links,
-                            },
-                            () => {
-                                this.setIsLoading(false).then(() => {
-                                    resolve()
-                                })
-                            },
-                        )
-                    },
-                    () => {
-                        this.setIsLoading(false).then(() => {
+                    } = {},
+                }) => {
+                    this.setState(
+                        {
+                            data,
+                            page: current_page,
+                            hasNextPage: !!next_page_url,
+                            hasPrevPage: !!prev_page_url,
+                            totalPages: last_page,
+                            total,
+                            perPage: per_page,
+                            links,
+                        },
+                        () => {
                             resolve()
-                        })
-                    },
-                )
-            })
-        })
-    }
-
-    resetFilters() {
-        const { defaultFilters } = this.props
-
-        this.setState({ filters: defaultFilters }, () => {
-            this.fetch()
-        })
-    }
-
-    setFilters(filters) {
-        return new Promise((resolve) => {
-            this.setState({ filters }, () => {
-                resolve()
-            })
+                            this.requestInProgress = false
+                        },
+                    )
+                },
+                () => {
+                    resolve()
+                    this.requestInProgress = false
+                },
+            )
         })
     }
 
     render() {
-        const { filters, data, total, hasPrevPage, hasNextPage, totalPages, page, isLoading, perPage, links } =
-            this.state
-        const { children, defaultFilters } = this.props
-
-        const allFilters = {
-            ...defaultFilters,
-            ...filters,
-        }
+        const { data, total, hasPrevPage, hasNextPage, totalPages, page, perPage, links } = this.state
+        const { children } = this.props
 
         const renderProps = {
             fetch: this.fetch.bind(this),
-            setFilter: this.setFilter.bind(this),
-            filters: allFilters,
             data,
             total,
             hasPrevPage,
             hasNextPage,
             totalPages,
             page,
-            isLoading,
             setPage: this.setPage.bind(this),
             perPage,
-            resetFilters: this.resetFilters.bind(this),
             links,
-            setIsLoading: this.setIsLoading.bind(this),
-            defaultFilters,
-            setFilters: this.setFilters.bind(this),
         }
 
         return <div className={cx('list-manager-container')}>{children(renderProps)}</div>

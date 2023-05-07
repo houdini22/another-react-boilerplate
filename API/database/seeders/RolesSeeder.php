@@ -203,6 +203,12 @@ class RolesSeeder extends Seeder
                         'is_deletable' => false,
                         'is_name_editable' => false,
                     ],
+                    [
+                        'name' => 'users.remove_role',
+                        'guard_name' => 'web',
+                        'is_deletable' => false,
+                        'is_name_editable' => false,
+                    ],
                 ]
             ],
             [

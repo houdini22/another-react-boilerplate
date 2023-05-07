@@ -2,21 +2,21 @@ import * as React from 'react'
 import styles from '../../../../assets/scss/components/_list_manager.scss'
 import classNames from 'classnames/bind'
 import { Button, Col, Row } from '../../../components'
+import { SetPage } from '../../../../types.d'
 
 const cx = classNames.bind(styles)
 
 interface PaginationProps {
     hasPrevPage: boolean
-    setPage: Function
+    setPage: SetPage
     page: number
-    fetch: Function
     totalPages: number
     hasNextPage: boolean
 }
 
 class Pagination extends React.Component<PaginationProps, null> {
     render() {
-        const { hasPrevPage, setPage, page, fetch, links, hasNextPage } = this.props
+        const { hasPrevPage, setPage, page, links, hasNextPage } = this.props
         return (
             <div className={cx('pagination')}>
                 <Row>
@@ -25,9 +25,7 @@ class Pagination extends React.Component<PaginationProps, null> {
                             disabled={!hasPrevPage}
                             color={'secondary'}
                             onClick={() => {
-                                setPage(page - 1).then(() => {
-                                    fetch()
-                                })
+                                setPage(page - 1)
                             }}
                         >
                             Previous
@@ -51,9 +49,7 @@ class Pagination extends React.Component<PaginationProps, null> {
                                     disabled={active}
                                     key={label}
                                     onClick={() => {
-                                        setPage(Number(label)).then(() => {
-                                            fetch()
-                                        })
+                                        setPage(Number(label))
                                     }}
                                 >
                                     {label}
@@ -66,9 +62,7 @@ class Pagination extends React.Component<PaginationProps, null> {
                             disabled={!hasNextPage}
                             color={'secondary'}
                             onClick={() => {
-                                setPage(page + 1).then(() => {
-                                    fetch()
-                                })
+                                setPage(page + 1)
                             }}
                         >
                             Next

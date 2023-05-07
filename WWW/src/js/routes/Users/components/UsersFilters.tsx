@@ -1,25 +1,48 @@
 import * as React from 'react'
 import { FiltersCard } from '../../../components/common/FiltersCard'
+import {
+    Permission,
+    Role,
+    SetFilter,
+    Filters,
+    SetFilters,
+    DeleteSavedFilter,
+    SaveFilters,
+    RestoreSavedFilter,
+    ResetFilters,
+} from '../../../../types.d'
+import { LoadingOverlay } from '../../../components'
 
 interface FiltersProps {
     filters: Object
-    setFilter: Function
-    fetch(): Function
+    setFilter: SetFilter
+    roles: Array<Role>
+    permissions: Array<Permission>
+    resetFilters: ResetFilters
+    defaultFilters: Filters
+    isLoading: boolean
+    setFilters: SetFilters
+    savedFilters: Filters
+    deleteSavedFilter: DeleteSavedFilter
+    saveFilters: SaveFilters
+    restoreSavedFilter: RestoreSavedFilter
 }
 
-export class Filters extends React.Component<FiltersProps, null> {
+export class UserFilters extends React.Component<FiltersProps, null> {
     render() {
         const {
             filters,
             setFilter,
-            fetch,
             roles,
             permissions,
             resetFilters,
             defaultFilters,
             isLoading,
             setFilters,
-            setIsLoading,
+            savedFilters,
+            deleteSavedFilter,
+            saveFilters,
+            restoreSavedFilter,
         } = this.props
 
         return (
@@ -29,12 +52,11 @@ export class Filters extends React.Component<FiltersProps, null> {
                 setFilter={setFilter}
                 setFilters={setFilters}
                 resetFilters={resetFilters}
-                fetch={() => {
-                    setIsLoading(true)
-                    fetch().then(() => setIsLoading(false))
-                }}
                 defaultFilters={defaultFilters}
-                isLoading={isLoading}
+                savedFilters={savedFilters}
+                deleteSavedFilter={deleteSavedFilter}
+                saveFilters={saveFilters}
+                restoreSavedFilter={restoreSavedFilter}
                 filtersToRender={[
                     {
                         type: 'search',
@@ -189,8 +211,8 @@ export class Filters extends React.Component<FiltersProps, null> {
                                 value: 15,
                             },
                             {
-                                label: '50',
-                                value: 50,
+                                label: '40',
+                                value: 40,
                             },
                             {
                                 label: '100',
@@ -199,9 +221,11 @@ export class Filters extends React.Component<FiltersProps, null> {
                         ],
                     },
                 ]}
-            />
+            >
+                {isLoading && <LoadingOverlay />}
+            </FiltersCard>
         )
     }
 }
 
-export default Filters
+export default UserFilters
