@@ -1,28 +1,28 @@
 import * as React from 'react'
 import { Card, LoadingOverlay } from '../../../../components'
 import { EditFormContainer } from './EditFormContainer'
-interface EditProps {
-    fetch: Function
-    isLoading: boolean
-}
+import { NotificationsManager } from '../../../../containers/NotificationsManager'
+interface EditProps {}
 
-interface EditState {}
-
-export class Edit extends React.Component<EditProps, EditState> {
+export class Edit extends React.Component<EditProps, null> {
     render() {
-        const { editRole, role, fetch, isLoading, addToastNotification, setIsLoading } = this.props
+        const { editRole, role, fetch, isLoading, setIsLoading } = this.props
         return (
-            <Card header={<h1>Edit</h1>}>
-                <EditFormContainer
-                    initialValues={role}
-                    save={editRole}
-                    role={role}
-                    fetch={fetch}
-                    addToastNotification={addToastNotification}
-                    setIsLoading={setIsLoading}
-                />
-                {isLoading && <LoadingOverlay />}
-            </Card>
+            <NotificationsManager>
+                {({ addToastNotification }) => (
+                    <Card header={<h1>Role</h1>} color={'primary'}>
+                        <EditFormContainer
+                            initialValues={role}
+                            save={editRole}
+                            role={role}
+                            fetch={fetch}
+                            addToastNotification={addToastNotification}
+                            setIsLoading={setIsLoading}
+                        />
+                        {isLoading && <LoadingOverlay />}
+                    </Card>
+                )}
+            </NotificationsManager>
         )
     }
 }

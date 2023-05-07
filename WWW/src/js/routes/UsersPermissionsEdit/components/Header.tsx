@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { PageHeader } from '../../../components'
 import { HomeIcon } from '../../../components/icons'
+import { Permission } from '../../../../types.d'
 
 interface HeaderProps {
-    permission: Object
+    permission: Permission
 }
 
 export class Header extends React.Component<HeaderProps, null> {
@@ -25,4 +26,4 @@ export class Header extends React.Component<HeaderProps, null> {
     }
 }
 
-export default { Header }
+export default Header

@@ -1,27 +1,30 @@
 import * as React from 'react'
 import { Card, LoadingOverlay } from '../../../components'
 import { AddPermissionFormContainer } from './AddPermissions/AddPermissionFormContainer'
+import { NotificationsManager } from '../../../containers/NotificationsManager'
 
-interface HeaderProps {
-    role: Object
-}
+interface AddPermissionsProps {}
 
-export class AddPermissions extends React.Component<HeaderProps, null> {
+export class AddPermissions extends React.Component<AddPermissionsProps, null> {
     render() {
-        const { role, permissions, setIsLoading, addPermission, fetchPermissions, fetchOne, isLoading, addToastNotification } = this.props
+        const { role, permissions, setIsLoading, addPermission, fetchPermissions, fetchOne, isLoading } = this.props
         return (
-            <Card header={<h1>Add Permissions</h1>}>
-                <AddPermissionFormContainer
-                    role={role}
-                    permissions={permissions}
-                    setIsLoading={setIsLoading}
-                    addPermission={addPermission}
-                    fetchPermissions={fetchPermissions}
-                    fetchOne={fetchOne}
-                    addToastNotification={addToastNotification}
-                />
-                {isLoading && <LoadingOverlay />}
-            </Card>
+            <NotificationsManager>
+                {({ addToastNotification }) => (
+                    <Card header={<h1>Add Permissions</h1>} color={'secondary'}>
+                        <AddPermissionFormContainer
+                            role={role}
+                            permissions={permissions}
+                            setIsLoading={setIsLoading}
+                            addPermission={addPermission}
+                            fetchPermissions={fetchPermissions}
+                            fetchOne={fetchOne}
+                            addToastNotification={addToastNotification}
+                        />
+                        {isLoading && <LoadingOverlay />}
+                    </Card>
+                )}
+            </NotificationsManager>
         )
     }
 }

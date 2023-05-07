@@ -13,13 +13,11 @@ import { UsersManager } from '../../../containers/UsersManager'
 import { TitleManager } from '../../../containers/TitleManager'
 import { AuthorizationManager } from '../../../containers/AuthorizationManager'
 
-interface UsersViewState {}
-
-export class UserRolesEdit extends React.Component<null, UsersViewState> {
+export class UserRolesEdit extends React.Component<null, null> {
     render() {
         return (
             <RouteManager>
-                {({ navigate, query }) => (
+                {({ query: { id: roleId } }) => (
                     <NotificationsManager>
                         {({ addToastNotification }) => {
                             return (
@@ -29,109 +27,93 @@ export class UserRolesEdit extends React.Component<null, UsersViewState> {
                                             {({ setTitleSegments }) => {
                                                 setTitleSegments(['Users', 'Roles', 'Edit'])
                                                 return (
-                                                    <Modal.Manager>
-                                                        {({ openModal, registerModal, closeModal }) => (
-                                                            <UsersManager roleId={query['id']} getUsers getPermissions>
-                                                                {({
-                                                                    users,
-                                                                    deletePermission,
-                                                                    role,
-                                                                    isLoading,
-                                                                    editRole,
-                                                                    fetchRole,
-                                                                    permissions,
-                                                                    setIsLoading,
-                                                                    addPermission,
-                                                                    fetchPermissions,
-                                                                    deleteRolePermission,
-                                                                    fetch,
-                                                                    deleteUserRole,
-                                                                    addUserRole,
-                                                                }) => (
-                                                                    <PageContent>
-                                                                        <Header navigate={navigate} role={role} />
-                                                                        <Row>
-                                                                            <Col xs={12} md={6}>
-                                                                                <Edit
-                                                                                    editRole={editRole}
-                                                                                    role={role}
-                                                                                    fetchOne={() => fetchRole(role['id'])}
-                                                                                    fetch={fetch}
-                                                                                    isLoading={isLoading}
-                                                                                    addToastNotification={addToastNotification}
-                                                                                    setIsLoading={setIsLoading}
-                                                                                />
-                                                                            </Col>
-                                                                        </Row>
-                                                                        <Row>
-                                                                            <Col xs={12} md={6}>
-                                                                                {canByPermission('roles.list_permissions') && (
-                                                                                    <Permissions
-                                                                                        role={role}
-                                                                                        setIsLoading={setIsLoading}
-                                                                                        fetch={() => fetchRole(role['id'])}
-                                                                                        isLoading={isLoading}
-                                                                                        deletePermission={deletePermission}
-                                                                                        deleteRolePermission={deleteRolePermission}
-                                                                                        navigate={navigate}
-                                                                                        addToastNotification={addToastNotification}
-                                                                                        openModal={openModal}
-                                                                                        registerModal={registerModal}
-                                                                                        closeModal={closeModal}
-                                                                                    />
-                                                                                )}
-                                                                            </Col>
-                                                                            <Col xs={12} md={6}>
-                                                                                {canByPermission('roles.add_permission') && (
-                                                                                    <AddPermissions
-                                                                                        role={role}
-                                                                                        permissions={permissions}
-                                                                                        setIsLoading={setIsLoading}
-                                                                                        addPermission={addPermission}
-                                                                                        fetchPermissions={fetchPermissions}
-                                                                                        fetchOne={() => fetchRole(role.id)}
-                                                                                        isLoading={isLoading}
-                                                                                        addToastNotification={addToastNotification}
-                                                                                    />
-                                                                                )}
-                                                                            </Col>
-                                                                        </Row>
-                                                                        <Row>
-                                                                            <Col xs={12} md={6}>
-                                                                                {canByPermission('roles.list_users') && (
-                                                                                    <Users
-                                                                                        role={role}
-                                                                                        setIsLoading={setIsLoading}
-                                                                                        fetch={() => fetchRole(role['id'])}
-                                                                                        isLoading={isLoading}
-                                                                                        navigate={navigate}
-                                                                                        addToastNotification={addToastNotification}
-                                                                                        openModal={openModal}
-                                                                                        registerModal={registerModal}
-                                                                                        closeModal={closeModal}
-                                                                                        deleteUserRole={deleteUserRole}
-                                                                                    />
-                                                                                )}
-                                                                            </Col>
-                                                                            <Col xs={12} md={6}>
-                                                                                {canByPermission('users.add_permission') && (
-                                                                                    <AddUsers
-                                                                                        role={role}
-                                                                                        users={users}
-                                                                                        setIsLoading={setIsLoading}
-                                                                                        fetch={() => fetchRole(role['id'])}
-                                                                                        isLoading={isLoading}
-                                                                                        addToastNotification={addToastNotification}
-                                                                                        addUserRole={addUserRole}
-                                                                                    />
-                                                                                )}
-                                                                            </Col>
-                                                                        </Row>
-                                                                    </PageContent>
-                                                                )}
-                                                            </UsersManager>
+                                                    <UsersManager roleId={roleId} getUsers getPermissions>
+                                                        {({
+                                                            users,
+                                                            deletePermission,
+                                                            role,
+                                                            isLoading,
+                                                            editRole,
+                                                            fetchRole,
+                                                            permissions,
+                                                            setIsLoading,
+                                                            addPermission,
+                                                            fetchPermissions,
+                                                            deleteRolePermission,
+                                                            fetch,
+                                                            deleteUserRole,
+                                                            addUserRole,
+                                                        }) => (
+                                                            <PageContent>
+                                                                <Header role={role} />
+                                                                <Row>
+                                                                    <Col xs={12} md={6}>
+                                                                        <Edit
+                                                                            editRole={editRole}
+                                                                            role={role}
+                                                                            fetchOne={() => fetchRole(role['id'])}
+                                                                            fetch={fetch}
+                                                                            isLoading={isLoading}
+                                                                            addToastNotification={addToastNotification}
+                                                                            setIsLoading={setIsLoading}
+                                                                        />
+                                                                    </Col>
+                                                                </Row>
+                                                                <Row>
+                                                                    <Col xs={12} md={6}>
+                                                                        {canByPermission('roles.list_permissions') && (
+                                                                            <Permissions
+                                                                                role={role}
+                                                                                setIsLoading={setIsLoading}
+                                                                                fetch={() => fetchRole(role['id'])}
+                                                                                isLoading={isLoading}
+                                                                                deletePermission={deletePermission}
+                                                                                deleteRolePermission={deleteRolePermission}
+                                                                            />
+                                                                        )}
+                                                                    </Col>
+                                                                    <Col xs={12} md={6}>
+                                                                        {canByPermission('roles.add_permission') && (
+                                                                            <AddPermissions
+                                                                                role={role}
+                                                                                permissions={permissions}
+                                                                                setIsLoading={setIsLoading}
+                                                                                addPermission={addPermission}
+                                                                                fetchPermissions={fetchPermissions}
+                                                                                fetchOne={() => fetchRole(role.id)}
+                                                                                isLoading={isLoading}
+                                                                            />
+                                                                        )}
+                                                                    </Col>
+                                                                </Row>
+                                                                <Row>
+                                                                    <Col xs={12} md={6}>
+                                                                        {canByPermission('roles.list_users') && (
+                                                                            <Users
+                                                                                role={role}
+                                                                                setIsLoading={setIsLoading}
+                                                                                fetch={() => fetchRole(role['id'])}
+                                                                                isLoading={isLoading}
+                                                                                deleteUserRole={deleteUserRole}
+                                                                            />
+                                                                        )}
+                                                                    </Col>
+                                                                    <Col xs={12} md={6}>
+                                                                        {canByPermission('users.add_permission') && (
+                                                                            <AddUsers
+                                                                                role={role}
+                                                                                users={users}
+                                                                                setIsLoading={setIsLoading}
+                                                                                fetch={() => fetchRole(role['id'])}
+                                                                                isLoading={isLoading}
+                                                                                addUserRole={addUserRole}
+                                                                            />
+                                                                        )}
+                                                                    </Col>
+                                                                </Row>
+                                                            </PageContent>
                                                         )}
-                                                    </Modal.Manager>
+                                                    </UsersManager>
                                                 )
                                             }}
                                         </TitleManager>

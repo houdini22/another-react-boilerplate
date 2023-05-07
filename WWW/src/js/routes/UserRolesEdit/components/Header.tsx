@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { PageHeader } from '../../../components'
 import { FaHome as HomeIcon } from 'react-icons/fa'
+import { Role } from '../../../../types.d'
 
 interface HeaderProps {
-    role: Object
+    role: Role
 }
 
 export class Header extends React.Component<HeaderProps, null> {

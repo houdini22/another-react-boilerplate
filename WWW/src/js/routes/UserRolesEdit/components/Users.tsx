@@ -1,8 +1,13 @@
 import * as React from 'react'
 import { Card, Dropdown, Label, LoadingOverlay } from '../../../components'
 import { DeleteIcon, RoleIcon } from '../../../components/icons'
-import { Role } from '../../../../types.d'
+import { Role, User } from '../../../../types.d'
 import { ModalConfirm } from '../../../components/common/ModalConfirm'
+import { RouteManager } from '../../../containers/RouteManager'
+import ModalDeleteUserRole from '../../Users/components/ModalDeleteUserRole'
+import { users } from '../../../reducers'
+import UserDropdown from '../../UserRoles/components/UserDropdown'
+import { ModalManager } from '../../../components/ui/Modal'
 
 interface HeaderProps {
     role: Role
@@ -10,79 +15,40 @@ interface HeaderProps {
 
 export class Users extends React.Component<HeaderProps, null> {
     render() {
-        const { role, setIsLoading, fetch, isLoading, navigate, addToastNotification, openModal, registerModal, closeModal, deleteUserRole } =
-            this.props
+        const { role, setIsLoading, fetch, isLoading, deleteUserRole } = this.props
         return (
-            <Card header={<h1>Users</h1>}>
-                {role?.users?.map(({ id: _id, name }) => {
-                    registerModal(
-                        `delete-role-from-user-${_id}`,
-                        <ModalConfirm
-                            onConfirm={() => {
-                                setIsLoading(true)
+            <ModalManager>
+                {({ openModal, closeModal, registerModal }) => (
+                    <Card header={<h1>Users</h1>} color={'secondary'}>
+                        {role?.users?.map((user: User) => {
+                            const modalName = `delete-role-from-user-${user.id}`
+                            registerModal(
+                                modalName,
+                                <ModalDeleteUserRole
+                                    role={role}
+                                    setIsLoading={setIsLoading}
+                                    deleteUserRole={deleteUserRole}
+                                    user={user}
+                                    fetch={fetch}
+                                    closeModal={() => closeModal(modalName)}
+                                />,
+                            )
 
-                                return deleteUserRole(
-                                    {
-                                        id: _id,
-                                    },
-                                    role,
-                                ).then(() => {
-                                    Promise.all([fetch()]).then(() => {
-                                        setIsLoading(false)
-                                        addToastNotification({
-                                            type: 'success',
-                                            title: 'Remove success.',
-                                            text: `Role ID: ${role.id} has been removed from User ID: ${_id}.`,
-                                            href: `/roles/edit?id=${role.id}}`,
-                                        })
-                                        closeModal(`delete-role-from-user-${_id}`)
-                                    })
-                                })
-                            }}
-                            onCancel={() => {
-                                closeModal(`delete-role-from-user-${_id}`)
-                            }}
-                        >
-                            Are you sure to delete Role: <b>{role.name}</b> from User: <b>{name}</b>?
-                        </ModalConfirm>,
-                    )
-
-                    return (
-                        <Dropdown.Container triggerSize={'lg'} key={_id}>
-                            <Dropdown.Trigger size="lg" component={Label} componentProps={{ block: true }}>
-                                {name}
-                            </Dropdown.Trigger>
-                            <Dropdown.Menu>
-                                <Dropdown.Item
-                                    color="info"
-                                    onClick={() => {
-                                        navigate(`/roles?user=${name}`)
+                            return (
+                                <UserDropdown
+                                    key={user.id}
+                                    user={{
+                                        ...user,
+                                        hasRole: true,
                                     }}
-                                >
-                                    <RoleIcon /> Show User Roles
-                                </Dropdown.Item>
-                                <Dropdown.Item
-                                    color="warning"
-                                    onClick={() => {
-                                        navigate(`/users/edit?id=${_id}`)
-                                    }}
-                                >
-                                    <RoleIcon /> Edit User
-                                </Dropdown.Item>
-                                <Dropdown.Item
-                                    color="danger"
-                                    onClick={() => {
-                                        openModal(`delete-role-from-user-${_id}`)
-                                    }}
-                                >
-                                    <DeleteIcon /> Remove Role from User
-                                </Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown.Container>
-                    )
-                })}
-                {isLoading && <LoadingOverlay />}
-            </Card>
+                                    openDeleteModal={() => openModal(modalName)}
+                                />
+                            )
+                        })}
+                        {isLoading && <LoadingOverlay />}
+                    </Card>
+                )}
+            </ModalManager>
         )
     }
 }

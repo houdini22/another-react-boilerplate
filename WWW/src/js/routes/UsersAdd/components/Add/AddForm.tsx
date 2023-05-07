@@ -207,4 +207,4 @@ class AddForm extends React.Component<null, null> {
 }
 
 export { AddForm }
-export default { EditForm: AddForm }
+export default AddForm
