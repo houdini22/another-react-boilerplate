@@ -16,15 +16,6 @@ interface UsersManagerProps {
 }
 
 class MediaManagerBase extends React.Component<UsersManagerProps, null> {
-    componentDidMount() {
-        /*const {
-            fetch,
-            location: { search },
-        } = this.props
-        const query = parseQueryString(search)
-        fetch(query)*/
-    }
-
     render() {
         const { children, files, setIsLoading, isLoading, deleteFile, uploadProgress, uploadFiles, editFile } = this.props
         const renderProps = {

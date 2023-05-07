@@ -6,7 +6,10 @@ const SET_FETCH_ERROR = 'files::set-fetch-error'
 const SET_UPLOAD_PROGRESS = 'files::set-upload-progress'
 
 const setIsLoading = (data) => (dispatch) => {
-    dispatch({ type: SET_IS_LOADING, payload: data })
+    return new Promise((resolve) => {
+        dispatch({ type: SET_IS_LOADING, payload: data })
+        resolve()
+    })
 }
 
 const setIsLoaded = (data) => (dispatch) => {

@@ -9,6 +9,7 @@ interface FiltersManagerBaseProps {
     defaultFilters: Object
     urlFilters?: Object
     filters: Object
+    name: string
 }
 
 interface FiltersManagerBaseState {
