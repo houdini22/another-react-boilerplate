@@ -1,5 +1,5 @@
 import { http } from '../modules/http'
-import { User } from '../../types.d'
+import { Role, User } from '../../types.d'
 
 const SET_IS_LOADING = 'users::set-is-loading'
 const SET_USER = 'users::set-user'
@@ -305,19 +305,17 @@ const addRole = (params, rolePermissions, roleUsers) => (dispatch) => {
     })
 }
 
-const deleteRole =
-    (id = 0) =>
-    (dispatch) => {
-        return new Promise<void>((resolve, reject) => {
-            http.delete(`/roles/delete/${id}`)
-                .then(() => {
-                    resolve()
-                })
-                .catch((e) => {
-                    reject(e)
-                })
-        })
-    }
+const deleteRole = (role: Role) => (dispatch) => {
+    return new Promise<void>((resolve, reject) => {
+        http.delete(`/roles/delete/${role.id}`)
+            .then(() => {
+                resolve()
+            })
+            .catch((e) => {
+                reject(e)
+            })
+    })
+}
 
 const addPermission =
     (params, newPermissionUsers = []) =>

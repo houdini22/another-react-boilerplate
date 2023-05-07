@@ -62,6 +62,16 @@ export class PermissionDropdown extends React.Component<PermissionDropdownProps,
                                     <DeleteIcon /> Remove Permission from User
                                 </Dropdown.Item>
                             )}
+                            {permission.hasRole && canByPermission('roles.remove_permission') && (
+                                <Dropdown.Item
+                                    color="danger"
+                                    onClick={() => {
+                                        openDeleteModal()
+                                    }}
+                                >
+                                    <DeleteIcon /> Remove Permission from Role
+                                </Dropdown.Item>
+                            )}
                         </Dropdown.Menu>
                     </Dropdown.Container>
                 )}

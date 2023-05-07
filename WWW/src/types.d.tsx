@@ -17,6 +17,7 @@ export interface User {
     is_deletable: boolean
     avatar: UserAvatar
     email: string
+    hasRole: boolean
 }
 
 export interface Role {
@@ -38,6 +39,7 @@ export interface Permission {
     description: string
     occurrence?: number
     hasUser: boolean
+    hasRole: boolean
 }
 
 interface UserAvatar {
@@ -53,18 +55,19 @@ export type DeleteUserAvatar = (user: User) => Promise<void>
 export type OpenModal = (name: string) => void
 type CanByPermissionsArgument = string | Array<string>
 export type CanByPermissions = (permission: CanByPermissionsArgument) => boolean
+
 interface AddToastNotificationValues {
     title: string
     text: string
     type: string
     href: string
 }
+
 export type AddToastNotification = (values: AddToastNotificationValues) => void
 export type ActivateUser = (user: User) => Promise<void>
 export type DeactivateUser = (user: User) => Promise<void>
 export type ExpandRow = (name: string) => void
 export type DeleteUser = (user: User) => Promise<void>
-
 export type SetFilter = (name: string, value: string) => void
 export type Filters = Object
 export type SetFilters = (filters: Filters) => void
@@ -75,3 +78,6 @@ export type ResetFilters = () => void
 export type SavedFilters = Array<any>
 export type PaginationLinks = Object
 export type SetPage = (page: number) => Promise<void>
+export type DeleteRole = (role: Role) => Promise<void>
+export type DeleteRolePermission = (role: Role, permission: Permission) => Promise<void>
+export type DeletePermission = (permission: Permission) => Promise<void>

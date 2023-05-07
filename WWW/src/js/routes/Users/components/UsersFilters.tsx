@@ -10,6 +10,7 @@ import {
     SaveFilters,
     RestoreSavedFilter,
     ResetFilters,
+    SavedFilters,
 } from '../../../../types.d'
 import { LoadingOverlay } from '../../../components'
 
@@ -22,7 +23,7 @@ interface FiltersProps {
     defaultFilters: Filters
     isLoading: boolean
     setFilters: SetFilters
-    savedFilters: Filters
+    savedFilters: SavedFilters
     deleteSavedFilter: DeleteSavedFilter
     saveFilters: SaveFilters
     restoreSavedFilter: RestoreSavedFilter
