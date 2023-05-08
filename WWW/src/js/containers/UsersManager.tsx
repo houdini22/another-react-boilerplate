@@ -76,44 +76,44 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
         } = this.props
         const promises = []
 
-        setIsLoading(true)
+        setIsLoading(true).then(() => {
+            if (id) {
+                promises.push(fetchOne(id))
+            }
 
-        if (id) {
-            promises.push(fetchOne(id))
-        }
+            if (getUsers) {
+                promises.push(fetch())
+            }
 
-        if (getUsers) {
-            promises.push(fetch())
-        }
+            if (getRoles) {
+                promises.push(fetchRoles())
+            }
 
-        if (getRoles) {
-            promises.push(fetchRoles())
-        }
+            if (getPermissions) {
+                promises.push(fetchPermissions())
+            }
 
-        if (getPermissions) {
-            promises.push(fetchPermissions())
-        }
+            if (roleId) {
+                promises.push(fetchRole(roleId))
+            }
 
-        if (roleId) {
-            promises.push(fetchRole(roleId))
-        }
+            if (permissionId) {
+                promises.push(fetchPermission(permissionId))
+            }
 
-        if (permissionId) {
-            promises.push(fetchPermission(permissionId))
-        }
+            if (getLogsData) {
+                promises.push(fetchLogsData(logsDataFilters))
+            }
 
-        if (getLogsData) {
-            promises.push(fetchLogsData(logsDataFilters))
-        }
-
-        Promise.all(promises).then(
-            () => {
-                setIsLoading(false)
-            },
-            () => {
-                setIsLoading(false)
-            },
-        )
+            Promise.all(promises).then(
+                () => {
+                    setIsLoading(false)
+                },
+                () => {
+                    setIsLoading(false)
+                },
+            )
+        })
     }
 
     componentDidUpdate(prevProps: Readonly<UsersManagerProps>, prevState: Readonly<null>, snapshot?: any) {

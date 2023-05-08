@@ -124,29 +124,31 @@ class Filter extends React.Component<FilterProps, null> {
                     )}
                 </Col>
                 <Col xs={12} md={4}>
-                    {changed && (
-                        <Button
-                            size="xs"
-                            color={'warning'}
-                            onClick={() => {
-                                setFilter(name, defaultFilters[name])
-                            }}
-                        >
-                            Reset
-                        </Button>
-                    )}
-                    {type === 'order' && this.getChanged(defaultFilters, filters, 'order', type) && (
-                        <Button
-                            size="xs"
-                            color={'warning'}
-                            onClick={() => {
-                                setFilter('order_by', defaultFilters['order_by'])
-                                setFilter('order_direction', defaultFilters['order_direction'])
-                            }}
-                        >
-                            Reset
-                        </Button>
-                    )}
+                    <div>
+                        {changed && (
+                            <Button
+                                size="xs"
+                                color={'warning'}
+                                onClick={() => {
+                                    setFilter(name, defaultFilters[name])
+                                }}
+                            >
+                                Reset
+                            </Button>
+                        )}
+                        {type === 'order' && this.getChanged(defaultFilters, filters, 'order', type) && (
+                            <Button
+                                size="xs"
+                                color={'warning'}
+                                onClick={() => {
+                                    setFilter('order_by', defaultFilters['order_by'])
+                                    setFilter('order_direction', defaultFilters['order_direction'])
+                                }}
+                            >
+                                Reset
+                            </Button>
+                        )}
+                    </div>
                 </Col>
             </Row>
         )

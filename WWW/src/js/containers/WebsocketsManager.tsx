@@ -5,7 +5,6 @@ import { selectors as authSelectors, actions as authActions } from '../reducers/
 import Echo from 'laravel-echo'
 import Pusher from 'pusher-js'
 import { withRouter } from '../helpers/router'
-import { ModalManager } from '../components/ui/Modal'
 import { ModalInfo } from '../components/common/ModalInfo'
 
 interface WebsocketsManagerBaseProps {
@@ -75,28 +74,19 @@ class WebsocketsManagerBase extends React.Component<WebsocketsManagerBaseProps, 
         const renderProps = {}
 
         return (
-            <ModalManager>
-                {({ registerModal, openModal }) => {
-                    registerModal(
-                        'modal_info',
-                        <ModalInfo
-                            close={() => {
-                                this.setState({
-                                    modalInfoVisible: false,
-                                })
-                            }}
-                            visible={modalInfoVisible}
-                        >
-                            Your User has was updated.
-                        </ModalInfo>,
-                    )
-                    if (modalInfoVisible) {
-                        openModal('modal_info')
-                    }
-
-                    return <>{children(renderProps)}</>
-                }}
-            </ModalManager>
+            <>
+                {children(renderProps)}
+                <ModalInfo
+                    close={() => {
+                        this.setState({
+                            modalInfoVisible: false,
+                        })
+                    }}
+                    visible={modalInfoVisible}
+                >
+                    Your User data has just changed.
+                </ModalInfo>
+            </>
         )
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserDataChanged;
 use App\Models\Log;
 use App\Models\Permission;
 use App\Models\Role;
@@ -344,7 +345,7 @@ class PermissionsController extends Controller
     {
         $user = $this->getUserFromRequest($request);
 
-        $permission = Permission::find($request->route('permission_id'));
+        $permission = Permission::with('users')->find($request->route('permission_id'));
         if (!$permission) {
             Log::add($user, 'permissions.not_found', [
                 'message' => 'while.users_remove_permission',
@@ -368,6 +369,10 @@ class PermissionsController extends Controller
             'related_model' => $permission,
             'request' => $request
         ]);
+
+        foreach ($permission->users as $u2) {
+            broadcast(new UserDataChanged($u2));
+        }
 
         $u->revokePermissionTo($permission);
 

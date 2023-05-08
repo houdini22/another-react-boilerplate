@@ -21,15 +21,17 @@ class Pagination extends React.Component<PaginationProps, null> {
             <div className={cx('pagination')}>
                 <Row>
                     <Col xs={2}>
-                        <Button
-                            disabled={!hasPrevPage}
-                            color={'secondary'}
-                            onClick={() => {
-                                setPage(page - 1)
-                            }}
-                        >
-                            Previous
-                        </Button>
+                        <div>
+                            <Button
+                                disabled={!hasPrevPage}
+                                color={'secondary'}
+                                onClick={() => {
+                                    setPage(page - 1)
+                                }}
+                            >
+                                Previous
+                            </Button>
+                        </div>
                     </Col>
                     <Col xs={8} className={cx('pages')}>
                         <div>
@@ -60,15 +62,17 @@ class Pagination extends React.Component<PaginationProps, null> {
                         </div>
                     </Col>
                     <Col xs={2} style={{ textAlign: 'right' }}>
-                        <Button
-                            disabled={!hasNextPage}
-                            color={'secondary'}
-                            onClick={() => {
-                                setPage(page + 1)
-                            }}
-                        >
-                            Next
-                        </Button>
+                        <div>
+                            <Button
+                                disabled={!hasNextPage}
+                                color={'secondary'}
+                                onClick={() => {
+                                    setPage(page + 1)
+                                }}
+                            >
+                                Next
+                            </Button>
+                        </div>
                     </Col>
                 </Row>
             </div>

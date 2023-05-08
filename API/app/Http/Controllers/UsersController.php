@@ -76,7 +76,7 @@ class UsersController extends Controller
             });
         }
 
-        if (!empty($filters['files'])) {
+        if (!empty($filters['has_files'])) {
             if ($filters['has_files'] === 'yes') {
                 $query = $query->whereHas('files');
             } else if ($filters['has_files'] === 'no') {

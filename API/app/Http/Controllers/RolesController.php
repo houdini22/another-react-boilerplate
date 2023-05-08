@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserDataChanged;
 use App\Models\File;
 use App\Models\Log;
 use App\Models\Permission;
@@ -315,6 +316,10 @@ class RolesController extends Controller
                     'model' => Role::class,
                 ],
             ]);
+        }
+
+        foreach ($role->users as $u2) {
+            broadcast(new UserDataChanged($u2));
         }
 
         $u->removeRole($role);
