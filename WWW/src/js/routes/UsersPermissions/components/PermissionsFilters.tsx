@@ -1,16 +1,6 @@
 import * as React from 'react'
 import { FiltersCard } from '../../../components/common/FiltersCard'
-import {
-    DeleteSavedFilter,
-    Filters,
-    ResetFilters,
-    RestoreSavedFilter,
-    Role,
-    SavedFilters,
-    SaveFilters,
-    SetFilter,
-    SetFilters,
-} from '../../../../types.d'
+import { DeleteSavedFilter, Filters, ResetFilters, RestoreSavedFilter, SavedFilters, SaveFilters, SetFilter, SetFilters } from '../../../../types.d'
 import { LoadingOverlay } from '../../../components'
 import { sortRolesByNameAscending } from '../../../helpers/roles'
 

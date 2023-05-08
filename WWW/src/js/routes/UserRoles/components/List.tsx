@@ -10,7 +10,6 @@ import {
     DeleteUserRole,
     Filters,
     PaginationLinks,
-    Permission,
     ResetFilters,
     RestoreSavedFilter,
     Role,

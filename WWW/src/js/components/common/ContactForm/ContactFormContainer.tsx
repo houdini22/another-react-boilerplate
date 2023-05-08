@@ -1,4 +1,4 @@
-import { reduxForm, formValueSelector, SubmissionError } from 'redux-form'
+import { reduxForm, SubmissionError } from 'redux-form'
 import { connect } from 'react-redux'
 import ContactForm from './ContactForm'
 import { bindActionCreators, compose } from 'redux'

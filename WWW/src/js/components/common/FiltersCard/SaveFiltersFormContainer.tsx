@@ -3,7 +3,6 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { SaveFiltersForm as FormComponent } from './SaveFiltersForm'
 import { reduxForm } from 'redux-form'
-import { LocalStorage } from '../../../modules/database'
 
 const onSubmit = ({ list_name }, _, { close, saveFilters }) => {
     saveFilters(list_name)

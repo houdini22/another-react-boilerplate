@@ -1,7 +1,6 @@
 import * as React from 'react'
-import { Button, Col, Popover, Row } from '../../index'
-import { DeleteIcon, DetailsIcon } from '../../icons'
-import { formatDateTime } from '../../../helpers/date-time'
+import { Button, Popover } from '../../index'
+import { DetailsIcon } from '../../icons'
 
 interface ButtonDeleteProps {
     content: any

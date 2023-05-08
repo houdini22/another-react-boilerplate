@@ -1,18 +1,7 @@
 import * as React from 'react'
 import { FiltersCard } from '../../../components/common/FiltersCard'
 import { LoadingOverlay } from '../../../components'
-import {
-    DeleteSavedFilter,
-    Filters,
-    Permission,
-    ResetFilters,
-    RestoreSavedFilter,
-    Role,
-    SavedFilters,
-    SaveFilters,
-    SetFilter,
-    SetFilters,
-} from '../../../../types.d'
+import { DeleteSavedFilter, Filters, ResetFilters, RestoreSavedFilter, SavedFilters, SaveFilters, SetFilter, SetFilters } from '../../../../types.d'
 import { sortPermissionsByNameAscending } from '../../../helpers/permissions'
 
 interface RolesFiltersProps {

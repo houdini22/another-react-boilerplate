@@ -3,7 +3,6 @@ import classNames from 'classnames/bind'
 import _ from 'lodash'
 import { FaCheck as CheckIcon } from 'react-icons/fa'
 import Transition from 'react-transition-group/Transition'
-import jQuery from 'jquery'
 import styles1 from '../../../../assets/scss/components/_checkbox.scss'
 import styles2 from '../../../../assets/scss/_animations.scss'
 

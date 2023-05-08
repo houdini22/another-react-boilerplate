@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { selectors as authSelectors, actions as authActions } from '../reducers/auth'
 import Echo from 'laravel-echo'
 import Pusher from 'pusher-js'
-import { UploadFileForm as FormComponent } from '../routes/Media/components/UploadFileForm'
 import { withRouter } from '../helpers/router'
 
 interface WebsocketsManagerBaseProps {

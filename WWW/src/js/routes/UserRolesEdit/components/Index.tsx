@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { RouteManager } from '../../../containers'
-import { Col, Modal, Row } from '../../../components'
+import { Col, Row } from '../../../components'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import Header from './Header'
 import Edit from './Edit/Edit'

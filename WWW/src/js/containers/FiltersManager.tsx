@@ -2,7 +2,7 @@ import * as React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { actions as filtersActions, selectors as filtersSelectors } from '../reducers/filters'
-import { deepDiff, ifDeepDiff } from '../utils/javascript'
+import { ifDeepDiff } from '../utils/javascript'
 import { LocalStorage } from '../modules/database'
 
 interface FiltersManagerBaseProps {

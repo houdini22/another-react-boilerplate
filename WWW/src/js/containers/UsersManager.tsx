@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { AuthManager } from './AuthManager'
 import { Permission, Role, User } from '../../types.d'
-import { deepDiff, ifDeepDiff } from '../utils/javascript'
+import { ifDeepDiff } from '../utils/javascript'
 
 interface UsersManagerProps {
     children: any

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Card, LoadingOverlay, Modal } from '../../../components'
+import { Card, LoadingOverlay } from '../../../components'
 import { Pagination } from '../../../components/common/List/Pagination'
 import UsersTable from './UsersTable'
 import UsersFilters from './UsersFilters'

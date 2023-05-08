@@ -1,10 +1,9 @@
 import * as React from 'react'
-import { Field, SubmissionError } from 'redux-form'
+import { Field } from 'redux-form'
 import { Alert, Button, Card, Col, FormField, Row, Section } from '../../../../components'
 import { sortPermissionsByNameAscending } from '../../../../helpers/permissions'
 import { sortUsersByNameAscending } from '../../../../helpers/users'
 import { AddPermission } from '../../../UsersPermissionsAdd/components/Add/Index'
-import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 
 class AddForm extends React.Component<null, null> {
     render() {
