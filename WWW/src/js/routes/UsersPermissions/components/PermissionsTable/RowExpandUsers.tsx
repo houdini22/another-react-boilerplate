@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { Col, Row, Table, Typography, Modal } from '../../../../components'
 import { sortUsersByNameAscending } from '../../../../helpers/users'
-import ModalDeleteUserPermission from '../../../Users/components/ModalDeleteUserPermission'
+import ModalDeleteUserPermission from '../../../../components/common/ModalDeleteUserPermission'
 import { User } from '../../../../../types.d'
-import UserDropdown from '../../../UserRoles/components/UserDropdown'
+import UserDropdown from '../../../../components/common/UserDropdown'
 
 interface RowExpandPermissionsProps {
     setIsLoading: Function

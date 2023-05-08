@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { NotificationsManager } from '../../../../containers/NotificationsManager'
-import { ModalConfirm } from '../../../../components/common/ModalConfirm'
-import { DeleteRole, Role, SetIsLoading } from '../../../../../types.d'
-import { DeleteRolePermission, Permission } from '../../../../../types.d'
+import { NotificationsManager } from '../../containers/NotificationsManager'
+import { ModalConfirm } from './ModalConfirm'
+import { Role, SetIsLoading } from '../../../types.d'
+import { DeleteRolePermission, Permission } from '../../../types.d'
 
 interface ModalDeleteRolePermissionProps {
     setIsLoading: SetIsLoading

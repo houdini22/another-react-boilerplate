@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { Dropdown, Label } from '../../../components'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
-import { DeleteIcon, EditIcon, PermissionIcon, UserIcon } from '../../../components/icons'
-import { Navigate, Role } from '../../../../types.d'
-import { RouteManager } from '../../../containers/RouteManager'
+import { Dropdown, Label } from '../index'
+import { AuthorizationManager } from '../../containers/AuthorizationManager'
+import { DeleteIcon, EditIcon, PermissionIcon, UserIcon } from '../icons'
+import { Navigate, Role } from '../../../types.d'
+import { RouteManager } from '../../containers/RouteManager'
 
 interface RoleDropdownProps {
     openDeleteModal: () => any

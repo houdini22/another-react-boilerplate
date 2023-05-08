@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { Col, Modal, Row, Table, Typography } from '../../../../components'
 import { sortRolesByNameAscending } from '../../../../helpers/roles'
-import { ModalDeleteRolePermission } from '../../../UserRoles/components/RolesTable/ModalDeleteRolePermission'
+import { ModalDeleteRolePermission } from '../../../../components/common/ModalDeleteRolePermission'
 import { Role } from '../../../../../types.d'
-import RoleDropdown from '../../../Users/components/RoleDropdown'
+import RoleDropdown from '../../../../components/common/RoleDropdown'
 
 interface RowExpandRolesProps {}
 

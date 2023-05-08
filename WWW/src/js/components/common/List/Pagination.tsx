@@ -37,7 +37,7 @@ class Pagination extends React.Component<PaginationProps, null> {
                                 if (url === null && label === '...') {
                                     return (
                                         <Button transparent disabled key={`${i}...`}>
-                                            ...
+                                            <strong>...</strong>
                                         </Button>
                                     )
                                 }

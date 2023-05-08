@@ -2,8 +2,8 @@ import * as React from 'react'
 import { Card, LoadingOverlay } from '../../../components'
 import { Permission, Role } from '../../../../types.d'
 import { ModalManager } from '../../../components/ui/Modal'
-import ModalDeleteRolePermission from '../../UserRoles/components/RolesTable/ModalDeleteRolePermission'
-import PermissionDropdown from '../../Users/components/PermissionDropdown'
+import ModalDeleteRolePermission from '../../../components/common/ModalDeleteRolePermission'
+import PermissionDropdown from '../../../components/common/PermissionDropdown'
 
 interface HeaderProps {
     role: Role

@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Dropdown, Label } from '../../../components'
-import { AuthorizationManager, RouteManager } from '../../../containers'
-import { DeleteIcon, EditIcon, RoleIcon, UserIcon } from '../../../components/icons'
-import { Permission } from '../../../../types.d'
+import { Dropdown, Label } from '../index'
+import { AuthorizationManager, RouteManager } from '../../containers'
+import { DeleteIcon, EditIcon, RoleIcon, UserIcon } from '../icons'
+import { Permission } from '../../../types.d'
 
 interface PermissionDropdownProps {
     openDeleteModal?: () => any

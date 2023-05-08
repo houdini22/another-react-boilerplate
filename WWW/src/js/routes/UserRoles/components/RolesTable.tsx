@@ -24,7 +24,7 @@ import { RouteManager } from '../../../containers/RouteManager'
 import { AuthorizationManager } from '../../../containers/AuthorizationManager'
 import { ModalManager } from '../../../components/ui/Modal'
 import { NotificationsManager } from '../../../containers/NotificationsManager'
-import ModalDeleteRole from './ModalDeleteRole'
+import ModalDeleteRole from '../../../components/common/ModalDeleteRole'
 
 interface RolesTableProps {
     roles: Array<Role>

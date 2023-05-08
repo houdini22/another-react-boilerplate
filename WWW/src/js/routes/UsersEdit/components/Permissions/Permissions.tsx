@@ -2,8 +2,8 @@ import * as React from 'react'
 import { Badge, Card, Label, LoadingOverlay, Tabs } from '../../../../components'
 import { mergeUserPermissions, sortPermissionsByNameAscending, userPermissionFromRoles } from '../../../../helpers/permissions'
 import { Permission, User } from '../../../../../types.d'
-import PermissionDropdown from '../../../Users/components/PermissionDropdown'
-import ModalDeleteUserPermission from '../../../Users/components/ModalDeleteUserPermission'
+import PermissionDropdown from '../../../../components/common/PermissionDropdown'
+import ModalDeleteUserPermission from '../../../../components/common/ModalDeleteUserPermission'
 
 interface AddRoleProps {
     roles: any

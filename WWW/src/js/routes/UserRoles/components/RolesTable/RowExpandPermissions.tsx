@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { Col, Row, Table, Typography } from '../../../../components'
 import { sortPermissionsByNameAscending } from '../../../../helpers/permissions'
-import { RouteManager } from '../../../../containers/RouteManager'
+import { RouteManager } from '../../../../containers'
 import { ModalManager } from '../../../../components/ui/Modal'
 import { DeleteRolePermission, Permission, Role, SetIsLoading } from '../../../../../types.d'
-import PermissionDropdown from '../../../Users/components/PermissionDropdown'
-import { ModalDeleteRolePermission } from './ModalDeleteRolePermission'
+import { PermissionDropdown } from '../../../../components/common/PermissionDropdown'
+import { ModalDeleteRolePermission } from '../../../../components/common/ModalDeleteRolePermission'
 
 interface RowExpandPermissionsProps {
     setIsLoading: SetIsLoading

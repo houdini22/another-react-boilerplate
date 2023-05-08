@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { DeleteUserPermission, Permission, SetIsLoading, User } from '../../../../types.d'
-import { ModalConfirm } from '../../../components/common/ModalConfirm'
-import { NotificationsManager } from '../../../containers/NotificationsManager'
+import { DeleteUserPermission, Permission, SetIsLoading, User } from '../../../types.d'
+import { ModalConfirm } from './ModalConfirm'
+import { NotificationsManager } from '../../containers/NotificationsManager'
 
 interface ModalDeleteUserPermissionProps {
     permission: Permission

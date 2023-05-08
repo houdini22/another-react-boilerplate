@@ -2,11 +2,11 @@ import * as React from 'react'
 import { Col, Row, Table, Typography } from '../../../../components'
 import { ModalConfirm } from '../../../../components/common/ModalConfirm'
 import { sortUsersByNameAscending } from '../../../../helpers/users'
-import { UserDropdown } from '../UserDropdown'
+import { UserDropdown } from '../../../../components/common/UserDropdown'
 import { DeleteUserRole, Role, SetIsLoading, User } from '../../../../../types.d'
 import { ModalManager } from '../../../../components/ui/Modal'
 import { NotificationsManager } from '../../../../containers/NotificationsManager'
-import ModalDeleteUserRole from '../../../Users/components/ModalDeleteUserRole'
+import ModalDeleteUserRole from '../../../../components/common/ModalDeleteUserRole'
 
 interface RowExpandPermissionsProps {
     setIsLoading: SetIsLoading

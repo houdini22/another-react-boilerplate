@@ -4,9 +4,9 @@ import { DeleteIcon, RoleIcon } from '../../../components/icons'
 import { Role, User } from '../../../../types.d'
 import { ModalConfirm } from '../../../components/common/ModalConfirm'
 import { RouteManager } from '../../../containers/RouteManager'
-import ModalDeleteUserRole from '../../Users/components/ModalDeleteUserRole'
+import ModalDeleteUserRole from '../../../components/common/ModalDeleteUserRole'
 import { users } from '../../../reducers'
-import UserDropdown from '../../UserRoles/components/UserDropdown'
+import UserDropdown from '../../../components/common/UserDropdown'
 import { ModalManager } from '../../../components/ui/Modal'
 
 interface HeaderProps {

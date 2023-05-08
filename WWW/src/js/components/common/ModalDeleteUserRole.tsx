@@ -1,10 +1,7 @@
 import * as React from 'react'
-import { Dropdown, Label } from '../../../components'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
-import { DeleteIcon, EditIcon, PermissionIcon, UserIcon } from '../../../components/icons'
-import { DeleteUserRole, Navigate, Role, SetIsLoading, User } from '../../../../types.d'
-import { ModalConfirm } from '../../../components/common/ModalConfirm'
-import { NotificationsManager } from '../../../containers/NotificationsManager'
+import { DeleteUserRole, Role, SetIsLoading, User } from '../../../types.d'
+import { ModalConfirm } from './ModalConfirm/ModalConfirm'
+import { NotificationsManager } from '../../containers'
 
 interface ModalDeleteUserRoleProps {
     role: Role

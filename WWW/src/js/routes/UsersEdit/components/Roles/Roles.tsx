@@ -2,8 +2,8 @@ import * as React from 'react'
 import { Badge, Card, LoadingOverlay } from '../../../../components'
 import { Role, User } from '../../../../../types.d'
 import { sortRolesByNameAscending } from '../../../../helpers/roles'
-import RoleDropdown from '../../../Users/components/RoleDropdown'
-import ModalDeleteUserRole from '../../../Users/components/ModalDeleteUserRole'
+import RoleDropdown from '../../../../components/common/RoleDropdown'
+import ModalDeleteUserRole from '../../../../components/common/ModalDeleteUserRole'
 
 interface AddRoleProps {
     roles: any
