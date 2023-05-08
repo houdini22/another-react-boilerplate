@@ -25,15 +25,13 @@ class Filter extends React.Component<FilterProps, null> {
                     .map(({ label, value }) => {
                         let count = ''
 
-                        console.log(label, value, filterData, name)
-
                         if (typeof filterData?.[`count:${value}`] === 'number') {
                             count = ` (${filterData[`count:${value}`]})`
                         }
 
                         return (
                             <Button
-                                key={`${name}${value}${label}`}
+                                key={`${name}${value}${label}${count}`}
                                 color={filters[name] === value ? 'warning' : 'secondary'}
                                 onClick={() => {
                                     setFilter(name, value)
@@ -208,7 +206,7 @@ class Filter extends React.Component<FilterProps, null> {
             <div className={cx('filter')}>
                 <Row>
                     <Col xs={4}>
-                        <span>{this.renderFilterLabel()}</span>
+                        <div>{this.renderFilterLabel()}</div>
                     </Col>
                     <Col xs={8}>
                         {type === 'select' && this.renderSelect()}

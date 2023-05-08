@@ -18,7 +18,8 @@ export class ButtonEdit extends React.Component<ButtonEditProps, null> {
                         icon={<EditIcon />}
                         iconOnly
                         color={'warning'}
-                        onClick={() => {
+                        onClick={(e) => {
+                            e.stopPropagation()
                             navigate(href)
                         }}
                     />

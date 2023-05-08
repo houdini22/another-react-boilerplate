@@ -173,7 +173,7 @@ export class BreadcrumbsItem extends React.Component<BreadcrumbsItemProps, null>
                 )
             } else if (_.isEmpty(href)) {
                 return (
-                    <a href>
+                    <a>
                         <span>{children}</span>
                     </a>
                 )

@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { actions, selectors } from '../../../reducers/cms-pages'
+import { ifDeepDiff } from '../../../utils/javascript'
 
 export class Manager extends React.Component<null, null> {
     state = {
@@ -8,22 +9,33 @@ export class Manager extends React.Component<null, null> {
     }
 
     componentDidMount() {
-        const { defaultFilters = {}, urlFilters = {}, setCurrentId, setFilters, setDefaultFilters, fetch, setIsLoading, id = 1 } = this.props
-        const newFilters = {
-            ...defaultFilters,
-            ...urlFilters,
-        }
-        setDefaultFilters(defaultFilters)
+        const { filters, setCurrentId, fetch, setIsLoading, id = 1 } = this.props
 
-        Promise.all([setCurrentId(id), setFilters(newFilters)]).then(() => {
-            setIsLoading(true)
-            fetch().then(
-                () => setIsLoading(false),
-                () => {
-                    setIsLoading(false)
-                },
-            )
+        Promise.all([setCurrentId(id)]).then(() => {
+            setIsLoading(true).then(() => {
+                fetch(filters).then(
+                    () => setIsLoading(false),
+                    () => {
+                        setIsLoading(false)
+                    },
+                )
+            })
         })
+    }
+
+    componentDidUpdate(prevProps: Readonly<null>, prevState: Readonly<null>, snapshot?: any) {
+        const { filters, fetch, setIsLoading } = this.props
+
+        if (ifDeepDiff(prevProps.filters, filters)) {
+            setIsLoading(true).then(() => {
+                fetch(filters).then(
+                    () => {
+                        setIsLoading(false)
+                    },
+                    () => setIsLoading(false),
+                )
+            })
+        }
     }
 
     render() {
@@ -45,11 +57,6 @@ export class Manager extends React.Component<null, null> {
             addLink,
             editLink,
             fetch,
-            setFilter,
-            setFilters,
-            resetFilters,
-            setDefaultFilters,
-            filters,
         } = this.props
 
         const renderProps = {
@@ -69,11 +76,6 @@ export class Manager extends React.Component<null, null> {
             addLink,
             editLink,
             fetch,
-            filters,
-            setFilter,
-            setFilters,
-            resetFilters,
-            setDefaultFilters,
         }
 
         return children(renderProps)
@@ -86,7 +88,6 @@ const mapStateToProps = (state) => ({
     currentNode: selectors.getCurrentNode(state),
     currentNodeParents: selectors.getCurrentNodeParents(state),
     currentId: selectors.getCurrentId(state),
-    filters: selectors.getFilters(state),
 })
 
 const mapDispatchToProps = (dispatch) => {
@@ -102,11 +103,7 @@ const mapDispatchToProps = (dispatch) => {
         editDocument: (values) => dispatch(actions.editDocument(values)),
         addLink: (values) => dispatch(actions.addLink(values)),
         editLink: (values) => dispatch(actions.editLink(values)),
-        setFilter: (name, value) => dispatch(actions.setFilter(name, value)),
-        setFilters: (values) => dispatch(actions.setFilters(values)),
-        resetFilters: () => dispatch(actions.resetFilters()),
-        setDefaultFilters: (values) => dispatch(actions.setDefaultFilters(values)),
-        fetch: () => dispatch(actions.fetch()),
+        fetch: (filters) => dispatch(actions.fetch(filters)),
     }
 }
 

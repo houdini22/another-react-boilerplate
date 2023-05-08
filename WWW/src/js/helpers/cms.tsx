@@ -33,3 +33,10 @@ export const isPublished = (node = {}) => {
 
     return true
 }
+
+export const getDefaultFilters = () => ({
+    search_in: 'current',
+    is_published: 'yes_or_no',
+    type: 'all',
+    search: '',
+})

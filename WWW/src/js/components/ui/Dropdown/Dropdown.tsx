@@ -259,7 +259,7 @@ interface DropdownItemProps {
     href?: string
     highlighted?: boolean
     type?: string
-    onClick?: () => void
+    onClick?: (e) => void
     children: any
     color?: string
 }
@@ -324,9 +324,9 @@ export class DropdownItem extends React.Component<DropdownItemProps, DropdownIte
                         [`component-dropdown__dropdown-menu__items__item--color-${color}`]: color,
                         [`component-dropdown__dropdown-menu__items__item--highlighted`]: highlighted,
                     })}
-                    onClick={() => {
+                    onClick={(e) => {
                         if (typeof onClick === 'function') {
-                            onClick()
+                            onClick(e)
                         }
                     }}
                 >
