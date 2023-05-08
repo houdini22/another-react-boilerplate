@@ -72,100 +72,112 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                         />
                                                                         <Row>
                                                                             <Col xs={12} md={6}>
-                                                                                <Edit
-                                                                                    editUser={editUser}
-                                                                                    user={user}
-                                                                                    fetchOne={fetchOne}
-                                                                                    isLoading={isLoading}
-                                                                                    addToastNotification={addToastNotification}
-                                                                                    setIsLoading={setIsLoading}
-                                                                                    canByPermission={canByPermission}
-                                                                                />
-                                                                            </Col>
-                                                                            <Col xs={12} md={6}>
-                                                                                <Details
-                                                                                    user={user}
-                                                                                    navigate={navigate}
-                                                                                    setUploadProgress={setUploadProgress}
-                                                                                    setIsLoading={setIsLoading}
-                                                                                    uploadProgress={uploadProgress}
-                                                                                    sendAvatar={sendAvatar}
-                                                                                    fetchOne={fetchOne}
-                                                                                    forceLogin={forceLogin}
-                                                                                    sendActivationEmail={sendActivationEmail}
-                                                                                    isLoading={isLoading}
-                                                                                    addToastNotification={addToastNotification}
-                                                                                    deleteAvatar={deleteAvatar}
-                                                                                    registerModal={registerModal}
-                                                                                    openModal={openModal}
-                                                                                    closeModal={closeModal}
-                                                                                    canByPermission={canByPermission}
-                                                                                />
-                                                                            </Col>
-                                                                        </Row>
-                                                                        <Row>
-                                                                            <Col xs={12} md={6}>
-                                                                                {canByPermission('users.list_roles') && (
-                                                                                    <Roles
-                                                                                        roles={roles}
-                                                                                        setIsLoading={setIsLoading}
-                                                                                        deleteUserRole={deleteUserRole}
-                                                                                        deletePermission={deletePermission}
-                                                                                        fetchOne={fetchOne}
+                                                                                <div>
+                                                                                    <Edit
+                                                                                        editUser={editUser}
                                                                                         user={user}
+                                                                                        fetchOne={fetchOne}
                                                                                         isLoading={isLoading}
+                                                                                        addToastNotification={addToastNotification}
+                                                                                        setIsLoading={setIsLoading}
+                                                                                        canByPermission={canByPermission}
+                                                                                    />
+                                                                                </div>
+                                                                            </Col>
+                                                                            <Col xs={12} md={6}>
+                                                                                <div>
+                                                                                    <Details
+                                                                                        user={user}
                                                                                         navigate={navigate}
-                                                                                        addToastNotification={addToastNotification}
-                                                                                        openModal={openModal}
-                                                                                        closeModal={closeModal}
-                                                                                        registerModal={registerModal}
-                                                                                    />
-                                                                                )}
-                                                                            </Col>
-                                                                            <Col xs={12} md={6}>
-                                                                                {canByPermission('users.add_role') && (
-                                                                                    <AddRole
-                                                                                        roles={roles}
+                                                                                        setUploadProgress={setUploadProgress}
                                                                                         setIsLoading={setIsLoading}
-                                                                                        addUserRole={addUserRole}
+                                                                                        uploadProgress={uploadProgress}
+                                                                                        sendAvatar={sendAvatar}
                                                                                         fetchOne={fetchOne}
-                                                                                        user={user}
+                                                                                        forceLogin={forceLogin}
+                                                                                        sendActivationEmail={sendActivationEmail}
                                                                                         isLoading={isLoading}
                                                                                         addToastNotification={addToastNotification}
+                                                                                        deleteAvatar={deleteAvatar}
+                                                                                        registerModal={registerModal}
+                                                                                        openModal={openModal}
+                                                                                        closeModal={closeModal}
+                                                                                        canByPermission={canByPermission}
                                                                                     />
-                                                                                )}
+                                                                                </div>
                                                                             </Col>
                                                                         </Row>
                                                                         <Row>
                                                                             <Col xs={12} md={6}>
-                                                                                {canByPermission('users.list_permissions') && (
-                                                                                    <Permissions
-                                                                                        roles={roles}
-                                                                                        setIsLoading={setIsLoading}
-                                                                                        deletePermission={deletePermission}
-                                                                                        fetchOne={fetchOne}
-                                                                                        user={user}
-                                                                                        isLoading={isLoading}
-                                                                                        deleteUserPermission={deleteUserPermission}
-                                                                                        fetchPermissions={fetchPermissions}
-                                                                                        openModal={openModal}
-                                                                                        registerModal={registerModal}
-                                                                                        closeModal={closeModal}
-                                                                                    />
-                                                                                )}
+                                                                                <div>
+                                                                                    {canByPermission('users.list_roles') && (
+                                                                                        <Roles
+                                                                                            roles={roles}
+                                                                                            setIsLoading={setIsLoading}
+                                                                                            deleteUserRole={deleteUserRole}
+                                                                                            deletePermission={deletePermission}
+                                                                                            fetchOne={fetchOne}
+                                                                                            user={user}
+                                                                                            isLoading={isLoading}
+                                                                                            navigate={navigate}
+                                                                                            addToastNotification={addToastNotification}
+                                                                                            openModal={openModal}
+                                                                                            closeModal={closeModal}
+                                                                                            registerModal={registerModal}
+                                                                                        />
+                                                                                    )}
+                                                                                </div>
                                                                             </Col>
                                                                             <Col xs={12} md={6}>
-                                                                                {canByPermission('users.add_permission') && (
-                                                                                    <AddPermission
-                                                                                        permissions={permissions}
-                                                                                        setIsLoading={setIsLoading}
-                                                                                        addUserPermission={addUserPermission}
-                                                                                        fetchOne={fetchOne}
-                                                                                        user={user}
-                                                                                        isLoading={isLoading}
-                                                                                        addToastNotification={addToastNotification}
-                                                                                    />
-                                                                                )}
+                                                                                <div>
+                                                                                    {canByPermission('users.add_role') && (
+                                                                                        <AddRole
+                                                                                            roles={roles}
+                                                                                            setIsLoading={setIsLoading}
+                                                                                            addUserRole={addUserRole}
+                                                                                            fetchOne={fetchOne}
+                                                                                            user={user}
+                                                                                            isLoading={isLoading}
+                                                                                            addToastNotification={addToastNotification}
+                                                                                        />
+                                                                                    )}
+                                                                                </div>
+                                                                            </Col>
+                                                                        </Row>
+                                                                        <Row>
+                                                                            <Col xs={12} md={6}>
+                                                                                <div>
+                                                                                    {canByPermission('users.list_permissions') && (
+                                                                                        <Permissions
+                                                                                            roles={roles}
+                                                                                            setIsLoading={setIsLoading}
+                                                                                            deletePermission={deletePermission}
+                                                                                            fetchOne={fetchOne}
+                                                                                            user={user}
+                                                                                            isLoading={isLoading}
+                                                                                            deleteUserPermission={deleteUserPermission}
+                                                                                            fetchPermissions={fetchPermissions}
+                                                                                            openModal={openModal}
+                                                                                            registerModal={registerModal}
+                                                                                            closeModal={closeModal}
+                                                                                        />
+                                                                                    )}
+                                                                                </div>
+                                                                            </Col>
+                                                                            <Col xs={12} md={6}>
+                                                                                <div>
+                                                                                    {canByPermission('users.add_permission') && (
+                                                                                        <AddPermission
+                                                                                            permissions={permissions}
+                                                                                            setIsLoading={setIsLoading}
+                                                                                            addUserPermission={addUserPermission}
+                                                                                            fetchOne={fetchOne}
+                                                                                            user={user}
+                                                                                            isLoading={isLoading}
+                                                                                            addToastNotification={addToastNotification}
+                                                                                        />
+                                                                                    )}
+                                                                                </div>
                                                                             </Col>
                                                                         </Row>
                                                                     </PageContent>

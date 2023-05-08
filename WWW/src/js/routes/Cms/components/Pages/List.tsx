@@ -1,7 +1,8 @@
 import * as React from 'react'
-import { Alert, Button, Card, Dropdown, LoadingOverlay, Table, Tooltip, Typography } from '../../../../components'
+import { Alert, Button, Card, Dropdown, Label, LoadingOverlay, Table, Tooltip, Typography } from '../../../../components'
 import {
     AddIcon,
+    AlertIcon,
     CategoryIcon,
     DeleteIcon,
     DocumentIcon,
@@ -20,6 +21,8 @@ import { ModalManager } from '../../../../components/ui/Modal'
 import { RouteManager } from '../../../../containers'
 import { ButtonDelete } from '../../../../components/common/ButtonDelete'
 import { ButtonEdit } from '../../../../components/common/ButtonEdit'
+import moment from 'moment'
+import config from '../../../../config'
 
 const cx = classNames.bind(styles)
 
@@ -93,9 +96,9 @@ export class List extends React.Component<null, null> {
                                             <Table.Th xs={1}>Type</Table.Th>
                                             <Table.Th xs={3}>Name</Table.Th>
                                             <Table.Th xs={3}>URL</Table.Th>
-                                            <Table.Th xs={1}>Statuses</Table.Th>
+                                            <Table.Th xs={2}>Statuses</Table.Th>
                                             <Table.Th xs={1}>Ordering</Table.Th>
-                                            <Table.Th xs={3}>Actions</Table.Th>
+                                            <Table.Th xs={2}>Actions</Table.Th>
                                         </Table.Tr>
                                     </Table.THead>
                                     <Table.TBody>
@@ -152,6 +155,14 @@ export class List extends React.Component<null, null> {
                                                 </ModalConfirm>,
                                             )
 
+                                            const incomingPublishing =
+                                                moment(node.tree_published_from, config.api.apiDateTimeFormat).subtract(3, 'd').isBefore(moment()) &&
+                                                moment(node.tree_published_from, config.api.apiDateTimeFormat).isAfter(moment())
+
+                                            const incomingExpiring = moment(node.tree_published_to, config.api.apiDateTimeFormat)
+                                                .subtract(3, 'd')
+                                                .isBefore(moment())
+
                                             return (
                                                 <Table.Tr
                                                     onClick={
@@ -159,10 +170,6 @@ export class List extends React.Component<null, null> {
                                                             ? () => {
                                                                   setCurrentId(node.id).then(() => {
                                                                       navigate(`/cms/pages?parent_id=${node.id}`)
-                                                                      /*setIsLoading(true)
-                                                                  fetch().then(() => {
-                                                                      setIsLoading(false)
-                                                                  })*/
                                                                   })
                                                               }
                                                             : null
@@ -193,7 +200,7 @@ export class List extends React.Component<null, null> {
                                                         {node.tree_object_type === 'document' && node?.document?.document_url}
                                                         {node.tree_object_type === 'link' && node?.link?.link_url}
                                                     </Table.Td>
-                                                    <Table.Td xs={1} className={cx('tree-icon')}>
+                                                    <Table.Td xs={2} className={cx('tree-icon')}>
                                                         {!isPublished(node) && (
                                                             <Tooltip
                                                                 tooltip={
@@ -241,6 +248,22 @@ export class List extends React.Component<null, null> {
                                                                 <PublishIcon className={cx('text-success')} />
                                                             </Tooltip>
                                                         )}
+
+                                                        {incomingPublishing && (
+                                                            <Tooltip tooltip={<p>Will be published: {node.tree_published_from}</p>}>
+                                                                <Label color={'warning'}>
+                                                                    <AlertIcon />
+                                                                </Label>
+                                                            </Tooltip>
+                                                        )}
+
+                                                        {incomingExpiring && (
+                                                            <Tooltip tooltip={<p>Will be not visible: {node.tree_published_to}</p>}>
+                                                                <Label color={'danger'}>
+                                                                    <AlertIcon />
+                                                                </Label>
+                                                            </Tooltip>
+                                                        )}
                                                     </Table.Td>
                                                     <Table.Td xs={1}>
                                                         <Button
@@ -251,7 +274,7 @@ export class List extends React.Component<null, null> {
                                                             }}
                                                         />
                                                     </Table.Td>
-                                                    <Table.Td xs={3}>
+                                                    <Table.Td xs={2}>
                                                         <div>
                                                             {!!(
                                                                 node.tree_class !== 'system_page' &&

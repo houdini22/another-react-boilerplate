@@ -5,6 +5,8 @@ import { selectors as authSelectors, actions as authActions } from '../reducers/
 import Echo from 'laravel-echo'
 import Pusher from 'pusher-js'
 import { withRouter } from '../helpers/router'
+import { ModalManager } from '../components/ui/Modal'
+import { ModalInfo } from '../components/common/ModalInfo'
 
 interface WebsocketsManagerBaseProps {
     auth: {
@@ -14,6 +16,9 @@ interface WebsocketsManagerBaseProps {
 }
 
 class WebsocketsManagerBase extends React.Component<WebsocketsManagerBaseProps, null> {
+    state = {
+        modalInfoVisible: false,
+    }
     client = null
 
     token = ''
@@ -46,6 +51,9 @@ class WebsocketsManagerBase extends React.Component<WebsocketsManagerBaseProps, 
                 ?.channel(`user.${token}`)
                 .listen('.user_data_changed', (data) => {
                     setUserData(data)
+                    this.setState({
+                        modalInfoVisible: true,
+                    })
                 })
                 .listen('.force_logout', () => {
                     console.log('force logout')
@@ -63,9 +71,33 @@ class WebsocketsManagerBase extends React.Component<WebsocketsManagerBaseProps, 
 
     render() {
         const { children } = this.props
+        const { modalInfoVisible } = this.state
         const renderProps = {}
 
-        return children(renderProps)
+        return (
+            <ModalManager>
+                {({ registerModal, openModal }) => {
+                    registerModal(
+                        'modal_info',
+                        <ModalInfo
+                            close={() => {
+                                this.setState({
+                                    modalInfoVisible: false,
+                                })
+                            }}
+                            visible={modalInfoVisible}
+                        >
+                            Your User has was updated.
+                        </ModalInfo>,
+                    )
+                    if (modalInfoVisible) {
+                        openModal('modal_info')
+                    }
+
+                    return <>{children(renderProps)}</>
+                }}
+            </ModalManager>
+        )
     }
 }
 

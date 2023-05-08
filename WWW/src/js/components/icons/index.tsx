@@ -23,7 +23,7 @@ import { AiFillEyeInvisible as UnpublishIcon } from 'react-icons/ai'
 import { AiOutlineWarning as WarningIcon } from 'react-icons/ai'
 import { MdDesktopAccessDisabled as AccessDisabledIcon } from 'react-icons/md'
 import { HiDocumentDuplicate as LogsIcon } from 'react-icons/hi'
-
+import { FiAlertTriangle as AlertIcon } from 'react-icons/fi'
 export {
     OrderingIcon,
     EditIcon,
@@ -49,4 +49,5 @@ export {
     WarningIcon,
     AccessDisabledIcon,
     LogsIcon,
+    AlertIcon,
 }

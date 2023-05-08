@@ -43,7 +43,16 @@ class AddLinkForm extends React.Component {
                                                     placeholder={'Link Name'}
                                                     component={FormField}
                                                 />
-                                                <Card header={<h1>Content</h1>}>
+                                                <Field name="link.link_url" label="URL" type="text" placeholder={'URL'} component={FormField} />
+                                                <Field
+                                                    name="link.link_target"
+                                                    label="Target"
+                                                    type="select"
+                                                    placeholder={'--- choose ---'}
+                                                    component={FormField}
+                                                    options={linkTargets}
+                                                />
+                                                <Card header={<h1>Content</h1>} color={'secondary'}>
                                                     <Field
                                                         name="tree.tree_display_name"
                                                         label="Display Name"
@@ -61,6 +70,7 @@ class AddLinkForm extends React.Component {
                                                             </Badge>
                                                         </h1>
                                                     }
+                                                    color={'secondary'}
                                                 >
                                                     <Field
                                                         name="tree.tree_is_published"
@@ -71,15 +81,6 @@ class AddLinkForm extends React.Component {
                                                     <Field name="tree.tree_published_from" label="Published from" type="text" component={FormField} />
                                                     <Field name="tree.tree_published_to" label="Published to" type="text" component={FormField} />
                                                 </Card>
-                                                <Field name="link.link_url" label="URL" type="text" placeholder={'URL'} component={FormField} />
-                                                <Field
-                                                    name="link.link_target"
-                                                    label="Target"
-                                                    type="select"
-                                                    placeholder={'--- choose ---'}
-                                                    component={FormField}
-                                                    options={linkTargets}
-                                                />
 
                                                 <div>
                                                     <Button color="success" type="submit" block>

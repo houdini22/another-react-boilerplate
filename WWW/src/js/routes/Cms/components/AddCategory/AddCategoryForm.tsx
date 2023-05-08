@@ -45,7 +45,8 @@ class AddCategoryForm extends React.Component {
                                                 )
                                             }}
                                         />
-                                        <Card header={<h1>Content</h1>}>
+                                        <Field name="category.category_url" label="URL" placeholder={'URL'} type="text" component={FormField} />
+                                        <Card header={<h1>Content</h1>} color={'secondary'}>
                                             <Field
                                                 name="tree.tree_display_name"
                                                 label="Display Name"
@@ -90,12 +91,12 @@ class AddCategoryForm extends React.Component {
                                                     </Badge>
                                                 </h1>
                                             }
+                                            color={'secondary'}
                                         >
                                             <Field name="tree.tree_is_published" label="Is published?" type="checkbox" component={FormField} />
                                             <Field name="tree.tree_published_from" label="Published from" type="text" component={FormField} />
                                             <Field name="tree.tree_published_to" label="Published to" type="text" component={FormField} />
                                         </Card>
-                                        <Field name="category.category_url" label="URL" placeholder={'URL'} type="text" component={FormField} />
                                     </Tabs.Content>
                                 </Tabs.Tab>
                                 <Tabs.Tab name="meta">

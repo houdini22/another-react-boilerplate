@@ -51,7 +51,14 @@ class AddDocumentForm extends React.Component {
                                                         )
                                                     }}
                                                 />
-                                                <Card header={<h1>Content</h1>}>
+                                                <Field
+                                                    name="document.document_url"
+                                                    label="URL"
+                                                    placeholder={'URL'}
+                                                    type="text"
+                                                    component={FormField}
+                                                />
+                                                <Card header={<h1>Content</h1>} color={'secondary'}>
                                                     <Field
                                                         name="tree.tree_display_name"
                                                         label="Display Name"
@@ -76,6 +83,7 @@ class AddDocumentForm extends React.Component {
                                                             </Badge>
                                                         </h1>
                                                     }
+                                                    color={'secondary'}
                                                 >
                                                     <Field
                                                         name="tree.tree_is_published"
@@ -86,13 +94,6 @@ class AddDocumentForm extends React.Component {
                                                     <Field name="tree.tree_published_from" label="Published from" type="text" component={FormField} />
                                                     <Field name="tree.tree_published_to" label="Published to" type="text" component={FormField} />
                                                 </Card>
-                                                <Field
-                                                    name="document.document_url"
-                                                    label="URL"
-                                                    placeholder={'URL'}
-                                                    type="text"
-                                                    component={FormField}
-                                                />
                                             </>
                                         )}
                                     </Tabs.Content>
