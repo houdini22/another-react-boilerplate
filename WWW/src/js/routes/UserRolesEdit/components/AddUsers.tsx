@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Card, LoadingOverlay } from '../../../components'
 import { AddUserFormContainer } from './AddUsers/AddUserFormContainer'
-import { NotificationsManager } from '../../../containers/NotificationsManager'
+import { NotificationsManager } from '../../../containers'
 import { Role } from '../../../../types.d'
 
 interface AddUsersProps {

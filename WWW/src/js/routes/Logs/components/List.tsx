@@ -3,7 +3,7 @@ import { Card, LoadingOverlay } from '../../../components'
 import { Pagination } from '../../../components/common/List/Pagination'
 import LogsTable from './LogsTable'
 import { Log, PaginationLinks, SetIsLoading, SetPage } from '../../../../types.d'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
+import { AuthorizationManager } from '../../../containers'
 
 interface ListProps {
     isLoading: boolean

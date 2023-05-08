@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { Button, PageHeader } from '../../../components'
 import { HomeIcon } from '../../../components/icons'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
-import { RouteManager } from '../../../containers/RouteManager'
+import { AuthorizationManager, RouteManager } from '../../../containers'
 
 interface HeaderProps {}
 

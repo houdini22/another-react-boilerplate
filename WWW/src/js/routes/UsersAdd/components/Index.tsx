@@ -1,13 +1,9 @@
 import * as React from 'react'
-import { RouteManager } from '../../../containers/RouteManager'
+import { RouteManager, UsersManager, NotificationsManager, TitleManager, AuthorizationManager } from '../../../containers'
 import { Col, Row } from '../../../components'
-import { UsersManager } from '../../../containers/UsersManager'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import Header from './Header'
 import Add from './Add/Add'
-import { NotificationsManager } from '../../../containers/NotificationsManager'
-import { TitleManager } from '../../../containers/TitleManager'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
 
 interface UsersViewState {}
 

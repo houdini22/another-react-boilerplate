@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Alert, Button } from '../../../components'
-import { RouteManager } from '../../../containers/RouteManager'
+import { RouteManager } from '../../../containers'
 
 export class IndexView extends React.Component<null, null> {
     render() {

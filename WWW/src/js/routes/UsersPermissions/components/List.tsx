@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Card, LoadingOverlay } from '../../../components'
 import { Pagination } from '../../../components/common/List/Pagination'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
+import { AuthorizationManager } from '../../../containers'
 import {
     DeletePermission,
     DeleteRole,
@@ -14,7 +14,6 @@ import {
     Permission,
     ResetFilters,
     RestoreSavedFilter,
-    Role,
     SavedFilters,
     SaveFilters,
     SetFilter,

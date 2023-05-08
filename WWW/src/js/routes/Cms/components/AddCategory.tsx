@@ -1,18 +1,17 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import Manager from './Manager'
-import { RouteManager } from '../../../containers/RouteManager'
+import { RouteManager, AuthorizationManager } from '../../../containers/'
 import { Header } from './Header'
 import { AddCategoryFormContainer } from '../containers/AddCategoryFormContainer'
-import { formattedCurrentDate, formattedDateTime } from '../../../helpers/date-time'
+import { formattedDateTime } from '../../../helpers/date-time'
 import { generateUrl } from '../../../helpers/cms'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
 
 export class AddCategoryView extends React.Component {
     render() {
         return (
             <RouteManager>
-                {({ navigate, query: { parent_id } }) => (
+                {({ query: { parent_id } }) => (
                     <AuthorizationManager>
                         {({ canByPermission }) => (
                             <PageContent>

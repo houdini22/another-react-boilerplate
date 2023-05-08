@@ -1,29 +1,14 @@
 import * as React from 'react'
 import { Button, Table, Tooltip } from '../../../components'
-import { EditIcon, DeleteIcon, UserIcon, PermissionIcon, HelpIcon } from '../../../components/icons'
+import { UserIcon, PermissionIcon, HelpIcon } from '../../../components/icons'
 import { TableSummary } from '../../../components/common/List/TableSummary'
-import { ModalConfirm } from '../../../components/common/ModalConfirm'
 import RowExpandPermissions from './RolesTable/RowExpandPermissions'
 import RowExpandUsers from './RolesTable/RowExpandUsers'
-import {
-    ActivateUser,
-    DeactivateUser,
-    DeleteRole,
-    DeleteRolePermission,
-    DeleteUser,
-    DeleteUserAvatar,
-    DeleteUserPermission,
-    DeleteUserRole,
-    Role,
-    SetIsLoading,
-    User,
-} from '../../../../types.d'
+import { DeleteRole, DeleteRolePermission, DeleteUserRole, Role, SetIsLoading } from '../../../../types.d'
 import { ButtonEdit } from '../../../components/common/ButtonEdit'
 import { ButtonDelete } from '../../../components/common/ButtonDelete'
-import { RouteManager } from '../../../containers/RouteManager'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
+import { RouteManager, AuthorizationManager, NotificationsManager } from '../../../containers'
 import { ModalManager } from '../../../components/ui/Modal'
-import { NotificationsManager } from '../../../containers/NotificationsManager'
 import ModalDeleteRole from '../../../components/common/ModalDeleteRole'
 
 interface RolesTableProps {
@@ -79,7 +64,7 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
 
                                                         return (
                                                             <Table.ExpandManager key={role.id}>
-                                                                {({ addExpand, expand }) => {
+                                                                {({ addExpand, expand, collapse }) => {
                                                                     addExpand(
                                                                         'permissions',
                                                                         <RowExpandPermissions
@@ -100,6 +85,13 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                                                             deleteUserRole={deleteUserRole}
                                                                         />,
                                                                     )
+
+                                                                    if (role?.permissions?.length === 0) {
+                                                                        collapse('permissions')
+                                                                    }
+                                                                    if (role?.users?.length === 0) {
+                                                                        collapse('users')
+                                                                    }
 
                                                                     return (
                                                                         <Table.Tr key={role.id}>

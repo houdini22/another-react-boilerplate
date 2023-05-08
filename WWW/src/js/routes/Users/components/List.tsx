@@ -1,19 +1,9 @@
 import * as React from 'react'
-import { PageContent } from '../../../layouts/PageLayout/components'
-import { RouteManager } from '../../../containers/RouteManager'
 import { Card, LoadingOverlay, Modal } from '../../../components'
-import { UsersManager } from '../../../containers/UsersManager'
-import { ListManager } from '../../../components/common/List/ListManager'
 import { Pagination } from '../../../components/common/List/Pagination'
 import UsersTable from './UsersTable'
 import UsersFilters from './UsersFilters'
-import { NotificationsManager } from '../../../containers/NotificationsManager'
-import Header from './Header'
-import { TitleManager } from '../../../containers/TitleManager'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
-import { FiltersManager } from '../../../containers/FiltersManager'
-import { getDefaultFilters } from '../../../helpers/users'
-import { splitIds } from '../../../helpers/filters'
+import { AuthorizationManager } from '../../../containers'
 import {
     ActivateUser,
     DeactivateUser,
@@ -24,10 +14,8 @@ import {
     DeleteUserRole,
     Filters,
     PaginationLinks,
-    Permission,
     ResetFilters,
     RestoreSavedFilter,
-    Role,
     SavedFilters,
     SaveFilters,
     SetFilter,

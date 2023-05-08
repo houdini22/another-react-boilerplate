@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Card, LoadingOverlay } from '../../../../components'
 import { EditFormContainer } from './EditFormContainer'
-import { NotificationsManager } from '../../../../containers/NotificationsManager'
+import { NotificationsManager } from '../../../../containers'
 interface EditProps {}
 
 export class Edit extends React.Component<EditProps, null> {

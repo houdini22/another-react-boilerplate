@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { Button, Tooltip } from '../../../../components'
 import { FileIcon, PermissionIcon, RoleIcon } from '../../../../components/icons'
-import { CanByPermissions, DeleteUserAvatar, ExpandRow, SetIsLoading, User } from '../../../../../types.d'
+import { DeleteUserAvatar, ExpandRow, SetIsLoading, User } from '../../../../../types.d'
 import RowResourcesAvatarDropdown from './RowResourcesAvatarDropdown'
-import { RouteManager } from '../../../../containers/RouteManager'
-import { AuthorizationManager } from '../../../../containers/AuthorizationManager'
+import { RouteManager, AuthorizationManager } from '../../../../containers'
 
 interface RowResourcesProps {
     user: User
@@ -17,7 +16,14 @@ interface RowResourcesProps {
 
 export class RowResources extends React.Component<RowResourcesProps, null> {
     render() {
-        const { user, permissionsFromRoles, expand, deleteAvatar, setIsLoading, fetch } = this.props
+        const { user, permissionsFromRoles, expand, deleteAvatar, setIsLoading, fetch, collapse } = this.props
+
+        if (user?.roles?.length === 0) {
+            collapse('roles')
+        }
+        if (Object.keys(permissionsFromRoles).length + user.permissions.length === 0) {
+            collapse('permissions')
+        }
 
         return (
             <RouteManager>
@@ -38,7 +44,7 @@ export class RowResources extends React.Component<RowResourcesProps, null> {
                                         </Button>
                                     </Tooltip>
                                 )}
-                                {Object.keys(permissionsFromRoles).length > 0 && canByPermission('users.list_permissions') && (
+                                {Object.keys(permissionsFromRoles).length + user.permissions.length && canByPermission('users.list_permissions') && (
                                     <Tooltip tooltip={`User Permissions`}>
                                         <Button
                                             color={'info'}
@@ -47,7 +53,7 @@ export class RowResources extends React.Component<RowResourcesProps, null> {
                                                 expand('permissions')
                                             }}
                                         >
-                                            {Object.keys(permissionsFromRoles).length || 0}
+                                            {Object.keys(permissionsFromRoles).length + user.permissions.length || 0}
                                         </Button>
                                     </Tooltip>
                                 )}

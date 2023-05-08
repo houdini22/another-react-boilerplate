@@ -6,7 +6,7 @@ import { selectors as authSelectors, actions as authActions } from '../../../red
 import { bindActionCreators } from 'redux'
 import { apiURL } from '../../../helpers/api'
 import { Dropdown, Button } from '../../../components'
-import { RouteManager } from '../../../containers/RouteManager'
+import { RouteManager } from '../../../containers'
 
 const cx = classNames.bind(styles)
 

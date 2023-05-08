@@ -6,10 +6,8 @@ import { ModalConfirm } from '../../../components/common/ModalConfirm'
 import { DeletePermission, DeleteRolePermission, DeleteUserPermission, DeleteUserRole, Permission, SetIsLoading } from '../../../../types.d'
 import { ButtonEdit } from '../../../components/common/ButtonEdit'
 import { ButtonDelete } from '../../../components/common/ButtonDelete'
-import { RouteManager } from '../../../containers/RouteManager'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
+import { RouteManager, AuthorizationManager, NotificationsManager } from '../../../containers'
 import { ModalManager } from '../../../components/ui/Modal'
-import { NotificationsManager } from '../../../containers/NotificationsManager'
 import RowExpandRoles from './PermissionsTable/RowExpandRoles'
 import RowExpandUsers from './PermissionsTable/RowExpandUsers'
 
@@ -95,7 +93,7 @@ export class PermissionsTable extends React.Component<RolesTableProps, null> {
 
                                                         return (
                                                             <Table.ExpandManager key={`expand-manager-${permission.id}`}>
-                                                                {({ addExpand, expand }) => {
+                                                                {({ addExpand, expand, collapse }) => {
                                                                     addExpand(
                                                                         'roles',
                                                                         <RowExpandRoles
@@ -119,6 +117,13 @@ export class PermissionsTable extends React.Component<RolesTableProps, null> {
                                                                             deleteUserPermission={deleteUserPermission}
                                                                         />,
                                                                     )
+
+                                                                    if (permission.roles_count === 0) {
+                                                                        collapse('roles')
+                                                                    }
+                                                                    if (permission.users_count === 0) {
+                                                                        collapse('users')
+                                                                    }
 
                                                                     return (
                                                                         <Table.Tr key={permission.id}>

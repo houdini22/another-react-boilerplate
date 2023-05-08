@@ -28,12 +28,20 @@ class ExpandManager extends React.Component<ExpandManagerProps, null> {
 
         return null
     }
+    collapse(name: string) {
+        const { currentExpanded } = this.state
+
+        if (currentExpanded === name) {
+            this.setState({ currentExpanded: '' })
+        }
+    }
     render() {
         const { children } = this.props
 
         const renderProps = {
             addExpand: this.addExpand.bind(this),
             expand: this.expand.bind(this),
+            collapse: this.collapse.bind(this),
         }
 
         return (

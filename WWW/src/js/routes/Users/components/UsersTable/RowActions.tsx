@@ -5,7 +5,7 @@ import { OpenModal, User } from '../../../../../types.d'
 import { ButtonEdit } from '../../../../components/common/ButtonEdit'
 import { ButtonDelete } from '../../../../components/common/ButtonDelete'
 import { ButtonDetails } from '../../../../components/common/ButtonDetails'
-import { AuthorizationManager } from '../../../../containers/AuthorizationManager'
+import { AuthorizationManager } from '../../../../containers'
 
 interface RowActionsProps {
     user: User

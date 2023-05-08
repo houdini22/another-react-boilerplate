@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import Manager from './Manager'
-import { RouteManager } from '../../../containers/RouteManager'
+import { RouteManager, AuthorizationManager } from '../../../containers'
 import { Header } from './Header'
 import { AddDocumentFormContainer } from '../containers/AddDocumentFormContainer'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
 
 export class EditDocumentView extends React.Component {
     render() {

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { PageHeader, Dropdown, Button } from '../../index'
 import { FaHome as HomeIcon } from 'react-icons/fa'
-import { RouteManager } from '../../../containers/RouteManager'
+import { RouteManager } from '../../../containers'
 
 interface ComponentsPageHeaderProps {
     title: any

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Card, LoadingOverlay } from '../../../components'
 import { AddPermissionFormContainer } from './AddPermissions/AddPermissionFormContainer'
-import { NotificationsManager } from '../../../containers/NotificationsManager'
+import { NotificationsManager } from '../../../containers'
 
 interface AddPermissionsProps {}
 

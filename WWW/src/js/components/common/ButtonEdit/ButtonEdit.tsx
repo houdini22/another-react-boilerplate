@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Button } from '../../index'
-import { RouteManager } from '../../../containers/RouteManager'
+import { RouteManager } from '../../../containers/'
 import { EditIcon } from '../../icons'
 
 interface ButtonEditProps {

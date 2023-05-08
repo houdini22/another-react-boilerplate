@@ -6,7 +6,7 @@ import { Button, Col, Modal, Row } from '../../../components'
 import { AiOutlineDownload as DownloadIcon } from 'react-icons/ai'
 import { DeleteIcon } from '../../../components/icons'
 import { FileDetailsFormContainer } from './FileDetailsFormContainer'
-import { NotificationsManager } from '../../../containers/NotificationsManager'
+import { NotificationsManager } from '../../../containers'
 
 const cx = classNames.bind(styles)
 

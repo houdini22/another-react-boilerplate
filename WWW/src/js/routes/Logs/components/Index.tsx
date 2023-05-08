@@ -1,13 +1,10 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
-import { RouteManager } from '../../../containers/RouteManager'
+import { RouteManager, TitleManager, FiltersManager, LogsManager } from '../../../containers'
 import { ListManager } from '../../../components/common/List/ListManager'
 import Header from './Header'
-import { TitleManager } from '../../../containers/TitleManager'
 import { getDefaultFilters } from '../../../helpers/logs'
 import List from './List'
-import { FiltersManager } from '../../../containers/FiltersManager'
-import { LogsManager } from '../../../containers/LogsManager'
 import { LogsFilters } from './LogsFilters'
 
 export class LogsView extends React.Component<null, null> {

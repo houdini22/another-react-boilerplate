@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { Label, Tooltip } from '../../../../components'
-import { ActivateUser, AddToastNotification, DeactivateUser, SetIsLoading, User } from '../../../../../types.d'
+import { ActivateUser, DeactivateUser, SetIsLoading, User } from '../../../../../types.d'
 import { ModalConfirm } from '../../../../components/common/ModalConfirm'
 import { ModalManager } from '../../../../components/ui/Modal'
-import { AuthorizationManager } from '../../../../containers/AuthorizationManager'
-import { NotificationsManager } from '../../../../containers/NotificationsManager'
+import { AuthorizationManager, NotificationsManager } from '../../../../containers'
 
 interface RowStatusProps {
     user: User

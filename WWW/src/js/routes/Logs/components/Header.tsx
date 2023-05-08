@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { PageHeader } from '../../../components'
 import { HomeIcon } from '../../../components/icons'
-import { RouteManager } from '../../../containers/RouteManager'
+import { RouteManager } from '../../../containers'
 
 interface HeaderProps {}
 

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Field } from 'redux-form'
 import { FormField, Button, LoadingOverlay, Alert, Row, Col } from '../../index'
-import { RouteManager } from '../../../containers/RouteManager'
+import { RouteManager } from '../../../containers'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/routes/index.scss'
 

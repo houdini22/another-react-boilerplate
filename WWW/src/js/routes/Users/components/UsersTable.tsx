@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { Table } from '../../../components'
-import { RouteManager } from '../../../containers/RouteManager'
 import { TableSummary } from '../../../components/common/List/TableSummary'
 import RowId from './UsersTable/RowId'
 import RowUsername from './UsersTable/RowUsername'
@@ -21,7 +20,7 @@ import {
     SetIsLoading,
     User,
 } from '../../../../types.d'
-import { NotificationsManager } from '../../../containers/NotificationsManager'
+import { NotificationsManager, RouteManager } from '../../../containers'
 import { ModalManager } from '../../../components/ui/Modal'
 
 interface UsersTableProps {
@@ -90,7 +89,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
 
                                                 return (
                                                     <Table.ExpandManager key={user.id}>
-                                                        {({ addExpand, expand }) => {
+                                                        {({ addExpand, expand, collapse }) => {
                                                             addExpand(
                                                                 'roles',
                                                                 <RowExpandRoles
@@ -171,6 +170,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                                             deleteAvatar={deleteAvatar}
                                                                             setIsLoading={setIsLoading}
                                                                             fetch={fetch}
+                                                                            collapse={collapse}
                                                                         />
                                                                     </Table.Td>
                                                                     <Table.Td xs={6} md={2}>

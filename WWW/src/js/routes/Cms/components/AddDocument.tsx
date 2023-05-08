@@ -1,18 +1,17 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import Manager from './Manager'
-import { RouteManager } from '../../../containers/RouteManager'
+import { RouteManager, AuthorizationManager } from '../../../containers'
 import { Header } from './Header'
 import { AddDocumentFormContainer } from '../containers/AddDocumentFormContainer'
 import { generateUrl } from '../../../helpers/cms'
-import { formattedCurrentDate, formattedDateTime } from '../../../helpers/date-time'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
+import { formattedDateTime } from '../../../helpers/date-time'
 
 export class AddDocumentView extends React.Component {
     render() {
         return (
             <RouteManager>
-                {({ navigate, query: { parent_id } }) => (
+                {({ query: { parent_id } }) => (
                     <AuthorizationManager>
                         {({ canByPermission }) => (
                             <PageContent>

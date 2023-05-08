@@ -1,11 +1,10 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import Manager from './Manager'
-import { RouteManager } from '../../../containers/RouteManager'
+import { RouteManager, AuthorizationManager } from '../../../containers'
 import { Header } from './Header'
 import { AddLinkFormContainer } from '../containers/AddLinkFormContainer'
-import { formattedCurrentDate, formattedDateTime } from '../../../helpers/date-time'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
+import { formattedDateTime } from '../../../helpers/date-time'
 
 export class AddLinkView extends React.Component {
     render() {

@@ -1,11 +1,7 @@
 import * as React from 'react'
-import { Card, Dropdown, Label, LoadingOverlay } from '../../../components'
-import { DeleteIcon, RoleIcon } from '../../../components/icons'
+import { Card, LoadingOverlay } from '../../../components'
 import { Role, User } from '../../../../types.d'
-import { ModalConfirm } from '../../../components/common/ModalConfirm'
-import { RouteManager } from '../../../containers/RouteManager'
 import ModalDeleteUserRole from '../../../components/common/ModalDeleteUserRole'
-import { users } from '../../../reducers'
 import UserDropdown from '../../../components/common/UserDropdown'
 import { ModalManager } from '../../../components/ui/Modal'
 

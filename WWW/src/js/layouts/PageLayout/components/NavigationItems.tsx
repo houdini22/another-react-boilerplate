@@ -1,11 +1,9 @@
 import * as React from 'react'
 import { NavigationHeader } from './NavigationHeader'
 import { NavigationLink } from './NavigationLink'
-import { AuthManager } from '../../../containers/AuthManager'
-import { RouteManager } from '../../../containers/RouteManager'
+import { AuthManager, RouteManager, AuthorizationManager } from '../../../containers'
 import classNames from 'classnames/bind'
 import styles from '../../../../assets/scss/layout/_layout.scss'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
 
 const cx = classNames.bind(styles)
 

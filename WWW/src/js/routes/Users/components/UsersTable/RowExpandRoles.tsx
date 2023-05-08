@@ -44,7 +44,10 @@ export class RowExpandRoles extends React.Component<RowExpandRolesProps, null> {
                                     return (
                                         <Col xs={4} key={`${role.id}`}>
                                             <RoleDropdown
-                                                role={role}
+                                                role={{
+                                                    ...role,
+                                                    hasUser: true,
+                                                }}
                                                 openDeleteModal={() => {
                                                     openModal(`user-remove-role-${role.id}-delete`)
                                                 }}

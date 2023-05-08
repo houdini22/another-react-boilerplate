@@ -1,17 +1,14 @@
 import * as React from 'react'
-import { RouteManager } from '../../../containers/RouteManager'
+import { RouteManager } from '../../../containers'
 import { Col, Modal, Row } from '../../../components'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import Header from './Header'
 import Edit from './Edit/Edit'
 import Permissions from './Permissions'
 import AddPermissions from './AddPermissions'
-import { NotificationsManager } from '../../../containers/NotificationsManager'
+import { NotificationsManager, UsersManager, TitleManager, AuthorizationManager } from '../../../containers'
 import Users from './Users'
 import AddUsers from './AddUsers'
-import { UsersManager } from '../../../containers/UsersManager'
-import { TitleManager } from '../../../containers/TitleManager'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
 
 export class UserRolesEdit extends React.Component<null, null> {
     render() {

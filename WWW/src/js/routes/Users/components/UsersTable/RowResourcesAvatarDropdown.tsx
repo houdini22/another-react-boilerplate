@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Button, Dropdown, Popover } from '../../../../components'
-import { AvatarIcon } from '../../../../components/icons'
+import { AvatarIcon, DeleteIcon } from '../../../../components/icons'
 import { apiURL } from '../../../../helpers/api'
 import { DeleteUserAvatar, SetIsLoading, User } from '../../../../../types.d'
 
@@ -24,6 +24,7 @@ export class RowResourcesAvatarDropdown extends React.Component<RowResourcesAvat
                                 <Dropdown.Trigger component={Button} componentProps={{ iconOnly: true, icon: <AvatarIcon /> }}></Dropdown.Trigger>
                                 <Dropdown.Menu>
                                     <Dropdown.Item
+                                        color={'danger'}
                                         onClick={() => {
                                             setIsLoading(true).then(() => {
                                                 deleteAvatar(user).then(() => {
@@ -34,7 +35,7 @@ export class RowResourcesAvatarDropdown extends React.Component<RowResourcesAvat
                                             })
                                         }}
                                     >
-                                        Delete Avatar
+                                        <DeleteIcon /> Delete Avatar
                                     </Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown.Container>
