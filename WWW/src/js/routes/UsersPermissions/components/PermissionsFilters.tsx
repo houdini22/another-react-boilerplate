@@ -16,7 +16,6 @@ import { LoadingOverlay } from '../../../components'
 interface RolesFiltersProps {
     filters: Object
     setFilter: SetFilter
-    roles: Array<Role>
     resetFilters: ResetFilters
     defaultFilters: Filters
     isLoading: boolean
@@ -32,7 +31,6 @@ export class PermissionsFilters extends React.Component<RolesFiltersProps, null>
         const {
             filters,
             setFilter,
-            roles,
             defaultFilters,
             isLoading,
             resetFilters,
@@ -109,9 +107,9 @@ export class PermissionsFilters extends React.Component<RolesFiltersProps, null>
                         label: 'Has Users',
                     },
                     {
-                        options: roles.map(({ id, name }) => {
+                        options: filtersData?.roles?.data.map(({ id, name, count }) => {
                             return {
-                                label: name,
+                                label: `${name} (${count})`,
                                 value: id,
                             }
                         }),

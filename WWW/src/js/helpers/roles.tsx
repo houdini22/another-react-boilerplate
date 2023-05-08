@@ -8,7 +8,7 @@ export const getDefaultFilters = () => ({
     order_direction: 'asc',
     permissions: [],
     has_permissions: 'yes_or_no',
-    users: 'yes_or_no',
+    has_users: 'yes_or_no',
     user: '',
     roles: [],
     search: '',

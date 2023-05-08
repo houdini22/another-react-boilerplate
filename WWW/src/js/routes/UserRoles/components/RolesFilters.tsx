@@ -106,13 +106,13 @@ export class RolesFilters extends React.Component<RolesFiltersProps, null> {
                             },
                         ],
                         type: 'radio',
-                        name: 'users',
+                        name: 'has_users',
                         label: 'Has Users',
                     },
                     {
-                        options: permissions.map(({ id, name }) => {
+                        options: filtersData?.permissions?.data.map(({ id, name, count }) => {
                             return {
-                                label: name,
+                                label: `${name} (${count})`,
                                 value: id,
                             }
                         }),

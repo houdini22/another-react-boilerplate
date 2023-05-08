@@ -40,8 +40,6 @@ import {
 interface ListProps {
     filters: Filters
     setFilter: SetFilter
-    roles: Array<Role>
-    permissions: Array<Permission>
     resetFilters: ResetFilters
     defaultFilters: Filters
     isLoading: boolean
@@ -67,6 +65,7 @@ interface ListProps {
     deleteUser: DeleteUser
     deleteAvatar: DeleteUserAvatar
     fetch: () => Promise<void>
+    filtersData: Object
 }
 
 export class List extends React.Component<ListProps, null> {
@@ -74,8 +73,6 @@ export class List extends React.Component<ListProps, null> {
         const {
             filters,
             setFilter,
-            roles,
-            permissions,
             resetFilters,
             defaultFilters,
             isLoading,
@@ -101,6 +98,7 @@ export class List extends React.Component<ListProps, null> {
             deleteUser,
             deleteAvatar,
             fetch,
+            filtersData,
         } = this.props
 
         return (
@@ -112,8 +110,6 @@ export class List extends React.Component<ListProps, null> {
                                 <UsersFilters
                                     filters={filters}
                                     setFilter={setFilter}
-                                    roles={roles}
-                                    permissions={permissions}
                                     resetFilters={resetFilters}
                                     defaultFilters={defaultFilters}
                                     isLoading={isLoading}
@@ -122,6 +118,7 @@ export class List extends React.Component<ListProps, null> {
                                     saveFilters={saveFilters}
                                     deleteSavedFilter={deleteSavedFilter}
                                     restoreSavedFilter={restoreSavedFilter}
+                                    filtersData={filtersData}
                                 />
                                 <Card>
                                     <Pagination

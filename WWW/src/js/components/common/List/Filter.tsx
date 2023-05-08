@@ -16,13 +16,21 @@ interface FilterProps {
 
 class Filter extends React.Component<FilterProps, null> {
     renderRadio() {
-        const { name, options, filters, setFilter } = this.props
+        const { name, options, filters, setFilter, filterData } = this.props
 
         return (
             <>
                 {options
                     .sort(({ label: labelA }, { label: labelB }) => labelA.localeCompare(labelB))
                     .map(({ label, value }) => {
+                        let count = ''
+
+                        console.log(label, value, filterData, name)
+
+                        if (typeof filterData?.[`count:${value}`] === 'number') {
+                            count = ` (${filterData[`count:${value}`]})`
+                        }
+
                         return (
                             <Button
                                 key={`${name}${value}${label}`}
@@ -31,7 +39,7 @@ class Filter extends React.Component<FilterProps, null> {
                                     setFilter(name, value)
                                 }}
                             >
-                                {label}
+                                {label} {count}
                             </Button>
                         )
                     })}
@@ -148,7 +156,7 @@ class Filter extends React.Component<FilterProps, null> {
         return (
             <>
                 {options
-                    .sort(({ label: labelA }, { label: labelB }) => labelA.localeCompare(labelB))
+                    ?.sort(({ label: labelA }, { label: labelB }) => labelA.localeCompare(labelB))
                     .map(({ label, value }) => {
                         return (
                             <Button

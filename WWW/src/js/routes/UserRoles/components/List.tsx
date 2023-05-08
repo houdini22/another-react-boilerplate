@@ -50,7 +50,6 @@ interface ListProps {
     fetch: () => Promise<void>
     deletePermission: DeletePermission
     deleteRole: DeleteRole
-    permissions: Array<Permission>
 }
 
 export class List extends React.Component<ListProps, null> {
@@ -81,7 +80,6 @@ export class List extends React.Component<ListProps, null> {
             deleteRolePermission,
             deletePermission,
             data,
-            permissions,
             filtersData,
         } = this.props
 
@@ -96,7 +94,6 @@ export class List extends React.Component<ListProps, null> {
                                     filters={filters}
                                     setFilter={setFilter}
                                     fetch={fetch}
-                                    permissions={permissions}
                                     defaultFilters={defaultFilters}
                                     isLoading={isLoading}
                                     resetFilters={resetFilters}

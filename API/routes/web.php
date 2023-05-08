@@ -41,6 +41,7 @@ Route::prefix('api/v1')->group(function () {
         Route::post('change_avatar/{id}', '\App\Http\Controllers\UsersController@postChangeAvatar');
         Route::post('delete_avatar', '\App\Http\Controllers\UsersController@postDeleteAvatar');
         Route::post('force_login/{id}', '\App\Http\Controllers\UsersController@postForceLogin');
+        Route::get('filtersData', '\App\Http\Controllers\UsersController@getFiltersData');
 
         Route::prefix('roles')->group(function () {
             Route::post('add/{user_id}/{role_id}', '\App\Http\Controllers\UsersController@postAddUserRole');
@@ -53,6 +54,7 @@ Route::prefix('api/v1')->group(function () {
         Route::delete('delete/{id}', '\App\Http\Controllers\RolesController@deleteDeleteRole');
         Route::post('edit', '\App\Http\Controllers\RolesController@postEdit');
         Route::post('add', '\App\Http\Controllers\RolesController@postAdd');
+        Route::get('filtersData', '\App\Http\Controllers\RolesController@getFiltersData');
 
         Route::prefix('permissions')->group(function () {
             Route::get('list', '\App\Http\Controllers\RolesController@getPermissionList');

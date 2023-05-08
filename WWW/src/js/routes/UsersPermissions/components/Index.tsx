@@ -17,7 +17,7 @@ export class UsersPermissions extends React.Component<null, null> {
                             setTitleSegments(['Users', 'Permissions'])
 
                             return (
-                                <PermissionsManager getRoles>
+                                <PermissionsManager>
                                     {({
                                         deleteRole,
                                         setIsLoading,
@@ -25,7 +25,6 @@ export class UsersPermissions extends React.Component<null, null> {
                                         deleteRolePermission,
                                         deleteUserRole,
                                         isLoading,
-                                        roles,
                                         deleteUserPermission,
                                     }) => (
                                         <FiltersManager
@@ -71,7 +70,6 @@ export class UsersPermissions extends React.Component<null, null> {
                                                                 <Header />
 
                                                                 <List
-                                                                    roles={roles}
                                                                     filters={filters}
                                                                     setFilter={setFilter}
                                                                     resetFilters={resetFilters}

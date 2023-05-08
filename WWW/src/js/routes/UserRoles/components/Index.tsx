@@ -20,16 +20,8 @@ export class UsersView extends React.Component<null, null> {
                             setTitleSegments(['Users', 'Roles'])
 
                             return (
-                                <UsersManager getPermissions>
-                                    {({
-                                        deleteRole,
-                                        setIsLoading,
-                                        deletePermission,
-                                        deleteRolePermission,
-                                        deleteUserRole,
-                                        permissions,
-                                        isLoading,
-                                    }) => {
+                                <UsersManager>
+                                    {({ deleteRole, setIsLoading, deletePermission, deleteRolePermission, deleteUserRole, isLoading }) => {
                                         return (
                                             <FiltersManager
                                                 name={'roles-list'}
@@ -50,7 +42,12 @@ export class UsersView extends React.Component<null, null> {
                                                     savedFilters,
                                                     restoreSavedFilter,
                                                 }) => (
-                                                    <ListManager url={'/roles/list'} filters={filters} setIsLoading={setIsLoading}>
+                                                    <ListManager
+                                                        filtersDataUrl={'/roles/filtersData'}
+                                                        url={'/roles/list'}
+                                                        filters={filters}
+                                                        setIsLoading={setIsLoading}
+                                                    >
                                                         {({
                                                             data,
                                                             links,
@@ -72,7 +69,6 @@ export class UsersView extends React.Component<null, null> {
                                                                         filters={filters}
                                                                         filtersData={filtersData}
                                                                         setFilter={setFilter}
-                                                                        permissions={permissions}
                                                                         resetFilters={resetFilters}
                                                                         defaultFilters={defaultFilters}
                                                                         isLoading={isLoading}

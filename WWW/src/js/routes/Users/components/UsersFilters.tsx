@@ -17,8 +17,6 @@ import { LoadingOverlay } from '../../../components'
 interface FiltersProps {
     filters: Object
     setFilter: SetFilter
-    roles: Array<Role>
-    permissions: Array<Permission>
     resetFilters: ResetFilters
     defaultFilters: Filters
     isLoading: boolean
@@ -27,6 +25,7 @@ interface FiltersProps {
     deleteSavedFilter: DeleteSavedFilter
     saveFilters: SaveFilters
     restoreSavedFilter: RestoreSavedFilter
+    filtersData: Object
 }
 
 export class UserFilters extends React.Component<FiltersProps, null> {
@@ -34,8 +33,6 @@ export class UserFilters extends React.Component<FiltersProps, null> {
         const {
             filters,
             setFilter,
-            roles,
-            permissions,
             resetFilters,
             defaultFilters,
             isLoading,
@@ -44,6 +41,7 @@ export class UserFilters extends React.Component<FiltersProps, null> {
             deleteSavedFilter,
             saveFilters,
             restoreSavedFilter,
+            filtersData,
         } = this.props
 
         return (
@@ -58,6 +56,7 @@ export class UserFilters extends React.Component<FiltersProps, null> {
                 deleteSavedFilter={deleteSavedFilter}
                 saveFilters={saveFilters}
                 restoreSavedFilter={restoreSavedFilter}
+                filtersData={filtersData}
                 filtersToRender={[
                     {
                         type: 'search',
@@ -80,7 +79,7 @@ export class UserFilters extends React.Component<FiltersProps, null> {
                             },
                         ],
                         type: 'radio',
-                        name: 'avatar',
+                        name: 'has_avatar',
                         label: 'Has Avatar',
                     },
                     {
@@ -99,7 +98,7 @@ export class UserFilters extends React.Component<FiltersProps, null> {
                             },
                         ],
                         type: 'radio',
-                        name: 'files',
+                        name: 'has_files',
                         label: 'Has Files',
                     },
                     {
@@ -143,16 +142,16 @@ export class UserFilters extends React.Component<FiltersProps, null> {
                     {
                         options: [
                             {
-                                label: 'both',
+                                label: 'yes or no',
                                 value: 'yes_or_no',
                             },
                             {
-                                label: 'active',
-                                value: 'active',
+                                label: 'yes',
+                                value: 'yes',
                             },
                             {
-                                label: 'not active',
-                                value: 'not_active',
+                                label: 'no',
+                                value: 'no',
                             },
                         ],
                         name: 'status',
@@ -160,9 +159,9 @@ export class UserFilters extends React.Component<FiltersProps, null> {
                         type: 'radio',
                     },
                     {
-                        options: permissions.map(({ id, name }) => {
+                        options: filtersData?.permissions?.data.map(({ id, name, count }) => {
                             return {
-                                label: name,
+                                label: `${name} (${count})`,
                                 value: id,
                             }
                         }),
@@ -171,9 +170,9 @@ export class UserFilters extends React.Component<FiltersProps, null> {
                         type: 'multiple',
                     },
                     {
-                        options: roles.map(({ id, name }) => {
+                        options: filtersData?.roles?.data.map(({ id, name, count }) => {
                             return {
-                                label: name,
+                                label: `${name} (${count})`,
                                 value: id,
                             }
                         }),

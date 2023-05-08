@@ -8,10 +8,10 @@ export const getDefaultFilters = () => ({
     items_per_page: 15,
     search: '',
     status: 'yes_or_no',
-    avatar: 'yes_or_no',
+    has_avatar: 'yes_or_no',
     roles: [],
     permissions: [],
-    files: 'yes_or_no',
+    has_files: 'yes_or_no',
     has_roles: 'yes_or_no',
     has_permissions: 'yes_or_no',
 })

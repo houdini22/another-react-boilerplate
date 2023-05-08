@@ -51,7 +51,6 @@ interface ListProps {
     fetch: () => Promise<void>
     deletePermission: DeletePermission
     deleteRole: DeleteRole
-    roles: Array<Role>
     deleteUserPermission: DeleteUserPermission
     filtersData: Object
 }
@@ -85,7 +84,6 @@ export class List extends React.Component<ListProps, null> {
             fetch,
             deleteRolePermission,
             deletePermission,
-            roles,
             deleteUserPermission,
             filtersData,
         } = this.props
@@ -110,7 +108,6 @@ export class List extends React.Component<ListProps, null> {
                                     saveFilters={saveFilters}
                                     deleteSavedFilter={deleteSavedFilter}
                                     restoreSavedFilter={restoreSavedFilter}
-                                    roles={roles}
                                     filtersData={filtersData}
                                 />
                                 <Card>

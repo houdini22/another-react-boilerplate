@@ -8,6 +8,8 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class RolesController extends Controller
@@ -37,10 +39,10 @@ class RolesController extends Controller
             });
         }
 
-        if (!empty($filters['users'])) {
-            if ($filters['users'] === 'yes') {
+        if (!empty($filters['has_users'])) {
+            if ($filters['has_users'] === 'yes') {
                 $query = $query->whereHas('users');
-            } else if ($filters['users'] === 'no') {
+            } else if ($filters['has_users'] === 'no') {
                 $query = $query->whereDoesntHave('users');
             }
         }
@@ -69,6 +71,87 @@ class RolesController extends Controller
 
         return response()->json([
             'data' => $roles->toArray(),
+        ]);
+    }
+
+    public function getFiltersData(Request $request) {
+        $user = User::getFromRequest($request);
+
+        $filters = $request->get('filters');
+
+        $hasPermissions = Role::select('id');
+        $hasUsers = Role::select('id');
+        $permissions = Permission::select([
+            'permissions.id as id',
+            'permissions.name as name',
+            'count' => DB::raw('count(distinct role_has_permissions.role_id) as count')
+        ])->from('permissions', 'permissions')
+            ->leftJoin('role_has_permissions', 'role_has_permissions.permission_id', 'id')
+            ->leftJoin('model_has_permissions', 'model_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->leftJoin('users', 'users.id', 'model_has_permissions.model_id')
+            ->where(function ($query) use ($filters) {
+                if (Arr::get($filters, 'user')) {
+                    $query->where('users.name', '=', Arr::get($filters, 'user'));
+                }
+                if (Arr::get($filters, 'has_permissions') === 'no') {
+                    $query->whereNull('role_has_permissions.permission_id');
+                } else if (Arr::get($filters, 'has_permissions') === 'yes') {
+                    $query->whereNotNull('role_has_permissions.permission_id');
+                }
+                if (Arr::get($filters, 'has_users') === 'no') {
+                    $query->whereNull('model_has_permissions.model_id');
+                } else if (Arr::get($filters, 'has_users') === 'yes') {
+                    $query->whereNotNull('users.id');
+                }
+            })
+            ->groupBy("id");
+
+        if (Arr::get($filters, 'has_permissions') === 'no') {
+            $hasPermissions = $hasPermissions->whereDoesntHave('permissions');
+            $hasUsers = $hasUsers->whereDoesntHave('permissions');
+        } else if (Arr::get($filters, 'has_permissions') === 'yes') {
+            $hasPermissions = $hasPermissions->whereHas('permissions');
+            $hasUsers = $hasUsers->whereHas('permissions');
+        }
+
+        if (Arr::get($filters, 'has_users') === 'no') {
+            $hasPermissions = $hasPermissions->whereDoesntHave('users');
+            $hasUsers = $hasUsers->whereDoesntHave('users');
+        } else if (Arr::get($filters, 'has_users') === 'yes') {
+            $hasPermissions = $hasPermissions->whereHas('users');
+            $hasUsers = $hasUsers->whereHas('users');
+        }
+
+        if (Arr::get($filters, 'permissions')) {
+            $hasPermissions = $hasPermissions->whereHas('permissions', function($query) use ($filters) {
+                $query->whereIn('id', $filters['permissions']);
+            });
+            $hasUsers = $hasUsers->whereHas('permissions', function($query) use ($filters) {
+                $query->whereIn('id', $filters['permissions']);
+            });
+        }
+
+        if (Arr::get($filters, 'user')) {
+            $hasPermissions = $hasPermissions->whereHas('users', function($query) use ($filters) {
+                $query->where('name', '=', $filters['user']);
+            });
+            $hasUsers = $hasUsers->whereHas('users', function($query) use ($filters) {
+                $query->where('name', '=', $filters['user']);
+            });
+        }
+
+        $permissions = $permissions->get();
+
+        return $this->responseOK([
+            'has_permissions' => [
+                'count' => $hasPermissions->count(),
+            ],
+            'has_users' => [
+                'count' => $hasUsers->count(),
+            ],
+            'permissions' => [
+                'data' => $permissions
+            ]
         ]);
     }
 
