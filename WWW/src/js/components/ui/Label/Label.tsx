@@ -27,7 +27,7 @@ interface LabelProps {
 
 class Label extends React.Component<LabelProps, null> {
     renderClassName({ cardSize, dropdownSize, accordionSize } = {}) {
-        const { color = 'default', className, rounded, roundless, block, href, iconOnly, striped, outline, arrow, size } = this.props
+        const { color = 'default', className, onClick, rounded, roundless, block, href, iconOnly, striped, outline, arrow, size } = this.props
 
         return cx('component-label', {
             [className]: className,
@@ -40,6 +40,7 @@ class Label extends React.Component<LabelProps, null> {
             [`component-label--striped`]: striped,
             [`component-label--outline`]: outline,
             [`component-label--arrow`]: arrow,
+            [`component-label--pointer`]: !!onClick,
             [`component-label--size-${dropdownSize || cardSize || accordionSize || size}`]: dropdownSize || cardSize || accordionSize || size,
         })
     }
@@ -64,6 +65,7 @@ class Label extends React.Component<LabelProps, null> {
                         size = 'md',
                         arrow,
                         style = {},
+                        onClick,
                         ...props
                     } = this.props
 
@@ -91,6 +93,7 @@ class Label extends React.Component<LabelProps, null> {
                         <div
                             className={this.renderClassName(disableContext ? {} : { cardSize, dropdownSize, accordionSize })}
                             style={style}
+                            onClick={onClick}
                             {...props}
                         >
                             {children}

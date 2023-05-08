@@ -4,7 +4,7 @@ export const sortUsersByNameAscending = (users = []) => {
 
 export const getDefaultFilters = () => ({
     order_by: 'id',
-    order_direction: 'asc',
+    order_direction: 'desc',
     items_per_page: 15,
     search: '',
     status: 'yes_or_no',

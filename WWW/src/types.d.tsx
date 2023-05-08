@@ -30,6 +30,7 @@ export interface Role {
     users: Array<User>
     description: string
     hasPermission: boolean
+    hasUser: boolean
 }
 
 export interface Permission {

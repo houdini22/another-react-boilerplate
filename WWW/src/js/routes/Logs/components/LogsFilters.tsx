@@ -153,7 +153,7 @@ export class LogsFilters extends React.Component<LogsFiltersProps, null> {
                                 value: 15,
                             },
                             {
-                                label: '50',
+                                label: '40',
                                 value: 40,
                             },
                             {

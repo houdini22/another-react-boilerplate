@@ -53,7 +53,11 @@ export class Index extends React.Component<null, UsersViewState> {
                                                                 />
                                                             </Card>
                                                         )}
-                                                        <FiltersManager defaultFilters={getDefaultFilters()} name={'media-filters'}>
+                                                        <FiltersManager
+                                                            defaultFilters={getDefaultFilters()}
+                                                            name={'media-filters'}
+                                                            urlFilters={createUrlFilters({ user })}
+                                                        >
                                                             {({
                                                                 defaultFilters,
                                                                 filters,

@@ -14,7 +14,7 @@ export class AddUsers extends React.Component<AddUsersProps, null> {
         return (
             <NotificationsManager>
                 {({ addToastNotification }) => (
-                    <Card header={<h1>Add Users</h1>} color={'secondary'}>
+                    <Card header={<h1>Add Users</h1>} color={'primary'}>
                         <AddUserFormContainer
                             role={role}
                             users={users}

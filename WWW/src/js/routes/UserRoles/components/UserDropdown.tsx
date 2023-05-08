@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { Dropdown, Label } from '../../../components'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
-import { DeleteIcon, DetailsIcon, EditIcon, InfoIcon } from '../../../components/icons'
-import { RouteManager } from '../../../containers/RouteManager'
+import { AuthorizationManager, RouteManager } from '../../../containers'
+import { DeleteIcon, EditIcon, FileIcon, InfoIcon, PermissionIcon, RoleIcon } from '../../../components/icons'
 import { User } from '../../../../types.d'
 
 interface UserDropdownProps {
@@ -33,7 +32,7 @@ export class UserDropdown extends React.Component<UserDropdownProps, null> {
                                             navigate(`/permissions?user=${user.name}`)
                                         }}
                                     >
-                                        <DetailsIcon /> Show User Permissions
+                                        <PermissionIcon /> Show User Permissions
                                     </Dropdown.Item>
                                     <Dropdown.Item
                                         color={'info'}
@@ -41,7 +40,7 @@ export class UserDropdown extends React.Component<UserDropdownProps, null> {
                                             navigate(`/roles?user=${user.name}`)
                                         }}
                                     >
-                                        <DetailsIcon /> Show User Roles
+                                        <RoleIcon /> Show User Roles
                                     </Dropdown.Item>
                                     <Dropdown.Item
                                         color={'info'}
@@ -49,7 +48,7 @@ export class UserDropdown extends React.Component<UserDropdownProps, null> {
                                             navigate(`/media?user=${user.name}`)
                                         }}
                                     >
-                                        <DetailsIcon /> Show User Media
+                                        <FileIcon /> Show User Media
                                     </Dropdown.Item>
                                     <Dropdown.Item
                                         color={'warning'}

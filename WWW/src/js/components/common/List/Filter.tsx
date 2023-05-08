@@ -20,27 +20,25 @@ class Filter extends React.Component<FilterProps, null> {
 
         return (
             <>
-                {options
-                    .sort(({ label: labelA }, { label: labelB }) => labelA.localeCompare(labelB))
-                    .map(({ label, value }) => {
-                        let count = ''
+                {options?.map(({ label, value }) => {
+                    let count = ''
 
-                        if (typeof filterData?.[`count:${value}`] === 'number') {
-                            count = ` (${filterData[`count:${value}`]})`
-                        }
+                    if (typeof filterData?.[`count:${value}`] === 'number') {
+                        count = ` (${filterData[`count:${value}`]})`
+                    }
 
-                        return (
-                            <Button
-                                key={`${name}${value}${label}${count}`}
-                                color={filters[name] === value ? 'warning' : 'secondary'}
-                                onClick={() => {
-                                    setFilter(name, value)
-                                }}
-                            >
-                                {label} {count}
-                            </Button>
-                        )
-                    })}
+                    return (
+                        <Button
+                            key={`${name}${value}${label}${count}`}
+                            color={filters[name] === value ? 'warning' : 'secondary'}
+                            onClick={() => {
+                                setFilter(name, value)
+                            }}
+                        >
+                            {label} {count}
+                        </Button>
+                    )
+                })}
             </>
         )
     }
@@ -108,22 +106,49 @@ class Filter extends React.Component<FilterProps, null> {
     }
 
     renderFilterLabel() {
-        const { type, label, filterData = {}, name, defaultFilters, filters } = this.props
+        const { type, label, filterData = {}, name, defaultFilters, filters, setFilter } = this.props
 
-        const changed = this.getChanged(defaultFilters, filters, name, type)
+        const changed = type === 'order' ? false : this.getChanged(defaultFilters, filters, name, type)
 
         return (
-            <p>
-                {type === 'order' && 'Sort by'}
-                {type !== 'order' && (
-                    <>
-                        {typeof filterData?.count !== 'undefined' && (
-                            <Badge color={filterData.count === 0 ? 'warning' : 'info'}>{filterData.count}</Badge>
-                        )}{' '}
-                        {label}: {changed && <Label color={'info'}>Active</Label>}
-                    </>
-                )}
-            </p>
+            <Row>
+                <Col xs={12} md={8}>
+                    {type === 'order' && <div>Sort by</div>}
+                    {type !== 'order' && (
+                        <div>
+                            {typeof filterData?.count !== 'undefined' && (
+                                <Badge color={filterData.count === 0 ? 'warning' : 'info'}>{filterData.count}</Badge>
+                            )}{' '}
+                            {label}: {changed && <Label color={'info'}>Active</Label>}
+                        </div>
+                    )}
+                </Col>
+                <Col xs={12} md={4}>
+                    {changed && (
+                        <Button
+                            size="xs"
+                            color={'warning'}
+                            onClick={() => {
+                                setFilter(name, defaultFilters[name])
+                            }}
+                        >
+                            Reset
+                        </Button>
+                    )}
+                    {type === 'order' && this.getChanged(defaultFilters, filters, 'order', type) && (
+                        <Button
+                            size="xs"
+                            color={'warning'}
+                            onClick={() => {
+                                setFilter('order_by', defaultFilters['order_by'])
+                                setFilter('order_direction', defaultFilters['order_direction'])
+                            }}
+                        >
+                            Reset
+                        </Button>
+                    )}
+                </Col>
+            </Row>
         )
     }
 
@@ -153,30 +178,29 @@ class Filter extends React.Component<FilterProps, null> {
 
         return (
             <>
-                {options
-                    ?.sort(({ label: labelA }, { label: labelB }) => labelA.localeCompare(labelB))
-                    .map(({ label, value }) => {
-                        return (
-                            <Button
-                                key={`${value}${label}`}
-                                color={filters[name].indexOf(value) === -1 ? 'secondary' : 'warning'}
-                                onClick={() => {
-                                    if (filters[name].indexOf(value) === -1) {
-                                        setFilter(name, [...filters[name], value])
-                                    } else {
-                                        setFilter(
-                                            name,
-                                            filters[name].filter((v) => {
-                                                return v !== value
-                                            }),
-                                        )
-                                    }
-                                }}
-                            >
-                                {label}
-                            </Button>
-                        )
-                    })}
+                {options?.map(({ label, value }) => {
+                    return (
+                        <Label
+                            size={'lg'}
+                            key={`${value}${label}`}
+                            color={filters[name].indexOf(value) === -1 ? 'default' : 'warning'}
+                            onClick={() => {
+                                if (filters[name].indexOf(value) === -1) {
+                                    setFilter(name, [...filters[name], value])
+                                } else {
+                                    setFilter(
+                                        name,
+                                        filters[name].filter((v) => {
+                                            return v !== value
+                                        }),
+                                    )
+                                }
+                            }}
+                        >
+                            {label}
+                        </Label>
+                    )
+                })}
             </>
         )
     }
@@ -205,21 +229,21 @@ class Filter extends React.Component<FilterProps, null> {
         return (
             <div className={cx('filter')}>
                 <Row>
-                    <Col xs={4}>
-                        <div>{this.renderFilterLabel()}</div>
-                    </Col>
+                    <Col xs={4}>{this.renderFilterLabel()}</Col>
                     <Col xs={8}>
-                        {type === 'select' && this.renderSelect()}
-                        {type === 'search' && this.renderSearch()}
-                        {type === 'radio' && this.renderRadio()}
-                        {type === 'multiple' && this.renderMultiple()}
-                        {type === 'text' && this.renderText({ name, placeholder })}
-                        {type === 'order' && (
-                            <div>
-                                {this.renderOrderByColumn()}
-                                {this.renderOrderDirection()}
-                            </div>
-                        )}
+                        <div>
+                            {type === 'select' && this.renderSelect()}
+                            {type === 'search' && this.renderSearch()}
+                            {type === 'radio' && this.renderRadio()}
+                            {type === 'multiple' && this.renderMultiple()}
+                            {type === 'text' && this.renderText({ name, placeholder })}
+                            {type === 'order' && (
+                                <div>
+                                    {this.renderOrderByColumn()}
+                                    {this.renderOrderDirection()}
+                                </div>
+                            )}
+                        </div>
                     </Col>
                 </Row>
             </div>

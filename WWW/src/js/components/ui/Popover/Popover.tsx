@@ -131,7 +131,7 @@ class Container extends React.Component<ContainerProps, ContainerState> {
                     <div
                         className={cx('component-popover__content')}
                         style={{
-                            width: Number(pixelsWidth),
+                            width: isNaN(Number(pixelsWidth)) ? 'auto' : Number(pixelsWidth),
                             marginTop: placement === 'right-center' || placement === 'left-center' ? contentElementMarginTop : 0,
                         }}
                         ref={(e) => this.registerContentElement(e)}

@@ -44,7 +44,7 @@ export class FilesFiles extends React.Component<null, null> {
                         type: 'text',
                         label: 'Username',
                         name: 'user',
-                        placeholder: 'username',
+                        placeholder: 'Username',
                     },
                     {
                         options: [

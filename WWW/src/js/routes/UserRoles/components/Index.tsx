@@ -1,13 +1,10 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
-import { RouteManager } from '../../../containers/RouteManager'
+import { RouteManager, UsersManager, TitleManager, FiltersManager } from '../../../containers'
 import { ListManager } from '../../../components/common/List/ListManager'
 import Header from './Header'
-import { UsersManager } from '../../../containers/UsersManager'
-import { TitleManager } from '../../../containers/TitleManager'
 import { getDefaultFilters } from '../../../helpers/roles'
 import { createUrlFilters, splitIds } from '../../../helpers/filters'
-import { FiltersManager } from '../../../containers/FiltersManager'
 import List from './List'
 
 export class UsersView extends React.Component<null, null> {

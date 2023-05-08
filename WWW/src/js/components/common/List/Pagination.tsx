@@ -32,30 +32,32 @@ class Pagination extends React.Component<PaginationProps, null> {
                         </Button>
                     </Col>
                     <Col xs={8} className={cx('pages')}>
-                        {links.map(({ label, active, url }, i) => {
-                            if (url === null && label === '...') {
+                        <div>
+                            {links.map(({ label, active, url }, i) => {
+                                if (url === null && label === '...') {
+                                    return (
+                                        <Button transparent disabled key={`${i}...`}>
+                                            ...
+                                        </Button>
+                                    )
+                                }
+                                if (!label.match(/^[0-9]+$/)) {
+                                    return null
+                                }
                                 return (
-                                    <Button transparent disabled key={`${i}...`}>
-                                        ...
+                                    <Button
+                                        color={'secondary'}
+                                        disabled={active}
+                                        key={label}
+                                        onClick={() => {
+                                            setPage(Number(label))
+                                        }}
+                                    >
+                                        {label}
                                     </Button>
                                 )
-                            }
-                            if (!label.match(/^[0-9]+$/)) {
-                                return null
-                            }
-                            return (
-                                <Button
-                                    color={'secondary'}
-                                    disabled={active}
-                                    key={label}
-                                    onClick={() => {
-                                        setPage(Number(label))
-                                    }}
-                                >
-                                    {label}
-                                </Button>
-                            )
-                        })}
+                            })}
+                        </div>
                     </Col>
                     <Col xs={2} style={{ textAlign: 'right' }}>
                         <Button

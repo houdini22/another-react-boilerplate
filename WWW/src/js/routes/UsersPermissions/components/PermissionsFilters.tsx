@@ -12,6 +12,7 @@ import {
     SetFilters,
 } from '../../../../types.d'
 import { LoadingOverlay } from '../../../components'
+import { sortRolesByNameAscending } from '../../../helpers/roles'
 
 interface RolesFiltersProps {
     filters: Object
@@ -107,7 +108,7 @@ export class PermissionsFilters extends React.Component<RolesFiltersProps, null>
                         label: 'Has Users',
                     },
                     {
-                        options: filtersData?.roles?.data.map(({ id, name, count }) => {
+                        options: sortRolesByNameAscending(filtersData?.roles?.data).map(({ id, name, count }) => {
                             return {
                                 label: `${name} (${count})`,
                                 value: id,
@@ -148,7 +149,7 @@ export class PermissionsFilters extends React.Component<RolesFiltersProps, null>
                                 value: 15,
                             },
                             {
-                                label: '50',
+                                label: '40',
                                 value: 40,
                             },
                             {

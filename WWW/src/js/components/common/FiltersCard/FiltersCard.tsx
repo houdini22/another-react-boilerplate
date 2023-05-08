@@ -63,7 +63,7 @@ class FiltersCard extends React.Component<FiltersCardProps, null> {
                             headerActions={[
                                 <Button
                                     key={'reset-filters'}
-                                    color={'primary'}
+                                    color={'warning'}
                                     onClick={() => resetFilters()}
                                     disabled={!ifDeepDiff(defaultFilters, filters)}
                                 >

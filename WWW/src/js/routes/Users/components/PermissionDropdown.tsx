@@ -1,9 +1,8 @@
 import * as React from 'react'
 import { Dropdown, Label } from '../../../components'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
-import { DeleteIcon, PermissionIcon, RoleIcon, UserIcon } from '../../../components/icons'
-import { Navigate, Permission } from '../../../../types.d'
-import { RouteManager } from '../../../containers/RouteManager'
+import { AuthorizationManager, RouteManager } from '../../../containers'
+import { DeleteIcon, EditIcon, RoleIcon, UserIcon } from '../../../components/icons'
+import { Permission } from '../../../../types.d'
 
 interface PermissionDropdownProps {
     openDeleteModal?: () => any
@@ -51,7 +50,7 @@ export class PermissionDropdown extends React.Component<PermissionDropdownProps,
                                                 navigate(`/permissions/edit?id=${permission.id}`)
                                             }}
                                         >
-                                            <PermissionIcon /> Edit Permission
+                                            <EditIcon /> Edit Permission
                                         </Dropdown.Item>
                                     )}
                                     {permission.hasUser && canByPermission('users.remove_permission') && (

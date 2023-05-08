@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { withRouter } from '../helpers/router'
 import { LocalStorage } from './database'
 import createReactClass from 'create-react-class'
-import { AuthorizationManager } from '../containers/AuthorizationManager'
+import { AuthorizationManager } from '../containers'
 import Page401 from '../components/common/Page401/Index'
 
 const { getIsLoggedIn } = selectors
@@ -117,37 +117,3 @@ export { UserIsAuthenticatedRoute }
 export default {
     UserIsAuthenticatedRoute,
 }
-
-/*
-export const userIsAdmin = connectedRouterRedirect({
-    redirectPath: '/',
-        allowRedirectBack
-:
-    false,
-        authenticatedSelector
-:
-    state => state.user.data !== null && state.user.data.isAdmin,
-        redirectAction
-:
-    routerActions.replace,
-        wrapperDisplayName
-:
-    'UserIsAdmin'
-})
-
-export const userIsNotAuthenticated = connectedRouterRedirect({
-    redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps) || '/foo',
-        allowRedirectBack
-:
-    false,
-        authenticatedSelector
-:
-    state => state.user.data === null && state.user.isLoading === false,
-        redirectAction
-:
-    routerActions.replace,
-        wrapperDisplayName
-:
-    'UserIsNotAuthenticated'
-})
-*/

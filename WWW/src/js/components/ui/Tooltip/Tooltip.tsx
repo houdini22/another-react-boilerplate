@@ -122,9 +122,18 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
     }
 
     calculateDimensions() {
+        const { placement } = this.props
+        let left = this.calculateLeft(placement)
+        let top = this.calculateTop(placement)
+        if (isNaN(left)) {
+            left = '50%'
+        }
+        if (isNaN(top)) {
+            top = '50%'
+        }
         this.setState({
-            left: this.calculateLeft(this.props.placement),
-            top: this.calculateTop(this.props.placement),
+            left,
+            top,
         })
     }
 

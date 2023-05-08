@@ -11,7 +11,7 @@ export class AddPermissions extends React.Component<AddPermissionsProps, null> {
         return (
             <NotificationsManager>
                 {({ addToastNotification }) => (
-                    <Card header={<h1>Add Permissions</h1>} color={'secondary'}>
+                    <Card header={<h1>Add Permissions</h1>} color={'primary'}>
                         <AddPermissionFormContainer
                             role={role}
                             permissions={permissions}

@@ -1,7 +1,6 @@
 import * as React from 'react'
-import { RouteManager } from '../../../containers/RouteManager'
+import { RouteManager, UsersManager, NotificationsManager, TitleManager, AuthorizationManager } from '../../../containers'
 import { Col, Modal, Row } from '../../../components'
-import { UsersManager } from '../../../containers/UsersManager'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import Header from './Header'
 import Details from './Details/Details'
@@ -10,9 +9,6 @@ import AddRole from './AddRole/AddRole'
 import Roles from './Roles/Roles'
 import Permissions from './Permissions/Permissions'
 import AddPermission from './AddPermission/AddPermission'
-import { NotificationsManager } from '../../../containers/NotificationsManager'
-import { TitleManager } from '../../../containers/TitleManager'
-import { AuthorizationManager } from '../../../containers/AuthorizationManager'
 
 interface UsersViewState {}
 
@@ -76,6 +72,17 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                         />
                                                                         <Row>
                                                                             <Col xs={12} md={6}>
+                                                                                <Edit
+                                                                                    editUser={editUser}
+                                                                                    user={user}
+                                                                                    fetchOne={fetchOne}
+                                                                                    isLoading={isLoading}
+                                                                                    addToastNotification={addToastNotification}
+                                                                                    setIsLoading={setIsLoading}
+                                                                                    canByPermission={canByPermission}
+                                                                                />
+                                                                            </Col>
+                                                                            <Col xs={12} md={6}>
                                                                                 <Details
                                                                                     user={user}
                                                                                     navigate={navigate}
@@ -92,17 +99,6 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                                     registerModal={registerModal}
                                                                                     openModal={openModal}
                                                                                     closeModal={closeModal}
-                                                                                    canByPermission={canByPermission}
-                                                                                />
-                                                                            </Col>
-                                                                            <Col xs={12} md={6}>
-                                                                                <Edit
-                                                                                    editUser={editUser}
-                                                                                    user={user}
-                                                                                    fetchOne={fetchOne}
-                                                                                    isLoading={isLoading}
-                                                                                    addToastNotification={addToastNotification}
-                                                                                    setIsLoading={setIsLoading}
                                                                                     canByPermission={canByPermission}
                                                                                 />
                                                                             </Col>
@@ -150,10 +146,8 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                                         fetchOne={fetchOne}
                                                                                         user={user}
                                                                                         isLoading={isLoading}
-                                                                                        navigate={navigate}
                                                                                         deleteUserPermission={deleteUserPermission}
                                                                                         fetchPermissions={fetchPermissions}
-                                                                                        addToastNotification={addToastNotification}
                                                                                         openModal={openModal}
                                                                                         registerModal={registerModal}
                                                                                         closeModal={closeModal}

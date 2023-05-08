@@ -13,11 +13,11 @@ import {
     SetFilter,
     SetFilters,
 } from '../../../../types.d'
+import { sortPermissionsByNameAscending } from '../../../helpers/permissions'
 
 interface RolesFiltersProps {
     filters: Object
     setFilter: SetFilter
-    permissions: Array<Permission>
     resetFilters: ResetFilters
     defaultFilters: Filters
     isLoading: boolean
@@ -33,7 +33,6 @@ export class RolesFilters extends React.Component<RolesFiltersProps, null> {
         const {
             filters,
             setFilter,
-            permissions,
             defaultFilters,
             isLoading,
             resetFilters,
@@ -110,7 +109,7 @@ export class RolesFilters extends React.Component<RolesFiltersProps, null> {
                         label: 'Has Users',
                     },
                     {
-                        options: filtersData?.permissions?.data.map(({ id, name, count }) => {
+                        options: sortPermissionsByNameAscending(filtersData?.permissions?.data).map(({ id, name, count }) => {
                             return {
                                 label: `${name} (${count})`,
                                 value: id,
@@ -151,8 +150,8 @@ export class RolesFilters extends React.Component<RolesFiltersProps, null> {
                                 value: 15,
                             },
                             {
-                                label: '50',
-                                value: 50,
+                                label: '40',
+                                value: 40,
                             },
                             {
                                 label: '100',

@@ -13,6 +13,8 @@ import {
     SavedFilters,
 } from '../../../../types.d'
 import { LoadingOverlay } from '../../../components'
+import { sortPermissionsByNameAscending } from '../../../helpers/permissions'
+import { sortRolesByNameAscending } from '../../../helpers/roles'
 
 interface FiltersProps {
     filters: Object
@@ -159,7 +161,7 @@ export class UserFilters extends React.Component<FiltersProps, null> {
                         type: 'radio',
                     },
                     {
-                        options: filtersData?.permissions?.data.map(({ id, name, count }) => {
+                        options: sortPermissionsByNameAscending(filtersData?.permissions?.data).map(({ id, name, count }) => {
                             return {
                                 label: `${name} (${count})`,
                                 value: id,
@@ -170,7 +172,7 @@ export class UserFilters extends React.Component<FiltersProps, null> {
                         type: 'multiple',
                     },
                     {
-                        options: filtersData?.roles?.data.map(({ id, name, count }) => {
+                        options: sortRolesByNameAscending(filtersData?.roles?.data).map(({ id, name, count }) => {
                             return {
                                 label: `${name} (${count})`,
                                 value: id,

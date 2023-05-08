@@ -5,16 +5,16 @@ import { AddPermissionForm as FormComponent } from './AddPermissionForm'
 import { reduxForm } from 'redux-form'
 
 const onSubmit = ({ permission_id }, _, { setIsLoading, addUserPermission, fetchOne, user, addToastNotification }) => {
-    setIsLoading(true)
-
-    addUserPermission(user, { id: permission_id }).then((permission) => {
-        fetchOne(user['id']).then(() => {
-            setIsLoading(false)
-            addToastNotification({
-                type: 'success',
-                title: 'Save success.',
-                text: `Permission ID: ${permission_id} has been added to User ID: ${user.id}.`,
-                href: `/users/edit?id=${user.id}`,
+    return setIsLoading(true).then(() => {
+        return addUserPermission(user, { id: permission_id }).then((permission) => {
+            fetchOne(user['id']).then(() => {
+                setIsLoading(false)
+                addToastNotification({
+                    type: 'success',
+                    title: 'Save success.',
+                    text: `Permission ID: ${permission_id} has been added to User ID: ${user.id}.`,
+                    href: `/users/edit?id=${user.id}`,
+                })
             })
         })
     })

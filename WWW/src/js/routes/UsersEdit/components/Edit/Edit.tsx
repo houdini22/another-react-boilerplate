@@ -14,7 +14,7 @@ export class Edit extends React.Component<EditProps, EditState> {
     render() {
         const { editUser, user, fetchOne, isLoading, addToastNotification, setIsLoading, canByPermission } = this.props
         return (
-            <Card header={<h1>Edit</h1>}>
+            <Card header={<h1>User</h1>} color={'primary'}>
                 <EditFormContainer
                     initialValues={user}
                     editUser={editUser}

@@ -48,7 +48,7 @@ export class RoleDropdown extends React.Component<RoleDropdownProps, null> {
                                     >
                                         <EditIcon /> Edit Role
                                     </Dropdown.Item>
-                                    {!role.hasPermission && canByPermission('users.remove_role') && (
+                                    {role.hasUser && canByPermission('users.remove_role') && (
                                         <Dropdown.Item
                                             color="danger"
                                             onClick={() => {
