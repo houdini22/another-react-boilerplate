@@ -111,6 +111,37 @@
         }
     }
 
+    &.component-form-field--state-danger {
+        .component-form-field__input-container {
+            input[type='text'],
+            input[type='number'],
+            input[type='password'] {
+                border-bottom-color: $danger;
+            }
+            select {
+                border-bottom-color: $danger;
+            }
+            textarea {
+                border-bottom-color: $danger;
+            }
+        }
+    }
+
+    &.component-form-field--is-dirty {
+        .component-form-field__input-container {
+            input[type='text'],
+            input[type='number'] {
+                border-bottom-color: $warning;
+            }
+            select {
+                border-bottom-color: $warning;
+            }
+            textarea {
+                border-bottom-color: $warning;
+            }
+        }
+    }
+
     &.component-form-field--state-error {
         .component-form-field__input-container {
             input[type='text'],
