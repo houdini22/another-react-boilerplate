@@ -71,9 +71,7 @@ class PermissionsController extends Controller
             'request' => $request
         ]);
 
-        return $this->responseOK([
-            'permissions' => $permissions
-        ]);
+        return $this->responseOK($permissions);
     }
 
     public function getFiltersData(Request $request)

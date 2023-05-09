@@ -110,9 +110,7 @@ class UsersController extends Controller
             'request' => $request
         ]);
 
-        return $this->responseOK([
-            'users' => $users,
-        ]);
+        return $this->responseOK($users);
     }
 
     public function getFiltersData(Request $request)

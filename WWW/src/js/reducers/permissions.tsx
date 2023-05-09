@@ -75,7 +75,7 @@ const fetchPermissions = () => (dispatch) => {
     return new Promise((resolve, reject) => {
         myGet('/roles/permissions/list').then(
             (data) => {
-                dispatch(setPermissions(data.permissions))
+                dispatch(setPermissions(data))
                 resolve()
             },
             () => {
@@ -195,7 +195,7 @@ const fetchRoles = () => (dispatch) => {
     return new Promise((resolve, reject) => {
         myGet('/roles/list').then(
             (data) => {
-                dispatch(setRoles(data.roles))
+                dispatch(setRoles(data))
                 resolve()
             },
             () => {

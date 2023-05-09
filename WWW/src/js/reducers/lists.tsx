@@ -8,16 +8,16 @@ export const SET_PAGE = 'list::set-page'
 
 const setListData =
     (name, data = {}) =>
-    (dispatch) => {
-        dispatch({ type: SET_LIST, payload: { name, data } })
-    }
+        (dispatch) => {
+            dispatch({type: SET_LIST, payload: {name, data}})
+        }
 const setFiltersData =
     (name, data = {}) =>
-    (dispatch) => {
-        dispatch({ type: SET_FILTERS_DATA, payload: { name, data } })
-    }
+        (dispatch) => {
+            dispatch({type: SET_FILTERS_DATA, payload: {name, data}})
+        }
 const setPage = (name, page) => (dispatch) => {
-    dispatch({ type: SET_PAGE, payload: { name, page } })
+    dispatch({type: SET_PAGE, payload: {name, page}})
 }
 
 export const actions = {
@@ -29,7 +29,7 @@ export const actions = {
 // action handlers
 
 const ACTION_HANDLERS = {
-    [SET_LIST]: (state, { payload: { name, data } }) => {
+    [SET_LIST]: (state, {payload: {name, data}}) => {
         const list = state.lists?.[name] || {}
 
         return {
@@ -38,12 +38,19 @@ const ACTION_HANDLERS = {
                 ...state.lists,
                 [name]: {
                     ...list,
-                    ...data,
+                    ...{
+                        ...data, ...{
+                            hasPrevPage: !!data?.prev_page_url,
+                            hasNextPage: !!data?.next_page_url,
+                            perPage: data?.per_page,
+                            totalPages: data?.last_page,
+                        }
+                    },
                 },
             },
         }
     },
-    [SET_FILTERS_DATA]: (state, { payload: { name, data } }) => {
+    [SET_FILTERS_DATA]: (state, {payload: {name, data}}) => {
         return {
             ...state,
             filtersData: {
@@ -52,7 +59,7 @@ const ACTION_HANDLERS = {
             },
         }
     },
-    [SET_PAGE]: (state, { payload: { name, page } }) => {
+    [SET_PAGE]: (state, {payload: {name, page}}) => {
         const list = state.lists?.[name] || {}
 
         return {
