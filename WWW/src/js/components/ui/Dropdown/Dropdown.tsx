@@ -177,16 +177,7 @@ export class DropdownTrigger extends React.Component<DropdownTriggerProps, null>
 
         return (
             <AppContext.Consumer>
-                {({
-                    triggerElement,
-                    itemsElement,
-                    dropdownTriggerSize,
-                    dropdownTriggerColor,
-                    dropdownIsOpen,
-                    dropdownOpen,
-                    dropdownClose,
-                    dropdownTrigger,
-                }) => {
+                {({ triggerElement, itemsElement, dropdownTriggerSize, dropdownIsOpen, dropdownOpen, dropdownClose, dropdownTrigger }) => {
                     this.dropdownTrigger = dropdownTrigger
                     this.itemsElement = itemsElement
                     this.triggerElement = triggerElement
@@ -197,7 +188,6 @@ export class DropdownTrigger extends React.Component<DropdownTriggerProps, null>
                             arrow
                             {...componentProps}
                             size={dropdownTriggerSize}
-                            color={dropdownTriggerColor}
                             onClick={(e) => {
                                 e.preventDefault()
                                 e.stopPropagation()

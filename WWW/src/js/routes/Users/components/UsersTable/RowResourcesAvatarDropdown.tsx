@@ -19,9 +19,12 @@ export class RowResourcesAvatarDropdown extends React.Component<RowResourcesAvat
             <>
                 {!!user?.avatar?.id && (
                     <Popover.Container trigger={'hover'} placement={'left-center'}>
-                        <Popover.Trigger color={'info'}>
+                        <Popover.Trigger>
                             <Dropdown.Container>
-                                <Dropdown.Trigger component={Button} componentProps={{ iconOnly: true, icon: <AvatarIcon /> }}></Dropdown.Trigger>
+                                <Dropdown.Trigger
+                                    component={Button}
+                                    componentProps={{ iconOnly: true, icon: <AvatarIcon />, color: 'secondary' }}
+                                ></Dropdown.Trigger>
                                 <Dropdown.Menu>
                                     <Dropdown.Item
                                         color={'danger'}

@@ -34,7 +34,7 @@ export class RowResources extends React.Component<RowResourcesProps, null> {
                                 {user?.roles?.length > 0 && canByPermission('users.list_roles') && (
                                     <Tooltip tooltip={`User Roles`}>
                                         <Button
-                                            color={'info'}
+                                            color={'secondary'}
                                             icon={<RoleIcon />}
                                             onClick={() => {
                                                 expand('roles')
@@ -47,7 +47,7 @@ export class RowResources extends React.Component<RowResourcesProps, null> {
                                 {Object.keys(permissionsFromRoles).length + user.permissions.length && canByPermission('users.list_permissions') && (
                                     <Tooltip tooltip={`User Permissions`}>
                                         <Button
-                                            color={'info'}
+                                            color={'secondary'}
                                             icon={<PermissionIcon />}
                                             onClick={() => {
                                                 expand('permissions')
@@ -58,7 +58,7 @@ export class RowResources extends React.Component<RowResourcesProps, null> {
                                     </Tooltip>
                                 )}
                                 {user.files_count > 0 && canByPermission('users.list_files') && (
-                                    <Button color={'info'} icon={<FileIcon />} onClick={() => navigate(`/media?user=${user.name}`)}>
+                                    <Button color={'secondary'} icon={<FileIcon />} onClick={() => navigate(`/media?user=${user.name}`)}>
                                         <span>{user.files_count}</span>
                                     </Button>
                                 )}
