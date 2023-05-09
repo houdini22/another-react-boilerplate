@@ -68,7 +68,6 @@ export class Index extends React.Component<null, UsersViewState> {
                                                                 deleteSavedFilter,
                                                                 restoreSavedFilter,
                                                                 saveFilters,
-                                                                filtersData,
                                                             }) => (
                                                                 <ListManager
                                                                     url={'/files/list'}
@@ -88,7 +87,7 @@ export class Index extends React.Component<null, UsersViewState> {
                                                                                 per_page: perPage,
                                                                                 total,
                                                                             } = {},
-                                                                        },
+                                                                        } = {},
                                                                         filtersData,
                                                                         setPage,
                                                                         fetch,

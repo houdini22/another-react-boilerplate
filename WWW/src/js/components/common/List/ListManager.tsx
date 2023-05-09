@@ -1,9 +1,11 @@
 import React from 'react'
-import { http, myGet } from '../../../modules/http'
+import { myGet } from '../../../modules/http'
 import styles from '../../../../assets/scss/components/_list_manager.scss'
 import classNames from 'classnames/bind'
-import { SetIsLoading } from '../../../../types.d'
 import { ifDeepDiff } from '../../../utils/javascript'
+import {actions as listsActions, selectors as listsSelectors} from "../../../reducers/lists";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 
 const cx = classNames.bind(styles)
 
@@ -13,18 +15,7 @@ interface ListManagerProps {
     filtersDataUrl?: string
 }
 
-interface ListManagerState {
-    data: any
-    filtersData: Object
-}
-
-class ListManager extends React.Component<ListManagerProps, ListManagerState> {
-    state = {
-        data: [],
-        filtersData: {},
-        page: 1,
-    }
-
+class ListManagerBase extends React.Component<ListManagerProps> {
     requestInProgress = false
 
     componentDidMount() {
@@ -37,23 +28,15 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
     }
 
     setPage(page: number) {
-        return new Promise((resolve) => {
-            this.setState(
-                {
-                    page,
-                },
-                () => {
-                    resolve()
-                },
-            )
-        })
+        const {setPage, url} = this.props;
+
+        setPage(url, page);
     }
 
     componentDidUpdate(prevProps: Readonly<ListManagerProps>, prevState: Readonly<ListManagerState>, snapshot?: any) {
-        const { filters, setIsLoading } = this.props
-        const { page } = this.state
+        const { filters, setIsLoading, page } = this.props
 
-        if (ifDeepDiff(prevProps.filters, filters) || prevState.page !== page) {
+        if (ifDeepDiff(prevProps.filters, filters) || prevProps.page !== page) {
             setIsLoading(true).then(() => {
                 this.fetch().then(
                     () => {
@@ -74,8 +57,7 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
 
             this.requestInProgress = true
 
-            const { url, filters } = this.props
-            const { page } = this.state
+            const { url, filters, page, setListData } = this.props
 
             const params = {
                 filters,
@@ -85,18 +67,12 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
             Promise.all([
                 new Promise((resolve) => {
                     return myGet(url, params).then((data) => {
-                        this.setState(
-                            {
-                                data,
-                            },
-                            () => {
-                                resolve()
-                            },
-                        )
+                        setListData(url, data);
+                        resolve()
                     })
                 }),
                 new Promise((resolve) => {
-                    const { filtersDataUrl } = this.props
+                    const { filtersDataUrl, setFiltersData, url } = this.props
 
                     if (!filtersDataUrl) {
                         resolve()
@@ -106,14 +82,8 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
                     myGet(`${filtersDataUrl}`, {
                         filters,
                     }).then((data) => {
-                        this.setState(
-                            {
-                                filtersData: data,
-                            },
-                            () => {
-                                resolve()
-                            },
-                        )
+                        setFiltersData(url, data);
+                        resolve()
                     })
                 }),
             ]).then(() => {
@@ -124,12 +94,11 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
     }
 
     render() {
-        const { data, filtersData, page } = this.state
-        const { children } = this.props
+        const { children, listData, filtersData, page = 1, } = this.props
 
         const renderProps = {
             fetch: this.fetch.bind(this),
-            data,
+            data: listData,
             setPage: this.setPage.bind(this),
             filtersData,
             page,
@@ -137,5 +106,22 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
         return <div className={cx('list-manager-container')}>{children(renderProps)}</div>
     }
 }
+
+const mapStateToProps = (state, {url}) => ({
+    listData: listsSelectors['getListData'](state, url),
+    filtersData: listsSelectors['getFiltersData'](state, url),
+    page: listsSelectors['getPage'](state, url),
+})
+
+const ListManager = connect(mapStateToProps, (dispatch) => {
+    return bindActionCreators(
+        {
+            setListData: listsActions.setListData,
+            setFiltersData: listsActions.setFiltersData,
+            setPage: listsActions.setPage
+        },
+        dispatch,
+    )
+})(ListManagerBase)
 
 export { ListManager }
