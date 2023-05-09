@@ -146,7 +146,6 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                         <button {...rest} style={style} className={classes} onClick={this.handleClick.bind(this)} disabled={isDisabled} type={type}>
                             {icon}
                             {!iconOnly && <div>{children}</div>}
-                            {iconOnly && <div> </div>}
                             {arrow && <ArrowDownIcon className={cx('component-button__arrow-icon')} />}
                             {navigationHref && (
                                 <Link
