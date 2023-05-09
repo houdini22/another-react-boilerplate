@@ -10,7 +10,7 @@ class EditForm extends React.Component<null, null> {
                 <Field name="name" label="Name" type="text" component={FormField} autoFocus disabled={!is_name_editable} />
                 <Field name="description" label="Description" type="textarea" component={FormField} />
                 <Button color="success" type="submit" block>
-                    Save
+                    <span>Save</span>
                 </Button>
             </form>
         )

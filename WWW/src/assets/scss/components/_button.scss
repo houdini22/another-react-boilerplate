@@ -35,6 +35,18 @@
         font-size: 1.3em;
     }
 
+    & > div {
+        display: inline-flex;
+        align-items: center;
+        align-content: center;
+        width: 100%;
+
+        & > span {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
     &.component-button--size-lg {
         padding: $COMPONENT_ELEMENT_PADDING_LG;
         font-size: $COMPONENT_FONT_SIZE_LG;
@@ -61,6 +73,10 @@
         width: 100%;
     }
 
+    &.component-button--bordered.component-button--transparent {
+        border: 1px solid $default;
+    }
+
     &.component-button--disabled {
         cursor: not-allowed;
         opacity: 0.65;
@@ -75,6 +91,12 @@
 
     &.component-button--rounded {
         border-radius: 100px;
+    }
+
+    &.component-button--with-icon {
+        & > div {
+            width: calc(100% - 30px);
+        }
     }
 
     &.component-button--roundless {
@@ -121,7 +143,7 @@
     }
 
     &:not(.component-button--icon-only) {
-        svg:not(.component-button__arrow-icon) {
+        & > svg:not(.component-button__arrow-icon) {
             margin-right: 7px;
         }
     }

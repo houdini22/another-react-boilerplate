@@ -46,7 +46,7 @@ class AddPermissionForm extends React.Component<AddPermissionFormProps, null> {
                     </>
                 )}
                 <Button color="success" type="submit" block>
-                    Save
+                    <span>Save</span>
                 </Button>
             </form>
         )

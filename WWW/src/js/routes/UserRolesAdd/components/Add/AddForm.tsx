@@ -4,6 +4,8 @@ import { Alert, Button, Card, Col, FormField, Row, Section } from '../../../../c
 import { sortPermissionsByNameAscending } from '../../../../helpers/permissions'
 import { sortUsersByNameAscending } from '../../../../helpers/users'
 import { AddPermission } from '../../../UsersPermissionsAdd/components/Add/Index'
+import SimpleModelCell from '../../../../components/common/SimpleModelCell'
+import { PermissionIcon, UserIcon } from '../../../../components/icons'
 
 class AddForm extends React.Component<null, null> {
     render() {
@@ -37,7 +39,6 @@ class AddForm extends React.Component<null, null> {
 
                         {!noAddToUsers && canByPermission('users.add_permission') && (
                             <Card header={<h1>Add to Users</h1>} color={'secondary'}>
-                                {newRoleUsers.length > 0 && <Alert color={'info'}>Click added User to remove.</Alert>}
                                 <Field
                                     name="_users"
                                     label="User"
@@ -58,17 +59,20 @@ class AddForm extends React.Component<null, null> {
                                 <Section>
                                     {newRoleUsers.map((user) => {
                                         return (
-                                            <Button
+                                            <SimpleModelCell
+                                                icon={<UserIcon />}
                                                 key={user.id}
-                                                roundless
-                                                color={'secondary'}
-                                                block
-                                                onClick={() => {
-                                                    removeNewRoleFromUser(user.id)
-                                                }}
+                                                actions={[
+                                                    {
+                                                        name: 'delete',
+                                                        onClick: () => {
+                                                            removeNewRoleFromUser(user.id)
+                                                        },
+                                                    },
+                                                ]}
                                             >
                                                 {user.name}
-                                            </Button>
+                                            </SimpleModelCell>
                                         )
                                     })}
                                 </Section>
@@ -77,7 +81,6 @@ class AddForm extends React.Component<null, null> {
 
                         {canByPermission('roles.add_permission') && (
                             <Card header={<h1>Associate Permissions</h1>} color={'secondary'}>
-                                {newRolePermissions.length > 0 && <Alert color={'info'}>Click added Permission to remove.</Alert>}
                                 <Field
                                     name="_permissions"
                                     label="Permission"
@@ -98,17 +101,20 @@ class AddForm extends React.Component<null, null> {
                                 <Section>
                                     {newRolePermissions.map((permission) => {
                                         return (
-                                            <Button
+                                            <SimpleModelCell
+                                                icon={<PermissionIcon />}
                                                 key={permission.id}
-                                                roundless
-                                                color={'secondary'}
-                                                block
-                                                onClick={() => {
-                                                    removePermissionFromNewRole(permission.id)
-                                                }}
+                                                actions={[
+                                                    {
+                                                        name: 'delete',
+                                                        onClick: () => {
+                                                            removePermissionFromNewRole(permission.id)
+                                                        },
+                                                    },
+                                                ]}
                                             >
                                                 {permission.name}
-                                            </Button>
+                                            </SimpleModelCell>
                                         )
                                     })}
                                 </Section>
@@ -116,7 +122,7 @@ class AddForm extends React.Component<null, null> {
                         )}
 
                         <Button color="success" type="submit" block style={{ marginBottom: 30 }}>
-                            Save
+                            <span>Save</span>
                         </Button>
                     </form>
                 </Col>

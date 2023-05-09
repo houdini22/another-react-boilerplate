@@ -89,7 +89,7 @@ class AddForm extends React.Component<null, null> {
                 <Row>
                     <Col xs={12}>
                         <Button color="success" type="submit" block>
-                            Save
+                            <span>Save</span>
                         </Button>
                     </Col>
                 </Row>
