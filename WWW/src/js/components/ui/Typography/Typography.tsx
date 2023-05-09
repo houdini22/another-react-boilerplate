@@ -9,7 +9,7 @@ interface ContainerProps {
     className?: string
 }
 
-class Container extends React.Component<ContainerProps, null> {
+export class Container extends React.Component<ContainerProps, null> {
     render() {
         const { children, className } = this.props
 
@@ -25,5 +25,23 @@ class Container extends React.Component<ContainerProps, null> {
     }
 }
 
-export { Container }
-export default { Container }
+export class Header extends React.Component<ContainerProps, null> {
+    render() {
+        const { children, className, level = 1, solid, } = this.props
+
+        return (
+            <div
+                className={cx('component-typography__header', {
+                    [`component-typography__header--level-${level}`]: level,
+                    [`component-typography__header--solid`]: solid,
+                    [`component-typography__header-${level}`]: level,
+                    [className]: className,
+                })}
+            >
+                {children}
+            </div>
+        )
+    }
+}
+
+export default { Container, Header }

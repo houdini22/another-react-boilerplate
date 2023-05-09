@@ -29,12 +29,12 @@ class BaseSidebarHeaderUser extends React.Component<BaseSidebarHeaderUserProps, 
                     <span className={cx('layout__header__bar__right__element', 'layout__header__bar__right__element--user')}>
                         <Dropdown.Container placement={'right'}>
                             <Dropdown.Trigger component={Button}>
-                                <span className={'layout__header__bar__right__element--user__user-name'}>{user.name}</span>
                                 {user.avatar && (
                                     <span className={'layout__header__bar__right__element--user__avatar'}>
                                         <img src={apiURL(`files/preview/${user.avatar.id}`)} alt={''} />
                                     </span>
                                 )}
+                                <span className={'layout__header__bar__right__element--user__user-name'}>{user.name}</span>
                             </Dropdown.Trigger>
                             <Dropdown.Menu>
                                 <Dropdown.Item

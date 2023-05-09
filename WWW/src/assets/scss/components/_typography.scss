@@ -68,4 +68,19 @@
     & > p:last-child {
         margin-bottom: 0;
     }
+
+    .component-typography__header {
+        &.component-typography__header--level-3 {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 0;
+            text-align: left;
+        }
+        &.component-typography__header--solid {
+            border-top: 1px solid $default;
+            border-bottom: 1px solid $default;
+            background: $default_LIGHTEN_X1;
+            padding: $COMPONENT_ELEMENT_PADDING_MD;
+        }
+    }
 }
