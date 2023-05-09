@@ -23,7 +23,7 @@ export class UserDropdown extends React.Component<UserDropdownProps, null> {
                                 icon={<PermissionIcon />}
                                 dropdown={[
                                     {
-                                        color: 'info',
+                                        color: 'primary',
                                         onClick: () => {
                                             navigate(`/permissions?user=${user.name}`)
                                         },
@@ -35,7 +35,7 @@ export class UserDropdown extends React.Component<UserDropdownProps, null> {
                                         display: canByPermission('permissions.list'),
                                     },
                                     {
-                                        color: 'info',
+                                        color: 'primary',
                                         onClick: () => {
                                             navigate(`/roles?user=${user.name}`)
                                         },
@@ -47,7 +47,7 @@ export class UserDropdown extends React.Component<UserDropdownProps, null> {
                                         display: canByPermission('roles.list'),
                                     },
                                     {
-                                        color: 'info',
+                                        color: 'primary',
                                         onClick: () => {
                                             navigate(`/media?user=${user.name}`)
                                         },

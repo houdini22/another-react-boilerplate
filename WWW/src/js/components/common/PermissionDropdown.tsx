@@ -23,7 +23,7 @@ export class PermissionDropdown extends React.Component<PermissionDropdownProps,
                                 icon={<PermissionIcon />}
                                 dropdown={[
                                     {
-                                        color: 'info',
+                                        color: 'primary',
                                         onClick: () => {
                                             navigate(`/roles?permissions=${permission.id}`)
                                         },
@@ -36,7 +36,7 @@ export class PermissionDropdown extends React.Component<PermissionDropdownProps,
                                         display: canByPermission('roles.list'),
                                     },
                                     {
-                                        color: 'info',
+                                        color: 'primary',
                                         onClick: () => {
                                             navigate(`/users?permissions=${permission.id}`)
                                         },
