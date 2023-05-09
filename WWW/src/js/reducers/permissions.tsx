@@ -182,7 +182,7 @@ const fetchUsers = () => (dispatch) => {
     return new Promise((resolve, reject) => {
         myGet('/users/list').then(
             (data) => {
-                dispatch(setUsers(data.users))
+                dispatch(setUsers(data))
                 resolve()
             },
             () => {
