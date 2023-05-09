@@ -173,12 +173,7 @@ export class DropdownTrigger extends React.Component<DropdownTriggerProps, null>
     }
 
     render() {
-        const {
-            component: Component,
-            children,
-            transparent,
-            componentProps: { icon, iconOnly, block },
-        } = this.props
+        const { component: Component, children, transparent, componentProps } = this.props
 
         return (
             <AppContext.Consumer>
@@ -200,6 +195,7 @@ export class DropdownTrigger extends React.Component<DropdownTriggerProps, null>
                     return createPortal(
                         <Component
                             arrow
+                            {...componentProps}
                             size={dropdownTriggerSize}
                             color={dropdownTriggerColor}
                             onClick={(e) => {
@@ -221,9 +217,6 @@ export class DropdownTrigger extends React.Component<DropdownTriggerProps, null>
                             }}
                             transparent={transparent}
                             disableContext
-                            icon={icon}
-                            iconOnly={iconOnly}
-                            block={block}
                         >
                             {children}
                         </Component>,

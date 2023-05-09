@@ -29,7 +29,7 @@ class DetailsUserAvatarRow extends React.Component<null, null> {
                 <Col xs={8} style={{ marginBottom: 10 }}>
                     <div>
                         {user?.avatar?.id != null && (
-                            <Tooltip tooltip={<div>Size: {user.avatar.size}</div>}>
+                            <Tooltip color={'primary'} tooltip={<div>Size: {user.avatar.size}</div>}>
                                 <img src={apiURL(`files/preview/${user.avatar?.id}`)} style={{ maxWidth: '100%', marginBottom: 20 }} alt={''} />
                             </Tooltip>
                         )}

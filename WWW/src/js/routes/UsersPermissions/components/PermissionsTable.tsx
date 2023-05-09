@@ -135,6 +135,7 @@ export class PermissionsTable extends React.Component<RolesTableProps, null> {
                                                                                     {permission.name}{' '}
                                                                                     {!!permission.description && (
                                                                                         <Tooltip
+                                                                                            color={'primary'}
                                                                                             tooltip={
                                                                                                 <span
                                                                                                     style={{

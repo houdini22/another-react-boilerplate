@@ -39,7 +39,8 @@
         display: inline-flex;
         align-items: center;
         align-content: center;
-        width: 100%;
+        width: calc(100% - 40px);
+        min-width: 10px;
 
         & > span {
             width: 100%;
@@ -91,12 +92,6 @@
 
     &.component-button--rounded {
         border-radius: 100px;
-    }
-
-    &.component-button--with-icon {
-        & > div {
-            width: calc(100% - 30px);
-        }
     }
 
     &.component-button--roundless {

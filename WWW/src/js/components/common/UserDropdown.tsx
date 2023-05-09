@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Dropdown, Label } from '../index'
 import { AuthorizationManager, RouteManager } from '../../containers'
-import { DeleteIcon, EditIcon, FileIcon, InfoIcon, PermissionIcon, RoleIcon } from '../icons'
+import { DeleteIcon, EditIcon, FileIcon, PermissionIcon, RoleIcon } from '../icons'
 import { User } from '../../../types.d'
+import SimpleModelCell from './SimpleModelCell'
 
 interface UserDropdownProps {
     openDeleteModal?: () => any
@@ -18,68 +18,85 @@ export class UserDropdown extends React.Component<UserDropdownProps, null> {
                 {({ navigate }) => (
                     <AuthorizationManager>
                         {({ canByPermission }) => (
-                            <Dropdown.Container triggerSize={'lg'}>
-                                <Dropdown.Trigger size="lg" component={Label} componentProps={{ block: true }}>
-                                    {user.name}
-                                </Dropdown.Trigger>
-                                <Dropdown.Menu>
-                                    <Dropdown.Item type={'header'}>
-                                        <InfoIcon /> User ID: {user.id}
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        color={'info'}
-                                        onClick={() => {
+                            <SimpleModelCell
+                                icon={<PermissionIcon />}
+                                dropdown={[
+                                    {
+                                        color: 'info',
+                                        onClick: () => {
                                             navigate(`/permissions?user=${user.name}`)
-                                        }}
-                                    >
-                                        <PermissionIcon /> Show User Permissions
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        color={'info'}
-                                        onClick={() => {
+                                        },
+                                        children: (
+                                            <>
+                                                <PermissionIcon /> Show User Permissions
+                                            </>
+                                        ),
+                                        display: canByPermission('permissions.list'),
+                                    },
+                                    {
+                                        color: 'info',
+                                        onClick: () => {
                                             navigate(`/roles?user=${user.name}`)
-                                        }}
-                                    >
-                                        <RoleIcon /> Show User Roles
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        color={'info'}
-                                        onClick={() => {
+                                        },
+                                        children: (
+                                            <>
+                                                <RoleIcon /> Show User Roles
+                                            </>
+                                        ),
+                                        display: canByPermission('roles.list'),
+                                    },
+                                    {
+                                        color: 'info',
+                                        onClick: () => {
                                             navigate(`/media?user=${user.name}`)
-                                        }}
-                                    >
-                                        <FileIcon /> Show User Media
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        color={'warning'}
-                                        onClick={() => {
+                                        },
+                                        children: (
+                                            <>
+                                                <FileIcon /> Show User Media
+                                            </>
+                                        ),
+                                        display: canByPermission('media.list'),
+                                    },
+                                    {
+                                        color: 'warning',
+                                        onClick: () => {
                                             navigate(`/users/edit?id=${user.id}`)
-                                        }}
-                                    >
-                                        <EditIcon /> Edit User
-                                    </Dropdown.Item>
-                                    {user.hasRole && canByPermission('users.remove_permission') && (
-                                        <Dropdown.Item
-                                            color="danger"
-                                            onClick={() => {
-                                                openDeleteModal()
-                                            }}
-                                        >
-                                            <DeleteIcon /> Remove Role from User
-                                        </Dropdown.Item>
-                                    )}
-                                    {user.hasPermission && (
-                                        <Dropdown.Item
-                                            color="danger"
-                                            onClick={() => {
-                                                openDeleteModal()
-                                            }}
-                                        >
-                                            <DeleteIcon /> Remove Permission from User
-                                        </Dropdown.Item>
-                                    )}
-                                </Dropdown.Menu>
-                            </Dropdown.Container>
+                                        },
+                                        children: (
+                                            <>
+                                                <EditIcon /> Edit User
+                                            </>
+                                        ),
+                                        display: canByPermission('users.edit'),
+                                    },
+                                    {
+                                        color: 'danger',
+                                        onClick: () => {
+                                            openDeleteModal()
+                                        },
+                                        children: (
+                                            <>
+                                                <DeleteIcon /> Remove Role from User
+                                            </>
+                                        ),
+                                        display: user.hasRole && canByPermission('users.remove_permission'),
+                                    },
+                                    {
+                                        color: 'danger',
+                                        onClick: () => {
+                                            openDeleteModal()
+                                        },
+                                        children: (
+                                            <>
+                                                <DeleteIcon /> Remove Permission from User
+                                            </>
+                                        ),
+                                        display: user.hasPermission && canByPermission('users.remove_permission'),
+                                    },
+                                ]}
+                            >
+                                {user.name}
+                            </SimpleModelCell>
                         )}
                     </AuthorizationManager>
                 )}

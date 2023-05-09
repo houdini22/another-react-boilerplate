@@ -103,6 +103,7 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                                                                     {role.name}{' '}
                                                                                     {!!role.description && (
                                                                                         <Tooltip
+                                                                                            color={'primary'}
                                                                                             tooltip={
                                                                                                 <span
                                                                                                     style={{
