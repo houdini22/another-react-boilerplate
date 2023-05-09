@@ -11,6 +11,16 @@
     align-content: center;
     flex-direction: row;
 
+    &.component-col--align-right {
+        & > * {
+            margin-left: auto;
+        }
+    }
+
+    &.component-col--align-center {
+        align-items: center;
+    }
+
     @each $name, $size in $grid-breakpoints {
         @for $i from 1 through 12 {
             @media only screen and (min-width: $size) {

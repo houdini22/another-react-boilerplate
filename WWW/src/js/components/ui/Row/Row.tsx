@@ -10,11 +10,13 @@ interface RowProps {
     builder?: any
     className?: string
     onClick?: () => void
+    alignCenter?: boolean
+    noMarginBottom?: boolean
 }
 
 class Row extends React.Component<RowProps, null> {
     render() {
-        const { children, builder, className, ...props } = this.props
+        const { children, builder, className, alignCenter, noMarginBottom, ...props } = this.props
 
         return (
             <div
@@ -22,6 +24,8 @@ class Row extends React.Component<RowProps, null> {
                 className={cx('component-row', className, {
                     [cx('builder')]: builder,
                     [cx('component-row--no-padding')]: props['noPadding'],
+                    [cx('component-row--align-center')]: alignCenter,
+                    [cx('component-row--no-margin-bottom')]: noMarginBottom,
                 })}
             >
                 {children}

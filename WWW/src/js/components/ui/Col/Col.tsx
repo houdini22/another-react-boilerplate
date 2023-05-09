@@ -13,11 +13,13 @@ interface ColProps {
     lg?: number | string
     style?: object
     onClick?: () => void
+    alignRight?: boolean
+    alignCenter?: boolean
 }
 
 class Col extends React.Component<ColProps, null> {
     render() {
-        const { children, className, xs, sm, md, lg, ...props } = this.props
+        const { children, className, xs, sm, md, lg, alignRight, alignCenter, ...props } = this.props
 
         return (
             <div
@@ -28,6 +30,8 @@ class Col extends React.Component<ColProps, null> {
                     [`component-col--sm-${Number(sm)}`]: Number(sm),
                     [`component-col--md-${Number(md)}`]: Number(md),
                     [`component-col--lg-${Number(lg)}`]: Number(lg),
+                    [`component-col--align-right`]: alignRight,
+                    [`component-col--align-center`]: alignCenter,
                 })}
             >
                 {children}

@@ -171,7 +171,13 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                                         )
                                                     })}
                                                 </Table.TBody>
-                                                <TableSummary page={page} perPage={perPage} total={total} totalPages={totalPages} />
+                                                <Table.TFoot alignRight>
+                                                    <Table.Tr>
+                                                        <Table.Td xs={12}>
+                                                            <TableSummary page={page} perPage={perPage} total={total} totalPages={totalPages} />
+                                                        </Table.Td>
+                                                    </Table.Tr>
+                                                </Table.TFoot>
                                             </Table.Container>
                                         )}
                                     </NotificationsManager>

@@ -2,6 +2,7 @@ import * as React from 'react'
 import styles from '../../../../assets/scss/components/_list_manager.scss'
 import classNames from 'classnames/bind'
 import { Button, FormField, Col, Row, Label, Badge } from '../../../components'
+import { ResetIcon } from '../../icons'
 
 const cx = classNames.bind(styles)
 
@@ -111,8 +112,8 @@ class Filter extends React.Component<FilterProps, null> {
         const changed = type === 'order' ? false : this.getChanged(defaultFilters, filters, name, type)
 
         return (
-            <Row>
-                <Col xs={12} md={8}>
+            <Row noMarginBottom>
+                <Col xs={12} md={10} alignCenter>
                     {type === 'order' && <div>Sort by</div>}
                     {type !== 'order' && (
                         <div>
@@ -123,7 +124,7 @@ class Filter extends React.Component<FilterProps, null> {
                         </div>
                     )}
                 </Col>
-                <Col xs={12} md={4}>
+                <Col xs={12} md={2} alignRight alignCenter>
                     <div>
                         {changed && (
                             <Button
@@ -132,9 +133,9 @@ class Filter extends React.Component<FilterProps, null> {
                                 onClick={() => {
                                     setFilter(name, defaultFilters[name])
                                 }}
-                            >
-                                Reset
-                            </Button>
+                                icon={<ResetIcon />}
+                                iconOnly
+                            />
                         )}
                         {type === 'order' && this.getChanged(defaultFilters, filters, 'order', type) && (
                             <Button
@@ -144,9 +145,9 @@ class Filter extends React.Component<FilterProps, null> {
                                     setFilter('order_by', defaultFilters['order_by'])
                                     setFilter('order_direction', defaultFilters['order_direction'])
                                 }}
-                            >
-                                Reset
-                            </Button>
+                                icon={<ResetIcon />}
+                                iconOnly
+                            />
                         )}
                     </div>
                 </Col>
@@ -230,8 +231,10 @@ class Filter extends React.Component<FilterProps, null> {
 
         return (
             <div className={cx('filter')}>
-                <Row>
-                    <Col xs={4}>{this.renderFilterLabel()}</Col>
+                <Row noMarginBottom>
+                    <Col xs={4} alignCenter>
+                        {this.renderFilterLabel()}
+                    </Col>
                     <Col xs={8}>
                         <div>
                             {type === 'select' && this.renderSelect()}
