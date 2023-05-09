@@ -145,6 +145,13 @@
                     }
                 }
 
+                &.component-dropdown__dropdown-menu__items__item--color-primary {
+                    & > a {
+                        color: $primary_text_color;
+                        background: $primary;
+                    }
+                }
+
                 &.component-dropdown__dropdown-menu__items__item--highlighted {
                     background-color: $default !important;
                     & > a:hover {

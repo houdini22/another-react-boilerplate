@@ -23,7 +23,7 @@ export class RoleDropdown extends React.Component<RoleDropdownProps, null> {
                                 icon={<RoleIcon />}
                                 dropdown={[
                                     {
-                                        color: 'info',
+                                        color: 'primary',
                                         onClick: () => {
                                             navigate(`/permissions?roles=${role.id}`)
                                         },
@@ -35,7 +35,7 @@ export class RoleDropdown extends React.Component<RoleDropdownProps, null> {
                                         display: canByPermission('permissions.list'),
                                     },
                                     {
-                                        color: 'info',
+                                        color: 'primary',
                                         onClick: () => {
                                             navigate(`/users?roles=${role.id}`)
                                         },
