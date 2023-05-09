@@ -185,7 +185,12 @@ class PermissionsController extends Controller
                 'message' => 'while.get',
                 'request' => $request
             ]);
-            return $this->response404();
+            return $this->response404([
+                'data' => [
+                    'model' => Permission::class,
+                    'id' => $id
+                ]
+            ]);
         }
 
         return response()->json([

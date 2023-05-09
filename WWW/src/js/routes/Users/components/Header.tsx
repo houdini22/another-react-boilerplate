@@ -1,7 +1,8 @@
 import * as React from 'react'
-import { Button, PageHeader } from '../../../components'
+import { PageHeader } from '../../../components'
 import { FaHome as HomeIcon } from 'react-icons/fa'
 import { RouteManager, AuthorizationManager } from '../../../containers'
+import { ButtonAdd } from '../../../components/common/ButtonAdd'
 
 interface HeaderProps {}
 
@@ -14,13 +15,7 @@ export class Header extends React.Component<HeaderProps, null> {
                         {({ canByPermission }) => (
                             <PageHeader.Container>
                                 <PageHeader.Title>Users</PageHeader.Title>
-                                <PageHeader.Actions>
-                                    {canByPermission('users.add') && (
-                                        <Button color={'success'} onClick={() => navigate('/users/add')}>
-                                            Add
-                                        </Button>
-                                    )}
-                                </PageHeader.Actions>
+                                <PageHeader.Actions>{canByPermission('users.add') && <ButtonAdd href={'/users/add'} />}</PageHeader.Actions>
                                 <PageHeader.Breadcrumbs>
                                     <PageHeader.BreadcrumbsItem href="/">
                                         <HomeIcon /> Home

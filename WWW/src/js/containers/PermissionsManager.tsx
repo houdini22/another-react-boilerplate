@@ -3,25 +3,64 @@ import { selectors as permissionsSelectors, actions as permissionsActions } from
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { AuthManager } from './AuthManager'
-import { Permission } from '../../types.d'
+import { AddPermission, Permission, Role, SetIsLoading, User } from '../../types.d'
+import { EditPermission } from '../routes/UsersPermissionsEdit/components/Edit/Index'
 
 interface PermissionsManagerProps {
-    children: any
+    children: (renderProps: PermissionsManagerRenderProps) => any
+    addPermission?: AddPermission
+    fetchPermissions?: Function
+    deleteRolePermission?: Function
+    deletePermission?: Function
+    fetchPermission?: Function
+    editPermission?: Function
+    addUserPermission?: Function
+    deleteUserPermission?: Function
+    isLoading?: boolean
+    permissions?: Array<Permissions>
+    permission?: Permission
+    id?: string | number
+    getPermissions?: boolean
+    setIsLoading?: SetIsLoading
+    getUsers?: boolean
+    fetchUsers?: () => Promise<void>
+    fetchRoles?: () => Promise<void>
+    getRoles?: boolean
+    users?: Array<User>
+    roles?: Array<Role>
+}
+
+interface PermissionsManagerState {
+    newUsers: Array<number>
+}
+
+interface PermissionsManagerRenderProps {
     addPermission: Function
     fetchPermissions: Function
     deleteRolePermission: Function
     deletePermission: Function
-    fetchPermission: Function
-    editPermission: Function
+    fetchPermission: () => Promise<void>
+    editPermission: EditPermission
     addUserPermission: Function
     deleteUserPermission: Function
     isLoading: boolean
     permissions: Array<Permissions>
     permission: Permission
-    id?: string | number
+    getPermissions: boolean
+    setIsLoading: SetIsLoading
+    getUsers: boolean
+    fetchUsers: () => Promise<void>
+    fetchRoles: () => Promise<void>
+    getRoles: boolean
+    users: Array<User>
+    roles: Array<Role>
+    addUserToNewPermission: Function
+    removeUserFromNewPermission: Function
+    newUsers: Array<number>
+    clearUsersFromNewPermission: Function
 }
 
-class PermissionsManagerBase extends React.Component<PermissionsManagerProps, null> {
+class PermissionsManagerBase extends React.Component<PermissionsManagerProps, PermissionsManagerState> {
     state = {
         newUsers: [],
     }
@@ -76,6 +115,12 @@ class PermissionsManagerBase extends React.Component<PermissionsManagerProps, nu
         })
     }
 
+    clearUsersFromNewPermission() {
+        this.setState({
+            newUsers: [],
+        })
+    }
+
     render() {
         const {
             children,
@@ -95,7 +140,7 @@ class PermissionsManagerBase extends React.Component<PermissionsManagerProps, nu
             roles,
         } = this.props
         const { newUsers } = this.state
-        const renderProps = {
+        const renderProps: PermissionsManagerRenderProps = {
             setIsLoading,
             permissions,
             permission,
@@ -110,6 +155,7 @@ class PermissionsManagerBase extends React.Component<PermissionsManagerProps, nu
             deletePermission,
             addUserToNewPermission: this.addUserToNewPermission.bind(this),
             removeUserFromNewPermission: this.removeUserFromNewPermission.bind(this),
+            clearUsersFromNewPermission: this.clearUsersFromNewPermission.bind(this),
             users,
             newUsers,
             roles,

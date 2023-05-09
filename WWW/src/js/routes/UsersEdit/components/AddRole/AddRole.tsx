@@ -16,7 +16,7 @@ export class AddRole extends React.Component<AddRoleProps, null> {
     render() {
         const { roles, setIsLoading, addUserRole, fetchOne, user, isLoading, addToastNotification } = this.props
         return (
-            <Card header={<h1>Add Role</h1>} color={'primary'}>
+            <Card header={<h1>Add Role</h1>} color={'success'}>
                 <AddRoleFormContainer
                     user={user}
                     roles={roles}

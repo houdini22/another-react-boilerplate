@@ -24,6 +24,11 @@ import { AiOutlineWarning as WarningIcon } from 'react-icons/ai'
 import { MdDesktopAccessDisabled as AccessDisabledIcon } from 'react-icons/md'
 import { HiDocumentDuplicate as LogsIcon } from 'react-icons/hi'
 import { FiAlertTriangle as AlertIcon } from 'react-icons/fi'
+import { AiOutlineReload as RestoreIcon } from 'react-icons/ai'
+import { AiFillSave as SaveIcon } from 'react-icons/ai'
+import { RxReset as ResetIcon } from 'react-icons/rx'
+import { MdDescription as DescriptionIcon } from 'react-icons/md'
+import { BsArrowLeft as LeftArrowIcon, BsArrowRight as RightArrowIcon, BsArrowUp as UpArrowIcon } from 'react-icons/bs'
 export {
     OrderingIcon,
     EditIcon,
@@ -50,4 +55,11 @@ export {
     AccessDisabledIcon,
     LogsIcon,
     AlertIcon,
+    RestoreIcon,
+    SaveIcon,
+    ResetIcon,
+    DescriptionIcon,
+    LeftArrowIcon,
+    RightArrowIcon,
+    UpArrowIcon,
 }

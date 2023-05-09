@@ -52,6 +52,7 @@ interface ListProps {
     deleteRole: DeleteRole
     deleteUserPermission: DeleteUserPermission
     filtersData: Object
+    permissions: Array<Permission>
 }
 
 export class List extends React.Component<ListProps, null> {
@@ -96,13 +97,10 @@ export class List extends React.Component<ListProps, null> {
                                 <PermissionsFilters
                                     filters={filters}
                                     setFilter={setFilter}
-                                    fetch={fetch}
-                                    permissions={permissions}
                                     defaultFilters={defaultFilters}
                                     isLoading={isLoading}
                                     resetFilters={resetFilters}
                                     setFilters={setFilters}
-                                    setIsLoading={setIsLoading}
                                     savedFilters={savedFilters}
                                     saveFilters={saveFilters}
                                     deleteSavedFilter={deleteSavedFilter}
@@ -130,9 +128,7 @@ export class List extends React.Component<ListProps, null> {
                                         perPage={perPage}
                                         total={total}
                                         totalPages={totalPages}
-                                        deleteRole={deleteRole}
                                         deleteUserPermission={deleteUserPermission}
-                                        permissions={permissions}
                                     />
                                     <Pagination
                                         links={links}

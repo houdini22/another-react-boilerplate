@@ -134,7 +134,7 @@ const App = () => (
                         }
                     />
                     <Route
-                        path="/users/logs"
+                        path="/logs"
                         element={
                             <PageLayout>
                                 <UserIsAuthenticatedRoute permission={'logs.list'}>

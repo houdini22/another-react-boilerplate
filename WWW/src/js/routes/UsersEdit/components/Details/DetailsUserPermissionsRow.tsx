@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Button, Col, Row } from '../../../../components'
-import { RoleIcon } from '../../../../components/icons'
+import { PermissionIcon } from '../../../../components/icons'
 import { RouteManager } from '../../../../containers'
 import { User } from '../../../../../types.d'
 
@@ -20,7 +20,7 @@ class DetailsUserPermissionsRow extends React.Component<DetailsUserPermissionsRo
                             Permissions
                         </Col>
                         <Col xs={8} style={{ marginBottom: 10 }}>
-                            <Button color={'info'} icon={<RoleIcon />} onClick={() => navigate(`/permissions?user=${user.name}`)}>
+                            <Button color={'info'} icon={<PermissionIcon />} onClick={() => navigate(`/permissions?user=${user.name}`)}>
                                 {user.permissions_count}
                             </Button>
                         </Col>

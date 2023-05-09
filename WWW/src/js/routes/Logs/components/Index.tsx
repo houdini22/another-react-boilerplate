@@ -38,16 +38,20 @@ export class LogsView extends React.Component<null, null> {
                                                     isLoading={isLoading}
                                                 >
                                                     {({
-                                                        data,
-                                                        links,
-                                                        page,
-                                                        setPage,
-                                                        hasNextPage,
-                                                        hasPrevPage,
-                                                        totalPages,
-                                                        perPage,
-                                                        total,
+                                                        data: {
+                                                            logs: {
+                                                                data,
+                                                                links,
+                                                                hasNextPage,
+                                                                hasPrevPage,
+                                                                totalPages,
+                                                                per_page: perPage,
+                                                                total,
+                                                            } = {},
+                                                        },
                                                         filtersData,
+                                                        setPage,
+                                                        page,
                                                     }) => {
                                                         return (
                                                             <PageContent>

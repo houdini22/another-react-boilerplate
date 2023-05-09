@@ -8,6 +8,7 @@ import { TitleManager } from './TitleManager'
 import { UsersManager } from './UsersManager'
 import { WebsocketsManager } from './WebsocketsManager'
 import { PermissionsManager } from './PermissionsManager'
+import { FormContainer } from './FormContainer'
 
 export {
     AuthManager,
@@ -20,4 +21,5 @@ export {
     UsersManager,
     WebsocketsManager,
     PermissionsManager,
+    FormContainer,
 }

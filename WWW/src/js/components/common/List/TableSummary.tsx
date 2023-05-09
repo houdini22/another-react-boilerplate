@@ -17,20 +17,16 @@ class TableSummary extends React.Component<TableSummaryProps, null> {
     render() {
         const { children, page, perPage, total, totalPages } = this.props
         return (
-            <Table.TFoot alignRight>
-                <Table.Tr>
-                    <Table.Td xs={12}>
-                        Records:{' '}
-                        <b>
-                            {(page - 1) * perPage + 1} - {Math.min(perPage * page, total)} / {total}
-                        </b>
-                        <br />
-                        Total pages: <b>{totalPages}</b>
-                        <br />
-                        {children}
-                    </Table.Td>
-                </Table.Tr>
-            </Table.TFoot>
+            <div>
+                Records:{' '}
+                <b>
+                    {(page - 1) * perPage + 1} - {Math.min(perPage * page, total)} / {total}
+                </b>
+                <br />
+                Total pages: <b>{totalPages}</b>
+                <br />
+                {children}
+            </div>
         )
     }
 }

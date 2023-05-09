@@ -36,7 +36,7 @@ class AddForm extends React.Component<null, null> {
         } = this.props
 
         return (
-            <Tabs.Container solid color={'primary'} header={'Add User'} size={'lg'} rounded>
+            <Tabs.Container solid color={'success'} header={'Add User'} size={'lg'} rounded>
                 <Tabs.Tab name={'user'}>
                     <Tabs.Trigger>User</Tabs.Trigger>
                     <Tabs.Content>

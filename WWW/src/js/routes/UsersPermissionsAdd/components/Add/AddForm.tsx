@@ -17,12 +17,13 @@ class AddForm extends React.Component<null, null> {
             noAddToUsers,
             noRoleId,
             canByPermission,
+            fullWidth,
         } = this.props
 
         return (
             <form onSubmit={handleSubmit}>
                 <Row>
-                    <Col xs={6}>
+                    <Col xs={fullWidth ? 12 : 6}>
                         <Card color={'primary'} header={<h1>Permission</h1>}>
                             {!noRoleId && (
                                 <Field
@@ -43,7 +44,7 @@ class AddForm extends React.Component<null, null> {
                             <Field name="description" label="Description" type="textarea" component={FormField} />
                         </Card>
                     </Col>
-                    <Col xs={6}>
+                    <Col xs={fullWidth ? 12 : 6}>
                         {!role_id && !noAddToUsers && canByPermission('users.add_permission') && (
                             <Card header={<h1>Add to Users</h1>} color={'secondary'}>
                                 {newUsers.length > 0 && <Alert color={'info'}>Click added User to remove.</Alert>}

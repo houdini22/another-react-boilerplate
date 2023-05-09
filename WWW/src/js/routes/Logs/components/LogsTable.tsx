@@ -30,7 +30,7 @@ export class LogsTable extends React.Component<LogsTableProps, null> {
                     </Table.Tr>
                 </Table.THead>
                 <Table.TBody>
-                    {data.map((log) => (
+                    {data?.map((log) => (
                         <Table.Tr key={log.id}>
                             <Table.Td xs={1}>{log.id}</Table.Td>
                             <Table.Td xs={2}>
@@ -80,7 +80,13 @@ export class LogsTable extends React.Component<LogsTableProps, null> {
                         </Table.Tr>
                     ))}
                 </Table.TBody>
-                <TableSummary page={page} perPage={perPage} total={total} totalPages={totalPages} />
+                <Table.TFoot alignRight>
+                    <Table.Tr>
+                        <Table.Td xs={12}>
+                            <TableSummary page={page} perPage={perPage} total={total} totalPages={totalPages} />
+                        </Table.Td>
+                    </Table.Tr>
+                </Table.TFoot>
             </Table.Container>
         )
     }

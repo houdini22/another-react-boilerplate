@@ -43,6 +43,7 @@ export interface Permission {
     occurrence?: number
     hasUser: boolean
     hasRole: boolean
+    users: Array<User>
 }
 
 interface UserAvatar {
@@ -97,3 +98,4 @@ export type SetPage = (page: number) => Promise<void>
 export type DeleteRole = (role: Role) => Promise<void>
 export type DeleteRolePermission = (role: Role, permission: Permission) => Promise<void>
 export type DeletePermission = (permission: Permission) => Promise<void>
+export type AddPermission = (values: object) => Promise<Permission>

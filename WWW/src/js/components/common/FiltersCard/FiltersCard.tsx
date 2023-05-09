@@ -6,7 +6,7 @@ import { FiltersFactory } from '../List/FiltersFactory'
 import { ModalManager } from '../../ui/Modal'
 import { SaveFiltersModal } from './SaveFiltersModal'
 import { DropdownContainer, DropdownItem, DropdownMenu, DropdownTrigger } from '../../ui/Dropdown'
-import { DeleteIcon } from '../../icons'
+import { DeleteIcon, ResetIcon, RestoreIcon, SaveIcon } from '../../icons'
 import { ResetFilters, Filters, SetFilter, DeleteSavedFilter, SaveFilters, RestoreSavedFilter, SavedFilters } from '../../../../types.d'
 
 interface FiltersCardProps {
@@ -64,13 +64,19 @@ class FiltersCard extends React.Component<FiltersCardProps, null> {
                                 <Button
                                     key={'reset-filters'}
                                     color={'warning'}
+                                    icon={<ResetIcon />}
+                                    iconOnly
                                     onClick={() => resetFilters()}
                                     disabled={!ifDeepDiff(defaultFilters, filters)}
-                                >
-                                    Reset
-                                </Button>,
+                                />,
                                 <DropdownContainer key={'restore-filters'} placement={'right'}>
-                                    <DropdownTrigger component={Button}>Restore</DropdownTrigger>
+                                    <DropdownTrigger
+                                        component={Button}
+                                        componentProps={{
+                                            icon: <RestoreIcon />,
+                                            iconOnly: true,
+                                        }}
+                                    />
                                     <DropdownMenu>
                                         {savedFilters.map(({ list_name }) => (
                                             <DropdownItem
@@ -95,13 +101,13 @@ class FiltersCard extends React.Component<FiltersCardProps, null> {
                                     </DropdownMenu>
                                 </DropdownContainer>,
                                 <Button
+                                    icon={<SaveIcon />}
                                     key={'save-filters'}
                                     color={'success'}
                                     onClick={() => openModal('save-filters')}
                                     disabled={!ifDeepDiff(defaultFilters, filters)}
-                                >
-                                    Save
-                                </Button>,
+                                    iconOnly
+                                />,
                             ]}
                         >
                             <FiltersFactory
