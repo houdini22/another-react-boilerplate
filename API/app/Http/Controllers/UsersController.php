@@ -262,7 +262,7 @@ class UsersController extends Controller
             ]);
         }
 
-        return response()->json([
+        return $this->responseOK([
             'user' => $u->toArray(),
         ]);
     }

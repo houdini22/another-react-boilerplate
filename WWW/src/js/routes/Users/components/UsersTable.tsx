@@ -72,8 +72,8 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                                 <Table.Th xs={11} md={3}>
                                                     Name & Email
                                                 </Table.Th>
-                                                <Table.Th xs={12} md={4}>
-                                                    Resources
+                                                <Table.Th xs={12} md={4} alignRight>
+                                                    <span>Resources</span>
                                                 </Table.Th>
                                                 <Table.Th xs={6} md={2}>
                                                     Status

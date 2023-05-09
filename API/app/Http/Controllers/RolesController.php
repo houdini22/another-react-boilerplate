@@ -181,7 +181,7 @@ class RolesController extends Controller
             ]);
         }
 
-        return response()->json([
+        return $this->responseOK([
             'role' => $role->toArray(),
         ]);
     }

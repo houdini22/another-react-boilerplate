@@ -63,7 +63,7 @@ export class UsersPermissions extends React.Component<null, null> {
                                                                 per_page: perPage,
                                                                 total,
                                                             } = {},
-                                                        },
+                                                        } = {},
                                                         filtersData,
                                                         setPage,
                                                         fetch,
