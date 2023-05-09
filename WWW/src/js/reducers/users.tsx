@@ -422,7 +422,7 @@ const fetchRoles = () => (dispatch) => {
     return new Promise((resolve, reject) => {
         myGet('/roles/list').then(
             (data) => {
-                dispatch(setRoles(data.roles.data))
+                dispatch(setRoles(data.roles))
                 resolve()
             },
             () => {
