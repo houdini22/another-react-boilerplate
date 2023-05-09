@@ -40,13 +40,13 @@ export class SimpleModelCell extends React.Component<null, null> {
 
         return (
             <Button icon={icon} color={color} outline onClick={onClick} block={block} className={cx('component-simple-model-cell')}>
-                {children}
+                <div>{children}</div>
                 {actions?.length > 0 && (
-                    <div className={cx('component-simple-model-cell__actions')}>
+                    <>
                         {actions?.map(({ name, onClick }) => {
                             return <Button key={name} onClick={onClick} color={'danger'} icon={<DeleteIcon />} iconOnly />
                         })}
-                    </div>
+                    </>
                 )}
             </Button>
         )

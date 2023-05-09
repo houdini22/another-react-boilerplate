@@ -3,6 +3,7 @@
 .component-button {
     position: relative;
     display: inline-flex;
+    align-content: center;
     align-items: center;
     justify-content: center;
     font-weight: 400;
@@ -30,9 +31,14 @@
     margin-bottom: 5px;
     margin-top: 5px;
 
-    svg {
+    & > :nth-child(2) {
+        padding-left: 10px;
+    }
+
+    & > svg {
         position: relative;
         font-size: 1.3em;
+        margin-right: auto !important;
     }
 
     & > div {
@@ -40,10 +46,16 @@
         align-items: center;
         align-content: center;
         min-width: 10px;
+        margin-right: auto;
+        flex: 1;
 
         & > span {
             width: 100%;
             text-align: center;
+        }
+
+        & > button {
+            margin-left: auto;
         }
     }
 
@@ -69,7 +81,7 @@
     }
 
     &.component-button--block {
-        display: block;
+        display: flex;
         width: 100%;
     }
 
@@ -106,30 +118,37 @@
         background-color: transparent !important;
         box-shadow: none !important;
         -webkit-box-shadow: none !important;
+
         &.component-button--color-default {
             border-color: $default;
             color: $default;
         }
+
         &.component-button--color-primary {
             border-color: $primary;
             color: $primary;
         }
+
         &.component-button--color-secondary {
             border-color: $secondary;
             color: $secondary;
         }
+
         &.component-button--color-success {
             border-color: $success;
             color: $success;
         }
+
         &.component-button--color-info {
             border-color: $info;
             color: $info;
         }
+
         &.component-button--color-warning {
             border-color: $warning;
             color: $warning;
         }
+
         &.component-button--color-danger {
             border-color: $danger;
             color: $danger;
@@ -155,6 +174,7 @@
         font-weight: 400;
         color: #007bff;
         background-color: transparent;
+
         &:not(.component-button--disabled) {
             &:hover {
                 text-decoration: underline;
@@ -165,6 +185,7 @@
     &:not(.component-button--color-link) {
         -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.18), 0 2px 4px rgba(0, 0, 0, 0.21);
         box-shadow: 0 0 2px rgba(0, 0, 0, 0.18), 0 2px 4px rgba(0, 0, 0, 0.21);
+
         &:hover {
             -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.2);
             box-shadow: 0 0 3px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.2);
@@ -181,14 +202,17 @@
         background-color: $default;
         border-color: $default_DARKEN_X2;
         color: $default_text_color;
+
         &:not(.component-button--disabled):hover {
             background-color: $default_DARKEN_X1;
         }
+
         .loading-overlay-container {
             .spinner > * {
                 background: $default_DARKEN_X3;
             }
         }
+
         &.component-button--has-navigation {
             .component-button__navigation {
                 border-left: 2px solid $default_DARKEN_X3;
@@ -196,18 +220,22 @@
             }
         }
     }
+
     &.component-button--color-primary {
         background-color: $primary;
         border-color: $primary_DARKEN_X2;
         color: $primary_text_color;
+
         &:not(.component-button--disabled):hover {
             background-color: $primary_DARKEN_X1;
         }
+
         .loading-overlay-container {
             .spinner > * {
                 background: $primary_DARKEN_X1;
             }
         }
+
         &.component-button--has-navigation {
             .component-button__navigation {
                 border-left: 2px solid $primary_DARKEN_X1;
@@ -215,18 +243,22 @@
             }
         }
     }
+
     &.component-button--color-secondary {
         background-color: $secondary;
         border-color: $secondary_DARKEN_X2;
         color: $secondary_text_color;
+
         &:not(.component-button--disabled):hover {
             background-color: $secondary_DARKEN_X1;
         }
+
         .loading-overlay-container {
             .spinner > * {
                 background: $secondary_DARKEN_X1;
             }
         }
+
         &.component-button--has-navigation {
             .component-button__navigation {
                 border-left: 2px solid $secondary_text_color;
@@ -234,18 +266,22 @@
             }
         }
     }
+
     &.component-button--color-success {
         background-color: $success;
         border-color: $success_DARKEN_X2;
         color: $success_text_color;
+
         &:not(.component-button--disabled):hover {
             background-color: $success_DARKEN_X1;
         }
+
         .loading-overlay-container {
             .spinner > * {
                 background: $success_DARKEN_X3;
             }
         }
+
         &.component-button--has-navigation {
             .component-button__navigation {
                 border-left: 2px solid $success_DARKEN_X1;
@@ -253,18 +289,22 @@
             }
         }
     }
+
     &.component-button--color-info {
         background-color: $info;
         border-color: $info_DARKEN_X2;
         color: $info_text_color;
+
         &:not(.component-button--disabled):hover {
             background-color: $info_DARKEN_X1;
         }
+
         .loading-overlay-container {
             .spinner > * {
                 background: $info_DARKEN_X3;
             }
         }
+
         &.component-button--has-navigation {
             .component-button__navigation {
                 border-left: 2px solid $info_DARKEN_X1;
@@ -272,18 +312,22 @@
             }
         }
     }
+
     &.component-button--color-warning {
         background-color: $warning;
         border-color: $warning_DARKEN_X2;
         color: $warning_text_color;
+
         &:not(.component-button--disabled):hover {
             background-color: $warning_DARKEN_X1;
         }
+
         .loading-overlay-container {
             .spinner > * {
                 background: $warning_DARKEN_X3;
             }
         }
+
         &.component-button--has-navigation {
             .component-button__navigation {
                 border-left: 2px solid $warning_DARKEN_X1;
@@ -291,18 +335,22 @@
             }
         }
     }
+
     &.component-button--color-danger {
         background-color: $danger;
         border-color: $danger_DARKEN_X2;
         color: $danger_text_color;
+
         &:not(.component-button--disabled):hover {
             background-color: $danger_DARKEN_X1;
         }
+
         .loading-overlay-container {
             .spinner > * {
                 background: $danger_DARKEN_X3;
             }
         }
+
         &.component-button--has-navigation {
             .component-button__navigation {
                 border-left: 2px solid $danger_DARKEN_X1;

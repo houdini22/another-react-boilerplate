@@ -162,7 +162,7 @@ export class PermissionsTable extends React.Component<RolesTableProps, null> {
                                                                                         canByPermission('roles.list_permissions') && (
                                                                                             <Tooltip tooltip={`Roles with Permission`}>
                                                                                                 <Button
-                                                                                                    color={'info'}
+                                                                                                    color={'secondary'}
                                                                                                     icon={<RoleIcon />}
                                                                                                     onClick={() => expand('roles')}
                                                                                                 >
@@ -174,7 +174,7 @@ export class PermissionsTable extends React.Component<RolesTableProps, null> {
                                                                                         canByPermission('users.list_permissions') && (
                                                                                             <Tooltip tooltip={`Users with Permission`}>
                                                                                                 <Button
-                                                                                                    color={'info'}
+                                                                                                    color={'secondary'}
                                                                                                     icon={<UserIcon />}
                                                                                                     onClick={() => expand('users')}
                                                                                                 >
