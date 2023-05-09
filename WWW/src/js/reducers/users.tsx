@@ -1,4 +1,4 @@
-import { http } from '../modules/http'
+import { http, myGet } from '../modules/http'
 import { Permission, Role, User } from '../../types.d'
 
 const SET_IS_LOADING = 'users::set-is-loading'
@@ -127,23 +127,11 @@ const fetchOne =
     }
 
 const fetch = () => (dispatch) => {
-    return new Promise<void>((resolve, reject) => {
-        dispatch(setUser({}))
-
-        http.get(`/users/list`)
-            .then(
-                ({
-                    data: {
-                        data: { data: users },
-                    },
-                }) => {
-                    dispatch(setUsers(users))
-                    resolve()
-                },
-            )
-            .catch((e) => {
-                reject()
-            })
+    return myGet('/users/list', null, {
+        success: (data) => {
+            dispatch(setUsers(data?.users))
+        },
+        failure: (e) => {},
     })
 }
 
@@ -343,17 +331,16 @@ const addPermission =
     }
 
 const fetchPermissions = () => (dispatch) => {
-    return new Promise<void>((resolve, reject) => {
-        dispatch(setPermissions([]))
-
-        http.get('/roles/permissions/list')
-            .then(({ data: { permissions } }) => {
-                dispatch(setPermissions(permissions))
+    return new Promise((resolve, reject) => {
+        return myGet('/roles/permissions/list').then(
+            (data) => {
+                dispatch(setPermissions(data['permissions']))
                 resolve()
-            })
-            .catch((e) => {
+            },
+            () => {
                 reject()
-            })
+            },
+        )
     })
 }
 
@@ -448,28 +435,16 @@ const fetchRoles = () => (dispatch) => {
 }
 
 const fetchLogsData = (filters) => (dispatch) => {
-    return new Promise<void>((resolve, reject) => {
-        http.get('/logs/data', {
-            params: {
-                filters,
+    return myGet(
+        '/logs/data',
+        { filters },
+        {
+            success: (data) => {
+                dispatch(setLogsData(data))
             },
-        })
-            .then(
-                ({
-                    data: {
-                        data: {
-                            data: { data },
-                        },
-                    },
-                }) => {
-                    dispatch(setLogsData(data))
-                    resolve()
-                },
-            )
-            .catch((e) => {
-                reject()
-            })
-    })
+            failure: (e) => {},
+        },
+    )
 }
 
 const fetchRole =

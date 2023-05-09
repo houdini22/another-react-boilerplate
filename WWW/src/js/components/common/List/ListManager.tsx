@@ -1,5 +1,5 @@
 import React from 'react'
-import { http } from '../../../modules/http'
+import { http, myGet } from '../../../modules/http'
 import styles from '../../../../assets/scss/components/_list_manager.scss'
 import classNames from 'classnames/bind'
 import { SetIsLoading } from '../../../../types.d'
@@ -15,31 +15,14 @@ interface ListManagerProps {
 
 interface ListManagerState {
     data: any
-    isLoading: boolean
-    page: number
-    hasPrevPage: boolean
-    hasNextPage: boolean
-    totalPages: number
-    filters: { name: string; value: string }
-    total: number
-    perPage: number
-    links: Array<Object>
-    setIsLoading: SetIsLoading
     filtersData: Object
 }
 
 class ListManager extends React.Component<ListManagerProps, ListManagerState> {
     state = {
         data: [],
-        isLoading: false,
-        page: 1,
-        hasPrevPage: false,
-        hasNextPage: false,
-        totalPages: 0,
-        total: 0,
-        perPage: 0,
-        links: [],
         filtersData: {},
+        page: 1,
     }
 
     requestInProgress = false
@@ -101,43 +84,16 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
 
             Promise.all([
                 new Promise((resolve) => {
-                    http.get(`${url}`, {
-                        params,
-                    }).then(
-                        ({
-                            data: {
-                                data: {
-                                    data = [],
-                                    next_page_url = '',
-                                    prev_page_url = '',
-                                    last_page = 0,
-                                    total = 0,
-                                    current_page = 0,
-                                    per_page = 0,
-                                    links = [],
-                                } = {},
-                            } = {},
-                        }) => {
-                            this.setState(
-                                {
-                                    data,
-                                    page: current_page,
-                                    hasNextPage: !!next_page_url,
-                                    hasPrevPage: !!prev_page_url,
-                                    totalPages: last_page,
-                                    total,
-                                    perPage: per_page,
-                                    links,
-                                },
-                                () => {
-                                    resolve()
-                                },
-                            )
-                        },
-                        () => {
-                            resolve()
-                        },
-                    )
+                    return myGet(url, params).then((data) => {
+                        this.setState(
+                            {
+                                data,
+                            },
+                            () => {
+                                resolve()
+                            },
+                        )
+                    })
                 }),
                 new Promise((resolve) => {
                     const { filtersDataUrl } = this.props
@@ -147,25 +103,18 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
                         return
                     }
 
-                    http.get(`${filtersDataUrl}`, {
-                        params: {
-                            filters,
-                        },
-                    }).then(
-                        ({ data: { data: { data } } = {} }) => {
-                            this.setState(
-                                {
-                                    filtersData: data,
-                                },
-                                () => {
-                                    resolve()
-                                },
-                            )
-                        },
-                        () => {
-                            resolve()
-                        },
-                    )
+                    myGet(`${filtersDataUrl}`, {
+                        filters,
+                    }).then((data) => {
+                        this.setState(
+                            {
+                                filtersData: data,
+                            },
+                            () => {
+                                resolve()
+                            },
+                        )
+                    })
                 }),
             ]).then(() => {
                 resolve()
@@ -175,23 +124,16 @@ class ListManager extends React.Component<ListManagerProps, ListManagerState> {
     }
 
     render() {
-        const { data, total, hasPrevPage, hasNextPage, totalPages, page, perPage, links, filtersData } = this.state
+        const { data, filtersData, page } = this.state
         const { children } = this.props
 
         const renderProps = {
             fetch: this.fetch.bind(this),
             data,
-            total,
-            hasPrevPage,
-            hasNextPage,
-            totalPages,
-            page,
             setPage: this.setPage.bind(this),
-            perPage,
-            links,
             filtersData,
+            page,
         }
-
         return <div className={cx('list-manager-container')}>{children(renderProps)}</div>
     }
 }

@@ -47,7 +47,7 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                                     </Table.Tr>
                                                 </Table.THead>
                                                 <Table.TBody>
-                                                    {roles.map((role: Role) => {
+                                                    {roles?.map((role: Role) => {
                                                         if (role.is_deletable) {
                                                             const modalName = `user-role-${role.id}-delete`
                                                             registerModal(

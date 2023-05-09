@@ -49,7 +49,7 @@ export class PermissionsTable extends React.Component<RolesTableProps, null> {
                                                     </Table.Tr>
                                                 </Table.THead>
                                                 <Table.TBody>
-                                                    {data.map((permission: Permission) => {
+                                                    {data?.map((permission: Permission) => {
                                                         if (permission.is_deletable) {
                                                             registerModal(
                                                                 `user-permission-${permission.id}-delete`,

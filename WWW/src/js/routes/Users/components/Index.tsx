@@ -54,17 +54,21 @@ export class UsersView extends React.Component<null, null> {
                                                     setIsLoading={setIsLoading}
                                                 >
                                                     {({
-                                                        fetch,
-                                                        data,
-                                                        total,
-                                                        hasPrevPage,
-                                                        hasNextPage,
-                                                        totalPages,
-                                                        page,
-                                                        setPage,
-                                                        perPage,
-                                                        links,
+                                                        data: {
+                                                            users: {
+                                                                data,
+                                                                links,
+                                                                hasNextPage,
+                                                                hasPrevPage,
+                                                                totalPages,
+                                                                per_page: perPage,
+                                                                total,
+                                                            } = {},
+                                                        },
                                                         filtersData,
+                                                        setPage,
+                                                        fetch,
+                                                        page,
                                                     }) => {
                                                         return (
                                                             <PageContent>

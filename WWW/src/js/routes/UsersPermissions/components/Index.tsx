@@ -53,17 +53,21 @@ export class UsersPermissions extends React.Component<null, null> {
                                                     setIsLoading={setIsLoading}
                                                 >
                                                     {({
-                                                        data,
-                                                        links,
-                                                        page,
-                                                        setPage,
-                                                        hasNextPage,
-                                                        hasPrevPage,
-                                                        totalPages,
-                                                        perPage,
-                                                        total,
-                                                        fetch,
+                                                        data: {
+                                                            permissions: {
+                                                                data,
+                                                                links,
+                                                                hasNextPage,
+                                                                hasPrevPage,
+                                                                totalPages,
+                                                                per_page: perPage,
+                                                                total,
+                                                            } = {},
+                                                        },
                                                         filtersData,
+                                                        setPage,
+                                                        fetch,
+                                                        page,
                                                     }) => {
                                                         return (
                                                             <PageContent>

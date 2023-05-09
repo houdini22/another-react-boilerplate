@@ -35,7 +35,7 @@ class Pagination extends React.Component<PaginationProps, null> {
                     </Col>
                     <Col xs={8} className={cx('pages')}>
                         <div>
-                            {links.map(({ label, active, url }, i) => {
+                            {links?.map(({ label, active, url }, i) => {
                                 if (url === null && label === '...') {
                                     return (
                                         <Button transparent disabled key={`${i}...`}>

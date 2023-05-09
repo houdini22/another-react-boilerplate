@@ -84,7 +84,7 @@ export class UsersTable extends React.Component<UsersTableProps, null> {
                                             </Table.Tr>
                                         </Table.THead>
                                         <Table.TBody>
-                                            {users.map((user) => {
+                                            {users?.map((user) => {
                                                 const permissionsFromRoles = userPermissionFromRoles(user)
 
                                                 return (

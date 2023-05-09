@@ -100,8 +100,8 @@ class UsersController extends Controller
             }
         }
 
-        if (!empty($filters['items_per_page'])) {
-            $users = $query->paginate($filters['items_per_page']);
+        if (empty($filters)) {
+            $users = $query->get()->toArray();
         } else {
             $users = $query->paginate(10000);
         }
@@ -110,8 +110,8 @@ class UsersController extends Controller
             'request' => $request
         ]);
 
-        return response()->json([
-            'data' => $users->toArray(),
+        return $this->responseOK([
+            'users' => $users,
         ]);
     }
 

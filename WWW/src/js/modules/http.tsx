@@ -50,5 +50,25 @@ const processAPIerrorResponseToFormErrors = (response) => {
     return res
 }
 
+export const myGet = (url, params = {}) => {
+    return new Promise((resolve, reject) => {
+        instance
+            .get(url, { params })
+            .then(
+                ({
+                    data: {
+                        data: { data },
+                    },
+                }) => {
+                    console.log(data)
+                    resolve(data)
+                },
+            )
+            .catch((e) => {
+                reject(e)
+            })
+    })
+}
+
 export default instance
 export { setAuthToken, instance as http, processAPIerrorResponseToFormErrors }

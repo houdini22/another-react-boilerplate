@@ -70,8 +70,8 @@ class RolesController extends Controller
             'request' => $request
         ]);
 
-        return response()->json([
-            'data' => $roles->toArray(),
+        return $this->responseOK([
+            'roles' => $roles,
         ]);
     }
 

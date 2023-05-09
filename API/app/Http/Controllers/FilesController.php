@@ -72,8 +72,8 @@ class FilesController extends Controller
         Log::add($user, 'files.list', [
             'request' => $request]);
 
-        return response()->json([
-            'data' => $files->toArray(),
+        return $this->responseOK([
+            'files' => $files,
         ]);
     }
 

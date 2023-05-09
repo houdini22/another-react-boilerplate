@@ -78,16 +78,21 @@ export class Index extends React.Component<null, UsersViewState> {
                                                                     setIsLoading={setIsLoading}
                                                                 >
                                                                     {({
-                                                                        data,
-                                                                        fetch,
-                                                                        links,
-                                                                        page,
+                                                                        data: {
+                                                                            files: {
+                                                                                data,
+                                                                                links,
+                                                                                hasNextPage,
+                                                                                hasPrevPage,
+                                                                                totalPages,
+                                                                                per_page: perPage,
+                                                                                total,
+                                                                            } = {},
+                                                                        },
+                                                                        filtersData,
                                                                         setPage,
-                                                                        hasNextPage,
-                                                                        hasPrevPage,
-                                                                        totalPages,
-                                                                        perPage,
-                                                                        total,
+                                                                        fetch,
+                                                                        page,
                                                                     }) => (
                                                                         <>
                                                                             <FilesFilters
