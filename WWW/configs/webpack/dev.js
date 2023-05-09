@@ -17,7 +17,7 @@ module.exports = merge(commonConfig, {
     ],
     output: {
         filename: 'js/bundle.[fullhash].min.js',
-        path: resolve(__dirname, '../../../API/public'),
+        path: resolve(__dirname, '../../../dist/'),
         publicPath: '/',
     },
 })
