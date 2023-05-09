@@ -4,13 +4,13 @@ import {
     AddIcon,
     AlertIcon,
     CategoryIcon,
-    DeleteIcon,
     DocumentIcon,
     EditIcon,
     LinkIcon,
     OrderingIcon,
     PublishIcon,
     UnpublishIcon,
+    UpArrowIcon,
 } from '../../../../components/icons'
 import { formatDateTime } from '../../../../helpers/date-time'
 import styles from '../../../../../assets/scss/routes/cms.scss'
@@ -111,7 +111,7 @@ export class List extends React.Component<null, null> {
                                                         navigate(`/cms/pages?parent_id=${currentNode.parent_id}`)
                                                     }}
                                                 >
-                                                    <Button block color={'primary'}>
+                                                    <Button icon={<UpArrowIcon />} block color={'primary'}>
                                                         Up
                                                     </Button>
                                                 </Table.Td>

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Col, Row, Table, Typography, Modal } from '../../../../components'
 import { sortUsersByNameAscending } from '../../../../helpers/users'
 import ModalDeleteUserPermission from '../../../../components/common/ModalDeleteUserPermission'
-import { User } from '../../../../../types.d'
+import { Permission, User } from '../../../../../types.d'
 import UserDropdown from '../../../../components/common/UserDropdown'
 
 interface RowExpandPermissionsProps {
@@ -11,6 +11,7 @@ interface RowExpandPermissionsProps {
     deleteUserPermission: Function
     addToastNotification: Function
     fetch: Function
+    permission: Permission
 }
 
 export class RowExpandPermissions extends React.Component<RowExpandPermissionsProps, null> {

@@ -18,7 +18,7 @@ const setRoles = (data) => (dispatch) => {
     dispatch({ type: SET_ROLES, payload: data })
 }
 const setIsLoading = (data) => (dispatch) => {
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
         dispatch({ type: SET_IS_LOADING, payload: data })
         resolve()
     })

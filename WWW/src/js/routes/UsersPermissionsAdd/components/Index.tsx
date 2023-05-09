@@ -18,12 +18,12 @@ export class UserPermissionsAddView extends React.Component<null, null> {
                                 isLoading,
                                 setIsLoading,
                                 addPermission,
-                                newPermissionUsers,
                                 addUserToNewPermission,
                                 removeUserFromNewPermission,
                                 users,
                                 newUsers,
                                 roles,
+                                clearUsersFromNewPermission,
                             }) => (
                                 <PageContent>
                                     <Header />
@@ -33,12 +33,12 @@ export class UserPermissionsAddView extends React.Component<null, null> {
                                                 addPermission={addPermission}
                                                 isLoading={isLoading}
                                                 setIsLoading={setIsLoading}
-                                                newPermissionUsers={newPermissionUsers}
                                                 addUserToNewPermission={addUserToNewPermission}
                                                 removeUserFromNewPermission={removeUserFromNewPermission}
                                                 users={users}
                                                 newUsers={newUsers}
                                                 roles={roles}
+                                                clearUsersFromNewPermission={clearUsersFromNewPermission}
                                             />
                                         </Col>
                                     </Row>

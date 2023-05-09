@@ -30,7 +30,7 @@ export class LogsTable extends React.Component<LogsTableProps, null> {
                     </Table.Tr>
                 </Table.THead>
                 <Table.TBody>
-                    {data.map((log) => (
+                    {data?.map((log) => (
                         <Table.Tr key={log.id}>
                             <Table.Td xs={1}>{log.id}</Table.Td>
                             <Table.Td xs={2}>

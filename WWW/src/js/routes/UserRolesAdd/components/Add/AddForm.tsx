@@ -149,6 +149,7 @@ class AddForm extends React.Component<null, null> {
                             addToastNotification={addToastNotification}
                             noAddToUsers
                             noRoleId
+                            fullWidth
                         />
                     )}
                 </Col>

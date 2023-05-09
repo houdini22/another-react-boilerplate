@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Button, Table, Tooltip } from '../../../components'
-import { UserIcon, PermissionIcon, HelpIcon } from '../../../components/icons'
+import { UserIcon, PermissionIcon, DescriptionIcon } from '../../../components/icons'
 import { TableSummary } from '../../../components/common/List/TableSummary'
 import RowExpandPermissions from './RolesTable/RowExpandPermissions'
 import RowExpandUsers from './RolesTable/RowExpandUsers'
@@ -112,7 +112,11 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                                                                                 </span>
                                                                                             }
                                                                                         >
-                                                                                            <Button icon={<HelpIcon />} iconOnly color={'info'} />
+                                                                                            <Button
+                                                                                                icon={<DescriptionIcon />}
+                                                                                                iconOnly
+                                                                                                color={'info'}
+                                                                                            />
                                                                                         </Tooltip>
                                                                                     )}
                                                                                 </div>

@@ -25,7 +25,7 @@ export class AddRole extends React.Component<AddRoleProps, null> {
             canByPermission,
         } = this.props
         return (
-            <Card header={<h1>Add Role</h1>} color={'primary'}>
+            <div>
                 <AddFormContainer
                     setIsLoading={setIsLoading}
                     save={addRole}
@@ -45,7 +45,7 @@ export class AddRole extends React.Component<AddRoleProps, null> {
                     canByPermission={canByPermission}
                 />
                 {isLoading && <LoadingOverlay />}
-            </Card>
+            </div>
         )
     }
 }

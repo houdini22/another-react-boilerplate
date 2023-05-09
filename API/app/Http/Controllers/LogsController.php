@@ -52,8 +52,8 @@ class LogsController extends Controller
 
         $logs = $query->paginate(empty($filters['items_per_page']) ? 10000 : $filters['items_per_page']);
 
-        return response()->json([
-            'data' => $logs->toArray(),
+        return $this->responseOK([
+            'logs' => $logs
         ]);
     }
 

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Button, Table, Tooltip } from '../../../components'
-import { UserIcon, HelpIcon, RoleIcon } from '../../../components/icons'
+import { UserIcon, RoleIcon, DescriptionIcon } from '../../../components/icons'
 import { TableSummary } from '../../../components/common/List/TableSummary'
 import { ModalConfirm } from '../../../components/common/ModalConfirm'
 import { DeletePermission, DeleteRolePermission, DeleteUserPermission, DeleteUserRole, Permission, SetIsLoading } from '../../../../types.d'
@@ -144,7 +144,11 @@ export class PermissionsTable extends React.Component<RolesTableProps, null> {
                                                                                                 </span>
                                                                                             }
                                                                                         >
-                                                                                            <Button icon={<HelpIcon />} iconOnly color={'info'} />
+                                                                                            <Button
+                                                                                                icon={<DescriptionIcon />}
+                                                                                                iconOnly
+                                                                                                color={'info'}
+                                                                                            />
                                                                                         </Tooltip>
                                                                                     )}
                                                                                 </div>

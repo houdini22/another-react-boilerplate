@@ -87,14 +87,6 @@ export const navigation = [
                 urlActive: [/\/users\/add/],
                 permission: 'users.add',
             },
-            {
-                type: 'link',
-                href: '/users/logs',
-                caption: 'Logs',
-                icon: <LogsIcon />,
-                urlActive: [/\/users\/logs/],
-                permission: 'logs.list',
-            },
         ],
     },
     {
@@ -132,5 +124,17 @@ export const navigation = [
                 permission: 'permissions.add',
             },
         ],
+    },
+    {
+        type: 'header',
+        caption: 'System',
+    },
+    {
+        type: 'link',
+        href: '/logs',
+        caption: 'Logs',
+        icon: <LogsIcon />,
+        urlActive: [/\/logs/],
+        permission: 'logs.list',
     },
 ]

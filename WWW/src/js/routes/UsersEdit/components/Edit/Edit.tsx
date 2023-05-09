@@ -8,9 +8,7 @@ interface EditProps {
     isLoading: boolean
 }
 
-interface EditState {}
-
-export class Edit extends React.Component<EditProps, EditState> {
+export class Edit extends React.Component<EditProps> {
     render() {
         const { editUser, user, fetchOne, isLoading, addToastNotification, setIsLoading, canByPermission } = this.props
         return (

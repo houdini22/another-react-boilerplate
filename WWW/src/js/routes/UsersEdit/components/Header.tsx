@@ -145,7 +145,7 @@ export class Header extends React.Component<HeaderProps, null> {
                         <Button
                             isLoading={isLoading}
                             size={'xs'}
-                            disabled={!user.last_active && !user.token}
+                            disabled={!user.token}
                             onClick={() => {
                                 openModal('user-force-login')
                             }}

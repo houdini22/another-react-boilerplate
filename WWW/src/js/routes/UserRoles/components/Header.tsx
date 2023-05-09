@@ -1,7 +1,8 @@
 import * as React from 'react'
-import { Button, PageHeader } from '../../../components'
+import { PageHeader } from '../../../components'
 import { HomeIcon } from '../../../components/icons'
 import { RouteManager, AuthorizationManager } from '../../../containers'
+import { ButtonAdd } from '../../../components/common/ButtonAdd'
 
 interface HeaderProps {}
 
@@ -14,13 +15,7 @@ export class Header extends React.Component<HeaderProps, null> {
                         {({ canByPermission }) => (
                             <PageHeader.Container>
                                 <PageHeader.Title>Roles</PageHeader.Title>
-                                <PageHeader.Actions>
-                                    {canByPermission('roles.add') && (
-                                        <Button color={'success'} onClick={() => navigate('/roles/add')}>
-                                            Add
-                                        </Button>
-                                    )}
-                                </PageHeader.Actions>
+                                <PageHeader.Actions>{canByPermission('roles.add') && <ButtonAdd href={'/roles/add'} />}</PageHeader.Actions>
                                 <PageHeader.Breadcrumbs>
                                     <PageHeader.BreadcrumbsItem href="/">
                                         <HomeIcon /> Home
