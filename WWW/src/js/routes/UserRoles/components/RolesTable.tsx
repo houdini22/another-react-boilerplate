@@ -136,7 +136,7 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                                                                                         expand('permissions')
                                                                                                     }}
                                                                                                 >
-                                                                                                    {role?.permissions?.length || 0}
+                                                                                                    <span>{role?.permissions?.length || 0}</span>
                                                                                                 </Button>
                                                                                             </Tooltip>
                                                                                         )}
@@ -149,7 +149,7 @@ export class RolesTable extends React.Component<RolesTableProps, null> {
                                                                                                     icon={<UserIcon />}
                                                                                                     onClick={() => expand('users')}
                                                                                                 >
-                                                                                                    {role.users_count}
+                                                                                                    <span>{role.users_count}</span>
                                                                                                 </Button>
                                                                                             </Tooltip>
                                                                                         )}

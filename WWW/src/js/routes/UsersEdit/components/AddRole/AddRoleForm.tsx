@@ -49,7 +49,7 @@ class AddRoleForm extends React.Component<AddPermissionFormProps, null> {
                     component={FormField}
                 />
                 <Button color="success" type="submit" block disabled={this.isDisabled()}>
-                    Save
+                    <span>Save</span>
                 </Button>
             </form>
         )

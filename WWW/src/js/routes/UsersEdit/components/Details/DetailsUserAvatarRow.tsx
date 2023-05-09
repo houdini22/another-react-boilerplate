@@ -45,12 +45,12 @@ class DetailsUserAvatarRow extends React.Component<null, null> {
                                         }}
                                         block
                                     >
-                                        Delete Avatar
+                                        <span>Delete Avatar</span>
                                     </Button>
                                 )}
 
                                 <Button size={'xs'} onClick={() => openModal()} block>
-                                    Upload Avatar
+                                    <span>Upload Avatar</span>
                                 </Button>
 
                                 <UploadAvatarModal

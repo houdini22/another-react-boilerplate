@@ -46,7 +46,7 @@ export class UploadAvatarModal extends React.Component<UploadAvatarModalProps, U
                         }}
                     />
                     <Button color={'secondary'} block onClick={() => close()}>
-                        Cancel
+                        <span>Cancel</span>
                     </Button>
                 </Modal.Body>
             </Modal.Container>

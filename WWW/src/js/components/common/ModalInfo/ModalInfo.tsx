@@ -19,7 +19,7 @@ export class ModalInfo extends React.Component<ModalInfoProps, null> {
                     <Row>
                         <Col xs={12}>
                             <Button color={'success'} onClick={() => close()} block>
-                                OK
+                                <span>OK</span>
                             </Button>
                         </Col>
                     </Row>

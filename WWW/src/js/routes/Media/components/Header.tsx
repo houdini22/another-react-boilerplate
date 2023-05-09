@@ -1,6 +1,7 @@
 import * as React from 'react'
-import { Button, PageHeader } from '../../../components'
+import { PageHeader } from '../../../components'
 import { FaHome as HomeIcon } from 'react-icons/fa'
+import { ButtonAdd } from '../../../components/common/ButtonAdd'
 
 interface HeaderProps {
     openAddModal: () => void
@@ -14,14 +15,11 @@ export class Header extends React.Component<HeaderProps, null> {
             <PageHeader.Container>
                 <PageHeader.Title>Media</PageHeader.Title>
                 <PageHeader.Actions>
-                    <Button
-                        color={'success'}
+                    <ButtonAdd
                         onClick={() => {
                             openAddModal()
                         }}
-                    >
-                        Add
-                    </Button>
+                    ></ButtonAdd>
                 </PageHeader.Actions>
                 <PageHeader.Breadcrumbs>
                     <PageHeader.BreadcrumbsItem href="/">

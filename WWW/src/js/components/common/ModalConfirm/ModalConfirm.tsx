@@ -20,12 +20,12 @@ export class ModalConfirm extends React.Component<ModalConfirmProps, null> {
                     <Row>
                         <Col xs={6}>
                             <Button color={'secondary'} onClick={() => onCancel()} block>
-                                Cancel
+                                <span>Cancel</span>
                             </Button>
                         </Col>
                         <Col xs={6}>
                             <Button color={'success'} onClick={() => onConfirm()} block>
-                                OK
+                                <span>OK</span>
                             </Button>
                         </Col>
                     </Row>

@@ -112,7 +112,7 @@ export class List extends React.Component<null, null> {
                                                     }}
                                                 >
                                                     <Button icon={<UpArrowIcon />} block color={'primary'}>
-                                                        Up
+                                                        <span>Up</span>
                                                     </Button>
                                                 </Table.Td>
                                             </Table.Tr>

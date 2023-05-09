@@ -20,12 +20,12 @@ class SaveFiltersForm extends React.Component<null, null> {
                 <Row>
                     <Col xs={6}>
                         <Button color={'secondary'} onClick={() => closeModal('save-filters')} block>
-                            Cancel
+                            <span>Cancel</span>
                         </Button>
                     </Col>
                     <Col xs={6}>
                         <Button onClick={() => null} block type={'submit'}>
-                            Save
+                            <span>Save</span>
                         </Button>
                     </Col>
                 </Row>

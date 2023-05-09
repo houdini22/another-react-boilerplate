@@ -36,7 +36,9 @@ class Filter extends React.Component<FilterProps, null> {
                                 setFilter(name, value)
                             }}
                         >
-                            {label} {count}
+                            <span>
+                                {label} {count}
+                            </span>
                         </Button>
                     )
                 })}

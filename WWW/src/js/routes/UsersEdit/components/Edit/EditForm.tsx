@@ -31,7 +31,7 @@ class EditForm extends React.Component<null, null> {
                     />
                 )}
                 <Button color="success" type="submit" block>
-                    Save
+                    <span>Save</span>
                 </Button>
             </form>
         )

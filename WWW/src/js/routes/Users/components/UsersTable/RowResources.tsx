@@ -40,7 +40,7 @@ export class RowResources extends React.Component<RowResourcesProps, null> {
                                                 expand('roles')
                                             }}
                                         >
-                                            {user?.roles?.length || 0}
+                                            <span>{user?.roles?.length || 0}</span>
                                         </Button>
                                     </Tooltip>
                                 )}
@@ -53,13 +53,13 @@ export class RowResources extends React.Component<RowResourcesProps, null> {
                                                 expand('permissions')
                                             }}
                                         >
-                                            {Object.keys(permissionsFromRoles).length + user.permissions.length || 0}
+                                            <span> {Object.keys(permissionsFromRoles).length + user.permissions.length || 0}</span>
                                         </Button>
                                     </Tooltip>
                                 )}
                                 {user.files_count > 0 && canByPermission('users.list_files') && (
                                     <Button color={'info'} icon={<FileIcon />} onClick={() => navigate(`/media?user=${user.name}`)}>
-                                        {user.files_count}
+                                        <span>{user.files_count}</span>
                                     </Button>
                                 )}
                                 <RowResourcesAvatarDropdown user={user} deleteAvatar={deleteAvatar} setIsLoading={setIsLoading} fetch={fetch} />

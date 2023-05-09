@@ -494,6 +494,7 @@ export const actions = {
     fetchRoles,
     fetchRole,
     fetchLogsData,
+    setUser,
 }
 
 // ------------------------------------
