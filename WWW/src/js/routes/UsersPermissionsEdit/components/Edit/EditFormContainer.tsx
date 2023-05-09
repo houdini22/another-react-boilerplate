@@ -5,30 +5,31 @@ import { reduxForm, SubmissionError } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 
 const onSubmit = (values, _, { save, fetchPermission, addToastNotification, setIsLoading, permission }) => {
-    setIsLoading(true)
-    return save({ ...values }).then(
-        () => {
-            fetchPermission(permission['id']).then(() => {
+    return setIsLoading(true).then(() => {
+        return save({ ...values }).then(
+            () => {
+                fetchPermission(permission['id']).then(() => {
+                    addToastNotification({
+                        type: 'success',
+                        title: 'Save success.',
+                        text: `Permission ID: ${permission.id} has been saved.`,
+                        href: `/permissions/edit?id=${permission.id}`,
+                    })
+                    setIsLoading(false)
+                })
+            },
+            (response) => {
                 addToastNotification({
-                    type: 'success',
-                    title: 'Save success.',
-                    text: `Permission ID: ${permission.id} has been saved.`,
+                    title: 'Form Validation Error',
+                    text: response.message,
+                    type: 'danger',
                     href: `/permissions/edit?id=${permission.id}`,
                 })
                 setIsLoading(false)
-            })
-        },
-        (response) => {
-            addToastNotification({
-                title: 'Form Validation Error',
-                text: response.message,
-                type: 'danger',
-                href: `/permissions/edit?id=${permission.id}`,
-            })
-            setIsLoading(false)
-            throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
-        },
-    )
+                throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
+            },
+        )
+    })
 }
 
 const EditFormContainer = compose(
@@ -41,4 +42,4 @@ const EditFormContainer = compose(
 )(FormComponent)
 
 export { EditFormContainer }
-export default { EditFormContainer }
+export default EditFormContainer

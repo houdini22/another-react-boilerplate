@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
+use App\Models\Tree;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
@@ -15,6 +18,10 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             if ($user->status === User::$STATUS_NOT_ACTIVE) {
+                Log::add($user, 'auth.login_failed', [
+                    'message' => 'user_not_active',
+                    'request' => $request
+                ]);
                 return response()->json([
                     'message' => 'ERR_STATUS_NOT_ACTIVE'
                 ], 403);
@@ -43,30 +50,21 @@ class AuthController extends Controller
                     $additional[] = 'Super Admin';
                 }
 
-                return response()->json([
-                    'data' => [
-                        'user' => [
-                            'name' => $user->name,
-                            'email' => $user->email,
-                            'token' => $user->token,
-                            'roles' => array_unique(
-                                array_merge(
-                                    $user->roles->pluck('name')->toArray(),
-                                    $additional
-                                )
-                            ),
-                            'permissions' => array_unique(
-                                array_merge(
-                                    $user->getPermissionsViaRoles()->pluck('name')->toArray(),
-                                    collect($user->permissions->toArray())->pluck('name')->toArray(),
-                                )
-                            ),
-                            'avatar' => $avatar,
-                        ]
-                    ]
+                Log::add($user, 'auth.login_success', [
+                    'model' => $user,
+                    'request' => $request
+                ]);
+
+                return $this->responseOK([
+                    'user' => $user->toAuthArray()
                 ]);
             }
         }
+
+        Log::add(NULL, 'auth.login_failed', [
+            'message' => 'wrong_credentials',
+            'request' => $request
+        ]);
 
         return response()->json([
             'message' => 'Wrong email or password.'
@@ -76,13 +74,35 @@ class AuthController extends Controller
     public function postLoginWithToken(Request $request)
     {
         $credentials = $request->only('email', 'token');
+
+        if (!Arr::get($credentials, 'email') || !Arr::get($credentials, 'token')) {
+            Log::add(NULL, 'auth.login_with_token_failed', [
+                'message' => 'empty_token_or_email',
+                'request' => $request
+            ]);
+            return $this->response404([
+                'message' => 'empty_token_or_email'
+            ]);
+        }
+
         $user = User::where('email', $credentials['email'])->where('token', $credentials['token'])->first();
 
         if (!$user) {
-            return $this->response401();
+            Log::add(NULL, 'auth.login_with_token_failed', [
+                'message' => 'user_not_found',
+                'request' => $request
+            ]);
+            return $this->response404([
+                'message' => 'user_not_found'
+            ]);
         }
 
         if ($user->status === User::$STATUS_NOT_ACTIVE) {
+            Log::add($user, 'auth.login_with_token_failed', [
+                'model' => $user,
+                'message' => 'account_not_active',
+                'request' => $request
+            ]);
             return response()->json([
                 'message' => 'ERR_STATUS_NOT_ACTIVE'
             ], 403);
@@ -101,34 +121,38 @@ class AuthController extends Controller
                 $avatar = null;
             }
 
-            return response()->json([
-                'data' => [
-                    'user' => [
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'token' => $user->token,
-                        'roles' => $user->roles->pluck('name'),
-                        'permissions' => $user->getPermissionsViaRoles()->pluck('name'),
-                        'avatar' => $avatar,
-                    ]
-                ]
+            Log::add($user, 'auth.login_with_token', [
+                'model' => $user,
+                'request' => $request
+            ]);
+
+            return $this->responseOK([
+                'user' => $user->toAuthArray(),
+            ]);
+        } else {
+            Log::add($user, 'auth.login_with_token_failed', [
+                'model' => $user,
+                'message' => 'email_not_verified',
+                'request' => $request
             ]);
         }
 
-        return response()->json([
-            'message' => 'ERR'
-        ], 401);
+        return $this->response404([
+            'message' => 'email_not_verified'
+        ]);
     }
 
     public function postLogout(Request $request)
     {
-        $user = User::getFromRequest($request);
-        if (!$user) {
-            return $this->response401();
-        }
+        $user = $this->getUserFromRequest($request);
 
         $user->token = null;
         $user->save();
+
+        Log::add($user, 'auth.logout', [
+            'model' => $user,
+            'request' => $request
+        ]);
 
         return response()->json([
             'message' => 'OK'

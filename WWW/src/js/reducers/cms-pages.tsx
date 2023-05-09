@@ -1,18 +1,17 @@
 import { http } from '../modules/http'
 
 const SET_IS_LOADING = 'cms-pages::set-is-loading'
-const SET_IS_LOADED = 'cms-pages::set-is-loaded'
 const SET_FETCH_ERROR = 'cms-pages::set-fetch-error'
 const SET_CURRENT_ID = 'cms-pages::set-current-id'
 const SET_NODES = 'cms-pages::set-nodes'
 const SET_CURRENT_NODE = 'cms-pages::set-current-node'
+const SET_CURRENT_NODE_PARENTS = 'cms-pages::set-current-node-parents'
 
 const setIsLoading = (data) => (dispatch) => {
-    dispatch({ type: SET_IS_LOADING, payload: data })
-}
-
-const setIsLoaded = (data) => (dispatch) => {
-    dispatch({ type: SET_IS_LOADED, payload: data })
+    return new Promise((resolve) => {
+        dispatch({ type: SET_IS_LOADING, payload: data })
+        resolve()
+    })
 }
 
 const setNodes = (data) => (dispatch) => {
@@ -23,84 +22,205 @@ const setCurrentNode = (data) => (dispatch) => {
     dispatch({ type: SET_CURRENT_NODE, payload: data })
 }
 
-const setCurrentId = (currentId) => (dispatch) => {
-    dispatch({ type: SET_CURRENT_ID, payload: currentId })
-    dispatch(fetch(currentId))
+const setCurrentNodeParents = (data) => (dispatch) => {
+    dispatch({ type: SET_CURRENT_NODE_PARENTS, payload: data })
 }
 
-const fetch =
-    (parent_id = 0) =>
-    (dispatch) => {
-        return new Promise<void>((resolve) => {
-            dispatch(setIsLoading(true))
-            dispatch(setIsLoaded(false))
-            setNodes([])
+const setCurrentId = (currentId) => (dispatch) => {
+    return new Promise((resolve) => {
+        dispatch({ type: SET_CURRENT_ID, payload: currentId })
+        resolve()
+    })
+}
 
-            http.get('/cms/pages', {
+const fetch = (filters) => (dispatch, state) => {
+    return new Promise<void>((resolve, reject) => {
+        return http
+            .get('/cms/pages', {
                 params: {
-                    parent_id,
+                    parent_id: getCurrentId(state()),
+                    filters,
                 },
             })
-                .then(({ data: { nodes, currentNode } }) => {
+            .then(
+                ({
+                    data: {
+                        data: {
+                            data: { nodes, currentNode, parents },
+                        },
+                    },
+                }) => {
                     dispatch(setNodes(nodes))
                     dispatch(setCurrentNode(currentNode))
-                    dispatch(setIsLoading(false))
-                    dispatch(setIsLoaded(true))
+                    dispatch(setCurrentNodeParents(parents))
                     resolve()
-                })
-                .catch((e) => {
-                    dispatch(setIsLoaded(false))
-                })
-        })
-    }
+                },
+            )
+            .catch(() => {
+                reject()
+            })
+    })
+}
 
 const fetchParentCategorySelectOptions = () => (dispatch) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         http.get('/cms/pages/fetchParentCategorySelectOptions')
-            .then(({ data: { options } }) => {
-                resolve(options)
+            .then(
+                ({
+                    data: {
+                        data: {
+                            data: { data },
+                        },
+                    },
+                }) => {
+                    resolve(data)
+                },
+            )
+            .catch((e) => {
+                reject()
             })
-            .catch((e) => {})
     })
 }
 
 const fetchIndexDocumentsSelectOptions = () => (dispatch) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         http.get('/cms/pages/fetchIndexDocumentsSelectOptions')
-            .then(({ data: { options } }) => {
-                resolve(options)
+            .then(
+                ({
+                    data: {
+                        data: {
+                            data: { data },
+                        },
+                    },
+                }) => {
+                    resolve(data)
+                },
+            )
+            .catch((e) => {
+                reject()
             })
-            .catch((e) => {})
     })
 }
 
 const addCategory = (values) => (dispatch, getState) => {
-    return new Promise<void>((resolve) => {
-        return http.post('/cms/pages/addCategory', values).then(() => {
-            return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
-                resolve()
+    return new Promise<void>((resolve, reject) => {
+        return http
+            .post('/cms/pages/addCategory', values)
+            .then(
+                ({
+                    data: {
+                        data: { data },
+                    },
+                }) => {
+                    return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                        resolve(data)
+                    })
+                },
+            )
+            .catch((e) => {
+                reject(e)
             })
-        })
+    })
+}
+
+const editCategory = (values) => (dispatch, getState) => {
+    return new Promise<void>((resolve, reject) => {
+        return http
+            .post('/cms/pages/editCategory', values)
+            .then(
+                ({
+                    data: {
+                        data: { data },
+                    },
+                }) => {
+                    return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                        resolve(data)
+                    })
+                },
+            )
+            .catch((e) => {
+                reject(e)
+            })
     })
 }
 
 const addDocument = (values) => (dispatch, getState) => {
-    return new Promise<void>((resolve) => {
-        return http.post('/cms/pages/addDocument', values).then(() => {
-            return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
-                resolve()
-            })
-        })
+    return new Promise<void>((resolve, reject) => {
+        return http
+            .post('/cms/pages/addDocument', values)
+            .then(
+                ({
+                    data: {
+                        data: { data },
+                    },
+                }) => {
+                    return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                        resolve(data)
+                    })
+                },
+            )
+            .catch((e) => reject(e))
+    })
+}
+
+const editDocument = (values) => (dispatch, getState) => {
+    return new Promise<void>((resolve, reject) => {
+        return http
+            .post('/cms/pages/editDocument', values)
+            .then(
+                ({
+                    data: {
+                        data: { data },
+                    },
+                }) => {
+                    return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                        resolve(data)
+                    })
+                },
+            )
+            .catch((e) => reject(e))
     })
 }
 
 const addLink = (values) => (dispatch, getState) => {
-    return new Promise<void>((resolve) => {
-        return http.post('/cms/pages/addLink', values).then(() => {
-            return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
-                resolve()
+    return new Promise<void>((resolve, reject) => {
+        return http
+            .post('/cms/pages/addLink', values)
+            .then(
+                ({
+                    data: {
+                        data: { data },
+                    },
+                }) => {
+                    return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                        resolve(data)
+                    })
+                },
+            )
+            .catch((e) => {
+                reject(e)
             })
-        })
+    })
+}
+
+const editLink = (values) => (dispatch, getState) => {
+    return new Promise<void>((resolve, reject) => {
+        return http
+            .post('/cms/pages/editLink', values)
+            .then(
+                ({
+                    data: {
+                        data: { data },
+                    },
+                }) => {
+                    return dispatch(fetch(getCurrentNode(getState())['id'])).then(() => {
+                        resolve(data)
+                    })
+                },
+            )
+            .catch((e) => {
+                reject(e)
+            })
     })
 }
 
@@ -126,7 +246,6 @@ const deleteNode =
 
 export const actions = {
     fetch,
-    setIsLoaded,
     setIsLoading,
     setCurrentId,
     setCurrentNode,
@@ -138,6 +257,9 @@ export const actions = {
     unpublish,
     deleteNode,
     addLink,
+    editCategory,
+    editDocument,
+    editLink,
 }
 
 // ------------------------------------
@@ -148,12 +270,6 @@ const ACTION_HANDLERS = {
         return {
             ...state,
             isLoading: payload,
-        }
-    },
-    [SET_IS_LOADED]: (state, { payload }) => {
-        return {
-            ...state,
-            isLoaded: payload,
         }
     },
     [SET_FETCH_ERROR]: (state, { payload }) => {
@@ -180,6 +296,12 @@ const ACTION_HANDLERS = {
             currentNode: payload,
         }
     },
+    [SET_CURRENT_NODE_PARENTS]: (state, { payload }) => {
+        return {
+            ...state,
+            currentNodeParents: payload,
+        }
+    },
 }
 
 // ------------------------------------
@@ -189,10 +311,9 @@ const ACTION_HANDLERS = {
 const getInitialState = () => ({
     nodes: [],
     isLoading: false,
-    isLoaded: false,
-    fetchError: null,
     currentId: undefined,
     currentNode: {},
+    currentNodeParents: [],
 })
 
 export default function cmsPagesReducer(state = getInitialState(), action) {
@@ -205,17 +326,15 @@ export default function cmsPagesReducer(state = getInitialState(), action) {
 const getState = (state) => state['cmsPages']
 const getNodes = (state) => getState(state)['nodes']
 const getIsLoading = (state) => getState(state)['isLoading']
-const getIsLoaded = (state) => getState(state)['isLoaded']
-const getFetchError = (state) => getState(state)['fetchError']
 const getCurrentId = (state) => getState(state)['currentId']
 const getCurrentNode = (state) => getState(state)['currentNode']
+const getCurrentNodeParents = (state) => getState(state)['currentNodeParents']
 
 export const selectors = {
     getState,
     getNodes,
     getIsLoading,
-    getIsLoaded,
-    getFetchError,
     getCurrentId,
     getCurrentNode,
+    getCurrentNodeParents,
 }

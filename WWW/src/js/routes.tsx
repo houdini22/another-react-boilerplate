@@ -19,180 +19,229 @@ import { UsersEditView } from './routes/UsersEdit'
 import UsersAddView from './routes/UsersAdd/components/Index'
 import { UserRolesEdit } from './routes/UserRolesEdit'
 import { UsersPermissions } from './routes/UsersPermissions'
-import { UsersPermissionsEdit } from './routes/UsersPermissionsEdit'
-import { UsersPermissionsAdd } from './routes/UsersPermissionsAdd'
+import { UsersPermissionsEditView } from './routes/UsersPermissionsEdit'
+import { UsersPermissionsAddView } from './routes/UsersPermissionsAdd'
 import { UserRolesAdd } from './routes/UserRolesAdd'
+import { WebsocketsManager } from './containers/WebsocketsManager'
+import { EditCategoryView } from './routes/Cms/components/EditCategory'
+import EditDocumentView from './routes/Cms/components/EditDocument'
+import EditLinkView from './routes/Cms/components/EditLink'
+import { LogsView } from './routes/Logs'
 
 const App = () => (
     <Router>
-        <Routes>
-            <Route
-                path="/cms/pages"
-                element={
-                    <PageLayout>
-                        <UserIsAuthenticatedRoute>
-                            <CmsPagesView />
-                        </UserIsAuthenticatedRoute>
-                    </PageLayout>
-                }
-            />
-            <Route
-                path="/cms/pages/add_category"
-                element={
-                    <PageLayout>
-                        <UserIsAuthenticatedRoute>
-                            <AddCategoryView />
-                        </UserIsAuthenticatedRoute>
-                    </PageLayout>
-                }
-            />
-            <Route
-                path="/cms/pages/add_link"
-                element={
-                    <PageLayout>
-                        <UserIsAuthenticatedRoute>
-                            <AddLinkView />
-                        </UserIsAuthenticatedRoute>
-                    </PageLayout>
-                }
-            />
-            <Route
-                path="/cms/pages/add_document"
-                element={
-                    <PageLayout>
-                        <UserIsAuthenticatedRoute>
-                            <AddDocumentView />
-                        </UserIsAuthenticatedRoute>
-                    </PageLayout>
-                }
-            />
-            <Route
-                path="/users"
-                element={
-                    <PageLayout>
-                        <UserIsAuthenticatedRoute>
-                            <UsersView />
-                        </UserIsAuthenticatedRoute>
-                    </PageLayout>
-                }
-            />
-            <Route
-                path="/users/edit"
-                element={
-                    <PageLayout>
-                        <UserIsAuthenticatedRoute>
-                            <UsersEditView />
-                        </UserIsAuthenticatedRoute>
-                    </PageLayout>
-                }
-            />
-            <Route
-                path="/users/add"
-                element={
-                    <PageLayout>
-                        <UserIsAuthenticatedRoute>
-                            <UsersAddView />
-                        </UserIsAuthenticatedRoute>
-                    </PageLayout>
-                }
-            />
-            <Route
-                path="/users/account_activated"
-                element={
-                    <BlankPageLayout>
-                        <UsersAccountActivated />
-                    </BlankPageLayout>
-                }
-            />
-            <Route
-                path="/login"
-                element={
-                    <BlankPageLayout>
-                        <LoginView />
-                    </BlankPageLayout>
-                }
-            />
-            <Route
-                path="/roles"
-                element={
-                    <PageLayout>
-                        <UserIsAuthenticatedRoute>
-                            <UserRolesView />
-                        </UserIsAuthenticatedRoute>
-                    </PageLayout>
-                }
-            />
-            <Route
-                path="/roles/add"
-                element={
-                    <PageLayout>
-                        <UserIsAuthenticatedRoute>
-                            <UserRolesAdd />
-                        </UserIsAuthenticatedRoute>
-                    </PageLayout>
-                }
-            />
-            <Route
-                path="/roles/edit"
-                element={
-                    <PageLayout>
-                        <UserIsAuthenticatedRoute>
-                            <UserRolesEdit />
-                        </UserIsAuthenticatedRoute>
-                    </PageLayout>
-                }
-            />
-            <Route
-                path="/permissions"
-                element={
-                    <PageLayout>
-                        <UserIsAuthenticatedRoute>
-                            <UsersPermissions />
-                        </UserIsAuthenticatedRoute>
-                    </PageLayout>
-                }
-            />
-            <Route
-                path="/permissions/add"
-                element={
-                    <PageLayout>
-                        <UserIsAuthenticatedRoute>
-                            <UsersPermissionsAdd />
-                        </UserIsAuthenticatedRoute>
-                    </PageLayout>
-                }
-            />
-            <Route
-                path="/permissions/edit"
-                element={
-                    <PageLayout>
-                        <UserIsAuthenticatedRoute>
-                            <UsersPermissionsEdit />
-                        </UserIsAuthenticatedRoute>
-                    </PageLayout>
-                }
-            />
-            <Route
-                path="/media"
-                element={
-                    <PageLayout>
-                        <UserIsAuthenticatedRoute>
-                            <MediaView />
-                        </UserIsAuthenticatedRoute>
-                    </PageLayout>
-                }
-            />
-            <Route
-                path="/"
-                element={
-                    <PageLayout>
-                        <UserIsAuthenticatedRoute>
-                            <IndexView />
-                        </UserIsAuthenticatedRoute>
-                    </PageLayout>
-                }
-            />
-        </Routes>
+        <WebsocketsManager>
+            {() => (
+                <Routes>
+                    <Route
+                        path="/cms/pages"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'cms.list'}>
+                                    <CmsPagesView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/cms/pages/add_category"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'cms.add_category'}>
+                                    <AddCategoryView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/cms/pages/edit_category"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'cms.edit_category'}>
+                                    <EditCategoryView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/cms/pages/add_link"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'cms.add_link'}>
+                                    <AddLinkView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/cms/pages/edit_link"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'cms.edit_link'}>
+                                    <EditLinkView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/cms/pages/add_document"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'cms.add_document'}>
+                                    <AddDocumentView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/cms/pages/edit_document"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'cms.edit_document'}>
+                                    <EditDocumentView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/users"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'users.list'}>
+                                    <UsersView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/users/edit"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'users.edit'}>
+                                    <UsersEditView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/users/add"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'users.add'}>
+                                    <UsersAddView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/users/logs"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'logs.list'}>
+                                    <LogsView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/users/account_activated"
+                        element={
+                            <BlankPageLayout>
+                                <UsersAccountActivated />
+                            </BlankPageLayout>
+                        }
+                    />
+                    <Route
+                        path="/login"
+                        element={
+                            <BlankPageLayout>
+                                <LoginView />
+                            </BlankPageLayout>
+                        }
+                    />
+                    <Route
+                        path="/roles"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'roles.list'}>
+                                    <UserRolesView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/roles/add"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'roles.add'}>
+                                    <UserRolesAdd />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/roles/edit"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'roles.edit'}>
+                                    <UserRolesEdit />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/permissions"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'permissions.list'}>
+                                    <UsersPermissions />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/permissions/add"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'permissions.add'}>
+                                    <UsersPermissionsAddView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/permissions/edit"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'permissions.edit'}>
+                                    <UsersPermissionsEditView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/media"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute permission={'media.list'}>
+                                    <MediaView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                    <Route
+                        path="/"
+                        element={
+                            <PageLayout>
+                                <UserIsAuthenticatedRoute>
+                                    <IndexView />
+                                </UserIsAuthenticatedRoute>
+                            </PageLayout>
+                        }
+                    />
+                </Routes>
+            )}
+        </WebsocketsManager>
     </Router>
 )
 

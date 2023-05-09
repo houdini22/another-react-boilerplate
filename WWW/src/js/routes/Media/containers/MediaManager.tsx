@@ -2,7 +2,7 @@ import * as React from 'react'
 import { selectors as commonSelectors, actions as commonActions } from '../../../reducers/files'
 import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux'
-import { AuthManager } from '../../../containers/AuthManager'
+import { AuthManager } from '../../../containers'
 import { withRouter } from '../../../helpers/router'
 
 interface UsersManagerProps {
@@ -16,18 +16,8 @@ interface UsersManagerProps {
 }
 
 class MediaManagerBase extends React.Component<UsersManagerProps, null> {
-    componentDidMount() {
-        /*const {
-            fetch,
-            location: { search },
-        } = this.props
-        const query = parseQueryString(search)
-        fetch(query)*/
-    }
-
     render() {
-        const { children, files, setIsLoading, isLoading, deleteFile, uploadProgress, uploadFiles, editFile } =
-            this.props
+        const { children, files, setIsLoading, isLoading, deleteFile, uploadProgress, uploadFiles, editFile } = this.props
         const renderProps = {
             files,
             setIsLoading,

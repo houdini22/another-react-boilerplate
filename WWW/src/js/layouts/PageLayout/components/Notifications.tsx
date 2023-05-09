@@ -53,34 +53,16 @@ class NotificationsBase extends React.Component<NotificationsProps, null> {
                         {toastNotifications.map(({ type, text, title, href, id }) => {
                             return (
                                 <li
-                                    className={cx(
-                                        'layout__notifications__container__notification',
-                                        'animation--sweet-show',
-                                        {
-                                            [cx(`layout__notifications__container__notification--color-${type}`)]: type,
-                                        },
-                                    )}
+                                    className={cx('layout__notifications__container__notification', 'animation--sweet-show', {
+                                        [cx(`layout__notifications__container__notification--color-${type}`)]: type,
+                                    })}
                                     key={`${id}`}
                                 >
                                     <Link to={href}>
-                                        <span className={cx('layout__notifications__container__notification__icon')}>
-                                            {this.getIcon(type)}
-                                        </span>
+                                        <span className={cx('layout__notifications__container__notification__icon')}>{this.getIcon(type)}</span>
                                         <span className={cx('layout__notifications__container__notification__content')}>
-                                            <span
-                                                className={cx(
-                                                    'layout__notifications__container__notification__content__title',
-                                                )}
-                                            >
-                                                {title}
-                                            </span>
-                                            <span
-                                                className={cx(
-                                                    'layout__notifications__container__notification__content__text',
-                                                )}
-                                            >
-                                                {text}
-                                            </span>
+                                            <span className={cx('layout__notifications__container__notification__content__title')}>{title}</span>
+                                            <span className={cx('layout__notifications__container__notification__content__text')}>{text}</span>
                                         </span>
                                     </Link>
                                 </li>

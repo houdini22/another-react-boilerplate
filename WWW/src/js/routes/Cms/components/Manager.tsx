@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { actions, selectors } from '../../../reducers/cms-pages'
+import { ifDeepDiff } from '../../../utils/javascript'
 
 export class Manager extends React.Component<null, null> {
     state = {
@@ -8,8 +9,33 @@ export class Manager extends React.Component<null, null> {
     }
 
     componentDidMount() {
-        const { setCurrentId } = this.props
-        setCurrentId(1)
+        const { filters, setCurrentId, fetch, setIsLoading, id = 1 } = this.props
+
+        Promise.all([setCurrentId(id)]).then(() => {
+            setIsLoading(true).then(() => {
+                fetch(filters).then(
+                    () => setIsLoading(false),
+                    () => {
+                        setIsLoading(false)
+                    },
+                )
+            })
+        })
+    }
+
+    componentDidUpdate(prevProps: Readonly<null>, prevState: Readonly<null>, snapshot?: any) {
+        const { filters, fetch, setIsLoading } = this.props
+
+        if (ifDeepDiff(prevProps.filters, filters)) {
+            setIsLoading(true).then(() => {
+                fetch(filters).then(
+                    () => {
+                        setIsLoading(false)
+                    },
+                    () => setIsLoading(false),
+                )
+            })
+        }
     }
 
     render() {
@@ -17,27 +43,39 @@ export class Manager extends React.Component<null, null> {
             children,
             nodes,
             isLoading,
-            isLoaded,
-            fetchError,
             currentNode,
             setCurrentId,
             setIsLoading,
             publish,
             unpublish,
             deleteNode,
+            currentNodeParents,
+            editCategory,
+            addCategory,
+            addDocument,
+            editDocument,
+            addLink,
+            editLink,
+            fetch,
         } = this.props
 
         const renderProps = {
             nodes,
             isLoading,
-            isLoaded,
-            fetchError,
             currentNode,
             setCurrentId,
             setIsLoading,
             publish,
             unpublish,
             deleteNode,
+            currentNodeParents,
+            editCategory,
+            addCategory,
+            addDocument,
+            editDocument,
+            addLink,
+            editLink,
+            fetch,
         }
 
         return children(renderProps)
@@ -46,10 +84,10 @@ export class Manager extends React.Component<null, null> {
 
 const mapStateToProps = (state) => ({
     isLoading: selectors.getIsLoading(state),
-    isLoaded: selectors.getIsLoaded(state),
-    fetchError: selectors.getFetchError(state),
     nodes: selectors.getNodes(state),
     currentNode: selectors.getCurrentNode(state),
+    currentNodeParents: selectors.getCurrentNodeParents(state),
+    currentId: selectors.getCurrentId(state),
 })
 
 const mapDispatchToProps = (dispatch) => {
@@ -59,6 +97,13 @@ const mapDispatchToProps = (dispatch) => {
         publish: (id) => dispatch(actions.publish(id)),
         unpublish: (id) => dispatch(actions.unpublish(id)),
         deleteNode: (node) => dispatch(actions.deleteNode(node)),
+        addCategory: (values) => dispatch(actions.addCategory(values)),
+        editCategory: (values) => dispatch(actions.editCategory(values)),
+        addDocument: (values) => dispatch(actions.addDocument(values)),
+        editDocument: (values) => dispatch(actions.editDocument(values)),
+        addLink: (values) => dispatch(actions.addLink(values)),
+        editLink: (values) => dispatch(actions.editLink(values)),
+        fetch: (filters) => dispatch(actions.fetch(filters)),
     }
 }
 

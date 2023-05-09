@@ -16,7 +16,7 @@
             & > .component-dropdown__dropdown-menu__items {
                 display: block;
                 float: none;
-                width: 150%;
+                min-width: 150%;
             }
         }
 
@@ -178,6 +178,12 @@
                     ) {
                     a {
                         cursor: pointer;
+
+                        & > span {
+                            & > span {
+                                margin-right: 5px;
+                            }
+                        }
                     }
                 }
 

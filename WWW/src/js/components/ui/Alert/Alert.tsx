@@ -115,7 +115,9 @@ class Alert extends React.Component<AlertProps, AlertState> {
                         <div className={cx('component-alert__icon-container--inner')}>{withIcon}</div>
                     </div>
                 )}
-                <div className={cx('component-alert__content')}>{children}</div>
+                <div className={cx('component-alert__content--outer')}>
+                    <div className={cx('component-alert__content--inner')}>{children}</div>
+                </div>
                 {closeIcon && (
                     <div
                         className={cx('component-alert__close-icon')}

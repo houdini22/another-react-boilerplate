@@ -114,6 +114,7 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                         style,
                         isLoading,
                         href,
+                        disableContext,
                         ...rest
                     } = this.props
 
@@ -138,14 +139,7 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                     const isDisabled = isLoading || isLoadingState || buttonGroupDisabled || disabled
 
                     return (
-                        <button
-                            {...rest}
-                            style={style}
-                            className={classes}
-                            onClick={this.handleClick.bind(this)}
-                            disabled={isDisabled}
-                            type={type}
-                        >
+                        <button {...rest} style={style} className={classes} onClick={this.handleClick.bind(this)} disabled={isDisabled} type={type}>
                             {icon}
                             {!iconOnly && <span>{children}</span>}
                             {(isLoading || isLoadingState) && <LoadingOverlay size="xs" />}

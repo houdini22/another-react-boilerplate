@@ -2,11 +2,9 @@ import * as React from 'react'
 import { Card, LoadingOverlay } from '../../../../components'
 import { AddFormContainer } from './AddFormContainer'
 
-interface EditProps {}
+interface AddRoleProps {}
 
-interface EditState {}
-
-export class AddRole extends React.Component<EditProps, EditState> {
+export class AddRole extends React.Component<AddRoleProps, null> {
     render() {
         const {
             addRole,
@@ -22,9 +20,12 @@ export class AddRole extends React.Component<EditProps, EditState> {
             addNewRoleToUser,
             removeNewRoleFromUser,
             navigate,
+            addPermission,
+            fetchPermissions,
+            canByPermission,
         } = this.props
         return (
-            <Card header={<h1>Add Role</h1>}>
+            <Card header={<h1>Add Role</h1>} color={'primary'}>
                 <AddFormContainer
                     setIsLoading={setIsLoading}
                     save={addRole}
@@ -38,6 +39,10 @@ export class AddRole extends React.Component<EditProps, EditState> {
                     addNewRoleToUser={addNewRoleToUser}
                     removeNewRoleFromUser={removeNewRoleFromUser}
                     navigate={navigate}
+                    addPermission={addPermission}
+                    isLoading={isLoading}
+                    fetchPermissions={fetchPermissions}
+                    canByPermission={canByPermission}
                 />
                 {isLoading && <LoadingOverlay />}
             </Card>

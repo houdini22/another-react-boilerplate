@@ -16,14 +16,7 @@ class SaveFiltersForm extends React.Component<null, null> {
                 <Alert color={'info'} withIcon={<InfoIcon />}>
                     Filters will be saved only on your local machine.
                 </Alert>
-                <Field
-                    name="list_name"
-                    label="Filter List name"
-                    type="text"
-                    placeholder={'Filter List name'}
-                    autoFocus
-                    component={FormField}
-                />
+                <Field name="list_name" label="Filter List name" type="text" placeholder={'Filter List name'} autoFocus component={FormField} />
                 <Row>
                     <Col xs={6}>
                         <Button color={'secondary'} onClick={() => closeModal('save-filters')} block>

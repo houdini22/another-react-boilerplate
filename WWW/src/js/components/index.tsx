@@ -46,12 +46,7 @@ import {
     TFoot as TFootComponent,
     ExpandManager,
 } from './ui/Table'
-import {
-    Container as ListContainer,
-    Item as ListItem,
-    Image as ListImage,
-    ItemContent as ListItemContent,
-} from './ui/List'
+import { Container as ListContainer, Item as ListItem, Image as ListImage, ItemContent as ListItemContent } from './ui/List'
 import { Tooltip } from './ui/Tooltip'
 import { ModalContainer, ModalBody, ModalFooter, ModalHeader, ModalManager } from './ui/Modal'
 

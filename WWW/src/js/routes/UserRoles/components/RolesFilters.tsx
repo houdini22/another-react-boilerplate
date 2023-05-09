@@ -1,24 +1,36 @@
 import * as React from 'react'
 import { FiltersCard } from '../../../components/common/FiltersCard'
+import { LoadingOverlay } from '../../../components'
+import { DeleteSavedFilter, Filters, ResetFilters, RestoreSavedFilter, SavedFilters, SaveFilters, SetFilter, SetFilters } from '../../../../types.d'
+import { sortPermissionsByNameAscending } from '../../../helpers/permissions'
 
-interface FiltersProps {
+interface RolesFiltersProps {
     filters: Object
-    setFilter: Function
-    fetch(): Function
+    setFilter: SetFilter
+    resetFilters: ResetFilters
+    defaultFilters: Filters
+    isLoading: boolean
+    setFilters: SetFilters
+    savedFilters: SavedFilters
+    deleteSavedFilter: DeleteSavedFilter
+    saveFilters: SaveFilters
+    restoreSavedFilter: RestoreSavedFilter
 }
 
-export class Filters extends React.Component<FiltersProps, null> {
+export class RolesFilters extends React.Component<RolesFiltersProps, null> {
     render() {
         const {
             filters,
             setFilter,
-            fetch,
-            permissions,
             defaultFilters,
             isLoading,
             resetFilters,
             setFilters,
-            setIsLoading,
+            savedFilters,
+            saveFilters,
+            deleteSavedFilter,
+            restoreSavedFilter,
+            filtersData,
         } = this.props
 
         return (
@@ -28,12 +40,13 @@ export class Filters extends React.Component<FiltersProps, null> {
                 setFilter={setFilter}
                 setFilters={setFilters}
                 resetFilters={resetFilters}
-                fetch={() => {
-                    setIsLoading(true)
-                    fetch().then(() => setIsLoading(false))
-                }}
                 defaultFilters={defaultFilters}
                 isLoading={isLoading}
+                savedFilters={savedFilters}
+                saveFilters={saveFilters}
+                deleteSavedFilter={deleteSavedFilter}
+                restoreSavedFilter={restoreSavedFilter}
+                filtersData={filtersData}
                 filtersToRender={[
                     {
                         type: 'search',
@@ -81,13 +94,13 @@ export class Filters extends React.Component<FiltersProps, null> {
                             },
                         ],
                         type: 'radio',
-                        name: 'users',
+                        name: 'has_users',
                         label: 'Has Users',
                     },
                     {
-                        options: permissions.map(({ id, name }) => {
+                        options: sortPermissionsByNameAscending(filtersData?.permissions?.data).map(({ id, name, count }) => {
                             return {
-                                label: name,
+                                label: `${name} (${count})`,
                                 value: id,
                             }
                         }),
@@ -126,8 +139,8 @@ export class Filters extends React.Component<FiltersProps, null> {
                                 value: 15,
                             },
                             {
-                                label: '50',
-                                value: 50,
+                                label: '40',
+                                value: 40,
                             },
                             {
                                 label: '100',
@@ -136,9 +149,11 @@ export class Filters extends React.Component<FiltersProps, null> {
                         ],
                     },
                 ]}
-            />
+            >
+                {isLoading && <LoadingOverlay />}
+            </FiltersCard>
         )
     }
 }
 
-export default Filters
+export default RolesFilters

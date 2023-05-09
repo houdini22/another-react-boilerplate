@@ -17,19 +17,9 @@ const onChange = (values, dispatch, props) => {
         newValues['iconHighlighted'] = false
         newValues['withIconArrow'] = false
     } else if (newValues['withIcon']) {
-        if (
-            !options['withIconArrow'] &&
-            !options['iconHighlighted'] &&
-            newValues['withIconArrow'] &&
-            !newValues['iconHighlighted']
-        ) {
+        if (!options['withIconArrow'] && !options['iconHighlighted'] && newValues['withIconArrow'] && !newValues['iconHighlighted']) {
             newValues['iconHighlighted'] = true
-        } else if (
-            options['withIconArrow'] &&
-            options['iconHighlighted'] &&
-            newValues['withIconArrow'] &&
-            !newValues['iconHighlighted']
-        ) {
+        } else if (options['withIconArrow'] && options['iconHighlighted'] && newValues['withIconArrow'] && !newValues['iconHighlighted']) {
             newValues['withIconArrow'] = false
         }
     }

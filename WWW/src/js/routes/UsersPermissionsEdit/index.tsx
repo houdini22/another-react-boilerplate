@@ -1,3 +1,3 @@
-import UsersPermissionsEdit from './components/Index'
+import UsersPermissionsEditView from './components/Index'
 
-export { UsersPermissionsEdit }
+export { UsersPermissionsEditView }

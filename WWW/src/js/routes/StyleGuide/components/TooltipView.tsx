@@ -61,25 +61,14 @@ class TooltipView extends React.Component<TooltipViewProps, TooltipViewState> {
                 <Row>
                     <Col xs={12} md={6}>
                         <Section>
-                            <TooltipFormContainer
-                                options={options}
-                                setOptions={this.setOptions.bind(this)}
-                                colSize1={colSize2}
-                            />
+                            <TooltipFormContainer options={options} setOptions={this.setOptions.bind(this)} colSize1={colSize2} />
                         </Section>
                     </Col>
                     <Col xs={12} md={6}>
                         <Section>
                             {createPresentationTab(
                                 <span />,
-                                <Tooltip
-                                    color={color}
-                                    outline={outline}
-                                    size={size}
-                                    tooltip={tooltip}
-                                    placement={placement}
-                                    trigger={trigger}
-                                >
+                                <Tooltip color={color} outline={outline} size={size} tooltip={tooltip} placement={placement} trigger={trigger}>
                                     <Button>I have the tooltip</Button>
                                 </Tooltip>,
                                 code,

@@ -7,28 +7,32 @@ import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 const onSubmit = (
     { email, name, status, password, password_confirmation },
     _,
-    { addUser, navigate, addToastNotification, newUserRoles, newUserPermissions },
+    { addUser, navigate, addToastNotification, newUserRoles, newUserPermissions, setIsLoading },
 ) => {
-    return addUser({ email, name, status, password, password_confirmation }, newUserRoles, newUserPermissions).then(
-        (user) => {
-            addToastNotification({
-                title: 'Save success.',
-                text: `User has been saved with ID: ${user.id}.`,
-                type: 'success',
-                href: '/users/add',
-            })
-            navigate(`/users/edit?id=${user.id}`)
-        },
-        (response) => {
-            addToastNotification({
-                title: 'Form Validation Error',
-                text: response.message,
-                type: 'danger',
-                href: '/users/add',
-            })
-            throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
-        },
-    )
+    return setIsLoading(true).then(() => {
+        return addUser({ email, name, status, password, password_confirmation }, newUserRoles, newUserPermissions).then(
+            (user) => {
+                addToastNotification({
+                    title: 'Save success.',
+                    text: `User has been saved with ID: ${user.id}.`,
+                    type: 'success',
+                    href: '/users/add',
+                })
+                navigate(`/users/edit?id=${user.id}`)
+                setIsLoading(false)
+            },
+            (response) => {
+                addToastNotification({
+                    title: 'Form Validation Error',
+                    text: response.message,
+                    type: 'danger',
+                    href: '/users/add',
+                })
+                setIsLoading(false)
+                throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
+            },
+        )
+    })
 }
 
 const AddFormContainer = compose(

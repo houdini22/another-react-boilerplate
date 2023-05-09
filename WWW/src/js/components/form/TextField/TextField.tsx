@@ -23,15 +23,7 @@ class TextField extends React.Component<TextFieldProps, null> {
         onChange(e)
     }
     render() {
-        const {
-            error,
-            loading,
-            custom: { size, onChange, ...customProps } = {},
-            type,
-            value,
-            defaultValue,
-            ...props
-        } = this.props
+        const { error, loading, custom: { size, onChange, ...customProps } = {}, type, value, defaultValue, ...props } = this.props
         return (
             <AppContext.Consumer>
                 {({ cardSize } = {}) => {

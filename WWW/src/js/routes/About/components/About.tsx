@@ -41,10 +41,7 @@ export class AboutView extends React.Component {
                                     <h4>LinkedIn: </h4>
                                 </Col>
                                 <Col xs={9} style={{ textAlign: 'right' }}>
-                                    <a
-                                        href="https://www.linkedin.com/in/micha%C5%82-baniowski-34474a25b/"
-                                        target="_blank"
-                                    >
+                                    <a href="https://www.linkedin.com/in/micha%C5%82-baniowski-34474a25b/" target="_blank">
                                         https://www.linkedin.com/in/michał-baniowski-34474a25b/
                                     </a>
                                 </Col>

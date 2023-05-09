@@ -74,13 +74,7 @@ class Radio extends React.Component<RadioProps, RadioState> {
                         )}
                     </Transition>
                 )}
-                <input
-                    {...props}
-                    disabled={disabled}
-                    checked={checked}
-                    type="radio"
-                    className={cx('component-radio__input')}
-                />
+                <input {...props} disabled={disabled} checked={checked} type="radio" className={cx('component-radio__input')} />
             </div>
         )
     }

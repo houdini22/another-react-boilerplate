@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { withRouter } from '../helpers/router'
 import { LocalStorage } from './database'
 import createReactClass from 'create-react-class'
+import { AuthorizationManager } from '../containers'
+import Page401 from '../components/common/Page401/Index'
 
 const { getIsLoggedIn } = selectors
 
@@ -20,6 +22,7 @@ interface UserIsAuthenticatedRouteProps {
     }
     loginWithToken: Function
     navigate: Function
+    permission?: string
 }
 
 class UserIsAuthenticatedRouteBase extends React.Component<UserIsAuthenticatedRouteProps, null> {
@@ -28,14 +31,17 @@ class UserIsAuthenticatedRouteBase extends React.Component<UserIsAuthenticatedRo
             isLoggedIn,
             navigate,
             loginWithToken,
-            location: { pathname },
+            location: { pathname, search },
         } = this.props
+
         if (!isLoggedIn) {
             const { email, token } = LocalStorage.queryAll('LoginFormContainer', { query: { ID: 1 } })[0]
 
             loginWithToken(email, token).then(
-                () => null,
-                () => navigate(`/login?back=${pathname}`),
+                () => {},
+                () => {
+                    navigate(`/login?back=${pathname}${encodeURIComponent(search)}`)
+                },
             )
         }
     }
@@ -44,23 +50,57 @@ class UserIsAuthenticatedRouteBase extends React.Component<UserIsAuthenticatedRo
         const {
             isLoggedIn,
             navigate,
+            loginWithToken,
             location: { pathname, search },
         } = this.props
         if (!isLoggedIn && prevProps.isLoggedIn) {
-            navigate(`/login?back=${pathname}${encodeURIComponent(search)}&reason=401`)
+            const { email, token } = LocalStorage.queryAll('LoginFormContainer', { query: { ID: 1 } })[0]
+
+            loginWithToken(email, token).then(
+                () => {},
+                () => {
+                    navigate(`/login?back=${pathname}${encodeURIComponent(search)}&reason=401`)
+                },
+            )
         }
     }
 
     render() {
-        const { children } = this.props
+        const { children, isLoggedIn, permission } = this.props
+
+        if (!isLoggedIn) {
+            return null
+        }
+
         const Component = createReactClass({
-            render: function () {
-                return <>{children}</>
+            render: () => {
+                return (
+                    <AuthorizationManager>
+                        {({ canByPermission }) => (
+                            <>
+                                {!!permission && canByPermission(permission) && children}
+                                {!!permission && !canByPermission(permission) && <Page401 />}
+                                {!permission && children}
+                            </>
+                        )}
+                    </AuthorizationManager>
+                )
             },
         })
+
         return <Component />
+
+        /*return <AuthorizationManager>
+            {({canByPermission}) => (
+                <>{!!permission && canByPermission(permission) && children}
+                    {!!permission && !canByPermission(permission) && <Page401/>}
+                    {!permission && children}
+                </>
+            )}
+        </AuthorizationManager>*/
     }
 }
+
 const UserIsAuthenticatedRoute = compose(
     connect(mapStateToProps, (dispatch) => {
         return bindActionCreators(
@@ -74,22 +114,6 @@ const UserIsAuthenticatedRoute = compose(
 )(UserIsAuthenticatedRouteBase)
 
 export { UserIsAuthenticatedRoute }
-export default { UserIsAuthenticatedRoute }
-
-/*
-export const userIsAdmin = connectedRouterRedirect({
-  redirectPath: '/',
-  allowRedirectBack: false,
-  authenticatedSelector: state => state.user.data !== null && state.user.data.isAdmin,
-  redirectAction: routerActions.replace,
-  wrapperDisplayName: 'UserIsAdmin'
-})
-
-export const userIsNotAuthenticated = connectedRouterRedirect({
-  redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps) || '/foo',
-  allowRedirectBack: false,
-  authenticatedSelector: state => state.user.data === null && state.user.isLoading === false,
-  redirectAction: routerActions.replace,
-  wrapperDisplayName: 'UserIsNotAuthenticated'
-})
-*/
+export default {
+    UserIsAuthenticatedRoute,
+}

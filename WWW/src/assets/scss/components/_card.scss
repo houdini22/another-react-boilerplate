@@ -31,7 +31,6 @@
 
     &.component-card--size-lg {
         .component-card__header {
-            font-size: 1.3em;
             height: 55px;
             line-height: 55px;
 
@@ -42,7 +41,7 @@
             h5,
             h6 {
                 line-height: 1.4em;
-                font-size: 1.3em;
+                font-size: 1.5em;
                 padding-left: $COMPONENT_PADDING_SINGLE;
                 padding-right: $COMPONENT_PADDING_SINGLE;
             }
@@ -66,8 +65,7 @@
     }
 
     &.component-card--size-md {
-        .component-card__header {
-            font-size: 1.2em;
+        & > .component-card__header {
             height: 45px;
             line-height: 45px;
 
@@ -78,7 +76,7 @@
             h5,
             h6 {
                 line-height: 1.4em;
-                font-size: 1.2em;
+                font-size: 1.4em;
                 padding-left: #{$COMPONENT_PADDING_SINGLE / 2};
                 padding-right: #{$COMPONENT_PADDING_SINGLE / 2};
             }
@@ -91,17 +89,16 @@
             }
         }
 
-        .component-card__content {
+        & > .component-card__content {
             padding: #{$COMPONENT_PADDING};
         }
-        .component-card__footer > div {
+        & > .component-card__footer > div {
             padding: #{$COMPONENT_PADDING};
         }
     }
 
     &.component-card--size-sm {
-        .component-card__header {
-            font-size: 1.1em;
+        & > .component-card__header {
             height: 35px;
             line-height: 35px;
 
@@ -112,7 +109,7 @@
             h5,
             h6 {
                 line-height: 1.1em;
-                font-size: 1.1em;
+                font-size: 1.2em;
                 padding-left: #{$COMPONENT_PADDING_SINGLE / 3};
                 padding-right: #{$COMPONENT_PADDING_SINGLE / 3};
             }
@@ -125,26 +122,21 @@
             }
         }
 
-        .component-card__content {
+        & > .component-card__content {
             font-size: 12px;
             padding: #{$COMPONENT_PADDING / 3};
         }
 
-        .component-card__footer > div {
+        & > .component-card__footer > div {
             padding: #{$COMPONENT_PADDING / 3};
         }
     }
 
     &.component-card--color-default {
         border-top-color: $default_DARKEN_X1;
-        .component-card__header {
+        & > .component-card__header {
             background: $default;
             color: $default_text_color;
-            .component-card__header__actions {
-                svg {
-                    color: $default_text_color_DARKEN_X3;
-                }
-            }
         }
         &.component-card--solid-background {
             .component-card__content {
@@ -155,16 +147,11 @@
 
     &.component-card--color-primary {
         border-top-color: $primary_DARKEN_X1;
-        .component-card__header {
+        & > .component-card__header {
             background: $primary;
             color: $primary_text_color;
-            .component-card__header__actions {
-                svg {
-                    color: $primary_text_color_DARKEN_X3;
-                }
-            }
         }
-        &.component-card--solid-background {
+        & > &.component-card--solid-background {
             .component-card__content {
                 background: $primary_LIGHTEN_X3;
             }
@@ -173,17 +160,12 @@
 
     &.component-card--color-secondary {
         border-top-color: $secondary_DARKEN_X1;
-        .component-card__header {
+        & > .component-card__header {
             background: $secondary;
             color: $secondary_text_color;
-            .component-card__header__actions {
-                svg {
-                    color: $secondary_text_color_DARKEN_X3;
-                }
-            }
         }
         &.component-card--solid-background {
-            .component-card__content {
+            & > .component-card__content {
                 background: $secondary_LIGHTEN_X3;
             }
         }
@@ -191,17 +173,12 @@
 
     &.component-card--color-info {
         border-top-color: $info_DARKEN_X1;
-        .component-card__header {
+        & > .component-card__header {
             background: $info;
             color: $info_text_color;
-            .component-card__header__actions {
-                svg {
-                    color: $info_text_color_DARKEN_X3;
-                }
-            }
         }
         &.component-card--solid-background {
-            .component-card__content {
+            & > .component-card__content {
                 background: $info_LIGHTEN_X3;
             }
         }
@@ -209,17 +186,12 @@
 
     &.component-card--color-warning {
         border-top-color: $warning_DARKEN_X1;
-        .component-card__header {
+        & > .component-card__header {
             background: $warning;
             color: $warning_text_color;
-            .component-card__header__actions {
-                svg {
-                    color: $warning_text_color_DARKEN_X3;
-                }
-            }
         }
         &.component-card--solid-background {
-            .component-card__content {
+            & > .component-card__content {
                 background: $warning_LIGHTEN_X3;
             }
         }
@@ -227,17 +199,12 @@
 
     &.component-card--color-success {
         border-top-color: $success_DARKEN_X1;
-        .component-card__header {
+        & > .component-card__header {
             background: $success;
             color: $success_text_color;
-            .component-card__header__actions {
-                svg {
-                    color: $success_text_color_DARKEN_X3;
-                }
-            }
         }
         &.component-card--solid-background {
-            .component-card__content {
+            & > .component-card__content {
                 background: $success_LIGHTEN_X3;
             }
         }
@@ -245,23 +212,18 @@
 
     &.component-card--color-danger {
         border-top-color: $danger_DARKEN_X1;
-        .component-card__header {
+        & > .component-card__header {
             background: $danger;
             color: $danger_text_color;
-            .component-card__header__actions {
-                svg {
-                    color: $danger_text_color_DARKEN_X3;
-                }
-            }
         }
         &.component-card--solid-background {
-            .component-card__content {
+            & > .component-card__content {
                 background: $danger_LIGHTEN_X3;
             }
         }
     }
 
-    .component-card__header {
+    & > .component-card__header {
         border-bottom: $COMPONENT_BORDER;
         background: $COMPONENT_BACKGROUND_DARKER;
         font-weight: 400;
@@ -287,7 +249,7 @@
             }
         }
 
-        .component-card__header__actions {
+        & > .component-card__header__actions {
             position: absolute;
             top: 0;
             bottom: 0;
@@ -296,8 +258,6 @@
             align-items: center;
 
             & > * {
-                margin-left: 5px;
-                margin-right: 5px;
                 flex: none;
 
                 &.form-control:not(.checkbox) {
@@ -309,7 +269,7 @@
                 }
             }
 
-            .component-card__header__actions__action-button.component-card__header__actions__action-button--outline {
+            & > .component-card__header__actions__action-button.component-card__header__actions__action-button--outline {
                 &.component-card__header__actions__action-button--color-primary.component-card__header__actions__action-button--outline {
                     color: $primary_LIGHTEN_X3;
                 }
@@ -332,13 +292,13 @@
         }
     }
 
-    .component-card__content {
+    & > .component-card__content {
         & > *:last-child {
             margin-bottom: 0;
         }
     }
 
-    .component-card__footer {
+    & > .component-card__footer {
         border-top: 1px solid transparent;
 
         &.component-card__footer--type-bordered {

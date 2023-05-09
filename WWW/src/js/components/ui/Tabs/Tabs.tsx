@@ -211,15 +211,7 @@ export class Tab extends React.Component<TabProps, null> {
 
         return (
             <AppContext.Consumer>
-                {({
-                    registerTab,
-                    tabs,
-                    setActiveTab,
-                    activeTab,
-                    triggersElement,
-                    contentElement,
-                    contentHeight,
-                } = {}) => {
+                {({ registerTab, tabs, setActiveTab, activeTab, triggersElement, contentElement, contentHeight } = {}) => {
                     registerTab(name)
 
                     return (
@@ -282,8 +274,7 @@ export class Trigger extends React.Component<TriggerProps, null> {
                                     }
                                 }}
                                 className={cx('component-tabs__tabs__header__triggers__trigger__link', {
-                                    'component-tabs__tabs__header__triggers__trigger__link--is-active':
-                                        _.get(activeTab, 'tabName') === tabName,
+                                    'component-tabs__tabs__header__triggers__trigger__link--is-active': _.get(activeTab, 'tabName') === tabName,
                                 })}
                             >
                                 <a>
@@ -318,8 +309,7 @@ export class Content extends React.Component<ContentProps, null> {
                         <div
                             className={cx({
                                 'component-tabs__content__outer__inner__tab': true,
-                                'component-tabs__content__outer__inner__tab--is-active':
-                                    _.get(activeTab, 'tabName') === tabName,
+                                'component-tabs__content__outer__inner__tab--is-active': _.get(activeTab, 'tabName') === tabName,
                             })}
                         >
                             {_.isFunction(children) && children({ changeTab })}

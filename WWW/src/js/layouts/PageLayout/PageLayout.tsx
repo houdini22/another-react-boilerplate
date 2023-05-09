@@ -1,14 +1,14 @@
 import * as React from 'react'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Sidebar, SidebarHeader, Navigation, Container } from './components'
-import { AuthManager } from '../../containers/AuthManager'
+import { AuthManager, RouteManager } from '../../containers'
 import classNames from 'classnames/bind'
 import config from '../../config'
 import styles from '../../../assets/scss/layout/_layout.scss'
 import { Notifications } from './components/Notifications'
-import { RouteManager } from '../../containers/RouteManager'
 import { ConnectionErrorModal } from './components/ConnectionErrorModal'
 import { ConnectionFetchErrorModal } from './components/ConnectionFetchErrorModal'
+import { ConnectionFetchError404 } from './components/ConnectionFetchError404'
 
 const cx = classNames.bind(styles)
 
@@ -25,6 +25,7 @@ interface PageLayoutProps {
         status: number | null
         code: string
     }
+    error404: {}
 }
 
 class PageLayout extends React.Component<PageLayoutProps, null> {
@@ -33,13 +34,11 @@ class PageLayout extends React.Component<PageLayoutProps, null> {
             children,
             layout: { disableHeader, disableFooter, disableSidebar },
             connectionErrorModalVisible: { message: connectionErrorMessage, code: connectionErrorCode },
-            connectionFetchError: {
-                message: connectionFetchErrorMessage,
-                statusText: connectionErrorStatusText,
-                data: connectionErrorStatusData,
-            },
+            connectionFetchError: { message: connectionFetchErrorMessage, statusText: connectionErrorStatusText, data: connectionErrorStatusData },
             setConnectionErrorModalVisible,
             setFetchError,
+            error404,
+            set404error,
         } = this.props
 
         return (
@@ -88,6 +87,7 @@ class PageLayout extends React.Component<PageLayoutProps, null> {
                                     message={connectionFetchErrorMessage}
                                     close={() => setFetchError({})}
                                 />
+                                <ConnectionFetchError404 data={error404} visible={Object.keys(error404).length > 0} close={() => set404error({})} />
                             </div>
                         )}
                     </AuthManager>

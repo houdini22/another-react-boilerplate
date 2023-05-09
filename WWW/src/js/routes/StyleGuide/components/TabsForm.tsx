@@ -88,31 +88,16 @@ class TabsForm extends React.Component {
                                             <Field name="block" label="block" type="checkbox" component={FormField} />
                                         </Col>
                                         <Col xs={12}>
-                                            <Field
-                                                name="aligned"
-                                                label="aligned"
-                                                type="checkbox"
-                                                component={FormField}
-                                            />
+                                            <Field name="aligned" label="aligned" type="checkbox" component={FormField} />
                                         </Col>
                                         <Col xs={12}>
                                             <Field name="left" label="left" type="checkbox" component={FormField} />
                                         </Col>
                                         <Col xs={12}>
-                                            <Field
-                                                name="outline"
-                                                label="outline"
-                                                type="checkbox"
-                                                component={FormField}
-                                            />
+                                            <Field name="outline" label="outline" type="checkbox" component={FormField} />
                                         </Col>
                                         <Col xs={12}>
-                                            <Field
-                                                name="rounded"
-                                                label="rounded"
-                                                type="checkbox"
-                                                component={FormField}
-                                            />
+                                            <Field name="rounded" label="rounded" type="checkbox" component={FormField} />
                                         </Col>
                                         <Col xs={12}>
                                             <Field name="below" label="below" type="checkbox" component={FormField} />

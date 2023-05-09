@@ -25,8 +25,10 @@ class Select extends React.Component<SelectProps, null> {
         const { error, options, loading, placeholder, value, defaultValue, ...props } = this.props
         const _options = _.isFunction(options) ? options() : options
 
+        const val = value || defaultValue
+
         return (
-            <select {...props} defaultValue={defaultValue || ''} key={defaultValue || ''}>
+            <select {...props} key={val || ''} value={val || ''}>
                 {placeholder && this.renderPlaceholder()}
                 {_options.map(({ label, value: _value, disabled }) => {
                     return (

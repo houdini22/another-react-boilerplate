@@ -6,7 +6,7 @@ import { Button, Col, Modal, Row } from '../../../components'
 import { AiOutlineDownload as DownloadIcon } from 'react-icons/ai'
 import { DeleteIcon } from '../../../components/icons'
 import { FileDetailsFormContainer } from './FileDetailsFormContainer'
-import { NotificationsManager } from '../../../containers/NotificationsManager'
+import { NotificationsManager } from '../../../containers'
 
 const cx = classNames.bind(styles)
 
@@ -89,11 +89,7 @@ export class FileView extends React.Component<FileProps, FileState> {
                     <Modal.Footer>
                         <Row>
                             <Col xs={6}>
-                                <Button
-                                    block
-                                    color={'secondary'}
-                                    onClick={() => this.setState({ confirmDeleteModalVisible: false })}
-                                >
+                                <Button block color={'secondary'} onClick={() => this.setState({ confirmDeleteModalVisible: false })}>
                                     Cancel
                                 </Button>
                             </Col>
@@ -143,7 +139,11 @@ export class FileView extends React.Component<FileProps, FileState> {
                                         <FileDetailsFormContainer
                                             file={file}
                                             isLoading={isLoading}
-                                            initialValues={{ ...file, download_url: apiURL(`files/download/${id}`), preview_url: apiURL(`files/preview/${id}`) }}
+                                            initialValues={{
+                                                ...file,
+                                                download_url: apiURL(`files/download/${id}`),
+                                                preview_url: apiURL(`files/preview/${id}`),
+                                            }}
                                             addToastNotification={addToastNotification}
                                             editFile={editFile}
                                             fetch={fetch}

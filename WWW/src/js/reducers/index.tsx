@@ -5,5 +5,8 @@ import contactform from './contactform'
 import cmsPages from './cms-pages'
 import users from './users'
 import files from './files'
+import filters from './filters'
+import logs from './logs'
+import permissions from './permissions'
 
-export { auth, common, notifications, contactform, cmsPages, users, files }
+export { auth, common, notifications, contactform, cmsPages, users, files, filters, logs, permissions }

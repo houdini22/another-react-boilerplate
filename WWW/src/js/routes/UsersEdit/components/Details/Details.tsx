@@ -59,23 +59,25 @@ export class Details extends React.Component<HeaderProps, HeaderState> {
             registerModal,
             openModal,
             closeModal,
+            canByPermission,
         } = this.props
 
         registerModal(
             `user-avatar-delete`,
             <ModalConfirm
                 onConfirm={() => {
-                    setIsLoading(true)
-                    deleteAvatar(user).then(() => {
-                        fetchOne(user.id).then(() => {
-                            addToastNotification({
-                                title: 'Remove success.',
-                                text: `User ID: ${user.id} Avatar has been removed.`,
-                                type: 'success',
-                                href: `/users/edit?id${user.id}`,
+                    setIsLoading(true).then(() => {
+                        return deleteAvatar(user).then(() => {
+                            return fetchOne(user.id).then(() => {
+                                addToastNotification({
+                                    title: 'Remove success.',
+                                    text: `User ID: ${user.id} Avatar has been removed.`,
+                                    type: 'success',
+                                    href: `/users/edit?id${user.id}`,
+                                })
+                                setIsLoading(false)
+                                closeModal(`user-avatar-delete`)
                             })
-                            setIsLoading(false)
-                            closeModal(`user-avatar-delete`)
                         })
                     })
                 }}
@@ -88,7 +90,7 @@ export class Details extends React.Component<HeaderProps, HeaderState> {
         )
 
         return (
-            <Card header={<h1>Details</h1>}>
+            <Card header={<h1>Details</h1>} color={'secondary'}>
                 <Tabs.Container>
                     <Tabs.Tab name={'general_info'}>
                         <Tabs.Trigger>General info</Tabs.Trigger>
@@ -107,6 +109,7 @@ export class Details extends React.Component<HeaderProps, HeaderState> {
                                 uploadProgress={uploadProgress}
                                 addToastNotification={addToastNotification}
                                 openModalAvatar={() => openModal(`user-avatar-delete`)}
+                                canByPermission={canByPermission}
                             />
                         </Tabs.Content>
                     </Tabs.Tab>

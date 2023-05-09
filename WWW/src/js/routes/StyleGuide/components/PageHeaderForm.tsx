@@ -41,20 +41,10 @@ class PageHeaderForm extends React.Component {
                                             />
                                         </Col>
                                         <Col xs={12}>
-                                            <Field
-                                                name="breadcrumbs"
-                                                label="breadcrumbs"
-                                                type="checkbox"
-                                                component={FormField}
-                                            />
+                                            <Field name="breadcrumbs" label="breadcrumbs" type="checkbox" component={FormField} />
                                         </Col>
                                         <Col xs={12}>
-                                            <Field
-                                                name="actions"
-                                                label="actions"
-                                                type="checkbox"
-                                                component={FormField}
-                                            />
+                                            <Field name="actions" label="actions" type="checkbox" component={FormField} />
                                         </Col>
                                     </Row>
                                 </Tabs.Content>

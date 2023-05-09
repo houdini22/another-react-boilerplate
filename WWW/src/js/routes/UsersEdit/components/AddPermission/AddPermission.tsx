@@ -13,10 +13,9 @@ interface AddRoleProps {
 
 export class AddPermission extends React.Component<AddRoleProps, null> {
     render() {
-        const { permissions, setIsLoading, addUserPermission, fetchOne, user, isLoading, addToastNotification } =
-            this.props
+        const { permissions, setIsLoading, addUserPermission, fetchOne, user, isLoading, addToastNotification } = this.props
         return (
-            <Card header={<h1>Add Permission</h1>}>
+            <Card header={<h1>Add Permission</h1>} color={'primary'}>
                 <AddPermissionFormContainer
                     user={user}
                     permissions={permissions}

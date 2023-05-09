@@ -65,11 +65,7 @@ class BadgeView extends React.Component<BadgeViewProps, BadgeViewState> {
                 <Row>
                     <Col xs={12} md={6}>
                         <Section>
-                            <BadgeFormContainer
-                                options={options}
-                                setOptions={this.setOptions.bind(this)}
-                                colSize1={colSize2}
-                            />
+                            <BadgeFormContainer options={options} setOptions={this.setOptions.bind(this)} colSize1={colSize2} />
                         </Section>
                     </Col>
                     <Col xs={12} md={6}>

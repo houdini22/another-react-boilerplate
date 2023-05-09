@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Button, Col, Row } from '../../../../components'
 import { FileIcon } from '../../../../components/icons'
-import { RouteManager } from '../../../../containers/RouteManager'
+import { RouteManager } from '../../../../containers'
 import { User } from '../../../../../types.d'
 
 interface DetailsUserFilesRowProps {
@@ -20,11 +20,7 @@ class DetailsUserFilesRow extends React.Component<DetailsUserFilesRowProps, null
                             Files
                         </Col>
                         <Col xs={8} style={{ marginBottom: 10 }}>
-                            <Button
-                                color={'info'}
-                                icon={<FileIcon />}
-                                onClick={() => navigate(`/media?user=${user.name}`)}
-                            >
+                            <Button color={'info'} icon={<FileIcon />} onClick={() => navigate(`/media?user=${user.name}`)}>
                                 {user.files_count}
                             </Button>
                         </Col>

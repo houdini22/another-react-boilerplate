@@ -43,7 +43,7 @@
             border-radius: 0;
             font-size: 13px;
             font-weight: 400;
-            padding: 0;
+            padding: 0 5px;
             background-color: transparent;
             -webkit-box-shadow: none;
             box-shadow: none;
@@ -53,6 +53,11 @@
 
             &::placeholder {
                 color: lighten(#000, 35%);
+            }
+
+            &[disabled] {
+                background: $default;
+                cursor: not-allowed;
             }
         }
         select {

@@ -1,16 +1,14 @@
 import * as React from 'react'
 import { bindActionCreators, compose } from 'redux'
 import { connect } from 'react-redux'
-import { AddCategoryForm } from '../components/AddCategoryForm'
-import { reduxForm, SubmissionError } from 'redux-form'
-import * as moment from 'moment'
-import { formatDateTimeAPI } from '../../../helpers/date-time'
+import { AddCategoryForm } from '../components/AddCategory/AddCategoryForm'
+import { reduxForm, SubmissionError, formValueSelector } from 'redux-form'
 import { actions } from '../../../reducers/cms-pages'
 import { processAPIerrorResponseToFormErrors } from '../../../modules/http'
 import { withRouter } from '../../../helpers/router'
 
-export const FORM_NAME = 'add-category-form-container'
-
+export const FORM_NAME = 'add-category-form'
+const selector = formValueSelector(FORM_NAME)
 interface AddCategoryFormContainerBaseState {
     categories: Array<any>
     indexDocuments: Array<any>
@@ -24,6 +22,7 @@ class AddCategoryFormContainerBase extends React.Component<null, AddCategoryForm
 
     componentDidMount() {
         this.fetchParentCategorySelectOptions()
+        this.fetchIndexDocumentsSelectOptions()
     }
 
     fetchParentCategorySelectOptions() {
@@ -31,17 +30,17 @@ class AddCategoryFormContainerBase extends React.Component<null, AddCategoryForm
 
         return fetchParentCategorySelectOptions().then((options) => {
             this.setState({
-                categories: options,
+                categories: [...options],
             })
         })
     }
 
-    fetchIndexDocumentSelectOptions() {
-        const { fetchIndexDocumentSelectOptions } = this.props
+    fetchIndexDocumentsSelectOptions() {
+        const { fetchIndexDocumentsSelectOptions } = this.props
 
-        return fetchIndexDocumentSelectOptions().then((options) => {
+        return fetchIndexDocumentsSelectOptions().then((options) => {
             this.setState({
-                indexDocuments: options,
+                indexDocuments: [...options],
             })
         })
     }
@@ -54,22 +53,10 @@ class AddCategoryFormContainerBase extends React.Component<null, AddCategoryForm
 const AddCategoryFormContainer = compose(
     withRouter,
     connect(
-        ({ cmsPages: { currentId } }, props) => {
+        (state) => {
+            const formValues = selector(state, 'tree.tree_is_published', 'tree.tree_published_from', 'tree.tree_published_to')
             return {
-                initialValues: {
-                    category: {
-                        category_name: null,
-                        category_url: null,
-                        index_document_id: null,
-                        menu_category_id: null,
-                    },
-                    parent_id: currentId,
-                    tree: {
-                        tree_is_published: true,
-                        tree_published_from: formatDateTimeAPI(moment()),
-                        tree_published_to: formatDateTimeAPI(moment(new Date(2099, 12)).format('YYYY')),
-                    },
-                },
+                formValues,
             }
         },
         (dispatch) => {
@@ -85,21 +72,21 @@ const AddCategoryFormContainer = compose(
     ),
     reduxForm({
         form: FORM_NAME,
-        onSubmit: (values, dispatch, { addCategory, navigate }) => {
-            return addCategory(values)
-                .then(() => {
-                    navigate('/cms/pages')
-                })
-                .catch(
-                    ({
-                        response: {
-                            data: { errors },
-                        },
-                    }) => {
-                        throw new SubmissionError(processAPIerrorResponseToFormErrors(errors))
-                    },
-                )
+        onSubmit: (values, dispatch, { save, navigate, setIsLoading }) => {
+            setIsLoading(true)
+            return save(values).then(
+                ({ data }) => {
+                    setIsLoading(false)
+                    navigate(`/cms/pages?parent_id=${data.parent_id}`)
+                },
+                (response) => {
+                    setIsLoading(false)
+                    throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
+                },
+            )
         },
+        enableReinitialize: true,
+        destroyOnUnmount: false,
     }),
 )(AddCategoryFormContainerBase)
 

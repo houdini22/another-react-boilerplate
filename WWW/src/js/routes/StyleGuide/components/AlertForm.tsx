@@ -95,20 +95,10 @@ class AlertForm extends React.Component {
                                 </Col>
                                 {withIcon && [
                                     <Col xs={12}>
-                                        <Field
-                                            name="iconHighlighted"
-                                            label="iconHighlighted"
-                                            type="checkbox"
-                                            component={FormField}
-                                        />
+                                        <Field name="iconHighlighted" label="iconHighlighted" type="checkbox" component={FormField} />
                                     </Col>,
                                     <Col xs={12}>
-                                        <Field
-                                            name="withIconArrow"
-                                            label="withIconArrow"
-                                            type="checkbox"
-                                            component={FormField}
-                                        />
+                                        <Field name="withIconArrow" label="withIconArrow" type="checkbox" component={FormField} />
                                     </Col>,
                                 ]}
                             </Row>

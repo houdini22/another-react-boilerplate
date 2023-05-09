@@ -61,13 +61,7 @@ class ModalView extends React.Component<any, ModalViewState> {
                             >
                                 Open Modal
                             </Button>
-                            <Modal.Container
-                                visible={opened}
-                                color={color}
-                                size={size}
-                                animation={animation}
-                                placement={placement}
-                            >
+                            <Modal.Container visible={opened} color={color} size={size} animation={animation} placement={placement}>
                                 <Modal.Header
                                     closeIcon
                                     close={() => {
@@ -77,11 +71,7 @@ class ModalView extends React.Component<any, ModalViewState> {
                                     Header
                                 </Modal.Header>
                                 <Modal.Body>
-                                    <ModalFormContainer
-                                        options={options}
-                                        setOptions={this.setOptions.bind(this)}
-                                        colSize1={colSize2}
-                                    />
+                                    <ModalFormContainer options={options} setOptions={this.setOptions.bind(this)} colSize1={colSize2} />
                                 </Modal.Body>
                                 <Modal.Footer>
                                     {({}) => {

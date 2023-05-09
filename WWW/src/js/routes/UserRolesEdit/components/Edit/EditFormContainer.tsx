@@ -42,4 +42,4 @@ const EditFormContainer = compose(
 )(FormComponent)
 
 export { EditFormContainer }
-export default { EditFormContainer }
+export default EditFormContainer

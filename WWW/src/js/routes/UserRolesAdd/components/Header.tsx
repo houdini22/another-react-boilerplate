@@ -2,9 +2,7 @@ import * as React from 'react'
 import { PageHeader } from '../../../components'
 import { FaHome as HomeIcon } from 'react-icons/fa'
 
-interface HeaderProps {
-    role: Object
-}
+interface HeaderProps {}
 
 export class Header extends React.Component<HeaderProps, null> {
     render() {

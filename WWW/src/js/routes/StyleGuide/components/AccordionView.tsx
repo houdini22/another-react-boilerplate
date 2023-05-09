@@ -62,11 +62,7 @@ class AccordionView extends React.Component<AccordionViewProps, AccordionViewSta
                 <Row>
                     <Col xs={12} md={6}>
                         <Section>
-                            <AccordionFormContainer
-                                options={options}
-                                setOptions={this.setOptions.bind(this)}
-                                colSize1={colSize2}
-                            />
+                            <AccordionFormContainer options={options} setOptions={this.setOptions.bind(this)} colSize1={colSize2} />
                         </Section>
                     </Col>
                     <Col xs={12} md={6}>
@@ -104,11 +100,10 @@ class AccordionView extends React.Component<AccordionViewProps, AccordionViewSta
                                     </Accordion.Item>
                                     <Accordion.Item name="Item 5">
                                         <Accordion.ItemHeader>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce justo erat,
-                                            sagittis nec erat a, finibus suscipit arcu. Morbi id semper mi. Duis cursus
-                                            pharetra nisi, in eleifend velit aliquet sed. Donec rutrum placerat neque,
-                                            sed sagittis erat condimentum quis. Donec risus massa, scelerisque sed ante
-                                            in, luctus blandit dui.
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce justo erat, sagittis nec erat a, finibus
+                                            suscipit arcu. Morbi id semper mi. Duis cursus pharetra nisi, in eleifend velit aliquet sed. Donec rutrum
+                                            placerat neque, sed sagittis erat condimentum quis. Donec risus massa, scelerisque sed ante in, luctus
+                                            blandit dui.
                                         </Accordion.ItemHeader>
                                         <Accordion.ItemContent>Hello!</Accordion.ItemContent>
                                     </Accordion.Item>

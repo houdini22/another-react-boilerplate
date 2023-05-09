@@ -95,10 +95,7 @@ export class Container extends React.Component<ContainerProps, ContainerState> {
                         <div className={cx('component-page-header__content__title')}>
                             <h2 ref={(e) => this.registerTitleElement(e)} />
                         </div>
-                        <div
-                            className={cx('component-page-header__content__actions')}
-                            ref={(e) => this.registerActionsElement(e)}
-                        />
+                        <div className={cx('component-page-header__content__actions')} ref={(e) => this.registerActionsElement(e)} />
                     </div>
                     <div
                         className={cx('component-page-header__breadcrumbs--outer')}
@@ -176,7 +173,7 @@ export class BreadcrumbsItem extends React.Component<BreadcrumbsItemProps, null>
                 )
             } else if (_.isEmpty(href)) {
                 return (
-                    <a href>
+                    <a>
                         <span>{children}</span>
                     </a>
                 )
@@ -195,8 +192,6 @@ export class Actions extends React.Component<ActionsProps, null> {
     render() {
         const { children } = this.props
 
-        return (
-            <AppContext.Consumer>{({ actionsElement }) => createPortal(children, actionsElement)}</AppContext.Consumer>
-        )
+        return <AppContext.Consumer>{({ actionsElement }) => createPortal(children, actionsElement)}</AppContext.Consumer>
     }
 }

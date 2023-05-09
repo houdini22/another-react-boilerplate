@@ -17,6 +17,8 @@ const config = {
             </span>
         ),
     },
+    siteTitle: 'another-react-boilerplate',
+    siteTitleSeparator: ' - ',
 }
 
 export default config

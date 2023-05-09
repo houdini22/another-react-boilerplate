@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { AuthManager } from './AuthManager'
 import { Permission, Role, User } from '../../types.d'
+import { ifDeepDiff } from '../utils/javascript'
 
 interface UsersManagerProps {
     children: any
@@ -69,38 +70,58 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             fetchPermission,
             getUsers,
             setIsLoading,
+            getLogsData,
+            fetchLogsData,
+            logsDataFilters,
         } = this.props
         const promises = []
 
-        setIsLoading(true)
+        setIsLoading(true).then(() => {
+            if (id) {
+                promises.push(fetchOne(id))
+            }
 
-        if (id) {
-            promises.push(fetchOne(id))
-        }
+            if (getUsers) {
+                promises.push(fetch())
+            }
 
-        if (getUsers) {
-            promises.push(fetch())
-        }
+            if (getRoles) {
+                promises.push(fetchRoles())
+            }
 
-        if (getRoles) {
-            promises.push(fetchRoles())
-        }
+            if (getPermissions) {
+                promises.push(fetchPermissions())
+            }
 
-        if (getPermissions) {
-            promises.push(fetchPermissions())
-        }
+            if (roleId) {
+                promises.push(fetchRole(roleId))
+            }
 
-        if (roleId) {
-            promises.push(fetchRole(roleId))
-        }
+            if (permissionId) {
+                promises.push(fetchPermission(permissionId))
+            }
 
-        if (permissionId) {
-            promises.push(fetchPermission(permissionId))
-        }
+            if (getLogsData) {
+                promises.push(fetchLogsData(logsDataFilters))
+            }
 
-        Promise.all(promises).then(() => {
-            setIsLoading(false)
+            Promise.all(promises).then(
+                () => {
+                    setIsLoading(false)
+                },
+                () => {
+                    setIsLoading(false)
+                },
+            )
         })
+    }
+
+    componentDidUpdate(prevProps: Readonly<UsersManagerProps>, prevState: Readonly<null>, snapshot?: any) {
+        const { logsDataFilters, fetchLogsData } = this.props
+
+        if (ifDeepDiff(logsDataFilters, prevProps.logsDataFilters)) {
+            fetchLogsData(logsDataFilters)
+        }
     }
 
     addPermissionToNewUser(id) {
@@ -158,6 +179,10 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
         })
 
         this.setState({ newRolePermissions: newPermissions })
+    }
+
+    clearPermissionsFromNewRole() {
+        this.setState({ newRolePermissions: [] })
     }
 
     addNewRoleToUser(id) {
@@ -236,6 +261,8 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             fetchPermission,
             deletePermission,
             deleteRole,
+            fetchRoles,
+            logsData,
         } = this.props
         const { newUserRoles, newUserPermissions, newRoleUsers, newPermissionUsers, newRolePermissions } = this.state
         const renderProps = {
@@ -289,6 +316,9 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
             fetchPermission,
             deletePermission,
             deleteRole,
+            fetchRoles,
+            clearPermissionsFromNewRole: this.clearPermissionsFromNewRole.bind(this),
+            logsData,
         }
 
         return (
@@ -308,6 +338,7 @@ const mapStateToProps = (state) => ({
     role: usersSelectors['getRole'](state),
     permissions: usersSelectors['getPermissions'](state),
     permission: usersSelectors['getPermission'](state),
+    logsData: usersSelectors['getLogsData'](state),
 })
 
 const UsersManager = connect(mapStateToProps, (dispatch) => {
@@ -341,6 +372,7 @@ const UsersManager = connect(mapStateToProps, (dispatch) => {
             addUserPermission: usersActions.addUserPermission,
             deleteUserPermission: usersActions.deleteUserPermission,
             fetchRoles: usersActions.fetchRoles,
+            fetchLogsData: usersActions.fetchLogsData,
         },
         dispatch,
     )

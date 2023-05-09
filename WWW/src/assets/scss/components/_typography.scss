@@ -9,6 +9,11 @@
     h4,
     h5,
     h6 {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
         small {
             color: $default;
         }
@@ -58,5 +63,9 @@
     }
     .text-success {
         color: $success;
+    }
+
+    & > p:last-child {
+        margin-bottom: 0;
     }
 }

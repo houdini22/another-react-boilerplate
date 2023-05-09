@@ -1,17 +1,28 @@
 import * as React from 'react'
-import styles from '../../../../assets/scss/components/_file.scss'
-import classNames from 'classnames/bind'
 import { FiltersCard } from '../../../components/common/FiltersCard'
-
-const cx = classNames.bind(styles)
+import { LoadingOverlay } from '../../../components'
 
 export class FilesFiles extends React.Component<null, null> {
     render() {
-        const { filters, setFilter, fetch, resetFilters, defaultFilters, setFilters, isLoading } = this.props
+        const {
+            filters,
+            setFilter,
+            fetch,
+            resetFilters,
+            defaultFilters,
+            setFilters,
+            isLoading,
+            savedFilters,
+            deleteSavedFilter,
+            restoreSavedFilter,
+            saveFilters,
+            filtersData,
+        } = this.props
 
         return (
             <FiltersCard
                 name={'MediaList'}
+                filtersData={filtersData}
                 filters={filters}
                 setFilter={setFilter}
                 setFilters={setFilters}
@@ -19,6 +30,10 @@ export class FilesFiles extends React.Component<null, null> {
                 fetch={fetch}
                 defaultFilters={defaultFilters}
                 isLoading={isLoading}
+                savedFilters={savedFilters}
+                deleteSavedFilter={deleteSavedFilter}
+                restoreSavedFilter={restoreSavedFilter}
+                saveFilters={saveFilters}
                 filtersToRender={[
                     {
                         type: 'search',
@@ -29,7 +44,7 @@ export class FilesFiles extends React.Component<null, null> {
                         type: 'text',
                         label: 'Username',
                         name: 'user',
-                        placeholder: 'username',
+                        placeholder: 'Username',
                     },
                     {
                         options: [
@@ -99,7 +114,9 @@ export class FilesFiles extends React.Component<null, null> {
                         label: 'Items per page',
                     },
                 ]}
-            />
+            >
+                {isLoading && <LoadingOverlay />}
+            </FiltersCard>
         )
     }
 }

@@ -1,22 +1,22 @@
 import * as React from 'react'
 import { PageContent } from '../../../layouts/PageLayout/components'
-import { RouteManager } from '../../../containers/RouteManager'
-import { Button, Card, Col, LoadingOverlay, PageHeader, Row } from '../../../components'
+import { RouteManager, NotificationsManager, TitleManager, FiltersManager } from '../../../containers'
+import { Card, Col, LoadingOverlay, Row } from '../../../components'
 import { MediaManager } from '../containers/MediaManager'
 import File from './File'
 import { UploadFileFormContainer } from './UploadFileFormContainer'
 import { ListManager } from '../../../components/common/List/ListManager'
 import { Pagination } from '../../../components/common/List/Pagination'
 import FilesFilters from './FilesFilters'
-import { getReadableFileSizeString } from '../../../utils/javascript'
-import { FaHome as HomeIcon } from 'react-icons/fa'
-import { NotificationsManager } from '../../../containers/NotificationsManager'
+import Header from './Header'
+import { getDefaultFilters } from '../../../helpers/media'
+import { createUrlFilters } from '../../../helpers/filters'
 
 interface UsersViewState {
     addVisible: boolean
 }
 
-export class UsersView extends React.Component<null, UsersViewState> {
+export class Index extends React.Component<null, UsersViewState> {
     state = {
         addVisible: false,
     }
@@ -25,158 +25,153 @@ export class UsersView extends React.Component<null, UsersViewState> {
         const { addVisible } = this.state
 
         return (
-            <NotificationsManager>
-                {({ addToastNotification }) => (
-                    <RouteManager>
-                        {({ query: { user = '' } }) => {
-                            const defaultFilters = {
-                                user: '',
-                                items_per_page: 24,
-                                order_by: 'id',
-                                order_direction: 'asc',
-                                search: '',
-                                has_user: 'yes_or_no',
-                            }
+            <TitleManager>
+                {({ setTitleSegments }) => {
+                    setTitleSegments(['Media'])
 
-                            return (
-                                <PageContent>
-                                    <PageHeader.Container>
-                                        <PageHeader.Title>Media</PageHeader.Title>
-                                        <PageHeader.Actions>
-                                            <Button
-                                                color={'success'}
-                                                onClick={() => {
-                                                    this.setState({
-                                                        addVisible: !addVisible,
-                                                    })
+                    return (
+                        <NotificationsManager>
+                            {({ addToastNotification }) => (
+                                <RouteManager>
+                                    {({ query: { user = '' } }) => (
+                                        <PageContent>
+                                            <Header
+                                                openAddModal={() => {
+                                                    this.setState({ addVisible: true })
                                                 }}
-                                            >
-                                                Add
-                                            </Button>
-                                        </PageHeader.Actions>
-                                        <PageHeader.Breadcrumbs>
-                                            <PageHeader.BreadcrumbsItem href="/">
-                                                <HomeIcon /> Home
-                                            </PageHeader.BreadcrumbsItem>
-                                            <PageHeader.BreadcrumbsItem href="/media">Media</PageHeader.BreadcrumbsItem>
-                                        </PageHeader.Breadcrumbs>
-                                    </PageHeader.Container>
-
-                                    <ListManager
-                                        url={'/files/list'}
-                                        defaultFilters={defaultFilters}
-                                        urlFilters={{ user }}
-                                    >
-                                        {({
-                                            data,
-                                            isLoading,
-                                            fetch,
-                                            links,
-                                            page,
-                                            setPage,
-                                            hasNextPage,
-                                            hasPrevPage,
-                                            totalPages,
-                                            filters,
-                                            setFilter,
-                                            perPage,
-                                            total,
-                                            resetFilters,
-                                            setFilters,
-                                        }) => (
+                                            />
                                             <MediaManager>
-                                                {({ deleteFile, uploadFiles, uploadProgress, editFile }) => {
-                                                    let totalSize = 0
-                                                    data.forEach(({ size }) => {
-                                                        totalSize += size
-                                                    })
-
-                                                    return (
-                                                        <>
-                                                            {addVisible && (
-                                                                <Card header={<h1>Add files</h1>}>
-                                                                    <UploadFileFormContainer
-                                                                        uploadFiles={uploadFiles}
-                                                                        uploadProgress={uploadProgress}
-                                                                        fetch={fetch}
-                                                                        addToastNotification={addToastNotification}
-                                                                    />
-                                                                </Card>
-                                                            )}
-
-                                                            <FilesFilters
-                                                                filters={filters}
-                                                                setFilter={setFilter}
-                                                                fetch={fetch}
-                                                                resetFilters={resetFilters}
-                                                                defaultFilters={defaultFilters}
-                                                                setFilters={setFilters}
-                                                                isLoading={isLoading}
-                                                            />
-
-                                                            <Card>
-                                                                <Pagination
-                                                                    links={links}
-                                                                    page={page}
+                                                {({ deleteFile, uploadFiles, uploadProgress, editFile, isLoading, setIsLoading }) => (
+                                                    <>
+                                                        {addVisible && (
+                                                            <Card header={<h1>Add files</h1>}>
+                                                                <UploadFileFormContainer
+                                                                    uploadFiles={uploadFiles}
+                                                                    uploadProgress={uploadProgress}
                                                                     fetch={fetch}
-                                                                    setPage={setPage}
-                                                                    hasNextPage={hasNextPage}
-                                                                    hasPrevPage={hasPrevPage}
-                                                                    totalPages={totalPages}
+                                                                    addToastNotification={addToastNotification}
                                                                 />
-                                                                <Row>
-                                                                    {data?.map((file) => (
-                                                                        <Col xs={2} sm={2} md={2} key={file.id}>
-                                                                            <File
-                                                                                file={file}
-                                                                                deleteFile={deleteFile}
-                                                                                fetch={fetch}
-                                                                                editFile={editFile}
-                                                                                isLoading={isLoading}
-                                                                                addToastNotification={
-                                                                                    addToastNotification
-                                                                                }
-                                                                            />
-                                                                        </Col>
-                                                                    ))}
-                                                                </Row>
-                                                                <Pagination
-                                                                    links={links}
-                                                                    page={page}
-                                                                    fetch={fetch}
-                                                                    setPage={setPage}
-                                                                    hasNextPage={hasNextPage}
-                                                                    hasPrevPage={hasPrevPage}
-                                                                    totalPages={totalPages}
-                                                                />
-                                                                <div style={{ textAlign: 'right' }}>
-                                                                    Records:{' '}
-                                                                    <b>
-                                                                        {(page - 1) * perPage + 1} -{' '}
-                                                                        {Math.min(perPage * page, total)} / {total}
-                                                                    </b>
-                                                                    <br />
-                                                                    Total pages: <b>{totalPages}</b>
-                                                                    <br />
-                                                                    Total size:{' '}
-                                                                    <b>{getReadableFileSizeString(totalSize)}</b>
-                                                                </div>
-                                                                {isLoading && <LoadingOverlay />}
                                                             </Card>
-                                                        </>
-                                                    )
-                                                }}
+                                                        )}
+                                                        <FiltersManager
+                                                            defaultFilters={getDefaultFilters()}
+                                                            name={'media-filters'}
+                                                            urlFilters={createUrlFilters({ user })}
+                                                        >
+                                                            {({
+                                                                defaultFilters,
+                                                                filters,
+                                                                setFilters,
+                                                                resetFilters,
+                                                                setFilter,
+                                                                savedFilters,
+                                                                deleteSavedFilter,
+                                                                restoreSavedFilter,
+                                                                saveFilters,
+                                                                filtersData,
+                                                            }) => (
+                                                                <ListManager
+                                                                    url={'/files/list'}
+                                                                    defaultFilters={defaultFilters}
+                                                                    urlFilters={createUrlFilters({ user })}
+                                                                    filters={filters}
+                                                                    setIsLoading={setIsLoading}
+                                                                >
+                                                                    {({
+                                                                        data: {
+                                                                            files: {
+                                                                                data,
+                                                                                links,
+                                                                                hasNextPage,
+                                                                                hasPrevPage,
+                                                                                totalPages,
+                                                                                per_page: perPage,
+                                                                                total,
+                                                                            } = {},
+                                                                        },
+                                                                        filtersData,
+                                                                        setPage,
+                                                                        fetch,
+                                                                        page,
+                                                                    }) => (
+                                                                        <>
+                                                                            <FilesFilters
+                                                                                filters={filters}
+                                                                                setFilter={setFilter}
+                                                                                fetch={fetch}
+                                                                                resetFilters={resetFilters}
+                                                                                defaultFilters={defaultFilters}
+                                                                                setFilters={setFilters}
+                                                                                isLoading={isLoading}
+                                                                                savedFilters={savedFilters}
+                                                                                deleteSavedFilter={deleteSavedFilter}
+                                                                                restoreSavedFilter={restoreSavedFilter}
+                                                                                saveFilters={saveFilters}
+                                                                                filtersData={filtersData}
+                                                                            />
+
+                                                                            <Card>
+                                                                                <Pagination
+                                                                                    links={links}
+                                                                                    page={page}
+                                                                                    fetch={fetch}
+                                                                                    setPage={setPage}
+                                                                                    hasNextPage={hasNextPage}
+                                                                                    hasPrevPage={hasPrevPage}
+                                                                                    totalPages={totalPages}
+                                                                                />
+                                                                                <Row>
+                                                                                    {data?.map((file) => (
+                                                                                        <Col xs={2} sm={2} md={2} key={file.id}>
+                                                                                            <File
+                                                                                                file={file}
+                                                                                                deleteFile={deleteFile}
+                                                                                                fetch={fetch}
+                                                                                                editFile={editFile}
+                                                                                                isLoading={isLoading}
+                                                                                                addToastNotification={addToastNotification}
+                                                                                            />
+                                                                                        </Col>
+                                                                                    ))}
+                                                                                </Row>
+                                                                                <Pagination
+                                                                                    links={links}
+                                                                                    page={page}
+                                                                                    fetch={fetch}
+                                                                                    setPage={setPage}
+                                                                                    hasNextPage={hasNextPage}
+                                                                                    hasPrevPage={hasPrevPage}
+                                                                                    totalPages={totalPages}
+                                                                                />
+                                                                                <div style={{ textAlign: 'right' }}>
+                                                                                    Records:{' '}
+                                                                                    <b>
+                                                                                        {(page - 1) * perPage + 1} - {Math.min(perPage * page, total)}{' '}
+                                                                                        / {total}
+                                                                                    </b>
+                                                                                    <br />
+                                                                                    Total pages: <b>{totalPages}</b>
+                                                                                </div>
+                                                                                {isLoading && <LoadingOverlay />}
+                                                                            </Card>
+                                                                        </>
+                                                                    )}
+                                                                </ListManager>
+                                                            )}
+                                                        </FiltersManager>
+                                                    </>
+                                                )}
                                             </MediaManager>
-                                        )}
-                                    </ListManager>
-                                </PageContent>
-                            )
-                        }}
-                    </RouteManager>
-                )}
-            </NotificationsManager>
+                                        </PageContent>
+                                    )}
+                                </RouteManager>
+                            )}
+                        </NotificationsManager>
+                    )
+                }}
+            </TitleManager>
         )
     }
 }
 
-export default UsersView
+export default Index

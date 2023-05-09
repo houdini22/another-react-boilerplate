@@ -1,118 +1,70 @@
 import * as React from 'react'
-import { Col, Row, Table, Label, Dropdown, Typography } from '../../../../components'
-import { DeleteIcon, InfoIcon, UserIcon } from '../../../../components/icons'
-import { ModalConfirm } from '../../../../components/common/ModalConfirm'
+import { Col, Row, Table, Typography } from '../../../../components'
 import { sortPermissionsByNameAscending } from '../../../../helpers/permissions'
+import { RouteManager } from '../../../../containers'
+import { ModalManager } from '../../../../components/ui/Modal'
+import { DeleteRolePermission, Permission, Role, SetIsLoading } from '../../../../../types.d'
+import { PermissionDropdown } from '../../../../components/common/PermissionDropdown'
+import { ModalDeleteRolePermission } from '../../../../components/common/ModalDeleteRolePermission'
 
 interface RowExpandPermissionsProps {
-    setIsLoading: Function
-    navigate: Function
-    addToastNotification: Function
-    fetch: Function
+    setIsLoading: SetIsLoading
+    role: Role
+    fetch: () => Promise<void>
+    deleteRolePermission: DeleteRolePermission
 }
 
 export class RowExpandPermissions extends React.Component<RowExpandPermissionsProps, null> {
     render() {
-        const {
-            role,
-            setIsLoading,
-            navigate,
-            addToastNotification,
-            fetch,
-            deleteRolePermission,
-            registerModal,
-            closeModal,
-            openModal,
-        } = this.props
+        const { role, setIsLoading, fetch, deleteRolePermission } = this.props
 
         return (
-            <Table.Tr key={`permissions${role.id}`}>
-                <Table.Td xs={12}>
-                    <Row>
-                        <Col xs={12}>
-                            <Typography.Container>
-                                <h3>Role Permissions</h3>
-                            </Typography.Container>
-                        </Col>
-                        {sortPermissionsByNameAscending(role?.permissions).map(
-                            ({ id: _id, name, is_deletable: _is_deletable }) => {
-                                registerModal(
-                                    `user-remove-role-permission-${_id}-delete`,
-                                    <ModalConfirm
-                                        onConfirm={() => {
-                                            setIsLoading(true)
+            <RouteManager>
+                {({ navigate }) => (
+                    <ModalManager>
+                        {({ registerModal, openModal, closeModal }) => (
+                            <Table.Tr key={`permissions${role.id}`}>
+                                <Table.Td xs={12}>
+                                    <Row>
+                                        <Col xs={12}>
+                                            <Typography.Container>
+                                                <h3>Role Permissions</h3>
+                                            </Typography.Container>
+                                        </Col>
+                                        {sortPermissionsByNameAscending(role?.permissions).map((permission: Permission) => {
+                                            const modalName = `user-remove-role-permission-${permission.id}-delete`
+                                            registerModal(
+                                                modalName,
+                                                <ModalDeleteRolePermission
+                                                    role={role}
+                                                    permission={permission}
+                                                    deleteRolePermission={deleteRolePermission}
+                                                    close={() => closeModal(modalName)}
+                                                    fetch={fetch}
+                                                    setIsLoading={setIsLoading}
+                                                />,
+                                            )
 
-                                            return deleteRolePermission(role, {
-                                                id: _id,
-                                            }).then(() => {
-                                                fetch().then(() => {
-                                                    setIsLoading(false)
-                                                    addToastNotification({
-                                                        title: 'Remove success.',
-                                                        text: `Permission ID: ${_id} has been removed from Role ID: ${role.id}.`,
-                                                        type: 'success',
-                                                        href: '/roles',
-                                                    })
-                                                    closeModal(`user-remove-role-permission-${_id}-delete`)
-                                                })
-                                            })
-                                        }}
-                                        onCancel={() => closeModal(`user-remove-role-permission-${_id}-delete`)}
-                                    >
-                                        <p>
-                                            Are you sure to delete Permission: <b>{name}</b> from Role{' '}
-                                            <b>{role.name}</b>?
-                                        </p>
-                                    </ModalConfirm>,
-                                )
-
-                                return (
-                                    <Col xs={4} key={_id}>
-                                        <Dropdown.Container triggerSize={'lg'}>
-                                            <Dropdown.Trigger
-                                                size="lg"
-                                                component={Label}
-                                                componentProps={{ block: true }}
-                                            >
-                                                {name}
-                                            </Dropdown.Trigger>
-                                            <Dropdown.Menu>
-                                                <Dropdown.Item type={'header'}>
-                                                    <InfoIcon /> Permission ID: {_id}
-                                                </Dropdown.Item>
-                                                <Dropdown.Item
-                                                    color={'info'}
-                                                    onClick={() => {
-                                                        navigate(`/users?permissions=${_id}`)
-                                                    }}
-                                                >
-                                                    <UserIcon /> Show Users with Permission
-                                                </Dropdown.Item>
-                                                <Dropdown.Item
-                                                    color={'info'}
-                                                    onClick={() => {
-                                                        navigate(`/roles?permissions=${_id}`)
-                                                    }}
-                                                >
-                                                    <UserIcon /> Show Roles with Permission
-                                                </Dropdown.Item>
-                                                <Dropdown.Item
-                                                    color="danger"
-                                                    onClick={() => {
-                                                        openModal(`user-remove-role-permission-${_id}-delete`)
-                                                    }}
-                                                >
-                                                    <DeleteIcon /> Remove Permission from Role
-                                                </Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown.Container>
-                                    </Col>
-                                )
-                            },
+                                            return (
+                                                <Col xs={4} key={permission.id}>
+                                                    <PermissionDropdown
+                                                        navigate={navigate}
+                                                        permission={{
+                                                            ...permission,
+                                                            hasRole: true,
+                                                        }}
+                                                        openDeleteModal={() => openModal(modalName)}
+                                                    />
+                                                </Col>
+                                            )
+                                        })}
+                                    </Row>
+                                </Table.Td>
+                            </Table.Tr>
                         )}
-                    </Row>
-                </Table.Td>
-            </Table.Tr>
+                    </ModalManager>
+                )}
+            </RouteManager>
         )
     }
 }

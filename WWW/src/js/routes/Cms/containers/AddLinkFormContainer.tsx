@@ -1,17 +1,16 @@
 import * as React from 'react'
 import { bindActionCreators, compose } from 'redux'
 import { connect } from 'react-redux'
-import { AddLinkForm } from '../components/AddLinkForm'
-import { reduxForm, SubmissionError } from 'redux-form'
-import * as moment from 'moment'
-import { formatDateTimeAPI } from '../../../helpers/date-time'
+import { AddLinkForm } from '../components/AddLink/AddLinkForm'
+import { reduxForm, SubmissionError, formValueSelector } from 'redux-form'
 import { actions } from '../../../reducers/cms-pages'
 import { processAPIerrorResponseToFormErrors } from '../../../modules/http'
 import { withRouter } from '../../../helpers/router'
 
 export const FORM_NAME = 'add-link-form-container'
+const selector = formValueSelector(FORM_NAME)
 
-class AddLinkFormContainerBase extends React.Component {
+class AddLinkFormContainerBase extends React.Component<null, null> {
     state = {
         categories: [],
     }
@@ -38,21 +37,10 @@ class AddLinkFormContainerBase extends React.Component {
 const AddLinkFormContainer = compose(
     withRouter,
     connect(
-        ({ cmsPages: { currentId } }, props) => {
+        (state) => {
+            const formValues = selector(state, 'tree.tree_is_published', 'tree.tree_published_from', 'tree.tree_published_to')
             return {
-                initialValues: {
-                    link: {
-                        link_name: null,
-                        link_url: null,
-                        link_target: '_self',
-                    },
-                    parent_id: currentId,
-                    tree: {
-                        tree_is_published: true,
-                        tree_published_from: formatDateTimeAPI(moment()),
-                        tree_published_to: formatDateTimeAPI(moment(new Date(2099, 12)).format('YYYY')),
-                    },
-                },
+                formValues,
             }
         },
         (dispatch) => {
@@ -67,21 +55,21 @@ const AddLinkFormContainer = compose(
     ),
     reduxForm({
         form: FORM_NAME,
-        onSubmit: (values, dispatch, { addLink, navigate }) => {
-            return addLink(values)
-                .then(() => {
-                    navigate('/cms/pages')
-                })
-                .catch(
-                    ({
-                        response: {
-                            data: { errors },
-                        },
-                    }) => {
-                        throw new SubmissionError(processAPIerrorResponseToFormErrors(errors))
-                    },
-                )
+        onSubmit: (values, dispatch, { save, navigate, setIsLoading }) => {
+            setIsLoading(true)
+            return save(values).then(
+                ({ data }) => {
+                    setIsLoading(false)
+                    navigate(`/cms/pages?parent_id=${data.parent_id}`)
+                },
+                (response) => {
+                    setIsLoading(false)
+                    throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
+                },
+            )
         },
+        enableReinitialize: true,
+        destroyOnUnmount: false,
     }),
 )(AddLinkFormContainerBase)
 

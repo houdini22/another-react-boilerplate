@@ -33,8 +33,7 @@ class Badge extends React.Component<BadgeProps, null> {
             [`component-badge--arrow`]: arrow,
             [`component-badge--rounded`]: rounded,
             [`component-badge--roundless`]: roundless,
-            [`component-badge--size-${dropdownSize || cardSize || accordionSize || size}`]:
-                dropdownSize || cardSize || accordionSize || size,
+            [`component-badge--size-${dropdownSize || cardSize || accordionSize || size}`]: dropdownSize || cardSize || accordionSize || size,
         })
     }
 
@@ -44,16 +43,7 @@ class Badge extends React.Component<BadgeProps, null> {
         return (
             <AppContext.Consumer>
                 {({ cardSize, dropdownSize, accordionSize } = {}) => {
-                    const {
-                        children,
-                        color = 'default',
-                        className,
-                        href,
-                        size = 'md',
-                        arrow,
-                        rounded,
-                        ...props
-                    } = this.props
+                    const { children, color = 'default', className, href, size = 'md', arrow, rounded, ...props } = this.props
 
                     if (href) {
                         return (
@@ -76,12 +66,7 @@ class Badge extends React.Component<BadgeProps, null> {
                     }
 
                     return (
-                        <div
-                            className={this.renderClassName(
-                                disableContext ? {} : { cardSize, dropdownSize, accordionSize },
-                            )}
-                            {...props}
-                        >
+                        <div className={this.renderClassName(disableContext ? {} : { cardSize, dropdownSize, accordionSize })} {...props}>
                             {children}
                             {arrow && <ArrowIcon className={cx('component-badge__arrow-icon')} />}
                         </div>

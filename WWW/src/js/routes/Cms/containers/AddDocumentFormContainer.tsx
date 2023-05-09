@@ -1,17 +1,15 @@
 import * as React from 'react'
 import { bindActionCreators, compose } from 'redux'
 import { connect } from 'react-redux'
-import { AddDocumentForm } from '../components/AddDocumentForm'
-import { reduxForm, SubmissionError } from 'redux-form'
-import * as moment from 'moment'
-import { formatDateTimeAPI } from '../../../helpers/date-time'
+import { AddDocumentForm } from '../components/AddDocument/AddDocumentForm'
+import { reduxForm, SubmissionError, formValueSelector } from 'redux-form'
 import { actions } from '../../../reducers/cms-pages'
 import { processAPIerrorResponseToFormErrors } from '../../../modules/http'
 import { withRouter } from '../../../helpers/router'
 
-export const FORM_NAME = 'add-document-form-container'
-
-class AddDocumentFormContainerBase extends React.Component {
+export const FORM_NAME = 'add-document-form'
+const selector = formValueSelector(FORM_NAME)
+class AddDocumentFormContainerBase extends React.Component<null, null> {
     state = {
         categories: [],
     }
@@ -38,24 +36,10 @@ class AddDocumentFormContainerBase extends React.Component {
 const AddDocumentFormContainer = compose(
     withRouter,
     connect(
-        ({ cmsPages: { currentId } }, props) => {
+        (state) => {
+            const formValues = selector(state, 'tree.tree_is_published', 'tree.tree_published_from', 'tree.tree_published_to')
             return {
-                initialValues: {
-                    document: {
-                        document_name: null,
-                        document_url: null,
-                        document_meta_title: null,
-                        document_meta_keywords: null,
-                        document_meta_description: null,
-                        document_meta_robots: null,
-                    },
-                    parent_id: currentId,
-                    tree: {
-                        tree_is_published: true,
-                        tree_published_from: formatDateTimeAPI(moment()),
-                        tree_published_to: formatDateTimeAPI(moment(new Date(2099, 12)).format('YYYY')),
-                    },
-                },
+                formValues,
             }
         },
         (dispatch) => {
@@ -70,21 +54,20 @@ const AddDocumentFormContainer = compose(
     ),
     reduxForm({
         form: FORM_NAME,
-        onSubmit: (values, dispatch, { addDocument, navigate }) => {
-            return addDocument(values)
-                .then(() => {
-                    navigate('/cms/pages')
-                })
-                .catch(
-                    ({
-                        response: {
-                            data: { errors },
-                        },
-                    }) => {
-                        throw new SubmissionError(processAPIerrorResponseToFormErrors(errors))
-                    },
-                )
+        onSubmit: (values, dispatch, { save, navigate, setIsLoading }) => {
+            return save(values).then(
+                ({ data }) => {
+                    setIsLoading(false)
+                    navigate(`/cms/pages?parent_id=${data.parent_id}`)
+                },
+                (response) => {
+                    setIsLoading(false)
+                    throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
+                },
+            )
         },
+        enableReinitialize: true,
+        destroyOnUnmount: false,
     }),
 )(AddDocumentFormContainerBase)
 

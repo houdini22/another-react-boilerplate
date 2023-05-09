@@ -1,45 +1,45 @@
 import * as React from 'react'
-import { Button, LoadingOverlay } from '../../../components'
+import { Button } from '../../../components'
 import { Card } from '../../ui/Card'
 import { ifDeepDiff } from '../../../utils/javascript'
 import { FiltersFactory } from '../List/FiltersFactory'
 import { ModalManager } from '../../ui/Modal'
 import { SaveFiltersModal } from './SaveFiltersModal'
 import { DropdownContainer, DropdownItem, DropdownMenu, DropdownTrigger } from '../../ui/Dropdown'
-import { LocalStorage } from '../../../modules/database'
 import { DeleteIcon } from '../../icons'
+import { ResetFilters, Filters, SetFilter, DeleteSavedFilter, SaveFilters, RestoreSavedFilter, SavedFilters } from '../../../../types.d'
 
-interface FilterProps {}
+interface FiltersCardProps {
+    name: string
+    resetFilters: ResetFilters
+    defaultFilters: Filters
+    filters: Filters
+    setFilter: SetFilter
+    filtersToRender: Array<any>
+    savedFilters: SavedFilters
+    deleteSavedFilter: DeleteSavedFilter
+    saveFilters: SaveFilters
+    restoreSavedFilter: RestoreSavedFilter
+    children: any
+    filtersData: Object
+}
 
-class FiltersCard extends React.Component<FilterProps, null> {
-    state = {
-        savedFilters: [],
-    }
-    componentDidMount() {
-        const savedFilters = this.getSavedFilters()
-
-        this.setState({ savedFilters })
-    }
-
-    getSavedFilters() {
-        const { name } = this.props
-        return LocalStorage.queryAll('ListManagerFilters', { query: { name: name } })
-    }
-
+class FiltersCard extends React.Component<FiltersCardProps, null> {
     render() {
         const {
             name,
             resetFilters,
-            defaultFilters = {},
-            filters = {},
+            defaultFilters,
+            filters,
             setFilter,
-            fetch,
             filtersToRender,
-            isLoading,
-            setFilters,
+            savedFilters,
+            deleteSavedFilter,
+            saveFilters,
+            restoreSavedFilter,
+            children,
+            filtersData,
         } = this.props
-
-        const { savedFilters } = this.state
 
         return (
             <ModalManager>
@@ -47,12 +47,11 @@ class FiltersCard extends React.Component<FilterProps, null> {
                     registerModal(
                         'save-filters',
                         <SaveFiltersModal
-                            closeModal={() => {
+                            close={() => {
                                 closeModal('save-filters')
-                                this.setState({ savedFilters: this.getSavedFilters() })
                             }}
-                            name={name}
                             filters={filters}
+                            saveFilters={saveFilters}
                         />,
                     )
 
@@ -64,22 +63,20 @@ class FiltersCard extends React.Component<FilterProps, null> {
                             headerActions={[
                                 <Button
                                     key={'reset-filters'}
-                                    color={'secondary'}
+                                    color={'warning'}
                                     onClick={() => resetFilters()}
                                     disabled={!ifDeepDiff(defaultFilters, filters)}
                                 >
-                                    Reset Filters
+                                    Reset
                                 </Button>,
                                 <DropdownContainer key={'restore-filters'} placement={'right'}>
-                                    <DropdownTrigger component={Button}>Restore Filters</DropdownTrigger>
+                                    <DropdownTrigger component={Button}>Restore</DropdownTrigger>
                                     <DropdownMenu>
-                                        {savedFilters.map(({ list_name, filters }) => (
+                                        {savedFilters.map(({ list_name }) => (
                                             <DropdownItem
                                                 key={list_name}
                                                 onClick={() => {
-                                                    setFilters(filters).then(() => {
-                                                        fetch()
-                                                    })
+                                                    restoreSavedFilter(list_name)
                                                 }}
                                             >
                                                 <span>{list_name}</span>
@@ -90,12 +87,7 @@ class FiltersCard extends React.Component<FilterProps, null> {
                                                     style={{ marginLeft: 'auto' }}
                                                     onClick={(e) => {
                                                         e.stopPropagation()
-                                                        LocalStorage.deleteRows('ListManagerFilters', (row) => {
-                                                            return row.name === name && row.list_name === list_name
-                                                        })
-                                                        LocalStorage.commit()
-
-                                                        this.setState({ savedFilters: this.getSavedFilters() })
+                                                        deleteSavedFilter(list_name)
                                                     }}
                                                 />
                                             </DropdownItem>
@@ -104,22 +96,22 @@ class FiltersCard extends React.Component<FilterProps, null> {
                                 </DropdownContainer>,
                                 <Button
                                     key={'save-filters'}
-                                    color={'warning'}
+                                    color={'success'}
                                     onClick={() => openModal('save-filters')}
                                     disabled={!ifDeepDiff(defaultFilters, filters)}
                                 >
-                                    Save Filters
+                                    Save
                                 </Button>,
                             ]}
                         >
                             <FiltersFactory
+                                filtersData={filtersData}
                                 filters={filters}
                                 setFilter={setFilter}
                                 defaultFilters={defaultFilters}
-                                fetch={fetch}
                                 body={filtersToRender}
                             />
-                            {isLoading && <LoadingOverlay />}
+                            {children}
                         </Card>
                     )
                 }}

@@ -26,11 +26,7 @@ class BlankPageLayout extends React.Component<BlankPageLayoutProps, null> {
                 })}
             >
                 {children}
-                <ConnectionErrorModal
-                    visible={code === 'ERR_NETWORK'}
-                    message={message}
-                    close={() => setConnectionErrorModalVisible({})}
-                />
+                <ConnectionErrorModal visible={code === 'ERR_NETWORK'} message={message} close={() => setConnectionErrorModalVisible({})} />
             </div>
         )
     }

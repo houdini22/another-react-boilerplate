@@ -17,17 +17,7 @@ interface UploadAvatarModalState {}
 
 export class UploadAvatarModal extends React.Component<UploadAvatarModalProps, UploadAvatarModalState> {
     render() {
-        const {
-            user,
-            setUploadProgress,
-            setIsLoading,
-            uploadProgress,
-            sendAvatar,
-            fetchOne,
-            visible,
-            close,
-            addToastNotification,
-        } = this.props
+        const { user, setUploadProgress, setIsLoading, uploadProgress, sendAvatar, fetchOne, visible, close, addToastNotification } = this.props
         return (
             <Modal.Container visible={visible} color={'primary'}>
                 <Modal.Header close={close} closeIcon>

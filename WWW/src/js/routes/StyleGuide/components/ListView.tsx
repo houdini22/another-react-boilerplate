@@ -53,30 +53,23 @@ class ListView extends React.Component {
                                                 <List.ItemContent>
                                                     <h1>Header</h1>
                                                     <p>
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-                                                        feugiat, libero eget finibus finibus, neque lectus posuere
-                                                        lorem, sit amet placerat nulla ipsum eget nulla. Suspendisse
-                                                        tempus sapien a pulvinar porttitor. Etiam lacinia suscipit
-                                                        facilisis. Vivamus vel feugiat nulla. Duis eu tempor sapien, id
-                                                        vestibulum ante. Aliquam vitae placerat purus. Maecenas porta,
-                                                        urna ut condimentum lobortis, eros quam suscipit lacus, eu
-                                                        faucibus sapien ex ut risus. Vestibulum lacinia mauris ut magna
-                                                        elementum maximus.
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce feugiat, libero eget finibus
+                                                        finibus, neque lectus posuere lorem, sit amet placerat nulla ipsum eget nulla. Suspendisse
+                                                        tempus sapien a pulvinar porttitor. Etiam lacinia suscipit facilisis. Vivamus vel feugiat
+                                                        nulla. Duis eu tempor sapien, id vestibulum ante. Aliquam vitae placerat purus. Maecenas
+                                                        porta, urna ut condimentum lobortis, eros quam suscipit lacus, eu faucibus sapien ex ut risus.
+                                                        Vestibulum lacinia mauris ut magna elementum maximus.
                                                     </p>
                                                     <p>
-                                                        Maecenas non ligula tincidunt, porta sem quis, rutrum justo.
-                                                        Curabitur et dui et neque pulvinar viverra. Vestibulum ultricies
-                                                        venenatis urna. Duis maximus, libero sit amet tempus elementum,
-                                                        est urna congue enim, sed tristique sapien nulla id justo. Sed
-                                                        pellentesque, mauris vel luctus malesuada, mauris mauris tempus
-                                                        risus, at porta purus libero ac nunc. In tortor odio, pharetra
-                                                        quis suscipit non, eleifend eu nunc. Maecenas a tincidunt metus,
-                                                        in semper sem. Integer mattis elementum odio at condimentum.
-                                                        Suspendisse sagittis metus mauris, et mollis nisl posuere at.
-                                                        Etiam vitae ex in arcu consectetur interdum ac eget ante.
-                                                        Aliquam accumsan massa non magna malesuada sagittis. Aliquam
-                                                        placerat ullamcorper felis, eu pharetra enim iaculis in. Aliquam
-                                                        lobortis volutpat venenatis.
+                                                        Maecenas non ligula tincidunt, porta sem quis, rutrum justo. Curabitur et dui et neque
+                                                        pulvinar viverra. Vestibulum ultricies venenatis urna. Duis maximus, libero sit amet tempus
+                                                        elementum, est urna congue enim, sed tristique sapien nulla id justo. Sed pellentesque, mauris
+                                                        vel luctus malesuada, mauris mauris tempus risus, at porta purus libero ac nunc. In tortor
+                                                        odio, pharetra quis suscipit non, eleifend eu nunc. Maecenas a tincidunt metus, in semper sem.
+                                                        Integer mattis elementum odio at condimentum. Suspendisse sagittis metus mauris, et mollis
+                                                        nisl posuere at. Etiam vitae ex in arcu consectetur interdum ac eget ante. Aliquam accumsan
+                                                        massa non magna malesuada sagittis. Aliquam placerat ullamcorper felis, eu pharetra enim
+                                                        iaculis in. Aliquam lobortis volutpat venenatis.
                                                     </p>
                                                 </List.ItemContent>
                                             </List.Item>
@@ -84,30 +77,23 @@ class ListView extends React.Component {
                                                 <List.ItemContent>
                                                     <h1>Header</h1>
                                                     <p>
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-                                                        feugiat, libero eget finibus finibus, neque lectus posuere
-                                                        lorem, sit amet placerat nulla ipsum eget nulla. Suspendisse
-                                                        tempus sapien a pulvinar porttitor. Etiam lacinia suscipit
-                                                        facilisis. Vivamus vel feugiat nulla. Duis eu tempor sapien, id
-                                                        vestibulum ante. Aliquam vitae placerat purus. Maecenas porta,
-                                                        urna ut condimentum lobortis, eros quam suscipit lacus, eu
-                                                        faucibus sapien ex ut risus. Vestibulum lacinia mauris ut magna
-                                                        elementum maximus.
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce feugiat, libero eget finibus
+                                                        finibus, neque lectus posuere lorem, sit amet placerat nulla ipsum eget nulla. Suspendisse
+                                                        tempus sapien a pulvinar porttitor. Etiam lacinia suscipit facilisis. Vivamus vel feugiat
+                                                        nulla. Duis eu tempor sapien, id vestibulum ante. Aliquam vitae placerat purus. Maecenas
+                                                        porta, urna ut condimentum lobortis, eros quam suscipit lacus, eu faucibus sapien ex ut risus.
+                                                        Vestibulum lacinia mauris ut magna elementum maximus.
                                                     </p>
                                                     <p>
-                                                        Maecenas non ligula tincidunt, porta sem quis, rutrum justo.
-                                                        Curabitur et dui et neque pulvinar viverra. Vestibulum ultricies
-                                                        venenatis urna. Duis maximus, libero sit amet tempus elementum,
-                                                        est urna congue enim, sed tristique sapien nulla id justo. Sed
-                                                        pellentesque, mauris vel luctus malesuada, mauris mauris tempus
-                                                        risus, at porta purus libero ac nunc. In tortor odio, pharetra
-                                                        quis suscipit non, eleifend eu nunc. Maecenas a tincidunt metus,
-                                                        in semper sem. Integer mattis elementum odio at condimentum.
-                                                        Suspendisse sagittis metus mauris, et mollis nisl posuere at.
-                                                        Etiam vitae ex in arcu consectetur interdum ac eget ante.
-                                                        Aliquam accumsan massa non magna malesuada sagittis. Aliquam
-                                                        placerat ullamcorper felis, eu pharetra enim iaculis in. Aliquam
-                                                        lobortis volutpat venenatis.
+                                                        Maecenas non ligula tincidunt, porta sem quis, rutrum justo. Curabitur et dui et neque
+                                                        pulvinar viverra. Vestibulum ultricies venenatis urna. Duis maximus, libero sit amet tempus
+                                                        elementum, est urna congue enim, sed tristique sapien nulla id justo. Sed pellentesque, mauris
+                                                        vel luctus malesuada, mauris mauris tempus risus, at porta purus libero ac nunc. In tortor
+                                                        odio, pharetra quis suscipit non, eleifend eu nunc. Maecenas a tincidunt metus, in semper sem.
+                                                        Integer mattis elementum odio at condimentum. Suspendisse sagittis metus mauris, et mollis
+                                                        nisl posuere at. Etiam vitae ex in arcu consectetur interdum ac eget ante. Aliquam accumsan
+                                                        massa non magna malesuada sagittis. Aliquam placerat ullamcorper felis, eu pharetra enim
+                                                        iaculis in. Aliquam lobortis volutpat venenatis.
                                                     </p>
                                                 </List.ItemContent>
                                             </List.Item>

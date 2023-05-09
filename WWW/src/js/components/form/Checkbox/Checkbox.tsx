@@ -3,7 +3,6 @@ import classNames from 'classnames/bind'
 import _ from 'lodash'
 import { FaCheck as CheckIcon } from 'react-icons/fa'
 import Transition from 'react-transition-group/Transition'
-import jQuery from 'jquery'
 import styles1 from '../../../../assets/scss/components/_checkbox.scss'
 import styles2 from '../../../../assets/scss/_animations.scss'
 
@@ -34,10 +33,10 @@ class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
         this.setState({ checked })
     }
 
-    handleClick() {
+    handleClick(e) {
         const { checked } = this.state
         const { onChange, disabled } = this.props
-        jQuery(this.el).trigger('click')
+        this.el.click()
         if (_.isFunction(onChange) && !disabled) {
             onChange(this.el.checked)
         }
@@ -70,13 +69,7 @@ class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
                     )}
                 </span>
 
-                <input
-                    {...props}
-                    disabled={disabled}
-                    type="checkbox"
-                    className={cx('component-checkbox__input')}
-                    ref={(el) => (this.el = el)}
-                />
+                <input {...props} disabled={disabled} type="checkbox" className={cx('component-checkbox__input')} ref={(el) => (this.el = el)} />
             </div>
         )
     }

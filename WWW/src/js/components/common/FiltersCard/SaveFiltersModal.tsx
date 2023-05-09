@@ -6,15 +6,15 @@ interface SaveFiltersModalProps {}
 
 class SaveFiltersModal extends React.Component<SaveFiltersModalProps, null> {
     render() {
-        const { closeModal, name, filters } = this.props
+        const { close, filters, saveFilters } = this.props
 
         return (
             <ModalContainer visible={true} color={'primary'}>
-                <ModalHeader closeIcon close={() => closeModal('save-filters')}>
+                <ModalHeader closeIcon close={close}>
                     Save filters
                 </ModalHeader>
                 <ModalBody>
-                    <SaveFiltersFormContainer closeModal={closeModal} name={name} filters={filters} />
+                    <SaveFiltersFormContainer close={close} filters={filters} saveFilters={saveFilters} />
                 </ModalBody>
             </ModalContainer>
         )

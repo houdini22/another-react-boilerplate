@@ -6,13 +6,22 @@ const cx = classNames.bind(styles)
 
 interface ContainerProps {
     children: any
+    className?: string
 }
 
 class Container extends React.Component<ContainerProps, null> {
     render() {
-        const { children } = this.props
+        const { children, className } = this.props
 
-        return <div className={cx('component-typography')}>{children}</div>
+        return (
+            <div
+                className={cx('component-typography', {
+                    [className]: className,
+                })}
+            >
+                {children}
+            </div>
+        )
     }
 }
 

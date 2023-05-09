@@ -46,14 +46,7 @@ export class ContactForm extends React.Component<LoginFormProps, null> {
                             size={type === 'popover' ? 'sm' : undefined}
                             autoFocus
                         />
-                        <Field
-                            name="message"
-                            component={FormField}
-                            type="textarea"
-                            placeholder="Message..."
-                            inputOnly
-                            autoComplete="off"
-                        />
+                        <Field name="message" component={FormField} type="textarea" placeholder="Message..." inputOnly autoComplete="off" />
                         <Field
                             name="captcha_image"
                             component={FormField}

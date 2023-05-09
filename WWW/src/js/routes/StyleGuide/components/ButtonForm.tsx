@@ -98,12 +98,7 @@ class ButtonForm extends React.Component {
                                     <Field name="iconOnly" label="iconOnly" type="checkbox" component={FormField} />
                                 </Col>
                                 <Col xs={12}>
-                                    <Field
-                                        name="navigationHref"
-                                        label="navigationHref"
-                                        type="text"
-                                        component={FormField}
-                                    />
+                                    <Field name="navigationHref" label="navigationHref" type="text" component={FormField} />
                                 </Col>
                             </Row>
                         </Tabs.Content>

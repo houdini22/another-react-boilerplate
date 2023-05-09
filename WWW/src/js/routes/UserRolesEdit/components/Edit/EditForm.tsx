@@ -4,11 +4,10 @@ import { Button, FormField } from '../../../../components'
 
 class EditForm extends React.Component<null, null> {
     render() {
-        const { handleSubmit } = this.props
-
+        const { handleSubmit, initialValues: { is_name_editable } = {} } = this.props
         return (
             <form onSubmit={handleSubmit}>
-                <Field name="name" label="Name" type="text" component={FormField} autoFocus />
+                <Field name="name" label="Name" type="text" component={FormField} autoFocus disabled={!is_name_editable} />
                 <Field name="description" label="Description" type="textarea" component={FormField} />
                 <Button color="success" type="submit" block>
                     Save

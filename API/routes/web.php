@@ -17,12 +17,16 @@ Route::prefix('api/v1')->group(function () {
     Route::prefix('cms')->group(function () {
         Route::get('pages', '\App\Http\Controllers\CmsPagesController@getPages');
         Route::get('pages/fetchParentCategorySelectOptions', '\App\Http\Controllers\CmsPagesController@getParentCategorySelectOptions');
+        Route::get('pages/fetchIndexDocumentsSelectOptions', '\App\Http\Controllers\CmsPagesController@getFetchIndexDocumentsSelectOptions');
         Route::post('pages/addCategory', '\App\Http\Controllers\CmsPagesController@postAddCategory');
         Route::post('pages/publish', '\App\Http\Controllers\CmsPagesController@postPublish');
         Route::post('pages/unpublish', '\App\Http\Controllers\CmsPagesController@postUnpublish');
         Route::delete('pages/deleteNode', '\App\Http\Controllers\CmsPagesController@deleteDeleteNode');
         Route::post('pages/addDocument', '\App\Http\Controllers\CmsPagesController@postAddDocument');
         Route::post('pages/addLink', '\App\Http\Controllers\CmsPagesController@postAddLink');
+        Route::post('pages/editLink', '\App\Http\Controllers\CmsPagesController@postEditLink');
+        Route::post('pages/editCategory', '\App\Http\Controllers\CmsPagesController@postEditCategory');
+        Route::post('pages/editDocument', '\App\Http\Controllers\CmsPagesController@postEditDocument');
     });
 
     Route::prefix('users')->group(function () {
@@ -37,6 +41,7 @@ Route::prefix('api/v1')->group(function () {
         Route::post('change_avatar/{id}', '\App\Http\Controllers\UsersController@postChangeAvatar');
         Route::post('delete_avatar', '\App\Http\Controllers\UsersController@postDeleteAvatar');
         Route::post('force_login/{id}', '\App\Http\Controllers\UsersController@postForceLogin');
+        Route::get('filtersData', '\App\Http\Controllers\UsersController@getFiltersData');
 
         Route::prefix('roles')->group(function () {
             Route::post('add/{user_id}/{role_id}', '\App\Http\Controllers\UsersController@postAddUserRole');
@@ -49,6 +54,7 @@ Route::prefix('api/v1')->group(function () {
         Route::delete('delete/{id}', '\App\Http\Controllers\RolesController@deleteDeleteRole');
         Route::post('edit', '\App\Http\Controllers\RolesController@postEdit');
         Route::post('add', '\App\Http\Controllers\RolesController@postAdd');
+        Route::get('filtersData', '\App\Http\Controllers\RolesController@getFiltersData');
 
         Route::prefix('permissions')->group(function () {
             Route::get('list', '\App\Http\Controllers\RolesController@getPermissionList');
@@ -65,6 +71,7 @@ Route::prefix('api/v1')->group(function () {
         Route::post('add/{user_id}/{permission_id}', '\App\Http\Controllers\PermissionsController@postAddPermissionToUser');
         Route::post('delete_user_permission/{permission_id}/{user_id}', '\App\Http\Controllers\PermissionsController@postDeleteUserPermission');
         Route::post('add', '\App\Http\Controllers\PermissionsController@postAdd');
+        Route::get('filtersData', '\App\Http\Controllers\PermissionsController@getFiltersData');
     });
 
     Route::prefix('files')->group(function () {
@@ -72,6 +79,11 @@ Route::prefix('api/v1')->group(function () {
         Route::post('upload', '\App\Http\Controllers\FilesController@postUpload');
         Route::post('edit/{id}', '\App\Http\Controllers\FilesController@postEdit');
         Route::delete('delete/{id}', '\App\Http\Controllers\FilesController@deleteFile');
+    });
+
+    Route::prefix('logs')->group(function () {
+        Route::get('list', '\App\Http\Controllers\LogsController@getList');
+        Route::get('filtersData', '\App\Http\Controllers\LogsController@getFiltersData');
     });
 });
 

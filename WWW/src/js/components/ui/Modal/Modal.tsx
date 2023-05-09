@@ -76,10 +76,7 @@ class ModalHeader extends React.Component<ModalHeaderProps, null> {
                     {!_.isFunction(children) && children}
                 </h2>
                 {closeIcon && (
-                    <div
-                        className={cx('component-modal-container__modal__content__title__close-icon')}
-                        onClick={() => close()}
-                    >
+                    <div className={cx('component-modal-container__modal__content__title__close-icon')} onClick={() => close()}>
                         <CloseIcon />
                     </div>
                 )}

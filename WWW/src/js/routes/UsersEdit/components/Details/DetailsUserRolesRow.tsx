@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Button, Col, Row } from '../../../../components'
 import { RoleIcon } from '../../../../components/icons'
-import { RouteManager } from '../../../../containers/RouteManager'
+import { RouteManager } from '../../../../containers'
 import { User } from '../../../../../types.d'
 
 interface DetailsUserRolesRowProps {
@@ -20,11 +20,7 @@ class DetailsUserRolesRow extends React.Component<DetailsUserRolesRowProps, null
                             Roles
                         </Col>
                         <Col xs={8} style={{ marginBottom: 10 }}>
-                            <Button
-                                color={'info'}
-                                icon={<RoleIcon />}
-                                onClick={() => navigate(`/roles?user=${user.name}`)}
-                            >
+                            <Button color={'info'} icon={<RoleIcon />} onClick={() => navigate(`/roles?user=${user.name}`)}>
                                 {user.roles_count}
                             </Button>
                         </Col>

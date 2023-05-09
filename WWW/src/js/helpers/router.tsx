@@ -8,9 +8,7 @@ export const withRouter = (Component) => {
         let navigate = useNavigate()
         let params = useParams()
         let searchParams = parseQueryString(location.search)
-        return (
-            <Component {...props} location={location} navigate={navigate} params={params} searchParams={searchParams} />
-        )
+        return <Component {...props} location={location} navigate={navigate} params={params} searchParams={searchParams} />
     }
 
     return ComponentWithRouterProp
