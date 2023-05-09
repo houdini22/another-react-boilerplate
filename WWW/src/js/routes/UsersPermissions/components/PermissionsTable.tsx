@@ -42,10 +42,12 @@ export class PermissionsTable extends React.Component<RolesTableProps, null> {
                                             <Table.Container bordered striped>
                                                 <Table.THead>
                                                     <Table.Tr>
-                                                        <Table.Th xs={1}>ID</Table.Th>
-                                                        <Table.Th xs={3}>Name</Table.Th>
-                                                        <Table.Th xs={4}>Resources</Table.Th>
-                                                        <Table.Th xs={4}>Actions</Table.Th>
+                                                        <Table.Th xs={1}></Table.Th>
+                                                        <Table.Th xs={5}>Name</Table.Th>
+                                                        <Table.Th xs={4} alignRight>
+                                                            <span>Resources</span>
+                                                        </Table.Th>
+                                                        <Table.Th xs={2}>Actions</Table.Th>
                                                     </Table.Tr>
                                                 </Table.THead>
                                                 <Table.TBody>
@@ -128,7 +130,7 @@ export class PermissionsTable extends React.Component<RolesTableProps, null> {
                                                                     return (
                                                                         <Table.Tr key={permission.id}>
                                                                             <Table.Td xs={1}>{permission.id}</Table.Td>
-                                                                            <Table.Td xs={4}>
+                                                                            <Table.Td xs={5}>
                                                                                 <div>
                                                                                     {permission.name}{' '}
                                                                                     {!!permission.description && (
@@ -153,7 +155,7 @@ export class PermissionsTable extends React.Component<RolesTableProps, null> {
                                                                                     )}
                                                                                 </div>
                                                                             </Table.Td>
-                                                                            <Table.Td xs={5} alignRight>
+                                                                            <Table.Td xs={4} alignRight>
                                                                                 <div>
                                                                                     {permission.roles_count > 0 &&
                                                                                         canByPermission('roles.list_permissions') && (

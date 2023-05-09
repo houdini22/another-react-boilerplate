@@ -96,11 +96,12 @@ interface ThProps {
 
     md?: number
     alignCenter?: boolean
+    alignRight?: boolean
 }
 
 class Th extends React.Component<ThProps, null> {
     render() {
-        const { children, xs, md, alignCenter } = this.props
+        const { children, xs, md, alignCenter, alignRight } = this.props
 
         return (
             <Col
@@ -108,9 +109,11 @@ class Th extends React.Component<ThProps, null> {
                     [`component-table__thead__th--xs-${xs}`]: xs,
                     [`component-table__thead__th--md-${md}`]: md,
                     'component-table__thead__th--align-center': alignCenter,
+                    'component-table__thead__th--align-right': alignRight,
                 })}
                 xs={xs}
                 md={md}
+                alignRight={alignRight}
             >
                 {children}
             </Col>

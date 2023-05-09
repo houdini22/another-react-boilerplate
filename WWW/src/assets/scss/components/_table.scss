@@ -46,6 +46,10 @@
                 font-weight: bold;
                 font-size: 1.16em;
                 padding: $COMPONENT_PADDING_MD;
+
+                &.component-table__thead__th--align-right {
+                    text-align: right;
+                }
             }
         }
     }
