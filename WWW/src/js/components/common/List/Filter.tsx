@@ -3,6 +3,7 @@ import styles from '../../../../assets/scss/components/_list_manager.scss'
 import classNames from 'classnames/bind'
 import { Button, FormField, Col, Row, Label, Badge } from '../../../components'
 import { ResetIcon } from '../../icons'
+import SimpleModelCell from '../SimpleModelCell'
 
 const cx = classNames.bind(styles)
 
@@ -183,12 +184,12 @@ class Filter extends React.Component<FilterProps, null> {
 
         return (
             <>
-                {options?.map(({ label, value }) => {
+                {options?.map(({ label, value, icon }) => {
                     return (
-                        <Label
-                            size={'lg'}
+                        <SimpleModelCell
+                            icon={icon}
                             key={`${value}${label}`}
-                            color={filters[name].indexOf(value) === -1 ? 'default' : 'warning'}
+                            color={filters[name].indexOf(value) === -1 ? 'primary' : 'warning'}
                             onClick={() => {
                                 if (filters[name].indexOf(value) === -1) {
                                     setFilter(name, [...filters[name], value])
@@ -202,8 +203,8 @@ class Filter extends React.Component<FilterProps, null> {
                                 }
                             }}
                         >
-                            {label}
-                        </Label>
+                            <div>{label}</div>
+                        </SimpleModelCell>
                     )
                 })}
             </>

@@ -70,6 +70,7 @@ class AddForm extends React.Component<null, null> {
                                     {newUsers.map((user) => {
                                         return (
                                             <SimpleModelCell
+                                                block
                                                 icon={<UserIcon />}
                                                 key={user.id}
                                                 actions={[

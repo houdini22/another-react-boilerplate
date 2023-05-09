@@ -19,6 +19,7 @@ export class RoleDropdown extends React.Component<RoleDropdownProps, null> {
                     <AuthorizationManager>
                         {({ canByPermission }) => (
                             <SimpleModelCell
+                                block
                                 icon={<RoleIcon />}
                                 dropdown={[
                                     {

@@ -95,6 +95,7 @@ class AddForm extends React.Component<null, null> {
                                                     {newUserRoles.map((role) => {
                                                         return (
                                                             <SimpleModelCell
+                                                                block
                                                                 icon={<RoleIcon />}
                                                                 key={role.id}
                                                                 actions={[
@@ -140,6 +141,7 @@ class AddForm extends React.Component<null, null> {
                                                         {newUserPermissions.map((permission) => {
                                                             return (
                                                                 <SimpleModelCell
+                                                                    block
                                                                     icon={<PermissionIcon />}
                                                                     key={permission.id}
                                                                     actions={[

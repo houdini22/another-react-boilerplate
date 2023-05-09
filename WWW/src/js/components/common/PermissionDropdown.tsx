@@ -19,6 +19,7 @@ export class PermissionDropdown extends React.Component<PermissionDropdownProps,
                     <AuthorizationManager>
                         {({ canByPermission }) => (
                             <SimpleModelCell
+                                block
                                 icon={<PermissionIcon />}
                                 dropdown={[
                                     {

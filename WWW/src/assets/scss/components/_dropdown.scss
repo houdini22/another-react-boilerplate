@@ -3,6 +3,7 @@
 .component-dropdown {
     display: inline;
     position: relative;
+    line-height: 0;
 
     & > .component-dropdown__trigger {
         position: relative;
