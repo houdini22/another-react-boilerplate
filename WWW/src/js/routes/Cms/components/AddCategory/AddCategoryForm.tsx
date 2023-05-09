@@ -135,7 +135,7 @@ class AddCategoryForm extends React.Component {
                             </Tabs.Container>
                             <div>
                                 <Button color="success" type="submit" block>
-                                    Save
+                                    <span>Save</span>
                                 </Button>
                             </div>
                         </form>

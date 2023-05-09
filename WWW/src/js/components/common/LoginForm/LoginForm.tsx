@@ -58,7 +58,7 @@ export class LoginForm extends React.Component<LoginFormProps, null> {
                                 <Row>
                                     <Col xs={6}>
                                         <Button type={'submit'} block>
-                                            Login
+                                            <span>Login</span>
                                         </Button>
                                     </Col>
                                     <Col xs={6}>
@@ -68,7 +68,7 @@ export class LoginForm extends React.Component<LoginFormProps, null> {
                                             }}
                                             block
                                         >
-                                            Register
+                                            <span>Register</span>
                                         </Button>
                                     </Col>
                                 </Row>

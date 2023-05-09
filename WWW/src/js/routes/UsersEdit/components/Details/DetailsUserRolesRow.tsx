@@ -21,7 +21,7 @@ class DetailsUserRolesRow extends React.Component<DetailsUserRolesRowProps, null
                         </Col>
                         <Col xs={8} style={{ marginBottom: 10 }}>
                             <Button color={'info'} icon={<RoleIcon />} onClick={() => navigate(`/roles?user=${user.name}`)}>
-                                {user.roles_count}
+                                <span> {user.roles_count}</span>
                             </Button>
                         </Col>
                     </Row>

@@ -116,6 +116,11 @@ class UsersManagerBase extends React.Component<UsersManagerProps, null> {
         })
     }
 
+    componentWillUnmount() {
+        const { setUser } = this.props
+        setUser({})
+    }
+
     componentDidUpdate(prevProps: Readonly<UsersManagerProps>, prevState: Readonly<null>, snapshot?: any) {
         const { logsDataFilters, fetchLogsData } = this.props
 
@@ -373,6 +378,7 @@ const UsersManager = connect(mapStateToProps, (dispatch) => {
             deleteUserPermission: usersActions.deleteUserPermission,
             fetchRoles: usersActions.fetchRoles,
             fetchLogsData: usersActions.fetchLogsData,
+            setUser: usersActions.setUser,
         },
         dispatch,
     )

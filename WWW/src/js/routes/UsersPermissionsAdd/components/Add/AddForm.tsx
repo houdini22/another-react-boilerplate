@@ -1,8 +1,10 @@
 import * as React from 'react'
 import { Field } from 'redux-form'
-import { Alert, Button, Card, Col, FormField, Row, Section } from '../../../../components'
+import { Button, Card, Col, FormField, Row, Section } from '../../../../components'
 import { sortRolesByNameAscending } from '../../../../helpers/roles'
 import { sortUsersByNameAscending } from '../../../../helpers/users'
+import { UserIcon } from '../../../../components/icons'
+import SimpleModelCell from '../../../../components/common/SimpleModelCell'
 
 class AddForm extends React.Component<null, null> {
     render() {
@@ -47,7 +49,6 @@ class AddForm extends React.Component<null, null> {
                     <Col xs={fullWidth ? 12 : 6}>
                         {!role_id && !noAddToUsers && canByPermission('users.add_permission') && (
                             <Card header={<h1>Add to Users</h1>} color={'secondary'}>
-                                {newUsers.length > 0 && <Alert color={'info'}>Click added User to remove.</Alert>}
                                 <Field
                                     name="_users"
                                     label="User"
@@ -68,17 +69,21 @@ class AddForm extends React.Component<null, null> {
                                 <Section>
                                     {newUsers.map((user) => {
                                         return (
-                                            <Button
-                                                key={user.id}
-                                                roundless
-                                                color={'secondary'}
+                                            <SimpleModelCell
                                                 block
-                                                onClick={() => {
-                                                    removeUserFromNewPermission(user.id)
-                                                }}
+                                                icon={<UserIcon />}
+                                                key={user.id}
+                                                actions={[
+                                                    {
+                                                        name: 'delete',
+                                                        onClick: () => {
+                                                            removeUserFromNewPermission(user.id)
+                                                        },
+                                                    },
+                                                ]}
                                             >
                                                 {user.name}
-                                            </Button>
+                                            </SimpleModelCell>
                                         )
                                     })}
                                 </Section>
@@ -89,7 +94,7 @@ class AddForm extends React.Component<null, null> {
                 <Row>
                     <Col xs={12}>
                         <Button color="success" type="submit" block>
-                            Save
+                            <span>Save</span>
                         </Button>
                     </Col>
                 </Row>

@@ -31,6 +31,7 @@ interface ButtonProps {
     onClickNavigation?(): any
     transparent?: boolean
     style?: object
+    bordered?: boolean
 }
 
 interface ButtonState {
@@ -115,6 +116,7 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                         isLoading,
                         href,
                         disableContext,
+                        bordered,
                         ...rest
                     } = this.props
 
@@ -123,6 +125,7 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                     const classes = cx('component-button', className, {
                         'component-button--is-loading': isLoading,
                         'component-button--icon-only': iconOnly,
+                        'component-button--with-icon': icon,
                         [`component-button--color-${buttonGroupColor || color}`]: buttonGroupColor || color,
                         [`component-button--size-${pageHeaderSize || cardSize || buttonGroupSize || size}`]:
                             pageHeaderSize || cardSize || buttonGroupSize || size,
@@ -134,6 +137,7 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                         'component-button--borderless': buttonGroupBorderless || borderless,
                         'component-button--has-navigation': navigationHref,
                         'component-button--transparent': transparent,
+                        'component-button--bordered': bordered,
                     })
 
                     const isDisabled = isLoading || isLoadingState || buttonGroupDisabled || disabled
@@ -141,7 +145,7 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                     return (
                         <button {...rest} style={style} className={classes} onClick={this.handleClick.bind(this)} disabled={isDisabled} type={type}>
                             {icon}
-                            {!iconOnly && <span>{children}</span>}
+                            {!iconOnly && <div>{children}</div>}
                             {(isLoading || isLoadingState) && <LoadingOverlay size="xs" />}
                             {arrow && <ArrowDownIcon className={cx('component-button__arrow-icon')} />}
                             {navigationHref && (

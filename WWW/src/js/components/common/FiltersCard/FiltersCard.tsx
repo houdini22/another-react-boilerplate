@@ -87,6 +87,7 @@ class FiltersCard extends React.Component<FiltersCardProps, null> {
                                             >
                                                 <span>{list_name}</span>
                                                 <Button
+                                                    size={'xs'}
                                                     color={'danger'}
                                                     iconOnly
                                                     icon={<DeleteIcon />}

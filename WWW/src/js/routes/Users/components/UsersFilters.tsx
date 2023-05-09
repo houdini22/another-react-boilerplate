@@ -4,6 +4,7 @@ import { SetFilter, Filters, SetFilters, DeleteSavedFilter, SaveFilters, Restore
 import { LoadingOverlay } from '../../../components'
 import { sortPermissionsByNameAscending } from '../../../helpers/permissions'
 import { sortRolesByNameAscending } from '../../../helpers/roles'
+import { PermissionIcon, RoleIcon } from '../../../components/icons'
 
 interface FiltersProps {
     filters: Object
@@ -154,6 +155,7 @@ export class UserFilters extends React.Component<FiltersProps, null> {
                             return {
                                 label: `${name} (${count})`,
                                 value: id,
+                                icon: <PermissionIcon />,
                             }
                         }),
                         name: 'permissions',
@@ -165,6 +167,7 @@ export class UserFilters extends React.Component<FiltersProps, null> {
                             return {
                                 label: `${name} (${count})`,
                                 value: id,
+                                icon: <RoleIcon />,
                             }
                         }),
                         name: 'roles',

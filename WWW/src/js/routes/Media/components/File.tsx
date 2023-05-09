@@ -90,7 +90,7 @@ export class FileView extends React.Component<FileProps, FileState> {
                         <Row>
                             <Col xs={6}>
                                 <Button block color={'secondary'} onClick={() => this.setState({ confirmDeleteModalVisible: false })}>
-                                    Cancel
+                                    <span>Cancel</span>
                                 </Button>
                             </Col>
                             <Col xs={6}>
@@ -109,7 +109,7 @@ export class FileView extends React.Component<FileProps, FileState> {
                                         })
                                     }}
                                 >
-                                    OK
+                                    <span>OK</span>
                                 </Button>
                             </Col>
                         </Row>

@@ -26,7 +26,7 @@ class FormField extends React.Component<FormFieldProps, null> {
             label = '',
             type = '',
             placeholder = '',
-            meta: { error } = {},
+            meta: { error, dirty } = {},
             options = [],
             html = () => '',
             inputOnly = false,
@@ -76,6 +76,7 @@ class FormField extends React.Component<FormFieldProps, null> {
                     className={cx('component-form-field', {
                         [`component-form-field--state-${validationState}`]: true,
                         [`component-form-field--type-${type}`]: type,
+                        [`component-form-field--is-dirty`]: dirty,
                     })}
                     style={inputContainerStyle}
                 >
@@ -92,6 +93,7 @@ class FormField extends React.Component<FormFieldProps, null> {
             <div
                 className={cx('component-form-field', {
                     [`component-form-field--state-${validationState}`]: true,
+                    [`component-form-field--is-dirty`]: dirty,
                 })}
             >
                 <div className={cx('component-form-field__label')}>

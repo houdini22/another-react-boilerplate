@@ -1,9 +1,11 @@
 import * as React from 'react'
 import { Field } from 'redux-form'
-import { Alert, Button, Card, Col, FormField, Row, Section, Tabs } from '../../../../components'
+import { Button, Card, Col, FormField, Row, Section, Tabs } from '../../../../components'
 import { sortRolesByNameAscending } from '../../../../helpers/roles'
 import { sortPermissionsByNameAscending } from '../../../../helpers/permissions'
 import { AddFormContainer } from '../../../UserRolesAdd/components/Add/AddFormContainer'
+import SimpleModelCell from '../../../../components/common/SimpleModelCell'
+import { PermissionIcon, RoleIcon, UserIcon } from '../../../../components/icons'
 
 class AddForm extends React.Component<null, null> {
     render() {
@@ -72,7 +74,6 @@ class AddForm extends React.Component<null, null> {
                                     <div>
                                         {canByPermission('users.add_role') && (
                                             <Card header={<h1>Associate Roles</h1>} size={'md'} color={'secondary'}>
-                                                {newUserRoles.length > 0 && <Alert color={'info'}>Click added Role to remove.</Alert>}
                                                 <Field
                                                     name="_roles"
                                                     label="Role"
@@ -93,16 +94,21 @@ class AddForm extends React.Component<null, null> {
                                                 <Section>
                                                     {newUserRoles.map((role) => {
                                                         return (
-                                                            <Button
-                                                                roundless
-                                                                color={'secondary'}
+                                                            <SimpleModelCell
                                                                 block
-                                                                onClick={() => {
-                                                                    removeRoleFromNewUser(role.id)
-                                                                }}
+                                                                icon={<RoleIcon />}
+                                                                key={role.id}
+                                                                actions={[
+                                                                    {
+                                                                        name: 'delete',
+                                                                        onClick: () => {
+                                                                            removeRoleFromNewUser(role.id)
+                                                                        },
+                                                                    },
+                                                                ]}
                                                             >
                                                                 {role.name}
-                                                            </Button>
+                                                            </SimpleModelCell>
                                                         )
                                                     })}
                                                 </Section>
@@ -112,7 +118,6 @@ class AddForm extends React.Component<null, null> {
                                         {canByPermission('users.add_permission') && (
                                             <div>
                                                 <Card header={<h1>Associate Permissions</h1>} size={'md'} color={'secondary'}>
-                                                    {newUserPermissions.length > 0 && <Alert color={'info'}>Click added Permission to remove.</Alert>}
                                                     <Field
                                                         name="_permissions"
                                                         label="Permission"
@@ -135,16 +140,21 @@ class AddForm extends React.Component<null, null> {
                                                     <Section>
                                                         {newUserPermissions.map((permission) => {
                                                             return (
-                                                                <Button
-                                                                    roundless
-                                                                    color={'secondary'}
+                                                                <SimpleModelCell
                                                                     block
-                                                                    onClick={() => {
-                                                                        removePermissionFromNewUser(permission.id)
-                                                                    }}
+                                                                    icon={<PermissionIcon />}
+                                                                    key={permission.id}
+                                                                    actions={[
+                                                                        {
+                                                                            name: 'delete',
+                                                                            onClick: () => {
+                                                                                removePermissionFromNewUser(permission.id)
+                                                                            },
+                                                                        },
+                                                                    ]}
                                                                 >
                                                                     {permission.name}
-                                                                </Button>
+                                                                </SimpleModelCell>
                                                             )
                                                         })}
                                                     </Section>
@@ -156,7 +166,7 @@ class AddForm extends React.Component<null, null> {
                             </Row>
 
                             <Button type={'submit'} color={'success'} block>
-                                Save
+                                <span>Save</span>
                             </Button>
                         </form>
                     </Tabs.Content>
@@ -212,4 +222,5 @@ class AddForm extends React.Component<null, null> {
 }
 
 export { AddForm }
+
 export default AddForm

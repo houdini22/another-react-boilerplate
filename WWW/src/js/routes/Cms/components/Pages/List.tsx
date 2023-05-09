@@ -112,7 +112,7 @@ export class List extends React.Component<null, null> {
                                                     }}
                                                 >
                                                     <Button icon={<UpArrowIcon />} block color={'primary'}>
-                                                        Up
+                                                        <span>Up</span>
                                                     </Button>
                                                 </Table.Td>
                                             </Table.Tr>
@@ -203,6 +203,7 @@ export class List extends React.Component<null, null> {
                                                     <Table.Td xs={2} className={cx('tree-icon')}>
                                                         {!isPublished(node) && (
                                                             <Tooltip
+                                                                color={'primary'}
                                                                 tooltip={
                                                                     <Typography.Container>
                                                                         <p>
@@ -227,6 +228,7 @@ export class List extends React.Component<null, null> {
                                                         )}
                                                         {isPublished(node) && (
                                                             <Tooltip
+                                                                color={'primary'}
                                                                 tooltip={
                                                                     <Typography.Container>
                                                                         <p>
@@ -250,7 +252,7 @@ export class List extends React.Component<null, null> {
                                                         )}
 
                                                         {incomingPublishing && (
-                                                            <Tooltip tooltip={<p>Will be published: {node.tree_published_from}</p>}>
+                                                            <Tooltip color={'primary'} tooltip={<p>Will be published: {node.tree_published_from}</p>}>
                                                                 <Label color={'warning'}>
                                                                     <AlertIcon />
                                                                 </Label>
@@ -258,7 +260,7 @@ export class List extends React.Component<null, null> {
                                                         )}
 
                                                         {incomingExpiring && (
-                                                            <Tooltip tooltip={<p>Will be not visible: {node.tree_published_to}</p>}>
+                                                            <Tooltip color={'primary'} tooltip={<p>Will be not visible: {node.tree_published_to}</p>}>
                                                                 <Label color={'danger'}>
                                                                     <AlertIcon />
                                                                 </Label>

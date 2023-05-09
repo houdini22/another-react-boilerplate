@@ -31,7 +31,7 @@ class AddUserForm extends React.Component<AddUsersFormProps, null> {
                     component={FormField}
                 />
                 <Button color="success" type="submit" block>
-                    Save
+                    <span>Save</span>
                 </Button>
             </form>
         )

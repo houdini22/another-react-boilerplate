@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Dropdown, Label } from '../index'
 import { AuthorizationManager, RouteManager } from '../../containers'
-import { DeleteIcon, EditIcon, RoleIcon, UserIcon } from '../icons'
+import { DeleteIcon, EditIcon, PermissionIcon, RoleIcon, UserIcon } from '../icons'
 import { Permission } from '../../../types.d'
+import SimpleModelCell from './SimpleModelCell'
 
 interface PermissionDropdownProps {
     openDeleteModal?: () => any
@@ -18,63 +18,75 @@ export class PermissionDropdown extends React.Component<PermissionDropdownProps,
                 {({ navigate }) => (
                     <AuthorizationManager>
                         {({ canByPermission }) => (
-                            <Dropdown.Container triggerSize={'lg'} key={permission.id}>
-                                <Dropdown.Trigger size="lg" componentProps={{ block: true }} component={Label}>
-                                    {permission.name} {permission.occurrence > 1 && `(${permission.occurrence})`}
-                                </Dropdown.Trigger>
-                                <Dropdown.Menu>
-                                    {canByPermission('roles.list') && (
-                                        <Dropdown.Item
-                                            color={'info'}
-                                            onClick={() => {
-                                                navigate(`/roles?permissions=${permission.id}`)
-                                            }}
-                                        >
-                                            <RoleIcon /> Show Roles with Permission
-                                        </Dropdown.Item>
-                                    )}
-                                    {canByPermission('users.list') && (
-                                        <Dropdown.Item
-                                            color={'info'}
-                                            onClick={() => {
-                                                navigate(`/users?permissions=${permission.id}`)
-                                            }}
-                                        >
-                                            <UserIcon /> Show Users with Permission
-                                        </Dropdown.Item>
-                                    )}
-                                    {canByPermission('permissions.edit') && (
-                                        <Dropdown.Item
-                                            color={'warning'}
-                                            onClick={() => {
-                                                navigate(`/permissions/edit?id=${permission.id}`)
-                                            }}
-                                        >
-                                            <EditIcon /> Edit Permission
-                                        </Dropdown.Item>
-                                    )}
-                                    {permission.hasUser && canByPermission('users.remove_permission') && (
-                                        <Dropdown.Item
-                                            color="danger"
-                                            onClick={() => {
-                                                openDeleteModal()
-                                            }}
-                                        >
-                                            <DeleteIcon /> Remove Permission from User
-                                        </Dropdown.Item>
-                                    )}
-                                    {permission.hasRole && canByPermission('roles.remove_permission') && (
-                                        <Dropdown.Item
-                                            color="danger"
-                                            onClick={() => {
-                                                openDeleteModal()
-                                            }}
-                                        >
-                                            <DeleteIcon /> Remove Permission from Role
-                                        </Dropdown.Item>
-                                    )}
-                                </Dropdown.Menu>
-                            </Dropdown.Container>
+                            <SimpleModelCell
+                                block
+                                icon={<PermissionIcon />}
+                                dropdown={[
+                                    {
+                                        color: 'info',
+                                        onClick: () => {
+                                            navigate(`/roles?permissions=${permission.id}`)
+                                        },
+                                        children: (
+                                            <>
+                                                {' '}
+                                                <RoleIcon /> Show Roles with Permission
+                                            </>
+                                        ),
+                                        display: canByPermission('roles.list'),
+                                    },
+                                    {
+                                        color: 'info',
+                                        onClick: () => {
+                                            navigate(`/users?permissions=${permission.id}`)
+                                        },
+                                        children: (
+                                            <>
+                                                <UserIcon /> Show Users with Permission
+                                            </>
+                                        ),
+                                        display: canByPermission('users.list'),
+                                    },
+                                    {
+                                        color: 'warning',
+                                        onClick: () => {
+                                            navigate(`/permissions/edit?id=${permission.id}`)
+                                        },
+                                        children: (
+                                            <>
+                                                <EditIcon /> Edit Permission
+                                            </>
+                                        ),
+                                        display: canByPermission('permissions.edit'),
+                                    },
+                                    {
+                                        color: 'danger',
+                                        onClick: () => {
+                                            openDeleteModal()
+                                        },
+                                        children: (
+                                            <>
+                                                <DeleteIcon /> Remove Permission from User
+                                            </>
+                                        ),
+                                        display: permission.hasUser && canByPermission('users.remove_permission'),
+                                    },
+                                    {
+                                        color: 'danger',
+                                        onClick: () => {
+                                            openDeleteModal()
+                                        },
+                                        children: (
+                                            <>
+                                                <DeleteIcon /> Remove Permission from Role
+                                            </>
+                                        ),
+                                        display: permission.hasRole && canByPermission('users.remove_permission'),
+                                    },
+                                ]}
+                            >
+                                {permission.name}
+                            </SimpleModelCell>
                         )}
                     </AuthorizationManager>
                 )}

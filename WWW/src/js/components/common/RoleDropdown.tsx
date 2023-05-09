@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Dropdown, Label } from '../index'
 import { AuthorizationManager, RouteManager } from '../../containers'
-import { DeleteIcon, EditIcon, PermissionIcon, UserIcon } from '../icons'
+import { DeleteIcon, EditIcon, PermissionIcon, RoleIcon, UserIcon } from '../icons'
 import { Role } from '../../../types.d'
+import SimpleModelCell from './SimpleModelCell'
 
 interface RoleDropdownProps {
     openDeleteModal: () => any
@@ -18,57 +18,72 @@ export class RoleDropdown extends React.Component<RoleDropdownProps, null> {
                 {({ navigate }) => (
                     <AuthorizationManager>
                         {({ canByPermission }) => (
-                            <Dropdown.Container triggerSize={'lg'} key={role.id}>
-                                <Dropdown.Trigger size="lg" componentProps={{ block: true }} component={Label}>
-                                    {role.name}
-                                </Dropdown.Trigger>
-                                <Dropdown.Menu>
-                                    <Dropdown.Item
-                                        color={'info'}
-                                        onClick={() => {
+                            <SimpleModelCell
+                                block
+                                icon={<RoleIcon />}
+                                dropdown={[
+                                    {
+                                        color: 'info',
+                                        onClick: () => {
                                             navigate(`/permissions?roles=${role.id}`)
-                                        }}
-                                    >
-                                        <PermissionIcon /> Show Role Permissions
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        color={'info'}
-                                        onClick={() => {
+                                        },
+                                        children: (
+                                            <>
+                                                <PermissionIcon /> Show Role Permissions
+                                            </>
+                                        ),
+                                        display: canByPermission('permissions.list'),
+                                    },
+                                    {
+                                        color: 'info',
+                                        onClick: () => {
                                             navigate(`/users?roles=${role.id}`)
-                                        }}
-                                    >
-                                        <UserIcon /> Show Users with Role
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        color={'warning'}
-                                        onClick={() => {
+                                        },
+                                        children: (
+                                            <>
+                                                <UserIcon /> Show Users with Role
+                                            </>
+                                        ),
+                                        display: canByPermission('users.list'),
+                                    },
+                                    {
+                                        color: 'warning',
+                                        onClick: () => {
                                             navigate(`/roles/edit?id=${role.id}`)
-                                        }}
-                                    >
-                                        <EditIcon /> Edit Role
-                                    </Dropdown.Item>
-                                    {role.hasUser && canByPermission('users.remove_role') && (
-                                        <Dropdown.Item
-                                            color="danger"
-                                            onClick={() => {
-                                                openDeleteModal()
-                                            }}
-                                        >
-                                            <DeleteIcon /> Remove Role from User
-                                        </Dropdown.Item>
-                                    )}
-                                    {role.hasPermission && canByPermission('roles.remove_permission') && (
-                                        <Dropdown.Item
-                                            color="danger"
-                                            onClick={() => {
-                                                openDeleteModal()
-                                            }}
-                                        >
-                                            <DeleteIcon /> Remove Permission from Role
-                                        </Dropdown.Item>
-                                    )}
-                                </Dropdown.Menu>
-                            </Dropdown.Container>
+                                        },
+                                        children: (
+                                            <>
+                                                <EditIcon /> Edit Role
+                                            </>
+                                        ),
+                                        display: canByPermission('roles.edit'),
+                                    },
+                                    {
+                                        color: 'danger',
+                                        onClick: () => {
+                                            openDeleteModal()
+                                        },
+                                        children: (
+                                            <>
+                                                <DeleteIcon /> Remove Role from User
+                                            </>
+                                        ),
+                                        display: role.hasUser && canByPermission('users.remove_role'),
+                                    },
+                                    {
+                                        color: 'danger',
+                                        onClick: () => {},
+                                        children: (
+                                            <>
+                                                <DeleteIcon /> Remove Permission from Role
+                                            </>
+                                        ),
+                                        display: role.hasPermission && canByPermission('roles.remove_permission'),
+                                    },
+                                ]}
+                            >
+                                {role.name}
+                            </SimpleModelCell>
                         )}
                     </AuthorizationManager>
                 )}

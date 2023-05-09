@@ -20,7 +20,7 @@ class FileDetailsForm extends React.Component<null, null> {
                 <Field name="download_url" label="Download URL" type="text" component={FormField} disabled />
                 <Field name="preview_url" label="Preview URL" type="text" component={FormField} disabled />
                 <Button block type={'submit'}>
-                    Save
+                    <span></span>
                 </Button>
             </form>
         )

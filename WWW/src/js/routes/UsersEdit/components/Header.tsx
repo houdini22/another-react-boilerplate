@@ -138,7 +138,7 @@ export class Header extends React.Component<HeaderProps, null> {
                                 openModal('user-send-activation-email')
                             }}
                         >
-                            Force Activation
+                            <span>Force Activation</span>
                         </Button>
                     )}
                     {canByPermission('users.force_login') && (
@@ -150,7 +150,7 @@ export class Header extends React.Component<HeaderProps, null> {
                                 openModal('user-force-login')
                             }}
                         >
-                            Force Login
+                            <span>Force Login</span>
                         </Button>
                     )}
 
@@ -162,7 +162,7 @@ export class Header extends React.Component<HeaderProps, null> {
                             }}
                             isLoading={isLoading}
                         >
-                            Activate
+                            <span>Activate</span>
                         </Button>
                     )}
                     {user.status !== 0 && canByPermission('users.change_status') && (
@@ -173,7 +173,7 @@ export class Header extends React.Component<HeaderProps, null> {
                             }}
                             isLoading={isLoading}
                         >
-                            Deactivate
+                            <span>Deactivate</span>
                         </Button>
                     )}
                 </PageHeader.Actions>

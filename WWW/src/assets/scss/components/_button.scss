@@ -35,6 +35,18 @@
         font-size: 1.3em;
     }
 
+    & > div {
+        display: inline-flex;
+        align-items: center;
+        align-content: center;
+        min-width: 10px;
+
+        & > span {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
     &.component-button--size-lg {
         padding: $COMPONENT_ELEMENT_PADDING_LG;
         font-size: $COMPONENT_FONT_SIZE_LG;
@@ -59,6 +71,10 @@
     &.component-button--block {
         display: block;
         width: 100%;
+    }
+
+    &.component-button--bordered.component-button--transparent {
+        border: 1px solid $default;
     }
 
     &.component-button--disabled {
@@ -121,7 +137,7 @@
     }
 
     &:not(.component-button--icon-only) {
-        svg:not(.component-button__arrow-icon) {
+        & > svg:not(.component-button__arrow-icon) {
             margin-right: 7px;
         }
     }

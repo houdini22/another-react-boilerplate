@@ -9,7 +9,7 @@ interface ButtonAddProps {
 
 export class ButtonAdd extends React.Component<ButtonAddProps, null> {
     render() {
-        const { href } = this.props
+        const { href, onClick } = this.props
 
         return (
             <RouteManager>
@@ -20,7 +20,11 @@ export class ButtonAdd extends React.Component<ButtonAddProps, null> {
                         color={'success'}
                         onClick={(e) => {
                             e.stopPropagation()
-                            navigate(href)
+                            if (typeof onClick === 'function') {
+                                onClick(e)
+                            } else if (!!href) {
+                                navigate(href)
+                            }
                         }}
                     />
                 )}

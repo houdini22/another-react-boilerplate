@@ -3,6 +3,7 @@ import { FiltersCard } from '../../../components/common/FiltersCard'
 import { DeleteSavedFilter, Filters, ResetFilters, RestoreSavedFilter, SavedFilters, SaveFilters, SetFilter, SetFilters } from '../../../../types.d'
 import { LoadingOverlay } from '../../../components'
 import { sortRolesByNameAscending } from '../../../helpers/roles'
+import { PermissionIcon } from '../../../components/icons'
 
 interface RolesFiltersProps {
     filters: Object
@@ -102,6 +103,7 @@ export class PermissionsFilters extends React.Component<RolesFiltersProps, null>
                             return {
                                 label: `${name} (${count})`,
                                 value: id,
+                                icon: <PermissionIcon />,
                             }
                         }),
                         name: 'roles',
