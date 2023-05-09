@@ -72,9 +72,7 @@ class FilesController extends Controller
         Log::add($user, 'files.list', [
             'request' => $request]);
 
-        return $this->responseOK([
-            'files' => $files,
-        ]);
+        return $this->responseOK($files);
     }
 
     public function deleteFile(Request $request)

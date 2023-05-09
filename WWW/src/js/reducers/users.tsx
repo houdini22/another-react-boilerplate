@@ -132,7 +132,7 @@ const fetch = () => (dispatch) => {
     return new Promise((resolve, reject) => {
         return myGet('/users/list').then(
             (data) => {
-                dispatch(setUsers(data?.users))
+                dispatch(setUsers(data))
                 resolve()
             },
             () => {
@@ -425,7 +425,7 @@ const fetchRoles = () => (dispatch) => {
     return new Promise((resolve, reject) => {
         myGet('/roles/list').then(
             (data) => {
-                dispatch(setRoles(data.roles))
+                dispatch(setRoles(data))
                 resolve()
             },
             () => {

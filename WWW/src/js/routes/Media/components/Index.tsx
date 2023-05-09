@@ -78,15 +78,13 @@ export class Index extends React.Component<null, UsersViewState> {
                                                                 >
                                                                     {({
                                                                         data: {
-                                                                            files: {
-                                                                                data,
-                                                                                links,
-                                                                                hasNextPage,
-                                                                                hasPrevPage,
-                                                                                totalPages,
-                                                                                per_page: perPage,
-                                                                                total,
-                                                                            } = {},
+                                                                            data,
+                                                                            links,
+                                                                            hasNextPage,
+                                                                            hasPrevPage,
+                                                                            totalPages,
+                                                                            perPage,
+                                                                            total,
                                                                         } = {},
                                                                         filtersData,
                                                                         setPage,

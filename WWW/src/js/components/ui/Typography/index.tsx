@@ -1,4 +1,4 @@
-import { Container } from './Typography'
+import { Container, Header } from './Typography'
 
-export { Container }
-export default { Container }
+export { Container, Header }
+export default { Container, Header }

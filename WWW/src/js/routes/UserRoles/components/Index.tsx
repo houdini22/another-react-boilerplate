@@ -47,15 +47,13 @@ export class UsersView extends React.Component<null, null> {
                                                     >
                                                         {({
                                                             data: {
-                                                                roles: {
-                                                                    data,
-                                                                    links,
-                                                                    hasNextPage,
-                                                                    hasPrevPage,
-                                                                    totalPages,
-                                                                    per_page: perPage,
-                                                                    total,
-                                                                } = {},
+                                                                data,
+                                                                links,
+                                                                hasNextPage,
+                                                                hasPrevPage,
+                                                                totalPages,
+                                                                perPage,
+                                                                total,
                                                             } = {},
                                                             filtersData,
                                                             setPage,

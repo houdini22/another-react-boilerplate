@@ -74,9 +74,7 @@ class RolesController extends Controller
             'request' => $request
         ]);
 
-        return $this->responseOK([
-            'roles' => $roles,
-        ]);
+        return $this->responseOK($roles);
     }
 
     public function getFiltersData(Request $request) {
