@@ -193,7 +193,7 @@ class PermissionsController extends Controller
             ]);
         }
 
-        return response()->json([
+        return $this->responseOK([
             'permission' => $permission->toArray(),
         ]);
     }

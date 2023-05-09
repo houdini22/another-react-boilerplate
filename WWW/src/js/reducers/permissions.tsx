@@ -115,14 +115,16 @@ const fetchPermission =
     (id = 0) =>
     (dispatch) => {
         return new Promise<void>((resolve, reject) => {
-            http.get(`/permissions/get/${id}`)
-                .then(({ data: { permission } }) => {
-                    dispatch(setPermission(permission))
+            dispatch(setPermission({}))
+            myGet(`/permissions/get/${id}`).then(
+                (data) => {
+                    dispatch(setPermission(data.permission))
                     resolve()
-                })
-                .catch((e) => {
+                },
+                () => {
                     reject()
-                })
+                },
+            )
         })
     }
 

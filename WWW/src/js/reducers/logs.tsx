@@ -38,7 +38,7 @@ export default function logsReducer(state = getInitialState(), action) {
 
 // selectors
 
-const getState = (state) => state['users']
+const getState = (state) => state['logs']
 const getIsLoading = (state) => getState(state)['isLoading']
 export const selectors = {
     getState,

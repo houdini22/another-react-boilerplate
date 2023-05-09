@@ -48,11 +48,11 @@ export class LogsView extends React.Component<null, null> {
                                                                 per_page: perPage,
                                                                 total,
                                                             } = {},
-                                                        },
+                                                        } = {},
                                                         filtersData,
                                                         setPage,
                                                         page,
-                                                    }) => {
+                                                    } = {}) => {
                                                         return (
                                                             <PageContent>
                                                                 <Header />

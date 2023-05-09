@@ -8,6 +8,6 @@ import files from './files'
 import filters from './filters'
 import logs from './logs'
 import permissions from './permissions'
-import lists from './lists';
+import lists from './lists'
 
 export { auth, common, notifications, contactform, cmsPages, users, files, filters, logs, permissions, lists }

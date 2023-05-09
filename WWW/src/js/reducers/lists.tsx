@@ -6,12 +6,16 @@ export const SET_FILTERS_DATA = 'list::set-filters-data'
 export const SET_PAGE = 'list::set-page'
 // actions
 
-const setListData = (name, data = {}) => (dispatch) => {
-    dispatch({ type: SET_LIST, payload: { name, data } })
-}
-const setFiltersData = (name, data = {}) => (dispatch) => {
-    dispatch({ type: SET_FILTERS_DATA, payload: { name, data } })
-}
+const setListData =
+    (name, data = {}) =>
+    (dispatch) => {
+        dispatch({ type: SET_LIST, payload: { name, data } })
+    }
+const setFiltersData =
+    (name, data = {}) =>
+    (dispatch) => {
+        dispatch({ type: SET_FILTERS_DATA, payload: { name, data } })
+    }
 const setPage = (name, page) => (dispatch) => {
     dispatch({ type: SET_PAGE, payload: { name, page } })
 }
@@ -26,7 +30,6 @@ export const actions = {
 
 const ACTION_HANDLERS = {
     [SET_LIST]: (state, { payload: { name, data } }) => {
-
         const list = state.lists?.[name] || {}
 
         return {
@@ -35,9 +38,9 @@ const ACTION_HANDLERS = {
                 ...state.lists,
                 [name]: {
                     ...list,
-                    ...data
+                    ...data,
                 },
-            }
+            },
         }
     },
     [SET_FILTERS_DATA]: (state, { payload: { name, data } }) => {
@@ -46,19 +49,21 @@ const ACTION_HANDLERS = {
             filtersData: {
                 ...state.filtersData,
                 [name]: data,
-            }
+            },
         }
     },
     [SET_PAGE]: (state, { payload: { name, page } }) => {
+        const list = state.lists?.[name] || {}
+
         return {
             ...state,
             lists: {
                 ...state.lists,
                 [name]: {
-                    ...state.lists[name],
-                    page
+                    ...list,
+                    page,
                 },
-            }
+            },
         }
     },
 }
