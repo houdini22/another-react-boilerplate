@@ -127,11 +127,16 @@ const fetchOne =
     }
 
 const fetch = () => (dispatch) => {
-    return myGet('/users/list', null, {
-        success: (data) => {
-            dispatch(setUsers(data?.users))
-        },
-        failure: (e) => {},
+    return new Promise((resolve, reject) => {
+        return myGet('/users/list').then(
+            (data) => {
+                dispatch(setUsers(data?.users))
+                resolve()
+            },
+            () => {
+                reject()
+            },
+        )
     })
 }
 
@@ -332,7 +337,7 @@ const addPermission =
 
 const fetchPermissions = () => (dispatch) => {
     return new Promise((resolve, reject) => {
-        return myGet('/roles/permissions/list').then(
+        myGet('/roles/permissions/list').then(
             (data) => {
                 dispatch(setPermissions(data['permissions']))
                 resolve()
@@ -414,23 +419,16 @@ const deleteUserPermission =
     }
 
 const fetchRoles = () => (dispatch) => {
-    return new Promise<void>((resolve, reject) => {
-        dispatch(setRoles([]))
-
-        http.get('/roles/list')
-            .then(
-                ({
-                    data: {
-                        data: { data },
-                    },
-                }) => {
-                    dispatch(setRoles(data))
-                    resolve()
-                },
-            )
-            .catch((e) => {
+    return new Promise((resolve, reject) => {
+        myGet('/roles/list').then(
+            (data) => {
+                dispatch(setRoles(data.roles.data))
+                resolve()
+            },
+            () => {
                 reject()
-            })
+            },
+        )
     })
 }
 

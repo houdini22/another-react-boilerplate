@@ -64,7 +64,11 @@ class RolesController extends Controller
             });
         }
 
-        $roles = $query->paginate(empty($filters['items_per_page']) ? 10000 : $filters['items_per_page']);
+        if (empty($filters)) {
+            $roles = $query->get();
+        } else {
+            $roles = $query->paginate(Arr::get($filters, 'items_per_page', 10000));
+        }
 
         Log::add($user, 'roles.list', [
             'request' => $request
@@ -280,7 +284,7 @@ class RolesController extends Controller
 
         $permisions = Permission::orderBy('name', 'ASC')->get();
 
-        return response()->json([
+        return $this->responseOK([
             'permissions' => $permisions->toArray(),
         ]);
     }

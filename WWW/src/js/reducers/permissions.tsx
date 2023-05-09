@@ -1,4 +1,4 @@
-import { http } from '../modules/http'
+import { http, myGet } from '../modules/http'
 import { Permission } from '../../types.d'
 
 const SET_IS_LOADING = 'permissions::set-is-loading'
@@ -72,17 +72,16 @@ const addPermission =
     }
 
 const fetchPermissions = () => (dispatch) => {
-    return new Promise<void>((resolve, reject) => {
-        dispatch(setPermissions([]))
-
-        http.get('/roles/permissions/list')
-            .then(({ data: { permissions } }) => {
-                dispatch(setPermissions(permissions))
+    return new Promise((resolve, reject) => {
+        myGet('/roles/permissions/list').then(
+            (data) => {
+                dispatch(setPermissions(data.permissions))
                 resolve()
-            })
-            .catch((e) => {
+            },
+            () => {
                 reject()
-            })
+            },
+        )
     })
 }
 
@@ -178,39 +177,29 @@ const fetchLogsData = (filters) => (dispatch) => {
     })
 }
 const fetchUsers = () => (dispatch) => {
-    return new Promise<void>((resolve, reject) => {
-        http.get(`/users/list`)
-            .then(
-                ({
-                    data: {
-                        data: { data: users },
-                    },
-                }) => {
-                    dispatch(setUsers(users))
-                    resolve()
-                },
-            )
-            .catch((e) => {
+    return new Promise((resolve, reject) => {
+        myGet('/users/list').then(
+            (data) => {
+                dispatch(setUsers(data.users))
+                resolve()
+            },
+            () => {
                 reject()
-            })
+            },
+        )
     })
 }
 const fetchRoles = () => (dispatch) => {
-    return new Promise<void>((resolve, reject) => {
-        http.get('/roles/list')
-            .then(
-                ({
-                    data: {
-                        data: { data },
-                    },
-                }) => {
-                    dispatch(setRoles(data))
-                    resolve()
-                },
-            )
-            .catch((e) => {
+    return new Promise((resolve, reject) => {
+        myGet('/roles/list').then(
+            (data) => {
+                dispatch(setRoles(data.roles))
+                resolve()
+            },
+            () => {
                 reject()
-            })
+            },
+        )
     })
 }
 export const actions = {
