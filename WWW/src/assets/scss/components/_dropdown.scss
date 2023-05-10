@@ -11,6 +11,7 @@
     }
 
     & > .component-dropdown__dropdown-menu {
+        display: inline-block;
         position: relative;
 
         &.component-dropdown__dropdown-menu--is-open {
@@ -45,7 +46,7 @@
             > .component-dropdown__dropdown-menu__items__item__submenu
             .component-dropdown__dropdown-menu__items {
             position: absolute;
-            top: 100%;
+            top: calc(100% + 10px);
             left: 0;
             z-index: 1000;
             display: none;
@@ -545,7 +546,7 @@
         & > .component-dropdown__dropdown-menu {
             & > .component-dropdown__dropdown-menu__items {
                 left: auto;
-                right: 0;
+                right: 5px;
             }
         }
         .component-dropdown__dropdown-menu__items > .component-dropdown__dropdown-menu__items__item {
