@@ -44,19 +44,20 @@ export class RowResources extends React.Component<RowResourcesProps, null> {
                                         </Button>
                                     </Tooltip>
                                 )}
-                                {Object.keys(permissionsFromRoles).length + user.permissions.length && canByPermission('users.list_permissions') && (
-                                    <Tooltip tooltip={`User Permissions`}>
-                                        <Button
-                                            color={'secondary'}
-                                            icon={<PermissionIcon />}
-                                            onClick={() => {
-                                                expand('permissions')
-                                            }}
-                                        >
-                                            <span> {Object.keys(permissionsFromRoles).length + user.permissions.length || 0}</span>
-                                        </Button>
-                                    </Tooltip>
-                                )}
+                                {Object.keys(permissionsFromRoles).length + user.permissions.length > 0 &&
+                                    canByPermission('users.list_permissions') && (
+                                        <Tooltip tooltip={`User Permissions`}>
+                                            <Button
+                                                color={'secondary'}
+                                                icon={<PermissionIcon />}
+                                                onClick={() => {
+                                                    expand('permissions')
+                                                }}
+                                            >
+                                                <span> {Object.keys(permissionsFromRoles).length + user.permissions.length || 0}</span>
+                                            </Button>
+                                        </Tooltip>
+                                    )}
                                 {user.files_count > 0 && canByPermission('users.list_files') && (
                                     <Button color={'secondary'} icon={<FileIcon />} onClick={() => navigate(`/media?user=${user.name}`)}>
                                         <span>{user.files_count}</span>

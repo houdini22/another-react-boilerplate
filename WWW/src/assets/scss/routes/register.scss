@@ -1,0 +1,21 @@
+@import '../_variables.scss';
+
+.route--register {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-content: center;
+    align-items: center;
+
+    .row {
+        width: 100%;
+
+        form {
+            background: $default_LIGHTEN_X2;
+            padding: $COMPONENT_ELEMENT_PADDING_LG;
+            padding-top: 30px;
+            position: relative;
+            border-radius: $COMPONENT_BORDER_RADIUS;
+        }
+    }
+}

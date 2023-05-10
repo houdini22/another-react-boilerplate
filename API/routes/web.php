@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('api/v1')->group(function () {
     Route::post('auth/login', '\App\Http\Controllers\AuthController@postLogin');
+    Route::post('auth/register', '\App\Http\Controllers\AuthController@postRegister');
     Route::post('auth/login_with_token', '\App\Http\Controllers\AuthController@postLoginWithToken');
     Route::post('auth/logout', '\App\Http\Controllers\AuthController@postLogout');
     Route::post('/dummy-url', function () {
