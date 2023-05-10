@@ -4,10 +4,10 @@ import { connect } from 'react-redux'
 import { AddRoleForm as FormComponent } from './AddRoleForm'
 import { reduxForm, formValueSelector } from 'redux-form'
 
-const validate = (values) => {
+const validate = ({ role }) => {
     const errors = {}
 
-    if (!values.role) {
+    if (!role) {
         errors['role'] = 'Required.'
     }
 

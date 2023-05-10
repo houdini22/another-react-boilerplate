@@ -1757,7 +1757,7 @@
                 }
 
                 & > .component-tabs__content {
-                    margin-top: $COMPONENT_ELEMENT_MARGIN_SM;
+                    padding: $COMPONENT_ELEMENT_MARGIN_SM;
                 }
             }
 
@@ -1781,7 +1781,7 @@
                 }
 
                 & > .component-tabs__content {
-                    margin-top: $COMPONENT_ELEMENT_MARGIN_MD;
+                    padding: $COMPONENT_ELEMENT_MARGIN_MD;
                 }
             }
 
@@ -1805,7 +1805,7 @@
                 }
 
                 & > .component-tabs__content {
-                    margin-top: $COMPONENT_ELEMENT_MARGIN_LG;
+                    padding: $COMPONENT_ELEMENT_MARGIN_LG;
                 }
             }
         }
