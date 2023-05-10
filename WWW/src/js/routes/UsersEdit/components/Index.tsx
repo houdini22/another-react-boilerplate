@@ -9,6 +9,7 @@ import AddRole from './AddRole/AddRole'
 import Roles from './Roles/Roles'
 import Permissions from './Permissions/Permissions'
 import AddPermission from './AddPermission/AddPermission'
+import { PermissionIcon, RoleIcon, UserIcon } from '../../../components/icons'
 
 interface UsersViewState {}
 
@@ -72,7 +73,9 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                         />
                                                                         <Tabs.Container block color={'primary'} solid size={'lg'}>
                                                                             <Tabs.Tab name={'data'}>
-                                                                                <Tabs.Trigger>Data</Tabs.Trigger>
+                                                                                <Tabs.Trigger>
+                                                                                    <UserIcon /> Data
+                                                                                </Tabs.Trigger>
                                                                                 <Tabs.Content>
                                                                                     <Row>
                                                                                         <Col xs={12} md={6}>
@@ -114,7 +117,9 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                                 </Tabs.Content>
                                                                             </Tabs.Tab>
                                                                             <Tabs.Tab name={'roles'}>
-                                                                                <Tabs.Trigger>Roles</Tabs.Trigger>
+                                                                                <Tabs.Trigger>
+                                                                                    <RoleIcon /> Roles
+                                                                                </Tabs.Trigger>
                                                                                 <Tabs.Content>
                                                                                     <Row>
                                                                                         <Col xs={12} md={6}>
@@ -156,7 +161,9 @@ export class UsersView extends React.Component<null, UsersViewState> {
                                                                                 </Tabs.Content>
                                                                             </Tabs.Tab>
                                                                             <Tabs.Tab name={'permissions'}>
-                                                                                <Tabs.Trigger>Permissions</Tabs.Trigger>
+                                                                                <Tabs.Trigger>
+                                                                                    <PermissionIcon /> Permissions
+                                                                                </Tabs.Trigger>
                                                                                 <Tabs.Content>
                                                                                     <Row>
                                                                                         <Col xs={12} md={6}>
