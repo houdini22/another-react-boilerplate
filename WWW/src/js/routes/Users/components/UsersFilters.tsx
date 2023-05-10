@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { FiltersCard } from '../../../components/common/FiltersCard'
 import { SetFilter, Filters, SetFilters, DeleteSavedFilter, SaveFilters, RestoreSavedFilter, ResetFilters, SavedFilters } from '../../../../types.d'
-import { LoadingOverlay } from '../../../components'
+import { Badge, LoadingOverlay } from '../../../components'
 import { sortPermissionsByNameAscending } from '../../../helpers/permissions'
 import { sortRolesByNameAscending } from '../../../helpers/roles'
 import { PermissionIcon, RoleIcon } from '../../../components/icons'
@@ -153,7 +153,14 @@ export class UserFilters extends React.Component<FiltersProps, null> {
                     {
                         options: sortPermissionsByNameAscending(filtersData?.permissions?.data).map(({ id, name, count }) => {
                             return {
-                                label: `${name} (${count})`,
+                                label: (
+                                    <>
+                                        {name}{' '}
+                                        <Badge rounded color={'info'} size={'xs'}>
+                                            {count}
+                                        </Badge>
+                                    </>
+                                ),
                                 value: id,
                                 icon: <PermissionIcon />,
                                 disabled: count === 0,
@@ -166,7 +173,14 @@ export class UserFilters extends React.Component<FiltersProps, null> {
                     {
                         options: sortRolesByNameAscending(filtersData?.roles?.data).map(({ id, name, count }) => {
                             return {
-                                label: `${name} (${count})`,
+                                label: (
+                                    <>
+                                        {name}{' '}
+                                        <Badge rounded color={'info'} size={'xs'}>
+                                            {count}
+                                        </Badge>
+                                    </>
+                                ),
                                 value: id,
                                 icon: <RoleIcon />,
                                 disabled: count === 0,

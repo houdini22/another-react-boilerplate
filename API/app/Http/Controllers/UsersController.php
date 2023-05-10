@@ -122,79 +122,69 @@ class UsersController extends Controller
         $permissions = Permission::select([
             'permissions.id as id',
             'permissions.name as name',
-            'count' => DB::raw('count(distinct role_has_permissions.role_id) as count')
+            'count' => DB::raw('count(distinct users.id) as count')
         ])->from('permissions', 'permissions')
             ->leftJoin('role_has_permissions', 'role_has_permissions.permission_id', 'id')
             ->leftJoin('model_has_permissions', 'model_has_permissions.permission_id', 'role_has_permissions.permission_id')
             ->leftJoin('users', 'users.id', 'model_has_permissions.model_id')
             ->where(function ($query) use ($filters) {
-                if (Arr::get($filters, 'user')) {
-                    $query->where('users.name', '=', Arr::get($filters, 'user'));
+                /*if (Arr::get($filters, 'search')) {
+                    $query->where('users.name', 'LIKE', '%'.Arr::get($filters, 'search').'%');
                 }
                 if (Arr::get($filters, 'has_permissions') === 'no') {
-                    $query->whereNull('role_has_permissions.permission_id');
+                    $query->whereNull('model_has_permissions.permission_id');
                 } else if (Arr::get($filters, 'has_permissions') === 'yes') {
-                    $query->whereNotNull('role_has_permissions.permission_id');
+                    $query->whereNotNull('model_has_permissions.permission_id');
                 }
                 if (Arr::get($filters, 'has_users') === 'no') {
                     $query->whereNull('model_has_permissions.model_id');
                 } else if (Arr::get($filters, 'has_users') === 'yes') {
                     $query->whereNotNull('users.id');
-                }
+                }*/
             })
             ->groupBy("id");
 
         $roles = Role::select([
             'roles.id as id',
             'roles.name as name',
-            'count' => DB::raw('count(distinct role_has_permissions.permission_id) as count')
+            'count' => DB::raw('count(distinct users.id) as count'),
+            'model_has_roles.model_id as has_roles'
         ])->from('roles', 'roles')
             ->leftJoin('role_has_permissions', 'role_has_permissions.role_id', 'roles.id')
-            ->leftJoin('model_has_permissions', 'model_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->leftJoin('users', 'users.id', 'model_has_permissions.model_id')
+            ->leftJoin('model_has_roles', 'model_has_roles.role_id', 'roles.id')
+            ->leftJoin('users', 'users.id', 'model_has_roles.model_id')
+            ->leftJoin('model_has_permissions', 'model_has_permissions.model_id', 'users.id')
             ->where(function ($query) use ($filters) {
-                if (Arr::get($filters, 'user')) {
-                    $query->where('users.name', '=', Arr::get($filters, 'user'));
-                }
                 if (Arr::get($filters, 'has_roles') === 'no') {
-                    $query->whereNull('role_has_permissions.role_id');
+                    $query->whereNull('model_has_roles.model_id');
                 } else if (Arr::get($filters, 'has_roles') === 'yes') {
-                    $query->whereNotNull('role_has_permissions.role_id');
+                    $query->whereNotNull('model_has_roles.model_id');
                 }
-                if (Arr::get($filters, 'has_users') === 'no') {
-                    $query->whereNull('model_has_permissions.model_id');
-                } else if (Arr::get($filters, 'has_users') === 'yes') {
-                    $query->whereNotNull('users.id');
+                if (Arr::get($filters, 'has_permissions') === 'no') {
+                    $query->whereNull('model_has_permissions.permission_id');
+                } else if (Arr::get($filters, 'has_permissions') === 'yes') {
+                    $query->whereNotNull('model_has_permissions.permission_id');
                 }
             })
             ->groupBy("id");
 
-        $hasAvatar = User::select('id');
-        $hasFiles = User::select('id');
-        $hasRoles = User::select('id');
-        $hasPermissions = User::select('id');
+        $hasAvatar = User::with('avatar');
+        $hasFiles = User::with('files');
+        $hasRoles = User::with('roles')->select('id');
+        $hasPermissions = User::with('permissions')->select('id');
         $statusActive = User::select('id')->where('status', '=', 1);
         $statusNotActive = User::select('id')->where('status', '=', 0);
 
         if (Arr::get($filters, 'has_avatar') === 'no') {
-            $hasAvatar = $hasAvatar->whereDoesntHave('avatar');
         } else if (Arr::get($filters, 'has_avatar') === 'yes') {
-            $hasAvatar = $hasAvatar->whereHas('avatar');
         }
         if (Arr::get($filters, 'has_files') === 'no') {
-            $hasFiles = $hasAvatar->whereDoesntHave('files');
-        } else if (Arr::get($filters, 'has_files') === 'yes') {
-            $hasFiles = $hasAvatar->whereHas('files');
         }
         if (Arr::get($filters, 'has_roles') === 'no') {
-            $hasRoles = $hasRoles->whereDoesntHave('roles');
         } else if (Arr::get($filters, 'has_roles') === 'yes') {
-            $hasRoles = $hasRoles->whereHas('roles');
         }
         if (Arr::get($filters, 'has_permissions') === 'no') {
-            $hasPermissions = $hasPermissions->whereDoesntHave('permissions');
         } else if (Arr::get($filters, 'has_permissions') === 'yes') {
-            $hasPermissions = $hasPermissions->whereHas('permissions');
         }
 
         $permissions = $permissions->get();
@@ -218,25 +208,65 @@ class UsersController extends Controller
             'roles' => [
                 'data' => $roles,
                 'count' => $roles
-                    ->filter(function ($item) {
+                    ->filter(function($item) {
                         return $item['count'] > 0;
+                    })
+                    ->count(),
+            ],
+            'has_avatar' => [
+                'count:yes_or_no' => $hasAvatar->count(),
+                'count:yes' => $hasAvatar
+                    ->filter(function($item) {
+                        return Arr::get($item, 'avatar.id') !== NULL;
+                    })
+                    ->count(),
+                'count:no' => $hasAvatar
+                    ->filter(function($item) {
+                        return Arr::get($item, 'avatar.id') === NULL;
                     })
                     ->count()
             ],
-            'has_avatar' => [
-                'count' => $hasAvatar->count()
-            ],
             'has_files' => [
-                'count' => $hasFiles->count()
+                'count:yes_or_no' => $hasFiles->count(),
+                'count:yes' => $hasFiles
+                    ->filter(function($item) {
+                        return count($item['files']) > 0;
+                    })
+                    ->count(),
+                'count:no' => $hasFiles
+                    ->filter(function($item) {
+                        return count($item['files']) === 0;
+                    })
+                    ->count()
             ],
             'has_roles' => [
-                'count' => $hasRoles->count()
+                'count:yes_or_no' => $hasRoles->count(),
+                'count:yes' => $hasRoles
+                    ->filter(function($item) {
+                        return count($item['roles']) > 0;
+                    })
+                    ->count(),
+                'count:no' => $hasRoles
+                    ->filter(function($item) {
+                        return count($item['roles']) === 0;
+                    })
+                    ->count()
             ],
             'has_permissions' => [
-                'count' => $hasPermissions->count()
+                'count:yes_or_no' => $hasPermissions->count(),
+                'count:yes' => $hasPermissions
+                    ->filter(function($item) {
+                        return count($item['permissions']) > 0;
+                    })
+                    ->count(),
+                'count:no' => $hasPermissions
+                    ->filter(function($item) {
+                        return count($item['permissions']) === 0;
+                    })
+                    ->count()
             ],
             'status' => [
-                'count' => $statusActive->count() + $statusNotActive->count(),
+                'count:yes_or_no' => $statusActive->count() + $statusNotActive->count(),
                 'count:yes' => $statusActive->count(),
                 'count:no' => $statusNotActive->count(),
             ]
@@ -542,6 +572,8 @@ class UsersController extends Controller
         }
 
         $file = File::upload($request->file('avatar'), $user);
+        $file->class = 'avatar';
+        $file->save();
 
         $u->avatar_id = $file->id;
         $u->save();

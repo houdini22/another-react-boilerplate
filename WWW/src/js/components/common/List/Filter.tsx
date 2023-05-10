@@ -26,7 +26,14 @@ class Filter extends React.Component<FilterProps, null> {
                     let count = ''
 
                     if (typeof filterData?.[`count:${value}`] === 'number') {
-                        count = ` (${filterData[`count:${value}`]})`
+                        count = (
+                            <>
+                                {' '}
+                                <Badge size={'xs'} color={'info'} rounded>
+                                    {filterData[`count:${value}`]}
+                                </Badge>
+                            </>
+                        )
                     }
 
                     return (
@@ -39,7 +46,8 @@ class Filter extends React.Component<FilterProps, null> {
                             }}
                         >
                             <span>
-                                {label} {count}
+                                {label}
+                                {count}
                             </span>
                         </Button>
                     )
@@ -49,7 +57,7 @@ class Filter extends React.Component<FilterProps, null> {
     }
 
     renderOrderByColumn() {
-        const { options, filters, setFilter } = this.props
+        const { options, filters, setFilter, defaultFilters } = this.props
 
         return (
             <FormField
@@ -61,14 +69,15 @@ class Filter extends React.Component<FilterProps, null> {
                 defaultValue={filters['order_by']}
                 onChange={({ target: { value } }) => {
                     setFilter('order_by', value)
-                }}
-                className={cx('filter__form-field')}
+                }} /*
+                className={cx('filter__form-field')}*/
+                meta={{ dirty: defaultFilters['order_by'] !== filters['order_by'] }}
             />
         )
     }
 
     renderSelect() {
-        const { filters, setFilter, name, options } = this.props
+        const { filters, setFilter, name, options, defaultFilters } = this.props
 
         return (
             <FormField
@@ -83,12 +92,13 @@ class Filter extends React.Component<FilterProps, null> {
                     setFilter(name, value)
                 }}
                 className={cx('filter__form-field')}
+                meta={{ dirty: defaultFilters[name] !== filters[name] }}
             />
         )
     }
 
     renderOrderDirection() {
-        const { filters, setFilter } = this.props
+        const { filters, setFilter, defaultFilters } = this.props
         const options = [
             {
                 label: 'Ascending',
@@ -112,6 +122,7 @@ class Filter extends React.Component<FilterProps, null> {
                     setFilter('order_direction', value)
                 }}
                 className={cx('filter__form-field')}
+                meta={{ dirty: defaultFilters['order_direction'] !== filters['order_direction'] }}
             />
         )
     }
@@ -170,7 +181,7 @@ class Filter extends React.Component<FilterProps, null> {
     }
 
     renderText({ name, placeholder }) {
-        const { filters } = this.props
+        const { filters, defaultFilters } = this.props
         return (
             <FormField
                 type={'text'}
@@ -183,6 +194,7 @@ class Filter extends React.Component<FilterProps, null> {
                     setFilter(name, value)
                 }}
                 className={cx('filter__form-field')}
+                meta={{ dirty: defaultFilters[name] !== filters[name] }}
             />
         )
     }
