@@ -339,6 +339,8 @@ class PermissionsController extends Controller
             'request' => $request
         ]);
 
+        broadcast(new UserDataChanged($u));
+
         return response()->json([
             'msg' => 'ok',
         ]);

@@ -85,6 +85,8 @@ Route::prefix('api/v1')->group(function () {
         Route::get('list', '\App\Http\Controllers\LogsController@getList');
         Route::get('filtersData', '\App\Http\Controllers\LogsController@getFiltersData');
     });
+
+    Route::get('/config/get', '\App\Http\Controllers\ConfigController@getGet');
 });
 
 Route::get('/', function () {

@@ -27,7 +27,7 @@ export class Container extends React.Component<ContainerProps, null> {
 
 export class Header extends React.Component<ContainerProps, null> {
     render() {
-        const { children, className, level = 1, solid, } = this.props
+        const { children, className, level = 1, solid } = this.props
 
         return (
             <div

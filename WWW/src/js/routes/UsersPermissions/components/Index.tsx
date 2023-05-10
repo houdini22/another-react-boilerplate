@@ -1,32 +1,32 @@
 import * as React from 'react'
-import {PageContent} from '../../../layouts/PageLayout/components'
-import {ListManager} from '../../../components/common/List/ListManager'
+import { PageContent } from '../../../layouts/PageLayout/components'
+import { ListManager } from '../../../components/common/List/ListManager'
 import Header from './Header'
-import {getDefaultFilters} from '../../../helpers/permissions'
-import {createUrlFilters, splitIds} from '../../../helpers/filters'
+import { getDefaultFilters } from '../../../helpers/permissions'
+import { createUrlFilters, splitIds } from '../../../helpers/filters'
 import List from './List'
-import {PermissionsManager, FiltersManager, TitleManager, RouteManager} from '../../../containers'
+import { PermissionsManager, FiltersManager, TitleManager, RouteManager } from '../../../containers'
 
 export class UsersPermissions extends React.Component<null, null> {
     render() {
         return (
             <RouteManager>
-                {({query: {user = '', roles: rolesFromUri}}) => (
+                {({ query: { user = '', roles: rolesFromUri } }) => (
                     <TitleManager>
-                        {({setTitleSegments}) => {
+                        {({ setTitleSegments }) => {
                             setTitleSegments(['Users', 'Permissions'])
 
                             return (
                                 <PermissionsManager>
                                     {({
-                                          deleteRole,
-                                          setIsLoading,
-                                          deletePermission,
-                                          deleteRolePermission,
-                                          deleteUserRole,
-                                          isLoading,
-                                          deleteUserPermission,
-                                      }) => (
+                                        deleteRole,
+                                        setIsLoading,
+                                        deletePermission,
+                                        deleteRolePermission,
+                                        deleteUserRole,
+                                        isLoading,
+                                        deleteUserPermission,
+                                    }) => (
                                         <FiltersManager
                                             name={'permissions-list'}
                                             defaultFilters={getDefaultFilters()}
@@ -36,16 +36,16 @@ export class UsersPermissions extends React.Component<null, null> {
                                             })}
                                         >
                                             {({
-                                                  defaultFilters,
-                                                  filters,
-                                                  setFilters,
-                                                  setFilter,
-                                                  resetFilters,
-                                                  saveFilters,
-                                                  deleteSavedFilter,
-                                                  savedFilters,
-                                                  restoreSavedFilter,
-                                              }) => (
+                                                defaultFilters,
+                                                filters,
+                                                setFilters,
+                                                setFilter,
+                                                resetFilters,
+                                                saveFilters,
+                                                deleteSavedFilter,
+                                                savedFilters,
+                                                restoreSavedFilter,
+                                            }) => (
                                                 <ListManager
                                                     filtersDataUrl={'/permissions/filtersData'}
                                                     url={'/permissions/list'}
@@ -53,23 +53,15 @@ export class UsersPermissions extends React.Component<null, null> {
                                                     setIsLoading={setIsLoading}
                                                 >
                                                     {({
-                                                          data: {
-                                                              data,
-                                                              links,
-                                                              hasNextPage,
-                                                              hasPrevPage,
-                                                              totalPages,
-                                                              perPage,
-                                                              total,
-                                                          } = {},
-                                                          filtersData,
-                                                          setPage,
-                                                          fetch,
-                                                          page,
-                                                      }) => {
+                                                        data: { data, links, hasNextPage, hasPrevPage, totalPages, perPage, total } = {},
+                                                        filtersData,
+                                                        setPage,
+                                                        fetch,
+                                                        page,
+                                                    }) => {
                                                         return (
                                                             <PageContent>
-                                                                <Header/>
+                                                                <Header />
 
                                                                 <List
                                                                     filters={filters}

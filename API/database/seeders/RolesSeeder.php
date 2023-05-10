@@ -289,6 +289,12 @@ class RolesSeeder extends Seeder
                         'is_deletable' => false,
                         'is_name_editable' => false,
                     ],
+                    [
+                        'name' => 'cms.settings',
+                        'guard_name' => 'web',
+                        'is_deletable' => false,
+                        'is_name_editable' => false,
+                    ],
                 ]
             ],
             [

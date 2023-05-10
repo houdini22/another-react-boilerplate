@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { AuthManager } from './AuthManager'
 import { AddPermission, Permission, Role, SetIsLoading, User } from '../../types.d'
-import { EditPermission } from '../routes/UsersPermissionsEdit/components/Edit/Index'
+import { EditSettings } from '../routes/UsersPermissionsEdit/components/Edit/Index'
 
 interface PermissionsManagerProps {
     children: (renderProps: PermissionsManagerRenderProps) => any
@@ -40,7 +40,7 @@ interface PermissionsManagerRenderProps {
     deleteRolePermission: Function
     deletePermission: Function
     fetchPermission: () => Promise<void>
-    editPermission: EditPermission
+    editPermission: EditSettings
     addUserPermission: Function
     deleteUserPermission: Function
     isLoading: boolean

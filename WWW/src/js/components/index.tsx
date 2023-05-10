@@ -48,7 +48,7 @@ import {
 } from './ui/Table'
 import { Container as ListContainer, Item as ListItem, Image as ListImage, ItemContent as ListItemContent } from './ui/List'
 import { Tooltip } from './ui/Tooltip'
-import { ModalContainer, ModalBody, ModalFooter, ModalHeader, ModalManager } from './ui/Modal'
+import { ModalContainer, ModalBody, ModalFooter, ModalHeader, ModalManager, ModalWrapper } from './ui/Modal'
 
 const Tabs = {
     Container: TabContainer,
@@ -114,6 +114,7 @@ const Modal = {
     Header: ModalHeader,
     Footer: ModalFooter,
     Manager: ModalManager,
+    Wrapper: ModalWrapper,
 }
 
 export {

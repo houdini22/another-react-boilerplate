@@ -4,13 +4,11 @@ import { EditForm as FormComponent } from './EditForm'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 
-const onSubmit = (values, _, { save, fetchPermission, addToastNotification, setIsLoading, permission, initialValues }) => {
-    console.log(initialValues)
-    return
+const onSubmit = (values, _, { save, fetchPermission, addToastNotification, setIsLoading, permission }) => {
     return setIsLoading(true).then(() => {
         return save({ ...values }).then(
             () => {
-                /*fetchPermission(permission['id']).then(() => {
+                fetchPermission(permission['id']).then(() => {
                     addToastNotification({
                         type: 'success',
                         title: 'Save success.',
@@ -18,17 +16,17 @@ const onSubmit = (values, _, { save, fetchPermission, addToastNotification, setI
                         href: `/permissions/edit?id=${permission.id}`,
                     })
                     setIsLoading(false)
-                })*/
+                })
             },
             (response) => {
-                /*addToastNotification({
+                addToastNotification({
                     title: 'Form Validation Error',
                     text: response.message,
                     type: 'danger',
                     href: `/permissions/edit?id=${permission.id}`,
                 })
                 setIsLoading(false)
-                throw new SubmissionError(processAPIerrorResponseToFormErrors(response))*/
+                throw new SubmissionError(processAPIerrorResponseToFormErrors(response))
             },
         )
     })
@@ -38,7 +36,7 @@ const EditFormContainer = compose(
     reduxForm({
         enableReinitialize: true,
         destroyOnUnmount: false,
-        form: 'CmsSettingsForm',
+        form: 'EditPermissionForm',
         onSubmit,
     }),
 )(FormComponent)
