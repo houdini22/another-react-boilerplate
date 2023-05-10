@@ -81,28 +81,36 @@ class PermissionsController extends Controller
         $filters = $request->get('filters');
 
         $hasRoles = Permission::with('roles');
-        $hasUsers = Permission::select('id', 'name');
+        $hasUsers = Permission::with('roles');
         $roles = Role::select([
             'roles.id as id',
             'roles.name as name',
             'count' => DB::raw('count(distinct role_has_permissions.permission_id) as count')
         ])->from('roles', 'roles')
             ->leftJoin('role_has_permissions', 'role_has_permissions.role_id', 'roles.id')
+            ->leftJoin('model_has_roles', 'model_has_roles.role_id', 'roles.id')
             ->leftJoin('model_has_permissions', 'model_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->leftJoin('users', 'users.id', 'model_has_permissions.model_id')
+            ->leftJoin('permissions', 'permissions.id', 'model_has_permissions.permission_id')
+            ->leftJoin('users', 'users.id', 'model_has_roles.model_id')
             ->where(function ($query) use ($filters) {
                 if (Arr::get($filters, 'user')) {
                     $query->where('users.name', '=', Arr::get($filters, 'user'));
                 }
                 if (Arr::get($filters, 'has_roles') === 'no') {
-                    $query->whereNull('role_has_permissions.role_id');
+                    $query->whereNull('model_has_roles.model_id');
                 } else if (Arr::get($filters, 'has_roles') === 'yes') {
-                    $query->whereNotNull('role_has_permissions.role_id');
+                    $query->whereNotNull('model_has_roles.model_id');
                 }
                 if (Arr::get($filters, 'has_users') === 'no') {
                     $query->whereNull('model_has_permissions.model_id');
                 } else if (Arr::get($filters, 'has_users') === 'yes') {
-                    $query->whereNotNull('users.id');
+                    $query->whereNotNull('model_has_permissions.model_id');
+                }
+                if (Arr::get($filters, 'search')) {
+                    /*$query->where(function($query) use ($filters) {
+                        $query->where('permissions.name', 'LIKE', '%'.Arr::get($filters, 'search').'%')
+                            ->orWhere('permissions.description', 'LIKE', '%'.Arr::get($filters, 'search').'%');
+                    });*/
                 }
             })
             ->groupBy("id");
@@ -131,8 +139,14 @@ class PermissionsController extends Controller
         }
 
         if (Arr::get($filters, 'search')) {
-            $hasRoles = $hasRoles->where('name', 'LIKE', '%'.Arr::get($filters, 'search').'%');
-            $hasUsers = $hasUsers->where('name', 'LIKE', '%'.Arr::get($filters, 'search').'%');
+            $hasRoles->where(function($query) use ($filters) {
+                $query->where('permissions.name', 'LIKE', '%'.Arr::get($filters, 'search').'%')
+                    ->orWhere('permissions.description', 'LIKE', '%'.Arr::get($filters, 'search').'%');
+            });
+            $hasUsers->where(function($query) use ($filters) {
+                $query->where('permissions.name', 'LIKE', '%'.Arr::get($filters, 'search').'%')
+                    ->orWhere('permissions.description', 'LIKE', '%'.Arr::get($filters, 'search').'%');
+            });
         }
 
         if (Arr::get($filters, 'user')) {

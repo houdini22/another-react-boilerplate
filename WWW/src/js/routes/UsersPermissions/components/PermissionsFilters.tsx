@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { FiltersCard } from '../../../components/common/FiltersCard'
 import { DeleteSavedFilter, Filters, ResetFilters, RestoreSavedFilter, SavedFilters, SaveFilters, SetFilter, SetFilters } from '../../../../types.d'
-import { LoadingOverlay } from '../../../components'
+import { Badge, LoadingOverlay } from '../../../components'
 import { sortRolesByNameAscending } from '../../../helpers/roles'
 import { PermissionIcon } from '../../../components/icons'
 
@@ -101,7 +101,14 @@ export class PermissionsFilters extends React.Component<RolesFiltersProps, null>
                     {
                         options: sortRolesByNameAscending(filtersData?.roles?.data).map(({ id, name, count }) => {
                             return {
-                                label: `${name} (${count})`,
+                                label: (
+                                    <>
+                                        {name}{' '}
+                                        <Badge color={'info'} rounded size={'xs'}>
+                                            {count}
+                                        </Badge>
+                                    </>
+                                ),
                                 value: id,
                                 icon: <PermissionIcon />,
                                 disabled: count === 0,
