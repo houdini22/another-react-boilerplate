@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { PageHeader } from '../../../components'
-import { HomeIcon } from '../../../components/icons'
+import { HomeIcon, LogsIcon } from '../../../components/icons'
 import { RouteManager } from '../../../containers'
 
 interface HeaderProps {}
@@ -11,7 +11,9 @@ export class Header extends React.Component<HeaderProps, null> {
             <RouteManager>
                 {() => (
                     <PageHeader.Container>
-                        <PageHeader.Title>Logs</PageHeader.Title>
+                        <PageHeader.Title>
+                            <LogsIcon /> Logs
+                        </PageHeader.Title>
                         <PageHeader.Breadcrumbs>
                             <PageHeader.BreadcrumbsItem href="/">
                                 <HomeIcon /> Home

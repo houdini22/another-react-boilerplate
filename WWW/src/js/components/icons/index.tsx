@@ -31,6 +31,7 @@ import { MdDescription as DescriptionIcon } from 'react-icons/md'
 import { BsArrowLeft as LeftArrowIcon, BsArrowRight as RightArrowIcon, BsArrowUp as UpArrowIcon } from 'react-icons/bs'
 import { FiSettings as SettingsIcon } from 'react-icons/fi'
 import { MdContentCopy as PagesIcon } from 'react-icons/md'
+import { AiOutlineUserAdd as AddUserIcon } from 'react-icons/ai'
 export {
     OrderingIcon,
     EditIcon,
@@ -66,4 +67,5 @@ export {
     UpArrowIcon,
     SettingsIcon,
     PagesIcon,
+    AddUserIcon,
 }

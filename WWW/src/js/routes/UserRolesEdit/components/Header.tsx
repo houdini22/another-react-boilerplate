@@ -2,6 +2,7 @@ import * as React from 'react'
 import { PageHeader } from '../../../components'
 import { FaHome as HomeIcon } from 'react-icons/fa'
 import { Role } from '../../../../types.d'
+import { RoleIcon } from '../../../components/icons'
 
 interface HeaderProps {
     role: Role
@@ -12,7 +13,9 @@ export class Header extends React.Component<HeaderProps, null> {
         const { role } = this.props
         return (
             <PageHeader.Container>
-                <PageHeader.Title>Edit Role</PageHeader.Title>
+                <PageHeader.Title>
+                    <RoleIcon /> Edit Role
+                </PageHeader.Title>
                 <PageHeader.Breadcrumbs>
                     <PageHeader.BreadcrumbsItem href="/">
                         <HomeIcon /> Home

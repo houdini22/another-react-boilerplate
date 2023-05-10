@@ -3,6 +3,7 @@ import { Button, PageHeader } from '../../../components'
 import { FaHome as HomeIcon } from 'react-icons/fa'
 import { User } from '../../../../types.d'
 import { ModalConfirm } from '../../../components/common/ModalConfirm'
+import { UserIcon } from '../../../components/icons'
 
 interface HeaderProps {
     user: User
@@ -127,7 +128,9 @@ export class Header extends React.Component<HeaderProps, null> {
 
         return (
             <PageHeader.Container>
-                <PageHeader.Title>Edit User</PageHeader.Title>
+                <PageHeader.Title>
+                    <UserIcon /> Edit User
+                </PageHeader.Title>
                 <PageHeader.Actions>
                     {canByPermission('users.force_activation') && (
                         <Button

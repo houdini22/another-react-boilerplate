@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { Button, PageHeader } from '../../../components'
-import { HomeIcon } from '../../../components/icons'
+import { PageHeader } from '../../../components'
+import { HomeIcon, PermissionIcon } from '../../../components/icons'
 import { AuthorizationManager, RouteManager } from '../../../containers'
 import { ButtonAdd } from '../../../components/common/ButtonAdd'
 
@@ -14,7 +14,9 @@ export class Header extends React.Component<HeaderProps, null> {
                     <AuthorizationManager>
                         {({ canByPermission }) => (
                             <PageHeader.Container>
-                                <PageHeader.Title>Permissions</PageHeader.Title>
+                                <PageHeader.Title>
+                                    <PermissionIcon /> Permissions
+                                </PageHeader.Title>
                                 <PageHeader.Actions>
                                     {canByPermission('permissions.add') && <ButtonAdd href={'/permissions/add'} />}
                                 </PageHeader.Actions>

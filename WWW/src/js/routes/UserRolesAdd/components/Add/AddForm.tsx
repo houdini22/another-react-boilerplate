@@ -38,7 +38,14 @@ class AddForm extends React.Component<null, null> {
                         </Card>
 
                         {!noAddToUsers && canByPermission('users.add_permission') && (
-                            <Card header={<h1>Add to Users</h1>} color={'secondary'}>
+                            <Card
+                                header={
+                                    <h1>
+                                        <UserIcon /> Add to Users
+                                    </h1>
+                                }
+                                color={'secondary'}
+                            >
                                 <Field
                                     name="_users"
                                     label="User"
@@ -81,7 +88,14 @@ class AddForm extends React.Component<null, null> {
                         )}
 
                         {canByPermission('roles.add_permission') && (
-                            <Card header={<h1>Associate Permissions</h1>} color={'secondary'}>
+                            <Card
+                                header={
+                                    <h1>
+                                        <PermissionIcon /> Associate Permissions
+                                    </h1>
+                                }
+                                color={'secondary'}
+                            >
                                 <Field
                                     name="_permissions"
                                     label="Permission"

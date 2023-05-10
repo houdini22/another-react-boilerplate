@@ -5,7 +5,7 @@ import { sortRolesByNameAscending } from '../../../../helpers/roles'
 import { sortPermissionsByNameAscending } from '../../../../helpers/permissions'
 import { AddFormContainer } from '../../../UserRolesAdd/components/Add/AddFormContainer'
 import SimpleModelCell from '../../../../components/common/SimpleModelCell'
-import { PermissionIcon, RoleIcon, UserIcon } from '../../../../components/icons'
+import { AddUserIcon, PermissionIcon, RoleIcon, UserIcon } from '../../../../components/icons'
 
 class AddForm extends React.Component<null, null> {
     render() {
@@ -38,9 +38,21 @@ class AddForm extends React.Component<null, null> {
         } = this.props
 
         return (
-            <Tabs.Container solid color={'success'} header={'Add User'} size={'lg'} rounded>
+            <Tabs.Container
+                solid
+                color={'success'}
+                header={
+                    <h1>
+                        <AddUserIcon /> Add User
+                    </h1>
+                }
+                size={'lg'}
+                rounded
+            >
                 <Tabs.Tab name={'user'}>
-                    <Tabs.Trigger>User</Tabs.Trigger>
+                    <Tabs.Trigger>
+                        <UserIcon /> User
+                    </Tabs.Trigger>
                     <Tabs.Content>
                         <form onSubmit={handleSubmit}>
                             <Row>
@@ -73,7 +85,15 @@ class AddForm extends React.Component<null, null> {
                                 <Col xs={6}>
                                     <div>
                                         {canByPermission('users.add_role') && (
-                                            <Card header={<h1>Associate Roles</h1>} size={'md'} color={'secondary'}>
+                                            <Card
+                                                header={
+                                                    <h1>
+                                                        <RoleIcon /> Associate Roles
+                                                    </h1>
+                                                }
+                                                size={'md'}
+                                                color={'secondary'}
+                                            >
                                                 <Field
                                                     name="_roles"
                                                     label="Role"
@@ -117,7 +137,15 @@ class AddForm extends React.Component<null, null> {
 
                                         {canByPermission('users.add_permission') && (
                                             <div>
-                                                <Card header={<h1>Associate Permissions</h1>} size={'md'} color={'secondary'}>
+                                                <Card
+                                                    header={
+                                                        <h1>
+                                                            <PermissionIcon /> Associate Permissions
+                                                        </h1>
+                                                    }
+                                                    size={'md'}
+                                                    color={'secondary'}
+                                                >
                                                     <Field
                                                         name="_permissions"
                                                         label="Permission"
@@ -173,7 +201,9 @@ class AddForm extends React.Component<null, null> {
                 </Tabs.Tab>
                 {canByPermission('roles.add') && (
                     <Tabs.Tab name={'roles'}>
-                        <Tabs.Trigger>Add Role</Tabs.Trigger>
+                        <Tabs.Trigger>
+                            <RoleIcon /> Add Role
+                        </Tabs.Trigger>
                         <Tabs.Content>
                             <AddFormContainer
                                 setIsLoading={setIsLoading}

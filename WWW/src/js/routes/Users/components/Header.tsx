@@ -3,6 +3,7 @@ import { PageHeader } from '../../../components'
 import { FaHome as HomeIcon } from 'react-icons/fa'
 import { RouteManager, AuthorizationManager } from '../../../containers'
 import { ButtonAdd } from '../../../components/common/ButtonAdd'
+import { UserIcon } from '../../../components/icons'
 
 interface HeaderProps {}
 
@@ -14,7 +15,9 @@ export class Header extends React.Component<HeaderProps, null> {
                     <AuthorizationManager>
                         {({ canByPermission }) => (
                             <PageHeader.Container>
-                                <PageHeader.Title>Users</PageHeader.Title>
+                                <PageHeader.Title>
+                                    <UserIcon /> Users
+                                </PageHeader.Title>
                                 <PageHeader.Actions>{canByPermission('users.add') && <ButtonAdd href={'/users/add'} />}</PageHeader.Actions>
                                 <PageHeader.Breadcrumbs>
                                     <PageHeader.BreadcrumbsItem href="/">

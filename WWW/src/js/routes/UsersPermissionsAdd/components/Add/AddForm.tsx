@@ -48,7 +48,14 @@ class AddForm extends React.Component<null, null> {
                     </Col>
                     <Col xs={fullWidth ? 12 : 6}>
                         {!role_id && !noAddToUsers && canByPermission('users.add_permission') && (
-                            <Card header={<h1>Add to Users</h1>} color={'secondary'}>
+                            <Card
+                                header={
+                                    <h1>
+                                        <UserIcon /> Add to Users
+                                    </h1>
+                                }
+                                color={'secondary'}
+                            >
                                 <Field
                                     name="_users"
                                     label="User"

@@ -1,3 +1,3 @@
-import UsersPermissionsEditView from './components/Index'
+import { CmsSettingsView } from './components/Index'
 
-export { UsersPermissionsEditView }
+export { CmsSettingsView }
