@@ -157,19 +157,19 @@ export class Container extends React.Component<ContainerProps, ContainerState> {
                             {header && (
                                 <div
                                     className={cx('component-tabs__tabs__header__title')}
-                                    style={{
+                                    /*style={{
                                         flex: flexTitle,
-                                    }}
+                                    }}*/
                                 >
-                                    <h1>{header}</h1>
+                                    {header}
                                 </div>
                             )}
                             <ul
                                 className={cx('component-tabs__tabs__header__triggers')}
                                 ref={(e) => this.registerTriggersElement(e)}
-                                style={{
+                                /*style={{
                                     flex: flexTriggers,
-                                }}
+                                }}*/
                             />
                         </div>
                     </div>

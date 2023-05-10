@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Dropdown, PageHeader, Button } from '../../../components'
 import { FaHome as HomeIcon } from 'react-icons/fa'
 import { AuthorizationManager } from '../../../containers'
+import { PagesIcon } from '../../../components/icons'
 
 interface HeaderProps {
     currentNodeParents: Array<Object>
@@ -18,7 +19,9 @@ export class Header extends React.Component<HeaderProps, null> {
             <AuthorizationManager>
                 {({ canByPermission }) => (
                     <PageHeader.Container>
-                        <PageHeader.Title>{title}</PageHeader.Title>
+                        <PageHeader.Title>
+                            <PagesIcon /> {title}
+                        </PageHeader.Title>
                         <PageHeader.Breadcrumbs>
                             <PageHeader.BreadcrumbsItem href="/">
                                 <HomeIcon /> Home

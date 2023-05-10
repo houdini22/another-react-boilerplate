@@ -22,13 +22,13 @@ import { UsersPermissions } from './routes/UsersPermissions'
 import { UsersPermissionsEditView } from './routes/UsersPermissionsEdit'
 import { UsersPermissionsAddView } from './routes/UsersPermissionsAdd'
 import { UserRolesAdd } from './routes/UserRolesAdd'
-import { WebsocketsManager } from './containers/WebsocketsManager'
+import { WebsocketsManager } from './containers'
 import { EditCategoryView } from './routes/Cms/components/EditCategory'
 import EditDocumentView from './routes/Cms/components/EditDocument'
 import EditLinkView from './routes/Cms/components/EditLink'
 import { LogsView } from './routes/Logs'
 import { Container } from './containers/Config'
-import CmsSettingsView from './routes/UsersPermissionsEdit/components/Index'
+import { CmsSettingsView } from './routes/CmsSettings'
 
 const App = () => (
     <Router>

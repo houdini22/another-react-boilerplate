@@ -2,6 +2,7 @@ import * as React from 'react'
 import { AddFormContainer } from './AddFormContainer'
 import { FormContainer } from '../../../../containers'
 import { Card, LoadingOverlay } from '../../../../components'
+import { PermissionIcon } from '../../../../components/icons'
 
 interface AddPermissionProps {}
 
@@ -19,12 +20,19 @@ export class AddPermission extends React.Component<AddPermissionProps, null> {
             noRoleId,
             newUsers,
             clearUsersFromNewPermission,
-            fullWith,
+            fullWidth,
         } = this.props
         return (
             <FormContainer>
                 {({ addToastNotification, canByPermission }) => (
-                    <Card header={<h1>Add Permission</h1>} color="success">
+                    <Card
+                        header={
+                            <h1>
+                                <PermissionIcon /> Add Permission
+                            </h1>
+                        }
+                        color="success"
+                    >
                         <AddFormContainer
                             roles={roles}
                             setIsLoading={setIsLoading}
@@ -38,7 +46,7 @@ export class AddPermission extends React.Component<AddPermissionProps, null> {
                             noRoleId={noRoleId}
                             canByPermission={canByPermission}
                             clearUsersFromNewPermission={clearUsersFromNewPermission}
-                            fullWidth={fullWith}
+                            fullWidth={fullWidth}
                         />
                         {isLoading && <LoadingOverlay />}
                     </Card>
