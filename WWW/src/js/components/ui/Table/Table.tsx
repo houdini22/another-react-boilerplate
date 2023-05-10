@@ -69,11 +69,12 @@ interface TrProps {
     color?: string
     children: any
     onClick?: () => void
+    expanded?: boolean
 }
 
 class Tr extends React.Component<TrProps, null> {
     render() {
-        const { children, color, onClick, ...props } = this.props
+        const { children, color, onClick, expanded, ...props } = this.props
 
         return (
             <Row
@@ -82,6 +83,7 @@ class Tr extends React.Component<TrProps, null> {
                 className={cx('component-table__tr', {
                     [`component-table__tr--color-${color}`]: color,
                     [`component-table__tr--is-clickable`]: !!onClick,
+                    [`component-table__tr--expanded`]: expanded,
                 })}
             >
                 {children}

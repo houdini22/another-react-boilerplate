@@ -20,7 +20,7 @@ export class RowExpandPermissions extends React.Component<RowExpandPermissionsPr
         return (
             <ModalManager>
                 {({ registerModal, closeModal, openModal }) => (
-                    <Table.Tr key={`permissions${role.id}`}>
+                    <Table.Tr key={`permissions${role.id}`} expanded>
                         <Table.Td xs={12}>
                             <Row>
                                 <Col xs={12}>

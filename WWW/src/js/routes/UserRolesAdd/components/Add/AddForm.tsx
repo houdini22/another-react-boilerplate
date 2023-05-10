@@ -29,7 +29,17 @@ class AddForm extends React.Component<null, null> {
         } = this.props
 
         return (
-            <Tabs.Container size={'lg'} color={'success'} solid block>
+            <Tabs.Container
+                size={'lg'}
+                color={'success'}
+                solid
+                block
+                header={
+                    <h1>
+                        <RoleIcon /> Add Role
+                    </h1>
+                }
+            >
                 <Tabs.Tab name={'role'}>
                     <Tabs.Trigger>
                         <RoleIcon /> Role
