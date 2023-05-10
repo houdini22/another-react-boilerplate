@@ -47,11 +47,14 @@ export class Permissions extends React.Component<AddRoleProps, null> {
                             All Permissions <Badge color={'info'}>{Object.keys(allPermissions).length}</Badge>
                         </Tabs.Trigger>
                         <Tabs.Content>
-                            {sortPermissionsByNameAscending(_allPermissions).map(({ id, name, occurrence }) => {
+                            {sortPermissionsByNameAscending(_allPermissions).map((permission: Permission) => {
                                 return (
-                                    <Label key={id} block size={'lg'}>
-                                        {name} {occurrence > 1 && `(${occurrence})`}
-                                    </Label>
+                                    <PermissionDropdown
+                                        key={permission.id}
+                                        permission={{
+                                            ...permission,
+                                        }}
+                                    />
                                 )
                             })}
                         </Tabs.Content>

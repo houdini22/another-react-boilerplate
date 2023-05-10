@@ -39,7 +39,7 @@ class ModalWrapper extends React.Component<ModalWrapperProps, ModalWrapperState>
         return (
             <>
                 {modals.map(({ name, value }) => {
-                    return <>{value}</>
+                    return <div key={name}>{value}</div>
                 })}
             </>
         )
