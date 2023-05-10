@@ -606,7 +606,7 @@ class UsersController extends Controller
 
         $u = new User();
         $u->fill($request->post());
-        $u->password = bcrypt($user->password);
+        $u->password = bcrypt($u->password);
         $u->save();
 
         Log::add($user, 'users.add', [

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
@@ -156,6 +157,33 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'OK'
+        ]);
+    }
+
+    public function postRegister(Request $request) {
+        $request->validate([
+            'email' => ['required', 'email', 'unique:users,email'],
+            'name' => ['required', 'alpha_dash', 'unique:users,name'],
+            'password' => ['required', 'confirmed', Password::min(8)
+                ->mixedCase()
+                ->symbols()
+                ->numbers()
+                ->letters()],
+            'password_confirmation' => ['required'],
+        ]);
+
+        $u = new User();
+        $u->fill($request->post());
+        $u->password = bcrypt($u->password);
+        $u->save();
+
+        Log::add($u, 'users.register', [
+            'model' => $u,
+            'request' => $request
+        ]);
+
+        return $this->responseOK([
+            'user' => $u,
         ]);
     }
 }

@@ -69,6 +69,25 @@ export const myGet = (url, params = {}) => {
             })
     })
 }
+export const myPost = (url, params = {}) => {
+    return new Promise((resolve, reject) => {
+        instance
+            .post(url, params)
+            .then(
+                ({
+                    data: {
+                        data: { data },
+                    },
+                }) => {
+                    console.log(data)
+                    resolve(data)
+                },
+            )
+            .catch((e) => {
+                reject(e)
+            })
+    })
+}
 
 export default instance
 export { setAuthToken, instance as http, processAPIerrorResponseToFormErrors }

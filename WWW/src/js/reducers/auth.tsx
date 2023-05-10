@@ -1,4 +1,4 @@
-import { http, setAuthToken } from '../modules/http'
+import { http, myPost, setAuthToken } from '../modules/http'
 import { LocalStorage } from '../modules/database'
 
 // ------------------------------------
@@ -137,6 +137,27 @@ const logoff = () => (dispatch) => {
     })
 }
 
+const register = (values) => (dispatch) => {
+    return new Promise((resolve, reject) => {
+        dispatch(setIsLoading(true))
+        return myPost('/auth/register', values).then(
+            (data) => {
+                LocalStorage.update('LoginFormContainer', { ID: 1 }, (row) => {
+                    row.email = values.email
+                    return row
+                })
+                LocalStorage.commit()
+                dispatch(setIsLoading(false))
+                resolve(data)
+            },
+            (e) => {
+                dispatch(setIsLoading(false))
+                reject(e)
+            },
+        )
+    })
+}
+
 export const actions = {
     loggedIn,
     loggedOff,
@@ -147,6 +168,7 @@ export const actions = {
     setIsLoading,
     gentlyLogOff,
     setUserData,
+    register,
 }
 
 // ------------------------------------

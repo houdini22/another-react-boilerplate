@@ -29,6 +29,7 @@ import EditLinkView from './routes/Cms/components/EditLink'
 import { LogsView } from './routes/Logs'
 import { Container } from './containers/Config'
 import { CmsSettingsView } from './routes/CmsSettings'
+import { RegisterView } from './routes/Register'
 
 const App = () => (
     <Router>
@@ -250,6 +251,14 @@ const App = () => (
                                         <IndexView />
                                     </UserIsAuthenticatedRoute>
                                 </PageLayout>
+                            }
+                        />
+                        <Route
+                            path="/register"
+                            element={
+                                <BlankPageLayout>
+                                    <RegisterView />
+                                </BlankPageLayout>
                             }
                         />
                     </Routes>
