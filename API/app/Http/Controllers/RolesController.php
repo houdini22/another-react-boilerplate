@@ -89,32 +89,45 @@ class RolesController extends Controller
             'permissions.name',
             'count' => DB::raw('count(distinct role_has_permissions.role_id) as count')
         ])->from('permissions', 'permissions')
-            ->leftJoin('role_has_permissions', 'role_has_permissions.permission_id', 'id')
-            ->leftJoin('model_has_permissions', 'model_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->leftJoin('users', 'users.id', 'model_has_permissions.model_id')
+            ->leftJoin('role_has_permissions', 'role_has_permissions.permission_id', 'permissions.id')
+            ->leftJoin('model_has_roles', 'role_has_permissions.role_id', 'model_has_roles.role_id')
+            ->leftJoin('roles', 'roles.id', 'model_has_roles.role_id')
+            ->leftJoin('users', 'users.id', 'model_has_roles.model_id')
             ->where(function ($query) use ($filters) {
-                /*if (Arr::get($filters, 'user')) {
+                if (Arr::get($filters, 'user')) {
                     $query->where('users.name', '=', Arr::get($filters, 'user'));
-                }*/
+                }
+                if (Arr::get($filters, 'search')) {
+                    $query->where(function ($query) use ($filters) {
+                            $query->where('roles.name', 'like', "%{$filters['search']}%")
+                                ->orWhere('roles.description', 'like', "%{$filters['search']}%");
+                    });
+                }
                 if (Arr::get($filters, 'has_permissions') === 'no') {
-                    $query->whereNull('role_has_permissions.permission_id');
+                    $query->whereNull('role_has_permissions.role_id');
                 } else if (Arr::get($filters, 'has_permissions') === 'yes') {
-                    $query->whereNotNull('role_has_permissions.permission_id');
-                }/*
+                    $query->whereNotNull('role_has_permissions.role_id');
+                }
                 if (Arr::get($filters, 'has_users') === 'no') {
-                    $query->whereNull('model_has_permissions.model_id');
+                    $query->whereNull('model_has_roles.model_id');
                 } else if (Arr::get($filters, 'has_users') === 'yes') {
-                    $query->whereNotNull('users.id');
-                }*/
+                    $query->whereNotNull('model_has_roles.model_id');
+                }
             })
             ->groupBy("id");
 
         if (Arr::get($filters, 'has_permissions') === 'no') {
+            $hasUsers->whereDoesntHave('permissions');
         } else if (Arr::get($filters, 'has_permissions') === 'yes') {
+            $hasUsers->whereHas('permissions');
         }
 
         if (Arr::get($filters, 'has_users') === 'no') {
+            $hasUsers->whereDoesntHave('users');
+            $hasPermissions->whereDoesntHave('users');
         } else if (Arr::get($filters, 'has_users') === 'yes') {
+            $hasUsers->whereHas('users');
+            $hasPermissions->whereHas('users');
         }
 
         if (Arr::get($filters, 'permissions')) {
@@ -136,9 +149,18 @@ class RolesController extends Controller
         }
 
         if (Arr::get($filters, 'search')) {
-            $hasPermissions->where('name', 'LIKE', '%'.Arr::get($filters, 'search'));
-            $hasUsers->where('name', 'LIKE', '%'.Arr::get($filters, 'search'));
-            $permissions->where('permissions.name', 'LIKE', '%'.Arr::get($filters, 'search'));
+            $hasPermissions->where(function ($query) use ($filters) {
+                $query->where('roles.name', 'like', "%{$filters['search']}%")
+                    ->orWhere('roles.description', 'like', "%{$filters['search']}%");
+            });
+            $hasUsers->where(function ($query) use ($filters) {
+                $query->where('roles.name', 'like', "%{$filters['search']}%")
+                    ->orWhere('roles.description', 'like', "%{$filters['search']}%");
+            });
+            $permissions->where(function ($query) use ($filters) {
+                $query->where('roles.name', 'like', "%{$filters['search']}%")
+                    ->orWhere('roles.description', 'like', "%{$filters['search']}%");
+            });
         }
 
         $permissions = $permissions->get();
