@@ -6,7 +6,7 @@ import { FiltersFactory } from '../List/FiltersFactory'
 import { ModalManager } from '../../ui/Modal'
 import { SaveFiltersModal } from './SaveFiltersModal'
 import { DropdownContainer, DropdownItem, DropdownMenu, DropdownTrigger } from '../../ui/Dropdown'
-import { DeleteIcon, ResetIcon, RestoreIcon, SaveIcon } from '../../icons'
+import { DeleteIcon, FiltersIcon, ResetIcon, RestoreIcon, SaveIcon } from '../../icons'
 import { ResetFilters, Filters, SetFilter, DeleteSavedFilter, SaveFilters, RestoreSavedFilter, SavedFilters } from '../../../../types.d'
 
 interface FiltersCardProps {
@@ -58,7 +58,11 @@ class FiltersCard extends React.Component<FiltersCardProps, null> {
                     return (
                         <Card
                             name={name}
-                            header={<h1>Filters</h1>}
+                            header={
+                                <h1>
+                                    <FiltersIcon /> Filters
+                                </h1>
+                            }
                             withMinimizeIcon
                             headerActions={[
                                 <Button

@@ -12,7 +12,7 @@ export class RowExpandRoles extends React.Component<RowExpandRolesProps, null> {
         const { permission, deleteRolePermission, setIsLoading, fetch } = this.props
 
         return (
-            <Table.Tr key={`roles${permission.id}`}>
+            <Table.Tr key={`roles${permission.id}`} expanded>
                 <Table.Td xs={12}>
                     <Row>
                         <Col xs={12}>

@@ -20,7 +20,7 @@ export class RowExpandRoles extends React.Component<RowExpandRolesProps, null> {
         return (
             <ModalManager>
                 {({ registerModal, closeModal, openModal }) => (
-                    <Table.Tr key={`roles${user.id}`}>
+                    <Table.Tr key={`roles${user.id}`} expanded>
                         <Table.Td xs={12}>
                             <Row>
                                 <Col xs={12}>

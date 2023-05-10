@@ -32,6 +32,7 @@ import { BsArrowLeft as LeftArrowIcon, BsArrowRight as RightArrowIcon, BsArrowUp
 import { FiSettings as SettingsIcon } from 'react-icons/fi'
 import { MdContentCopy as PagesIcon } from 'react-icons/md'
 import { AiOutlineUserAdd as AddUserIcon } from 'react-icons/ai'
+import { MdFilterList as FiltersIcon } from 'react-icons/md'
 export {
     OrderingIcon,
     EditIcon,
@@ -68,4 +69,5 @@ export {
     SettingsIcon,
     PagesIcon,
     AddUserIcon,
+    FiltersIcon,
 }

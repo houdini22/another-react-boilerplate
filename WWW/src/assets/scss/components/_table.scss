@@ -190,7 +190,7 @@
 
     &.component-table--striped {
         & > .component-table__tbody {
-            & > .component-table__tr:nth-child(2n + 1) {
+            & > .component-table__tr:not(.component-table__tr--expanded):nth-child(2n + 1) {
                 background: $default_LIGHTEN_X1;
             }
         }
