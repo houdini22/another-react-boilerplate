@@ -209,11 +209,19 @@ class UsersController extends Controller
         return $this->responseOK([
             'permissions' => [
                 'data' => $permissions,
-                'count' => $permissions->count()
+                'count' => $permissions
+                    ->filter(function ($item) {
+                        return $item['count'] > 0;
+                    })
+                    ->count()
             ],
             'roles' => [
                 'data' => $roles,
-                'count' => $roles->count()
+                'count' => $roles
+                    ->filter(function ($item) {
+                        return $item['count'] > 0;
+                    })
+                    ->count()
             ],
             'has_avatar' => [
                 'count' => $hasAvatar->count()

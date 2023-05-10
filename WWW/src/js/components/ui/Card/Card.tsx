@@ -186,8 +186,10 @@ class Card extends React.Component<CardProps, null> {
                 )}
                 {!minimized && [
                     <div className={cx('component-card__content')}>
-                        {_.isFunction(children) && children()}
-                        {!_.isFunction(children) && children}
+                        <div>
+                            {_.isFunction(children) && children()}
+                            {!_.isFunction(children) && children}
+                        </div>
                     </div>,
                     <div
                         className={cx('component-card__footer', {
