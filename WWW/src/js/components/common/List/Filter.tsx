@@ -139,7 +139,9 @@ class Filter extends React.Component<FilterProps, null> {
                     {type !== 'order' && (
                         <div>
                             {typeof filterData?.count !== 'undefined' && (
-                                <Badge color={filterData.count === 0 ? 'warning' : 'info'}>{filterData.count}</Badge>
+                                <Badge rounded color={filterData.count === 0 ? 'warning' : 'info'}>
+                                    {filterData.count}
+                                </Badge>
                             )}{' '}
                             {label}: {changed && <Label color={'info'}>Active</Label>}
                         </div>
@@ -210,6 +212,7 @@ class Filter extends React.Component<FilterProps, null> {
                             disabled={disabled}
                             size={'xs'}
                             icon={icon}
+                            outline={filters[name].indexOf(value) === -1}
                             key={`${value}${label}`}
                             color={filters[name].indexOf(value) === -1 ? (!disabled ? 'primary' : 'danger') : 'warning'}
                             onClick={() => {

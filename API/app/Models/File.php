@@ -22,7 +22,8 @@ class File extends Model
         'title',
         'description',
         'caption',
-        'alt'
+        'alt',
+        'class'
     ];
 
     public static function upload(UploadedFile $file, User $user) {
@@ -37,10 +38,9 @@ class File extends Model
             'type' => 'file',
             'size' => filesize(storage_path('app/public/uploads/user_avatar/' . $fileName)),
             'title' => $file->getClientOriginalName(),
+            'class' => 'file',
         ]);
         $newFile->user_id = $user->id;
-        $newFile->save();
-
         $newFile->save();
 
         try {
