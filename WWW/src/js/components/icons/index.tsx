@@ -29,6 +29,8 @@ import { AiFillSave as SaveIcon } from 'react-icons/ai'
 import { RxReset as ResetIcon } from 'react-icons/rx'
 import { MdDescription as DescriptionIcon } from 'react-icons/md'
 import { BsArrowLeft as LeftArrowIcon, BsArrowRight as RightArrowIcon, BsArrowUp as UpArrowIcon } from 'react-icons/bs'
+import { FiSettings as SettingsIcon } from 'react-icons/fi'
+import { MdContentCopy as PagesIcon } from 'react-icons/md'
 export {
     OrderingIcon,
     EditIcon,
@@ -62,4 +64,6 @@ export {
     LeftArrowIcon,
     RightArrowIcon,
     UpArrowIcon,
+    SettingsIcon,
+    PagesIcon,
 }

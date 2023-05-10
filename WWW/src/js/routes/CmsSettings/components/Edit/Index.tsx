@@ -5,23 +5,33 @@ import { FormContainer, NotificationsManager } from '../../../../containers'
 import { Permission, SetIsLoading } from '../../../../../types.d'
 import AlertNoPermissions from '../../../../components/common/AlertNoPermissions'
 interface EditProps {
+    editPermission: EditPermission
+    permission: Permission
+    fetchPermission: () => Promise<void>
     isLoading: boolean
     setIsLoading: SetIsLoading
-    config: Object
 }
 
 interface EditState {}
 
-export class EditSettings extends React.Component<EditProps, EditState> {
+export class EditPermission extends React.Component<EditProps, EditState> {
     render() {
-        const { config, isLoading, setIsLoading } = this.props
+        const { editPermission, permission, fetchPermission, isLoading, setIsLoading } = this.props
         return (
             <FormContainer>
                 {({ addToastNotification, canByPermission }) => (
                     <>
                         {canByPermission('permissions.edit') && (
-                            <Card header={<h1>Settings</h1>} color={'primary'}>
-                                <EditFormContainer initialValues={config} addToastNotification={addToastNotification} setIsLoading={setIsLoading} />
+                            <Card header={<h1>Permission</h1>} color={'primary'}>
+                                <EditFormContainer
+                                    initialValues={permission}
+                                    save={editPermission}
+                                    role={permission}
+                                    fetchPermission={fetchPermission}
+                                    addToastNotification={addToastNotification}
+                                    setIsLoading={setIsLoading}
+                                    permission={permission}
+                                />
                                 {isLoading && <LoadingOverlay />}
                             </Card>
                         )}
@@ -33,4 +43,4 @@ export class EditSettings extends React.Component<EditProps, EditState> {
     }
 }
 
-export default { EditSettings }
+export default { EditPermission }

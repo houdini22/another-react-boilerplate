@@ -9,6 +9,7 @@ import { Notifications } from './components/Notifications'
 import { ConnectionErrorModal } from './components/ConnectionErrorModal'
 import { ConnectionFetchErrorModal } from './components/ConnectionFetchErrorModal'
 import { ConnectionFetchError404 } from './components/ConnectionFetchError404'
+import { ModalWrapper } from '../../components/ui/Modal'
 
 const cx = classNames.bind(styles)
 
@@ -53,41 +54,46 @@ class PageLayout extends React.Component<PageLayoutProps, null> {
                                     'layout--disable-sidebar': disableSidebar,
                                 })}
                             >
-                                <SidebarHeader>
-                                    {config.texts.frameworkName}
-                                    <sub>{config.texts.version}</sub>
-                                </SidebarHeader>
+                                <ModalWrapper>
+                                    <SidebarHeader>
+                                        {config.texts.frameworkName}
+                                        <sub>{config.texts.version}</sub>
+                                    </SidebarHeader>
 
-                                <Sidebar
-                                    onClickLogout={() => {
-                                        logoff().then(() => {
-                                            navigate('/login')
-                                        })
-                                    }}
-                                    isLoggedIn={isLoggedIn}
-                                    user={user}
-                                >
-                                    <Scrollbars style={{ height: 'calc(100% - 70px)' }}>
-                                        <Navigation />
-                                    </Scrollbars>
-                                </Sidebar>
+                                    <Sidebar
+                                        onClickLogout={() => {
+                                            logoff().then(() => {
+                                                navigate('/login')
+                                            })
+                                        }}
+                                        isLoggedIn={isLoggedIn}
+                                        user={user}
+                                    >
+                                        <Scrollbars style={{ height: 'calc(100% - 70px)' }}>
+                                            <Navigation />
+                                        </Scrollbars>
+                                    </Sidebar>
 
-                                <Container>{children}</Container>
+                                    <Container>{children}</Container>
 
-                                <Notifications />
-
-                                <ConnectionErrorModal
-                                    visible={connectionErrorMessage === 'ERR_NETWORK'}
-                                    message={connectionErrorCode}
-                                    close={() => setConnectionErrorModalVisible({})}
-                                />
-                                <ConnectionFetchErrorModal
-                                    data={connectionErrorStatusData}
-                                    visible={connectionErrorStatusText === 'Internal Server Error'}
-                                    message={connectionFetchErrorMessage}
-                                    close={() => setFetchError({})}
-                                />
-                                <ConnectionFetchError404 data={error404} visible={Object.keys(error404).length > 0} close={() => set404error({})} />
+                                    <Notifications />
+                                    <ConnectionErrorModal
+                                        visible={connectionErrorMessage === 'ERR_NETWORK'}
+                                        message={connectionErrorCode}
+                                        close={() => setConnectionErrorModalVisible({})}
+                                    />
+                                    <ConnectionFetchErrorModal
+                                        data={connectionErrorStatusData}
+                                        visible={connectionErrorStatusText === 'Internal Server Error'}
+                                        message={connectionFetchErrorMessage}
+                                        close={() => setFetchError({})}
+                                    />
+                                    <ConnectionFetchError404
+                                        data={error404}
+                                        visible={Object.keys(error404).length > 0}
+                                        close={() => set404error({})}
+                                    />
+                                </ModalWrapper>
                             </div>
                         )}
                     </AuthManager>

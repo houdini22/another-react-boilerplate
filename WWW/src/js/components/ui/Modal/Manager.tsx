@@ -1,31 +1,31 @@
 import * as React from 'react'
+
 interface ModalManagerProps {
     children: any
 }
+
+import { ModalContext } from './Wrapper'
 
 class ModalManager extends React.Component<ModalManagerProps, null> {
     state = {
         openedModal: '',
     }
     modals = {}
+
     registerModal(name, modal) {
         this.modals[name] = modal
     }
-    renderModals() {
-        const { openedModal } = this.state
 
-        if (this.modals[openedModal]) {
-            return this.modals[openedModal]
-        }
-
-        return null
-    }
     openModal(name) {
+        const { openedModal } = this.state
         if (!this.modals[name]) {
             console.error(`Modal ${name} not registered.`)
         }
-        this.setState({ openedModal: name })
+        if (!!this.modals[name] && openedModal !== name) {
+            this.setState({ openedModal: name })
+        }
     }
+
     closeModal(name) {
         const { openedModal } = this.state
 
@@ -33,6 +33,7 @@ class ModalManager extends React.Component<ModalManagerProps, null> {
             this.setState({ openedModal: '' })
         }
     }
+
     render() {
         const { children } = this.props
 
@@ -43,10 +44,19 @@ class ModalManager extends React.Component<ModalManagerProps, null> {
         }
 
         return (
-            <>
-                {children(renderProps)}
-                {this.renderModals()}
-            </>
+            <ModalContext.Consumer>
+                {({ openModal, closeModal }) => {
+                    renderProps.openModal = (name) => {
+                        this.openModal(name)
+                        openModal(name, this.modals[name])
+                    }
+                    renderProps.closeModal = (name) => {
+                        this.closeModal(name)
+                        closeModal(name)
+                    }
+                    return <>{children(renderProps)}</>
+                }}
+            </ModalContext.Consumer>
         )
     }
 }

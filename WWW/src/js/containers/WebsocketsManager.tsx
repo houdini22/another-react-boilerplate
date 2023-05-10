@@ -6,6 +6,7 @@ import Echo from 'laravel-echo'
 import Pusher from 'pusher-js'
 import { withRouter } from '../helpers/router'
 import { ModalInfo } from '../components/common/ModalInfo'
+import { ModalManager } from '../components/ui/Modal'
 
 interface WebsocketsManagerBaseProps {
     auth: {
@@ -49,6 +50,7 @@ class WebsocketsManagerBase extends React.Component<WebsocketsManagerBaseProps, 
             this.client
                 ?.channel(`user.${token}`)
                 .listen('.user_data_changed', (data) => {
+                    console.info('User data changed')
                     setUserData(data)
                     this.setState({
                         modalInfoVisible: true,
@@ -74,19 +76,30 @@ class WebsocketsManagerBase extends React.Component<WebsocketsManagerBaseProps, 
         const renderProps = {}
 
         return (
-            <>
-                {children(renderProps)}
-                <ModalInfo
-                    close={() => {
-                        this.setState({
-                            modalInfoVisible: false,
-                        })
-                    }}
-                    visible={modalInfoVisible}
-                >
-                    Your User data has just changed.
-                </ModalInfo>
-            </>
+            <ModalManager>
+                {({ openModal, closeModal, registerModal }) => {
+                    if (modalInfoVisible) {
+                        registerModal(
+                            'modal_info',
+                            <ModalInfo
+                                close={() => {
+                                    this.setState({
+                                        modalInfoVisible: false,
+                                    })
+                                }}
+                                visible={true}
+                            >
+                                Your User data has just changed.
+                            </ModalInfo>,
+                        )
+                        openModal('modal_info')
+                    } else {
+                        closeModal('modal_info')
+                    }
+
+                    return <>{children(renderProps)}</>
+                }}
+            </ModalManager>
         )
     }
 }

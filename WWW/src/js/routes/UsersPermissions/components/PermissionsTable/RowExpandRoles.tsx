@@ -17,7 +17,9 @@ export class RowExpandRoles extends React.Component<RowExpandRolesProps, null> {
                     <Row>
                         <Col xs={12}>
                             <Typography.Container>
-                                <Typography.Header level={3} solid>Roles with Permission</Typography.Header>
+                                <Typography.Header level={3} solid>
+                                    Roles with Permission
+                                </Typography.Header>
                             </Typography.Container>
                         </Col>
                         {sortRolesByNameAscending(permission?.roles).map((role: Role) => {

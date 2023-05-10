@@ -54,15 +54,7 @@ export class UsersView extends React.Component<null, null> {
                                                     setIsLoading={setIsLoading}
                                                 >
                                                     {({
-                                                        data: {
-                                                            data,
-                                                            links,
-                                                            hasNextPage,
-                                                            hasPrevPage,
-                                                            totalPages,
-                                                            perPage,
-                                                            total,
-                                                        } = {},
+                                                        data: { data, links, hasNextPage, hasPrevPage, totalPages, perPage, total } = {},
                                                         filtersData,
                                                         setPage,
                                                         fetch,
