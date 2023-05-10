@@ -33,6 +33,8 @@ class FormField extends React.Component<FormFieldProps, null> {
             withError = true,
             htmlAfter = '',
             inputContainerStyle = {},
+            className,
+            size = 'md',
             ...custom
         } = this.props
 
@@ -76,7 +78,9 @@ class FormField extends React.Component<FormFieldProps, null> {
                     className={cx('component-form-field', {
                         [`component-form-field--state-${validationState}`]: true,
                         [`component-form-field--type-${type}`]: type,
+                        [`component-form-field--size-${size}`]: size,
                         [`component-form-field--is-dirty`]: dirty,
+                        [className]: className,
                     })}
                     style={inputContainerStyle}
                 >

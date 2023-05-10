@@ -31,6 +31,7 @@ class Filter extends React.Component<FilterProps, null> {
 
                     return (
                         <Button
+                            size={'xs'}
                             key={`${name}${value}${label}${count}`}
                             color={filters[name] === value ? 'warning' : 'secondary'}
                             onClick={() => {
@@ -52,6 +53,7 @@ class Filter extends React.Component<FilterProps, null> {
 
         return (
             <FormField
+                size={'xs'}
                 type={'select'}
                 name={'order_by'}
                 options={options}
@@ -60,6 +62,7 @@ class Filter extends React.Component<FilterProps, null> {
                 onChange={({ target: { value } }) => {
                     setFilter('order_by', value)
                 }}
+                className={cx('filter__form-field')}
             />
         )
     }
@@ -69,6 +72,7 @@ class Filter extends React.Component<FilterProps, null> {
 
         return (
             <FormField
+                size={'xs'}
                 type={'select'}
                 name={name}
                 options={options}
@@ -78,6 +82,7 @@ class Filter extends React.Component<FilterProps, null> {
                 onChange={({ target: { value } }) => {
                     setFilter(name, value)
                 }}
+                className={cx('filter__form-field')}
             />
         )
     }
@@ -97,6 +102,7 @@ class Filter extends React.Component<FilterProps, null> {
 
         return (
             <FormField
+                size={'xs'}
                 type={'select'}
                 name={'order_direction'}
                 options={options}
@@ -105,6 +111,7 @@ class Filter extends React.Component<FilterProps, null> {
                 onChange={({ target: { value } }) => {
                     setFilter('order_direction', value)
                 }}
+                className={cx('filter__form-field')}
             />
         )
     }
@@ -115,7 +122,7 @@ class Filter extends React.Component<FilterProps, null> {
         const changed = type === 'order' ? false : this.getChanged(defaultFilters, filters, name, type)
 
         return (
-            <Row noMarginBottom>
+            <Row noMarginBottom className={cx('filter')}>
                 <Col xs={12} md={10} alignCenter>
                     {type === 'order' && <div>Sort by</div>}
                     {type !== 'order' && (
@@ -175,6 +182,7 @@ class Filter extends React.Component<FilterProps, null> {
                     const { setFilter } = this.props
                     setFilter(name, value)
                 }}
+                className={cx('filter__form-field')}
             />
         )
     }
@@ -184,12 +192,14 @@ class Filter extends React.Component<FilterProps, null> {
 
         return (
             <>
-                {options?.map(({ label, value, icon }) => {
+                {options?.map(({ label, value, icon, disabled }) => {
                     return (
                         <SimpleModelCell
+                            disabled={disabled}
+                            size={'xs'}
                             icon={icon}
                             key={`${value}${label}`}
-                            color={filters[name].indexOf(value) === -1 ? 'primary' : 'warning'}
+                            color={filters[name].indexOf(value) === -1 ? (!disabled ? 'primary' : 'danger') : 'warning'}
                             onClick={() => {
                                 if (filters[name].indexOf(value) === -1) {
                                     setFilter(name, [...filters[name], value])

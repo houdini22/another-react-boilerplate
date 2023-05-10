@@ -9,7 +9,7 @@ const cx = classnames.bind(styles)
 
 export class SimpleModelCell extends React.Component<null, null> {
     render() {
-        const { children, onClick, actions = [], icon, dropdown, color, block } = this.props
+        const { children, onClick, actions = [], icon, dropdown, color, block, size, disabled } = this.props
 
         if (dropdown) {
             return (
@@ -21,6 +21,7 @@ export class SimpleModelCell extends React.Component<null, null> {
                             outline: true,
                             icon,
                             block: true,
+                            size,
                         }}
                     >
                         {children}
@@ -39,7 +40,16 @@ export class SimpleModelCell extends React.Component<null, null> {
         }
 
         return (
-            <Button icon={icon} color={color} outline onClick={onClick} block={block} className={cx('component-simple-model-cell')}>
+            <Button
+                disabled={disabled}
+                size={'xs'}
+                icon={icon}
+                color={color}
+                outline
+                onClick={onClick}
+                block={block}
+                className={cx('component-simple-model-cell')}
+            >
                 <div>{children}</div>
                 {actions?.length > 0 && (
                     <>

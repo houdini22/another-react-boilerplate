@@ -17,5 +17,11 @@
         & > * {
             margin-bottom: 5px;
         }
+
+        .filter {
+            .filter__form-field {
+                margin-bottom: 0;
+            }
+        }
     }
 }

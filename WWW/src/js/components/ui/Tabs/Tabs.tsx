@@ -305,19 +305,22 @@ export class Content extends React.Component<ContentProps, null> {
         return (
             <AppContext.Consumer>
                 {({ contentElement, activeTab, tabName, changeTab } = {}) => {
-                    const Component = () => (
-                        <div
-                            className={cx({
-                                'component-tabs__content__outer__inner__tab': true,
-                                'component-tabs__content__outer__inner__tab--is-active': _.get(activeTab, 'tabName') === tabName,
-                            })}
-                        >
-                            {_.isFunction(children) && children({ changeTab })}
-                            {!_.isFunction(children) && children}
-                        </div>
-                    )
+                    if (_.get(activeTab, 'tabName') === tabName) {
+                        const Component = () => (
+                            <div
+                                className={cx({
+                                    'component-tabs__content__outer__inner__tab': true,
+                                    'component-tabs__content__outer__inner__tab--is-active': _.get(activeTab, 'tabName') === tabName,
+                                })}
+                            >
+                                {_.isFunction(children) && children({ changeTab })}
+                                {!_.isFunction(children) && children}
+                            </div>
+                        )
 
-                    return createPortal(<Component />, contentElement)
+                        return createPortal(<Component />, contentElement)
+                    }
+                    return null
                 }}
             </AppContext.Consumer>
         )

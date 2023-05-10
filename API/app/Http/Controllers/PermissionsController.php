@@ -80,8 +80,8 @@ class PermissionsController extends Controller
 
         $filters = $request->get('filters');
 
-        $hasRoles = Permission::select('id');
-        $hasUsers = Permission::select('id');
+        $hasRoles = Permission::with('roles');
+        $hasUsers = Permission::select('id', 'name');
         $roles = Role::select([
             'roles.id as id',
             'roles.name as name',
@@ -108,19 +108,15 @@ class PermissionsController extends Controller
             ->groupBy("id");
 
         if (Arr::get($filters, 'has_roles') === 'no') {
-            $hasRoles = $hasRoles->whereDoesntHave('roles');
             $hasUsers = $hasUsers->whereDoesntHave('roles');
         } else if (Arr::get($filters, 'has_roles') === 'yes') {
-            $hasRoles = $hasRoles->whereHas('roles');
             $hasUsers = $hasUsers->whereHas('roles');
         }
 
         if (Arr::get($filters, 'has_users') === 'no') {
-            $hasUsers = $hasUsers->whereDoesntHave('users');
             $hasRoles = $hasRoles->whereDoesntHave('users');
             $roles = $roles->whereDoesntHave('users');
         } else if (Arr::get($filters, 'has_users') === 'yes') {
-            $hasUsers = $hasUsers->whereHas('users');
             $hasRoles = $hasRoles->whereHas('users');
             $roles = $roles->whereHas('users');
         }
@@ -132,6 +128,11 @@ class PermissionsController extends Controller
             $hasUsers = $hasUsers->whereHas('roles', function ($query) use ($filters) {
                 $query->whereIn('id', $filters['roles']);
             });
+        }
+
+        if (Arr::get($filters, 'search')) {
+            $hasRoles = $hasRoles->where('name', 'LIKE', '%'.Arr::get($filters, 'search').'%');
+            $hasUsers = $hasUsers->where('name', 'LIKE', '%'.Arr::get($filters, 'search').'%');
         }
 
         if (Arr::get($filters, 'user')) {
@@ -152,21 +153,39 @@ class PermissionsController extends Controller
 
         return $this->responseOK([
             'has_roles' => [
-                'count' => $hasRoles->count()
+                'count' => $hasRoles
+                    ->unique('id')
+                    ->count(),
+                'count:yes' => $hasRoles
+                    ->unique('id')
+                    ->filter(function($item) {
+                        return count($item['roles']) > 0;
+                    })->count(),
+                'count:no' => $hasRoles
+                    ->unique('id')
+                    ->filter(function($item) {
+                        return count($item['roles']) === 0;
+                    })->count(),
             ],
             'has_users' => [
-                'count' => $hasUsers->count()
+                'count' => $hasUsers
+                    ->unique('id')
+                    ->count(),
+                'count:yes' => $hasUsers
+                    ->unique('id')
+                    ->filter(function($item) {
+                        return count($item['users']) > 0;
+                    })->count(),
+                'count:no' => $hasUsers
+                    ->unique('id')
+                    ->filter(function($item) {
+                        return count($item['users']) === 0;
+                    })->count(),
             ],
             'roles' => [
-                'count' => $roles->map(function ($item) use ($filters) {
-                    if (Arr::get($filters, 'roles')) {
-                        if (!in_array($item['id'], $filters['roles'])) {
-                            return 0;
-                        }
-                    }
-
-                    return ['count' => $item['count']];
-                })->sum('count'),
+                'count' => $roles
+                    ->unique('name')
+                    ->count(),
                 'data' => $roles,
             ]
         ]);

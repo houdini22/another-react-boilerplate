@@ -104,6 +104,7 @@ export class PermissionsFilters extends React.Component<RolesFiltersProps, null>
                                 label: `${name} (${count})`,
                                 value: id,
                                 icon: <PermissionIcon />,
+                                disabled: count === 0,
                             }
                         }),
                         name: 'roles',

@@ -156,6 +156,7 @@ export class UserFilters extends React.Component<FiltersProps, null> {
                                 label: `${name} (${count})`,
                                 value: id,
                                 icon: <PermissionIcon />,
+                                disabled: count === 0,
                             }
                         }),
                         name: 'permissions',
@@ -168,6 +169,7 @@ export class UserFilters extends React.Component<FiltersProps, null> {
                                 label: `${name} (${count})`,
                                 value: id,
                                 icon: <RoleIcon />,
+                                disabled: count === 0,
                             }
                         }),
                         name: 'roles',

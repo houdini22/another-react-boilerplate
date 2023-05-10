@@ -8,10 +8,11 @@
     & > .component-dropdown__trigger {
         position: relative;
         display: inline;
+        line-height: 0;
     }
 
     & > .component-dropdown__dropdown-menu {
-        display: inline-block;
+        display: inline;
         position: relative;
 
         &.component-dropdown__dropdown-menu--is-open {
@@ -46,7 +47,6 @@
             > .component-dropdown__dropdown-menu__items__item__submenu
             .component-dropdown__dropdown-menu__items {
             position: absolute;
-            top: calc(100% + 10px);
             left: 0;
             z-index: 1000;
             display: none;
