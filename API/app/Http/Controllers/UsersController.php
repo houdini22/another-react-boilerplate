@@ -78,9 +78,19 @@ class UsersController extends Controller
 
         if (!empty($filters['has_files'])) {
             if ($filters['has_files'] === 'yes') {
-                $query = $query->whereHas('files');
+                $query->whereHas('files', function ($query) {
+                    $query->where('files.class', '<>', 'avatar');
+                });
             } else if ($filters['has_files'] === 'no') {
-                $query = $query->whereDoesntHave('files');
+                $query->where(function ($query) {
+                    $query->where(function ($query) {
+                        $query->whereDoesntHave('files');
+                    })->orWhere(function ($query) {
+                        $query->whereHas('files', function ($query) {
+                            $query->where('files.class', '<>', 'avatar');
+                        });
+                    });
+                });
             }
         }
 
@@ -136,7 +146,14 @@ class UsersController extends Controller
             ->leftJoin('files as avatar', 'users.avatar_id', 'avatar.id')
             ->where(function ($query) use ($filters) {
                 if (Arr::get($filters, 'search')) {
-                    $query->where('users.name', 'LIKE', '%'.Arr::get($filters,'search').'%');
+                    $query->where(function ($query) use ($filters) {
+                        $query
+                            ->where('users.name', 'LIKE', '%' . Arr::get($filters, 'search') . '%')
+                            ->orWhere('users.email', 'LIKE', '%' . Arr::get($filters, 'search') . '%');
+                    });
+                }
+                if (Arr::get($filters, 'roles')) {
+                    $query->whereIn('model_has_roles.role_id', Arr::get($filters, 'roles'));
                 }
                 if (Arr::get($filters, 'has_roles') === 'no') {
                     $query->whereNull('model_has_roles.model_id');
@@ -181,12 +198,19 @@ class UsersController extends Controller
             ->leftJoin('model_has_permissions', 'model_has_permissions.model_id', 'users.id')
             ->where(function ($query) use ($filters) {
                 if (Arr::get($filters, 'search')) {
-                    $query->where('users.name', 'LIKE', '%'.Arr::get($filters,'search').'%');
+                    $query->where(function ($query) use ($filters) {
+                        $query
+                            ->where('users.name', 'LIKE', '%' . Arr::get($filters, 'search') . '%')
+                            ->orWhere('users.email', 'LIKE', '%' . Arr::get($filters, 'search') . '%');
+                    });
                 }
                 if (Arr::get($filters, 'has_roles') === 'no') {
                     $query->whereNull('model_has_roles.model_id');
                 } else if (Arr::get($filters, 'has_roles') === 'yes') {
                     $query->whereNotNull('model_has_roles.model_id');
+                }
+                if (Arr::get($filters, 'permissions')) {
+                    $query->whereIn('model_has_permissions.permission_id', Arr::get($filters, 'permissions'));
                 }
                 if (Arr::get($filters, 'has_permissions') === 'no') {
                     $query->whereNull('model_has_permissions.permission_id');
@@ -219,7 +243,11 @@ class UsersController extends Controller
             ->with('files')
             ->where(function ($query) use ($filters) {
                 if (Arr::get($filters, 'search')) {
-                    $query->where('name', 'LIKE', '%' . Arr::get($filters, 'search') . '%');
+                    $query->where(function ($query) use ($filters) {
+                        $query
+                            ->where('users.name', 'LIKE', '%' . Arr::get($filters, 'search') . '%')
+                            ->orWhere('users.email', 'LIKE', '%' . Arr::get($filters, 'search') . '%');
+                    });
                 }
                 if (Arr::get($filters, 'has_permissions') === 'no') {
                     $query->whereDoesntHave('permissions');
@@ -232,12 +260,22 @@ class UsersController extends Controller
                     $query->whereHas('roles');
                 }
                 if (Arr::get($filters, 'has_files') === 'no') {
-                    $query->whereDoesntHave('files');
+                    $query
+                        ->where(function ($query) {
+                            $query
+                                ->where(function ($query) {
+                                    $query->whereHas('files', function ($query) {
+                                        $query
+                                            ->where('class', '=', 'file');
+                                    });
+                                })->orWhereDoesntHave('files');
+                        });
                 } else if (Arr::get($filters, 'has_files') === 'yes') {
-                    $query->whereHas('files', function($query) {
+                    $query->whereHas('files', function ($query) {
                         $query
                             ->where('class', '=', 'file');
                     });
+
                 }
                 if (Arr::get($filters, 'status') === 'yes') {
                     $query->where('users.status', '=', 1);
@@ -250,7 +288,11 @@ class UsersController extends Controller
             ->with('roles')
             ->where(function ($query) use ($filters) {
                 if (Arr::get($filters, 'search')) {
-                    $query->where('name', 'LIKE', '%' . Arr::get($filters, 'search') . '%');
+                    $query->where(function ($query) use ($filters) {
+                        $query
+                            ->where('users.name', 'LIKE', '%' . Arr::get($filters, 'search') . '%')
+                            ->orWhere('users.email', 'LIKE', '%' . Arr::get($filters, 'search') . '%');
+                    });
                 }
                 if (Arr::get($filters, 'has_roles') === 'no') {
                     $query->whereDoesntHave('roles');
@@ -278,7 +320,11 @@ class UsersController extends Controller
             ->with('permissions')
             ->where(function ($query) use ($filters) {
                 if (Arr::get($filters, 'search')) {
-                    $query->where('name', 'LIKE', '%' . Arr::get($filters, 'search') . '%');
+                    $query->where(function ($query) use ($filters) {
+                        $query
+                            ->where('users.name', 'LIKE', '%' . Arr::get($filters, 'search') . '%')
+                            ->orWhere('users.email', 'LIKE', '%' . Arr::get($filters, 'search') . '%');
+                    });
                 }
                 if (Arr::get($filters, 'has_permissions') === 'no') {
                     $query->whereDoesntHave('permissions');
@@ -286,12 +332,22 @@ class UsersController extends Controller
                     $query->whereHas('permissions');
                 }
                 if (Arr::get($filters, 'has_files') === 'no') {
-                    $query->whereDoesntHave('files');
+                    $query
+                        ->where(function ($query) {
+                            $query
+                                ->where(function ($query) {
+                                    $query->whereHas('files', function ($query) {
+                                        $query
+                                            ->where('class', '=', 'file');
+                                    });
+                                })->orWhereDoesntHave('files');
+                        });
                 } else if (Arr::get($filters, 'has_files') === 'yes') {
-                    $query->whereHas('files', function($query) {
+                    $query->whereHas('files', function ($query) {
                         $query
                             ->where('class', '=', 'file');
                     });
+
                 }
                 if (Arr::get($filters, 'has_avatar') === 'no') {
                     $query->whereDoesntHave('avatar');
@@ -309,7 +365,11 @@ class UsersController extends Controller
             ->with('roles')
             ->where(function ($query) use ($filters) {
                 if (Arr::get($filters, 'search')) {
-                    $query->where('name', 'LIKE', '%' . Arr::get($filters, 'search') . '%');
+                    $query->where(function ($query) use ($filters) {
+                        $query
+                            ->where('users.name', 'LIKE', '%' . Arr::get($filters, 'search') . '%')
+                            ->orWhere('users.email', 'LIKE', '%' . Arr::get($filters, 'search') . '%');
+                    });
                 }
                 if (Arr::get($filters, 'has_roles') === 'no') {
                     $query->whereDoesntHave('roles');
@@ -317,12 +377,24 @@ class UsersController extends Controller
                     $query->whereHas('roles');
                 }
                 if (Arr::get($filters, 'has_files') === 'no') {
-                    $query->whereDoesntHave('files');
+                    $query
+                        ->where(function ($query) {
+                            $query
+                                ->where(function ($query) {
+                                    $query->whereHas('files', function ($query) {
+                                        $query
+                                            ->where('class', '=', 'file');
+                                    });
+                                })
+                                ->orWhereDoesntHave('files');
+                        });
                 } else if (Arr::get($filters, 'has_files') === 'yes') {
-                    $query->whereHas('files', function($query) {
-                        $query
-                            ->where('class', '=', 'file');
-                    });
+                    $query
+                        ->whereHas('files', function ($query) {
+                            $query
+                                ->where('class', '=', 'file');
+                        });
+
                 }
                 if (Arr::get($filters, 'has_avatar') === 'no') {
                     $query->whereDoesntHave('avatar');
@@ -341,7 +413,11 @@ class UsersController extends Controller
             ->where('status', '=', 1)
             ->where(function ($query) use ($filters) {
                 if (Arr::get($filters, 'search')) {
-                    $query->where('name', 'LIKE', '%' . Arr::get($filters, 'search') . '%');
+                    $query->where(function ($query) use ($filters) {
+                        $query
+                            ->where('users.name', 'LIKE', '%' . Arr::get($filters, 'search') . '%')
+                            ->orWhere('users.email', 'LIKE', '%' . Arr::get($filters, 'search') . '%');
+                    });
                 }
                 if (Arr::get($filters, 'has_permissions') === 'no') {
                     $query->whereDoesntHave('permissions');
@@ -354,12 +430,22 @@ class UsersController extends Controller
                     $query->whereHas('roles');
                 }
                 if (Arr::get($filters, 'has_files') === 'no') {
-                    $query->whereDoesntHave('files');
+                    $query
+                        ->where(function ($query) {
+                            $query
+                                ->where(function ($query) {
+                                    $query->whereHas('files', function ($query) {
+                                        $query
+                                            ->where('class', '=', 'file');
+                                    });
+                                })->orWhereDoesntHave('files');
+                        });
                 } else if (Arr::get($filters, 'has_files') === 'yes') {
-                    $query->whereHas('files', function($query) {
+                    $query->whereHas('files', function ($query) {
                         $query
                             ->where('class', '=', 'file');
                     });
+
                 }
                 if (Arr::get($filters, 'has_avatar') === 'no') {
                     $query->whereDoesntHave('avatar');
@@ -374,7 +460,11 @@ class UsersController extends Controller
             ->with('files')
             ->where(function ($query) use ($filters) {
                 if (Arr::get($filters, 'search')) {
-                    $query->where('name', 'LIKE', '%' . Arr::get($filters, 'search') . '%');
+                    $query->where(function ($query) use ($filters) {
+                        $query
+                            ->where('users.name', 'LIKE', '%' . Arr::get($filters, 'search') . '%')
+                            ->orWhere('users.email', 'LIKE', '%' . Arr::get($filters, 'search') . '%');
+                    });
                 }
                 if (Arr::get($filters, 'has_permissions') === 'no') {
                     $query->whereDoesntHave('permissions');
@@ -387,12 +477,22 @@ class UsersController extends Controller
                     $query->whereHas('roles');
                 }
                 if (Arr::get($filters, 'has_files') === 'no') {
-                    $query->whereDoesntHave('files');
+                    $query
+                        ->where(function ($query) {
+                            $query
+                                ->where(function ($query) {
+                                    $query->whereHas('files', function ($query) {
+                                        $query
+                                            ->where('class', '=', 'file');
+                                    });
+                                })->orWhereDoesntHave('files');
+                        });
                 } else if (Arr::get($filters, 'has_files') === 'yes') {
-                    $query->whereHas('files', function($query) {
+                    $query->whereHas('files', function ($query) {
                         $query
                             ->where('class', '=', 'file');
                     });
+
                 }
                 if (Arr::get($filters, 'has_avatar') === 'no') {
                     $query->whereDoesntHave('avatar');
@@ -413,8 +513,8 @@ class UsersController extends Controller
         } else if (Arr::get($filters, 'has_permissions') === 'yes') {
         }
 
-        $permissions = $permissions->get();
-        $roles = $roles->get();
+        $permissions = $permissions->having('count', '>', 0)->get();
+        $roles = $roles->having('count', '>', 0)->get();
         $hasAvatar = $hasAvatar->get();
         $hasFiles = $hasFiles->get();
         $hasRoles = $hasRoles->get();
@@ -453,13 +553,38 @@ class UsersController extends Controller
                     ->count()
             ],
             'has_files' => [
-                'count:yes_or_no' => $hasFiles->count(),
+                'count:yes_or_no' => $hasFiles
+                    ->map(function ($item) {
+                        return [
+                            'files' => collect($item['files'])
+                                ->filter(function ($itemFile) {
+                                    return $itemFile['class'] !== 'avatar';
+                                })->toArray(),
+                        ];
+                    })
+                    ->count(),
                 'count:yes' => $hasFiles
+                    ->map(function ($item) {
+                        return [
+                            'files' => collect($item['files'])
+                                ->filter(function ($itemFile) {
+                                    return $itemFile['class'] !== 'avatar';
+                                })->toArray(),
+                        ];
+                    })
                     ->filter(function ($item) {
                         return count($item['files']) > 0;
                     })
                     ->count(),
                 'count:no' => $hasFiles
+                    ->map(function ($item) {
+                        return [
+                            'files' => collect($item['files'])
+                                ->filter(function ($itemFile) {
+                                    return $itemFile['class'] !== 'avatar';
+                                })->toArray(),
+                        ];
+                    })
                     ->filter(function ($item) {
                         return count($item['files']) === 0;
                     })

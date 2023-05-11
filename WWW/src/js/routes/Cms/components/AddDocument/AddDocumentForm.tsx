@@ -2,6 +2,8 @@ import * as React from 'react'
 import { Field } from 'redux-form'
 import { Badge, Button, Card, Col, FormField, LoadingOverlay, Row, Tabs } from '../../../../components'
 import { generateUrl, isPublished } from '../../../../helpers/cms'
+import { DocumentIcon } from '../../../../components/icons'
+import { ButtonSave } from '../../../../components/common/ButtonSave'
 
 class AddDocumentForm extends React.Component {
     render() {
@@ -20,81 +22,108 @@ class AddDocumentForm extends React.Component {
         return (
             <Row>
                 <Col xs={12}>
-                    <Card header={<h1>Add Document</h1>} color={'primary'}>
+                    <Card
+                        header={
+                            <h1>
+                                <DocumentIcon /> Add Document
+                            </h1>
+                        }
+                        color={'success'}
+                    >
                         <form onSubmit={handleSubmit}>
                             <Tabs.Container color={'secondary'}>
                                 <Tabs.Tab name="main">
                                     <Tabs.Trigger>Main</Tabs.Trigger>
                                     <Tabs.Content>
                                         {({ changeTab }) => (
-                                            <>
-                                                <Field
-                                                    name="parent_id"
-                                                    label="Parent Category"
-                                                    type="select"
-                                                    component={FormField}
-                                                    options={categories}
-                                                />
-                                                <Field
-                                                    name="document.document_name"
-                                                    label="Document Name"
-                                                    type="text"
-                                                    placeholder={'Document Name'}
-                                                    component={FormField}
-                                                    onChange={(e, value) => {
-                                                        change(
-                                                            'document.document_url',
-                                                            generateUrl(
-                                                                id ? currentNode.parent.category.category_url : currentNode.category.category_url,
-                                                                value,
-                                                            ),
-                                                        )
-                                                    }}
-                                                />
-                                                <Field
-                                                    name="document.document_url"
-                                                    label="URL"
-                                                    placeholder={'URL'}
-                                                    type="text"
-                                                    component={FormField}
-                                                />
-                                                <Card header={<h1>Content</h1>} color={'secondary'}>
-                                                    <Field
-                                                        name="tree.tree_display_name"
-                                                        label="Display Name"
-                                                        placeholder={'Display Name'}
-                                                        type="text"
-                                                        component={FormField}
-                                                    />
-                                                    <Field
-                                                        name="document.document_content"
-                                                        label="Content"
-                                                        placeholder={'Content'}
-                                                        type="textarea"
-                                                        component={FormField}
-                                                    />
-                                                </Card>
-                                                <Card
-                                                    header={
-                                                        <h1>
-                                                            Publishing{' '}
-                                                            <Badge color={isPublished(formValues) ? 'success' : 'warning'}>
-                                                                {isPublished(formValues) ? 'Is published' : 'Is not Published'}
-                                                            </Badge>
-                                                        </h1>
-                                                    }
-                                                    color={'secondary'}
-                                                >
-                                                    <Field
-                                                        name="tree.tree_is_published"
-                                                        label="Is published?"
-                                                        type="checkbox"
-                                                        component={FormField}
-                                                    />
-                                                    <Field name="tree.tree_published_from" label="Published from" type="text" component={FormField} />
-                                                    <Field name="tree.tree_published_to" label="Published to" type="text" component={FormField} />
-                                                </Card>
-                                            </>
+                                            <Row>
+                                                <Col xs={12} md={6}>
+                                                    <div>
+                                                        <Field
+                                                            name="parent_id"
+                                                            label="Parent Category"
+                                                            type="select"
+                                                            component={FormField}
+                                                            options={categories}
+                                                        />
+                                                        <Field
+                                                            name="document.document_name"
+                                                            label="Document Name"
+                                                            type="text"
+                                                            placeholder={'Document Name'}
+                                                            component={FormField}
+                                                            onChange={(e, value) => {
+                                                                change(
+                                                                    'document.document_url',
+                                                                    generateUrl(
+                                                                        id
+                                                                            ? currentNode.parent.category.category_url
+                                                                            : currentNode.category.category_url,
+                                                                        value,
+                                                                    ),
+                                                                )
+                                                            }}
+                                                        />
+                                                        <Field
+                                                            name="document.document_url"
+                                                            label="URL"
+                                                            placeholder={'URL'}
+                                                            type="text"
+                                                            component={FormField}
+                                                        />
+                                                    </div>
+                                                </Col>
+                                                <Col xs={12} md={6}>
+                                                    <div>
+                                                        <Card header={<h1>Content</h1>} color={'secondary'}>
+                                                            <Field
+                                                                name="tree.tree_display_name"
+                                                                label="Display Name"
+                                                                placeholder={'Display Name'}
+                                                                type="text"
+                                                                component={FormField}
+                                                            />
+                                                            <Field
+                                                                name="document.document_content"
+                                                                label="Content"
+                                                                placeholder={'Content'}
+                                                                type="textarea"
+                                                                component={FormField}
+                                                            />
+                                                        </Card>
+                                                        <Card
+                                                            header={
+                                                                <h1>
+                                                                    Publishing{' '}
+                                                                    <Badge color={isPublished(formValues) ? 'success' : 'warning'}>
+                                                                        {isPublished(formValues) ? 'Is published' : 'Is not Published'}
+                                                                    </Badge>
+                                                                </h1>
+                                                            }
+                                                            color={'secondary'}
+                                                        >
+                                                            <Field
+                                                                name="tree.tree_is_published"
+                                                                label="Is published?"
+                                                                type="checkbox"
+                                                                component={FormField}
+                                                            />
+                                                            <Field
+                                                                name="tree.tree_published_from"
+                                                                label="Published from"
+                                                                type="text"
+                                                                component={FormField}
+                                                            />
+                                                            <Field
+                                                                name="tree.tree_published_to"
+                                                                label="Published to"
+                                                                type="text"
+                                                                component={FormField}
+                                                            />
+                                                        </Card>
+                                                    </div>
+                                                </Col>
+                                            </Row>
                                         )}
                                     </Tabs.Content>
                                 </Tabs.Tab>
@@ -137,11 +166,11 @@ class AddDocumentForm extends React.Component {
                                 </Tabs.Tab>
                             </Tabs.Container>
 
-                            <div>
-                                <Button color="success" type="submit" block>
-                                    <span>Save</span>
-                                </Button>
-                            </div>
+                            <Row>
+                                <Col xs={12}>
+                                    <ButtonSave />
+                                </Col>
+                            </Row>
                         </form>
                         {isLoading && <LoadingOverlay />}
                     </Card>

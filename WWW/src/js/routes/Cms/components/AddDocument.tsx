@@ -6,6 +6,7 @@ import { Header } from './Header'
 import { AddDocumentFormContainer } from '../containers/AddDocumentFormContainer'
 import { generateUrl } from '../../../helpers/cms'
 import { formattedDateTime } from '../../../helpers/date-time'
+import { DocumentIcon } from '../../../components/icons'
 
 export class AddDocumentView extends React.Component {
     render() {
@@ -26,6 +27,7 @@ export class AddDocumentView extends React.Component {
                                                     actionTitle={'Add Document'}
                                                     action={'add'}
                                                     canByPermission={canByPermission}
+                                                    icon={<DocumentIcon />}
                                                 />
 
                                                 <AddDocumentFormContainer

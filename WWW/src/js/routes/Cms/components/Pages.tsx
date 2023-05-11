@@ -9,6 +9,7 @@ import List from './Pages/List'
 import { FiltersCard } from '../../../components/common/FiltersCard'
 import { getDefaultFilters } from '../../../helpers/cms'
 import { LoadingOverlay } from '../../../components'
+import { PagesIcon } from '../../../components/icons'
 
 const cx = classNames.bind(styles)
 
@@ -52,6 +53,7 @@ export class CmsPagesView extends React.Component<null, null> {
                                                             currentNodeParents={currentNodeParents}
                                                             currentNode={currentNode}
                                                             title={'CMS - Pages'}
+                                                            icon={<PagesIcon />}
                                                         />
 
                                                         <FiltersCard
@@ -69,6 +71,12 @@ export class CmsPagesView extends React.Component<null, null> {
                                                             savedFilters={savedFilters}
                                                             defaultFilters={defaultFilters}
                                                             filtersToRender={[
+                                                                {
+                                                                    type: 'text',
+                                                                    name: 'search',
+                                                                    label: 'Search',
+                                                                    placeholder: 'Search phrase',
+                                                                },
                                                                 {
                                                                     options: [
                                                                         {
@@ -129,11 +137,6 @@ export class CmsPagesView extends React.Component<null, null> {
                                                                     type: 'radio',
                                                                     name: 'is_published',
                                                                     label: 'Is published',
-                                                                },
-                                                                {
-                                                                    type: 'text',
-                                                                    name: 'search',
-                                                                    label: 'Search',
                                                                 },
                                                             ]}
                                                         >

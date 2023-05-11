@@ -5,6 +5,7 @@ import { RouteManager, AuthorizationManager } from '../../../containers'
 import { Header } from './Header'
 import { AddLinkFormContainer } from '../containers/AddLinkFormContainer'
 import { formattedDateTime } from '../../../helpers/date-time'
+import { LinkIcon } from '../../../components/icons'
 
 export class AddLinkView extends React.Component {
     render() {
@@ -25,6 +26,7 @@ export class AddLinkView extends React.Component {
                                                     actionTitle={'Add Link'}
                                                     action={'add'}
                                                     canByPermission={canByPermission}
+                                                    icon={<LinkIcon />}
                                                 />
                                                 <AddLinkFormContainer
                                                     currentNode={currentNode}

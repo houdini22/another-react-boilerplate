@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { myGet } from '../modules/http'
+import { LoadingOverlay } from '../components'
 
 interface ManagerProps {}
 interface ManagerState {
@@ -11,22 +12,33 @@ const Context = React.createContext({ config: {} })
 class Container extends React.Component<ManagerProps, ManagerState> {
     state = {
         config: {},
+        isLoading: false,
     }
     componentDidMount() {
-        myGet('/config/get').then((config) => {
-            this.setState({ config })
-        })
+        this.setState(
+            {
+                isLoading: true,
+            },
+            () => {
+                myGet('/config/get').then((config) => {
+                    this.setState({ config, isLoading: false })
+                })
+            },
+        )
     }
 
     render() {
         const { children } = this.props
-        const { config } = this.state
+        const { config, isLoading } = this.state
 
         console.log(config)
 
         return (
             <>
-                <Context.Provider value={{ config }}>{children}</Context.Provider>
+                <Context.Provider value={{ config }}>
+                    {children}
+                    {isLoading && <LoadingOverlay />}
+                </Context.Provider>
             </>
         )
     }

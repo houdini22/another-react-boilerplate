@@ -2,6 +2,8 @@ import * as React from 'react'
 import { Field } from 'redux-form'
 import { Badge, Button, Card, Col, FormField, LoadingOverlay, Row, Tabs } from '../../../../components'
 import { isPublished } from '../../../../helpers/cms'
+import { LinkIcon } from '../../../../components/icons'
+import { ButtonSave } from '../../../../components/common/ButtonSave'
 
 class AddLinkForm extends React.Component {
     render() {
@@ -21,73 +23,101 @@ class AddLinkForm extends React.Component {
         return (
             <Row>
                 <Col xs={12}>
-                    <Card header={<h1>Add Link</h1>} color={'primary'}>
+                    <Card
+                        header={
+                            <h1>
+                                <LinkIcon /> Add Link
+                            </h1>
+                        }
+                        color={'primary'}
+                    >
                         <form onSubmit={handleSubmit}>
                             <Tabs.Container color={'secondary'}>
                                 <Tabs.Tab name="main">
                                     <Tabs.Trigger>Main</Tabs.Trigger>
                                     <Tabs.Content>
                                         {({ changeTab }) => (
-                                            <>
-                                                <Field
-                                                    name="parent_id"
-                                                    label="Parent Category"
-                                                    type="select"
-                                                    component={FormField}
-                                                    options={categories}
-                                                />
-                                                <Field
-                                                    name="link.link_name"
-                                                    label="Link Name"
-                                                    type="text"
-                                                    placeholder={'Link Name'}
-                                                    component={FormField}
-                                                />
-                                                <Field name="link.link_url" label="URL" type="text" placeholder={'URL'} component={FormField} />
-                                                <Field
-                                                    name="link.link_target"
-                                                    label="Target"
-                                                    type="select"
-                                                    placeholder={'--- choose ---'}
-                                                    component={FormField}
-                                                    options={linkTargets}
-                                                />
-                                                <Card header={<h1>Content</h1>} color={'secondary'}>
-                                                    <Field
-                                                        name="tree.tree_display_name"
-                                                        label="Display Name"
-                                                        placeholder={'Display Name'}
-                                                        type="text"
-                                                        component={FormField}
-                                                    />
-                                                </Card>
-                                                <Card
-                                                    header={
-                                                        <h1>
-                                                            Publishing{' '}
-                                                            <Badge color={isPublished(formValues) ? 'success' : 'warning'}>
-                                                                {isPublished(formValues) ? 'Is published' : 'Is not Published'}
-                                                            </Badge>
-                                                        </h1>
-                                                    }
-                                                    color={'secondary'}
-                                                >
-                                                    <Field
-                                                        name="tree.tree_is_published"
-                                                        label="Is published?"
-                                                        type="checkbox"
-                                                        component={FormField}
-                                                    />
-                                                    <Field name="tree.tree_published_from" label="Published from" type="text" component={FormField} />
-                                                    <Field name="tree.tree_published_to" label="Published to" type="text" component={FormField} />
-                                                </Card>
-
-                                                <div>
-                                                    <Button color="success" type="submit" block>
-                                                        <span>Save</span>
-                                                    </Button>
-                                                </div>
-                                            </>
+                                            <Row>
+                                                <Col xs={12} md={6}>
+                                                    <div>
+                                                        <Field
+                                                            name="parent_id"
+                                                            label="Parent Category"
+                                                            type="select"
+                                                            component={FormField}
+                                                            options={categories}
+                                                        />
+                                                        <Field
+                                                            name="link.link_name"
+                                                            label="Link Name"
+                                                            type="text"
+                                                            placeholder={'Link Name'}
+                                                            component={FormField}
+                                                        />
+                                                        <Field
+                                                            name="link.link_url"
+                                                            label="URL"
+                                                            type="text"
+                                                            placeholder={'URL'}
+                                                            component={FormField}
+                                                        />
+                                                        <Field
+                                                            name="link.link_target"
+                                                            label="Target"
+                                                            type="select"
+                                                            placeholder={'--- choose ---'}
+                                                            component={FormField}
+                                                            options={linkTargets}
+                                                        />
+                                                    </div>
+                                                </Col>
+                                                <Col xs={12} md={6}>
+                                                    <div>
+                                                        <Card header={<h1>Content</h1>} color={'secondary'}>
+                                                            <Field
+                                                                name="tree.tree_display_name"
+                                                                label="Display Name"
+                                                                placeholder={'Display Name'}
+                                                                type="text"
+                                                                component={FormField}
+                                                            />
+                                                        </Card>
+                                                        <Card
+                                                            header={
+                                                                <h1>
+                                                                    Publishing{' '}
+                                                                    <Badge color={isPublished(formValues) ? 'success' : 'warning'}>
+                                                                        {isPublished(formValues) ? 'Is published' : 'Is not Published'}
+                                                                    </Badge>
+                                                                </h1>
+                                                            }
+                                                            color={'secondary'}
+                                                        >
+                                                            <Field
+                                                                name="tree.tree_is_published"
+                                                                label="Is published?"
+                                                                type="checkbox"
+                                                                component={FormField}
+                                                            />
+                                                            <Field
+                                                                name="tree.tree_published_from"
+                                                                label="Published from"
+                                                                type="text"
+                                                                component={FormField}
+                                                            />
+                                                            <Field
+                                                                name="tree.tree_published_to"
+                                                                label="Published to"
+                                                                type="text"
+                                                                component={FormField}
+                                                            />
+                                                        </Card>
+                                                    </div>
+                                                </Col>
+                                                <Col xs={12}>
+                                                    <ButtonSave />
+                                                </Col>
+                                            </Row>
                                         )}
                                     </Tabs.Content>
                                 </Tabs.Tab>

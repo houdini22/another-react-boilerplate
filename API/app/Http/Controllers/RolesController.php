@@ -123,10 +123,8 @@ class RolesController extends Controller
         }
 
         if (Arr::get($filters, 'has_users') === 'no') {
-            $hasUsers->whereDoesntHave('users');
             $hasPermissions->whereDoesntHave('users');
         } else if (Arr::get($filters, 'has_users') === 'yes') {
-            $hasUsers->whereHas('users');
             $hasPermissions->whereHas('users');
         }
 
@@ -163,13 +161,13 @@ class RolesController extends Controller
             });
         }
 
-        $permissions = $permissions->get();
+        $permissions = $permissions->having('count', '>', 0)->get();
         $hasUsers = $hasUsers->get();
         $hasPermissions = $hasPermissions->get();
 
         return $this->responseOK([
             'has_permissions' => [
-                'count' => $hasPermissions->count(),
+                'count:yes_or_no' => $hasPermissions->count(),
                 'count:yes' => $hasPermissions
                     ->filter(function($item) {
                         return count($item['permissions']) > 0;
@@ -182,7 +180,7 @@ class RolesController extends Controller
                     ->count(),
             ],
             'has_users' => [
-                'count' => $hasUsers->count(),
+                'count:yes_or_no' => $hasUsers->count(),
                 'count:yes' => $hasUsers
                     ->filter(function($item) {
                         return count($item['users']) > 0;

@@ -91,7 +91,7 @@ class PermissionsController extends Controller
             ->leftJoin('model_has_roles', 'model_has_roles.role_id', 'roles.id')
             ->leftJoin('model_has_permissions', 'model_has_permissions.permission_id', 'role_has_permissions.permission_id')
             ->leftJoin('permissions', 'permissions.id', 'model_has_permissions.permission_id')
-            ->leftJoin('users', 'users.id', 'model_has_roles.model_id')
+            ->leftJoin('users', 'users.id', 'model_has_permissions.model_id')
             ->where(function ($query) use ($filters) {
                 if (Arr::get($filters, 'user')) {
                     $query->where('users.name', '=', Arr::get($filters, 'user'));
@@ -105,13 +105,13 @@ class PermissionsController extends Controller
                     $query->whereNull('model_has_permissions.model_id');
                 } else if (Arr::get($filters, 'has_users') === 'yes') {
                     $query->whereNotNull('model_has_permissions.model_id');
-                }
+                }/*
                 if (Arr::get($filters, 'search')) {
-                    /*$query->where(function($query) use ($filters) {
+                    $query->where(function($query) use ($filters) {
                         $query->where('permissions.name', 'LIKE', '%'.Arr::get($filters, 'search').'%')
                             ->orWhere('permissions.description', 'LIKE', '%'.Arr::get($filters, 'search').'%');
-                    });*/
-                }
+                    });
+                }*/
             })
             ->groupBy("id");
 
@@ -163,11 +163,11 @@ class PermissionsController extends Controller
 
         $hasRoles = $hasRoles->get();
         $hasUsers = $hasUsers->get();
-        $roles = $roles->get();
+        $roles = $roles->having('count', '>', 0)->get();
 
         return $this->responseOK([
             'has_roles' => [
-                'count' => $hasRoles
+                'count:yes_or_no' => $hasRoles
                     ->unique('id')
                     ->count(),
                 'count:yes' => $hasRoles
@@ -182,7 +182,7 @@ class PermissionsController extends Controller
                     })->count(),
             ],
             'has_users' => [
-                'count' => $hasUsers
+                'count:yes_or_no' => $hasUsers
                     ->unique('id')
                     ->count(),
                 'count:yes' => $hasUsers
