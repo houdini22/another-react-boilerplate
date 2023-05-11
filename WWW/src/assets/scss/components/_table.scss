@@ -62,6 +62,16 @@
         }
     }
 
+    &.component-table--bordered {
+        & > .component-table__tbody > .component-table__tr {
+            &.component-table__tr--color-default {
+                .component-table__tbody__td {
+                    border-bottom: $default_DARKEN_X3;
+                }
+            }
+        }
+    }
+
     & > .component-table__tbody {
         width: 100%;
 

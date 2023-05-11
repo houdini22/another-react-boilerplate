@@ -6,6 +6,7 @@ import { Header } from './Header'
 import { AddCategoryFormContainer } from '../containers/AddCategoryFormContainer'
 import { formattedDateTime } from '../../../helpers/date-time'
 import { generateUrl } from '../../../helpers/cms'
+import { CategoryIcon } from '../../../components/icons'
 
 export class AddCategoryView extends React.Component {
     render() {
@@ -26,6 +27,7 @@ export class AddCategoryView extends React.Component {
                                                     actionTitle={'Add Category'}
                                                     action={'add'}
                                                     canByPermission={canByPermission}
+                                                    icon={<CategoryIcon />}
                                                 />
                                                 <AddCategoryFormContainer
                                                     currentNode={currentNode}

@@ -14,13 +14,13 @@ interface HeaderProps {
 
 export class Header extends React.Component<HeaderProps, null> {
     render() {
-        const { currentNodeParents, currentNode, title, actionTitle, action } = this.props
+        const { currentNodeParents, currentNode, title, actionTitle, action, icon } = this.props
         return (
             <AuthorizationManager>
                 {({ canByPermission }) => (
                     <PageHeader.Container>
                         <PageHeader.Title>
-                            <PagesIcon /> {title}
+                            {icon} {title}
                         </PageHeader.Title>
                         <PageHeader.Breadcrumbs>
                             <PageHeader.BreadcrumbsItem href="/">

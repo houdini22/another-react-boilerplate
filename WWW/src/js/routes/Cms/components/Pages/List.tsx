@@ -41,12 +41,13 @@ export class List extends React.Component<null, null> {
                                 header={<h1>Pages - {currentNode?.category?.category_name}</h1>}
                                 headerActions={[
                                     canByPermission(['cms.add_link', 'cms.add_document', 'cms.add_category']) ? (
-                                        <Dropdown.Container triggerColor={'success'} placement={'right'} key={'add'}>
+                                        <Dropdown.Container placement={'right'} key={'add'}>
                                             <Dropdown.Trigger
                                                 component={Button}
                                                 componentProps={{
                                                     icon: <AddIcon />,
                                                     iconOnly: true,
+                                                    color: 'success',
                                                 }}
                                             />
                                             <Dropdown.Menu>
@@ -56,7 +57,7 @@ export class List extends React.Component<null, null> {
                                                             navigate(`/cms/pages/add_category?parent_id=${currentNode.id}`)
                                                         }}
                                                     >
-                                                        Category
+                                                        <AddIcon /> Category
                                                     </Dropdown.Item>
                                                 )}
                                                 {canByPermission('cms.add_document') && (
@@ -65,7 +66,7 @@ export class List extends React.Component<null, null> {
                                                             navigate(`/cms/pages/add_document?parent_id=${currentNode.id}`)
                                                         }}
                                                     >
-                                                        Document
+                                                        <AddIcon /> Document
                                                     </Dropdown.Item>
                                                 )}
                                                 {canByPermission('cms.add_link') && (
@@ -74,7 +75,7 @@ export class List extends React.Component<null, null> {
                                                             navigate(`/cms/pages/add_link?parent_id=${currentNode.id}`)
                                                         }}
                                                     >
-                                                        Link
+                                                        <AddIcon /> Link
                                                     </Dropdown.Item>
                                                 )}
                                             </Dropdown.Menu>
@@ -90,15 +91,25 @@ export class List extends React.Component<null, null> {
                                     ) : undefined,
                                 ]}
                             >
-                                <Table.Container>
+                                <Table.Container bordered>
                                     <Table.THead>
                                         <Table.Tr>
                                             <Table.Th xs={1}>Type</Table.Th>
-                                            <Table.Th xs={3}>Name</Table.Th>
-                                            <Table.Th xs={3}>URL</Table.Th>
-                                            <Table.Th xs={2}>Statuses</Table.Th>
-                                            <Table.Th xs={1}>Ordering</Table.Th>
-                                            <Table.Th xs={2}>Actions</Table.Th>
+                                            <Table.Th xs={11} md={3}>
+                                                Name
+                                            </Table.Th>
+                                            <Table.Th xs={12} md={3}>
+                                                URL
+                                            </Table.Th>
+                                            <Table.Th xs={4} md={2}>
+                                                Statuses
+                                            </Table.Th>
+                                            <Table.Th xs={4} md={1}>
+                                                Ordering
+                                            </Table.Th>
+                                            <Table.Th xs={4} md={2}>
+                                                Actions
+                                            </Table.Th>
                                         </Table.Tr>
                                     </Table.THead>
                                     <Table.TBody>
@@ -185,98 +196,114 @@ export class List extends React.Component<null, null> {
                                                             : undefined,
                                                     }}
                                                 >
-                                                    <Table.Td xs={1} alignCenter className={cx('tree-icon')}>
-                                                        {node.tree_object_type === 'category' && <CategoryIcon />}
-                                                        {node.tree_object_type === 'document' && <DocumentIcon />}
-                                                        {node.tree_object_type === 'link' && <LinkIcon />}
+                                                    <Table.Td xs={1} md={1} alignCenter className={cx('tree-icon')}>
+                                                        <div>
+                                                            {node.tree_object_type === 'category' && <CategoryIcon />}
+                                                            {node.tree_object_type === 'document' && <DocumentIcon />}
+                                                            {node.tree_object_type === 'link' && <LinkIcon />}
+                                                        </div>
                                                     </Table.Td>
-                                                    <Table.Td xs={3}>
-                                                        {node.tree_object_type === 'category' && node?.category?.category_name}
-                                                        {node.tree_object_type === 'document' && node?.document?.document_name}
-                                                        {node.tree_object_type === 'link' && node?.link?.link_name}
+                                                    <Table.Td xs={11} md={3}>
+                                                        <div>
+                                                            {node.tree_object_type === 'category' && node?.category?.category_name}
+                                                            {node.tree_object_type === 'document' && node?.document?.document_name}
+                                                            {node.tree_object_type === 'link' && node?.link?.link_name}
+                                                        </div>
                                                     </Table.Td>
-                                                    <Table.Td xs={3}>
-                                                        {node.tree_object_type === 'category' && (node?.category?.category_url || '---')}
-                                                        {node.tree_object_type === 'document' && node?.document?.document_url}
-                                                        {node.tree_object_type === 'link' && node?.link?.link_url}
+                                                    <Table.Td xs={12} md={3}>
+                                                        <div>
+                                                            {node.tree_object_type === 'category' && (node?.category?.category_url || '---')}
+                                                            {node.tree_object_type === 'document' && node?.document?.document_url}
+                                                            {node.tree_object_type === 'link' && node?.link?.link_url}
+                                                        </div>
                                                     </Table.Td>
-                                                    <Table.Td xs={2} className={cx('tree-icon')}>
-                                                        {!isPublished(node) && (
-                                                            <Tooltip
-                                                                color={'primary'}
-                                                                tooltip={
-                                                                    <Typography.Container>
-                                                                        <p>
-                                                                            Published from:{' '}
-                                                                            {node.tree_published_from
-                                                                                ? formatDateTime(node.tree_published_from)
-                                                                                : 'never'}
-                                                                        </p>
-                                                                        <p>
-                                                                            Published to:{' '}
-                                                                            {node.tree_published_to
-                                                                                ? formatDateTime(node.tree_published_to)
-                                                                                : 'never'}
-                                                                        </p>
-                                                                        {!node.tree_is_published && <p>Publishing disabled.</p>}
-                                                                    </Typography.Container>
-                                                                }
-                                                                placement={'top'}
-                                                            >
-                                                                <UnpublishIcon className={cx('text-danger')} />
-                                                            </Tooltip>
-                                                        )}
-                                                        {isPublished(node) && (
-                                                            <Tooltip
-                                                                color={'primary'}
-                                                                tooltip={
-                                                                    <Typography.Container>
-                                                                        <p>
-                                                                            Published from:{' '}
-                                                                            {node.tree_published_from
-                                                                                ? formatDateTime(node.tree_published_from)
-                                                                                : 'never'}
-                                                                        </p>
-                                                                        <p>
-                                                                            Published to:{' '}
-                                                                            {node.tree_published_to
-                                                                                ? formatDateTime(node.tree_published_to)
-                                                                                : 'never'}
-                                                                        </p>
-                                                                    </Typography.Container>
-                                                                }
-                                                                placement={'top'}
-                                                            >
-                                                                <PublishIcon className={cx('text-success')} />
-                                                            </Tooltip>
-                                                        )}
+                                                    <Table.Td xs={4} md={2} className={cx('tree-icon')}>
+                                                        <div>
+                                                            {!isPublished(node) && (
+                                                                <Tooltip
+                                                                    color={'primary'}
+                                                                    tooltip={
+                                                                        <Typography.Container>
+                                                                            <p>
+                                                                                Published from:{' '}
+                                                                                {node.tree_published_from
+                                                                                    ? formatDateTime(node.tree_published_from)
+                                                                                    : 'never'}
+                                                                            </p>
+                                                                            <p>
+                                                                                Published to:{' '}
+                                                                                {node.tree_published_to
+                                                                                    ? formatDateTime(node.tree_published_to)
+                                                                                    : 'never'}
+                                                                            </p>
+                                                                            {!node.tree_is_published && <p>Publishing disabled.</p>}
+                                                                        </Typography.Container>
+                                                                    }
+                                                                    placement={'top'}
+                                                                >
+                                                                    <UnpublishIcon className={cx('text-danger')} />
+                                                                </Tooltip>
+                                                            )}
+                                                            {isPublished(node) && (
+                                                                <Tooltip
+                                                                    color={'primary'}
+                                                                    tooltip={
+                                                                        <Typography.Container>
+                                                                            <p>
+                                                                                Published from:{' '}
+                                                                                {node.tree_published_from
+                                                                                    ? formatDateTime(node.tree_published_from)
+                                                                                    : 'never'}
+                                                                            </p>
+                                                                            <p>
+                                                                                Published to:{' '}
+                                                                                {node.tree_published_to
+                                                                                    ? formatDateTime(node.tree_published_to)
+                                                                                    : 'never'}
+                                                                            </p>
+                                                                        </Typography.Container>
+                                                                    }
+                                                                    placement={'top'}
+                                                                >
+                                                                    <PublishIcon className={cx('text-success')} />
+                                                                </Tooltip>
+                                                            )}
 
-                                                        {incomingPublishing && (
-                                                            <Tooltip color={'primary'} tooltip={<p>Will be published: {node.tree_published_from}</p>}>
-                                                                <Label color={'warning'}>
-                                                                    <AlertIcon />
-                                                                </Label>
-                                                            </Tooltip>
-                                                        )}
+                                                            {incomingPublishing && (
+                                                                <Tooltip
+                                                                    color={'primary'}
+                                                                    tooltip={<p>Will be published: {node.tree_published_from}</p>}
+                                                                >
+                                                                    <Label color={'warning'}>
+                                                                        <AlertIcon />
+                                                                    </Label>
+                                                                </Tooltip>
+                                                            )}
 
-                                                        {incomingExpiring && (
-                                                            <Tooltip color={'primary'} tooltip={<p>Will be not visible: {node.tree_published_to}</p>}>
-                                                                <Label color={'danger'}>
-                                                                    <AlertIcon />
-                                                                </Label>
-                                                            </Tooltip>
-                                                        )}
+                                                            {incomingExpiring && (
+                                                                <Tooltip
+                                                                    color={'primary'}
+                                                                    tooltip={<p>Will be not visible: {node.tree_published_to}</p>}
+                                                                >
+                                                                    <Label color={'danger'}>
+                                                                        <AlertIcon />
+                                                                    </Label>
+                                                                </Tooltip>
+                                                            )}
+                                                        </div>
                                                     </Table.Td>
-                                                    <Table.Td xs={1}>
-                                                        <Button
-                                                            icon={<OrderingIcon />}
-                                                            iconOnly
-                                                            style={{
-                                                                cursor: 'move',
-                                                            }}
-                                                        />
+                                                    <Table.Td xs={4} md={1}>
+                                                        <div>
+                                                            <Button
+                                                                icon={<OrderingIcon />}
+                                                                iconOnly
+                                                                style={{
+                                                                    cursor: 'move',
+                                                                }}
+                                                            />
+                                                        </div>
                                                     </Table.Td>
-                                                    <Table.Td xs={2}>
+                                                    <Table.Td xs={4} md={2}>
                                                         <div>
                                                             {!!(
                                                                 node.tree_class !== 'system_page' &&

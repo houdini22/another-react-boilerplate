@@ -90,8 +90,8 @@ Route::prefix('api/v1')->group(function () {
     Route::get('/config/get', '\App\Http\Controllers\ConfigController@getGet');
 });
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/admin', function () {
+    return view('admin');
 });
 
 Route::get('/users/activate/{email_verified_token}', '\App\Http\Controllers\UsersController@getActivate');
