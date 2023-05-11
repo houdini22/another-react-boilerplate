@@ -44,6 +44,11 @@ class Tree extends Model
         return $this->hasOne(Document::class);
     }
 
+    public function documentCategory()
+    {
+        return $this->hasOne(Tree::class, 'id', 'parent_id');
+    }
+
     public function link()
     {
         return $this->hasOne(Link::class);

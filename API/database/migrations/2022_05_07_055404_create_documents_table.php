@@ -23,6 +23,8 @@ class CreateDocumentsTable extends Migration
             $table->string('document_meta_keywords', 512)->nullable()->default(null);
             $table->string('document_meta_robots', 64)->nullable()->default(null);
             $table->string('document_meta_description', 512)->nullable()->default(null);
+            $table->integer('document_hits')->default(0);
+            $table->integer('document_unique_hits')->default(0);
 
             $table->timestamps();
 

@@ -1,0 +1,61 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+body {
+    & > .container {
+        margin-top: 30px;
+
+        & > footer {
+            margin-top: 30px;
+        }
+
+        .menu {
+            padding-top: 0 !important;
+            border-top: 3px solid rgba(var(--bs-dark-rgb), 1);
+
+            & > h4 {
+                margin-top: 1rem;
+            }
+        }
+    }
+}
+
+img.avatar {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 300px;
+}
+
+img.header-logo {
+    max-height: 45px;
+    border-radius: 100px;
+    margin-right: 10px;
+}
+
+:root {
+    --jumbotron-padding-y: 3rem;
+}
+
+.jumbotron {
+    padding-top: var(--jumbotron-padding-y);
+    padding-bottom: var(--jumbotron-padding-y);
+    margin-bottom: 0;
+    background-color: #fff;
+    p:last-child {
+        margin-bottom: 0;
+    }
+    .jumbotron-heading {
+        font-weight: 300;
+    }.container {
+         max-width: 40rem;
+     }
+}
+@media (min-width: 768px) {
+
+}

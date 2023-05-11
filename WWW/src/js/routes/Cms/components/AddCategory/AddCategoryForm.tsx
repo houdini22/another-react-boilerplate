@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Field } from 'redux-form'
-import { Badge, Button, Card, Col, FormField, LoadingOverlay, Row, Tabs } from '../../../../components'
+import { Badge, Card, Col, FormField, LoadingOverlay, Row, Tabs } from '../../../../components'
 import { generateUrl, isPublished } from '../../../../helpers/cms'
 import { ButtonSave } from '../../../../components/common/ButtonSave'
 import { CategoryIcon } from '../../../../components/icons'

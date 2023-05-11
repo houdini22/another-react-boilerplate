@@ -90,6 +90,7 @@ Route::prefix('api/v1')->group(function () {
     Route::get('/config/get', '\App\Http\Controllers\ConfigController@getGet');
 });
 
+
 Route::get('/admin', function () {
     return view('admin');
 });
@@ -100,3 +101,6 @@ Route::prefix('files')->group(function () {
     Route::get('preview/{file_id}', '\App\Http\Controllers\FilesController@getPreview');
     Route::get('download/{id}', '\App\Http\Controllers\FilesController@getDownload');
 });
+
+Route::get('{slug}', '\App\Http\Controllers\ContentController@getGet')
+    ->where('slug', '([a-zA-Z\-\_0-9\/]+)?');

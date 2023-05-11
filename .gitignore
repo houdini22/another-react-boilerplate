@@ -1,4 +1,5 @@
 /WWW/node_modules
+/API/node_modules
 /API/public/hot
 /API/public/storage
 /API/storage/*.key

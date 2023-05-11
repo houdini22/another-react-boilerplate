@@ -22,6 +22,8 @@ class CreateCategoriesTable extends Migration
             $table->string('category_meta_keywords', 512)->nullable()->default(null);
             $table->string('category_meta_robots', 64)->nullable()->default(null);
             $table->string('category_meta_description', 512)->nullable()->default(null);
+            $table->integer('category_hits')->default(0);
+            $table->integer('category_unique_hits')->default(0);
             $table->unsignedBigInteger('index_document_id')->default(null)->nullable();
             $table->unsignedBigInteger('menu_category_id')->default(null)->nullable();
 

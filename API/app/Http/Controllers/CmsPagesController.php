@@ -446,6 +446,9 @@ class CmsPagesController extends Controller
         $tree->save();
 
         $tree->category->fill(Arr::get($values, 'category'));
+        if (Arr::get($values, 'category.menu_category_id') === 'new') {
+            $tree->category->index_document_id = $tree->id;
+        }
         $tree->category->save();
 
         if (Arr::get($values, 'parent_id') != $tree->parent_id) {
