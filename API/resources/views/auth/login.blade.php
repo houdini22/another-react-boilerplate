@@ -1,4 +1,4 @@
-@extends('layouts.app', ['meta' => $meta])
+@extends('layouts.app', ['meta' => isset($meta) ?? $meta])
 
 @section("content")
     <div class="container">
