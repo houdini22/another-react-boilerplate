@@ -82,8 +82,5 @@
                 @endif
             </aside><!-- /.blog-sidebar -->
         </div><!-- /.row -->
-        <footer>
-            <p>Copyright Michał Baniowski</p>
-        </footer>
     </div>
 @endsection

@@ -14,24 +14,21 @@ body {
     min-width: 100vw;
     background-color: var(--bs-gray-300);
 
-    & > div {
-        min-height: 100vh;
-        min-width: 100vw;
+    & > .container {
+        margin-top: 30px;
 
-        & > .container {
+        & > footer {
             margin-top: 30px;
+            padding-top: 1rem;
+            border-top: 1px solid var(--bs-dark);
+        }
 
-            & > footer {
-                margin-top: 30px;
-            }
+        .menu {
+            padding-top: 0 !important;
+            border-top: 3px solid rgba(var(--bs-dark-rgb), 1);
 
-            .menu {
-                padding-top: 0 !important;
-                border-top: 3px solid rgba(var(--bs-dark-rgb), 1);
-
-                & > h4 {
-                    margin-top: 1rem;
-                }
+            & > h4 {
+                margin-top: 1rem;
             }
         }
     }

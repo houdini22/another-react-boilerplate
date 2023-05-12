@@ -12,6 +12,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
@@ -880,14 +881,21 @@ class UsersController extends Controller
 
         $user->email_verify_token = NULL;
         $user->email_verified_at = Carbon::now();
+        $user->status = User::$STATUS_ACTIVE;
+        $user->last_active = Carbon::now();
         $user->save();
+
+        Auth::guard()->login($user);
 
         Log::add(NULL, 'users.activate', [
             'model' => $user,
             'request' => $request
         ]);
 
-        return redirect('/#/users/account_activated');
+        return redirect('/')->with('message', [
+            'type' => 'success',
+            'message' => 'Account Activated! You are now logged in!'
+        ]);
     }
 
     public function postChangeAvatar(Request $request)

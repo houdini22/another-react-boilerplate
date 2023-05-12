@@ -108,6 +108,8 @@ Route::prefix('files')->group(function () {
 Route::get('/login', '\App\Http\Controllers\Auth\LoginController@getIndex')->name('login');
 Route::post('/login', '\App\Http\Controllers\Auth\LoginController@postLogin');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+Route::get('/register', '\App\Http\Controllers\Auth\RegisterController@register')->name('register');
+Route::post('/register', '\App\Http\Controllers\Auth\RegisterController@postRegister');
 
 Route::get('{slug}', '\App\Http\Controllers\ContentController@getGet')
     ->where('slug', '([a-zA-Z\-\_0-9\/]+)?');

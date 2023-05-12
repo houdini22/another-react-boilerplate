@@ -51,7 +51,7 @@ class LoginController extends Controller
         $meta['keywords'] = Config::getByKey('cms.meta.keywords')->value;
         $meta['robots'] = Config::getByKey('cms.meta.robots')->value;
 
-        return response(view('auth.login', ['meta' => $meta]));
+        return response(view('auth.login', ['meta' => $meta, 'error' => NULL]));
     }
 
     public function postLogin(Request $request) {
@@ -67,16 +67,23 @@ class LoginController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
-            if ($user->status === User::$STATUS_ACTIVE) {
+            if ($user->status === User::$STATUS_NOT_ACTIVE) {
+                $error = [
+                    'message' => "ACCOUNT_NOT_ACTIVE",
+                ];
+            } else if (!$user->email_verified_at) {
+                $error = [
+                    'message' => "EMAIL_NOT_VERIFIED",
+                ];
+            } else if ($user->status === User::$STATUS_ACTIVE) {
                 $error = NULL;
                 $user->last_active = Carbon::now();
                 $user->save();
 
-                return redirect('/');
-            } else {
-                $error = [
-                    'message' => "ACCOUNT_NOT_ACTIVE",
-                ];
+                return redirect('/')->with('message', [
+                    'type' => 'success',
+                    'message' => 'You are logged in!'
+                ]);
             }
         }
 
@@ -88,6 +95,9 @@ class LoginController extends Controller
         Session::flush();
         Auth::logout();
 
-        return redirect('/');
+        return redirect('/')->with('message', [
+            'type' => 'success',
+            'message' => 'You are logged off!'
+        ]);
     }
 }

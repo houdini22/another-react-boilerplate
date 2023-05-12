@@ -5,9 +5,16 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Mail\Message;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterController extends Controller
 {
@@ -44,30 +51,73 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'name' => ['required', 'alpha_dash', 'unique:users,name'],
+            'password' => ['required', 'confirmed', Password::min(8)
+                ->mixedCase()
+                ->symbols()
+                ->numbers()
+                ->letters()],
+            'password_confirmation' => ['required'],
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \App\Models\User
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => bcrypt($data['password']),
+            'email_verify_token' => Str::random(16)
+            /*
+            'status' => User::$STATUS_ACTIVE,
+            'email_verified_at' => Carbon::now(),*/
         ]);
+
+        Mail::send('email_users_activate_account', [
+            'url' => url('/users/activate/' . $user->email_verify_token),
+        ], function (Message $message) use ($user) {
+            $message->to($user->email, $user->name)->subject('Activate ' . config('app.name') . ' account');
+            $message->from(config('app.from_email'));
+        });
+
+        return $user;
+    }
+
+    public function register(Request $request)
+    {
+        return response(view('auth.register'));
+    }
+
+    public function postRegister(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 201)
+            : redirect($this->redirectPath())->with('message', [
+                'type' => 'warning',
+                'message' => "Check your email to activate your account."
+            ]);
     }
 }
