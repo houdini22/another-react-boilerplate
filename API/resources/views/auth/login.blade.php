@@ -8,17 +8,17 @@
                     <div class="card-header">{{ __('Log In') }}</div>
 
                     <div class="card-body">
-                        @if(\Illuminate\Support\Arr::get($error, 'message') === 'WRONG_EMAIL_OR_PASSWORD')
+                        @if(isset($error) && \Illuminate\Support\Arr::get($error, 'message') === 'WRONG_EMAIL_OR_PASSWORD')
                             <div class="alert alert-danger" role="alert">
                                 Wrong email or password.
                             </div>
                         @endif
-                        @if(\Illuminate\Support\Arr::get($error, 'message') === 'ACCOUNT_NOT_ACTIVE')
+                        @if(isset($error) && \Illuminate\Support\Arr::get($error, 'message') === 'ACCOUNT_NOT_ACTIVE')
                             <div class="alert alert-danger" role="alert">
                                 Your account is not active.
                             </div>
                         @endif
-                        @if(\Illuminate\Support\Arr::get($error, 'message') === 'EMAIL_NOT_VERIFIED')
+                        @if(isset($error) && \Illuminate\Support\Arr::get($error, 'message') === 'EMAIL_NOT_VERIFIED')
                             <div class="alert alert-danger" role="alert">
                                 Your email is not verified.
                             </div>
