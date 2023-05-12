@@ -10,6 +10,7 @@
 /API/.phpunit.result.cache
 /API/Homestead.json
 /API/Homestead.yaml
+/API/package-lock.json
 /WWW/npm-debug.log
 /WWW/yarn-error.log
 .idea
