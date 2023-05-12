@@ -1,7 +1,7 @@
 <header>
     <div class="navbar navbar-dark bg-dark box-shadow">
         <div class="container d-flex justify-content-between">
-            <a href="#" class="navbar-brand d-flex align-items-center">
+            <a href="{{url('/')}}" class="navbar-brand d-flex align-items-center">
                 <img src="{{url('/img/avatar.jpg')}}" alt="" class="header-logo"/>
                 <strong>CMS System</strong>
             </a>

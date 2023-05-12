@@ -64,6 +64,10 @@ class WebsocketsManagerBase extends React.Component<WebsocketsManagerBaseProps, 
                     navigate('/login?reason=forced_by_admin')
                     gentlyLogOff()
                 })
+
+            this.client?.channel('global').listen('.config_changed', (data) => {
+                console.log('config changed data', data)
+            })
         } else if (prevProps.auth.isLoggedIn && !isLoggedIn) {
             this.client.leaveChannel(`user.${this.token}`)
             this.token = ''

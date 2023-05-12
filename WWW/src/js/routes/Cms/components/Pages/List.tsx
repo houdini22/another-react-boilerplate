@@ -205,16 +205,22 @@ export class List extends React.Component<null, null> {
                                                     </Table.Td>
                                                     <Table.Td xs={11} md={3}>
                                                         <div>
-                                                            {node.tree_object_type === 'category' && node?.category?.category_name}
+                                                            {/*{node.tree_object_type === 'category' && node?.category?.category_name}
                                                             {node.tree_object_type === 'document' && node?.document?.document_name}
-                                                            {node.tree_object_type === 'link' && node?.link?.link_name}
+                                                            {node.tree_object_type === 'link' && node?.link?.link_name}*/}
+                                                            {node.tree_display_name}
                                                         </div>
                                                     </Table.Td>
                                                     <Table.Td xs={12} md={3}>
                                                         <div>
-                                                            {node.tree_object_type === 'category' && (node?.category?.category_url || '---')}
-                                                            {node.tree_object_type === 'document' && node?.document?.document_url}
-                                                            {node.tree_object_type === 'link' && node?.link?.link_url}
+                                                            {!node.tree_url_is_showable && '---'}
+                                                            {!!node.tree_url_is_showable && (
+                                                                <>
+                                                                    {node.tree_object_type === 'category' && (node?.category?.category_url || '---')}
+                                                                    {node.tree_object_type === 'document' && node?.document?.document_url}
+                                                                    {node.tree_object_type === 'link' && node?.link?.link_url}
+                                                                </>
+                                                            )}
                                                         </div>
                                                     </Table.Td>
                                                     <Table.Td xs={4} md={2} className={cx('tree-icon')}>

@@ -48,20 +48,11 @@ class AddCategoryForm extends React.Component {
                                                         options={categories}
                                                     />
                                                     <Field
-                                                        name="category.category_name"
+                                                        name="tree.tree_display_name"
                                                         label="Category Name"
-                                                        placeholder={'Category Name'}
+                                                        placeholder={'Display Name'}
                                                         type="text"
                                                         component={FormField}
-                                                        onChange={(e, value) => {
-                                                            change(
-                                                                'category.category_url',
-                                                                generateUrl(
-                                                                    id ? currentNode.parent.category.category_url : currentNode.category.category_url,
-                                                                    value,
-                                                                ),
-                                                            )
-                                                        }}
                                                     />
                                                     <Field
                                                         name="category.category_url"
@@ -76,11 +67,22 @@ class AddCategoryForm extends React.Component {
                                                 <div>
                                                     <Card header={<h1>Content</h1>} color={'secondary'}>
                                                         <Field
-                                                            name="tree.tree_display_name"
+                                                            name="category.category_name"
                                                             label="Display Name"
-                                                            placeholder={'Display Name'}
+                                                            placeholder={'Category Name'}
                                                             type="text"
                                                             component={FormField}
+                                                            onChange={(e, value) => {
+                                                                change(
+                                                                    'category.category_url',
+                                                                    generateUrl(
+                                                                        id
+                                                                            ? currentNode.parent.category.category_url
+                                                                            : currentNode.category.category_url,
+                                                                        value,
+                                                                    ),
+                                                                )
+                                                            }}
                                                         />
                                                         <Field
                                                             name="category.index_document_id"

@@ -43,9 +43,13 @@ class THead extends React.Component<null, null> {
 
 class TBody extends React.Component<null, null> {
     render() {
-        const { children } = this.props
+        const { children, itemRef } = this.props
 
-        return <div className={cx('component-table__tbody')}>{children}</div>
+        return (
+            <div className={cx('component-table__tbody')} ref={itemRef}>
+                {children}
+            </div>
+        )
     }
 }
 
@@ -74,10 +78,11 @@ interface TrProps {
 
 class Tr extends React.Component<TrProps, null> {
     render() {
-        const { children, color, onClick, expanded, ...props } = this.props
+        const { children, color, onClick, expanded, itemRef, ...props } = this.props
 
         return (
             <Row
+                ref={itemRef}
                 {...props}
                 onClick={onClick}
                 className={cx('component-table__tr', {

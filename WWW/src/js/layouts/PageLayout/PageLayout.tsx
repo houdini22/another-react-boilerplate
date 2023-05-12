@@ -78,7 +78,7 @@ class PageLayout extends React.Component<PageLayoutProps, null> {
 
                                     <Notifications />
                                     <ConnectionErrorModal
-                                        visible={connectionErrorMessage === 'ERR_NETWORK'}
+                                        visible={connectionErrorCode === 'ERR_NETWORK'}
                                         message={connectionErrorCode}
                                         close={() => setConnectionErrorModalVisible({})}
                                     />

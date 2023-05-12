@@ -481,10 +481,8 @@ class CmsPagesController extends Controller
         }
 
         $values = $request->post();
-
-        $validator = Validator::make($values, [
+        $rules = [
             'document.document_name' => ['required', 'max:256'],
-            'document.document_url' => ['required', 'max:256', 'unique:documents,id,' . $tree->document->id],
             'parent_id' => 'required',
             'document.document_meta_title' => 'max:256',
             'document.document_meta_keywords' => 'max:512',
@@ -494,7 +492,12 @@ class CmsPagesController extends Controller
             'tree.tree_published_from' => ['required'],
             'tree.tree_published_to' => ['required'],
             'tree.tree_display_name' => ['required', 'max:64'],
-        ]);
+        ];
+        if ($tree->tree_class !== 'system_page') {
+            $rules['document.document_url'] = ['required', 'max:256', 'unique:documents,id,' . $tree->document->id];
+        }
+
+        $validator = Validator::make($values, $rules);
 
         if ($validator->fails()) {
             return response()->json([
@@ -543,15 +546,18 @@ class CmsPagesController extends Controller
 
         $values = $request->post();
 
-        $validator = Validator::make($values, [
+        $rules = [
             'link.link_name' => ['required', 'max:256'],
-            'link.link_url' => ['required', 'url'],
             'parent_id' => 'required',
             'tree.tree_is_published' => ['required'],
             'tree.tree_published_from' => ['required'],
             'tree.tree_published_to' => ['required'],
             'tree.tree_display_name' => ['required', 'max:64'],
-        ]);
+        ];
+        if (Arr::get($values, 'target') === 'manually') {
+            $rules['link.link_url'] = ['required', 'url'];
+        }
+        $validator = Validator::make($values, $rules);
 
         if ($validator->fails()) {
             return response()->json([
@@ -563,6 +569,15 @@ class CmsPagesController extends Controller
         $tree->save();
 
         $tree->link->fill(Arr::get($values, 'link'));
+        if (Arr::get($values, 'target') === "manually") {
+           $tree->link->category_id = $tree->link->document_id = 0;
+        } else if (Arr::get($values, 'target') === 'category') {
+            $tree->link->link_url = "";
+            $tree->link->document_id = 0;
+        } else if (Arr::get($values, 'target') === 'document') {
+            $tree->link->link_url = "";
+            $tree->link->category_id = 0;
+        }
         $tree->link->save();
 
         if (Arr::get($values, 'parent_id') != $tree->parent_id) {
@@ -758,11 +773,14 @@ class CmsPagesController extends Controller
 
         $values = $request->post();
 
-        $validator = Validator::make($values, [
+        $rules = [
             'link.link_name' => 'required|max:256',
-            'link.link_url' => 'required|max:256|url',
             'tree.tree_display_name' => ['required', 'max:64'],
-        ]);
+        ];
+        if (Arr::get($values, 'target') === 'manually') {
+            $rules['link.link_url'] = 'required|max:256|url';
+        }
+        $validator = Validator::make($values, $rules);
 
         if ($validator->fails()) {
             return response()->json([
@@ -795,5 +813,35 @@ class CmsPagesController extends Controller
         return $this->responseOK([
             'data' => $tree->toArray(),
         ]);
+    }
+
+    public function getGetDocuments(Request $request) {
+        $user = $this->getUserFromRequest($request);
+
+        $documents = Tree::with('document')
+            ->with('documentCategory')
+            ->with('documentCategory.category')
+            ->withDepth()
+            ->orderBy('_lft', 'ASC')
+            ->where('tree_object_type', '=', 'document')
+            ->where('tree_class', '<>', 'system_page')
+            ->where('tree_class', '<>', 'index_page')
+            ->get();
+
+        return $this->responseOK($documents);
+    }
+
+    public function getGetCategories(Request $request) {
+        $user = $this->getUserFromRequest($request);
+
+        $categories = Tree::with('category')
+            ->withDepth()
+            ->orderBy('_lft', 'ASC')
+            ->where('tree_object_type', '=', 'category')
+            ->where('tree_alias', '<>', 'root')
+            ->where('tree_alias', '<>', 'system_category')
+            ->get();
+
+        return $this->responseOK($categories);
     }
 }

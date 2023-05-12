@@ -1,17 +1,18 @@
 import * as React from 'react'
 import { Field } from 'redux-form'
-import { Button, FormField } from '../../../../components'
+import { FormField } from '../../../../components'
+import { ButtonSave } from '../../../../components/common/ButtonSave'
 
 class EditForm extends React.Component<null, null> {
     render() {
-        const { handleSubmit, initialValues: { is_name_editable } = {} } = this.props
+        const { handleSubmit } = this.props
         return (
             <form onSubmit={handleSubmit}>
-                <Field name="name" label="Name" type="text" component={FormField} autoFocus disabled={!is_name_editable} />
-                <Field name="description" label="Description" type="textarea" component={FormField} />
-                <Button color="success" type="submit" block>
-                    <span>Save</span>
-                </Button>
+                <Field name="title" label="Title" type="text" placeholder={'Meta Title'} component={FormField} />
+                <Field name="description" label="Description" type="textarea" placeholder={'Meta Description'} component={FormField} />
+                <Field name="robots" label="Keywords" type="textarea" placeholder={'Meta Keywords'} component={FormField} />
+                <Field name="robots" label="Robots" type="text" placeholder={'Meta Robots'} component={FormField} />
+                <ButtonSave />
             </form>
         )
     }

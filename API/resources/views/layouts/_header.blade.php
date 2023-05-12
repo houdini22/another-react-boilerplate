@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>CMS FRONT</title>
+    <title>{{$meta['title']}}</title>
+    <meta name="description" content="{{$meta['description']}}">
+    <meta name="keywords" content="{{$meta['keywords']}}">
+    <meta name="robots" content="{{$meta['robots']}}">
     <link rel="stylesheet" href="{{ asset('build/assets/app.css') }}">
     <script src="{{ asset('build/assets/app.js', 'build') }}" defer></script>
 </head>

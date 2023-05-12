@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ConfigChanged;
 use App\Models\Config;
+use App\Models\Log;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -13,32 +15,31 @@ class ConfigController extends Controller
         $user = User::getFromRequest($request);
 
         $configs = Config::orderBy('key', 'asc')->get();
-        $result = [];
 
-        foreach ($configs as $c) {
-            $value = NULL;
-            switch ($c->type) {
-                case 'number':
-                    $value = NAN;
-                    break;
+        return $this->responseOK($configs);
+    }
+    public function postEdit(Request $request) {
+        $user = User::getFromRequest($request);
 
-                case 'string':
-                    $value = "";
-                    break;
+        $config = $request->post('config');
 
-                case "object":
-                case "array":
-                    $value = [];
+        foreach ($config as $c) {
+            $model = Config::where('key', '=', $c['key'])->first();
+            if ($model) {
+                $model->value = $c['value'];
+                $model->save();
 
-                default:
-                    break;
+                Log::add($user, 'cms.settings.edit', [
+                    'request' => $request,
+                    'model' => $model
+                ]);
             }
-            if ($c->value) {
-                $value = $c->value;
-            }
-            Arr::set($result, $c->key, $value);
         }
 
-        return $this->responseOK($result);
+        broadcast(new ConfigChanged($config));
+
+        return $this->responseOK([
+            'config' => $config
+        ]);
     }
 }

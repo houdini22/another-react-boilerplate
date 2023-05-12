@@ -4,26 +4,24 @@ import { EditForm as FormComponent } from './EditForm'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { processAPIerrorResponseToFormErrors } from '../../../../modules/http'
 
-const onSubmit = (values, _, { save, fetchPermission, addToastNotification, setIsLoading, permission }) => {
+const onSubmit = (values, _, { save, addToastNotification, setIsLoading }) => {
     return setIsLoading(true).then(() => {
         return save({ ...values }).then(
             () => {
-                fetchPermission(permission['id']).then(() => {
-                    addToastNotification({
-                        type: 'success',
-                        title: 'Save success.',
-                        text: `Permission ID: ${permission.id} has been saved.`,
-                        href: `/permissions/edit?id=${permission.id}`,
-                    })
-                    setIsLoading(false)
+                addToastNotification({
+                    type: 'success',
+                    title: 'Save success.',
+                    text: `CMS Settings was saved.`,
+                    href: `/cms/settings`,
                 })
+                setIsLoading(false)
             },
             (response) => {
                 addToastNotification({
                     title: 'Form Validation Error',
                     text: response.message,
                     type: 'danger',
-                    href: `/permissions/edit?id=${permission.id}`,
+                    href: `/cms/settings`,
                 })
                 setIsLoading(false)
                 throw new SubmissionError(processAPIerrorResponseToFormErrors(response))

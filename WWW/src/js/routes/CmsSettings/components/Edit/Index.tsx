@@ -1,37 +1,56 @@
 import * as React from 'react'
 import { Card, LoadingOverlay } from '../../../../components'
 import { EditFormContainer } from './EditFormContainer'
-import { FormContainer, NotificationsManager } from '../../../../containers'
-import { Permission, SetIsLoading } from '../../../../../types.d'
+import { FormContainer } from '../../../../containers'
 import AlertNoPermissions from '../../../../components/common/AlertNoPermissions'
-interface EditProps {
-    editPermission: EditPermission
-    permission: Permission
-    fetchPermission: () => Promise<void>
-    isLoading: boolean
-    setIsLoading: SetIsLoading
-}
+import { Manager } from '../../../../containers/Config'
+import { SettingsIcon } from '../../../../components/icons'
 
-interface EditState {}
+interface EditSettingsProps {}
 
-export class EditPermission extends React.Component<EditProps, EditState> {
+interface EditSettingsState {}
+
+export class EditSettings extends React.Component<EditSettingsProps, EditSettingsState> {
     render() {
-        const { editPermission, permission, fetchPermission, isLoading, setIsLoading } = this.props
+        const { isLoading, setIsLoading } = this.props
         return (
             <FormContainer>
                 {({ addToastNotification, canByPermission }) => (
                     <>
                         {canByPermission('permissions.edit') && (
-                            <Card header={<h1>Permission</h1>} color={'primary'}>
-                                <EditFormContainer
-                                    initialValues={permission}
-                                    save={editPermission}
-                                    role={permission}
-                                    fetchPermission={fetchPermission}
-                                    addToastNotification={addToastNotification}
-                                    setIsLoading={setIsLoading}
-                                    permission={permission}
-                                />
+                            <Card
+                                header={
+                                    <h1>
+                                        <SettingsIcon /> Edit Settings
+                                    </h1>
+                                }
+                                color={'success'}
+                            >
+                                <Manager>
+                                    {({ getByKey, edit }) => (
+                                        <EditFormContainer
+                                            initialValues={{
+                                                title: getByKey('cms.meta.title')?.value,
+                                                description: getByKey('cms.meta.description')?.value,
+                                                keywords: getByKey('cms.meta.keywords')?.value,
+                                                robots: getByKey('cms.meta.robots')?.value,
+                                            }}
+                                            save={(values) => {
+                                                return new Promise((resolve) => {
+                                                    values = Object.keys(values).map((key) => ({
+                                                        key: `cms.meta.${key}`,
+                                                        value: values[key],
+                                                    }))
+                                                    edit(values).then(() => {
+                                                        resolve()
+                                                    })
+                                                })
+                                            }}
+                                            addToastNotification={addToastNotification}
+                                            setIsLoading={setIsLoading}
+                                        />
+                                    )}
+                                </Manager>
                                 {isLoading && <LoadingOverlay />}
                             </Card>
                         )}
@@ -43,4 +62,4 @@ export class EditPermission extends React.Component<EditProps, EditState> {
     }
 }
 
-export default { EditPermission }
+export default { EditSettings }

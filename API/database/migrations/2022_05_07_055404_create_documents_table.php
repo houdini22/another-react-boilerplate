@@ -29,8 +29,13 @@ class CreateDocumentsTable extends Migration
             $table->timestamps();
 
             //$table->foreign('tree_id')->references('id')->on('tree');
-            $table->index('document_url');
             $table->index('tree_id');
+            $table->index('document_name');
+            $table->index('document_url');
+            $table->index('document_meta_title');
+            $table->index('document_meta_keywords');
+            $table->index('document_meta_robots');
+            $table->index('document_meta_description');
         });
 
         //Schema::table('tree', function(Blueprint $table) {

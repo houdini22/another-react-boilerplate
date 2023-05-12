@@ -3,8 +3,8 @@ import { Col, Row } from '../../../components'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Header } from './Header'
 import { TitleManager, RouteManager } from '../../../containers'
-import { Manager } from '../../../containers/Config'
-import { EditSettings } from '../../UsersPermissionsEdit/components/Edit/Index'
+import Manager from '../../Cms/components/Manager'
+import { EditSettings } from './Edit/Index'
 
 export class CmsSettingsView extends React.Component<null, null> {
     render() {
@@ -17,12 +17,12 @@ export class CmsSettingsView extends React.Component<null, null> {
                         <RouteManager>
                             {({}) => (
                                 <Manager>
-                                    {({ config, isLoading, setIsLoading }) => (
+                                    {({ isLoading, setIsLoading }) => (
                                         <PageContent>
                                             <Header />
                                             <Row>
                                                 <Col xs={12}>
-                                                    <EditSettings config={config} isLoading={isLoading} setIsLoading={setIsLoading} />
+                                                    <EditSettings isLoading={isLoading} setIsLoading={setIsLoading} />
                                                 </Col>
                                             </Row>
                                         </PageContent>

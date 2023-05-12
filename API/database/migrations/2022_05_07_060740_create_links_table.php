@@ -19,12 +19,16 @@ class CreateLinksTable extends Migration
             $table->string('link_name', 256);
             $table->string('link_url', 512);
             $table->string('link_target', 24);
+            $table->integer('category_id');
+            $table->integer('document_id');
+            $table->integer('file_id');
 
             $table->timestamps();
 
             //$table->foreign('tree_id')->references('id')->on('tree');
-            $table->index('link_name');
             $table->index('tree_id');
+            $table->index('link_name');
+            $table->index('link_url');
         });
 
         //Schema::table('tree', function(Blueprint $table) {

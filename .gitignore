@@ -3,6 +3,7 @@
 /API/public/hot
 /API/public/storage
 /API/storage/*.key
+/API/node_modules
 /API/vendor
 /API/.env
 /API/.env.backup

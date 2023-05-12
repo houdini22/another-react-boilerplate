@@ -15,4 +15,38 @@ class Config extends Authenticatable
     protected $fillable = [
         'key', 'type', 'value', 'description', 'is_editable', 'is_deletable'
     ];
+
+    public function toArray()
+    {
+        $value = NULL;
+        switch ($this->type) {
+            case 'number':
+                $value = NAN;
+                break;
+
+            case 'string':
+                $value = "";
+                break;
+
+            case "object":
+            case "array":
+                $value = [];
+
+            default:
+                break;
+        }
+        if ($this->value) {
+            $value = $this->value;
+        }
+
+        return [
+            'key' => $this->key,
+            'type' => $this->type,
+            'value' => $value,
+        ];
+    }
+
+    public static function getByKey($key) {
+        return Config::where('key', '=', $key)->first();
+    }
 }

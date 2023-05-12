@@ -13,6 +13,18 @@ class Link extends Model
         'tree_id',
         'link_name',
         'link_url',
-        'link_target'
+        'link_target',
+        'category_id',
+        'document_id'
     ];
+
+    public function linkDocument()
+    {
+        return $this->hasOne(Tree::class, 'id', 'document_id');
+    }
+
+    public function linkCategory()
+    {
+        return $this->hasOne(Tree::class, 'id', 'category_id');
+    }
 }

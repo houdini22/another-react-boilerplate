@@ -30,7 +30,18 @@ class Select extends React.Component<SelectProps, null> {
         return (
             <select {...props} key={val || ''} value={val || ''}>
                 {placeholder && this.renderPlaceholder()}
-                {_options.map(({ label, value: _value, disabled }) => {
+                {_options.map(({ label, value: _value, disabled, children }) => {
+                    if (Array.isArray(children)) {
+                        return (
+                            <optgroup label={label} key={label}>
+                                {children.map(({ label, value: _value, disabled }) => (
+                                    <option key={_value} value={_value} disabled={disabled}>
+                                        {label}
+                                    </option>
+                                ))}
+                            </optgroup>
+                        )
+                    }
                     return (
                         <option key={_value} value={_value} disabled={disabled}>
                             {label}

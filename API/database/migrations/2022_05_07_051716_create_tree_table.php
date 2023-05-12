@@ -28,6 +28,8 @@ class CreateTreeTable extends Migration
             $table->boolean('tree_is_viewable')->default(true);
             $table->boolean('tree_url_is_showable')->default(true);
             $table->boolean('tree_url_is_editable')->default(true);
+            $table->boolean('tree_publishing_is_editable')->default(true);
+            $table->boolean('tree_category_is_editable')->default(true);
             $table->boolean('tree_menu_is_visible')->default(true);
             $table->string('tree_alias', 32)->default('');
             $table->string('tree_class')->default('');

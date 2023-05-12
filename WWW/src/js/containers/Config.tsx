@@ -1,19 +1,21 @@
 import * as React from 'react'
-import { myGet } from '../modules/http'
+import { myGet, myPost } from '../modules/http'
 import { LoadingOverlay } from '../components'
 
 interface ManagerProps {}
+
 interface ManagerState {
-    config: Object
+    config: []
 }
 
 const Context = React.createContext({ config: {} })
 
 class Container extends React.Component<ManagerProps, ManagerState> {
     state = {
-        config: {},
+        config: [],
         isLoading: false,
     }
+
     componentDidMount() {
         this.setState(
             {
@@ -27,15 +29,31 @@ class Container extends React.Component<ManagerProps, ManagerState> {
         )
     }
 
+    getByKey(key) {
+        return this.state.config.find(({ key: k }) => k === key)
+    }
+
+    edit(config) {
+        return new Promise((resolve, reject) => {
+            myPost('/config/edit', { config }).then((edited) => {
+                resolve()
+            })
+        })
+    }
+
     render() {
         const { children } = this.props
         const { config, isLoading } = this.state
 
-        console.log(config)
-
         return (
             <>
-                <Context.Provider value={{ config }}>
+                <Context.Provider
+                    value={{
+                        config,
+                        getByKey: this.getByKey.bind(this),
+                        edit: this.edit.bind(this),
+                    }}
+                >
                     {children}
                     {isLoading && <LoadingOverlay />}
                 </Context.Provider>

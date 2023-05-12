@@ -117,6 +117,7 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                         href,
                         disableContext,
                         bordered,
+                        itemRef,
                         ...rest
                     } = this.props
 
@@ -143,24 +144,38 @@ class Button extends React.Component<ButtonProps, ButtonState> {
                     const isDisabled = isLoading || isLoadingState || buttonGroupDisabled || disabled
 
                     return (
-                        <button {...rest} style={style} className={classes} onClick={this.handleClick.bind(this)} disabled={isDisabled} type={type}>
-                            {icon}
-                            {!iconOnly && <div>{children}</div>}
-                            {arrow && <ArrowDownIcon className={cx('component-button__arrow-icon')} />}
-                            {navigationHref && (
-                                <Link
-                                    to={navigationHref}
-                                    className={cx('component-button__navigation')}
-                                    ref={(e) => (this.navigationRef = e)}
-                                    onClick={() => {
-                                        onClickNavigation()
-                                    }}
-                                >
-                                    <ArrowRightIcon />
-                                </Link>
-                            )}
-                            {(isLoading || isLoadingState) && <LoadingOverlay size="xs" />}
-                        </button>
+                        <div
+                            ref={itemRef}
+                            style={{
+                                display: block ? 'flex' : 'inline-flex',
+                            }}
+                        >
+                            <button
+                                {...rest}
+                                style={style}
+                                className={classes}
+                                onClick={this.handleClick.bind(this)}
+                                disabled={isDisabled}
+                                type={type}
+                            >
+                                {icon}
+                                {!iconOnly && <div>{children}</div>}
+                                {arrow && <ArrowDownIcon className={cx('component-button__arrow-icon')} />}
+                                {navigationHref && (
+                                    <Link
+                                        to={navigationHref}
+                                        className={cx('component-button__navigation')}
+                                        ref={(e) => (this.navigationRef = e)}
+                                        onClick={() => {
+                                            onClickNavigation()
+                                        }}
+                                    >
+                                        <ArrowRightIcon />
+                                    </Link>
+                                )}
+                                {(isLoading || isLoadingState) && <LoadingOverlay size="xs" />}
+                            </button>
+                        </div>
                     )
                 }}
             </AppContext.Consumer>

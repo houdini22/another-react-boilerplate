@@ -38,6 +38,12 @@ export class EditLinkView extends React.Component {
                                                         },
                                                         link: currentNode.link,
                                                         parent_id: currentNode.parent_id,
+                                                        target:
+                                                            currentNode.link?.document_id > 0
+                                                                ? 'document'
+                                                                : currentNode.link?.category_id > 0
+                                                                ? 'category'
+                                                                : 'manually',
                                                     }}
                                                     save={editLink}
                                                     setIsLoading={setIsLoading}

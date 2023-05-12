@@ -9,7 +9,7 @@ export class EditDocumentView extends React.Component {
     render() {
         return (
             <RouteManager>
-                {({ navigate, query: { id } }) => (
+                {({ query: { id } }) => (
                     <AuthorizationManager>
                         {({ canByPermission }) => (
                             <PageContent>
@@ -35,6 +35,8 @@ export class EditDocumentView extends React.Component {
                                                             tree_is_published: currentNode.tree_is_published,
                                                             id: currentNode.id,
                                                             tree_display_name: currentNode.tree_display_name,
+                                                            tree_url_is_editable: currentNode.tree_url_is_editable,
+                                                            tree_publishing_is_editable: currentNode.tree_publishing_is_editable,
                                                         },
                                                         document: currentNode.document,
                                                         parent_id: currentNode.parent_id,

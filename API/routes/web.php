@@ -28,6 +28,8 @@ Route::prefix('api/v1')->group(function () {
         Route::post('pages/editLink', '\App\Http\Controllers\CmsPagesController@postEditLink');
         Route::post('pages/editCategory', '\App\Http\Controllers\CmsPagesController@postEditCategory');
         Route::post('pages/editDocument', '\App\Http\Controllers\CmsPagesController@postEditDocument');
+        Route::get('pages/link/getDocuments', '\App\Http\Controllers\CmsPagesController@getGetDocuments');
+        Route::get('pages/link/getCategories', '\App\Http\Controllers\CmsPagesController@getGetCategories');
     });
 
     Route::prefix('users')->group(function () {
@@ -88,6 +90,7 @@ Route::prefix('api/v1')->group(function () {
     });
 
     Route::get('/config/get', '\App\Http\Controllers\ConfigController@getGet');
+    Route::post('/config/edit', '\App\Http\Controllers\ConfigController@postEdit');
 });
 
 

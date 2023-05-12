@@ -3,7 +3,7 @@ import { Card, Col, Row } from '../../../components'
 import { PageContent } from '../../../layouts/PageLayout/components'
 import { Header } from './Header'
 import { TitleManager, RouteManager, PermissionsManager } from '../../../containers'
-import { EditPermission } from '../../CmsSettings/components/Edit/Index'
+import { EditSettings } from '../../CmsSettings/components/Edit/Index'
 import { PermissionIcon } from '../../../components/icons'
 
 export class UsersPermissionsEditView extends React.Component<null, null> {
@@ -31,7 +31,7 @@ export class UsersPermissionsEditView extends React.Component<null, null> {
                                                             }
                                                             color={'success'}
                                                         >
-                                                            <EditPermission
+                                                            <EditSettings
                                                                 editPermission={editPermission}
                                                                 permission={permission}
                                                                 fetchPermission={fetchPermission}

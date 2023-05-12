@@ -30,9 +30,11 @@ class CreateCategoriesTable extends Migration
             $table->timestamps();
 
             //$table->foreign('tree_id')->references('id')->on('tree');
+            $table->index('tree_id');
+            $table->index('menu_category_id');
+            $table->index('index_document_id');
             $table->index('category_name');
             $table->index('category_url');
-            $table->index('tree_id');
         });
 
         //Schema::table('tree', function(Blueprint $table) {
