@@ -101,7 +101,8 @@ Route::get('/admin', function () {
 Route::get('/users/activate/{email_verified_token}', '\App\Http\Controllers\UsersController@getActivate');
 
 Route::prefix('files')->group(function () {
-    Route::get('preview/{file_id}', '\App\Http\Controllers\FilesController@getPreview');
+    Route::get('preview/{file_id}/{name}', '\App\Http\Controllers\FilesController@getPreview')
+        ->where('name', '.*');
     Route::get('download/{id}', '\App\Http\Controllers\FilesController@getDownload');
 });
 

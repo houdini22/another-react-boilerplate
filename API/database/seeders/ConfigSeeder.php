@@ -42,6 +42,20 @@ class ConfigSeeder extends Seeder
                 'value' => 'Meta Robots',
                 'description' => 'Site Meta Robots',
                 'is_deletable' => false,
+            ],
+            [
+                'key' => 'app.name',
+                'type' => 'string',
+                'value' => 'Application Name',
+                'description' => 'Application Name.',
+                'is_deletable' => false,
+            ],
+            [
+                'key' => 'app.logo',
+                'type' => 'number',
+                'value' => 0,
+                'description' => 'File Resource for Logo.',
+                'is_deletable' => false,
             ]
         ];
 

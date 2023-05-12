@@ -30,6 +30,7 @@ import { LogsView } from './routes/Logs'
 import { Container } from './containers/Config'
 import { CmsSettingsView } from './routes/CmsSettings'
 import { RegisterView } from './routes/Register'
+import { SystemSettings } from './routes/SystemSettings'
 
 const App = () => (
     <Router>
@@ -239,6 +240,16 @@ const App = () => (
                                 <PageLayout>
                                     <UserIsAuthenticatedRoute permission={'media.list'}>
                                         <MediaView />
+                                    </UserIsAuthenticatedRoute>
+                                </PageLayout>
+                            }
+                        />
+                        <Route
+                            path="/settings"
+                            element={
+                                <PageLayout>
+                                    <UserIsAuthenticatedRoute permission={'system.edit_settings'}>
+                                        <SystemSettings />
                                     </UserIsAuthenticatedRoute>
                                 </PageLayout>
                             }

@@ -20,10 +20,6 @@ class Config extends Authenticatable
     {
         $value = NULL;
         switch ($this->type) {
-            case 'number':
-                $value = NAN;
-                break;
-
             case 'string':
                 $value = "";
                 break;

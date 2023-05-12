@@ -19,8 +19,10 @@
     <div class="navbar navbar-dark bg-dark box-shadow">
         <div class="container d-flex justify-content-between">
             <a href="{{url('/')}}" class="navbar-brand d-flex align-items-center">
-                <img src="{{url('/img/avatar.jpg')}}" alt="" class="header-logo"/>
-                <strong>CMS System</strong>
+                @if (\Illuminate\Support\Arr::get($app, 'logo.url'))
+                    <img src="{{\Illuminate\Support\Arr::get($app, 'logo.url')}}" alt="" class="header-logo"/>
+                @endif
+                <strong>{{$app['name']}}</strong>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"

@@ -108,17 +108,20 @@ class FilesController extends Controller
     public function postUpload(Request $request)
     {
         $user = $this->getUserFromRequest($request);
+        $data = $request->post();
 
         $files = $request->allFiles();
+        $result = [];
         foreach ($files as $f) {
-            $file = File::upload($f, $user);
+            $file = File::upload($f, $user, $data);
+            $result[] = $file;
             Log::add($user, 'media.upload', [
                 'model' => $file,
                 'request' => $request
             ]);
         }
 
-        return $this->responseOK();
+        return $this->responseOK($result);
     }
 
     public function postEdit(Request $request)

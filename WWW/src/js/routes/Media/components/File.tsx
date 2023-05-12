@@ -57,7 +57,7 @@ export class FileView extends React.Component<FileProps, FileState> {
             >
                 {isImage && (
                     <div className={cx('file__image')} onClick={() => this.setState({ detailsModalVisible: true })}>
-                        <img src={apiURL(`files/preview/${id}?width=300&height=300`)} alt={''} />
+                        <img src={apiURL(`files/preview/${id}/${name}?width=300&height=300`)} alt={''} />
                     </div>
                 )}
                 {!isImage && (
@@ -129,7 +129,7 @@ export class FileView extends React.Component<FileProps, FileState> {
                             <Col xs={8}>
                                 {isImage && (
                                     <div className={cx('file__details__image')}>
-                                        <img src={apiURL(`files/preview/${id}`)} alt={''} />
+                                        <img src={apiURL(`files/preview/${id}/${name}`)} alt={''} />
                                     </div>
                                 )}
                             </Col>

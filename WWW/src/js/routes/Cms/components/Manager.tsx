@@ -104,6 +104,7 @@ const mapDispatchToProps = (dispatch) => {
         addLink: (values) => dispatch(actions.addLink(values)),
         editLink: (values) => dispatch(actions.editLink(values)),
         fetch: (filters) => dispatch(actions.fetch(filters)),
+        setUploadProgress: (progress) => dispatch(actions.setUploadProgress(progress)),
     }
 }
 

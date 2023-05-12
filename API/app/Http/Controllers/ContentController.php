@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Config;
 use App\Models\Document;
+use App\Models\File;
 use App\Models\Tree;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -51,6 +52,24 @@ class ContentController extends Controller
         }
     }
 
+    protected function getAppConfig() {
+        $config = [
+            'name' => Config::getByKey('app.name')->value,
+        ];
+
+        $logo = NULL;
+        $logoId = Config::getByKey('app.logo')->value;
+        if ($logoId) {
+            $file = File::find($logoId);
+            if ($file) {
+                $logo = $file->toArray();
+            }
+        }
+
+        $config['logo'] = $logo;
+        return $config;
+    }
+
     protected function renderDefaultIndexPage()
     {
         $meta = [];
@@ -65,7 +84,8 @@ class ContentController extends Controller
 
         return response(view('content.index', [
             'meta' => $meta,
-            'document' => $tree->document
+            'document' => $tree->document,
+            'app' => $this->getAppConfig(),
         ]));
     }
 
@@ -172,6 +192,7 @@ class ContentController extends Controller
             'menu' => $menu,
             'meta' => $meta,
             'parent' => $parent,
+            'app' => $this->getAppConfig(),
         ]))->withCookie(cookie('visits', json_encode($cookie)));
     }
 
@@ -226,6 +247,7 @@ class ContentController extends Controller
             'menu' => $menu,
             'meta' => $meta,
             'parent' => $parent,
+            'app' => $this->getAppConfig(),
         ]))->withCookie(cookie('visits', json_encode($cookie)));
     }
 }

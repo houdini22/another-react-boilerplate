@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux'
 import { AuthManager } from '../../../containers'
 import { withRouter } from '../../../helpers/router'
+import { selectors } from '../../../reducers/cms-pages'
 
 interface UsersManagerProps {
     children: any
@@ -17,7 +18,7 @@ interface UsersManagerProps {
 
 class MediaManagerBase extends React.Component<UsersManagerProps, null> {
     render() {
-        const { children, files, setIsLoading, isLoading, deleteFile, uploadProgress, uploadFiles, editFile } = this.props
+        const { children, files, setIsLoading, isLoading, deleteFile, uploadProgress, uploadFiles, editFile, setUploadProgress } = this.props
         const renderProps = {
             files,
             setIsLoading,
@@ -26,6 +27,7 @@ class MediaManagerBase extends React.Component<UsersManagerProps, null> {
             uploadProgress,
             uploadFiles,
             editFile,
+            setUploadProgress,
         }
 
         return (
@@ -49,6 +51,7 @@ const MediaManager = compose(
                 deleteFile: commonActions.deleteFile,
                 uploadFiles: commonActions.uploadFiles,
                 editFile: commonActions.editFile,
+                setUploadProgress: commonActions.setUploadProgress,
             },
             dispatch,
         )

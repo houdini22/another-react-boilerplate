@@ -20,7 +20,10 @@ const setFetchError = (data) => (dispatch) => {
     dispatch({ type: SET_FETCH_ERROR, payload: data })
 }
 const setUploadProgress = (data) => (dispatch) => {
-    dispatch({ type: SET_UPLOAD_PROGRESS, payload: data })
+    return new Promise((resolve) => {
+        dispatch({ type: SET_UPLOAD_PROGRESS, payload: data })
+        resolve()
+    })
 }
 
 const deleteFile =
@@ -69,38 +72,44 @@ const editFile =
         })
     }
 
-const uploadFiles = (e) => (dispatch) => {
-    return new Promise<void>((resolve, reject) => {
-        dispatch(setFetchError(null))
+const uploadFiles =
+    (files, data = {}) =>
+    (dispatch) => {
+        return new Promise<void>((resolve, reject) => {
+            dispatch(setFetchError(null))
 
-        const formData = new FormData()
-        for (let i = 0; i < e?.target?.files?.length; i += 1) {
-            formData.append(`file_${i}`, e.target.files[i])
-        }
-
-        const onUploadProgress = (progressEvent) => {
-            const { loaded, total } = progressEvent
-            let percent = Math.floor((loaded * 100) / total)
-            if (percent <= 100) {
-                dispatch(setUploadProgress(percent))
+            const formData = new FormData()
+            for (let i = 0; i < files?.length; i += 1) {
+                formData.append(`file_${i}`, files[i])
             }
-        }
+            Object.keys(data).forEach((key) => {
+                formData.append(key, data[key])
+            })
 
-        http.post(`/files/upload`, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-            onUploadProgress,
+            const onUploadProgress = (progressEvent) => {
+                const { loaded, total } = progressEvent
+                let percent = Math.floor((loaded * 100) / total)
+                if (percent <= 100) {
+                    dispatch(setUploadProgress(percent))
+                }
+            }
+
+            http.post(`/files/upload`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+                onUploadProgress,
+            })
+                .then((files) => {
+                    console.log(files)
+                    resolve(files)
+                })
+                .catch((e) => {
+                    dispatch(setFetchError(e))
+                    reject(e)
+                })
         })
-            .then(() => {
-                resolve()
-            })
-            .catch((e) => {
-                dispatch(setFetchError(e))
-                reject(e)
-            })
-    })
-}
+    }
 export const actions = {
     setIsLoaded,
     setIsLoading,
@@ -108,6 +117,7 @@ export const actions = {
     deleteFile,
     uploadFiles,
     editFile,
+    setUploadProgress,
 }
 
 // ------------------------------------

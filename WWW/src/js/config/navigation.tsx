@@ -158,4 +158,12 @@ export const navigation = [
         urlActive: [/\/logs/],
         permission: 'logs.list',
     },
+    {
+        type: 'link',
+        href: '/settings',
+        caption: 'Settings',
+        icon: <SettingsIcon />,
+        urlActive: [/^\/settings/],
+        permission: 'system.settings',
+    },
 ]

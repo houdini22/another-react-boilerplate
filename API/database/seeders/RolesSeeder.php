@@ -329,7 +329,6 @@ class RolesSeeder extends Seeder
                     ],
                 ]
             ],
-
             [
                 'name' => 'logs',
                 'guard_name' => 'web',
@@ -338,6 +337,26 @@ class RolesSeeder extends Seeder
                 'permissions' => [
                     [
                         'name' => 'logs.list',
+                        'guard_name' => 'web',
+                        'is_deletable' => false,
+                        'is_name_editable' => false,
+                    ],
+                ]
+            ],
+            [
+                'name' => 'system',
+                'guard_name' => 'web',
+                'is_deletable' => false,
+                'is_name_editable' => false,
+                'permissions' => [
+                    [
+                        'name' => 'system.edit_settings',
+                        'guard_name' => 'web',
+                        'is_deletable' => false,
+                        'is_name_editable' => false,
+                    ],
+                    [
+                        'name' => 'system.settings',
                         'guard_name' => 'web',
                         'is_deletable' => false,
                         'is_name_editable' => false,
