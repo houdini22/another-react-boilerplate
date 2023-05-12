@@ -493,7 +493,7 @@ class CmsPagesController extends Controller
             'tree.tree_published_to' => ['required'],
             'tree.tree_display_name' => ['required', 'max:64'],
         ];
-        if ($tree->tree_class !== 'system_page') {
+        if ($tree->tree_class !== 'system_page' && $tree->tree_url_is_editable) {
             $rules['document.document_url'] = ['required', 'max:256', 'unique:documents,id,' . $tree->document->id];
         }
 
