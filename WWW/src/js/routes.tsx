@@ -31,6 +31,7 @@ import { Container } from './containers/Config'
 import { CmsSettingsView } from './routes/CmsSettings'
 import { RegisterView } from './routes/Register'
 import { SystemSettings } from './routes/SystemSettings'
+import { CmsAddMenuView, CmsMenusView } from './routes/CmsMenus'
 
 const App = () => (
     <Router>
@@ -114,6 +115,26 @@ const App = () => (
                                 <PageLayout>
                                     <UserIsAuthenticatedRoute permission={'cms.settings'}>
                                         <CmsSettingsView />
+                                    </UserIsAuthenticatedRoute>
+                                </PageLayout>
+                            }
+                        />
+                        <Route
+                            path="/cms/menus"
+                            element={
+                                <PageLayout>
+                                    <UserIsAuthenticatedRoute permission={'cms.menus'}>
+                                        <CmsMenusView />
+                                    </UserIsAuthenticatedRoute>
+                                </PageLayout>
+                            }
+                        />
+                        <Route
+                            path="/cms/menus/add"
+                            element={
+                                <PageLayout>
+                                    <UserIsAuthenticatedRoute permission={'cms.menus.add'}>
+                                        <CmsAddMenuView />
                                     </UserIsAuthenticatedRoute>
                                 </PageLayout>
                             }

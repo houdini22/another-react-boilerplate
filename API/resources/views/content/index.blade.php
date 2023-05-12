@@ -1,4 +1,4 @@
-@extends('layouts.app', ['meta' => $meta])
+@extends('layouts.app', ['meta' => $meta, 'mainMenu' => $mainMenu])
 @section('content')
     @include("content._jumbotron")
     <div class="row">

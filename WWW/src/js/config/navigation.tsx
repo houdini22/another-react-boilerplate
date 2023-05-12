@@ -7,6 +7,7 @@ import {
     FileIcon,
     LinkIcon,
     LogsIcon,
+    MenuIcon,
     PagesIcon,
     PermissionIcon,
     RoleIcon,
@@ -24,7 +25,7 @@ export const navigation = [
         caption: 'CMS',
         href: '/cms/pages',
         icon: <FaSitemap />,
-        urlActive: [/\/cms\/pages.*/],
+        urlActive: [/\/cms\/pages.*/, /\/cms\/menus.*/],
         permission: 'cms.list',
         children: [
             {
@@ -67,6 +68,24 @@ export const navigation = [
                                 permission: 'cms.add_link',
                             },
                         ],
+                    },
+                ],
+            },
+            {
+                type: 'link',
+                href: '/cms/menus',
+                caption: 'Menus',
+                icon: <MenuIcon />,
+                urlActive: [/^\/cms\/menus/],
+                permission: 'cms.menus',
+                children: [
+                    {
+                        type: 'link',
+                        href: '/cms/menus/add',
+                        caption: 'Add',
+                        icon: <AddIcon />,
+                        urlActive: [/\/cms\/menus\/add/],
+                        permission: ['cms.menus.add'],
                     },
                 ],
             },

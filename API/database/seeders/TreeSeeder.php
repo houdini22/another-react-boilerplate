@@ -39,6 +39,36 @@ class TreeSeeder extends Seeder
         $rootTree->category_id = $rootCategory->id;
         $rootTree->save();
 
+        // MENU CATEGORY
+        $menuTree = $rootTree->children()->create([
+            'tree_is_published' => false,
+            'tree_published_from' => null,
+            'tree_published_to' => null,
+            'tree_is_visible_frontend' => false,
+            'tree_is_visible_backend' => false,
+            'tree_is_visible_in_select' => true,
+            'tree_is_deletable' => false,
+            'tree_is_editable' => false,
+            'tree_has_edit_button' => false,
+            'tree_is_viewable' => false,
+            'tree_url_is_showable' => false,
+            'tree_url_is_editable' => false,
+            'tree_menu_is_visible' => false,
+            'tree_class' => 'system_category',
+            'tree_alias' => 'menu_category',
+            'tree_object_type' => 'category',
+            'tree_display_name' => 'MENU'
+        ]);
+
+        $menuTreeCategory = Category::create([
+            'tree_id' => $menuTree->id,
+            'category_name' => 'MENU',
+        ]);
+        $menuTreeCategory->save();
+
+        $menuTree->category_id = $menuTreeCategory->id;
+        $menuTree->save();
+
         // SYSTEM CATEGORY
         $systemTree = $rootTree->children()->create([
             'tree_is_published' => false,
@@ -54,18 +84,19 @@ class TreeSeeder extends Seeder
             'tree_url_is_showable' => false,
             'tree_url_is_editable' => false,
             'tree_menu_is_visible' => false,
+            'tree_class' => 'system_category',
             'tree_alias' => 'system_category',
             'tree_object_type' => 'category',
             'tree_display_name' => 'SYSTEM'
         ]);
 
-        $systemCategory = Category::create([
+        $menuTreeCategory = Category::create([
             'tree_id' => $systemTree->id,
             'category_name' => 'SYSTEM',
         ]);
-        $systemCategory->save();
+        $menuTreeCategory->save();
 
-        $systemTree->category_id = $systemCategory->id;
+        $systemTree->category_id = $menuTreeCategory->id;
         $systemTree->save();
 
         // SYSTEM PAGES

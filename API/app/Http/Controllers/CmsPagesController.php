@@ -33,6 +33,8 @@ class CmsPagesController extends Controller
             $nodes = $currentNode
                 ->descendants()
                 ->where(function ($query) use ($currentNode, $filters) {
+                    $query->where('tree_is_visible_backend', '=', 1);
+
                     if (!empty($filters['is_published'])) {
                         if ($filters['is_published'] === 'no') {
                             $query->where('tree_is_published', '=', 0)
@@ -114,6 +116,8 @@ class CmsPagesController extends Controller
             $nodes = $currentNode
                 ->descendants()
                 ->where(function ($query) use ($currentNode, $filters) {
+                    $query->where('tree_is_visible_backend', '=', 1);
+
                     if (!empty($filters['type'])) {
                         if ($filters['type'] !== 'all') {
                             $query->where('tree_object_type', '=', $filters['type']);
@@ -207,6 +211,8 @@ class CmsPagesController extends Controller
             $nodes = $currentNode
                 ->children()
                 ->where(function ($query) use ($currentNode, $filters) {
+                    $query->where('tree_is_visible_backend', '=', 1);
+
                     if (!empty($filters['type'])) {
                         if ($filters['type'] !== 'all') {
                             $query->where('tree_object_type', '=', $filters['type']);
@@ -824,6 +830,7 @@ class CmsPagesController extends Controller
             ->with('documentCategory.category')
             ->withDepth()
             ->orderBy('_lft', 'ASC')
+            ->where('tree_is_visible_backend', '=', 1)
             ->where('tree_object_type', '=', 'document')
             ->where('tree_class', '<>', 'system_page')
             ->where('tree_class', '<>', 'index_page')
@@ -839,11 +846,80 @@ class CmsPagesController extends Controller
         $categories = Tree::with('category')
             ->withDepth()
             ->orderBy('_lft', 'ASC')
+            ->where('tree_is_visible_backend', '=', 1)
             ->where('tree_object_type', '=', 'category')
             ->where('tree_alias', '<>', 'root')
             ->where('tree_alias', '<>', 'system_category')
             ->get();
 
         return $this->responseOK($categories);
+    }
+
+    public function postMenusAdd(Request $request)
+    {
+        $user = $this->getUserFromRequest($request);
+
+        $menu = $request->post('menu');
+
+        $rules = [
+            'tree.tree_display_name' => ['required', 'max:64'],
+            'tree.tree_is_published' => ['required'],
+            'tree.tree_published_from' => ['required'],
+            'tree.tree_published_to' => ['required'],
+        ];
+        $validator = Validator::make($menu, $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->messages(),
+            ], 422);
+        }
+
+        $menu['tree_class'] = 'menu';
+
+        $menuCategory = Tree::where('tree_alias', '=', 'menu_category')
+            ->first()
+            ->children()
+            ->create(Arr::get($menu, 'tree'));
+        $menuCategoryCategory = Category::create([
+            'category_name' => Arr::get($menu, 'tree.tree_display_name'),
+        ]);
+        $menuCategoryCategory->tree_id = $menuCategory->id;
+        $menuCategoryCategory->save();
+
+        $menuCategory->category_id = $menuCategoryCategory->id;
+        $menuCategory->save();
+
+        $links = $request->post('links');
+
+        foreach ($links as $link) {
+            $linkTree = $menuCategory->children()->create([
+                'tree_display_name' => Arr::get($link, 'link.link_name'),
+                'tree_is_published' => 1,
+                'tree_published_from' => '2000-01-01 00:00:00',
+                'tree_published_to' => '2099-01-01 00:00:00',
+                'tree_class' => 'menu_item'
+            ]);
+            $linkTreeLink = Link::create(Arr::get($link, 'link'));
+            $linkTreeLink->tree_id = $linkTree->id;
+            $linkTreeLink->save();
+            $linkTree->link_id = $linkTreeLink->id;
+            $linkTree->save();
+        }
+
+        return $this->responseOK($menuCategory);
+    }
+
+    public function getMenus(Request $request)
+    {
+        $user = $this->getUserFromRequest($request);
+
+        $menus = Tree::where('tree_alias', '=', 'menu_category')
+            ->first()
+            ->children()
+            ->with('category')
+            ->get();
+
+        return $this->responseOK($menus);
     }
 }

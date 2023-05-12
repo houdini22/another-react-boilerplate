@@ -1,4 +1,4 @@
-import { http } from '../modules/http'
+import { http, myGet, myPost } from '../modules/http'
 
 const SET_IS_LOADING = 'cms-pages::set-is-loading'
 const SET_FETCH_ERROR = 'cms-pages::set-fetch-error'
@@ -6,7 +6,9 @@ const SET_CURRENT_ID = 'cms-pages::set-current-id'
 const SET_NODES = 'cms-pages::set-nodes'
 const SET_CURRENT_NODE = 'cms-pages::set-current-node'
 const SET_CURRENT_NODE_PARENTS = 'cms-pages::set-current-node-parents'
-
+const SET_MENUS = 'cms-pages::set-menus'
+const ADD_NEW_MENU_LINK = 'cms-pages::add-new-menu-link'
+const REMOVE_NEW_MENU_LINK = 'cms-pages::remove-new-menu-link'
 const setIsLoading = (data) => (dispatch) => {
     return new Promise((resolve) => {
         dispatch({ type: SET_IS_LOADING, payload: data })
@@ -26,9 +28,27 @@ const setCurrentNodeParents = (data) => (dispatch) => {
     dispatch({ type: SET_CURRENT_NODE_PARENTS, payload: data })
 }
 
+const addNewMenuLink = (data) => (dispatch) => {
+    dispatch({ type: ADD_NEW_MENU_LINK, payload: data })
+}
+
 const setCurrentId = (currentId) => (dispatch) => {
     return new Promise((resolve) => {
         dispatch({ type: SET_CURRENT_ID, payload: currentId })
+        resolve()
+    })
+}
+
+const removeNewMenuLink = (link) => (dispatch) => {
+    return new Promise((resolve) => {
+        dispatch({ type: REMOVE_NEW_MENU_LINK, payload: link })
+        resolve()
+    })
+}
+
+const setMenus = (menus) => (dispatch) => {
+    return new Promise((resolve) => {
+        dispatch({ type: SET_MENUS, payload: menus })
         resolve()
     })
 }
@@ -56,6 +76,21 @@ const fetch = (filters) => (dispatch, state) => {
                     resolve()
                 },
             )
+            .catch(() => {
+                reject()
+            })
+    })
+}
+
+const fetchMenus = (filters) => (dispatch) => {
+    return new Promise<void>((resolve, reject) => {
+        return myGet('/cms/menus', {
+            filters,
+        })
+            .then((data) => {
+                dispatch(setMenus(data))
+                resolve()
+            })
             .catch(() => {
                 reject()
             })
@@ -203,6 +238,21 @@ const addLink = (values) => (dispatch, getState) => {
     })
 }
 
+const addMenu = (menu, links) => (dispatch) => {
+    return new Promise<void>((resolve, reject) => {
+        return myPost('/cms/menus/add', {
+            menu,
+            links,
+        })
+            .then((data) => {
+                resolve(data)
+            })
+            .catch((e) => {
+                reject(e)
+            })
+    })
+}
+
 const editLink = (values) => (dispatch, getState) => {
     return new Promise<void>((resolve, reject) => {
         return http
@@ -260,6 +310,10 @@ export const actions = {
     editCategory,
     editDocument,
     editLink,
+    fetchMenus,
+    addNewMenuLink,
+    removeNewMenuLink,
+    addMenu,
 }
 
 // ------------------------------------
@@ -302,6 +356,27 @@ const ACTION_HANDLERS = {
             currentNodeParents: payload,
         }
     },
+    [SET_MENUS]: (state, { payload }) => {
+        return {
+            ...state,
+            menus: payload,
+        }
+    },
+    [ADD_NEW_MENU_LINK]: (state, { payload }) => {
+        return {
+            ...state,
+            newMenuLinks: [...state.newMenuLinks, payload],
+        }
+    },
+    [REMOVE_NEW_MENU_LINK]: (state, { payload }) => {
+        console.log(payload)
+        return {
+            ...state,
+            newMenuLinks: state.newMenuLinks.filter((link) => {
+                return link.link.link_name !== payload.link.link_name
+            }),
+        }
+    },
 }
 
 // ------------------------------------
@@ -314,6 +389,8 @@ const getInitialState = () => ({
     currentId: undefined,
     currentNode: {},
     currentNodeParents: [],
+    menus: [],
+    newMenuLinks: [],
 })
 
 export default function cmsPagesReducer(state = getInitialState(), action) {
@@ -329,6 +406,8 @@ const getIsLoading = (state) => getState(state)['isLoading']
 const getCurrentId = (state) => getState(state)['currentId']
 const getCurrentNode = (state) => getState(state)['currentNode']
 const getCurrentNodeParents = (state) => getState(state)['currentNodeParents']
+const getMenus = (state) => getState(state)['menus']
+const getNewMenuLinks = (state) => getState(state)['newMenuLinks']
 
 export const selectors = {
     getState,
@@ -337,4 +416,6 @@ export const selectors = {
     getCurrentId,
     getCurrentNode,
     getCurrentNodeParents,
+    getMenus,
+    getNewMenuLinks,
 }

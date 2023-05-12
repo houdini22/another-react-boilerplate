@@ -33,6 +33,7 @@ import { FiSettings as SettingsIcon } from 'react-icons/fi'
 import { MdContentCopy as PagesIcon } from 'react-icons/md'
 import { AiOutlineUserAdd as AddUserIcon } from 'react-icons/ai'
 import { MdFilterList as FiltersIcon } from 'react-icons/md'
+import { TiThMenuOutline as MenuIcon } from 'react-icons/ti'
 export {
     OrderingIcon,
     EditIcon,
@@ -70,4 +71,5 @@ export {
     PagesIcon,
     AddUserIcon,
     FiltersIcon,
+    MenuIcon,
 }

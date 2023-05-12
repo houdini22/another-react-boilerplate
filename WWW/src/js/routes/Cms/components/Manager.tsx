@@ -9,18 +9,27 @@ export class Manager extends React.Component<null, null> {
     }
 
     componentDidMount() {
-        const { filters, setCurrentId, fetch, setIsLoading, id = 1 } = this.props
+        const { filters, setCurrentId, fetch, setIsLoading, id = 1, getMenus, fetchMenus, getPages } = this.props
 
-        Promise.all([setCurrentId(id)]).then(() => {
-            setIsLoading(true).then(() => {
-                fetch(filters).then(
-                    () => setIsLoading(false),
-                    () => {
-                        setIsLoading(false)
-                    },
-                )
+        if (id) {
+            Promise.all([setCurrentId(id)]).then(() => {
+                setIsLoading(true).then(() => {
+                    fetch(filters).then(
+                        () => setIsLoading(false),
+                        () => {
+                            setIsLoading(false)
+                        },
+                    )
+                })
             })
-        })
+        }
+        if (getMenus) {
+            setIsLoading(true).then(() => {
+                fetchMenus().then(() => {
+                    setIsLoading(false)
+                })
+            })
+        }
     }
 
     componentDidUpdate(prevProps: Readonly<null>, prevState: Readonly<null>, snapshot?: any) {
@@ -57,6 +66,11 @@ export class Manager extends React.Component<null, null> {
             addLink,
             editLink,
             fetch,
+            menus,
+            addNewMenuLink,
+            newMenuLinks,
+            removeNewMenuLink,
+            addMenu,
         } = this.props
 
         const renderProps = {
@@ -76,6 +90,11 @@ export class Manager extends React.Component<null, null> {
             addLink,
             editLink,
             fetch,
+            menus,
+            addNewMenuLink,
+            newMenuLinks,
+            removeNewMenuLink,
+            addMenu,
         }
 
         return children(renderProps)
@@ -88,6 +107,8 @@ const mapStateToProps = (state) => ({
     currentNode: selectors.getCurrentNode(state),
     currentNodeParents: selectors.getCurrentNodeParents(state),
     currentId: selectors.getCurrentId(state),
+    menus: selectors.getMenus(state),
+    newMenuLinks: selectors.getNewMenuLinks(state),
 })
 
 const mapDispatchToProps = (dispatch) => {
@@ -102,9 +123,12 @@ const mapDispatchToProps = (dispatch) => {
         addDocument: (values) => dispatch(actions.addDocument(values)),
         editDocument: (values) => dispatch(actions.editDocument(values)),
         addLink: (values) => dispatch(actions.addLink(values)),
+        addNewMenuLink: (values) => dispatch(actions.addNewMenuLink(values)),
         editLink: (values) => dispatch(actions.editLink(values)),
         fetch: (filters) => dispatch(actions.fetch(filters)),
-        setUploadProgress: (progress) => dispatch(actions.setUploadProgress(progress)),
+        fetchMenus: (filters) => dispatch(actions.fetchMenus(filters)),
+        removeNewMenuLink: (link) => dispatch(actions.removeNewMenuLink(link)),
+        addMenu: (menu, links) => dispatch(actions.addMenu(menu, links)),
     }
 }
 

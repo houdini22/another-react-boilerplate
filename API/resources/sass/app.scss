@@ -30,6 +30,11 @@ body {
             & > h4 {
                 margin-top: 1rem;
             }
+
+            .nav-item > .nav-link {
+                padding-left: 0;
+                padding-right: 0;
+            }
         }
     }
 

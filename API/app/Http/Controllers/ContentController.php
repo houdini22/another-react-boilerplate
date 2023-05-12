@@ -83,11 +83,36 @@ class ContentController extends Controller
             ->where('tree_alias', '=', 'page_index')
             ->first();
 
+        $mainMenu = $this->getMainMenu();
+
         return response(view('content.index', [
             'meta' => $meta,
             'document' => $tree->document,
             'app' => $this->getAppConfig(),
+            'mainMenu' => $mainMenu,
+            'slug' => '/'
         ]));
+    }
+
+    protected function getMainMenu()
+    {
+        $menu = Tree::where('tree_alias', '=', 'menu_category')
+            ->first()
+            ->children()
+            ->where(function ($query) {
+                $query->where('tree_alias', '=', 'main_menu');
+            })
+            ->first()
+            ->children()
+            ->with('link')
+            ->with('link.linkDocument')
+            ->with('link.linkCategory')
+            ->with('link.linkDocument.document')
+            ->with('link.linkCategory.category')
+            ->get()
+            ->toTree();
+
+        return $menu;
     }
 
     protected function getMetaFromDocument(Document $document)
@@ -194,6 +219,8 @@ class ContentController extends Controller
             'meta' => $meta,
             'parent' => $parent,
             'app' => $this->getAppConfig(),
+            'mainMenu' => $this->getMainMenu(),
+            'slug' => '/' . $request->route('slug')
         ]))->withCookie(cookie('visits', json_encode($cookie)));
     }
 
@@ -249,6 +276,8 @@ class ContentController extends Controller
             'meta' => $meta,
             'parent' => $parent,
             'app' => $this->getAppConfig(),
+            'mainMenu' => $this->getMainMenu(),
+            'slug' => '/' . $request->route('slug')
         ]))->withCookie(cookie('visits', json_encode($cookie)));
     }
 }

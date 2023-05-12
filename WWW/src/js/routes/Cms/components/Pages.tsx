@@ -32,7 +32,7 @@ export class CmsPagesView extends React.Component<null, null> {
                                     savedFilters,
                                     defaultFilters,
                                 }) => (
-                                    <Manager id={parent_id} filters={filters}>
+                                    <Manager id={parent_id} filters={filters} getPages>
                                         {({
                                             nodes,
                                             currentNode,
