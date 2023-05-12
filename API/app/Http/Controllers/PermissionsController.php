@@ -266,7 +266,7 @@ class PermissionsController extends Controller
     {
         $user = $this->getUserFromRequest($request);
 
-        if ($request->post('role_id') && $request->post("permission") && $request->post("permission") !== "add") {
+        if ($request->post('role_id') && $request->post("permission")) {
             $permission = Permission::findById($request->post('permission'));
             if (!$permission) {
                 Log::add($user, 'permissions.not_found', [
