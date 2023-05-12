@@ -22,7 +22,7 @@
                 @if (\Illuminate\Support\Arr::get($app, 'logo.url'))
                     <img src="{{\Illuminate\Support\Arr::get($app, 'logo.url')}}" alt="" class="header-logo"/>
                 @endif
-                <strong>{{$app['name']}}</strong>
+                <strong>{{\Illuminate\Support\Arr::get($app, 'name')}}</strong>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
