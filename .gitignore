@@ -13,3 +13,6 @@
 /WWW/npm-debug.log
 /WWW/yarn-error.log
 .idea
+/dist/build/*
+/dist/fonts/*
+/dist/js/
