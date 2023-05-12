@@ -51,6 +51,8 @@ export class AddDocumentView extends React.Component {
                                                                 second: 0,
                                                             }),
                                                             tree_is_published: true,
+                                                            tree_url_is_editable: true,
+                                                            tree_publishing_is_editable: true,
                                                         },
                                                         parent_id: currentNode.id,
                                                         document: {
