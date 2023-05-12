@@ -16,15 +16,15 @@ class CreateLogsTable extends Migration
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('model_class_name', 128)->nullable()->default(NULL);
-            $table->integer('model_id')->nullable()->default(NULL);
-            $table->string('related_model_class_name', 128)->nullable()->default(NULL);
-            $table->integer('related_model_id')->nullable()->default(NULL);
+            $table->string('model_class_name', 128)->nullable()->default(null);
+            $table->integer('model_id')->nullable()->default(null);
+            $table->string('related_model_class_name', 128)->nullable()->default(null);
+            $table->integer('related_model_id')->nullable()->default(null);
             $table->string('type', 64);
             $table->string('ip_address', 64);
-            $table->string('message', 64)->nullable()->default(NULL);
-            $table->json('payload')->nullable()->default(NULL);
-            $table->text('fields_affected')->nullable()->default(NULL);
+            $table->string('message', 64)->nullable()->default(null);
+            $table->json('payload')->nullable()->default(null);
+            $table->text('fields_affected')->nullable()->default(null);
             $table->timestamps();
 
             $table->index('user_id');

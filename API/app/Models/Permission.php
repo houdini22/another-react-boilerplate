@@ -8,7 +8,8 @@ use Spatie\Permission\Models\Permission as PermissionsBase;
 
 class Permission extends PermissionsBase
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
     protected $fillable = [
         'name', 'description'
     ];

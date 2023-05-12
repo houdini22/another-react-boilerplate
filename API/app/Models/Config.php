@@ -9,7 +9,9 @@ use Spatie\Permission\Traits\HasRoles;
 
 class Config extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory;
+    use Notifiable;
+    use HasRoles;
 
     protected $table = 'config';
     protected $fillable = [
@@ -18,7 +20,7 @@ class Config extends Authenticatable
 
     public function toArray()
     {
-        $value = NULL;
+        $value = null;
         switch ($this->type) {
             case 'string':
                 $value = "";
@@ -28,6 +30,7 @@ class Config extends Authenticatable
             case "array":
                 $value = [];
 
+                // no break
             default:
                 break;
         }
@@ -42,7 +45,8 @@ class Config extends Authenticatable
         ];
     }
 
-    public static function getByKey($key) {
+    public static function getByKey($key)
+    {
         return Config::where('key', '=', $key)->first();
     }
 }

@@ -11,7 +11,9 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
 class UserDataChanged implements ShouldBroadcastNow
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     protected $user = null;
 

@@ -45,7 +45,7 @@ class CmsPagesController extends Controller
                                         ->whereNull('tree_published_from')
                                         ->orWhere('tree_published_from', '>', date('Y-m-d H:i:s'));
                                 });
-                        } else if ($filters['is_published'] === 'yes') {
+                        } elseif ($filters['is_published'] === 'yes') {
                             $date = date('Y-m-d H:i:s');
 
                             $query->where('tree_is_published', '=', 1)
@@ -104,7 +104,7 @@ class CmsPagesController extends Controller
             if ($parents) {
                 $parents = $parents->toArray();
             }
-        } else if (!empty($filters['search_in']) && ($filters['search_in'] === 'descendants')) {
+        } elseif (!empty($filters['search_in']) && ($filters['search_in'] === 'descendants')) {
             $currentNode = Tree::where('id', '=', $request->get('parent_id'))
                 ->where('copy_of_id', null)
                 ->with('category')
@@ -133,7 +133,7 @@ class CmsPagesController extends Controller
                                         ->whereNull('tree_published_from')
                                         ->orWhere('tree_published_from', '>', date('Y-m-d H:i:s'));
                                 });
-                        } else if ($filters['is_published'] === 'yes') {
+                        } elseif ($filters['is_published'] === 'yes') {
                             $date = date('Y-m-d H:i:s');
 
                             $query->where('tree_is_published', '=', 1)
@@ -226,7 +226,7 @@ class CmsPagesController extends Controller
                                         ->whereNull('tree_published_from')
                                         ->orWhere('tree_published_from', '>', date('Y-m-d H:i:s'));
                                 });
-                        } else if ($filters['is_published'] === 'yes') {
+                        } elseif ($filters['is_published'] === 'yes') {
                             $date = date('Y-m-d H:i:s');
 
                             $query->where('tree_is_published', '=', 1)
@@ -570,11 +570,11 @@ class CmsPagesController extends Controller
 
         $tree->link->fill(Arr::get($values, 'link'));
         if (Arr::get($values, 'target') === "manually") {
-           $tree->link->category_id = $tree->link->document_id = 0;
-        } else if (Arr::get($values, 'target') === 'category') {
+            $tree->link->category_id = $tree->link->document_id = 0;
+        } elseif (Arr::get($values, 'target') === 'category') {
             $tree->link->link_url = "";
             $tree->link->document_id = 0;
-        } else if (Arr::get($values, 'target') === 'document') {
+        } elseif (Arr::get($values, 'target') === 'document') {
             $tree->link->link_url = "";
             $tree->link->category_id = 0;
         }
@@ -614,7 +614,7 @@ class CmsPagesController extends Controller
 
         $now = Carbon::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'));
 
-        if ($tree->tree_published_from !== NULL) {
+        if ($tree->tree_published_from !== null) {
             $from = Carbon::createFromFormat('Y-m-d H:i:s', $tree->tree_published_from);
             if ($from->gt($now)) {
                 $tree->tree_published_from = '2000-01-01 00:00:00';
@@ -623,7 +623,7 @@ class CmsPagesController extends Controller
             $tree->tree_published_from = '2000-01-01 00:00:00';
         }
 
-        if ($tree->tree_published_to !== NULL) {
+        if ($tree->tree_published_to !== null) {
             $to = Carbon::createFromFormat('Y-m-d H:i:s', $tree->tree_published_to);
             if ($now->gt($to)) {
                 $tree->tree_published_to = '2099-01-01 00:00:00';
@@ -815,7 +815,8 @@ class CmsPagesController extends Controller
         ]);
     }
 
-    public function getGetDocuments(Request $request) {
+    public function getGetDocuments(Request $request)
+    {
         $user = $this->getUserFromRequest($request);
 
         $documents = Tree::with('document')
@@ -831,7 +832,8 @@ class CmsPagesController extends Controller
         return $this->responseOK($documents);
     }
 
-    public function getGetCategories(Request $request) {
+    public function getGetCategories(Request $request)
+    {
         $user = $this->getUserFromRequest($request);
 
         $categories = Tree::with('category')

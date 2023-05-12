@@ -46,18 +46,19 @@ class ContentController extends Controller
 
             if ($tree->tree_object_type === 'category') {
                 return $this->renderCategory($request, $tree);
-            } else if ($tree->tree_object_type === 'document') {
+            } elseif ($tree->tree_object_type === 'document') {
                 return $this->renderDocument($request, $tree);
             }
         }
     }
 
-    protected function getAppConfig() {
+    protected function getAppConfig()
+    {
         $config = [
             'name' => Config::getByKey('app.name')->value,
         ];
 
-        $logo = NULL;
+        $logo = null;
         $logoId = Config::getByKey('app.logo')->value;
         if ($logoId) {
             $file = File::find($logoId);
@@ -157,7 +158,7 @@ class ContentController extends Controller
 
         $parent = $tree->documentCategory;
 
-        $document = NULL;
+        $document = null;
         if ($tree->category->indexDocument) {
             $document = $tree->category->indexDocument->document;
         }

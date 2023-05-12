@@ -44,17 +44,19 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function getIndex(Request $request) {
+    public function getIndex(Request $request)
+    {
         $meta = [];
         $meta['title'] = Config::getByKey('cms.meta.title')->value;
         $meta['description'] = Config::getByKey('cms.meta.description')->value;
         $meta['keywords'] = Config::getByKey('cms.meta.keywords')->value;
         $meta['robots'] = Config::getByKey('cms.meta.robots')->value;
 
-        return response(view('auth.login', ['meta' => $meta, 'error' => NULL]));
+        return response(view('auth.login', ['meta' => $meta, 'error' => null]));
     }
 
-    public function postLogin(Request $request) {
+    public function postLogin(Request $request)
+    {
         $meta = [];
         $meta['title'] = Config::getByKey('cms.meta.title')->value;
         $meta['description'] = Config::getByKey('cms.meta.description')->value;
@@ -71,12 +73,12 @@ class LoginController extends Controller
                 $error = [
                     'message' => "ACCOUNT_NOT_ACTIVE",
                 ];
-            } else if (!$user->email_verified_at) {
+            } elseif (!$user->email_verified_at) {
                 $error = [
                     'message' => "EMAIL_NOT_VERIFIED",
                 ];
-            } else if ($user->status === User::$STATUS_ACTIVE) {
-                $error = NULL;
+            } elseif ($user->status === User::$STATUS_ACTIVE) {
+                $error = null;
                 $user->last_active = Carbon::now();
                 $user->save();
 

@@ -33,7 +33,7 @@ class AuthController extends Controller
 
                 $user->last_active = Carbon::now();
 
-                if ($user->email_verified_at === NULL) {
+                if ($user->email_verified_at === null) {
                     $user->email_verified_at = Carbon::now();
                 }
 
@@ -62,7 +62,7 @@ class AuthController extends Controller
             }
         }
 
-        Log::add(NULL, 'auth.login_failed', [
+        Log::add(null, 'auth.login_failed', [
             'message' => 'wrong_credentials',
             'request' => $request
         ]);
@@ -77,7 +77,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'token');
 
         if (!Arr::get($credentials, 'email') || !Arr::get($credentials, 'token')) {
-            Log::add(NULL, 'auth.login_with_token_failed', [
+            Log::add(null, 'auth.login_with_token_failed', [
                 'message' => 'empty_token_or_email',
                 'request' => $request
             ]);
@@ -89,7 +89,7 @@ class AuthController extends Controller
         $user = User::where('email', $credentials['email'])->where('token', $credentials['token'])->first();
 
         if (!$user) {
-            Log::add(NULL, 'auth.login_with_token_failed', [
+            Log::add(null, 'auth.login_with_token_failed', [
                 'message' => 'user_not_found',
                 'request' => $request
             ]);
@@ -109,7 +109,7 @@ class AuthController extends Controller
             ], 403);
         }
 
-        if ($user->status === User::$STATUS_ACTIVE && $user->email_verified_at !== NULL) {
+        if ($user->status === User::$STATUS_ACTIVE && $user->email_verified_at !== null) {
             $user->generateToken();
 
             $user->last_active = Carbon::now();
@@ -160,7 +160,8 @@ class AuthController extends Controller
         ]);
     }
 
-    public function postRegister(Request $request) {
+    public function postRegister(Request $request)
+    {
         $request->validate([
             'email' => ['required', 'email', 'unique:users,email'],
             'name' => ['required', 'alpha_dash', 'unique:users,name'],

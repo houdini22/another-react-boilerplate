@@ -378,6 +378,5 @@ class RolesSeeder extends Seeder
 
             $user->assignRole($role);
         }
-
     }
 }

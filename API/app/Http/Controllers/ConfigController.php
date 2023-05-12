@@ -11,14 +11,16 @@ use Illuminate\Support\Arr;
 
 class ConfigController extends Controller
 {
-    public function getGet(Request $request) {
+    public function getGet(Request $request)
+    {
         $user = User::getFromRequest($request);
 
         $configs = Config::orderBy('key', 'asc')->get();
 
         return $this->responseOK($configs);
     }
-    public function postEdit(Request $request) {
+    public function postEdit(Request $request)
+    {
         $user = User::getFromRequest($request);
 
         $config = $request->post('config');

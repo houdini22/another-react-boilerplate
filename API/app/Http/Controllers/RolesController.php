@@ -42,7 +42,7 @@ class RolesController extends Controller
         if (!empty($filters['has_users'])) {
             if ($filters['has_users'] === 'yes') {
                 $query = $query->whereHas('users');
-            } else if ($filters['has_users'] === 'no') {
+            } elseif ($filters['has_users'] === 'no') {
                 $query = $query->whereDoesntHave('users');
             }
         }
@@ -50,7 +50,7 @@ class RolesController extends Controller
         if (!empty($filters['has_permissions'])) {
             if ($filters['has_permissions'] === 'yes') {
                 $query = $query->whereHas('permissions');
-            } else if ($filters['has_permissions'] === 'no') {
+            } elseif ($filters['has_permissions'] === 'no') {
                 $query = $query->whereDoesntHave('permissions');
             }
         }
@@ -76,7 +76,8 @@ class RolesController extends Controller
         return $this->responseOK($roles);
     }
 
-    public function getFiltersData(Request $request) {
+    public function getFiltersData(Request $request)
+    {
         $user = User::getFromRequest($request);
 
         $filters = $request->get('filters');
@@ -99,18 +100,18 @@ class RolesController extends Controller
                 }
                 if (Arr::get($filters, 'search')) {
                     $query->where(function ($query) use ($filters) {
-                            $query->where('roles.name', 'like', "%{$filters['search']}%")
-                                ->orWhere('roles.description', 'like', "%{$filters['search']}%");
+                        $query->where('roles.name', 'like', "%{$filters['search']}%")
+                            ->orWhere('roles.description', 'like', "%{$filters['search']}%");
                     });
                 }
                 if (Arr::get($filters, 'has_permissions') === 'no') {
                     $query->whereNull('role_has_permissions.role_id');
-                } else if (Arr::get($filters, 'has_permissions') === 'yes') {
+                } elseif (Arr::get($filters, 'has_permissions') === 'yes') {
                     $query->whereNotNull('role_has_permissions.role_id');
                 }
                 if (Arr::get($filters, 'has_users') === 'no') {
                     $query->whereNull('model_has_roles.model_id');
-                } else if (Arr::get($filters, 'has_users') === 'yes') {
+                } elseif (Arr::get($filters, 'has_users') === 'yes') {
                     $query->whereNotNull('model_has_roles.model_id');
                 }
             })
@@ -118,30 +119,30 @@ class RolesController extends Controller
 
         if (Arr::get($filters, 'has_permissions') === 'no') {
             $hasUsers->whereDoesntHave('permissions');
-        } else if (Arr::get($filters, 'has_permissions') === 'yes') {
+        } elseif (Arr::get($filters, 'has_permissions') === 'yes') {
             $hasUsers->whereHas('permissions');
         }
 
         if (Arr::get($filters, 'has_users') === 'no') {
             $hasPermissions->whereDoesntHave('users');
-        } else if (Arr::get($filters, 'has_users') === 'yes') {
+        } elseif (Arr::get($filters, 'has_users') === 'yes') {
             $hasPermissions->whereHas('users');
         }
 
         if (Arr::get($filters, 'permissions')) {
-            $hasPermissions->whereHas('permissions', function($query) use ($filters) {
+            $hasPermissions->whereHas('permissions', function ($query) use ($filters) {
                 $query->whereIn('id', $filters['permissions']);
             });
-            $hasUsers->whereHas('permissions', function($query) use ($filters) {
+            $hasUsers->whereHas('permissions', function ($query) use ($filters) {
                 $query->whereIn('id', $filters['permissions']);
             });
         }
 
         if (Arr::get($filters, 'user')) {
-            $hasPermissions->whereHas('users', function($query) use ($filters) {
+            $hasPermissions->whereHas('users', function ($query) use ($filters) {
                 $query->where('name', '=', $filters['user']);
             });
-            $hasUsers->whereHas('users', function($query) use ($filters) {
+            $hasUsers->whereHas('users', function ($query) use ($filters) {
                 $query->where('name', '=', $filters['user']);
             });
         }
@@ -169,12 +170,12 @@ class RolesController extends Controller
             'has_permissions' => [
                 'count:yes_or_no' => $hasPermissions->count(),
                 'count:yes' => $hasPermissions
-                    ->filter(function($item) {
+                    ->filter(function ($item) {
                         return count($item['permissions']) > 0;
                     })
                     ->count(),
                 'count:no' => $hasPermissions
-                    ->filter(function($item) {
+                    ->filter(function ($item) {
                         return count($item['permissions']) === 0;
                     })
                     ->count(),
@@ -182,12 +183,12 @@ class RolesController extends Controller
             'has_users' => [
                 'count:yes_or_no' => $hasUsers->count(),
                 'count:yes' => $hasUsers
-                    ->filter(function($item) {
+                    ->filter(function ($item) {
                         return count($item['users']) > 0;
                     })
                     ->count(),
                 'count:no' => $hasUsers
-                    ->filter(function($item) {
+                    ->filter(function ($item) {
                         return count($item['users']) === 0;
                     })
                     ->count(),
@@ -195,7 +196,7 @@ class RolesController extends Controller
             'permissions' => [
                 'data' => $permissions,
                 'count' => $permissions
-                    ->filter(function($item) {
+                    ->filter(function ($item) {
                         return $item['count'] > 0;
                     })
                     ->count()

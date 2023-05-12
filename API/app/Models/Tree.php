@@ -58,9 +58,9 @@ class Tree extends Model
     {
         if ($this->tree_object_type === 'category') {
             $this->category()->delete();
-        } else if ($this->tree_object_type === 'document') {
+        } elseif ($this->tree_object_type === 'document') {
             $this->document()->delete();
-        } else if ($this->tree_object_type === "link") {
+        } elseif ($this->tree_object_type === "link") {
             $this->link()->delete();
         }
 

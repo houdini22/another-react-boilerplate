@@ -12,7 +12,9 @@ use Illuminate\Support\Arr;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
 
     public function response401()
     {
@@ -29,7 +31,8 @@ class Controller extends BaseController
         ], 404);
     }
 
-    public function responseOK($data = null) {
+    public function responseOK($data = null)
+    {
         return response()->json([
             'message' => Arr::get($data, 'message', 'OK'),
             'data' => [
@@ -38,10 +41,11 @@ class Controller extends BaseController
         ]);
     }
 
-    protected function getUserFromRequest(\Illuminate\Http\Request $request) {
+    protected function getUserFromRequest(\Illuminate\Http\Request $request)
+    {
         $user = User::getFromRequest($request);
         if (!$user) {
-            Log::add(NULL, 'users.not_found', [
+            Log::add(null, 'users.not_found', [
                 'message' => 'while_get_by_token',
                 'request' => $request
             ]);

@@ -62,7 +62,7 @@ class FilesController extends Controller
         if (!empty($filters['has_user'])) {
             if ($filters['has_user'] === 'yes') {
                 $query = $query->whereHas('user');
-            } else if ($filters['has_user'] === 'no') {
+            } elseif ($filters['has_user'] === 'no') {
                 $query = $query->whereDoesntHave('user');
             }
         }
@@ -157,7 +157,7 @@ class FilesController extends Controller
     {
         $file = File::find($request->route('id'));
         if (!$file) {
-            Log::add(NULL, 'media.not_found', [
+            Log::add(null, 'media.not_found', [
                 'message' => 'while.download',
                 'request' => $request
             ]);

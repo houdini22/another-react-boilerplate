@@ -8,7 +8,8 @@ use Spatie\Permission\Models\Role as RoleBase;
 
 class Role extends RoleBase
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
     protected $fillable = [
         'name', 'description'
     ];

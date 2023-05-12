@@ -109,7 +109,7 @@ class LogsController extends Controller
             ->where(function ($query) use ($filters) {
                 if (Arr::get($filters, 'user') === "none") {
                     $query->where('user_id', '=', 0);
-                } else if (Arr::get($filters, 'user') !== "all" && Arr::get($filters, 'user')) {
+                } elseif (Arr::get($filters, 'user') !== "all" && Arr::get($filters, 'user')) {
                     $query->where('user_id', '=', Arr::get($filters, 'user'));
                 }
                 if (Arr::get($filters, 'type')) {
@@ -138,7 +138,7 @@ class LogsController extends Controller
             ->where(function ($query) use ($filters) {
                 if (Arr::get($filters, 'user') === "none") {
                     $query->where('user_id', '=', 0);
-                } else if (Arr::get($filters, 'user') !== "all" && Arr::get($filters, 'user')) {
+                } elseif (Arr::get($filters, 'user') !== "all" && Arr::get($filters, 'user')) {
                     $query->where('user_id', '=', Arr::get($filters, 'user'));
                 }
                 if (Arr::get($filters, 'related_model')) {
@@ -171,7 +171,7 @@ class LogsController extends Controller
             ->where(function ($query) use ($filters) {
                 if (Arr::get($filters, 'user') === "none") {
                     $query->where('user_id', '=', 0);
-                } else if (Arr::get($filters, 'user') !== "all" && Arr::get($filters, 'user')) {
+                } elseif (Arr::get($filters, 'user') !== "all" && Arr::get($filters, 'user')) {
                     $query->where('user_id', '=', Arr::get($filters, 'user'));
                 }
                 if (Arr::get($filters, 'type')) {
