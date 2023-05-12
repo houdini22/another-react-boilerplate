@@ -1,27 +1,68 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap-reboot";
+@import "~bootstrap/scss/bootstrap";
 
 body {
-    & > .container {
-        margin-top: 30px;
+    font-family: $font-family-sans-serif;
+    min-height: 100vh;
+    min-width: 100vw;
+    background-color: var(--bs-gray-300);
 
-        & > footer {
+    & > div {
+        min-height: 100vh;
+        min-width: 100vw;
+
+        & > .container {
             margin-top: 30px;
+
+            & > footer {
+                margin-top: 30px;
+            }
+
+            .menu {
+                padding-top: 0 !important;
+                border-top: 3px solid rgba(var(--bs-dark-rgb), 1);
+
+                & > h4 {
+                    margin-top: 1rem;
+                }
+            }
+        }
+    }
+
+    .form-signin {
+        width: 300px;
+        padding: 2rem;
+        background-color: var(--bs-light);
+        border-radius: 15px;
+
+        .col {
+            margin-bottom: 1rem;
+        }
+    }
+
+    .jumbotron {
+        padding-top: var(--jumbotron-padding-y);
+        padding-bottom: var(--jumbotron-padding-y);
+        margin-bottom: 30px;
+        background-color: #fff;
+
+        p:last-child {
+            margin-bottom: 0;
         }
 
-        .menu {
-            padding-top: 0 !important;
-            border-top: 3px solid rgba(var(--bs-dark-rgb), 1);
+        .jumbotron-heading {
+            font-weight: 300;
+        }
 
-            & > h4 {
-                margin-top: 1rem;
-            }
+        .container {
+            max-width: 40rem;
         }
     }
 }
@@ -38,24 +79,16 @@ img.header-logo {
     margin-right: 10px;
 }
 
+.flex {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
 :root {
     --jumbotron-padding-y: 3rem;
 }
 
-.jumbotron {
-    padding-top: var(--jumbotron-padding-y);
-    padding-bottom: var(--jumbotron-padding-y);
-    margin-bottom: 0;
-    background-color: #fff;
-    p:last-child {
-        margin-bottom: 0;
-    }
-    .jumbotron-heading {
-        font-weight: 300;
-    }.container {
-         max-width: 40rem;
-     }
-}
 @media (min-width: 768px) {
-
 }

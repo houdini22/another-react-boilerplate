@@ -2,9 +2,12 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build && cp -r public/build ../dist/"
+        "build": "vite build && cp -r public/build ../dist/",
+        "prettier-write": "prettier --write \"{resources/js,resources/sass,resources/css}/**/*.{js,jsx,css,scss,ts,tsx}\""
     },
     "devDependencies": {
+        "@originjs/vite-plugin-commonjs": "^1.0.3",
+        "@originjs/vite-plugin-require-context": "^1.0.9",
         "axios": "^1.1.2",
         "laravel-mix": "^6.0.49",
         "laravel-vite-plugin": "^0.7.2",
@@ -15,6 +18,8 @@
     "dependencies": {
         "@popperjs/core": "^2.11.7",
         "bootstrap": "^5.2.3",
+        "jquery": "^3.7.0",
+        "prettier": "^2.8.8",
         "sass": "^1.62.1"
     }
 }

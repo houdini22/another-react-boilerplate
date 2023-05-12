@@ -1,12 +1,8 @@
-try {
-    window.$ = window.jQuery = require('jquery');
-    window.Popper = require('@popperjs/core');
-    window.bootstrap = require('bootstrap');
-} catch (e) {
-    console.error(e);
-}
-
-import 'bootstrap'
+import("jquery").then(({ default: jQuery }) => {
+    window.$ = window.jQuery = jQuery;
+});
+import("@popperjs/core");
+import("bootstrap");
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

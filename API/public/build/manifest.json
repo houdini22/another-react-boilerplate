@@ -1,4 +1,20 @@
 {
+  "_index.js": {
+    "file": "assets/index.js",
+    "isDynamicEntry": true
+  },
+  "_jquery.js": {
+    "file": "assets/jquery.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/bootstrap/dist/js/bootstrap.esm.js": {
+    "file": "assets/bootstrap.esm.js",
+    "imports": [
+      "_index.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "node_modules/bootstrap/dist/js/bootstrap.esm.js"
+  },
   "resources/js/app.css": {
     "file": "assets/app.css",
     "src": "resources/js/app.css"
@@ -6,6 +22,11 @@
   "resources/js/app.js": {
     "css": [
       "assets/app.css"
+    ],
+    "dynamicImports": [
+      "_jquery.js",
+      "_index.js",
+      "node_modules/bootstrap/dist/js/bootstrap.esm.js"
     ],
     "file": "assets/app.js",
     "isEntry": true,
