@@ -317,7 +317,7 @@ const addPermission =
     (dispatch) => {
         return new Promise<void>((resolve, reject) => {
             return http
-                .post(`/permissions/add/`, params)
+                .post(`/permissions/add`, params)
                 .then(({ data: { permission } }) => {
                     const promises = []
 
