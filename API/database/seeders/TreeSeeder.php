@@ -306,6 +306,17 @@ class TreeSeeder extends Seeder
                             $c->index_document_id = $tree->id;
                             $c->save();
                         }
+                    ],
+                    [
+                        'type' => 'document',
+                        'tree' => [
+                            'tree_display_name' => 'Some other Document with no Menu'
+                        ],
+                        'document' => [
+                            'document_name' => 'Some other Document with no Menu',
+                            'document_content' => 'Some other content...',
+                            'document_url' => '/sample-category/sample-subcategory/some-other-document-with-no-menu'
+                        ],
                     ]
                 ]
             ],

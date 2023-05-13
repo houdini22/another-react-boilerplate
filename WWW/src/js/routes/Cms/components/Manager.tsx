@@ -68,6 +68,7 @@ export class Manager extends React.Component<null, null> {
             removeNewMenuLink,
             addMenu,
             fetchMenus,
+            clearNewMenuLinks,
         } = this.props
 
         const renderProps = {
@@ -93,6 +94,7 @@ export class Manager extends React.Component<null, null> {
             removeNewMenuLink,
             addMenu,
             fetchMenus,
+            clearNewMenuLinks,
         }
 
         return children(renderProps)
@@ -127,6 +129,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchMenus: (filters) => dispatch(actions.fetchMenus(filters)),
         removeNewMenuLink: (link) => dispatch(actions.removeNewMenuLink(link)),
         addMenu: (menu, links) => dispatch(actions.addMenu(menu, links)),
+        clearNewMenuLinks: () => dispatch(actions.clearNewMenuLinks()),
     }
 }
 

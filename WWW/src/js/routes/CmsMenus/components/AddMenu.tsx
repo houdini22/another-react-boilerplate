@@ -16,7 +16,7 @@ export class CmsAddMenuView extends React.Component {
                         {({ canByPermission }) => (
                             <PageContent>
                                 <Manager id={parent_id}>
-                                    {({ setIsLoading, isLoading, addMenu, addNewMenuLink, newMenuLinks, removeNewMenuLink }) => {
+                                    {({ setIsLoading, isLoading, addMenu, addNewMenuLink, newMenuLinks, removeNewMenuLink, clearNewMenuLinks }) => {
                                         return (
                                             <div>
                                                 <Header title={'CMS - Add Menu'} icon={<MenuIcon />} />
@@ -24,22 +24,6 @@ export class CmsAddMenuView extends React.Component {
                                                     initialValues={{
                                                         tree: {
                                                             tree_display_name: '',
-                                                            tree_published_from: formattedDateTime({
-                                                                year: 2000,
-                                                                month: 1,
-                                                                day: 1,
-                                                                hour: 0,
-                                                                minute: 0,
-                                                                second: 0,
-                                                            }),
-                                                            tree_published_to: formattedDateTime({
-                                                                year: 2099,
-                                                                month: 1,
-                                                                day: 1,
-                                                                hour: 0,
-                                                                minute: 0,
-                                                                second: 0,
-                                                            }),
                                                             tree_is_published: true,
                                                         },
                                                     }}
@@ -49,6 +33,7 @@ export class CmsAddMenuView extends React.Component {
                                                     addNewMenuLink={addNewMenuLink}
                                                     newMenuLinks={newMenuLinks}
                                                     removeNewMenuLink={removeNewMenuLink}
+                                                    clearNewMenuLinks={clearNewMenuLinks}
                                                 />
                                             </div>
                                         )

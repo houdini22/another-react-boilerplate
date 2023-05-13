@@ -4,13 +4,15 @@
         <ul class="nav nav-pills flex-column mb-auto">
             @if(
                     (
-                        $tree->tree_object_type === "document"
+                        !!$parent
+                        && $tree->tree_object_type === "document"
                         && $tree->depth > 1
                         && !!$parent->category->category_url
                         && $parent->category->category_url !== $tree->documentCategory->category->category_url
                     )
                 ||
-                    (
+                    (!!$parent
+                        &&
                         $tree->tree_object_type === "category"
                         && $tree->depth > 1
                         && $parent->category->category_url !== $tree->category->category_url

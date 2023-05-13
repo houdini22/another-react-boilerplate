@@ -2,7 +2,7 @@
 @section('content')
     <div>
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-{{count($menu) ? 8 : 12}}">
                 @if($document)
                     <h3 class="pb-3 mb-4 font-italic border-bottom document-header">
                         {{$document->document_name}}
@@ -13,7 +13,9 @@
                     </div>
                 @endif
             </div>
-            @include('content._menu', ['tree' => $tree, 'parent' => $parent, 'menu' => $menu, 'slug' => $slug])
+            @if (count($menu))
+                @include('content._menu', ['tree' => $tree, 'parent' => $parent, 'menu' => $menu, 'slug' => $slug])
+            @endif
         </div>
     </div>
 @endsection

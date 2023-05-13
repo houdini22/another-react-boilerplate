@@ -15,9 +15,16 @@ class ConfigController extends Controller
     {
         $user = User::getFromRequest($request);
 
-        $configs = Config::orderBy('key', 'asc')->get();
+        $result = [];
+        $configs = Config::orderBy('key', 'asc')
+            ->with('file')
+            ->get();
 
-        return $this->responseOK($configs);
+        foreach ($configs as $config) {
+            $result[] = $config->toArray();
+        }
+
+        return $this->responseOK($result);
     }
     public function postEdit(Request $request)
     {
@@ -29,6 +36,7 @@ class ConfigController extends Controller
             $model = Config::where('key', '=', $c['key'])->first();
             if ($model) {
                 $model->value = $c['value'];
+                $model->model_type = Arr::get($c, 'model_type');
                 $model->save();
 
                 Log::add($user, 'cms.settings.edit', [

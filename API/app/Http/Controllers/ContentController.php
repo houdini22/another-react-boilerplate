@@ -68,16 +68,68 @@ class ContentController extends Controller
 
         $tree = Tree::with('document')
             ->where('tree_alias', '=', 'page_index')
+            ->with('document.menuCategory')
             ->first();
 
         $mainMenu = $this->getMainMenu();
 
+        $menu = [];
+
+        if ($tree->document->menuCategory) {
+            $menu = $tree
+                ->document
+                ->menuCategory
+                ->children()
+                ->where('tree_is_published', '=', 1)
+                ->where(function ($query) {
+                    $query
+                        ->where(function ($query) {
+                            $query
+                                ->whereNull('tree_published_from')
+                                ->orWhere(function ($query) {
+                                    $query
+                                        ->whereNotNull('tree_published_from')
+                                        ->where(DB::raw("tree_published_from"), '<=', DB::raw('NOW()'));
+                                });
+                        })
+                        ->where(function ($query) {
+                            $query
+                                ->whereNull('tree_published_to')
+                                ->orWhere(function ($query) {
+                                    $query
+                                        ->whereNotNull('tree_published_to')
+                                        ->where(DB::raw("tree_published_to"), '<=', DB::raw('NOW()'));
+                                });
+                        });
+                })
+                ->where(function ($query) {
+                    $query
+                        ->where('tree_class', '=', 'menu_link')
+                        ->orWhere(function ($query) {
+                            $query
+                                ->whereIn('tree_object_type', ['document', 'category', 'link'])
+                                ->where('tree_class', '<>', 'index_page');
+                        });
+                })
+                ->with('link')
+                ->with('link.linkDocument')
+                ->with('link.linkDocument.document')
+                ->with('link.linkCategory')
+                ->with('link.linkCategory.category')
+                ->with('link.linkFile')
+                ->with('document')
+                ->with('category')
+                ->get();
+        }
+
         return response(view('content.index', [
             'meta' => $meta,
+            'tree' => $tree,
             'document' => $tree->document,
             'app' => $this->getAppConfig(),
             'mainMenu' => $mainMenu,
-            'slug' => '/'
+            'menu' => $menu,
+            'slug' => '/',
         ]));
     }
 

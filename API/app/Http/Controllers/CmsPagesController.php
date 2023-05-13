@@ -701,7 +701,7 @@ class CmsPagesController extends Controller
             'request' => $request
         ]);
 
-        $logName = $node->tree_class === "menu_category" ? "cms.menus.delete" : "cms.delete";
+        $logName = $node->tree_class === "menu_category" ? ($node->tree_class === "menu_link" ? 'cms.menus.menu.remove_link' : "cms.menus.menu.delete") : "cms.delete";
 
         foreach ($node->descendants as $d) {
             Log::add($user, $logName, [
@@ -869,8 +869,6 @@ class CmsPagesController extends Controller
         $rules = [
             'tree.tree_display_name' => ['required', 'max:64'],
             'tree.tree_is_published' => ['required'],
-            'tree.tree_published_from' => ['required'],
-            'tree.tree_published_to' => ['required'],
         ];
         $validator = Validator::make($menu, $rules);
 
@@ -922,6 +920,13 @@ class CmsPagesController extends Controller
             ->first()
             ->children()
             ->with('category')
+            ->withCount('children')
+            ->with('children')
+            ->with('children.link')
+            ->with('children.link.linkDocument')
+            ->with('children.link.linkDocument.document')
+            ->with('children.link.linkCategory')
+            ->with('children.link.linkCategory.category')
             ->get();
 
         return $this->responseOK($menus);

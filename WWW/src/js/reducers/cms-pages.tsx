@@ -9,6 +9,8 @@ const SET_CURRENT_NODE_PARENTS = 'cms-pages::set-current-node-parents'
 const SET_MENUS = 'cms-pages::set-menus'
 const ADD_NEW_MENU_LINK = 'cms-pages::add-new-menu-link'
 const REMOVE_NEW_MENU_LINK = 'cms-pages::remove-new-menu-link'
+const CLEAR_NEW_MENU_LINKS = 'cms-pages::clear-new-menu-links'
+
 const setIsLoading = (data) => (dispatch) => {
     return new Promise((resolve) => {
         dispatch({ type: SET_IS_LOADING, payload: data })
@@ -30,6 +32,10 @@ const setCurrentNodeParents = (data) => (dispatch) => {
 
 const addNewMenuLink = (data) => (dispatch) => {
     dispatch({ type: ADD_NEW_MENU_LINK, payload: data })
+}
+
+const clearNewMenuLinks = () => (dispatch) => {
+    dispatch({ type: CLEAR_NEW_MENU_LINKS })
 }
 
 const setCurrentId = (currentId) => (dispatch) => {
@@ -314,6 +320,7 @@ export const actions = {
     addNewMenuLink,
     removeNewMenuLink,
     addMenu,
+    clearNewMenuLinks,
 }
 
 // ------------------------------------
@@ -369,12 +376,17 @@ const ACTION_HANDLERS = {
         }
     },
     [REMOVE_NEW_MENU_LINK]: (state, { payload }) => {
-        console.log(payload)
         return {
             ...state,
             newMenuLinks: state.newMenuLinks.filter((link) => {
                 return link.link.link_name !== payload.link.link_name
             }),
+        }
+    },
+    [CLEAR_NEW_MENU_LINKS]: (state) => {
+        return {
+            ...state,
+            newMenuLinks: [],
         }
     },
 }

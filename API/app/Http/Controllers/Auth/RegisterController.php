@@ -67,6 +67,7 @@ class RegisterController extends Controller
                 ->numbers()
                 ->letters()],
             'password_confirmation' => ['required'],
+            'captcha' => ['required', 'captcha']
         ]);
     }
 
@@ -82,7 +83,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'email_verify_token' => Str::random(16)
+            'email_verify_token' => Str::random(16),
             /*
             'status' => User::$STATUS_ACTIVE,
             'email_verified_at' => Carbon::now(),*/
@@ -110,7 +111,9 @@ class RegisterController extends Controller
 
     public function postRegister(Request $request)
     {
-        $this->validator($request->all())->validate();
+        if (($validator = $this->validator($request->all()))->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        }
 
         event(new Registered($user = $this->create($request->all())));
 

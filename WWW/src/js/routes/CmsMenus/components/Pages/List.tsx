@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Alert, Button, Card, LoadingOverlay, Table, Tooltip, Typography } from '../../../../components'
-import { PublishIcon, UnpublishIcon } from '../../../../components/icons'
+import { LinkIcon, PermissionIcon, PublishIcon, UnpublishIcon } from '../../../../components/icons'
 import { formatDateTime } from '../../../../helpers/date-time'
 import styles from '../../../../../assets/scss/routes/cms.scss'
 import classNames from 'classnames/bind'
@@ -10,6 +10,8 @@ import { ModalManager } from '../../../../components/ui/Modal'
 import { RouteManager } from '../../../../containers'
 import { ButtonDelete } from '../../../../components/common/ButtonDelete'
 import { ButtonEdit } from '../../../../components/common/ButtonEdit'
+import RowExpandRoles from '../../../Users/components/UsersTable/RowExpandRoles'
+import RowLinks from './RowLinks'
 
 const cx = classNames.bind(styles)
 
@@ -26,10 +28,13 @@ export class List extends React.Component<null, null> {
                                 <Table.Container bordered>
                                     <Table.THead>
                                         <Table.Tr>
-                                            <Table.Th xs={12} md={5}>
+                                            <Table.Th xs={12} md={4}>
                                                 Name
                                             </Table.Th>
-                                            <Table.Th xs={6} md={3}>
+                                            <Table.Th xs={1} md={2}>
+                                                Links
+                                            </Table.Th>
+                                            <Table.Th xs={5} md={2}>
                                                 Statuses
                                             </Table.Th>
                                             <Table.Th xs={6} md={4}>
@@ -76,124 +81,155 @@ export class List extends React.Component<null, null> {
                                             )
 
                                             return (
-                                                <Table.Tr key={menu.id}>
-                                                    <Table.Td xs={12} md={5}>
-                                                        <div>{menu.tree_display_name}</div>
-                                                    </Table.Td>
-                                                    <Table.Td xs={6} md={3} className={cx('tree-icon')}>
-                                                        <div>
-                                                            {!!menu.tree_publishing_is_editable && (
-                                                                <>
-                                                                    {!isPublished(menu) && (
-                                                                        <Tooltip
-                                                                            color={'primary'}
-                                                                            tooltip={
-                                                                                <Typography.Container>
-                                                                                    <p>
-                                                                                        Published from:{' '}
-                                                                                        {menu.tree_published_from
-                                                                                            ? formatDateTime(menu.tree_published_from)
-                                                                                            : 'not set'}
-                                                                                    </p>
-                                                                                    <p>
-                                                                                        Published to:{' '}
-                                                                                        {menu.tree_published_to
-                                                                                            ? formatDateTime(menu.tree_published_to)
-                                                                                            : 'not set'}
-                                                                                    </p>
-                                                                                    {!menu.tree_is_published && <p>Publishing disabled.</p>}
-                                                                                </Typography.Container>
-                                                                            }
-                                                                            placement={'top'}
+                                                <Table.ExpandManager>
+                                                    {({ expand, addExpand }) => {
+                                                        addExpand(
+                                                            'links',
+                                                            <RowLinks
+                                                                menu={menu}
+                                                                links={menu.children}
+                                                                setIsLoading={setIsLoading}
+                                                                fetchMenus={fetchMenus}
+                                                                deleteNode={deleteNode}
+                                                            />,
+                                                        )
+                                                        return (
+                                                            <Table.Tr key={menu.id}>
+                                                                <Table.Td xs={12} md={4}>
+                                                                    <div>{menu.tree_display_name}</div>
+                                                                </Table.Td>
+                                                                <Table.Td xs={1} md={2}>
+                                                                    <Tooltip tooltip={`Menu Links`}>
+                                                                        <Button
+                                                                            color={'secondary'}
+                                                                            icon={<LinkIcon />}
+                                                                            onClick={() => {
+                                                                                expand('links')
+                                                                            }}
                                                                         >
-                                                                            <UnpublishIcon className={cx('text-danger')} />
-                                                                        </Tooltip>
-                                                                    )}
-                                                                    {isPublished(menu) && (
-                                                                        <Tooltip
-                                                                            color={'primary'}
-                                                                            tooltip={
-                                                                                <Typography.Container>
-                                                                                    <p>
-                                                                                        Published from:{' '}
-                                                                                        {menu.tree_published_from
-                                                                                            ? formatDateTime(menu.tree_published_from)
-                                                                                            : 'not set'}
-                                                                                    </p>
-                                                                                    <p>
-                                                                                        Published to:{' '}
-                                                                                        {menu.tree_published_to
-                                                                                            ? formatDateTime(menu.tree_published_to)
-                                                                                            : 'not set'}
-                                                                                    </p>
-                                                                                </Typography.Container>
-                                                                            }
-                                                                            placement={'top'}
-                                                                        >
-                                                                            <PublishIcon className={cx('text-success')} />
-                                                                        </Tooltip>
-                                                                    )}
-                                                                </>
-                                                            )}
-                                                        </div>
-                                                    </Table.Td>
-                                                    <Table.Td xs={6} md={4}>
-                                                        <div>
-                                                            {!!(
-                                                                menu.tree_publishing_is_editable &&
-                                                                !isPublished(menu) &&
-                                                                canByPermission(`cms.menus.publish`)
-                                                            ) && (
-                                                                <Tooltip tooltip={'Publish'}>
-                                                                    <Button
-                                                                        color="success"
-                                                                        icon={<PublishIcon />}
-                                                                        iconOnly
-                                                                        onClick={(e, { setIsLoading }) => {
-                                                                            e.stopPropagation()
-                                                                            setIsLoading(true)
-                                                                            publish(menu.id).then(() => {
-                                                                                setIsLoading(false)
-                                                                            })
-                                                                        }}
-                                                                    />
-                                                                </Tooltip>
-                                                            )}
-                                                            {!!(
-                                                                menu.tree_publishing_is_editable &&
-                                                                isPublished(menu) &&
-                                                                canByPermission(`cms.menus.unpublish`)
-                                                            ) && (
-                                                                <Tooltip tooltip={'Unpublish'}>
-                                                                    <Button
-                                                                        color="danger"
-                                                                        icon={<UnpublishIcon />}
-                                                                        iconOnly
-                                                                        onClick={(e, { setIsLoading }) => {
-                                                                            e.stopPropagation()
-                                                                            setIsLoading(true)
-                                                                            unpublish(menu.id).then(() => {
-                                                                                setIsLoading(false)
-                                                                            })
-                                                                        }}
-                                                                    />
-                                                                </Tooltip>
-                                                            )}
+                                                                            <div>{menu.children_count}</div>
+                                                                        </Button>
+                                                                    </Tooltip>
+                                                                </Table.Td>
+                                                                <Table.Td xs={5} md={2} className={cx('tree-icon')}>
+                                                                    <div>
+                                                                        {!!menu.tree_publishing_is_editable && (
+                                                                            <>
+                                                                                {!isPublished(menu) && (
+                                                                                    <Tooltip
+                                                                                        color={'primary'}
+                                                                                        tooltip={
+                                                                                            <Typography.Container>
+                                                                                                <p>
+                                                                                                    Published from:{' '}
+                                                                                                    {menu.tree_published_from
+                                                                                                        ? formatDateTime(menu.tree_published_from)
+                                                                                                        : 'not set'}
+                                                                                                </p>
+                                                                                                <p>
+                                                                                                    Published to:{' '}
+                                                                                                    {menu.tree_published_to
+                                                                                                        ? formatDateTime(menu.tree_published_to)
+                                                                                                        : 'not set'}
+                                                                                                </p>
+                                                                                                {!menu.tree_is_published && (
+                                                                                                    <p>Publishing disabled.</p>
+                                                                                                )}
+                                                                                            </Typography.Container>
+                                                                                        }
+                                                                                        placement={'top'}
+                                                                                    >
+                                                                                        <UnpublishIcon className={cx('text-danger')} />
+                                                                                    </Tooltip>
+                                                                                )}
+                                                                                {isPublished(menu) && (
+                                                                                    <Tooltip
+                                                                                        color={'primary'}
+                                                                                        tooltip={
+                                                                                            <Typography.Container>
+                                                                                                <p>
+                                                                                                    Published from:{' '}
+                                                                                                    {menu.tree_published_from
+                                                                                                        ? formatDateTime(menu.tree_published_from)
+                                                                                                        : 'not set'}
+                                                                                                </p>
+                                                                                                <p>
+                                                                                                    Published to:{' '}
+                                                                                                    {menu.tree_published_to
+                                                                                                        ? formatDateTime(menu.tree_published_to)
+                                                                                                        : 'not set'}
+                                                                                                </p>
+                                                                                            </Typography.Container>
+                                                                                        }
+                                                                                        placement={'top'}
+                                                                                    >
+                                                                                        <PublishIcon className={cx('text-success')} />
+                                                                                    </Tooltip>
+                                                                                )}
+                                                                            </>
+                                                                        )}
+                                                                    </div>
+                                                                </Table.Td>
+                                                                <Table.Td xs={6} md={4}>
+                                                                    <div>
+                                                                        {!!(
+                                                                            menu.tree_publishing_is_editable &&
+                                                                            !isPublished(menu) &&
+                                                                            canByPermission(`cms.menus.publish`)
+                                                                        ) && (
+                                                                            <Tooltip tooltip={'Publish'}>
+                                                                                <Button
+                                                                                    color="success"
+                                                                                    icon={<PublishIcon />}
+                                                                                    iconOnly
+                                                                                    onClick={(e, { setIsLoading }) => {
+                                                                                        e.stopPropagation()
+                                                                                        setIsLoading(true)
+                                                                                        publish(menu.id).then(() => {
+                                                                                            setIsLoading(false)
+                                                                                        })
+                                                                                    }}
+                                                                                />
+                                                                            </Tooltip>
+                                                                        )}
+                                                                        {!!(
+                                                                            menu.tree_publishing_is_editable &&
+                                                                            isPublished(menu) &&
+                                                                            canByPermission(`cms.menus.unpublish`)
+                                                                        ) && (
+                                                                            <Tooltip tooltip={'Unpublish'}>
+                                                                                <Button
+                                                                                    color="danger"
+                                                                                    icon={<UnpublishIcon />}
+                                                                                    iconOnly
+                                                                                    onClick={(e, { setIsLoading }) => {
+                                                                                        e.stopPropagation()
+                                                                                        setIsLoading(true)
+                                                                                        unpublish(menu.id).then(() => {
+                                                                                            setIsLoading(false)
+                                                                                        })
+                                                                                    }}
+                                                                                />
+                                                                            </Tooltip>
+                                                                        )}
 
-                                                            {!!menu.tree_is_editable && canByPermission(`cms.menus.edit`) && (
-                                                                <ButtonEdit href={`/cms/menus/edit/?id=${menu.id}`} />
-                                                            )}
-                                                            {!!menu.tree_is_deletable && canByPermission(`cms.menus.delete`) && (
-                                                                <ButtonDelete
-                                                                    onClick={(e) => {
-                                                                        e.stopPropagation()
-                                                                        openModal(`tree-delete-${menu.id}`)
-                                                                    }}
-                                                                />
-                                                            )}
-                                                        </div>
-                                                    </Table.Td>
-                                                </Table.Tr>
+                                                                        {!!menu.tree_is_editable && canByPermission(`cms.menus.edit`) && (
+                                                                            <ButtonEdit href={`/cms/menus/edit/?id=${menu.id}`} />
+                                                                        )}
+                                                                        {!!menu.tree_is_deletable && canByPermission(`cms.menus.delete`) && (
+                                                                            <ButtonDelete
+                                                                                onClick={(e) => {
+                                                                                    e.stopPropagation()
+                                                                                    openModal(`tree-delete-${menu.id}`)
+                                                                                }}
+                                                                            />
+                                                                        )}
+                                                                    </div>
+                                                                </Table.Td>
+                                                            </Table.Tr>
+                                                        )
+                                                    }}
+                                                </Table.ExpandManager>
                                             )
                                         })}
                                     </Table.TBody>

@@ -19,6 +19,7 @@ class CreateConfigTable extends Migration
             $table->enum('type', ['number', 'string', 'object', 'array']);
             $table->text('value')->nullable()->default(null);
             $table->text('description')->nullable()->default(null);
+            $table->string('model_type', 256);
             $table->boolean('is_editable')->default(true);
             $table->boolean('is_deletable')->default(true);
             $table->timestamps();

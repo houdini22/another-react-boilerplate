@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Button } from '../ui/Button'
-import { DeleteIcon } from '../icons'
+import { DeleteIcon, EditIcon } from '../icons'
 import styles from '../../../assets/scss/components/_simple-model-cell.scss'
 import classnames from 'classnames/bind'
 import { Dropdown } from '../index'
@@ -50,11 +50,19 @@ export class SimpleModelCell extends React.Component<null, null> {
                 className={cx('component-simple-model-cell')}
                 outline={outline}
             >
-                <div>{children}</div>
+                <span>{children}</span>
                 {actions?.length > 0 && (
                     <>
                         {actions?.map(({ name, onClick }) => {
-                            return <Button key={name} onClick={onClick} color={'danger'} icon={<DeleteIcon />} iconOnly />
+                            let icon, color
+                            if (name === 'delete') {
+                                icon = <DeleteIcon />
+                                color = 'danger'
+                            } else if (name === 'edit') {
+                                icon = <EditIcon />
+                                color = 'warning'
+                            }
+                            return <Button key={name} onClick={onClick} color={color} icon={icon} iconOnly />
                         })}
                     </>
                 )}

@@ -25,12 +25,14 @@ const AddMenuFormContainer = compose(
     }, null),
     reduxForm({
         form: FORM_NAME,
-        onSubmit: (values, dispatch, { save, navigate, setIsLoading, newMenuLinks }) => {
+        onSubmit: (values, dispatch, { save, navigate, setIsLoading, newMenuLinks, clearNewMenuLinks }) => {
             return setIsLoading(true).then(() => {
                 return save(values, newMenuLinks).then(
                     (data) => {
                         setIsLoading(false)
-                        navigate(`/cms/menus/edit?id=${data.id}`)
+                        //navigate(`/cms/menus/edit?id=${data.id}`)
+                        navigate('/cms/menus/add')
+                        clearNewMenuLinks()
                     },
                     (response) => {
                         setIsLoading(false)

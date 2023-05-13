@@ -62,6 +62,7 @@ export class EditSettings extends React.Component<EditSettingsProps, EditSetting
                                                                         {
                                                                             key: 'app.logo',
                                                                             value: files[0].id,
+                                                                            model_type: 'file',
                                                                         },
                                                                     ]).then(() => {
                                                                         setIsLoading(false)

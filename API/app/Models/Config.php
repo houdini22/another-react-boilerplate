@@ -18,26 +18,37 @@ class Config extends Authenticatable
         'key', 'type', 'value', 'description', 'is_editable', 'is_deletable'
     ];
 
+    public function file()
+    {
+        return $this->hasOne(File::class, 'id', 'value');
+    }
+
     public function toArray()
     {
         $value = null;
-        switch ($this->type) {
-            case 'string':
-                $value = "";
-                break;
 
-            case "object":
-            case "array":
-                $value = [];
+        if ($this->model_type) {
+            if ($this->model_type === "file") {
+                $value = $this->file;
+            }
+        } else {
+            switch ($this->type) {
+                case 'string':
+                    $value = "";
+                    break;
 
-                // no break
-            default:
-                break;
+                case "object":
+                case "array":
+                    $value = [];
+
+                    // no break
+                default:
+                    break;
+            }
+            if ($this->value) {
+                $value = $this->value;
+            }
         }
-        if ($this->value) {
-            $value = $this->value;
-        }
-
         return [
             'key' => $this->key,
             'type' => $this->type,
