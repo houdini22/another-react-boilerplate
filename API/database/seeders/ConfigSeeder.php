@@ -56,6 +56,21 @@ class ConfigSeeder extends Seeder
                 'value' => 0,
                 'description' => 'File Resource for Logo.',
                 'is_deletable' => false,
+                'model_type' => 'file'
+            ],
+            [
+                'key' => 'app.users.allow_register',
+                'type' => 'boolean',
+                'value' => 1,
+                'description' => 'Allows registration for Users.',
+                'is_deletable' => false,
+            ],
+            [
+                'key' => 'app.users.allow_login',
+                'type' => 'boolean',
+                'value' => 1,
+                'description' => 'Allows log in for Users.',
+                'is_deletable' => false,
             ]
         ];
 

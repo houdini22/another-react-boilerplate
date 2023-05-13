@@ -33,6 +33,13 @@ class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
         this.setState({ checked })
     }
 
+    componentDidUpdate(prevProps: Readonly<CheckboxProps>, prevState: Readonly<CheckboxState>, snapshot?: any) {
+        const { checked: checkedProps } = this.props
+        if (prevProps.checked !== checkedProps) {
+            this.setState({ checked: checkedProps })
+        }
+    }
+
     handleClick(e) {
         const { checked } = this.state
         const { onChange, disabled } = this.props
@@ -69,7 +76,14 @@ class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
                     )}
                 </span>
 
-                <input {...props} disabled={disabled} type="checkbox" className={cx('component-checkbox__input')} ref={(el) => (this.el = el)} />
+                <input
+                    {...props}
+                    checked={checked}
+                    disabled={disabled}
+                    type="checkbox"
+                    className={cx('component-checkbox__input')}
+                    ref={(el) => (this.el = el)}
+                />
             </div>
         )
     }

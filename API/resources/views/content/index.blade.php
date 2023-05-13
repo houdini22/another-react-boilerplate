@@ -1,4 +1,4 @@
-@extends('layouts.app', ['meta' => $meta, 'mainMenu' => $mainMenu])
+@extends('layouts.app', ['meta' => $meta, 'mainMenu' => $mainMenu, 'headerActions' => $headerActions])
 @section('content')
     @include("components.jumbotron", [
         'heading' => 'CMS System',

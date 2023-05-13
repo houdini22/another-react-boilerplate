@@ -16,7 +16,7 @@ class CreateConfigTable extends Migration
         Schema::create('config', function (Blueprint $table) {
             $table->id();
             $table->string('key', 512);
-            $table->enum('type', ['number', 'string', 'object', 'array']);
+            $table->enum('type', ['number', 'string', 'object', 'array', 'boolean']);
             $table->text('value')->nullable()->default(null);
             $table->text('description')->nullable()->default(null);
             $table->string('model_type', 256);

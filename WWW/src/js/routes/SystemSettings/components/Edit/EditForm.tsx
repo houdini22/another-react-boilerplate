@@ -5,8 +5,8 @@ import { ButtonSave } from '../../../../components/common/ButtonSave'
 
 class EditForm extends React.Component<null, null> {
     render() {
-        const { handleSubmit, onChangeLogo, uploadProgress } = this.props
-        console.log(uploadProgress)
+        const { handleSubmit, onChangeLogo, uploadProgress, initialValues } = this.props
+        console.log(initialValues['app:users:allow_register'])
         return (
             <form onSubmit={handleSubmit}>
                 <Field name="app:name" label="Application Name" type="text" placeholder={'Application Name'} component={FormField} />
@@ -19,6 +19,22 @@ class EditForm extends React.Component<null, null> {
                     component={FormField}
                     onChange={(e) => onChangeLogo(e)}
                     htmlAfter={() => <Progress progress={uploadProgress} />}
+                />
+                <Field
+                    component={FormField}
+                    name={'app:users:allow_register'}
+                    type={'checkbox'}
+                    label={'Allows User Registration'}
+                    value={'1'}
+                    checked={initialValues['app:users:allow_register']}
+                />
+                <Field
+                    component={FormField}
+                    name={'app:users:allow_login'}
+                    type={'checkbox'}
+                    label={'Allows User Login'}
+                    value={'1'}
+                    checked={initialValues['app:users:allow_login']}
                 />
                 <ButtonSave />
             </form>

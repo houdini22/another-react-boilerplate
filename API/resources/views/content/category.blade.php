@@ -1,4 +1,4 @@
-@extends('layouts.app', ['meta' => $meta, 'mainMenu' => $mainMenu, 'slug' => $slug])
+@extends('layouts.app', ['meta' => $meta, 'mainMenu' => $mainMenu, 'slug' => $slug, 'headerActions' => $headerActions])
 @section('content')
     @include("components.page_content", [
         'menu' => $menu,

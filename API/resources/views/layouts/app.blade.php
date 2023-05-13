@@ -17,29 +17,14 @@
 @guest
     @include('components.header', [
         'color' => 'dark',
-        'actions' => [
-            [
-                'label' => 'Log In',
-                'href' => url('/login'),
-            ],
-            [
-                'label' => 'Register',
-                'href' => url('/register'),
-                'color' => 'warning'
-            ]
-        ],
+        'actions' => $headerActions ?? null,
         'menu' => ($mainMenu ?? null),
         'marginBottom' => false,
     ])
 @else
     @include('components.header', [
         'color' => 'dark',
-        'actions' => [
-            [
-                'label' => 'Log Out',
-                'href' => url('/logout'),
-            ],
-        ],
+        'actions' => $headerActions ?? null,
         'menu' => ($mainMenu ?? null),
         'marginBottom' => false,
     ])

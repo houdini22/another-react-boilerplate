@@ -7,6 +7,7 @@ use App\Models\Config;
 use App\Models\Document;
 use App\Models\Tree;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ContentController extends Controller
@@ -42,7 +43,11 @@ class ContentController extends Controller
                 ->first();
 
             if (!$tree) {
-                return response(view('content/404'), 404);
+                return response(view('content/404', [
+                    'headerActions' => $this->getHeaderActions(),
+                    'mainMenu' => $this->getMainMenu(),
+                    'treeDocument' => Tree::with('document')->where('tree_alias', '=', 'page_404')->first(),
+                ]), 404);
             }
 
             if ($tree->tree_object_type === 'category') {
@@ -56,6 +61,34 @@ class ContentController extends Controller
     protected function getAppConfig()
     {
         return Config::getAppConfig();
+    }
+
+    public function getHeaderActions()
+    {
+        if (Auth::guest()) {
+            $result = [];
+            if (Config::getByKey('app.users.allow_login')->value) {
+                $result[] = [
+                    'label' => 'Log In',
+                    'href' => url('/login'),
+                ];
+            }
+            if (Config::getByKey('app.users.allow_register')->value) {
+                $result[] = [
+                    'label' => 'Register',
+                    'href' => url('/register'),
+                    'color' => 'warning'
+                ];
+            }
+            return $result;
+        } else {
+            return [
+                [
+                    'label' => 'Log Out',
+                    'href' => url('/logout'),
+                ],
+            ];
+        }
     }
 
     protected function renderDefaultIndexPage()
@@ -74,6 +107,7 @@ class ContentController extends Controller
         $mainMenu = $this->getMainMenu();
 
         $menu = [];
+        $headerActions = $this->getHeaderActions();
 
         if ($tree->document->menuCategory) {
             $menu = $tree
@@ -130,6 +164,7 @@ class ContentController extends Controller
             'mainMenu' => $mainMenu,
             'menu' => $menu,
             'slug' => '/',
+            'headerActions' => $headerActions,
         ]));
     }
 
@@ -217,36 +252,36 @@ class ContentController extends Controller
                 ->menuCategory
                 ->children()
                 ->where('tree_is_published', '=', 1)
-                    ->where(function ($query) {
-                        $query
-                            ->where(function ($query) {
-                                $query
-                                    ->whereNull('tree_published_from')
-                                    ->orWhere(function ($query) {
-                                        $query
-                                            ->whereNotNull('tree_published_from')
-                                            ->where(DB::raw("tree_published_from"), '<=', DB::raw('NOW()'));
-                                    });
-                            })
-                            ->where(function ($query) {
-                                $query
-                                    ->whereNull('tree_published_to')
-                                    ->orWhere(function ($query) {
-                                        $query
-                                            ->whereNotNull('tree_published_to')
-                                            ->where(DB::raw("tree_published_to"), '<=', DB::raw('NOW()'));
-                                    });
-                            });
-                    })
-                    ->where(function ($query) {
-                        $query
-                            ->where('tree_class', '=', 'menu_link')
-                            ->orWhere(function ($query) {
-                                $query
-                                    ->whereIn('tree_object_type', ['document', 'category', 'link'])
-                                    ->where('tree_class', '<>', 'index_page');
-                            });
-                    })
+                ->where(function ($query) {
+                    $query
+                        ->where(function ($query) {
+                            $query
+                                ->whereNull('tree_published_from')
+                                ->orWhere(function ($query) {
+                                    $query
+                                        ->whereNotNull('tree_published_from')
+                                        ->where(DB::raw("tree_published_from"), '<=', DB::raw('NOW()'));
+                                });
+                        })
+                        ->where(function ($query) {
+                            $query
+                                ->whereNull('tree_published_to')
+                                ->orWhere(function ($query) {
+                                    $query
+                                        ->whereNotNull('tree_published_to')
+                                        ->where(DB::raw("tree_published_to"), '<=', DB::raw('NOW()'));
+                                });
+                        });
+                })
+                ->where(function ($query) {
+                    $query
+                        ->where('tree_class', '=', 'menu_link')
+                        ->orWhere(function ($query) {
+                            $query
+                                ->whereIn('tree_object_type', ['document', 'category', 'link'])
+                                ->where('tree_class', '<>', 'index_page');
+                        });
+                })
                 ->with('link')
                 ->with('link.linkDocument')
                 ->with('link.linkDocument.document')
@@ -269,7 +304,8 @@ class ContentController extends Controller
             'parent' => $parent,
             'app' => $this->getAppConfig(),
             'mainMenu' => $this->getMainMenu(),
-            'slug' => '/' . $request->route('slug')
+            'slug' => '/' . $request->route('slug'),
+            'headerActions' => $this->getHeaderActions(),
         ]))->withCookie(cookie('visits', json_encode($cookie)));
     }
 
@@ -351,7 +387,8 @@ class ContentController extends Controller
             'parent' => $parent,
             'app' => $this->getAppConfig(),
             'mainMenu' => $this->getMainMenu(),
-            'slug' => '/' . $request->route('slug')
+            'slug' => '/' . $request->route('slug'),
+            'headerActions' => $this->getHeaderActions(),
         ]))->withCookie(cookie('visits', json_encode($cookie)));
     }
 }

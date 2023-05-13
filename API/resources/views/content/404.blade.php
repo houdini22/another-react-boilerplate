@@ -1,9 +1,8 @@
-@extends('layouts.app', ['meta' => [
-    'title' => '404 Not Found',
-]])
+@extends('layouts.app', ['meta' => $meta ?? [], 'headerActions' => $headerActions, 'mainMenu' => $mainMenu])
 @section('content')
 @include("components.page_content", [
-    'content' => '404 Page Not Found.',
+    'content' => $treeDocument->document->document_content,
+    'title' => $treeDocument->document->document_name,
     'slug' => ''
 ])
 @endsection

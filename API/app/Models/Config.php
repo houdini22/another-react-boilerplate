@@ -15,7 +15,7 @@ class Config extends Authenticatable
 
     protected $table = 'config';
     protected $fillable = [
-        'key', 'type', 'value', 'description', 'is_editable', 'is_deletable'
+        'key', 'type', 'value', 'description', 'is_editable', 'is_deletable', 'model_type'
     ];
 
     public function file()
@@ -32,21 +32,9 @@ class Config extends Authenticatable
                 $value = $this->file;
             }
         } else {
-            switch ($this->type) {
-                case 'string':
-                    $value = "";
-                    break;
-
-                case "object":
-                case "array":
-                    $value = [];
-
-                    // no break
-                default:
-                    break;
-            }
-            if ($this->value) {
-                $value = $this->value;
+            $value = $this->value;
+            if ($this->type === "boolean") {
+                $value = (bool) $value;
             }
         }
         return [
@@ -77,6 +65,7 @@ class Config extends Authenticatable
         }
 
         $config['logo'] = $logo;
+
         return $config;
     }
 }
