@@ -31,7 +31,6 @@ export class EditSettings extends React.Component<EditSettingsProps, EditSetting
                                         <EditFormContainer
                                             initialValues={{
                                                 'app:name': getByKey('app.name')?.value,
-                                                'app:logo': getByKey('app.logo')?.value,
                                             }}
                                             save={(values) => {
                                                 return new Promise((resolve) => {

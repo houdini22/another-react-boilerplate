@@ -33,11 +33,28 @@ class Container extends React.Component<ManagerProps, ManagerState> {
         return this.state.config.find(({ key: k }) => k === key)
     }
 
-    edit(config) {
+    edit(data) {
         return new Promise((resolve, reject) => {
-            myPost('/config/edit', { config }).then((edited) => {
-                resolve()
-            })
+            myPost('/config/edit', { config: data }).then(
+                (edited) => {
+                    const { config } = this.state
+
+                    this.setState({
+                        config: config
+                            .filter(({ key }) => {
+                                return !edited.find(({ key: k }) => {
+                                    return k === key
+                                })
+                            })
+                            .concat(edited),
+                    })
+
+                    resolve()
+                },
+                () => {
+                    reject()
+                },
+            )
         })
     }
 

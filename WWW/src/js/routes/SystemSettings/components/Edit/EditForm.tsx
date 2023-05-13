@@ -5,17 +5,12 @@ import { ButtonSave } from '../../../../components/common/ButtonSave'
 
 class EditForm extends React.Component<null, null> {
     render() {
-        const {
-            handleSubmit,
-            initialValues: { file },
-            onChangeLogo,
-            uploadProgress,
-        } = this.props
+        const { handleSubmit, onChangeLogo, uploadProgress } = this.props
         console.log(uploadProgress)
         return (
             <form onSubmit={handleSubmit}>
                 <Field name="app:name" label="Application Name" type="text" placeholder={'Application Name'} component={FormField} />
-                <Field name={'app:logo'} type="hidden" component={FormField} inputOnly />
+                <Field name={'app_logo'} type="hidden" component={FormField} inputOnly />
                 <Field
                     name={'logo'}
                     label="Application Logo"

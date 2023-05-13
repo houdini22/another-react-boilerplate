@@ -1,4 +1,4 @@
-<aside class="col-md-4">
+<aside>
     <div class="p-3 menu">
         <h4 class="font-italic">Menu</h4>
         <ul class="nav nav-pills flex-column mb-auto">

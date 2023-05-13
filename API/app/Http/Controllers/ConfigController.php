@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\ConfigChanged;
 use App\Models\Config;
+use App\Models\File;
 use App\Models\Log;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -32,8 +33,12 @@ class ConfigController extends Controller
 
         $config = $request->post('config');
 
+        $result = [];
+
         foreach ($config as $c) {
-            $model = Config::where('key', '=', $c['key'])->first();
+            $model = Config::where('key', '=', $c['key'])
+                ->with('file')
+                ->first();
             if ($model) {
                 $model->value = $c['value'];
                 $model->model_type = Arr::get($c, 'model_type');
@@ -43,13 +48,19 @@ class ConfigController extends Controller
                     'request' => $request,
                     'model' => $model
                 ]);
+
+                $arr = $model->toArray();
+
+                if (Arr::get($c, 'model_type') === 'file') {
+                    $arr['value'] = File::find($c['value'])->toArray();
+                }
+
+                $result[] = $arr;
             }
         }
 
-        broadcast(new ConfigChanged($config));
+        broadcast(new ConfigChanged($result));
 
-        return $this->responseOK([
-            'config' => $config
-        ]);
+        return $this->responseOK($result);
     }
 }
