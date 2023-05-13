@@ -13,8 +13,8 @@ export class EditCategoryView extends React.Component {
                     <AuthorizationManager>
                         {({ canByPermission }) => (
                             <PageContent>
-                                <Manager id={id}>
-                                    {({ currentNode, currentNodeParents, editCategory, setIsLoading, isLoading }) => {
+                                <Manager id={id} getMenus>
+                                    {({ currentNode, currentNodeParents, editCategory, setIsLoading, isLoading, menus }) => {
                                         return (
                                             <>
                                                 <Header
@@ -41,6 +41,7 @@ export class EditCategoryView extends React.Component {
                                                     save={editCategory}
                                                     setIsLoading={setIsLoading}
                                                     isLoading={isLoading}
+                                                    menus={menus}
                                                 />
                                             </>
                                         )

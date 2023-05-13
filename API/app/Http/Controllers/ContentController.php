@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Config;
 use App\Models\Document;
-use App\Models\File;
 use App\Models\Tree;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +24,8 @@ class ContentController extends Controller
                 ->with('category.indexDocument.document')
                 ->with('category.menuCategory')
                 ->with('document')
+                ->with('document.menuCategory')
+                ->with('document.menuCategory.category')
                 ->with('documentCategory')
                 ->with('documentCategory.documentCategory')
                 ->with('documentCategory.documentCategory.category')
@@ -54,21 +55,7 @@ class ContentController extends Controller
 
     protected function getAppConfig()
     {
-        $config = [
-            'name' => Config::getByKey('app.name')->value,
-        ];
-
-        $logo = null;
-        $logoId = Config::getByKey('app.logo')->value;
-        if ($logoId) {
-            $file = File::find($logoId);
-            if ($file) {
-                $logo = $file->toArray();
-            }
-        }
-
-        $config['logo'] = $logo;
-        return $config;
+        return Config::getAppConfig();
     }
 
     protected function renderDefaultIndexPage()
@@ -96,23 +83,7 @@ class ContentController extends Controller
 
     protected function getMainMenu()
     {
-        $menu = Tree::where('tree_alias', '=', 'menu_category')
-            ->first()
-            ->children()
-            ->where(function ($query) {
-                $query->where('tree_alias', '=', 'main_menu');
-            })
-            ->first()
-            ->children()
-            ->with('link')
-            ->with('link.linkDocument')
-            ->with('link.linkCategory')
-            ->with('link.linkDocument.document')
-            ->with('link.linkCategory.category')
-            ->get()
-            ->toTree();
-
-        return $menu;
+        return Tree::getMenuByName('main_menu');
     }
 
     protected function getMetaFromDocument(Document $document)
@@ -193,22 +164,48 @@ class ContentController extends Controller
                 ->category
                 ->menuCategory
                 ->children()
-                ->where(function ($query) {
-                    $query->where('tree_is_published', '=', 1)
-                        ->where(function ($query) {
-                            $query->where(DB::raw("tree_published_from"), '<=', DB::raw('NOW()'))
-                                ->where(DB::raw("tree_published_to"), '>=', DB::raw('NOW()'));
-                        })
-                        ->where('tree_class', '<>', 'index_page');
-                })
-                ->with('category')
-                ->with('document')
+                ->where('tree_is_published', '=', 1)
+                    ->where(function ($query) {
+                        $query
+                            ->where(function ($query) {
+                                $query
+                                    ->whereNull('tree_published_from')
+                                    ->orWhere(function ($query) {
+                                        $query
+                                            ->whereNotNull('tree_published_from')
+                                            ->where(DB::raw("tree_published_from"), '<=', DB::raw('NOW()'));
+                                    });
+                            })
+                            ->where(function ($query) {
+                                $query
+                                    ->whereNull('tree_published_to')
+                                    ->orWhere(function ($query) {
+                                        $query
+                                            ->whereNotNull('tree_published_to')
+                                            ->where(DB::raw("tree_published_to"), '<=', DB::raw('NOW()'));
+                                    });
+                            });
+                    })
+                    ->where(function ($query) {
+                        $query
+                            ->where('tree_class', '=', 'menu_link')
+                            ->orWhere(function ($query) {
+                                $query
+                                    ->whereIn('tree_object_type', ['document', 'category', 'link'])
+                                    ->where('tree_class', '<>', 'index_page');
+                            });
+                    })
                 ->with('link')
                 ->with('link.linkDocument')
                 ->with('link.linkDocument.document')
                 ->with('link.linkCategory')
                 ->with('link.linkCategory.category')
+                ->with('link.linkFile')
+                ->with('document')
+                ->with('category')
                 ->get();
+
+            //dd($menu->toArray());
         }
 
         return response(view('content.category', [
@@ -247,25 +244,50 @@ class ContentController extends Controller
 
         $menu = [];
         if ($tree
-            ->documentCategory
-            ->category
+            ->document
             ->menuCategory) {
             $menu = $tree
-                ->documentCategory
-                ->category
+                ->document
                 ->menuCategory
                 ->children()
+                ->where('tree_is_published', '=', 1)
                 ->where(function ($query) {
-                    $query->where('tree_is_published', '=', 1)
+                    $query
                         ->where(function ($query) {
-                            $query->where(DB::raw("tree_published_from"), '<=', DB::raw('NOW()'))
-                                ->where(DB::raw("tree_published_to"), '>=', DB::raw('NOW()'));
+                            $query
+                                ->whereNull('tree_published_from')
+                                ->orWhere(function ($query) {
+                                    $query
+                                        ->whereNotNull('tree_published_from')
+                                        ->where(DB::raw("tree_published_from"), '<=', DB::raw('NOW()'));
+                                });
                         })
-                        ->where('tree_class', '<>', 'index_page');
+                        ->where(function ($query) {
+                            $query
+                                ->whereNull('tree_published_to')
+                                ->orWhere(function ($query) {
+                                    $query
+                                        ->whereNotNull('tree_published_to')
+                                        ->where(DB::raw("tree_published_to"), '<=', DB::raw('NOW()'));
+                                });
+                        });
                 })
-                ->with('category')
-                ->with('document')
+                ->where(function ($query) {
+                    $query
+                        ->where('tree_class', '=', 'menu_link')
+                        ->orWhere(function ($query) {
+                            $query
+                                ->whereIn('tree_object_type', ['document', 'category', 'link'])
+                                ->where('tree_class', '<>', 'index_page');
+                        });
+                })
                 ->with('link')
+                ->with('link.linkDocument')
+                ->with('link.linkDocument.document')
+                ->with('link.linkCategory')
+                ->with('link.linkCategory.category')
+                ->with('document')
+                ->with('category')
                 ->get();
         }
 

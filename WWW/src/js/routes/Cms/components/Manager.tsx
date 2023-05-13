@@ -9,27 +9,23 @@ export class Manager extends React.Component<null, null> {
     }
 
     componentDidMount() {
-        const { filters, setCurrentId, fetch, setIsLoading, id = 1, getMenus, fetchMenus, getPages } = this.props
+        const { filters, setCurrentId, fetch, setIsLoading, id = 1, getMenus, fetchMenus } = this.props
+
+        const promises = []
 
         if (id) {
-            Promise.all([setCurrentId(id)]).then(() => {
-                setIsLoading(true).then(() => {
-                    fetch(filters).then(
-                        () => setIsLoading(false),
-                        () => {
-                            setIsLoading(false)
-                        },
-                    )
-                })
-            })
+            promises.push(setCurrentId(id))
+            promises.push(fetch(filters))
         }
         if (getMenus) {
-            setIsLoading(true).then(() => {
-                fetchMenus().then(() => {
-                    setIsLoading(false)
-                })
-            })
+            promises.push(fetchMenus())
         }
+
+        setIsLoading(true).then(() => {
+            Promise.all(promises).then(() => {
+                setIsLoading(false)
+            })
+        })
     }
 
     componentDidUpdate(prevProps: Readonly<null>, prevState: Readonly<null>, snapshot?: any) {
@@ -71,6 +67,7 @@ export class Manager extends React.Component<null, null> {
             newMenuLinks,
             removeNewMenuLink,
             addMenu,
+            fetchMenus,
         } = this.props
 
         const renderProps = {
@@ -95,6 +92,7 @@ export class Manager extends React.Component<null, null> {
             newMenuLinks,
             removeNewMenuLink,
             addMenu,
+            fetchMenus,
         }
 
         return children(renderProps)

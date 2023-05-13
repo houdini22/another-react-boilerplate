@@ -13,8 +13,8 @@ export class EditDocumentView extends React.Component {
                     <AuthorizationManager>
                         {({ canByPermission }) => (
                             <PageContent>
-                                <Manager id={id}>
-                                    {({ currentNode, isLoading, setIsLoading, currentNodeParents, editDocument }) => {
+                                <Manager id={id} getMenus>
+                                    {({ currentNode, isLoading, setIsLoading, currentNodeParents, editDocument, menus }) => {
                                         return (
                                             <div>
                                                 <Header
@@ -44,6 +44,7 @@ export class EditDocumentView extends React.Component {
                                                     save={editDocument}
                                                     setIsLoading={setIsLoading}
                                                     isLoading={isLoading}
+                                                    menus={menus}
                                                 />
                                             </div>
                                         )

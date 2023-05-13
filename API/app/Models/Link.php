@@ -15,7 +15,9 @@ class Link extends Model
         'link_url',
         'link_target',
         'category_id',
-        'document_id'
+        'document_id',
+        'file_id',
+        'link_display_children',
     ];
 
     public function linkDocument()
@@ -26,5 +28,10 @@ class Link extends Model
     public function linkCategory()
     {
         return $this->hasOne(Tree::class, 'id', 'category_id');
+    }
+
+    public function linkFile()
+    {
+        return $this->hasOne(File::class, 'id', 'file_id');
     }
 }

@@ -18,64 +18,22 @@
 <header>
     <div class="navbar navbar-dark bg-dark box-shadow">
         <div class="container d-flex justify-content-between">
-            <a href="{{url('/')}}" class="navbar-brand d-flex align-items-center">
-                @if (\Illuminate\Support\Arr::get($app, 'logo.url'))
-                    <img src="{{\Illuminate\Support\Arr::get($app, 'logo.url')}}" alt="" class="header-logo"/>
-                @endif
-                <strong>{{\Illuminate\Support\Arr::get($app, 'name')}}</strong>
-            </a>
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                @foreach ($mainMenu as $item)
-                    @if (!empty($item->link->linkCategory))
-                        <li><a class="nav-link px-2 {{$item->link->linkCategory->category->category_url === $slug ? "text-secondary" : "text-white"}}"
-                                href="{{$item->link->linkCategory->category->category_url}}">{{$item->link->link_name}}</a>
-                        </li>
-                    @elseif (!empty($item->link->linkDocument))
-                        <li><a class="nav-link px-2 {{$item->link->linkDocument->document->document_url === $slug ? "text-secondary" : "text-white"}}"
-                                href="{{$item->link->linkDocument->document->document_url}}">{{$item->link->link_name}}</a>
-                        </li>
-                    @elseif (!empty($item->link) && !empty($item->link->link_url))
-                        <li><a class="nav-link px-2 {{$item->link->link_url === $slug ? "text-secondary" : "text-white"}}"
-                                href="{{$item->link->link_url}}">{{$item->link->link_name}}</a>
-                        </li>
-                    @endif
-                @endforeach
-            </ul>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
-                 aria-labelledby="offcanvasDarkNavbarLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                            aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{url('/register')}}">Register</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{url('/login')}}">Log in</a>
-                            </li>
-                        @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{url('/logout')}}">Log out</a>
-                            </li>
-                        @endif
-                    </ul>
-                    <form class="d-flex mt-3" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-success" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
+            @include('layouts._app_main_menu', ['mainMenu' => $mainMenu, 'slug' => $slug])
+            @guest
+                <a class="btn btn-outline-light me-2" href="{{url('/login')}}">Log in</a>
+                <a class="btn btn-warning" href="{{url('/register')}}">Register</a>
+            @else
+                <a class="btn btn-outline-light me-2" href="{{url('/logout')}}">Log out</a>
+            @endif
         </div>
+    </div>
+</header>
+<header class="py-3 mb-4 border-bottom">
+    <div class="container d-flex flex-wrap justify-content-center">
+        @include('layouts._app_name_logo', ['app' => $app])
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
+            <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        </form>
     </div>
 </header>
 <main class="container">

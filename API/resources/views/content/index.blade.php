@@ -2,7 +2,7 @@
 @section('content')
     @include("content._jumbotron")
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <h3 class="pb-3 mb-4 font-italic border-bottom">
                 {{$document->document_name}}
             </h3>

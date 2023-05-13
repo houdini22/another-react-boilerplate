@@ -234,13 +234,13 @@ export class List extends React.Component<null, null> {
                                                                                 Published from:{' '}
                                                                                 {node.tree_published_from
                                                                                     ? formatDateTime(node.tree_published_from)
-                                                                                    : 'never'}
+                                                                                    : 'not set'}
                                                                             </p>
                                                                             <p>
                                                                                 Published to:{' '}
                                                                                 {node.tree_published_to
                                                                                     ? formatDateTime(node.tree_published_to)
-                                                                                    : 'never'}
+                                                                                    : 'not set'}
                                                                             </p>
                                                                             {!node.tree_is_published && <p>Publishing disabled.</p>}
                                                                         </Typography.Container>
@@ -259,13 +259,13 @@ export class List extends React.Component<null, null> {
                                                                                 Published from:{' '}
                                                                                 {node.tree_published_from
                                                                                     ? formatDateTime(node.tree_published_from)
-                                                                                    : 'never'}
+                                                                                    : 'not set'}
                                                                             </p>
                                                                             <p>
                                                                                 Published to:{' '}
                                                                                 {node.tree_published_to
                                                                                     ? formatDateTime(node.tree_published_to)
-                                                                                    : 'never'}
+                                                                                    : 'not set'}
                                                                             </p>
                                                                         </Typography.Container>
                                                                     }

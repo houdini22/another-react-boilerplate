@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Document;
+use App\Models\File;
 use App\Models\Link;
 use App\Models\Log;
 use App\Models\Permission;
@@ -362,8 +363,6 @@ class CmsPagesController extends Controller
             'category.category_meta_robots' => 'max:64',
             'category.category_meta_description' => 'max:512',
             'tree.tree_is_published' => ['required'],
-            'tree.tree_published_from' => ['required'],
-            'tree.tree_published_to' => ['required'],
             'tree.tree_display_name' => ['required', 'max:64'],
         ]);
 
@@ -436,8 +435,6 @@ class CmsPagesController extends Controller
             'category.category_meta_description' => 'max:512',
             'parent_id' => 'required',
             'tree.tree_is_published' => ['required'],
-            'tree.tree_published_from' => ['required'],
-            'tree.tree_published_to' => ['required'],
             'tree.tree_display_name' => ['required', 'max:64'],
         ]);
 
@@ -495,8 +492,6 @@ class CmsPagesController extends Controller
             'document.document_meta_robots' => 'max:64',
             'document.document_meta_description' => 'max:512',
             'tree.tree_is_published' => ['required'],
-            'tree.tree_published_from' => ['required'],
-            'tree.tree_published_to' => ['required'],
             'tree.tree_display_name' => ['required', 'max:64'],
         ];
         if ($tree->tree_class !== 'system_page' && $tree->tree_url_is_editable) {
@@ -706,8 +701,10 @@ class CmsPagesController extends Controller
             'request' => $request
         ]);
 
+        $logName = $node->tree_class === "menu_category" ? "cms.menus.delete" : "cms.delete";
+
         foreach ($node->descendants as $d) {
-            Log::add($user, 'cms.delete', [
+            Log::add($user, $logName, [
                 'model' => $node,
                 'message' => "{$d->tree_object_type}.deleted_as_descendant",
                 'related_model' => $d,
@@ -735,8 +732,6 @@ class CmsPagesController extends Controller
             'document.document_meta_description' => 'max:512',
             'parent_id' => 'required',
             'tree.tree_is_published' => ['required'],
-            'tree.tree_published_from' => ['required'],
-            'tree.tree_published_to' => ['required'],
             'tree.tree_display_name' => ['required', 'max:64'],
         ]);
 
@@ -839,6 +834,16 @@ class CmsPagesController extends Controller
         return $this->responseOK($documents);
     }
 
+    public function getGetFiles(Request $request)
+    {
+        $user = $this->getUserFromRequest($request);
+
+        $files = File::orderBy('name', 'ASC')
+            ->get();
+
+        return $this->responseOK($files);
+    }
+
     public function getGetCategories(Request $request)
     {
         $user = $this->getUserFromRequest($request);
@@ -896,9 +901,8 @@ class CmsPagesController extends Controller
             $linkTree = $menuCategory->children()->create([
                 'tree_display_name' => Arr::get($link, 'link.link_name'),
                 'tree_is_published' => 1,
-                'tree_published_from' => '2000-01-01 00:00:00',
-                'tree_published_to' => '2099-01-01 00:00:00',
-                'tree_class' => 'menu_item'
+                'tree_class' => 'menu_link',
+                'tree_object_type' => 'link'
             ]);
             $linkTreeLink = Link::create(Arr::get($link, 'link'));
             $linkTreeLink->tree_id = $linkTree->id;

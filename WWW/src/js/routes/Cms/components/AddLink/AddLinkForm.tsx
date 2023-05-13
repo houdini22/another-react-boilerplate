@@ -14,6 +14,7 @@ class AddLinkForm extends React.Component {
             linkCategories,
             formValues: { tree: formValues, target },
             isLoading,
+            files,
         } = this.props
 
         const linkTargets = [
@@ -72,6 +73,10 @@ class AddLinkForm extends React.Component {
                                                                     value: 'document',
                                                                 },
                                                                 {
+                                                                    label: 'File',
+                                                                    value: 'file',
+                                                                },
+                                                                {
                                                                     label: 'Enter URL manually',
                                                                     value: 'manually',
                                                                 },
@@ -104,6 +109,16 @@ class AddLinkForm extends React.Component {
                                                                 placeholder={'--- choose ---'}
                                                                 component={FormField}
                                                                 options={documents}
+                                                            />
+                                                        )}
+                                                        {target === 'file' && (
+                                                            <Field
+                                                                name="link.file_id"
+                                                                label="URL to File"
+                                                                type="select"
+                                                                placeholder={'--- choose ---'}
+                                                                component={FormField}
+                                                                options={files}
                                                             />
                                                         )}
                                                         <Field

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Config;
+use App\Models\Tree;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Carbon\Carbon;
@@ -98,7 +100,12 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        return response(view('auth.register'));
+        return response(view('auth.register', [
+            'mainMenu' => Tree::getMenuByName('main_menu'),
+            'slug' => '/register',
+            'app' => Config::getAppConfig(),
+            'contentPartial' => Tree::getPartialByName('register_partial'),
+        ]));
     }
 
     public function postRegister(Request $request)

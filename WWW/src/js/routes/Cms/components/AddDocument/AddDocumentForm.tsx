@@ -17,6 +17,7 @@ class AddDocumentForm extends React.Component {
             },
             formValues: { tree: formValues },
             isLoading,
+            menus,
         } = this.props
 
         return (
@@ -90,6 +91,28 @@ class AddDocumentForm extends React.Component {
                                                                 label="Content"
                                                                 placeholder={'Content'}
                                                                 type="textarea"
+                                                                component={FormField}
+                                                            />
+                                                            <Field
+                                                                name="document.menu_category_id"
+                                                                label="Display Menu"
+                                                                placeholder={'Do not display Menu'}
+                                                                type="select"
+                                                                options={[
+                                                                    {
+                                                                        label: 'Menus',
+                                                                        children: menus.map(({ id, tree_display_name }) => {
+                                                                            return {
+                                                                                value: id,
+                                                                                label: tree_display_name,
+                                                                            }
+                                                                        }),
+                                                                    },
+                                                                    {
+                                                                        label: 'Display from Category',
+                                                                        children: categories,
+                                                                    },
+                                                                ]}
                                                                 component={FormField}
                                                             />
                                                         </Card>

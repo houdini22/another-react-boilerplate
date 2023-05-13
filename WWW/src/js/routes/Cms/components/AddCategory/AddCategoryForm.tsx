@@ -18,6 +18,7 @@ class AddCategoryForm extends React.Component {
             },
             formValues: { tree: formValues },
             isLoading,
+            menus,
         } = this.props
 
         return (
@@ -104,10 +105,18 @@ class AddCategoryForm extends React.Component {
                                                             component={FormField}
                                                             options={[
                                                                 {
-                                                                    label: 'This category',
-                                                                    value: 'new',
+                                                                    label: 'Menus',
+                                                                    children: menus.map(({ id, tree_display_name }) => {
+                                                                        return {
+                                                                            value: id,
+                                                                            label: tree_display_name,
+                                                                        }
+                                                                    }),
                                                                 },
-                                                                ...categories,
+                                                                {
+                                                                    label: 'Display from Category',
+                                                                    children: categories,
+                                                                },
                                                             ]}
                                                             placeholder={'Do not display menu'}
                                                         />

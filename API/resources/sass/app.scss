@@ -12,11 +12,9 @@ body {
     font-family: $font-family-sans-serif;
     min-height: 100vh;
     min-width: 100vw;
-    background-color: var(--bs-gray-300);
+    background-color: var(--bs-body-bg-rgb);
 
     & > .container {
-        margin-top: 30px;
-
         & > footer {
             margin-top: 30px;
             padding-top: 1rem;
@@ -29,11 +27,6 @@ body {
 
             & > h4 {
                 margin-top: 1rem;
-            }
-
-            .nav-item > .nav-link {
-                padding-left: 0;
-                padding-right: 0;
             }
         }
     }
@@ -86,6 +79,10 @@ img.header-logo {
     align-items: center;
     align-content: center;
     justify-content: center;
+}
+
+.margin-bottom {
+    margin-bottom: 1.5rem;
 }
 
 :root {

@@ -14,6 +14,7 @@ class AddLinkFormContainerBase extends React.Component<null, null> {
     state = {
         documents: [],
         linkCategories: [],
+        files: [],
     }
 
     componentDidUpdate(prevProps: Readonly<null>, prevState: Readonly<null>, snapshot?: any) {
@@ -22,6 +23,8 @@ class AddLinkFormContainerBase extends React.Component<null, null> {
             this.fetchDocumentsForSelect()
         } else if (target === 'category' && prevProps.target !== target) {
             this.fetchCategoriesForSelect()
+        } else if (target === 'file' && prevProps.target !== target) {
+            this.fetchFilesForSelect()
         }
     }
 
@@ -67,7 +70,18 @@ class AddLinkFormContainerBase extends React.Component<null, null> {
             this.setState({ linkCategories: options })
         })
     }
-
+    fetchFilesForSelect() {
+        myGet('/cms/pages/link/getFiles').then((files) => {
+            const options = []
+            files.forEach(({ name, id: file_id }) => {
+                options.push({
+                    label: name,
+                    value: file_id,
+                })
+            })
+            this.setState({ files: options })
+        })
+    }
     render() {
         return <AddLinkForm {...this.props} {...this.state} />
     }

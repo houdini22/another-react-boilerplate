@@ -16,8 +16,8 @@ export class AddCategoryView extends React.Component {
                     <AuthorizationManager>
                         {({ canByPermission }) => (
                             <PageContent>
-                                <Manager id={parent_id}>
-                                    {({ currentNode, isLoading, setIsLoading, currentNodeParents, addCategory }) => {
+                                <Manager id={parent_id} getMenus>
+                                    {({ currentNode, isLoading, setIsLoading, currentNodeParents, addCategory, menus }) => {
                                         return (
                                             <>
                                                 <Header
@@ -60,6 +60,7 @@ export class AddCategoryView extends React.Component {
                                                     save={addCategory}
                                                     setIsLoading={setIsLoading}
                                                     isLoading={isLoading}
+                                                    menus={menus}
                                                 />
                                             </>
                                         )

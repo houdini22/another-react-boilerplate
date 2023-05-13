@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Config;
+use App\Models\Tree;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
@@ -52,7 +53,14 @@ class LoginController extends Controller
         $meta['keywords'] = Config::getByKey('cms.meta.keywords')->value;
         $meta['robots'] = Config::getByKey('cms.meta.robots')->value;
 
-        return response(view('auth.login', ['meta' => $meta, 'error' => null]));
+        return response(view('auth.login', [
+            'meta' => $meta,
+            'error' => null,
+            'mainMenu' => Tree::getMenuByName('main_menu'),
+            'slug' => '/login',
+            'app' => Config::getAppConfig(),
+            'contentPartial' => Tree::getPartialByName('login_partial'),
+        ]));
     }
 
     public function postLogin(Request $request)
@@ -89,7 +97,14 @@ class LoginController extends Controller
             }
         }
 
-        return response(view('auth.login', ['meta' => $meta, 'error' => $error]));
+        return response(view('auth.login', [
+            'meta' => $meta,
+            'error' => $error,
+            'mainMenu' => Tree::getMenuByName('main_menu'),
+            'slug' => '/login',
+            'app' => Config::getAppConfig(),
+            'contentPartial' => Tree::getPartialByName('login_partial')->toArray(),
+        ]));
     }
 
     public function logout(Request $request)

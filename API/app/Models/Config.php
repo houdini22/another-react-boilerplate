@@ -49,4 +49,23 @@ class Config extends Authenticatable
     {
         return Config::where('key', '=', $key)->first();
     }
+
+    public static function getAppConfig()
+    {
+        $config = [
+            'name' => Config::getByKey('app.name')->value,
+        ];
+
+        $logo = null;
+        $logoId = Config::getByKey('app.logo')->value;
+        if ($logoId) {
+            $file = File::find($logoId);
+            if ($file) {
+                $logo = $file->toArray();
+            }
+        }
+
+        $config['logo'] = $logo;
+        return $config;
+    }
 }

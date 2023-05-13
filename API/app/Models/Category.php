@@ -19,6 +19,7 @@ class Category extends Model
         'category_meta_description',
         'index_document_id',
         'menu_category_id',
+        'tree_id',
     ];
 
     public function indexDocument()

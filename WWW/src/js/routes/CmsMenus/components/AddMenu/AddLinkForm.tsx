@@ -6,7 +6,7 @@ import { ButtonSave } from '../../../../components/common/ButtonSave'
 
 class AddLinkForm extends React.Component {
     render() {
-        const { handleSubmit, target, documents, linkCategories } = this.props
+        const { handleSubmit, target, documents, linkCategories, files } = this.props
 
         const linkTargets = [
             { label: '_self', value: '_self' },
@@ -46,6 +46,10 @@ class AddLinkForm extends React.Component {
                                                     value: 'document',
                                                 },
                                                 {
+                                                    label: 'File',
+                                                    value: 'file',
+                                                },
+                                                {
                                                     label: 'Enter URL manually',
                                                     value: 'manually',
                                                 },
@@ -72,6 +76,16 @@ class AddLinkForm extends React.Component {
                                                 placeholder={'--- choose ---'}
                                                 component={FormField}
                                                 options={documents}
+                                            />
+                                        )}
+                                        {target === 'file' && (
+                                            <Field
+                                                name="link.file_id"
+                                                label="URL to File"
+                                                type="select"
+                                                placeholder={'--- choose ---'}
+                                                component={FormField}
+                                                options={files}
                                             />
                                         )}
                                         <Field name="link.link_target" label="Target" type="select" component={FormField} options={linkTargets} />

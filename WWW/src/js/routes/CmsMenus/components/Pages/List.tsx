@@ -1,17 +1,6 @@
 import * as React from 'react'
-import { Alert, Button, Card, Dropdown, Label, LoadingOverlay, Table, Tooltip, Typography } from '../../../../components'
-import {
-    AddIcon,
-    AlertIcon,
-    CategoryIcon,
-    DocumentIcon,
-    EditIcon,
-    LinkIcon,
-    OrderingIcon,
-    PublishIcon,
-    UnpublishIcon,
-    UpArrowIcon,
-} from '../../../../components/icons'
+import { Alert, Button, Card, LoadingOverlay, Table, Tooltip, Typography } from '../../../../components'
+import { PublishIcon, UnpublishIcon } from '../../../../components/icons'
 import { formatDateTime } from '../../../../helpers/date-time'
 import styles from '../../../../../assets/scss/routes/cms.scss'
 import classNames from 'classnames/bind'
@@ -21,8 +10,6 @@ import { ModalManager } from '../../../../components/ui/Modal'
 import { RouteManager } from '../../../../containers'
 import { ButtonDelete } from '../../../../components/common/ButtonDelete'
 import { ButtonEdit } from '../../../../components/common/ButtonEdit'
-import moment from 'moment'
-import config from '../../../../config'
 
 const cx = classNames.bind(styles)
 
@@ -32,7 +19,7 @@ export class List extends React.Component<null, null> {
 
         return (
             <RouteManager>
-                {({ navigate }) => (
+                {({}) => (
                     <ModalManager>
                         {({ registerModal, openModal, closeModal }) => (
                             <Card color={'primary'} header={<h1>Menus</h1>}>
@@ -91,73 +78,71 @@ export class List extends React.Component<null, null> {
                                             return (
                                                 <Table.Tr key={menu.id}>
                                                     <Table.Td xs={12} md={5}>
-                                                        <div>
-                                                            {/*{node.tree_object_type === 'category' && node?.category?.category_name}
-                                                            {node.tree_object_type === 'document' && node?.document?.document_name}
-                                                            {node.tree_object_type === 'link' && node?.link?.link_name}*/}
-                                                            {menu.tree_display_name}
-                                                        </div>
+                                                        <div>{menu.tree_display_name}</div>
                                                     </Table.Td>
-                                                    <Table.Td xs={6} md={3}>
+                                                    <Table.Td xs={6} md={3} className={cx('tree-icon')}>
                                                         <div>
-                                                            {!isPublished(menu) && (
-                                                                <Tooltip
-                                                                    color={'primary'}
-                                                                    tooltip={
-                                                                        <Typography.Container>
-                                                                            <p>
-                                                                                Published from:{' '}
-                                                                                {menu.tree_published_from
-                                                                                    ? formatDateTime(menu.tree_published_from)
-                                                                                    : 'never'}
-                                                                            </p>
-                                                                            <p>
-                                                                                Published to:{' '}
-                                                                                {menu.tree_published_to
-                                                                                    ? formatDateTime(menu.tree_published_to)
-                                                                                    : 'never'}
-                                                                            </p>
-                                                                            {!menu.tree_is_published && <p>Publishing disabled.</p>}
-                                                                        </Typography.Container>
-                                                                    }
-                                                                    placement={'top'}
-                                                                >
-                                                                    <UnpublishIcon className={cx('text-danger')} />
-                                                                </Tooltip>
-                                                            )}
-                                                            {isPublished(menu) && (
-                                                                <Tooltip
-                                                                    color={'primary'}
-                                                                    tooltip={
-                                                                        <Typography.Container>
-                                                                            <p>
-                                                                                Published from:{' '}
-                                                                                {menu.tree_published_from
-                                                                                    ? formatDateTime(menu.tree_published_from)
-                                                                                    : 'never'}
-                                                                            </p>
-                                                                            <p>
-                                                                                Published to:{' '}
-                                                                                {menu.tree_published_to
-                                                                                    ? formatDateTime(menu.tree_published_to)
-                                                                                    : 'never'}
-                                                                            </p>
-                                                                        </Typography.Container>
-                                                                    }
-                                                                    placement={'top'}
-                                                                >
-                                                                    <PublishIcon className={cx('text-success')} />
-                                                                </Tooltip>
+                                                            {!!menu.tree_publishing_is_editable && (
+                                                                <>
+                                                                    {!isPublished(menu) && (
+                                                                        <Tooltip
+                                                                            color={'primary'}
+                                                                            tooltip={
+                                                                                <Typography.Container>
+                                                                                    <p>
+                                                                                        Published from:{' '}
+                                                                                        {menu.tree_published_from
+                                                                                            ? formatDateTime(menu.tree_published_from)
+                                                                                            : 'not set'}
+                                                                                    </p>
+                                                                                    <p>
+                                                                                        Published to:{' '}
+                                                                                        {menu.tree_published_to
+                                                                                            ? formatDateTime(menu.tree_published_to)
+                                                                                            : 'not set'}
+                                                                                    </p>
+                                                                                    {!menu.tree_is_published && <p>Publishing disabled.</p>}
+                                                                                </Typography.Container>
+                                                                            }
+                                                                            placement={'top'}
+                                                                        >
+                                                                            <UnpublishIcon className={cx('text-danger')} />
+                                                                        </Tooltip>
+                                                                    )}
+                                                                    {isPublished(menu) && (
+                                                                        <Tooltip
+                                                                            color={'primary'}
+                                                                            tooltip={
+                                                                                <Typography.Container>
+                                                                                    <p>
+                                                                                        Published from:{' '}
+                                                                                        {menu.tree_published_from
+                                                                                            ? formatDateTime(menu.tree_published_from)
+                                                                                            : 'not set'}
+                                                                                    </p>
+                                                                                    <p>
+                                                                                        Published to:{' '}
+                                                                                        {menu.tree_published_to
+                                                                                            ? formatDateTime(menu.tree_published_to)
+                                                                                            : 'not set'}
+                                                                                    </p>
+                                                                                </Typography.Container>
+                                                                            }
+                                                                            placement={'top'}
+                                                                        >
+                                                                            <PublishIcon className={cx('text-success')} />
+                                                                        </Tooltip>
+                                                                    )}
+                                                                </>
                                                             )}
                                                         </div>
                                                     </Table.Td>
                                                     <Table.Td xs={6} md={4}>
                                                         <div>
                                                             {!!(
-                                                                menu.tree_class !== 'system_page' &&
-                                                                menu.tree_is_editable &&
+                                                                menu.tree_publishing_is_editable &&
                                                                 !isPublished(menu) &&
-                                                                canByPermission(`cms.publish`)
+                                                                canByPermission(`cms.menus.publish`)
                                                             ) && (
                                                                 <Tooltip tooltip={'Publish'}>
                                                                     <Button
@@ -175,10 +160,9 @@ export class List extends React.Component<null, null> {
                                                                 </Tooltip>
                                                             )}
                                                             {!!(
-                                                                menu.tree_class !== 'system_page' &&
-                                                                menu.tree_is_editable &&
+                                                                menu.tree_publishing_is_editable &&
                                                                 isPublished(menu) &&
-                                                                canByPermission(`cms.unpublish`)
+                                                                canByPermission(`cms.menus.unpublish`)
                                                             ) && (
                                                                 <Tooltip tooltip={'Unpublish'}>
                                                                     <Button
@@ -196,49 +180,10 @@ export class List extends React.Component<null, null> {
                                                                 </Tooltip>
                                                             )}
 
-                                                            {!!menu.tree_is_editable &&
-                                                                menu.tree_object_type === 'category' &&
-                                                                canByPermission(['cms.add_link', 'cms.add_document', 'cms.add_category']) && (
-                                                                    <Dropdown.Container triggerColor={'success'} placement={'right'}>
-                                                                        <Dropdown.Trigger
-                                                                            component={Button}
-                                                                            componentProps={{
-                                                                                icon: <AddIcon />,
-                                                                                iconOnly: true,
-                                                                            }}
-                                                                        />
-                                                                        <Dropdown.Menu>
-                                                                            <Dropdown.Item
-                                                                                onClick={(e) => {
-                                                                                    e.stopPropagation()
-                                                                                    navigate(`/cms/pages/add_category?parent_id=${menu.id}`)
-                                                                                }}
-                                                                            >
-                                                                                Category
-                                                                            </Dropdown.Item>
-                                                                            <Dropdown.Item
-                                                                                onClick={(e) => {
-                                                                                    e.stopPropagation()
-                                                                                    navigate(`/cms/pages/add_document?parent_id=${menu.id}`)
-                                                                                }}
-                                                                            >
-                                                                                Document
-                                                                            </Dropdown.Item>
-                                                                            <Dropdown.Item
-                                                                                onClick={(e) => {
-                                                                                    e.stopPropagation()
-                                                                                    navigate(`/cms/pages/add_link?parent_id=${menu.id}`)
-                                                                                }}
-                                                                            >
-                                                                                Link
-                                                                            </Dropdown.Item>
-                                                                        </Dropdown.Menu>
-                                                                    </Dropdown.Container>
-                                                                )}
-                                                            {!!menu.tree_is_editable && canByPermission(`cms.edit_${menu.tree_object_type}`) && (
-                                                                <ButtonEdit href={`/cms/pages/edit_${menu.tree_object_type}?id=${menu.id}`} />
+                                                            {!!menu.tree_is_editable && canByPermission(`cms.menus.edit`) && (
+                                                                <ButtonEdit href={`/cms/menus/edit/?id=${menu.id}`} />
                                                             )}
-                                                            {!!menu.tree_is_deletable && (
+                                                            {!!menu.tree_is_deletable && canByPermission(`cms.menus.delete`) && (
                                                                 <ButtonDelete
                                                                     onClick={(e) => {
                                                                         e.stopPropagation()

@@ -20,15 +20,16 @@ export const generateUrl = (parentUrl = '', categoryName = '') => {
 
 export const isPublished = (node = {}) => {
     if (!node.tree_is_published) return false
-    if (node.tree_published_from === null) return false
-    if (node.tree_published_to === null) return false
 
-    if (moment(node.tree_published_from, 'YYYY-MM-DD HH:mm:ss').unix() > moment().unix()) {
-        return false
+    if (typeof node.tree_published_from === 'string') {
+        if (moment(node.tree_published_from, 'YYYY-MM-DD HH:mm:ss').unix() > moment().unix()) {
+            return false
+        }
     }
-
-    if (moment(node.tree_published_to, 'YYYY-MM-DD HH:mm:ss').unix() < moment().unix()) {
-        return false
+    if (typeof node.tree_published_to === 'string') {
+        if (moment(node.tree_published_to, 'YYYY-MM-DD HH:mm:ss').unix() < moment().unix()) {
+            return false
+        }
     }
 
     return true

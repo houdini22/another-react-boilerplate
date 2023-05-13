@@ -43,6 +43,8 @@ export class EditLinkView extends React.Component {
                                                                 ? 'document'
                                                                 : currentNode.link?.category_id > 0
                                                                 ? 'category'
+                                                                : currentNode.link?.file_id > 0
+                                                                ? 'file'
                                                                 : 'manually',
                                                     }}
                                                     save={editLink}
