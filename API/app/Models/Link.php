@@ -18,6 +18,7 @@ class Link extends Model
         'document_id',
         'file_id',
         'link_display_children',
+        'icon_id'
     ];
 
     public function linkDocument()
@@ -33,5 +34,10 @@ class Link extends Model
     public function linkFile()
     {
         return $this->hasOne(File::class, 'id', 'file_id');
+    }
+
+    public function iconFile()
+    {
+        return $this->hasOne(File::class, 'id', 'icon_id');
     }
 }

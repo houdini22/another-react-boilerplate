@@ -92,6 +92,26 @@ img.header-logo {
     margin-bottom: 1.5rem;
 }
 
+.component-navbar-menu {
+    & > li {
+        display: flex;
+        align-content: end;
+        flex-wrap: wrap;
+
+        .component-navbar-menu__menu-item {
+            cursor: pointer;
+
+            & > img {
+                max-width: 24px;
+                max-height: 24px;
+                height: 24px;
+                width: 24px;
+            }
+        }
+    }
+
+}
+
 :root {
     --jumbotron-padding-y: 3rem;
 }

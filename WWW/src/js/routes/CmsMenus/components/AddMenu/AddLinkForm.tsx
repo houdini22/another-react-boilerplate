@@ -6,7 +6,7 @@ import { ButtonSave } from '../../../../components/common/ButtonSave'
 
 class AddLinkForm extends React.Component {
     render() {
-        const { handleSubmit, target, documents, linkCategories, files } = this.props
+        const { handleSubmit, target, documents, linkCategories, files, icons } = this.props
 
         const linkTargets = [
             { label: '_self', value: '_self' },
@@ -88,6 +88,14 @@ class AddLinkForm extends React.Component {
                                                 options={files}
                                             />
                                         )}
+                                        <Field
+                                            name="link.icon_id"
+                                            label="Icon"
+                                            type="select"
+                                            placeholder={'--- choose ---'}
+                                            component={FormField}
+                                            options={icons}
+                                        />
                                         <Field name="link.link_target" label="Target" type="select" component={FormField} options={linkTargets} />
                                         <ButtonSave />
                                     </div>

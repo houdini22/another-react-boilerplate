@@ -15,6 +15,11 @@ class AddLinkFormContainerBase extends React.Component<null, null> {
         documents: [],
         linkCategories: [],
         files: [],
+        icons: [],
+    }
+
+    componentDidMount() {
+        this.fetchIconsForSelect();
     }
 
     componentDidUpdate(prevProps: Readonly<null>, prevState: Readonly<null>, snapshot?: any) {
@@ -57,7 +62,18 @@ class AddLinkFormContainerBase extends React.Component<null, null> {
             this.setState({ documents: Object.keys(options).map((key) => options[key]) })
         })
     }
-
+    fetchIconsForSelect() {
+        myGet('/cms/pages/link/getIcons').then((icons) => {
+            const options = []
+            icons.forEach(({ name, id: file_id }) => {
+                options.push({
+                    label: name,
+                    value: file_id,
+                })
+            })
+            this.setState({ icons: options })
+        })
+    }
     fetchCategoriesForSelect() {
         myGet('/cms/pages/link/getCategories').then((categories) => {
             const options = []

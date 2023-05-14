@@ -860,6 +860,17 @@ class CmsPagesController extends Controller
         return $this->responseOK($categories);
     }
 
+    public function getGetIcons(Request $request)
+    {
+        $user = $this->getUserFromRequest($request);
+
+        $files = File::where('class', '=', 'icon')
+            ->orderBy('name', 'asc')
+            ->get();
+
+        return $this->responseOK($files);
+    }
+
     public function postMenusAdd(Request $request)
     {
         $user = $this->getUserFromRequest($request);
@@ -898,7 +909,6 @@ class CmsPagesController extends Controller
         foreach ($links as $link) {
             $linkTree = $menuCategory->children()->create([
                 'tree_display_name' => Arr::get($link, 'link.link_name'),
-                'tree_is_published' => 1,
                 'tree_class' => 'menu_link',
                 'tree_object_type' => 'link'
             ]);
@@ -923,6 +933,7 @@ class CmsPagesController extends Controller
             ->withCount('children')
             ->with('children')
             ->with('children.link')
+            ->with('children.link.iconFile')
             ->with('children.link.linkDocument')
             ->with('children.link.linkDocument.document')
             ->with('children.link.linkCategory')

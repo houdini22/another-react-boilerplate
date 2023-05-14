@@ -80,10 +80,25 @@ class Tree extends Model
             ->first()
             ->children()
             ->with('link')
+            ->with('link.iconFile')
             ->with('link.linkDocument')
-            ->with('link.linkCategory')
             ->with('link.linkDocument.document')
+            ->with('link.linkCategory')
             ->with('link.linkCategory.category')
+            ->with('link.linkCategory.children')
+            ->with('link.linkCategory.children.category')
+            ->with('link.linkCategory.children.document')
+            ->with('link.linkCategory.children.link')
+            ->where(function($query) {
+                $query->where(function($query) {
+                    $query->whereHas('link.linkCategory.children', function($query) {
+                        $query->where('tree.tree_class', '<>', 'index_page');
+                    });
+                })->orWhere(function($query) {
+                    $query->whereDoesntHave('link.linkCategory.children');
+                });
+
+            })
             ->get()
             ->toTree();
     }

@@ -25,7 +25,7 @@ export class Index extends React.Component<null, UsersViewState> {
         const { addVisible } = this.state
 
         return (
-            <TitleManager>
+            <TitleManager key={`${addVisible ? "1" : 0}`}>
                 {({ setTitleSegments }) => {
                     setTitleSegments(['Media'])
 
@@ -37,22 +37,12 @@ export class Index extends React.Component<null, UsersViewState> {
                                         <PageContent>
                                             <Header
                                                 openAddModal={() => {
-                                                    this.setState({ addVisible: true })
+                                                    this.setState({ addVisible: !addVisible })
                                                 }}
                                             />
                                             <MediaManager>
                                                 {({ deleteFile, uploadFiles, uploadProgress, editFile, isLoading, setIsLoading }) => (
                                                     <>
-                                                        {addVisible && (
-                                                            <Card header={<h1>Add files</h1>}>
-                                                                <UploadFileFormContainer
-                                                                    uploadFiles={uploadFiles}
-                                                                    uploadProgress={uploadProgress}
-                                                                    fetch={fetch}
-                                                                    addToastNotification={addToastNotification}
-                                                                />
-                                                            </Card>
-                                                        )}
                                                         <FiltersManager
                                                             defaultFilters={getDefaultFilters()}
                                                             name={'media-filters'}
@@ -92,6 +82,18 @@ export class Index extends React.Component<null, UsersViewState> {
                                                                         page,
                                                                     }) => (
                                                                         <>
+                                                                            {addVisible && (
+                                                                                <Card header={<h1>Add files</h1>}>
+                                                                                    <UploadFileFormContainer
+                                                                                        uploadFiles={uploadFiles}
+                                                                                        uploadProgress={uploadProgress}
+                                                                                        fetch={fetch}
+                                                                                        addToastNotification={addToastNotification}
+                                                                                        setIsLoading={setIsLoading}
+                                                                                    />
+                                                                                </Card>
+                                                                            )}
+
                                                                             <FilesFilters
                                                                                 filters={filters}
                                                                                 setFilter={setFilter}

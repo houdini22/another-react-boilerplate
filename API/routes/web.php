@@ -31,6 +31,7 @@ Route::prefix('api/v1')->group(function () {
         Route::get('pages/link/getDocuments', '\App\Http\Controllers\CmsPagesController@getGetDocuments');
         Route::get('pages/link/getCategories', '\App\Http\Controllers\CmsPagesController@getGetCategories');
         Route::get('pages/link/getFiles', '\App\Http\Controllers\CmsPagesController@getGetFiles');
+        Route::get('pages/link/getIcons', '\App\Http\Controllers\CmsPagesController@getGetIcons');
         Route::get('menus', '\App\Http\Controllers\CmsPagesController@getMenus');
         Route::post('menus/add', '\App\Http\Controllers\CmsPagesController@postMenusAdd');
     });

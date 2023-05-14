@@ -37,7 +37,7 @@ export class FileView extends React.Component<FileProps, FileState> {
 
     render() {
         const {
-            file: { id, name, width, height, extension },
+            file: { id, name, width, height, extension, mime },
             deleteFile,
             fetch,
             file,
@@ -47,7 +47,7 @@ export class FileView extends React.Component<FileProps, FileState> {
         } = this.props
         const { confirmDeleteModalVisible, detailsModalVisible } = this.state
 
-        const isImage = typeof width === 'number' && typeof height === 'number'
+        const isImage = (typeof width === 'number' && typeof height === 'number') || mime === "image/svg+xml";
 
         return (
             <div

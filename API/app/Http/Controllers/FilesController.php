@@ -26,6 +26,12 @@ class FilesController extends Controller
         $filePath = storage_path('app/public' . $file->file_path);
         $deleteAfterSend = false;
 
+        if ($file->mime === "image/svg+xml") {
+            return response()->file($filePath, [
+                'Content-Type' => $file->mime,
+            ])->deleteFileAfterSend(false);
+        }
+
         if ($request->query('width') && $request->query('height')) {
             $image_resize = \Intervention\Image\Facades\Image::make($filePath);
             $image_resize->fit($request->query('width'), $request->query('height'));
