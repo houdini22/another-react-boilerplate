@@ -25,7 +25,7 @@ export const navigation = [
         caption: 'CMS',
         href: '/cms/pages',
         icon: <FaSitemap />,
-        urlActive: [/\/cms\/pages.*/, /\/cms\/menus.*/],
+        urlActive: [/\/cms\/pages.*/, /\/cms\/menus.*/, /\/cms\/settings.*/],
         permission: 'cms.list',
         children: [
             {
