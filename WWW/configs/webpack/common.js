@@ -20,7 +20,16 @@ module.exports = {
             },
             {
                 test: /\.(scss|sass)$/,
-                use: ["style-loader", {loader: "css-loader"/*, options: {modules: true}*/}, "sass-loader"],
+                use: ["style-loader", {loader: "css-loader"/*, options: {modules: true}*/}, {
+                    loader: "sass-loader",
+                    options: {
+                        // Prefer `dart-sass`
+                        implementation: require("sass"),
+                        sassOptions: {
+                            quietDeps: true
+                        }
+                    },
+                },],
             },
             {
                 test: /\.(jpe?g|png|gif)$/i,

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use App\Models\Log;
+use App\Models\Tree;
 use Illuminate\Http\Request;
 
 class FilesController extends Controller
@@ -125,6 +126,24 @@ class FilesController extends Controller
                 'model' => $file,
                 'request' => $request
             ]);
+
+            if (!empty($data['tree_parent_id'])) {
+                $parentTreeCategory = Tree::where('id', '=', $data['tree_parent_id'])->first();
+                $parentTreeCategory->createChildTreeFile([
+                    'tree_is_published' => true,
+                    'tree_is_visible_frontend' => true,
+                    'tree_is_visible_backend' => true,
+                    'tree_is_visible_in_select' => false,
+                    'tree_is_deletable' => true,
+                    'tree_is_editable' => true,
+                    'tree_has_edit_button' => true,
+                    'tree_is_viewable' => true,
+                    'tree_url_is_showable' => true,
+                    'tree_url_is_editable' => true,
+                    'tree_menu_is_visible' => false,
+                    'tree_class' => 'tree_file',
+                ], $file);
+            }
         }
 
         return $this->responseOK($result);

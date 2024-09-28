@@ -33,6 +33,7 @@ Route::prefix('api/v1')->group(function () {
         Route::get('pages/link/getFiles', '\App\Http\Controllers\CmsPagesController@getGetFiles');
         Route::get('pages/link/getIcons', '\App\Http\Controllers\CmsPagesController@getGetIcons');
         Route::get('menus', '\App\Http\Controllers\CmsPagesController@getMenus');
+        Route::get('menu', '\App\Http\Controllers\CmsPagesController@getMenu');
         Route::post('menus/add', '\App\Http\Controllers\CmsPagesController@postMenusAdd');
     });
 
@@ -115,6 +116,7 @@ Route::post('/login', '\App\Http\Controllers\Auth\LoginController@postLogin');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 Route::get('/register', '\App\Http\Controllers\Auth\RegisterController@register')->name('register');
 Route::post('/register', '\App\Http\Controllers\Auth\RegisterController@postRegister');
+Route::post('/contact', '\App\Http\Controllers\ContentController@postContact')->name('contact');
 
 Route::get('{slug}', '\App\Http\Controllers\ContentController@getGet')
     ->where('slug', '([a-zA-Z\-\_0-9\/]+)?');

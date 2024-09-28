@@ -7,6 +7,7 @@ const SET_NODES = 'cms-pages::set-nodes'
 const SET_CURRENT_NODE = 'cms-pages::set-current-node'
 const SET_CURRENT_NODE_PARENTS = 'cms-pages::set-current-node-parents'
 const SET_MENUS = 'cms-pages::set-menus'
+const SET_MENU = 'cms-pages::set-menu'
 const ADD_NEW_MENU_LINK = 'cms-pages::add-new-menu-link'
 const REMOVE_NEW_MENU_LINK = 'cms-pages::remove-new-menu-link'
 const CLEAR_NEW_MENU_LINKS = 'cms-pages::clear-new-menu-links'
@@ -59,6 +60,14 @@ const setMenus = (menus) => (dispatch) => {
     })
 }
 
+
+const setMenu = (menu) => (dispatch) => {
+    return new Promise((resolve) => {
+        dispatch({ type: SET_MENU, payload: menu })
+        resolve()
+    })
+}
+
 const fetch = (filters) => (dispatch, state) => {
     return new Promise<void>((resolve, reject) => {
         return http
@@ -95,6 +104,21 @@ const fetchMenus = (filters) => (dispatch) => {
         })
             .then((data) => {
                 dispatch(setMenus(data))
+                resolve()
+            })
+            .catch(() => {
+                reject()
+            })
+    })
+}
+
+const fetchMenu = (id) => (dispatch) => {
+    return new Promise<void>((resolve, reject) => {
+        return myGet('/cms/menu/', {
+            id,
+        })
+            .then((data) => {
+                dispatch(setMenu(data))
                 resolve()
             })
             .catch(() => {
@@ -259,6 +283,21 @@ const addMenu = (menu, links) => (dispatch) => {
     })
 }
 
+const editMenu = (menu, links) => (dispatch) => {
+    return new Promise<void>((resolve, reject) => {
+        return myPost('/cms/menus/edit', {
+            menu,
+            links,
+        })
+            .then((data) => {
+                resolve(data)
+            })
+            .catch((e) => {
+                reject(e)
+            })
+    })
+}
+
 const editLink = (values) => (dispatch, getState) => {
     return new Promise<void>((resolve, reject) => {
         return http
@@ -320,7 +359,9 @@ export const actions = {
     addNewMenuLink,
     removeNewMenuLink,
     addMenu,
+    editMenu,
     clearNewMenuLinks,
+    fetchMenu,
 }
 
 // ------------------------------------
@@ -369,6 +410,12 @@ const ACTION_HANDLERS = {
             menus: payload,
         }
     },
+    [SET_MENU]: (state, { payload }) => {
+        return {
+            ...state,
+            menu: payload,
+        }
+    },
     [ADD_NEW_MENU_LINK]: (state, { payload }) => {
         return {
             ...state,
@@ -403,6 +450,7 @@ const getInitialState = () => ({
     currentNodeParents: [],
     menus: [],
     newMenuLinks: [],
+    menu: {},
 })
 
 export default function cmsPagesReducer(state = getInitialState(), action) {
@@ -419,6 +467,7 @@ const getCurrentId = (state) => getState(state)['currentId']
 const getCurrentNode = (state) => getState(state)['currentNode']
 const getCurrentNodeParents = (state) => getState(state)['currentNodeParents']
 const getMenus = (state) => getState(state)['menus']
+const getMenu = (state) => getState(state)['menu']
 const getNewMenuLinks = (state) => getState(state)['newMenuLinks']
 
 export const selectors = {
@@ -429,5 +478,6 @@ export const selectors = {
     getCurrentNode,
     getCurrentNodeParents,
     getMenus,
+    getMenu,
     getNewMenuLinks,
 }

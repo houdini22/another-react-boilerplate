@@ -2,8 +2,8 @@
 @section('content')
     @include("components.page_content", [
         'menu' => $menu,
-        'title' => $document->document_name,
-        'content' => $document->document_content,
+        'title' => !empty($document) ? $document->document_name : NULL,
+        'content' => !empty($document) ? $document->document_content : NULL,
         'tree' => $tree,
         'parent' => $parent,
         'slug' => $slug,

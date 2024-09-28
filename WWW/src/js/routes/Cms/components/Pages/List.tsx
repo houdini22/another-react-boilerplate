@@ -5,7 +5,7 @@ import {
     AlertIcon,
     CategoryIcon,
     DocumentIcon,
-    EditIcon,
+    EditIcon, FileIcon,
     LinkIcon,
     OrderingIcon,
     PublishIcon,
@@ -40,7 +40,7 @@ export class List extends React.Component<null, null> {
                                 color={'primary'}
                                 header={<h1>Pages - {currentNode?.category?.category_name}</h1>}
                                 headerActions={[
-                                    canByPermission(['cms.add_link', 'cms.add_document', 'cms.add_category']) ? (
+                                    canByPermission(['cms.add_link', 'cms.add_document', 'cms.add_category', 'cms.add_file']) ? (
                                         <Dropdown.Container placement={'right'} key={'add'}>
                                             <Dropdown.Trigger
                                                 component={Button}
@@ -76,6 +76,15 @@ export class List extends React.Component<null, null> {
                                                         }}
                                                     >
                                                         <AddIcon /> Link
+                                                    </Dropdown.Item>
+                                                )}
+                                                {canByPermission('cms.add_file') && (
+                                                    <Dropdown.Item
+                                                        onClick={() => {
+                                                            navigate(`/cms/pages/add_files?parent_id=${currentNode.id}`)
+                                                        }}
+                                                    >
+                                                        <AddIcon /> Files
                                                     </Dropdown.Item>
                                                 )}
                                             </Dropdown.Menu>
@@ -201,6 +210,7 @@ export class List extends React.Component<null, null> {
                                                             {node.tree_object_type === 'category' && <CategoryIcon />}
                                                             {node.tree_object_type === 'document' && <DocumentIcon />}
                                                             {node.tree_object_type === 'link' && <LinkIcon />}
+                                                            {node.tree_object_type === 'tree_file' && <FileIcon />}
                                                         </div>
                                                     </Table.Td>
                                                     <Table.Td xs={11} md={3}>

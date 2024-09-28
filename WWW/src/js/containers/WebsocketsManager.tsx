@@ -26,7 +26,7 @@ class WebsocketsManagerBase extends React.Component<WebsocketsManagerBaseProps, 
     componentDidMount() {
         const options = {
             broadcaster: 'pusher',
-            key: '1dd515ef5639ec0eaa2e',
+            key: '17e6d04c486a8203ea16',
             cluster: 'eu',
         }
 

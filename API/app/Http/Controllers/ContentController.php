@@ -9,6 +9,7 @@ use App\Models\Tree;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Mail;
 
 class ContentController extends Controller
 {
@@ -343,7 +344,7 @@ class ContentController extends Controller
                     $query
                         ->where(function ($query) {
                             $query
-                                ->whereNull('tree_published_from')
+                                ->whereNotNull('tree_published_from')
                                 ->orWhere(function ($query) {
                                     $query
                                         ->whereNotNull('tree_published_from')
@@ -352,7 +353,7 @@ class ContentController extends Controller
                         })
                         ->where(function ($query) {
                             $query
-                                ->whereNull('tree_published_to')
+                                ->whereNotNull('tree_published_to')
                                 ->orWhere(function ($query) {
                                     $query
                                         ->whereNotNull('tree_published_to')
@@ -390,5 +391,30 @@ class ContentController extends Controller
             'slug' => '/' . $request->route('slug'),
             'headerActions' => $this->getHeaderActions(),
         ]))->withCookie(cookie('visits', json_encode($cookie)));
+    }
+
+    public function postContact(Request $request) {
+        $request->validate([
+            'email' => ['required', 'email'],
+            'message' => ['required'],
+            'captcha' => 'required|captcha'
+        ], [
+            'validation.captcha' => 'Captcha code is incorrect.'
+        ]);
+
+        Mail::send('email_another_react_boilerplate', [
+            'message_email' => $request->post('email'),
+            'message_body' => $request->post('message'),
+        ], function ($message) use ($request) {
+            $message
+                ->to('duchemprzytomny@gmail.com', 'Michał Baniowski')
+                ->subject('Email from przytomny.pl')
+                ->from($request->post('email'));
+        });
+
+        return redirect()->back()->with('message', [
+            'type' => 'success',
+            'message' => 'Email sent!'
+        ]);
     }
 }

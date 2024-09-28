@@ -282,7 +282,7 @@ class TreeSeeder extends Seeder
                             'document_name' => 'Index page of Sample Subcategory',
                             'document_content' => 'Some content...'
                         ],
-                        'onAdd'=> function (Tree $tree, Document $document, Tree $parent) {
+                        'onAdd' => function (Tree $tree, Document $document, Tree $parent) {
                             $c = $parent->category()->first();
                             $c->index_document_id = $tree->id;
                             $c->save();
@@ -298,7 +298,7 @@ class TreeSeeder extends Seeder
                             'document_content' => 'Some other content...',
                             'document_url' => '/sample-category/sample-subcategory/some-other-document'
                         ],
-                        'onAdd'=> function (Tree $tree, Document $document, Tree $parent) {
+                        'onAdd' => function (Tree $tree, Document $document, Tree $parent) {
                             $document->menu_category_id = $parent->id;
                             $document->save();
 
@@ -330,7 +330,7 @@ class TreeSeeder extends Seeder
                     'document_url' => '/sample-category/sample-document',
                     'document_content' => 'Some content...',
                 ],
-                'onAdd'=> function (Tree $tree, Document $document, Tree $parent) {
+                'onAdd' => function (Tree $tree, Document $document, Tree $parent) {
                     $document->menu_category_id = $parent->id;
                     $document->save();
                 }
@@ -345,7 +345,7 @@ class TreeSeeder extends Seeder
                     'document_url' => '/sample-category/sample-document-2',
                     'document_content' => 'Some content...',
                 ],
-                'onAdd'=> function (Tree $tree, Document $document, Tree $parent) {
+                'onAdd' => function (Tree $tree, Document $document, Tree $parent) {
                     $document->menu_category_id = $parent->id;
                     $document->save();
                 }
@@ -376,5 +376,24 @@ class TreeSeeder extends Seeder
                 ]);
             }
         );
+
+        $rootTree->createChildCategory([
+            'tree_is_published' => true,
+            'tree_is_visible_frontend' => true,
+            'tree_is_visible_backend' => true,
+            'tree_is_visible_in_select' => true,
+            'tree_is_deletable' => false,
+            'tree_is_editable' => true,
+            'tree_has_edit_button' => true,
+            'tree_is_viewable' => true,
+            'tree_url_is_showable' => true,
+            'tree_url_is_editable' => true,
+            'tree_menu_is_visible' => false,
+            'tree_class' => 'system_category',
+            'tree_alias' => 'rate',
+            'tree_display_name' => 'RATE'
+        ], [
+            'category_name' => 'Rate',
+        ]);
     }
 }

@@ -18,6 +18,7 @@ class CreateTreeTable extends Migration
             $table->unsignedBigInteger('category_id')->unsigned()->default(0);
             $table->unsignedBigInteger('document_id')->unsigned()->default(0);
             $table->unsignedBigInteger('link_id')->unsigned()->default(0);
+            $table->unsignedBigInteger('file_id')->unsigned()->default(0);
             $table->string('tree_display_name', 64);
             $table->boolean('tree_is_visible_frontend')->default(true);
             $table->boolean('tree_is_visible_backend')->default(true);

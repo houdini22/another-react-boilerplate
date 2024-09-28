@@ -236,6 +236,12 @@ class RolesSeeder extends Seeder
                         'is_name_editable' => false,
                     ],
                     [
+                        'name' => 'cms.add_file',
+                        'guard_name' => 'web',
+                        'is_deletable' => false,
+                        'is_name_editable' => false,
+                    ],
+                    [
                         'name' => 'cms.delete_category',
                         'guard_name' => 'web',
                         'is_deletable' => false,
@@ -249,6 +255,12 @@ class RolesSeeder extends Seeder
                     ],
                     [
                         'name' => 'cms.delete_link',
+                        'guard_name' => 'web',
+                        'is_deletable' => false,
+                        'is_name_editable' => false,
+                    ],
+                    [
+                        'name' => 'cms.delete_tree_file',
                         'guard_name' => 'web',
                         'is_deletable' => false,
                         'is_name_editable' => false,
@@ -357,6 +369,27 @@ class RolesSeeder extends Seeder
                     ],
                     [
                         'name' => 'system.settings',
+                        'guard_name' => 'web',
+                        'is_deletable' => false,
+                        'is_name_editable' => false,
+                    ],
+                ]
+            ],
+
+            [
+                'name' => 'cms.menus',
+                'guard_name' => 'web',
+                'is_deletable' => false,
+                'is_name_editable' => false,
+                'permissions' => [
+                    [
+                        'name' => 'cms.menus.add',
+                        'guard_name' => 'web',
+                        'is_deletable' => false,
+                        'is_name_editable' => false,
+                    ],
+                    [
+                        'name' => 'cms.menus.edit',
                         'guard_name' => 'web',
                         'is_deletable' => false,
                         'is_name_editable' => false,

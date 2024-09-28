@@ -13,7 +13,7 @@ class Tree extends Model
     use NodeTrait;
 
     protected $table = 'tree';
-    protected $with = ['category', 'document', 'link'];
+    protected $with = ['category', 'document', 'link', 'tree_file'];
     protected $fillable = [
         'tree_is_published',
         'tree_published_from',
@@ -56,6 +56,16 @@ class Tree extends Model
         return $this->hasOne(Link::class);
     }
 
+    public function tree_file()
+    {
+        return $this->hasOne(TreeFile::class);
+    }
+
+    public function customer_rating()
+    {
+        return $this->hasMany(CustomerRating::class, 'tree_id');
+    }
+
     public function delete()
     {
         if ($this->tree_object_type === 'category') {
@@ -89,12 +99,12 @@ class Tree extends Model
             ->with('link.linkCategory.children.category')
             ->with('link.linkCategory.children.document')
             ->with('link.linkCategory.children.link')
-            ->where(function($query) {
-                $query->where(function($query) {
-                    $query->whereHas('link.linkCategory.children', function($query) {
+            ->where(function ($query) {
+                $query->where(function ($query) {
+                    $query->whereHas('link.linkCategory.children', function ($query) {
                         $query->where('tree.tree_class', '<>', 'index_page');
                     });
-                })->orWhere(function($query) {
+                })->orWhere(function ($query) {
                     $query->whereDoesntHave('link.linkCategory.children');
                 });
 
@@ -184,6 +194,24 @@ class Tree extends Model
         $link = Link::create($linkData);
 
         $tree->link_id = $link->id;
+        $tree->save();
+
+        return $tree;
+    }
+
+    public function createChildTreeFile($treeData, File $file)
+    {
+        $treeData['tree_object_type'] = 'tree_file';
+        $treeData['tree_display_name'] = $file->name;
+
+        $tree = $this->children()->create($treeData);
+
+        $treeFile = new TreeFile();
+        $treeFile->tree_id = $tree->id;
+        $treeFile->file_id = $file->id;
+        $treeFile->save();
+
+        $tree->file_id = $treeFile->id;
         $tree->save();
 
         return $tree;

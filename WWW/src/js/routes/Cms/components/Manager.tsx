@@ -9,7 +9,7 @@ export class Manager extends React.Component<null, null> {
     }
 
     componentDidMount() {
-        const { filters, setCurrentId, fetch, setIsLoading, id = 1, getMenus, fetchMenus } = this.props
+        const { filters, setCurrentId, fetch, setIsLoading, id = 1, menuId, getMenus, fetchMenus, fetchMenu } = this.props
 
         const promises = []
 
@@ -19,6 +19,9 @@ export class Manager extends React.Component<null, null> {
         }
         if (getMenus) {
             promises.push(fetchMenus())
+        }
+        if (menuId) {
+            promises.push(fetchMenu(menuId))
         }
 
         setIsLoading(true).then(() => {
@@ -63,11 +66,13 @@ export class Manager extends React.Component<null, null> {
             editLink,
             fetch,
             menus,
+            menu,
             addNewMenuLink,
             newMenuLinks,
             removeNewMenuLink,
             addMenu,
             fetchMenus,
+            fetchMenu,
             clearNewMenuLinks,
         } = this.props
 
@@ -89,11 +94,13 @@ export class Manager extends React.Component<null, null> {
             editLink,
             fetch,
             menus,
+            menu,
             addNewMenuLink,
             newMenuLinks,
             removeNewMenuLink,
             addMenu,
             fetchMenus,
+            fetchMenu,
             clearNewMenuLinks,
         }
 
@@ -108,6 +115,7 @@ const mapStateToProps = (state) => ({
     currentNodeParents: selectors.getCurrentNodeParents(state),
     currentId: selectors.getCurrentId(state),
     menus: selectors.getMenus(state),
+    menu: selectors.getMenu(state),
     newMenuLinks: selectors.getNewMenuLinks(state),
 })
 
@@ -127,8 +135,10 @@ const mapDispatchToProps = (dispatch) => {
         editLink: (values) => dispatch(actions.editLink(values)),
         fetch: (filters) => dispatch(actions.fetch(filters)),
         fetchMenus: (filters) => dispatch(actions.fetchMenus(filters)),
+        fetchMenu: (filters) => dispatch(actions.fetchMenu(filters)),
         removeNewMenuLink: (link) => dispatch(actions.removeNewMenuLink(link)),
         addMenu: (menu, links) => dispatch(actions.addMenu(menu, links)),
+        editMenu: (menu, links) => dispatch(actions.editMenu(menu, links)),
         clearNewMenuLinks: () => dispatch(actions.clearNewMenuLinks()),
     }
 }

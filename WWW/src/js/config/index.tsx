@@ -2,7 +2,7 @@ import * as React from 'react'
 
 const config = {
     api: {
-        baseURL: 'http://localhost:8000/api/v1/',
+        baseURL: 'http://arb.local/api/v1/',
         timeout: 100000,
         apiDateTimeFormat: 'YYYY-MM-DD HH:mm:ss',
         apiDateFormat: 'YYYY-MM-DD',

@@ -1,3 +1,4 @@
+@use "sass:math";
 @import '../variables';
 
 .component-row {
@@ -8,7 +9,7 @@
         flex-wrap: wrap;
         margin-right: -15px;
         margin-left: -15px;
-        margin-bottom: #{$COMPONENT_MARGIN_SINGLE / 2};
+        margin-bottom: #{math.div($COMPONENT_MARGIN_SINGLE, 2)};
     }
     &.builder span {
         display: -ms-flexbox;

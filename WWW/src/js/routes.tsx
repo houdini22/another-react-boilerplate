@@ -11,6 +11,7 @@ import { UserIsAuthenticatedRoute } from './modules/auth'
 import AddCategoryView from './routes/Cms/components/AddCategory'
 import AddDocumentView from './routes/Cms/components/AddDocument'
 import AddLinkView from './routes/Cms/components/AddLink'
+import AddFilesView from "./routes/Cms/components/AddFiles";
 import { UsersView } from './routes/Users'
 import { UserRolesView } from './routes/UserRoles'
 import { UsersAccountActivated } from './routes/UsersAccountActivated'
@@ -31,7 +32,7 @@ import { Container } from './containers/Config'
 import { CmsSettingsView } from './routes/CmsSettings'
 import { RegisterView } from './routes/Register'
 import { SystemSettings } from './routes/SystemSettings'
-import { CmsAddMenuView, CmsMenusView } from './routes/CmsMenus'
+import { CmsAddMenuView, CmsMenusView, CmsEditMenuView } from './routes/CmsMenus'
 
 const App = () => (
     <Router>
@@ -75,6 +76,16 @@ const App = () => (
                                 <PageLayout>
                                     <UserIsAuthenticatedRoute permission={'cms.add_link'}>
                                         <AddLinkView />
+                                    </UserIsAuthenticatedRoute>
+                                </PageLayout>
+                            }
+                        />
+                        <Route
+                            path="/cms/pages/add_files"
+                            element={
+                                <PageLayout>
+                                    <UserIsAuthenticatedRoute permission={'cms.add_file'}>
+                                        <AddFilesView />
                                     </UserIsAuthenticatedRoute>
                                 </PageLayout>
                             }
@@ -135,6 +146,16 @@ const App = () => (
                                 <PageLayout>
                                     <UserIsAuthenticatedRoute permission={'cms.menus.add'}>
                                         <CmsAddMenuView />
+                                    </UserIsAuthenticatedRoute>
+                                </PageLayout>
+                            }
+                        />
+                        <Route
+                            path="/cms/menus/edit"
+                            element={
+                                <PageLayout>
+                                    <UserIsAuthenticatedRoute permission={'cms.menus.edit'}>
+                                        <CmsEditMenuView />
                                     </UserIsAuthenticatedRoute>
                                 </PageLayout>
                             }

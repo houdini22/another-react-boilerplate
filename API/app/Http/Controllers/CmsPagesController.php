@@ -277,6 +277,7 @@ class CmsPagesController extends Controller
                 ->with('category')
                 ->with('document')
                 ->with('link')
+                ->with('tree_file')
                 ->get();
 
             $parents = $currentNode->ancestors()->with('category')->get();
@@ -939,6 +940,27 @@ class CmsPagesController extends Controller
             ->with('children.link.linkCategory')
             ->with('children.link.linkCategory.category')
             ->get();
+
+        return $this->responseOK($menus);
+    }
+
+    public function getMenu(Request $request)
+    {
+        $user = $this->getUserFromRequest($request);
+
+        $menus = Tree::where('tree_alias', '=', 'menu_category')
+            ->first()
+            ->children()
+            ->with('category')
+            ->withCount('children')
+            ->with('children')
+            ->with('children.link')
+            ->with('children.link.iconFile')
+            ->with('children.link.linkDocument')
+            ->with('children.link.linkDocument.document')
+            ->with('children.link.linkCategory')
+            ->with('children.link.linkCategory.category')
+            ->first();
 
         return $this->responseOK($menus);
     }

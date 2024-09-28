@@ -1,3 +1,4 @@
+@use "sass:math";
 @import '../variables';
 
 .component-card {
@@ -77,8 +78,8 @@
             h6 {
                 line-height: 1.4em;
                 font-size: 1.4em;
-                padding-left: #{$COMPONENT_PADDING_SINGLE / 2};
-                padding-right: #{$COMPONENT_PADDING_SINGLE / 2};
+                padding-left: #{math.div($COMPONENT_PADDING_SINGLE, 2)};
+                padding-right: #{math.div($COMPONENT_PADDING_SINGLE, 2)};
             }
 
             .component-card__header__actions {
@@ -110,8 +111,8 @@
             h6 {
                 line-height: 1.1em;
                 font-size: 1.2em;
-                padding-left: #{$COMPONENT_PADDING_SINGLE / 3};
-                padding-right: #{$COMPONENT_PADDING_SINGLE / 3};
+                padding-left: #{math.div($COMPONENT_PADDING_SINGLE, 3)};
+                padding-right: #{math.div($COMPONENT_PADDING_SINGLE, 3)};
             }
 
             .component-card__header__actions {
@@ -124,11 +125,11 @@
 
         & > .component-card__content {
             font-size: 12px;
-            padding: #{$COMPONENT_PADDING / 3};
+            padding: #{math.div($COMPONENT_PADDING, 3)};
         }
 
         & > .component-card__footer > div {
-            padding: #{$COMPONENT_PADDING / 3};
+            padding: #{math.div($COMPONENT_PADDING, 3)};
         }
     }
 

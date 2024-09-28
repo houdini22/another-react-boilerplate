@@ -114,7 +114,6 @@ class AddMenuForm extends React.Component {
                                                 <div>
                                                     <AddLinkFormContainer
                                                         onSubmit={(values) => {
-                                                            console.log(values)
                                                             addNewMenuLink(values)
                                                         }}
                                                         initialValues={{

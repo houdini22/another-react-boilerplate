@@ -7,8 +7,13 @@
         @endif
         @if(isset($content))
             <div>
-                {{$content}}
+                {!! $content !!}
             </div>
+            @if($tree->tree_alias === "contact")
+                <div>
+                    @include("content.contact")
+                </div>
+            @endif
         @endif
     </div>
     @if (isset($menu) && count($menu))
