@@ -10,6 +10,10 @@ Create API/.env file with database credentials.
 
 ```php artisan db:seed```
 
+```npm install```
+
+```npm run build```
+
 ---
 
 ```cd WWW```
@@ -20,12 +24,10 @@ Create API/.env file with database credentials.
 
 ---
 
-And you are ready to go.
+And you are ready to go after editing ```./WWW/src/js/config/index.tsx``` api.baseURL entry.
 
 
 ### Demo
-
-[https://another-react-boilerplate.baniowski.pro](https://another-react-boilerplate.baniowski.pro)
 
 ![alt text](./images/2023-05-10_17-09.png "Title")
 ![alt text](./images/2023-05-10_17-09_1.png "Title")
